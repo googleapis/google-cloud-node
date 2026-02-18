@@ -7,5 +7,5 @@
 
 # The yoshi-nodejs team is the default owner for nodejs repositories.
 *     @googleapis/cloud-sdk-nodejs-team
-/handwritten/bigquery @googleapis/api-bigquery
-/handwritten/cloud-profiler @googleapis/api-profiler
+/handwritten/bigquery @googleapis/bigquery-team
+/handwritten/cloud-profiler @googleapis/cloud-profiler-team
