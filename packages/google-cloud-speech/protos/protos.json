@@ -3978,6 +3978,13 @@
                         "voiceActivityTimeout": {
                           "type": "VoiceActivityTimeout",
                           "id": 3
+                        },
+                        "endpointingSensitivity": {
+                          "type": "EndpointingSensitivity",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3991,6 +3998,14 @@
                               "type": "google.protobuf.Duration",
                               "id": 2
                             }
+                          }
+                        },
+                        "EndpointingSensitivity": {
+                          "values": {
+                            "ENDPOINTING_SENSITIVITY_UNSPECIFIED": 0,
+                            "ENDPOINTING_SENSITIVITY_STANDARD": 1,
+                            "ENDPOINTING_SENSITIVITY_SUPERSHORT": 2,
+                            "ENDPOINTING_SENSITIVITY_SHORT": 3
                           }
                         }
                       }

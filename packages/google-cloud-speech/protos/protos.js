@@ -34066,6 +34066,7 @@
                          * @property {boolean|null} [enableVoiceActivityEvents] StreamingRecognitionFeatures enableVoiceActivityEvents
                          * @property {boolean|null} [interimResults] StreamingRecognitionFeatures interimResults
                          * @property {google.cloud.speech.v2.StreamingRecognitionFeatures.IVoiceActivityTimeout|null} [voiceActivityTimeout] StreamingRecognitionFeatures voiceActivityTimeout
+                         * @property {google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity|null} [endpointingSensitivity] StreamingRecognitionFeatures endpointingSensitivity
                          */
     
                         /**
@@ -34108,6 +34109,14 @@
                         StreamingRecognitionFeatures.prototype.voiceActivityTimeout = null;
     
                         /**
+                         * StreamingRecognitionFeatures endpointingSensitivity.
+                         * @member {google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity} endpointingSensitivity
+                         * @memberof google.cloud.speech.v2.StreamingRecognitionFeatures
+                         * @instance
+                         */
+                        StreamingRecognitionFeatures.prototype.endpointingSensitivity = 0;
+    
+                        /**
                          * Creates a new StreamingRecognitionFeatures instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v2.StreamingRecognitionFeatures
@@ -34137,6 +34146,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.interimResults);
                             if (message.voiceActivityTimeout != null && Object.hasOwnProperty.call(message, "voiceActivityTimeout"))
                                 $root.google.cloud.speech.v2.StreamingRecognitionFeatures.VoiceActivityTimeout.encode(message.voiceActivityTimeout, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.endpointingSensitivity != null && Object.hasOwnProperty.call(message, "endpointingSensitivity"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.endpointingSensitivity);
                             return writer;
                         };
     
@@ -34185,6 +34196,10 @@
                                         message.voiceActivityTimeout = $root.google.cloud.speech.v2.StreamingRecognitionFeatures.VoiceActivityTimeout.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 8: {
+                                        message.endpointingSensitivity = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -34231,6 +34246,16 @@
                                 if (error)
                                     return "voiceActivityTimeout." + error;
                             }
+                            if (message.endpointingSensitivity != null && message.hasOwnProperty("endpointingSensitivity"))
+                                switch (message.endpointingSensitivity) {
+                                default:
+                                    return "endpointingSensitivity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -34255,6 +34280,30 @@
                                     throw TypeError(".google.cloud.speech.v2.StreamingRecognitionFeatures.voiceActivityTimeout: object expected");
                                 message.voiceActivityTimeout = $root.google.cloud.speech.v2.StreamingRecognitionFeatures.VoiceActivityTimeout.fromObject(object.voiceActivityTimeout);
                             }
+                            switch (object.endpointingSensitivity) {
+                            default:
+                                if (typeof object.endpointingSensitivity === "number") {
+                                    message.endpointingSensitivity = object.endpointingSensitivity;
+                                    break;
+                                }
+                                break;
+                            case "ENDPOINTING_SENSITIVITY_UNSPECIFIED":
+                            case 0:
+                                message.endpointingSensitivity = 0;
+                                break;
+                            case "ENDPOINTING_SENSITIVITY_STANDARD":
+                            case 1:
+                                message.endpointingSensitivity = 1;
+                                break;
+                            case "ENDPOINTING_SENSITIVITY_SUPERSHORT":
+                            case 2:
+                                message.endpointingSensitivity = 2;
+                                break;
+                            case "ENDPOINTING_SENSITIVITY_SHORT":
+                            case 3:
+                                message.endpointingSensitivity = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -34275,6 +34324,7 @@
                                 object.enableVoiceActivityEvents = false;
                                 object.interimResults = false;
                                 object.voiceActivityTimeout = null;
+                                object.endpointingSensitivity = options.enums === String ? "ENDPOINTING_SENSITIVITY_UNSPECIFIED" : 0;
                             }
                             if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
                                 object.enableVoiceActivityEvents = message.enableVoiceActivityEvents;
@@ -34282,6 +34332,8 @@
                                 object.interimResults = message.interimResults;
                             if (message.voiceActivityTimeout != null && message.hasOwnProperty("voiceActivityTimeout"))
                                 object.voiceActivityTimeout = $root.google.cloud.speech.v2.StreamingRecognitionFeatures.VoiceActivityTimeout.toObject(message.voiceActivityTimeout, options);
+                            if (message.endpointingSensitivity != null && message.hasOwnProperty("endpointingSensitivity"))
+                                object.endpointingSensitivity = options.enums === String ? $root.google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity[message.endpointingSensitivity] === undefined ? message.endpointingSensitivity : $root.google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity[message.endpointingSensitivity] : message.endpointingSensitivity;
                             return object;
                         };
     
@@ -34548,6 +34600,24 @@
                             };
     
                             return VoiceActivityTimeout;
+                        })();
+    
+                        /**
+                         * EndpointingSensitivity enum.
+                         * @name google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity
+                         * @enum {number}
+                         * @property {number} ENDPOINTING_SENSITIVITY_UNSPECIFIED=0 ENDPOINTING_SENSITIVITY_UNSPECIFIED value
+                         * @property {number} ENDPOINTING_SENSITIVITY_STANDARD=1 ENDPOINTING_SENSITIVITY_STANDARD value
+                         * @property {number} ENDPOINTING_SENSITIVITY_SUPERSHORT=2 ENDPOINTING_SENSITIVITY_SUPERSHORT value
+                         * @property {number} ENDPOINTING_SENSITIVITY_SHORT=3 ENDPOINTING_SENSITIVITY_SHORT value
+                         */
+                        StreamingRecognitionFeatures.EndpointingSensitivity = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENDPOINTING_SENSITIVITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENDPOINTING_SENSITIVITY_STANDARD"] = 1;
+                            values[valuesById[2] = "ENDPOINTING_SENSITIVITY_SUPERSHORT"] = 2;
+                            values[valuesById[3] = "ENDPOINTING_SENSITIVITY_SHORT"] = 3;
+                            return values;
                         })();
     
                         return StreamingRecognitionFeatures;
