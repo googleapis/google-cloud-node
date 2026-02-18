@@ -90555,6 +90555,12 @@ export namespace google {
 
                         /** UsageMetadata candidatesTokensDetails */
                         candidatesTokensDetails?: (google.cloud.aiplatform.v1.IModalityTokenCount[]|null);
+
+                        /** UsageMetadata toolUsePromptTokensDetails */
+                        toolUsePromptTokensDetails?: (google.cloud.aiplatform.v1.IModalityTokenCount[]|null);
+
+                        /** UsageMetadata trafficType */
+                        trafficType?: (google.cloud.aiplatform.v1.GenerateContentResponse.UsageMetadata.TrafficType|keyof typeof google.cloud.aiplatform.v1.GenerateContentResponse.UsageMetadata.TrafficType|null);
                     }
 
                     /** Represents a UsageMetadata. */
@@ -90589,6 +90595,12 @@ export namespace google {
 
                         /** UsageMetadata candidatesTokensDetails. */
                         public candidatesTokensDetails: google.cloud.aiplatform.v1.IModalityTokenCount[];
+
+                        /** UsageMetadata toolUsePromptTokensDetails. */
+                        public toolUsePromptTokensDetails: google.cloud.aiplatform.v1.IModalityTokenCount[];
+
+                        /** UsageMetadata trafficType. */
+                        public trafficType: (google.cloud.aiplatform.v1.GenerateContentResponse.UsageMetadata.TrafficType|keyof typeof google.cloud.aiplatform.v1.GenerateContentResponse.UsageMetadata.TrafficType);
 
                         /**
                          * Creates a new UsageMetadata instance using the specified properties.
@@ -90666,6 +90678,18 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace UsageMetadata {
+
+                        /** TrafficType enum. */
+                        enum TrafficType {
+                            TRAFFIC_TYPE_UNSPECIFIED = 0,
+                            ON_DEMAND = 1,
+                            ON_DEMAND_PRIORITY = 3,
+                            ON_DEMAND_FLEX = 4,
+                            PROVISIONED_THROUGHPUT = 2
+                        }
                     }
                 }
 

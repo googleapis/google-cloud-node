@@ -24796,6 +24796,32 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "toolUsePromptTokensDetails": {
+                              "rule": "repeated",
+                              "type": "ModalityTokenCount",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trafficType": {
+                              "type": "TrafficType",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "TrafficType": {
+                              "values": {
+                                "TRAFFIC_TYPE_UNSPECIFIED": 0,
+                                "ON_DEMAND": 1,
+                                "ON_DEMAND_PRIORITY": 3,
+                                "ON_DEMAND_FLEX": 4,
+                                "PROVISIONED_THROUGHPUT": 2
+                              }
                             }
                           }
                         }
