@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.2.0...places-v2.3.0) (2026-02-18)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20251031 ([#6920](https://github.com/googleapis/google-cloud-node/issues/6920)) ([95f3adb](https://github.com/googleapis/google-cloud-node/commit/95f3adb6308c65eb000f841cc05460a8979a9d4f))
+* [places] Add `googleMapsTypeLabel` field to show type information on Google Maps ([#7251](https://github.com/googleapis/google-cloud-node/issues/7251)) ([95cccbe](https://github.com/googleapis/google-cloud-node/commit/95cccbe3c0b9e89a443c6a7bfffaa282616203ad))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.1.1...places-v2.2.0) (2025-10-23)
 
 

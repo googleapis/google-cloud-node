@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v5.0.0...workflows-v5.1.0) (2026-02-18)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20251031 ([#6920](https://github.com/googleapis/google-cloud-node/issues/6920)) ([95f3adb](https://github.com/googleapis/google-cloud-node/commit/95f3adb6308c65eb000f841cc05460a8979a9d4f))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v4.4.0...workflows-v5.0.0) (2025-10-13)
 
 
