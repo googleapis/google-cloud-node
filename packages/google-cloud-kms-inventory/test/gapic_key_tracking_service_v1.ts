@@ -860,6 +860,36 @@ describe('v1.KeyTrackingServiceClient', () => {
             });
         });
 
+        describe('organizationProtectedResourceScope', async () => {
+            const fakePath = "/rendered/path/organizationProtectedResourceScope";
+            const expectedParameters = {
+                organization: "organizationValue",
+            };
+            const client = new keytrackingserviceModule.v1.KeyTrackingServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationProtectedResourceScopePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationProtectedResourceScopePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationProtectedResourceScopePath', () => {
+                const result = client.organizationProtectedResourceScopePath("organizationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationProtectedResourceScopePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationProtectedResourceScopeName', () => {
+                const result = client.matchOrganizationFromOrganizationProtectedResourceScopeName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationProtectedResourceScopePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary', async () => {
             const fakePath = "/rendered/path/projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary";
             const expectedParameters = {
