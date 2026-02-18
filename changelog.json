@@ -5,6 +5,3318 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "27f63210-8150-4935-9be7-856ba17f225c",
+      "createTime": "2026-02-18T20:37:35.961Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "f6abb160-f2c5-451e-9658-1a6fdff5e90c",
+      "createTime": "2026-02-18T20:37:35.956Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "a3978c75-be4f-4bc9-bb9d-dbb61b4e9f44",
+      "createTime": "2026-02-18T20:37:35.951Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "31ae6d04-7859-43e1-99dd-e45c9a14d76d",
+      "createTime": "2026-02-18T20:37:35.947Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "63a269cc-767a-447b-9ee8-25e5de97d071",
+      "createTime": "2026-02-18T20:37:35.943Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "dd93165d-7430-4215-b3f5-b9d89f423907",
+      "createTime": "2026-02-18T20:37:35.938Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "e8b502f6-4cdf-4369-a032-68928a91a177",
+      "createTime": "2026-02-18T20:37:35.934Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "0f5aa08b-6198-4e22-9897-d1229cf4b3b0",
+      "createTime": "2026-02-18T20:37:35.929Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "50d1661b-ed51-4e49-b150-86429901ec1d",
+      "createTime": "2026-02-18T20:37:35.925Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/ordertracking",
+      "id": "388f92d1-a0c6-4e22-90d9-5b36feabaa93",
+      "createTime": "2026-02-18T20:37:35.921Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "358d5cd6-c813-4261-841a-0e05bc6bb804",
+      "createTime": "2026-02-18T20:37:35.916Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "1bcc6b89-fe6b-4f29-baa0-4f4d605d0592",
+      "createTime": "2026-02-18T20:37:35.912Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/issueresolution",
+      "id": "16fa3fc2-b78b-4d16-8313-8b7a08e634ce",
+      "createTime": "2026-02-18T20:37:35.907Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "133cbbc7-4848-43cb-8519-c7d6dbe19725",
+      "createTime": "2026-02-18T20:37:35.902Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "337b562c-d5db-4fc3-80d5-9535d6579a41",
+      "createTime": "2026-02-18T20:37:35.897Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "e38088ab-bfb1-47a2-ac8a-fe56e605c32a",
+      "createTime": "2026-02-18T20:37:35.893Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "91a1d622-0a0d-4815-8d60-dc435c9e05a3",
+      "createTime": "2026-02-18T20:37:35.888Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "a7073f7c-ce7c-488e-a4d3-a52f36f29427",
+      "createTime": "2026-02-18T20:37:35.884Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "526a894e-d5a0-40a8-bd85-6d39b81f327a",
+      "createTime": "2026-02-18T20:37:35.879Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "cbe350b4-2354-4bd8-90bb-ba768891191d",
+      "createTime": "2026-02-18T20:37:35.875Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "35b6a648-709e-453e-8f23-b62382c37353",
+      "createTime": "2026-02-18T20:37:35.871Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "42e2fbd6-bb69-4b60-88fd-680229a8f97a",
+      "createTime": "2026-02-18T20:37:35.866Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "0539e172-af5a-48c0-bdba-9734f7a45507",
+      "createTime": "2026-02-18T20:37:35.862Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95cccbe3c0b9e89a443c6a7bfffaa282616203ad",
+          "message": "[places] Add `googleMapsTypeLabel` field to show type information on Google Maps",
+          "issues": [
+            "7251"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "feb4e5fe-2d44-423d-b75c-ddddc4471015",
+      "createTime": "2026-02-18T20:37:35.858Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "32252d2e-f491-4fe7-afee-e8ecda5a598e",
+      "createTime": "2026-02-18T20:37:35.853Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "942f0bd3-270e-463b-8942-fb0b0d59a971",
+      "createTime": "2026-02-18T20:37:35.849Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "0f1ed170-b48e-48c0-8f05-eed662900560",
+      "createTime": "2026-02-18T20:37:35.844Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/areainsights",
+      "id": "6c17951a-1d8f-4947-a361-1ba0efad10d6",
+      "createTime": "2026-02-18T20:37:35.839Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "62ebd3e4-48c3-492f-ac4f-3444429aeec5",
+      "createTime": "2026-02-18T20:37:35.834Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "412abb7a-01b9-4590-823c-645c6d84ddca",
+      "createTime": "2026-02-18T20:37:35.830Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "c3dfb945-3b1f-4c1b-afe6-dc776ceacf18",
+      "createTime": "2026-02-18T20:37:35.825Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "6eb98af7-c404-4893-9fc6-1aa6b336edcd",
+      "createTime": "2026-02-18T20:37:35.821Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "53e98e9da1468dab3b86a08b6704d9f384f64fc1",
+          "message": "[containeranalysis] A new field `registry` is added to message `.grafeas.v1.BaseImage`",
+          "issues": [
+            "7258"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "0d7c15c4-82eb-4cbc-bce0-69eb392f1ef4",
+      "createTime": "2026-02-18T20:37:35.817Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "f24cea1c-b3a9-4451-865f-f92b4066e83a",
+      "createTime": "2026-02-18T20:37:35.812Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "272a3a57-33f3-43fa-839f-6c6b9b10a524",
+      "createTime": "2026-02-18T20:37:35.808Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "b5f79deb-d621-4642-999a-048dd8867baf",
+      "createTime": "2026-02-18T20:37:35.804Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "55e343cf-8136-44fe-b215-dd5569422565",
+      "createTime": "2026-02-18T20:37:35.800Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "bf882a64-4d94-4181-a434-23967b39f804",
+      "createTime": "2026-02-18T20:37:35.795Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "b9035982-14af-44f1-96f4-9be42a9cd0cf",
+      "createTime": "2026-02-18T20:37:35.791Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "2c538554-8cab-4323-a85f-f1c7ba46db95",
+      "createTime": "2026-02-18T20:37:35.787Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "444667c2-29f0-474c-976a-1c5f51e66849",
+      "createTime": "2026-02-18T20:37:35.782Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "31805a50-47bd-4c63-a316-79179a102be1",
+      "createTime": "2026-02-18T20:37:35.778Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "87f04c73-e750-46b1-841e-5ec534ac6e7b",
+      "createTime": "2026-02-18T20:37:35.774Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "6d7dabde-5fa6-42fe-bbf1-de117351e5ba",
+      "createTime": "2026-02-18T20:37:35.769Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "068dfe3c-87fa-4d43-8aab-cf494d7f8667",
+      "createTime": "2026-02-18T20:37:35.765Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "0add64c1-5ca5-499b-b59a-a050d25fbbbb",
+      "createTime": "2026-02-18T20:37:35.761Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "fa7ed1b8-b042-4ac0-9307-61e9367ecf17",
+      "createTime": "2026-02-18T20:37:35.757Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "9.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "5184ea2a-b503-4e16-93d4-b9410d199399",
+      "createTime": "2026-02-18T20:37:35.752Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "1b4ed7fd-187d-42ff-8d6a-a3894fa21e05",
+      "createTime": "2026-02-18T20:37:35.748Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "62a5b8ec-4913-49ec-82e7-f0f4dab4f6a0",
+      "createTime": "2026-02-18T20:37:35.744Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/telcoautomation",
+      "id": "f2bd3f05-cc30-482f-bb04-20e75d0ab9b6",
+      "createTime": "2026-02-18T20:37:35.740Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "70230229-1e30-4b5e-a78a-044d367b6728",
+      "createTime": "2026-02-18T20:37:35.735Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "64a6a7c3-2887-4877-98b9-9132bb665a2e",
+      "createTime": "2026-02-18T20:37:35.731Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "f7c1e924-dfdf-48bb-bfe3-03296a521e60",
+      "createTime": "2026-02-18T20:37:35.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "1236f847-6fd6-4acf-bcfd-f98b4c4ac805",
+      "createTime": "2026-02-18T20:37:35.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0bf04ff629e4010a55463b0d960e65c07d8cf3ee",
+          "message": "[storagebatchoperations] add QUEUED state to Storage Batch Operations API",
+          "issues": [
+            "7250"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storagebatchoperations",
+      "id": "3c136192-821f-40e8-9066-9b0057f63fa0",
+      "createTime": "2026-02-18T20:37:35.717Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "816c236c-f7ba-48a8-b912-dbd3b661b62f",
+      "createTime": "2026-02-18T20:37:35.713Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "269fdef1-966a-42a0-9a72-d4c71ad40ed9",
+      "createTime": "2026-02-18T20:37:35.708Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "4f521ff8-8c36-4962-990d-c97e1d0a65c8",
+      "createTime": "2026-02-18T20:37:35.704Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "65ce8a36-4175-44a2-a297-b9a3176ed7a2",
+      "createTime": "2026-02-18T20:37:35.700Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "51080faa-9039-4686-9c10-0b6d1d70407b",
+      "createTime": "2026-02-18T20:37:35.695Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "9.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "0c8cbb46-d32b-4ecc-8e63-68a3b8cb1492",
+      "createTime": "2026-02-18T20:37:35.691Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "d5b12cec-bdf5-4b8d-b2d6-ed87c0dfd7cf",
+      "createTime": "2026-02-18T20:37:35.686Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "295d1582-18bb-455e-b52e-00aab016bb84",
+      "createTime": "2026-02-18T20:37:35.682Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "cb7514f5-0a9b-4b31-9a4e-7d0561125286",
+      "createTime": "2026-02-18T20:37:35.678Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "dfae80ac-4f7b-40d2-a7fa-c89e7dff5a14",
+      "createTime": "2026-02-18T20:37:35.674Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "184d5a55-a95d-4520-85b9-2bc2a4c34553",
+      "createTime": "2026-02-18T20:37:35.669Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1e63c36ce9049b616892f3f6a897a6d5d8f36215",
+          "message": "[saasservicemgmt] Add AppHub related condition types to Deployment protos",
+          "issues": [
+            "7248"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/saasservicemgmt",
+      "id": "ca1689bb-1fd2-41db-882c-2fb23b2f155b",
+      "createTime": "2026-02-18T20:37:35.665Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "7b5a20b2-c319-435a-a1bd-e7947910e2d4",
+      "createTime": "2026-02-18T20:37:35.661Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "1809dff7-9ece-4da4-811d-2b6ef6f489c2",
+      "createTime": "2026-02-18T20:37:35.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "e5f50240-8c47-4a75-a883-a93fee1cb739",
+      "createTime": "2026-02-18T20:37:35.652Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "637c757e-2747-4709-819f-e87b2a2967b5",
+      "createTime": "2026-02-18T20:37:35.648Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "543a30e6-43ca-41ff-af62-5827fe8ae25d",
+      "createTime": "2026-02-18T20:37:35.644Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "8bbf3c0b-96a7-4e0c-8b0c-ad658bcf7a74",
+      "createTime": "2026-02-18T20:37:35.639Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "8e287a68-8241-432c-bdc1-0b64cce8449b",
+      "createTime": "2026-02-18T20:37:35.635Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "7af076c2-5914-42c2-8601-8982a2129439",
+      "createTime": "2026-02-18T20:37:35.631Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "da6d3168-b111-4249-9530-e630ca03293c",
+      "createTime": "2026-02-18T20:37:35.627Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "196065ac-9f57-4fbc-89d6-6716044c21b3",
+      "createTime": "2026-02-18T20:37:35.622Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "b053e1db-9038-4904-9114-05149457ebd3",
+      "createTime": "2026-02-18T20:37:35.618Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "aa881b41-a109-4a18-a324-9b13f1614747",
+      "createTime": "2026-02-18T20:37:35.614Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "c396d2b0-28a9-4a35-8b2b-dec63092c516",
+      "createTime": "2026-02-18T20:37:35.610Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "8f76f888-e246-41c6-9165-deb6e5fc3c51",
+      "createTime": "2026-02-18T20:37:35.604Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "19511c08-37e5-49fe-b267-b407e67babd7",
+      "createTime": "2026-02-18T20:37:35.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "af6cb850-898d-410e-a23f-c1614bff5ebe",
+      "createTime": "2026-02-18T20:37:35.596Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "856be6c1-c2ae-43be-9384-b900b264c4ec",
+      "createTime": "2026-02-18T20:37:35.591Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "99541fa0-e585-4cba-8dbe-f6f5320be287",
+      "createTime": "2026-02-18T20:37:35.587Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "2a46cdd4-ca34-4c5b-8c1c-b0a1b9f354bc",
+      "createTime": "2026-02-18T20:37:35.583Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "1d965e6e-4559-4734-b01e-fb054c73ee67",
+      "createTime": "2026-02-18T20:37:35.579Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "00f0f1b7-e291-4380-be26-79473cc5fa35",
+      "createTime": "2026-02-18T20:37:35.574Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "e365e857-2aed-4bcf-91d9-68107e8f2124",
+      "createTime": "2026-02-18T20:37:35.570Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "964f0898-82a2-4ce2-8fca-475fff6e89f3",
+      "createTime": "2026-02-18T20:37:35.566Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "63297894-64dd-407a-bc09-135be16adf70",
+      "createTime": "2026-02-18T20:37:35.562Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "1709675b-dc2e-4e6e-8871-48e26111bf84",
+      "createTime": "2026-02-18T20:37:35.557Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "ea806fb5-32a1-4f11-bc0a-c194d78c38f2",
+      "createTime": "2026-02-18T20:37:35.553Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka-schemaregistry",
+      "id": "afffab6d-26be-4e04-911f-28337cbf5bee",
+      "createTime": "2026-02-18T20:37:35.549Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "7d86866b-086e-4c3b-941c-423f2e2e4bb2",
+      "createTime": "2026-02-18T20:37:35.545Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "fbd73eff-8b85-46fd-b395-b5a31cb54f21",
+      "createTime": "2026-02-18T20:37:35.540Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lustre",
+      "id": "0d1fee90-6b89-451c-87ba-1b53770f4499",
+      "createTime": "2026-02-18T20:37:35.536Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/locationfinder",
+      "id": "344c26b1-f600-4af7-be4b-b65e0ba0e12d",
+      "createTime": "2026-02-18T20:37:35.532Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "5f7ae5b3-f3e8-45a6-998a-8dd53fb96a85",
+      "createTime": "2026-02-18T20:37:35.527Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/licensemanager",
+      "id": "2b1459e9-d451-4ff0-a6ff-ce5af0bec930",
+      "createTime": "2026-02-18T20:37:35.523Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "3391c38b-5ea9-4d3a-8f0b-c4f825f90c92",
+      "createTime": "2026-02-18T20:37:35.519Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a383b135a8982a8857b465478d679a75e0b6e89e",
+          "message": "[inventory] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations",
+          "issues": [
+            "7240"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "8dc768f4-3212-46b2-95f0-ff7e5ebc4c09",
+      "createTime": "2026-02-18T20:37:35.515Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9ad46e3b539da1a300b9e689b19dd2307604b2cf",
+          "message": "[kms] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations",
+          "issues": [
+            "7239"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "bb24f54d-6e3a-4aaf-b83f-2010a2f4fe31",
+      "createTime": "2026-02-18T20:37:35.511Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "b0eb1ef9-c980-437c-9ee0-3f92fdd90e7a",
+      "createTime": "2026-02-18T20:37:35.506Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "f5a1488b-16ad-4601-8df0-c7f8e120701c",
+      "createTime": "2026-02-18T20:37:35.502Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "6a117425-7f0e-4cac-8008-cb9b326f577e",
+      "createTime": "2026-02-18T20:37:35.498Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "d820aa2a-9785-4cca-8a80-498ddd87577f",
+      "createTime": "2026-02-18T20:37:35.494Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "1e9e4dbd-df38-420c-a59e-a4921b1a1e3e",
+      "createTime": "2026-02-18T20:37:35.489Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "ee6baee6-d15c-4b15-bd4f-db0b93139533",
+      "createTime": "2026-02-18T20:37:35.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "ad7fb5a3-72a0-468f-b47f-6586f08730a9",
+      "createTime": "2026-02-18T20:37:35.479Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "b4ae8e8f-91c9-4374-8fc7-165b628df162",
+      "createTime": "2026-02-18T20:37:35.475Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "31f23e5c-3bb9-4e93-87e7-3d21525b7985",
+      "createTime": "2026-02-18T20:37:35.471Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "288c88da-522c-40c8-8286-f8f3cfd88b38",
+      "createTime": "2026-02-18T20:37:35.467Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "940d3f05-785d-4878-b0a9-1da94fd451da",
+      "createTime": "2026-02-18T20:37:35.463Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "6d9c533b-3a61-4818-8be5-d929263b81f1",
+      "createTime": "2026-02-18T20:37:35.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "7e41512c-8753-49ee-ace4-255f4f135d17",
+      "createTime": "2026-02-18T20:37:35.454Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "ed88207a-8946-48c4-b3a2-9f8c8f80688e",
+      "createTime": "2026-02-18T20:37:35.450Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "d23ab7db-e624-4349-81f8-f7af8d1bdd64",
+      "createTime": "2026-02-18T20:37:35.446Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "a23696c1-5e7d-4e5f-a32d-f11474625bd9",
+      "createTime": "2026-02-18T20:37:35.441Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "156e8f84-97c8-4dbb-9278-fd8d3a3684cd",
+      "createTime": "2026-02-18T20:37:35.437Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "9.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "45cc3c73-cfdf-4356-9a61-1a908ff51b15",
+      "createTime": "2026-02-18T20:37:35.433Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dns",
+      "id": "7751002d-f52a-4c51-a6e9-ac8d371dbc8e",
+      "createTime": "2026-02-18T20:37:35.429Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "7075b952-100f-4568-ba11-a48a4f3546d2",
+      "createTime": "2026-02-18T20:37:35.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/devicestreaming",
+      "id": "99553a7a-502b-4626-8af4-f910007df829",
+      "createTime": "2026-02-18T20:37:35.420Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "a085e950-202e-417e-a5d6-32bd843d647f",
+      "createTime": "2026-02-18T20:37:35.416Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "ccbe0005-7c16-41f4-867e-21238bcf6ea5",
+      "createTime": "2026-02-18T20:37:35.412Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "87fa2e32-7032-46d9-b535-747ddb9cb8d4",
+      "createTime": "2026-02-18T20:37:35.407Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "015b242e-cc2c-4328-8335-7b4e6db33c01",
+      "createTime": "2026-02-18T20:37:35.403Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d0d345d819685831cbb5ca8854147c1486224038",
+          "message": "[dataproc] Add `ClusterType` to support creating Zero-Scale clusters",
+          "issues": [
+            "7252"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "d6172837-94a5-4cbf-93ac-32d9868df648",
+      "createTime": "2026-02-18T20:37:35.399Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "66c8413a-5295-4d56-aa92-3feb2035b809",
+      "createTime": "2026-02-18T20:37:35.394Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "cd7d72e2-7bba-4ab5-8024-0d0e18e7a8d1",
+      "createTime": "2026-02-18T20:37:35.390Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "c7ac2b91-df0b-43a2-8495-b588acea33ea",
+      "createTime": "2026-02-18T20:37:35.386Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "b9b82a2f-c005-4a72-bf38-54f6e4b343bf",
+      "createTime": "2026-02-18T20:37:35.382Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "77abc861-776d-4573-acc4-f7d838feae63",
+      "createTime": "2026-02-18T20:37:35.378Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "3d857d5d-2ee4-441d-be7d-0c65ce81f1ca",
+      "createTime": "2026-02-18T20:37:35.374Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "287bcbb6-06ed-4144-8532-9a0e3172cd2d",
+      "createTime": "2026-02-18T20:37:35.370Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "8465a127-5e4f-446d-b334-9ae484e0b67b",
+      "createTime": "2026-02-18T20:37:35.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/connectors",
+      "id": "d8b03255-3fd5-45a2-b86f-8becaa4e9bc0",
+      "createTime": "2026-02-18T20:37:35.359Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/configdelivery",
+      "id": "a0f003f7-bb30-4dbf-ab0c-d0318b00fb0c",
+      "createTime": "2026-02-18T20:37:35.355Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "64776080-d4d3-45f0-a7fe-a660fe3bbb17",
+      "createTime": "2026-02-18T20:37:35.351Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "d10ff5a6-73b0-4fd5-93af-279bf547ba0b",
+      "createTime": "2026-02-18T20:37:35.347Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "bd1c2c64-49a4-4c9f-95d7-eadf53d9bbd2",
+      "createTime": "2026-02-18T20:37:35.343Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudsecuritycompliance",
+      "id": "c1074a5c-7cfa-4b3f-8ff3-22018a3263f9",
+      "createTime": "2026-02-18T20:37:35.339Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "3b3f148a-1410-4e58-9cc8-78b33464855e",
+      "createTime": "2026-02-18T20:37:35.334Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "0eb17ebc-77e4-4bcb-a2a2-3799fa27ad90",
+      "createTime": "2026-02-18T20:37:35.330Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "a642577e-ae38-44af-b87c-6776987afbeb",
+      "createTime": "2026-02-18T20:37:35.326Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "b913faef-600a-42e5-a5e2-4cc9020f397b",
+      "createTime": "2026-02-18T20:37:35.322Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "24a77263-3255-43b0-aa95-b7f9a2bb9fd3",
+      "createTime": "2026-02-18T20:37:35.318Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "965856505ac13a44afeda20d587510ba7f892b3c",
+          "message": "[binaryauthorization] A new field `registry` is added to message `.grafeas.v1.BaseImage`",
+          "issues": [
+            "7259"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "c5fa7958-48ee-49b0-b6f8-e08ec4732ce3",
+      "createTime": "2026-02-18T20:37:35.313Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "496ae4d1-f442-48e7-a56d-807c5dc627f4",
+      "createTime": "2026-02-18T20:37:35.309Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "a0435170-331d-47f9-8df3-02001a45eac5",
+      "createTime": "2026-02-18T20:37:35.305Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "3d772884-8834-438d-891f-b77e7bb39863",
+      "createTime": "2026-02-18T20:37:35.301Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "068e44c7-9d36-44bd-9631-2ec6fc4a929b",
+      "createTime": "2026-02-18T20:37:35.296Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "5790ce05-a392-4362-9c51-290a1e40833d",
+      "createTime": "2026-02-18T20:37:35.292Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "337a291c-62be-46b2-8ca9-1e13d5a52f3e",
+      "createTime": "2026-02-18T20:37:35.287Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "cc7f1fc6-48ee-403d-a113-62b6c1bda534",
+      "createTime": "2026-02-18T20:37:35.283Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "7b2587f9-2de0-46ce-aab8-18249ecbed3c",
+      "createTime": "2026-02-18T20:37:35.279Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "04b7148d-dd76-4f02-b3d0-9e3506f7321f",
+      "createTime": "2026-02-18T20:37:35.274Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "dbcb48ed-b4e6-42fa-83ff-7a24917ac3fa",
+      "createTime": "2026-02-18T20:37:35.270Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "56889421-7bda-4bd0-846e-2a9b759803fa",
+      "createTime": "2026-02-18T20:37:35.266Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "0e6b19bb-c6b1-4133-ab3a-a62977810195",
+      "createTime": "2026-02-18T20:37:35.262Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "da46bd8e-f042-44c9-bd8b-e139e7cdd153",
+      "createTime": "2026-02-18T20:37:35.257Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "421b2782-90de-43c7-967f-57dbd61df763",
+      "createTime": "2026-02-18T20:37:35.253Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "41027e62-4e3e-4dd0-8845-cf330c8ec2da",
+      "createTime": "2026-02-18T20:37:35.247Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "8b29a6ad-e51a-4031-8dd4-18af10fc65e0",
+      "createTime": "2026-02-18T20:37:35.242Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "02a480f8-ec4b-4bc0-9d24-bbcdc64924ae",
+      "createTime": "2026-02-18T20:37:35.238Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "087bb809-c63b-45a8-b3e6-f0bcc0e7d3c1",
+      "createTime": "2026-02-18T20:37:35.234Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apphub",
+      "id": "7c07ae56-7941-445d-a62e-8aa36a38cc7e",
+      "createTime": "2026-02-18T20:37:35.230Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apihub",
+      "id": "bcd10263-8658-4dd0-b942-de7c73da11e1",
+      "createTime": "2026-02-18T20:37:35.225Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-registry",
+      "id": "bbf961d8-be36-42ae-9ebe-b047a825c9f6",
+      "createTime": "2026-02-18T20:37:35.221Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "373421e0-f7a3-4e0d-bfd7-d3ba4a28e950",
+      "createTime": "2026-02-18T20:37:35.217Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "6f7719dd-2f7d-43af-8584-b5d73ff204fc",
+      "createTime": "2026-02-18T20:37:35.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "559edbb1-6030-4f89-a0c4-e61bb1bf50a8",
+      "createTime": "2026-02-18T20:37:35.209Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "2a01eb7f-86a0-4c47-bca2-b4fb7648ccb5",
+      "createTime": "2026-02-18T20:37:35.205Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9f75b642a89a9739644f1aea2af00cacfe626224",
+          "message": "[chat] Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto",
+          "issues": [
+            "7084"
+          ]
+        }
+      ],
+      "version": "0.23.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "a34d19ec-fde3-4dd5-87bb-f6f2aabf21f5",
+      "createTime": "2026-02-18T20:37:35.201Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "09d81bdc-d15c-4633-8908-8d5eafe0ae04",
+      "createTime": "2026-02-18T20:37:35.197Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "3de00726-81f5-4ecd-9014-093679f9cd1a",
+      "createTime": "2026-02-18T20:37:35.193Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/subscriptions",
+      "id": "4c312ee8-229f-458a-b7a5-2f0729cb27dc",
+      "createTime": "2026-02-18T20:37:35.189Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "9c6a0c6c-cd22-40c5-8934-c23d7c18a7f6",
+      "createTime": "2026-02-18T20:37:35.185Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "0f614eb6-e2af-4c35-98c8-f5d7bab834de",
+      "createTime": "2026-02-18T20:37:35.181Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "140b0096-f476-4293-b273-0609d0349daf",
+      "createTime": "2026-02-18T20:37:35.177Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "169e8a6b-d007-47cf-9d74-7d531fc57318",
+      "createTime": "2026-02-18T20:37:35.173Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "34c12a2e-f2f8-483e-8b73-f067a1b3491a",
+      "createTime": "2026-02-18T20:37:35.169Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "e7124811-5131-4b9a-82aa-07460d8929c9",
+      "createTime": "2026-02-18T20:37:35.164Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "9b674242-0292-41e0-8c74-64f1e32c1893",
+      "createTime": "2026-02-18T20:37:35.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "c1c1141a-2dd5-4d01-80a1-01efa0300ab9",
+      "createTime": "2026-02-18T20:37:35.154Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "3ca469d2-f380-4aee-88cc-1bd98e090532",
+      "createTime": "2026-02-18T20:37:35.149Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "c83c9563-c22f-46c9-842b-4b6f7de700ff",
+      "createTime": "2026-02-18T20:37:35.143Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-bunyan",
+      "id": "621adc2c-b825-46b3-863c-9be1783f2d6c",
+      "createTime": "2026-02-18T20:37:35.137Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/profiler",
+      "id": "23bfd73e-7d75-49ba-8e53-1906ccd8d326",
+      "createTime": "2026-02-18T20:37:35.130Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bea42b2d48ef9a53395c0ad585f3baa941f5f822",
+          "message": "Add high precision TIMESTAMP values for queries",
+          "issues": [
+            "7147"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "3ebb3302-ba29-44af-b37e-aa1f0c4c1311",
+      "createTime": "2026-02-18T20:37:35.122Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "486644d1926db8bf8ab38dd7860383b6e0a48fbd",
           "message": "[vectorsearch] add SearchHint to SemanticSearch requests",
           "issues": [
@@ -68144,5 +71456,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-02-03T16:09:47.415Z"
+  "updateTime": "2026-02-18T20:37:35.961Z"
 }
