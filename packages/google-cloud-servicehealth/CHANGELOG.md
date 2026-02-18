@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/servicehealth-v0.7.1...servicehealth-v0.8.0) (2026-02-18)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20251031 ([#6920](https://github.com/googleapis/google-cloud-node/issues/6920)) ([95f3adb](https://github.com/googleapis/google-cloud-node/commit/95f3adb6308c65eb000f841cc05460a8979a9d4f))
+
 ## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/servicehealth-v0.7.0...servicehealth-v0.7.1) (2025-10-13)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/saasservicemgmt-v0.1.1...saasservicemgmt-v0.2.0) (2026-02-18)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20251031 ([#6920](https://github.com/googleapis/google-cloud-node/issues/6920)) ([95f3adb](https://github.com/googleapis/google-cloud-node/commit/95f3adb6308c65eb000f841cc05460a8979a9d4f))
+* [saasservicemgmt] Add AppHub related condition types to Deployment protos ([#7248](https://github.com/googleapis/google-cloud-node/issues/7248)) ([1e63c36](https://github.com/googleapis/google-cloud-node/commit/1e63c36ce9049b616892f3f6a897a6d5d8f36215))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/saasservicemgmt-v0.1.0...saasservicemgmt-v0.1.1) (2025-10-13)
 
 

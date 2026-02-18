@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.1.1...storagebatchoperations-v0.2.0) (2026-02-18)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20251031 ([#6920](https://github.com/googleapis/google-cloud-node/issues/6920)) ([95f3adb](https://github.com/googleapis/google-cloud-node/commit/95f3adb6308c65eb000f841cc05460a8979a9d4f))
+* [storagebatchoperations] add QUEUED state to Storage Batch Operations API ([#7250](https://github.com/googleapis/google-cloud-node/issues/7250)) ([0bf04ff](https://github.com/googleapis/google-cloud-node/commit/0bf04ff629e4010a55463b0d960e65c07d8cf3ee))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.1.0...storagebatchoperations-v0.1.1) (2025-10-13)
 
 
