@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.22.0...chat-v0.23.0) (2026-02-19)
+
+
+### Features
+
+* [chat] Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto ([#7084](https://github.com/googleapis/google-cloud-node/issues/7084)) ([9f75b64](https://github.com/googleapis/google-cloud-node/commit/9f75b642a89a9739644f1aea2af00cacfe626224))
+
 ## [0.22.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.21.0...chat-v0.22.0) (2026-01-22)
 
 
