@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-apps/chat": "^0.22.0"
+    "@google-apps/chat": "^0.23.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",

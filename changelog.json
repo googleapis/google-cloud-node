@@ -5,6 +5,225 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "95cccbe3c0b9e89a443c6a7bfffaa282616203ad",
+          "message": "[places] Add `googleMapsTypeLabel` field to show type information on Google Maps",
+          "issues": [
+            "7251"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "cc1df5bb-09f3-43d0-b377-c0a54e5f412a",
+      "createTime": "2026-02-19T13:03:03.636Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "53e98e9da1468dab3b86a08b6704d9f384f64fc1",
+          "message": "[containeranalysis] A new field `registry` is added to message `.grafeas.v1.BaseImage`",
+          "issues": [
+            "7258"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "949a7773-2412-478a-bd03-fad7cf461dc6",
+      "createTime": "2026-02-19T13:03:03.632Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0bf04ff629e4010a55463b0d960e65c07d8cf3ee",
+          "message": "[storagebatchoperations] add QUEUED state to Storage Batch Operations API",
+          "issues": [
+            "7250"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storagebatchoperations",
+      "id": "ec77ccd6-9819-4730-a66a-16cd620d4f87",
+      "createTime": "2026-02-19T13:03:03.628Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1e63c36ce9049b616892f3f6a897a6d5d8f36215",
+          "message": "[saasservicemgmt] Add AppHub related condition types to Deployment protos",
+          "issues": [
+            "7248"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/saasservicemgmt",
+      "id": "2808aa1f-9847-4edc-aa0c-1802b18c1975",
+      "createTime": "2026-02-19T13:03:03.624Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a383b135a8982a8857b465478d679a75e0b6e89e",
+          "message": "[inventory] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations",
+          "issues": [
+            "7240"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "b1e37c00-3280-4a0d-8c5b-029becbdaef4",
+      "createTime": "2026-02-19T13:03:03.619Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9ad46e3b539da1a300b9e689b19dd2307604b2cf",
+          "message": "[kms] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations",
+          "issues": [
+            "7239"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "6b700273-4879-4983-be94-cac0a7732e1d",
+      "createTime": "2026-02-19T13:03:03.615Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3c18d2c7d286ee0f5da9c83e5a929757ec3ab7f6",
+          "message": "[cx] Add new value DETECT_INTENT_RESPONSE_VIEW_DEFAULT to enum DetectIntentResponseView",
+          "issues": []
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "f9d495fc-4174-43c6-a5e8-ab2fb8a5dde5",
+      "createTime": "2026-02-19T13:03:03.610Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d0d345d819685831cbb5ca8854147c1486224038",
+          "message": "[dataproc] Add `ClusterType` to support creating Zero-Scale clusters",
+          "issues": [
+            "7252"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "d875f247-e543-4f5f-bb25-ecc2aff3ed3b",
+      "createTime": "2026-02-19T13:03:03.605Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "965856505ac13a44afeda20d587510ba7f892b3c",
+          "message": "[binaryauthorization] A new field `registry` is added to message `.grafeas.v1.BaseImage`",
+          "issues": [
+            "7259"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "35e4b5c1-2492-40d4-b6f8-1e96dbd5f2c9",
+      "createTime": "2026-02-19T13:03:03.599Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9f75b642a89a9739644f1aea2af00cacfe626224",
+          "message": "[chat] Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto",
+          "issues": [
+            "7084"
+          ]
+        }
+      ],
+      "version": "0.23.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "94c9e4ac-bdc7-4747-8f02-f870c487ea7e",
+      "createTime": "2026-02-19T13:03:03.593Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-bunyan",
+      "id": "7cb6b06e-e1a4-4173-a34b-42ef5bea173e",
+      "createTime": "2026-02-19T13:03:03.587Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/profiler",
+      "id": "44c64c9a-5ce4-4316-936c-b212e2b77618",
+      "createTime": "2026-02-19T13:03:03.580Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bea42b2d48ef9a53395c0ad585f3baa941f5f822",
+          "message": "Add high precision TIMESTAMP values for queries",
+          "issues": [
+            "7147"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "74a24423-1215-4b20-9918-afce03854387",
+      "createTime": "2026-02-19T13:03:03.571Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "486644d1926db8bf8ab38dd7860383b6e0a48fbd",
           "message": "[vectorsearch] add SearchHint to SemanticSearch requests",
           "issues": [
@@ -68144,5 +68363,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-02-03T16:09:47.415Z"
+  "updateTime": "2026-02-19T13:03:03.636Z"
 }
