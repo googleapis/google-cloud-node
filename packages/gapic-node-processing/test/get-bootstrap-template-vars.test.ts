@@ -42,18 +42,36 @@ const octokit = new Octokit({
 
 describe('get bootstrap template vars', () => {
   describe('tests for metadata information', () => {
-    it('should return the API path without the version, with slashes', async () => {
-      assert.deepStrictEqual(
-        getApiPath('cloud.google.kms.v1'),
-        'cloud/google/kms',
-      );
+    describe('getApiPath', () => {
+      it('should return without the version, with slashes', async () => {
+        assert.deepStrictEqual(
+          getApiPath('cloud.google.kms.v1'),
+          'cloud/google/kms',
+        );
+      });
+
+      it('should preserve package names that start with v', async () => {
+        assert.deepStrictEqual(
+          getApiPath('cloud.google.visionai.v1'),
+          'cloud/google/visionai',
+        );
+      });
     });
 
-    it('should return the API path without the version, with dashes', async () => {
-      assert.deepStrictEqual(
-        getApiPathWithDashes('cloud.google.kms.v1'),
-        'cloud-google-kms',
-      );
+    describe('getApiPathWithDashes', () => {
+      it('should return without the version, with dashes', async () => {
+        assert.deepStrictEqual(
+          getApiPathWithDashes('cloud.google.kms.v1'),
+          'cloud-google-kms',
+        );
+      });
+
+      it('should preserve names that start with v', async () => {
+        assert.deepStrictEqual(
+          getApiPathWithDashes('cloud.google.visionai.v1'),
+          'cloud-google-visionai',
+        );
+      });
     });
 
     it('should get just the version', async () => {
