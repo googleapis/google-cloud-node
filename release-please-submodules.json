@@ -1,0 +1,25 @@
+{
+  "release-type": "node",
+  "separate-pull-requests": true,
+  "include-component-in-tag": true,
+  "tag-separator": "-",
+  "packages": {
+    "handwritten/logging-winston": {
+      "component": "logging-winston"
+    },
+    "handwritten/bigquery": {
+      "component": "bigquery"
+    },
+    "handwritten/cloud-profiler": {
+      "component": "cloud-profiler"
+    },
+    "handwritten/logging-bunyan": {
+      "component": "logging-bunyan"
+    }
+  },
+  "plugins": [
+    {
+      "type": "sentence-case"
+    }
+  ]
+}
