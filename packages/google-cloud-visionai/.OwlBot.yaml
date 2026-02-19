@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-visionai-nodejs
+    - source: /google/cloud/visionai/google-cloud-visionai-nodejs
       dest: /owl-bot-staging/google-cloud-visionai
 
 api-name: visionai
