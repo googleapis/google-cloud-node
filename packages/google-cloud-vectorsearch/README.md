@@ -57,6 +57,28 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| aggregate data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_search_service.aggregate_data_objects.js) |
+| batch search data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_search_service.batch_search_data_objects.js) |
+| query data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_search_service.query_data_objects.js) |
+| search data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_search_service.search_data_objects.js) |
+| batch create data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_service.batch_create_data_objects.js) |
+| batch delete data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_service.batch_delete_data_objects.js) |
+| batch update data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_service.batch_update_data_objects.js) |
+| create data object | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_service.create_data_object.js) |
+| delete data object | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_service.delete_data_object.js) |
+| get data object | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_service.get_data_object.js) |
+| update data object | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/data_object_service.update_data_object.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/snippet_metadata_google.cloud.vectorsearch.v1.json) |
+| create collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.create_collection.js) |
+| create index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.create_index.js) |
+| delete collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.delete_collection.js) |
+| delete index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.delete_index.js) |
+| get collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.get_collection.js) |
+| get index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.get_index.js) |
+| import data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.import_data_objects.js) |
+| list collections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.list_collections.js) |
+| list indexes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.list_indexes.js) |
+| update collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.update_collection.js) |
 | aggregate data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1beta/data_object_search_service.aggregate_data_objects.js) |
 | batch search data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1beta/data_object_search_service.batch_search_data_objects.js) |
 | query data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1beta/data_object_search_service.query_data_objects.js) |
