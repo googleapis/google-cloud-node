@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.3.0...kms-inventory-v2.4.0) (2026-02-19)
+
+
+### Features
+
+* [inventory] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations ([#7240](https://github.com/googleapis/google-cloud-node/issues/7240)) ([a383b13](https://github.com/googleapis/google-cloud-node/commit/a383b135a8982a8857b465478d679a75e0b6e89e))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.2.1...kms-inventory-v2.3.0) (2026-01-22)
 
 

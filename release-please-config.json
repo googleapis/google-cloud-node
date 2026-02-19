@@ -1,6 +1,7 @@
 {
   "bump-minor-pre-major": true,
   "initial-version": "0.1.0",
+  "commit-batch-size": 1,
   "packages": {
     "handwritten/logging-winston": {},
     "handwritten/bigquery": {},
@@ -184,7 +185,6 @@
     "packages/google-cloud-vpcaccess": {},
     "packages/google-cloud-webrisk": {},
     "packages/google-cloud-websecurityscanner": {},
-    "packages/google-cloud-workflows-executions": {},
     "packages/google-cloud-workstations": {},
     "packages/google-container": {},
     "packages/google-dataflow": {},
@@ -227,6 +227,7 @@
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
     "packages/google-cloud-workflows": {}
+    "packages/google-cloud-ces": {}
   },
   "plugins": [
     {

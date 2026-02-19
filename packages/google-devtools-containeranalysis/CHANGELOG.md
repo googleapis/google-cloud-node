@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.5.0...containeranalysis-v6.6.0) (2026-02-19)
+
+
+### Features
+
+* [containeranalysis] A new field `registry` is added to message `.grafeas.v1.BaseImage` ([#7258](https://github.com/googleapis/google-cloud-node/issues/7258)) ([53e98e9](https://github.com/googleapis/google-cloud-node/commit/53e98e9da1468dab3b86a08b6704d9f384f64fc1))
+
 ## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.4.0...containeranalysis-v6.5.0) (2026-01-31)
 
 
