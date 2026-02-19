@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.3.0...kms-v5.4.0) (2026-02-19)
+
+
+### Features
+
+* [kms] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations ([#7239](https://github.com/googleapis/google-cloud-node/issues/7239)) ([9ad46e3](https://github.com/googleapis/google-cloud-node/commit/9ad46e3b539da1a300b9e689b19dd2307604b2cf))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.2.1...kms-v5.3.0) (2026-01-22)
 
 

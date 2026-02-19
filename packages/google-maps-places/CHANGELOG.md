@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.2.0...places-v2.3.0) (2026-02-19)
+
+
+### Features
+
+* [places] Add `googleMapsTypeLabel` field to show type information on Google Maps ([#7251](https://github.com/googleapis/google-cloud-node/issues/7251)) ([95cccbe](https://github.com/googleapis/google-cloud-node/commit/95cccbe3c0b9e89a443c6a7bfffaa282616203ad))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.1.1...places-v2.2.0) (2025-10-23)
 
 

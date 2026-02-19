@@ -1,0 +1,2559 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-ces",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.ces.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListApps_async",
+      "title": "AgentService listApps Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists apps in the given project and location.",
+      "canonical": true,
+      "file": "agent_service.list_apps.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApps",
+        "fullName": "google.cloud.ces.v1.AgentService.ListApps",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListAppsResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListApps",
+          "fullName": "google.cloud.ces.v1.AgentService.ListApps",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetApp_async",
+      "title": "AgentService getApp Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of the specified app.",
+      "canonical": true,
+      "file": "agent_service.get_app.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApp",
+        "fullName": "google.cloud.ces.v1.AgentService.GetApp",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.App",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetApp",
+          "fullName": "google.cloud.ces.v1.AgentService.GetApp",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_CreateApp_async",
+      "title": "AgentService createApp Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new app in the given project and location.",
+      "canonical": true,
+      "file": "agent_service.create_app.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApp",
+        "fullName": "google.cloud.ces.v1.AgentService.CreateApp",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "app_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "app",
+            "type": ".google.cloud.ces.v1.App"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateApp",
+          "fullName": "google.cloud.ces.v1.AgentService.CreateApp",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_UpdateApp_async",
+      "title": "AgentService updateApp Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified app.",
+      "canonical": true,
+      "file": "agent_service.update_app.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApp",
+        "fullName": "google.cloud.ces.v1.AgentService.UpdateApp",
+        "async": true,
+        "parameters": [
+          {
+            "name": "app",
+            "type": ".google.cloud.ces.v1.App"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.App",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateApp",
+          "fullName": "google.cloud.ces.v1.AgentService.UpdateApp",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_DeleteApp_async",
+      "title": "AgentService deleteApp Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified app.",
+      "canonical": true,
+      "file": "agent_service.delete_app.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApp",
+        "fullName": "google.cloud.ces.v1.AgentService.DeleteApp",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteApp",
+          "fullName": "google.cloud.ces.v1.AgentService.DeleteApp",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ExportApp_async",
+      "title": "AgentService exportApp Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports the specified app.",
+      "canonical": true,
+      "file": "agent_service.export_app.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportApp",
+        "fullName": "google.cloud.ces.v1.AgentService.ExportApp",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "export_format",
+            "type": ".google.cloud.ces.v1.ExportAppRequest.ExportFormat"
+          },
+          {
+            "name": "gcs_uri",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ExportApp",
+          "fullName": "google.cloud.ces.v1.AgentService.ExportApp",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ImportApp_async",
+      "title": "AgentService importApp Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports the specified app.",
+      "canonical": true,
+      "file": "agent_service.import_app.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 94,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportApp",
+        "fullName": "google.cloud.ces.v1.AgentService.ImportApp",
+        "async": true,
+        "parameters": [
+          {
+            "name": "gcs_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "app_content",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "display_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "app_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "import_options",
+            "type": ".google.cloud.ces.v1.ImportAppRequest.ImportOptions"
+          },
+          {
+            "name": "ignore_app_lock",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ImportApp",
+          "fullName": "google.cloud.ces.v1.AgentService.ImportApp",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListAgents_async",
+      "title": "AgentService listAgents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists agents in the given app.",
+      "canonical": true,
+      "file": "agent_service.list_agents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAgents",
+        "fullName": "google.cloud.ces.v1.AgentService.ListAgents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListAgentsResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListAgents",
+          "fullName": "google.cloud.ces.v1.AgentService.ListAgents",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetAgent_async",
+      "title": "AgentService getAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of the specified agent.",
+      "canonical": true,
+      "file": "agent_service.get_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAgent",
+        "fullName": "google.cloud.ces.v1.AgentService.GetAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Agent",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetAgent",
+          "fullName": "google.cloud.ces.v1.AgentService.GetAgent",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_CreateAgent_async",
+      "title": "AgentService createAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new agent in the given app.",
+      "canonical": true,
+      "file": "agent_service.create_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAgent",
+        "fullName": "google.cloud.ces.v1.AgentService.CreateAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "agent_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "agent",
+            "type": ".google.cloud.ces.v1.Agent"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Agent",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateAgent",
+          "fullName": "google.cloud.ces.v1.AgentService.CreateAgent",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_UpdateAgent_async",
+      "title": "AgentService updateAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified agent.",
+      "canonical": true,
+      "file": "agent_service.update_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAgent",
+        "fullName": "google.cloud.ces.v1.AgentService.UpdateAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "agent",
+            "type": ".google.cloud.ces.v1.Agent"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Agent",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateAgent",
+          "fullName": "google.cloud.ces.v1.AgentService.UpdateAgent",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_DeleteAgent_async",
+      "title": "AgentService deleteAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified agent.",
+      "canonical": true,
+      "file": "agent_service.delete_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAgent",
+        "fullName": "google.cloud.ces.v1.AgentService.DeleteAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAgent",
+          "fullName": "google.cloud.ces.v1.AgentService.DeleteAgent",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListExamples_async",
+      "title": "AgentService listExamples Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists examples in the given app.",
+      "canonical": true,
+      "file": "agent_service.list_examples.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListExamples",
+        "fullName": "google.cloud.ces.v1.AgentService.ListExamples",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListExamplesResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListExamples",
+          "fullName": "google.cloud.ces.v1.AgentService.ListExamples",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetExample_async",
+      "title": "AgentService getExample Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of the specified example.",
+      "canonical": true,
+      "file": "agent_service.get_example.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetExample",
+        "fullName": "google.cloud.ces.v1.AgentService.GetExample",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Example",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetExample",
+          "fullName": "google.cloud.ces.v1.AgentService.GetExample",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_CreateExample_async",
+      "title": "AgentService createExample Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new example in the given app.",
+      "canonical": true,
+      "file": "agent_service.create_example.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateExample",
+        "fullName": "google.cloud.ces.v1.AgentService.CreateExample",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "example_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "example",
+            "type": ".google.cloud.ces.v1.Example"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Example",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateExample",
+          "fullName": "google.cloud.ces.v1.AgentService.CreateExample",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_UpdateExample_async",
+      "title": "AgentService updateExample Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified example.",
+      "canonical": true,
+      "file": "agent_service.update_example.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateExample",
+        "fullName": "google.cloud.ces.v1.AgentService.UpdateExample",
+        "async": true,
+        "parameters": [
+          {
+            "name": "example",
+            "type": ".google.cloud.ces.v1.Example"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Example",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateExample",
+          "fullName": "google.cloud.ces.v1.AgentService.UpdateExample",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_DeleteExample_async",
+      "title": "AgentService deleteExample Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified example.",
+      "canonical": true,
+      "file": "agent_service.delete_example.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteExample",
+        "fullName": "google.cloud.ces.v1.AgentService.DeleteExample",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteExample",
+          "fullName": "google.cloud.ces.v1.AgentService.DeleteExample",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListTools_async",
+      "title": "AgentService listTools Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists tools in the given app.",
+      "canonical": true,
+      "file": "agent_service.list_tools.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTools",
+        "fullName": "google.cloud.ces.v1.AgentService.ListTools",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListToolsResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListTools",
+          "fullName": "google.cloud.ces.v1.AgentService.ListTools",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetTool_async",
+      "title": "AgentService getTool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of the specified tool.",
+      "canonical": true,
+      "file": "agent_service.get_tool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTool",
+        "fullName": "google.cloud.ces.v1.AgentService.GetTool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Tool",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetTool",
+          "fullName": "google.cloud.ces.v1.AgentService.GetTool",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListConversations_async",
+      "title": "AgentService listConversations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists conversations in the given app.",
+      "canonical": true,
+      "file": "agent_service.list_conversations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConversations",
+        "fullName": "google.cloud.ces.v1.AgentService.ListConversations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source",
+            "type": ".google.cloud.ces.v1.Conversation.Source"
+          },
+          {
+            "name": "sources",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListConversationsResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListConversations",
+          "fullName": "google.cloud.ces.v1.AgentService.ListConversations",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetConversation_async",
+      "title": "AgentService getConversation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of the specified conversation.",
+      "canonical": true,
+      "file": "agent_service.get_conversation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConversation",
+        "fullName": "google.cloud.ces.v1.AgentService.GetConversation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source",
+            "type": ".google.cloud.ces.v1.Conversation.Source"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Conversation",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetConversation",
+          "fullName": "google.cloud.ces.v1.AgentService.GetConversation",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_DeleteConversation_async",
+      "title": "AgentService deleteConversation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified conversation.",
+      "canonical": true,
+      "file": "agent_service.delete_conversation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConversation",
+        "fullName": "google.cloud.ces.v1.AgentService.DeleteConversation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source",
+            "type": ".google.cloud.ces.v1.Conversation.Source"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteConversation",
+          "fullName": "google.cloud.ces.v1.AgentService.DeleteConversation",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_BatchDeleteConversations_async",
+      "title": "AgentService batchDeleteConversations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Batch deletes the specified conversations.",
+      "canonical": true,
+      "file": "agent_service.batch_delete_conversations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeleteConversations",
+        "fullName": "google.cloud.ces.v1.AgentService.BatchDeleteConversations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "conversations",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "BatchDeleteConversations",
+          "fullName": "google.cloud.ces.v1.AgentService.BatchDeleteConversations",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_CreateTool_async",
+      "title": "AgentService createTool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new tool in the given app.",
+      "canonical": true,
+      "file": "agent_service.create_tool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTool",
+        "fullName": "google.cloud.ces.v1.AgentService.CreateTool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tool",
+            "type": ".google.cloud.ces.v1.Tool"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Tool",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateTool",
+          "fullName": "google.cloud.ces.v1.AgentService.CreateTool",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_UpdateTool_async",
+      "title": "AgentService updateTool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified tool.",
+      "canonical": true,
+      "file": "agent_service.update_tool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTool",
+        "fullName": "google.cloud.ces.v1.AgentService.UpdateTool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "tool",
+            "type": ".google.cloud.ces.v1.Tool"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Tool",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateTool",
+          "fullName": "google.cloud.ces.v1.AgentService.UpdateTool",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_DeleteTool_async",
+      "title": "AgentService deleteTool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified tool.",
+      "canonical": true,
+      "file": "agent_service.delete_tool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTool",
+        "fullName": "google.cloud.ces.v1.AgentService.DeleteTool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteTool",
+          "fullName": "google.cloud.ces.v1.AgentService.DeleteTool",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListGuardrails_async",
+      "title": "AgentService listGuardrails Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists guardrails in the given app.",
+      "canonical": true,
+      "file": "agent_service.list_guardrails.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGuardrails",
+        "fullName": "google.cloud.ces.v1.AgentService.ListGuardrails",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListGuardrailsResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListGuardrails",
+          "fullName": "google.cloud.ces.v1.AgentService.ListGuardrails",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetGuardrail_async",
+      "title": "AgentService getGuardrail Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of the specified guardrail.",
+      "canonical": true,
+      "file": "agent_service.get_guardrail.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGuardrail",
+        "fullName": "google.cloud.ces.v1.AgentService.GetGuardrail",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Guardrail",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetGuardrail",
+          "fullName": "google.cloud.ces.v1.AgentService.GetGuardrail",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_CreateGuardrail_async",
+      "title": "AgentService createGuardrail Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new guardrail in the given app.",
+      "canonical": true,
+      "file": "agent_service.create_guardrail.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateGuardrail",
+        "fullName": "google.cloud.ces.v1.AgentService.CreateGuardrail",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "guardrail_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "guardrail",
+            "type": ".google.cloud.ces.v1.Guardrail"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Guardrail",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateGuardrail",
+          "fullName": "google.cloud.ces.v1.AgentService.CreateGuardrail",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_UpdateGuardrail_async",
+      "title": "AgentService updateGuardrail Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified guardrail.",
+      "canonical": true,
+      "file": "agent_service.update_guardrail.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGuardrail",
+        "fullName": "google.cloud.ces.v1.AgentService.UpdateGuardrail",
+        "async": true,
+        "parameters": [
+          {
+            "name": "guardrail",
+            "type": ".google.cloud.ces.v1.Guardrail"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Guardrail",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateGuardrail",
+          "fullName": "google.cloud.ces.v1.AgentService.UpdateGuardrail",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_DeleteGuardrail_async",
+      "title": "AgentService deleteGuardrail Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified guardrail.",
+      "canonical": true,
+      "file": "agent_service.delete_guardrail.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteGuardrail",
+        "fullName": "google.cloud.ces.v1.AgentService.DeleteGuardrail",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteGuardrail",
+          "fullName": "google.cloud.ces.v1.AgentService.DeleteGuardrail",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListDeployments_async",
+      "title": "AgentService listDeployments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists deployments in the given app.",
+      "canonical": true,
+      "file": "agent_service.list_deployments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDeployments",
+        "fullName": "google.cloud.ces.v1.AgentService.ListDeployments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListDeploymentsResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListDeployments",
+          "fullName": "google.cloud.ces.v1.AgentService.ListDeployments",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetDeployment_async",
+      "title": "AgentService getDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of the specified deployment.",
+      "canonical": true,
+      "file": "agent_service.get_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDeployment",
+        "fullName": "google.cloud.ces.v1.AgentService.GetDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Deployment",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetDeployment",
+          "fullName": "google.cloud.ces.v1.AgentService.GetDeployment",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_CreateDeployment_async",
+      "title": "AgentService createDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new deployment in the given app.",
+      "canonical": true,
+      "file": "agent_service.create_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDeployment",
+        "fullName": "google.cloud.ces.v1.AgentService.CreateDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deployment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deployment",
+            "type": ".google.cloud.ces.v1.Deployment"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Deployment",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDeployment",
+          "fullName": "google.cloud.ces.v1.AgentService.CreateDeployment",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_UpdateDeployment_async",
+      "title": "AgentService updateDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified deployment.",
+      "canonical": true,
+      "file": "agent_service.update_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDeployment",
+        "fullName": "google.cloud.ces.v1.AgentService.UpdateDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "deployment",
+            "type": ".google.cloud.ces.v1.Deployment"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Deployment",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDeployment",
+          "fullName": "google.cloud.ces.v1.AgentService.UpdateDeployment",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_DeleteDeployment_async",
+      "title": "AgentService deleteDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified deployment.",
+      "canonical": true,
+      "file": "agent_service.delete_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDeployment",
+        "fullName": "google.cloud.ces.v1.AgentService.DeleteDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDeployment",
+          "fullName": "google.cloud.ces.v1.AgentService.DeleteDeployment",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListToolsets_async",
+      "title": "AgentService listToolsets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists toolsets in the given app.",
+      "canonical": true,
+      "file": "agent_service.list_toolsets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListToolsets",
+        "fullName": "google.cloud.ces.v1.AgentService.ListToolsets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListToolsetsResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListToolsets",
+          "fullName": "google.cloud.ces.v1.AgentService.ListToolsets",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetToolset_async",
+      "title": "AgentService getToolset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of the specified toolset.",
+      "canonical": true,
+      "file": "agent_service.get_toolset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetToolset",
+        "fullName": "google.cloud.ces.v1.AgentService.GetToolset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Toolset",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetToolset",
+          "fullName": "google.cloud.ces.v1.AgentService.GetToolset",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_CreateToolset_async",
+      "title": "AgentService createToolset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new toolset in the given app.",
+      "canonical": true,
+      "file": "agent_service.create_toolset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateToolset",
+        "fullName": "google.cloud.ces.v1.AgentService.CreateToolset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "toolset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "toolset",
+            "type": ".google.cloud.ces.v1.Toolset"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Toolset",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateToolset",
+          "fullName": "google.cloud.ces.v1.AgentService.CreateToolset",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_UpdateToolset_async",
+      "title": "AgentService updateToolset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified toolset.",
+      "canonical": true,
+      "file": "agent_service.update_toolset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateToolset",
+        "fullName": "google.cloud.ces.v1.AgentService.UpdateToolset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "toolset",
+            "type": ".google.cloud.ces.v1.Toolset"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Toolset",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateToolset",
+          "fullName": "google.cloud.ces.v1.AgentService.UpdateToolset",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_DeleteToolset_async",
+      "title": "AgentService deleteToolset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified toolset.",
+      "canonical": true,
+      "file": "agent_service.delete_toolset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteToolset",
+        "fullName": "google.cloud.ces.v1.AgentService.DeleteToolset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteToolset",
+          "fullName": "google.cloud.ces.v1.AgentService.DeleteToolset",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListAppVersions_async",
+      "title": "AgentService listAppVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all app versions in the given app.",
+      "canonical": true,
+      "file": "agent_service.list_app_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAppVersions",
+        "fullName": "google.cloud.ces.v1.AgentService.ListAppVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListAppVersionsResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListAppVersions",
+          "fullName": "google.cloud.ces.v1.AgentService.ListAppVersions",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetAppVersion_async",
+      "title": "AgentService getAppVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of the specified app version.",
+      "canonical": true,
+      "file": "agent_service.get_app_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAppVersion",
+        "fullName": "google.cloud.ces.v1.AgentService.GetAppVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.AppVersion",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetAppVersion",
+          "fullName": "google.cloud.ces.v1.AgentService.GetAppVersion",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_CreateAppVersion_async",
+      "title": "AgentService createAppVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new app version in the given app.",
+      "canonical": true,
+      "file": "agent_service.create_app_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAppVersion",
+        "fullName": "google.cloud.ces.v1.AgentService.CreateAppVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "app_version_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "app_version",
+            "type": ".google.cloud.ces.v1.AppVersion"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.AppVersion",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateAppVersion",
+          "fullName": "google.cloud.ces.v1.AgentService.CreateAppVersion",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_DeleteAppVersion_async",
+      "title": "AgentService deleteAppVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified app version.",
+      "canonical": true,
+      "file": "agent_service.delete_app_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAppVersion",
+        "fullName": "google.cloud.ces.v1.AgentService.DeleteAppVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAppVersion",
+          "fullName": "google.cloud.ces.v1.AgentService.DeleteAppVersion",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_RestoreAppVersion_async",
+      "title": "AgentService restoreAppVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Restores the specified app version. This will create a new app version from the current draft app and overwrite the current draft with the specified app version.",
+      "canonical": true,
+      "file": "agent_service.restore_app_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestoreAppVersion",
+        "fullName": "google.cloud.ces.v1.AgentService.RestoreAppVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "RestoreAppVersion",
+          "fullName": "google.cloud.ces.v1.AgentService.RestoreAppVersion",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_ListChangelogs_async",
+      "title": "AgentService listChangelogs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the changelogs of the specified app.",
+      "canonical": true,
+      "file": "agent_service.list_changelogs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 90,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListChangelogs",
+        "fullName": "google.cloud.ces.v1.AgentService.ListChangelogs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ListChangelogsResponse",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "ListChangelogs",
+          "fullName": "google.cloud.ces.v1.AgentService.ListChangelogs",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_AgentService_GetChangelog_async",
+      "title": "AgentService getChangelog Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified changelog.",
+      "canonical": true,
+      "file": "agent_service.get_changelog.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetChangelog",
+        "fullName": "google.cloud.ces.v1.AgentService.GetChangelog",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.Changelog",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetChangelog",
+          "fullName": "google.cloud.ces.v1.AgentService.GetChangelog",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_SessionService_RunSession_async",
+      "title": "AgentService runSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Initiates a single turn interaction with the CES agent within a session.",
+      "canonical": true,
+      "file": "session_service.run_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunSession",
+        "fullName": "google.cloud.ces.v1.SessionService.RunSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": ".google.cloud.ces.v1.SessionConfig"
+          },
+          {
+            "name": "inputs",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.RunSessionResponse",
+        "client": {
+          "shortName": "SessionServiceClient",
+          "fullName": "google.cloud.ces.v1.SessionServiceClient"
+        },
+        "method": {
+          "shortName": "RunSession",
+          "fullName": "google.cloud.ces.v1.SessionService.RunSession",
+          "service": {
+            "shortName": "SessionService",
+            "fullName": "google.cloud.ces.v1.SessionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_SessionService_BidiRunSession_async",
+      "title": "AgentService bidiRunSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Establishes a bidirectional streaming connection with the CES agent. The agent processes continuous multimodal inputs (e.g., text, audio) and generates real-time multimodal output streams. --- Client Request Stream --- The client streams requests in the following order: 1.  Initialization:     The first message must contain     [SessionConfig][google.cloud.ces.v1.BidiSessionClientMessage.config].     For audio sessions, this should also include     [InputAudioConfig][google.cloud.ces.v1.SessionConfig.input_audio_config]     and     [OutputAudioConfig][google.cloud.ces.v1.SessionConfig.output_audio_config]     to define audio processing and synthesis parameters. 2.  Interaction:     Subsequent messages stream     [SessionInput][google.cloud.ces.v1.BidiSessionClientMessage.realtime_input]     containing real-time user input data. 3.  Termination:     The client should half-close the stream when there is no more user     input. It should also half-close upon receiving     [EndSession][google.cloud.ces.v1.BidiSessionServerMessage.end_session]     or [GoAway][google.cloud.ces.v1.BidiSessionServerMessage.go_away] from     the agent. --- Server Response Stream --- For each interaction turn, the agent streams messages in the following sequence: 1.  Speech Recognition (First N messages):     Contains     [RecognitionResult][google.cloud.ces.v1.BidiSessionServerMessage.recognition_result]     representing the concatenated user speech segments captured so far.     This is only populated for audio sessions. 2.  Response (Next M messages):     Contains     [SessionOutput][google.cloud.ces.v1.BidiSessionServerMessage.session_output]     delivering the agent's response in various modalities (e.g., text,     audio). 3.  Turn Completion (Final message of the turn):     Contains     [SessionOutput][google.cloud.ces.v1.BidiSessionServerMessage.session_output]     with [turn_completed][google.cloud.ces.v1.SessionOutput.turn_completed]     set to true. This signals the end of the current turn and includes     [DiagnosticInfo][google.cloud.ces.v1.SessionOutput.diagnostic_info]     with execution details. --- Audio Best Practices --- 1.  Streaming:     Stream [audio data][google.cloud.ces.v1.SessionInput.audio]     **CONTINUOUSLY**, even during silence. Recommended chunk size: 40-120ms     (balances latency vs. efficiency). 2.  Playback & Interruption:     Play [audio responses][google.cloud.ces.v1.SessionOutput.audio] upon     receipt. Stop playback immediately if an     [InterruptionSignal][google.cloud.ces.v1.BidiSessionServerMessage.interruption_signal]     is received (e.g., user barge-in or new agent response).",
+      "canonical": true,
+      "file": "session_service.bidi_run_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BidiRunSession",
+        "fullName": "google.cloud.ces.v1.SessionService.BidiRunSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": ".google.cloud.ces.v1.SessionConfig"
+          },
+          {
+            "name": "realtime_input",
+            "type": ".google.cloud.ces.v1.SessionInput"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.BidiSessionServerMessage",
+        "client": {
+          "shortName": "SessionServiceClient",
+          "fullName": "google.cloud.ces.v1.SessionServiceClient"
+        },
+        "method": {
+          "shortName": "BidiRunSession",
+          "fullName": "google.cloud.ces.v1.SessionService.BidiRunSession",
+          "service": {
+            "shortName": "SessionService",
+            "fullName": "google.cloud.ces.v1.SessionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_ToolService_ExecuteTool_async",
+      "title": "AgentService executeTool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Executes the given tool with the given arguments.",
+      "canonical": true,
+      "file": "tool_service.execute_tool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExecuteTool",
+        "fullName": "google.cloud.ces.v1.ToolService.ExecuteTool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "tool",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "toolset_tool",
+            "type": ".google.cloud.ces.v1.ToolsetTool"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "args",
+            "type": ".google.protobuf.Struct"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.ExecuteToolResponse",
+        "client": {
+          "shortName": "ToolServiceClient",
+          "fullName": "google.cloud.ces.v1.ToolServiceClient"
+        },
+        "method": {
+          "shortName": "ExecuteTool",
+          "fullName": "google.cloud.ces.v1.ToolService.ExecuteTool",
+          "service": {
+            "shortName": "ToolService",
+            "fullName": "google.cloud.ces.v1.ToolService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_ToolService_RetrieveToolSchema_async",
+      "title": "AgentService retrieveToolSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieve the schema of the given tool. The schema is computed on the fly for the given instance of the tool.",
+      "canonical": true,
+      "file": "tool_service.retrieve_tool_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RetrieveToolSchema",
+        "fullName": "google.cloud.ces.v1.ToolService.RetrieveToolSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "tool",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "toolset_tool",
+            "type": ".google.cloud.ces.v1.ToolsetTool"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.RetrieveToolSchemaResponse",
+        "client": {
+          "shortName": "ToolServiceClient",
+          "fullName": "google.cloud.ces.v1.ToolServiceClient"
+        },
+        "method": {
+          "shortName": "RetrieveToolSchema",
+          "fullName": "google.cloud.ces.v1.ToolService.RetrieveToolSchema",
+          "service": {
+            "shortName": "ToolService",
+            "fullName": "google.cloud.ces.v1.ToolService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_ToolService_RetrieveTools_async",
+      "title": "AgentService retrieveTools Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieve the list of tools included in the specified toolset.",
+      "canonical": true,
+      "file": "tool_service.retrieve_tools.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RetrieveTools",
+        "fullName": "google.cloud.ces.v1.ToolService.RetrieveTools",
+        "async": true,
+        "parameters": [
+          {
+            "name": "toolset",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tool_ids",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.RetrieveToolsResponse",
+        "client": {
+          "shortName": "ToolServiceClient",
+          "fullName": "google.cloud.ces.v1.ToolServiceClient"
+        },
+        "method": {
+          "shortName": "RetrieveTools",
+          "fullName": "google.cloud.ces.v1.ToolService.RetrieveTools",
+          "service": {
+            "shortName": "ToolService",
+            "fullName": "google.cloud.ces.v1.ToolService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_WidgetService_GenerateChatToken_async",
+      "title": "AgentService generateChatToken Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates a session scoped token for chat widget to authenticate with Session APIs.",
+      "canonical": true,
+      "file": "widget_service.generate_chat_token.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateChatToken",
+        "fullName": "google.cloud.ces.v1.WidgetService.GenerateChatToken",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deployment",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "recaptcha_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.GenerateChatTokenResponse",
+        "client": {
+          "shortName": "WidgetServiceClient",
+          "fullName": "google.cloud.ces.v1.WidgetServiceClient"
+        },
+        "method": {
+          "shortName": "GenerateChatToken",
+          "fullName": "google.cloud.ces.v1.WidgetService.GenerateChatToken",
+          "service": {
+            "shortName": "WidgetService",
+            "fullName": "google.cloud.ces.v1.WidgetService"
+          }
+        }
+      }
+    }
+  ]
+}

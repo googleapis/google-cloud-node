@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.1.1...storagebatchoperations-v0.2.0) (2026-02-19)
+
+
+### Features
+
+* [storagebatchoperations] add QUEUED state to Storage Batch Operations API ([#7250](https://github.com/googleapis/google-cloud-node/issues/7250)) ([0bf04ff](https://github.com/googleapis/google-cloud-node/commit/0bf04ff629e4010a55463b0d960e65c07d8cf3ee))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.1.0...storagebatchoperations-v0.1.1) (2025-10-13)
 
 
