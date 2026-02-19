@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/vectorsearch/v1/common.proto",
+  "../../protos/google/cloud/vectorsearch/v1/data_object.proto",
+  "../../protos/google/cloud/vectorsearch/v1/data_object_search_service.proto",
+  "../../protos/google/cloud/vectorsearch/v1/data_object_service.proto",
+  "../../protos/google/cloud/vectorsearch/v1/embedding_config.proto",
+  "../../protos/google/cloud/vectorsearch/v1/vectorsearch_service.proto"
+]
