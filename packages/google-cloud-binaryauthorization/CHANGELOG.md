@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.2.0...binary-authorization-v4.3.0) (2026-02-19)
+
+
+### Features
+
+* [binaryauthorization] A new field `registry` is added to message `.grafeas.v1.BaseImage` ([#7259](https://github.com/googleapis/google-cloud-node/issues/7259)) ([9658565](https://github.com/googleapis/google-cloud-node/commit/965856505ac13a44afeda20d587510ba7f892b3c))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.1.1...binary-authorization-v4.2.0) (2026-01-31)
 
 

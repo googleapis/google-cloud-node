@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.1.1...bigquery-v8.2.0) (2026-02-19)
+
+
+### Features
+
+* Add high precision TIMESTAMP values for queries ([#7147](https://github.com/googleapis/google-cloud-node/issues/7147)) ([bea42b2](https://github.com/googleapis/google-cloud-node/commit/bea42b2d48ef9a53395c0ad585f3baa941f5f822))
+
 ## [8.1.1](https://github.com/googleapis/nodejs-bigquery/compare/v8.1.0...v8.1.1) (2025-07-23)
 
 

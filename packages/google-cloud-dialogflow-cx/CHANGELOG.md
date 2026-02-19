@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.6.0...dialogflow-cx-v5.7.0) (2026-02-19)
+
+
+### Features
+
+* [cx] Add new value DETECT_INTENT_RESPONSE_VIEW_DEFAULT to enum DetectIntentResponseView ([3c18d2c](https://github.com/googleapis/google-cloud-node/commit/3c18d2c7d286ee0f5da9c83e5a929757ec3ab7f6))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.5.0...dialogflow-cx-v5.6.0) (2026-01-22)
 
 

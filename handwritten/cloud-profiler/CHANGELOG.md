@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [6.0.4](https://github.com/googleapis/google-cloud-node/compare/profiler-v6.0.3...profiler-v6.0.4) (2026-02-19)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [6.0.3](https://github.com/googleapis/cloud-profiler-nodejs/compare/v6.0.2...v6.0.3) (2025-04-14)
 
 
