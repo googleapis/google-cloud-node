@@ -181,7 +181,7 @@
   "packages/google-cloud-vpcaccess": "4.2.1",
   "packages/google-cloud-webrisk": "5.3.1",
   "packages/google-cloud-websecurityscanner": "4.2.1",
-  "packages/google-cloud-workflows-executions": "5.0.0",
+  "packages/google-cloud-workflows": "5.0.0",
   "packages/google-cloud-workstations": "2.2.1",
   "packages/google-container": "6.7.0",
   "packages/google-dataflow": "4.1.1",
