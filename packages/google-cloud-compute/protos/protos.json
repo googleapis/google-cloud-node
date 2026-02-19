@@ -131800,6 +131800,11 @@
                             "count"
                           ]
                         },
+                        "_instanceFlexibilityPolicy": {
+                          "oneof": [
+                            "instanceFlexibilityPolicy"
+                          ]
+                        },
                         "_instanceProperties": {
                           "oneof": [
                             "instanceProperties"
@@ -131830,6 +131835,13 @@
                         "count": {
                           "type": "int64",
                           "id": 94851343,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceFlexibilityPolicy": {
+                          "type": "InstanceFlexibilityPolicy",
+                          "id": 26937090,
                           "options": {
                             "proto3_optional": true
                           }
@@ -158786,6 +158798,43 @@
                         "minNodeCpus": {
                           "type": "int32",
                           "id": 317231675,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceFlexibilityPolicy": {
+                      "fields": {
+                        "instanceSelections": {
+                          "keyType": "string",
+                          "type": "InstanceFlexibilityPolicyInstanceSelection",
+                          "id": 22954577
+                        }
+                      }
+                    },
+                    "InstanceFlexibilityPolicyInstanceSelection": {
+                      "oneofs": {
+                        "_rank": {
+                          "oneof": [
+                            "rank"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "AttachedDisk",
+                          "id": 95594102
+                        },
+                        "machineTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 79720065
+                        },
+                        "rank": {
+                          "type": "int64",
+                          "id": 3492908,
                           "options": {
                             "proto3_optional": true
                           }
