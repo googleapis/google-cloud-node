@@ -221,13 +221,19 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{autokey_config.name=folders/*/autokeyConfig}",
                             "(google.api.http).body": "autokey_config",
+                            "(google.api.http).additional_bindings.patch": "/v1/{autokey_config.name=projects/*/autokeyConfig}",
+                            "(google.api.http).additional_bindings.body": "autokey_config",
                             "(google.api.method_signature)": "autokey_config,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/{autokey_config.name=folders/*/autokeyConfig}",
-                                "body": "autokey_config"
+                                "body": "autokey_config",
+                                "additional_bindings": {
+                                  "patch": "/v1/{autokey_config.name=projects/*/autokeyConfig}",
+                                  "body": "autokey_config"
+                                }
                               }
                             },
                             {
@@ -240,12 +246,16 @@
                           "responseType": "AutokeyConfig",
                           "options": {
                             "(google.api.http).get": "/v1/{name=folders/*/autokeyConfig}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/autokeyConfig}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=folders/*/autokeyConfig}"
+                                "get": "/v1/{name=folders/*/autokeyConfig}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/autokeyConfig}"
+                                }
                               }
                             },
                             {
@@ -306,7 +316,7 @@
                     "AutokeyConfig": {
                       "options": {
                         "(google.api.resource).type": "cloudkms.googleapis.com/AutokeyConfig",
-                        "(google.api.resource).pattern": "folders/{folder}/autokeyConfig",
+                        "(google.api.resource).pattern": "projects/{project}/autokeyConfig",
                         "(google.api.resource).plural": "autokeyConfigs",
                         "(google.api.resource).singular": "autokeyConfig"
                       },
@@ -338,6 +348,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "keyProjectResolutionMode": {
+                          "type": "KeyProjectResolutionMode",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -346,7 +363,16 @@
                             "STATE_UNSPECIFIED": 0,
                             "ACTIVE": 1,
                             "KEY_PROJECT_DELETED": 2,
-                            "UNINITIALIZED": 3
+                            "UNINITIALIZED": 3,
+                            "KEY_PROJECT_PERMISSION_DENIED": 4
+                          }
+                        },
+                        "KeyProjectResolutionMode": {
+                          "values": {
+                            "KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED": 0,
+                            "DEDICATED_KEY_PROJECT": 1,
+                            "RESOURCE_PROJECT": 2,
+                            "DISABLED": 3
                           }
                         }
                       }
@@ -2109,8 +2135,14 @@
                             "ML_KEM_768": 47,
                             "ML_KEM_1024": 48,
                             "KEM_XWING": 63,
+                            "PQ_SIGN_ML_DSA_44": 68,
                             "PQ_SIGN_ML_DSA_65": 56,
-                            "PQ_SIGN_SLH_DSA_SHA2_128S": 57
+                            "PQ_SIGN_ML_DSA_87": 69,
+                            "PQ_SIGN_SLH_DSA_SHA2_128S": 57,
+                            "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256": 60,
+                            "PQ_SIGN_ML_DSA_44_EXTERNAL_MU": 70,
+                            "PQ_SIGN_ML_DSA_65_EXTERNAL_MU": 67,
+                            "PQ_SIGN_ML_DSA_87_EXTERNAL_MU": 71
                           }
                         },
                         "CryptoKeyVersionState": {
@@ -2331,6 +2363,44 @@
                         }
                       }
                     },
+                    "RetiredResource": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/RetiredResource",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/retiredResources/{retired_resource}",
+                        "(google.api.resource).plural": "retiredResources",
+                        "(google.api.resource).singular": "retiredResource"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "originalResource": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resourceType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ProtectionLevel": {
                       "values": {
                         "PROTECTION_LEVEL_UNSPECIFIED": 0,
@@ -2443,6 +2513,24 @@
                             }
                           ]
                         },
+                        "ListRetiredResources": {
+                          "requestType": "ListRetiredResourcesRequest",
+                          "responseType": "ListRetiredResourcesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/retiredResources",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/retiredResources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "GetKeyRing": {
                           "requestType": "GetKeyRingRequest",
                           "responseType": "KeyRing",
@@ -2533,6 +2621,24 @@
                             }
                           ]
                         },
+                        "GetRetiredResource": {
+                          "requestType": "GetRetiredResourceRequest",
+                          "responseType": "RetiredResource",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/retiredResources/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/retiredResources/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "CreateKeyRing": {
                           "requestType": "CreateKeyRingRequest",
                           "responseType": "KeyRing",
@@ -2590,6 +2696,58 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,crypto_key_version"
+                            }
+                          ]
+                        },
+                        "DeleteCryptoKey": {
+                          "requestType": "DeleteCryptoKeyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteCryptoKeyMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteCryptoKeyMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteCryptoKeyVersion": {
+                          "requestType": "DeleteCryptoKeyVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteCryptoKeyVersionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteCryptoKeyVersionMetadata"
+                              }
                             }
                           ]
                         },
@@ -3087,6 +3245,32 @@
                         }
                       }
                     },
+                    "ListRetiredResourcesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudkms.googleapis.com/RetiredResource"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "ListKeyRingsResponse": {
                       "fields": {
                         "keyRings": {
@@ -3155,6 +3339,23 @@
                         }
                       }
                     },
+                    "ListRetiredResourcesResponse": {
+                      "fields": {
+                        "retiredResources": {
+                          "rule": "repeated",
+                          "type": "RetiredResource",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int64",
+                          "id": 3
+                        }
+                      }
+                    },
                     "GetKeyRingRequest": {
                       "fields": {
                         "name": {
@@ -3218,6 +3419,18 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/ImportJob"
+                          }
+                        }
+                      }
+                    },
+                    "GetRetiredResourceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/RetiredResource"
                           }
                         }
                       }
@@ -3293,6 +3506,30 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCryptoKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCryptoKeyVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
                           }
                         }
                       }
@@ -4127,6 +4364,21 @@
                           "id": 3
                         }
                       }
+                    },
+                    "DeleteCryptoKeyMetadata": {
+                      "fields": {
+                        "retiredResource": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/RetiredResource"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCryptoKeyVersionMetadata": {
+                      "fields": {}
                     }
                   }
                 }

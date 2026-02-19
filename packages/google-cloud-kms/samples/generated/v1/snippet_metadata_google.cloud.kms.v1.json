@@ -155,7 +155,7 @@
       "regionTag": "cloudkms_v1_generated_AutokeyAdmin_UpdateAutokeyConfig_async",
       "title": "Autokey updateAutokeyConfig Sample",
       "origin": "API_DEFINITION",
-      "description": " Updates the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder. The caller must have both `cloudkms.autokeyConfigs.update` permission on the parent folder and `cloudkms.cryptoKeys.setIamPolicy` permission on the provided key project. A [KeyHandle][google.cloud.kms.v1.KeyHandle] creation in the folder's descendant projects will use this configuration to determine where to create the resulting [CryptoKey][google.cloud.kms.v1.CryptoKey].",
+      "description": " Updates the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder or a project. The caller must have both `cloudkms.autokeyConfigs.update` permission on the parent folder and `cloudkms.cryptoKeys.setIamPolicy` permission on the provided key project. A [KeyHandle][google.cloud.kms.v1.KeyHandle] creation in the folder's descendant projects will use this configuration to determine where to create the resulting [CryptoKey][google.cloud.kms.v1.CryptoKey].",
       "canonical": true,
       "file": "autokey_admin.update_autokey_config.js",
       "language": "JAVASCRIPT",
@@ -199,14 +199,14 @@
       "regionTag": "cloudkms_v1_generated_AutokeyAdmin_GetAutokeyConfig_async",
       "title": "Autokey getAutokeyConfig Sample",
       "origin": "API_DEFINITION",
-      "description": " Returns the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder.",
+      "description": " Returns the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder or project.",
       "canonical": true,
       "file": "autokey_admin.get_autokey_config.js",
       "language": "JAVASCRIPT",
       "segments": [
         {
           "start": 25,
-          "end": 54,
+          "end": 55,
           "type": "FULL"
         }
       ],
@@ -1244,6 +1244,54 @@
       }
     },
     {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_ListRetiredResources_async",
+      "title": "Autokey listRetiredResources Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the [RetiredResources][google.cloud.kms.v1.RetiredResource] which are the records of deleted [CryptoKeys][google.cloud.kms.v1.CryptoKey]. RetiredResources prevent the reuse of these resource names after deletion.",
+      "canonical": true,
+      "file": "key_management_service.list_retired_resources.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRetiredResources",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.ListRetiredResources",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ListRetiredResourcesResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "ListRetiredResources",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.ListRetiredResources",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "cloudkms_v1_generated_KeyManagementService_GetKeyRing_async",
       "title": "Autokey getKeyRing Sample",
       "origin": "API_DEFINITION",
@@ -1448,6 +1496,46 @@
       }
     },
     {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_GetRetiredResource_async",
+      "title": "Autokey getRetiredResource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a specific [RetiredResource][google.cloud.kms.v1.RetiredResource] resource, which represents the record of a deleted [CryptoKey][google.cloud.kms.v1.CryptoKey].",
+      "canonical": true,
+      "file": "key_management_service.get_retired_resource.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRetiredResource",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.GetRetiredResource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.RetiredResource",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "GetRetiredResource",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.GetRetiredResource",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "cloudkms_v1_generated_KeyManagementService_CreateKeyRing_async",
       "title": "Autokey createKeyRing Sample",
       "origin": "API_DEFINITION",
@@ -1584,6 +1672,86 @@
         "method": {
           "shortName": "CreateCryptoKeyVersion",
           "fullName": "google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_DeleteCryptoKey_async",
+      "title": "Autokey deleteCryptoKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Permanently deletes the given [CryptoKey][google.cloud.kms.v1.CryptoKey]. All child [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] must have been previously deleted using [KeyManagementService.DeleteCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyVersion]. The specified crypto key will be immediately and permanently deleted upon calling this method. This action cannot be undone.",
+      "canonical": true,
+      "file": "key_management_service.delete_crypto_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCryptoKey",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.DeleteCryptoKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteCryptoKey",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.DeleteCryptoKey",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_DeleteCryptoKeyVersion_async",
+      "title": "Autokey deleteCryptoKeyVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Permanently deletes the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. Only possible if the version has not been previously imported and if its [state][google.cloud.kms.v1.CryptoKeyVersion.state] is one of [DESTROYED][CryptoKeyVersionState.DESTROYED], [IMPORT_FAILED][CryptoKeyVersionState.IMPORT_FAILED], or [GENERATION_FAILED][CryptoKeyVersionState.GENERATION_FAILED]. Successfully imported [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] cannot be deleted at this time. The specified version will be immediately and permanently deleted upon calling this method. This action cannot be undone.",
+      "canonical": true,
+      "file": "key_management_service.delete_crypto_key_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCryptoKeyVersion",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteCryptoKeyVersion",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyVersion",
           "service": {
             "shortName": "KeyManagementService",
             "fullName": "google.cloud.kms.v1.KeyManagementService"

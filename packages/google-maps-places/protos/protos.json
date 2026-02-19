@@ -216,7 +216,7 @@
                     "csharp_namespace": "Google.Maps.Places.V1",
                     "go_package": "cloud.google.com/go/maps/places/apiv1/placespb;placespb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "TravelModeProto",
+                    "java_outer_classname": "ReferenceProto",
                     "java_package": "com.google.maps.places.v1",
                     "objc_class_prefix": "GMPSV1",
                     "php_namespace": "Google\\Maps\\Places\\V1"
@@ -348,84 +348,17 @@
                     },
                     "ContentBlock": {
                       "fields": {
-                        "topic": {
-                          "type": "string",
-                          "id": 1
-                        },
                         "content": {
                           "type": "google.type.LocalizedText",
                           "id": 2
                         },
-                        "references": {
-                          "type": "References",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "References": {
-                      "fields": {
-                        "reviews": {
-                          "rule": "repeated",
-                          "type": "Review",
-                          "id": 1
-                        },
-                        "places": {
+                        "referencedPlaces": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2,
+                          "id": 4,
                           "options": {
                             "(google.api.resource_reference).type": "places.googleapis.com/Place"
                           }
-                        }
-                      }
-                    },
-                    "Review": {
-                      "options": {
-                        "(google.api.resource).type": "places.googleapis.com/Review",
-                        "(google.api.resource).pattern": "places/{place}/reviews/{review}",
-                        "(google.api.resource).plural": "reviews",
-                        "(google.api.resource).singular": "review"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "relativePublishTimeDescription": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "text": {
-                          "type": "google.type.LocalizedText",
-                          "id": 9
-                        },
-                        "originalText": {
-                          "type": "google.type.LocalizedText",
-                          "id": 12
-                        },
-                        "rating": {
-                          "type": "double",
-                          "id": 7
-                        },
-                        "authorAttribution": {
-                          "type": "AuthorAttribution",
-                          "id": 13
-                        },
-                        "publishTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 14
-                        },
-                        "flagContentUri": {
-                          "type": "string",
-                          "id": 15
-                        },
-                        "googleMapsUri": {
-                          "type": "string",
-                          "id": 16
-                        },
-                        "visitDate": {
-                          "type": "google.type.Date",
-                          "id": 17
                         }
                       }
                     },
@@ -564,6 +497,56 @@
                         "googleMapsUri": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "Review": {
+                      "options": {
+                        "(google.api.resource).type": "places.googleapis.com/Review",
+                        "(google.api.resource).pattern": "places/{place}/reviews/{review}",
+                        "(google.api.resource).plural": "reviews",
+                        "(google.api.resource).singular": "review"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "relativePublishTimeDescription": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "text": {
+                          "type": "google.type.LocalizedText",
+                          "id": 9
+                        },
+                        "originalText": {
+                          "type": "google.type.LocalizedText",
+                          "id": 12
+                        },
+                        "rating": {
+                          "type": "double",
+                          "id": 7
+                        },
+                        "authorAttribution": {
+                          "type": "AuthorAttribution",
+                          "id": 13
+                        },
+                        "publishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14
+                        },
+                        "flagContentUri": {
+                          "type": "string",
+                          "id": 15
+                        },
+                        "googleMapsUri": {
+                          "type": "string",
+                          "id": 16
+                        },
+                        "visitDate": {
+                          "type": "google.type.Date",
+                          "id": 17
                         }
                       }
                     },
@@ -884,6 +867,10 @@
                         "primaryTypeDisplayName": {
                           "type": "google.type.LocalizedText",
                           "id": 32
+                        },
+                        "googleMapsTypeLabel": {
+                          "type": "google.type.LocalizedText",
+                          "id": 96
                         },
                         "nationalPhoneNumber": {
                           "type": "string",
@@ -1217,6 +1204,10 @@
                         "addressDescriptor": {
                           "type": "AddressDescriptor",
                           "id": 84
+                        },
+                        "googleMapsLinks": {
+                          "type": "GoogleMapsLinks",
+                          "id": 85
                         },
                         "priceRange": {
                           "type": "PriceRange",
@@ -1682,6 +1673,30 @@
                             "id": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "GoogleMapsLinks": {
+                          "fields": {
+                            "directionsUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "placeUri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "writeAReviewUri": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "reviewsUri": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "photosUri": {
+                              "type": "string",
+                              "id": 5
                             }
                           }
                         },
@@ -2637,6 +2652,23 @@
                         "BICYCLE": 2,
                         "WALK": 3,
                         "TWO_WHEELER": 4
+                      }
+                    },
+                    "References": {
+                      "fields": {
+                        "reviews": {
+                          "rule": "repeated",
+                          "type": "Review",
+                          "id": 1
+                        },
+                        "places": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "places.googleapis.com/Place"
+                          }
+                        }
                       }
                     }
                   }

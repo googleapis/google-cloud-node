@@ -190,9 +190,6 @@ export class EkmServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      autokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/autokeyConfig'
-      ),
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
@@ -204,6 +201,9 @@ export class EkmServiceClient {
       ),
       ekmConnectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ekmConnections/{ekm_connection}'
+      ),
+      folderAutokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/autokeyConfig'
       ),
       importJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}'
@@ -217,8 +217,14 @@ export class EkmServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      projectAutokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/autokeyConfig'
+      ),
       publicKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/publicKey'
+      ),
+      retiredResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/retiredResources/{retired_resource}'
       ),
       singleTenantHsmInstancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/singleTenantHsmInstances/{single_tenant_hsm_instance}'
@@ -1441,29 +1447,6 @@ export class EkmServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified autokeyConfig resource name string.
-   *
-   * @param {string} folder
-   * @returns {string} Resource name string.
-   */
-  autokeyConfigPath(folder:string) {
-    return this.pathTemplates.autokeyConfigPathTemplate.render({
-      folder: folder,
-    });
-  }
-
-  /**
-   * Parse the folder from AutokeyConfig resource.
-   *
-   * @param {string} autokeyConfigName
-   *   A fully-qualified path representing AutokeyConfig resource.
-   * @returns {string} A string representing the folder.
-   */
-  matchFolderFromAutokeyConfigName(autokeyConfigName: string) {
-    return this.pathTemplates.autokeyConfigPathTemplate.match(autokeyConfigName).folder;
-  }
-
-  /**
    * Return a fully-qualified cryptoKey resource name string.
    *
    * @param {string} project
@@ -1686,6 +1669,29 @@ export class EkmServiceClient {
   }
 
   /**
+   * Return a fully-qualified folderAutokeyConfig resource name string.
+   *
+   * @param {string} folder
+   * @returns {string} Resource name string.
+   */
+  folderAutokeyConfigPath(folder:string) {
+    return this.pathTemplates.folderAutokeyConfigPathTemplate.render({
+      folder: folder,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderAutokeyConfig resource.
+   *
+   * @param {string} folderAutokeyConfigName
+   *   A fully-qualified path representing folder_autokeyConfig resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderAutokeyConfigName(folderAutokeyConfigName: string) {
+    return this.pathTemplates.folderAutokeyConfigPathTemplate.match(folderAutokeyConfigName).folder;
+  }
+
+  /**
    * Return a fully-qualified importJob resource name string.
    *
    * @param {string} project
@@ -1882,6 +1888,29 @@ export class EkmServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectAutokeyConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectAutokeyConfigPath(project:string) {
+    return this.pathTemplates.projectAutokeyConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAutokeyConfig resource.
+   *
+   * @param {string} projectAutokeyConfigName
+   *   A fully-qualified path representing project_autokeyConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAutokeyConfigName(projectAutokeyConfigName: string) {
+    return this.pathTemplates.projectAutokeyConfigPathTemplate.match(projectAutokeyConfigName).project;
+  }
+
+  /**
    * Return a fully-qualified publicKey resource name string.
    *
    * @param {string} project
@@ -1954,6 +1983,55 @@ export class EkmServiceClient {
    */
   matchCryptoKeyVersionFromPublicKeyName(publicKeyName: string) {
     return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified retiredResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} retired_resource
+   * @returns {string} Resource name string.
+   */
+  retiredResourcePath(project:string,location:string,retiredResource:string) {
+    return this.pathTemplates.retiredResourcePathTemplate.render({
+      project: project,
+      location: location,
+      retired_resource: retiredResource,
+    });
+  }
+
+  /**
+   * Parse the project from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).project;
+  }
+
+  /**
+   * Parse the location from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).location;
+  }
+
+  /**
+   * Parse the retired_resource from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the retired_resource.
+   */
+  matchRetiredResourceFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).retired_resource;
   }
 
   /**

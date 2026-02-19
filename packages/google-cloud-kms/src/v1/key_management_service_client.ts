@@ -18,7 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -72,6 +72,7 @@ export class KeyManagementServiceClient {
   iamClient: IamClient;
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   keyManagementServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -197,9 +198,6 @@ export class KeyManagementServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      autokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/autokeyConfig'
-      ),
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
@@ -211,6 +209,9 @@ export class KeyManagementServiceClient {
       ),
       ekmConnectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ekmConnections/{ekm_connection}'
+      ),
+      folderAutokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/autokeyConfig'
       ),
       importJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}'
@@ -224,8 +225,17 @@ export class KeyManagementServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectAutokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/autokeyConfig'
+      ),
       publicKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/publicKey'
+      ),
+      retiredResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/retiredResources/{retired_resource}'
       ),
       singleTenantHsmInstancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/singleTenantHsmInstances/{single_tenant_hsm_instance}'
@@ -246,7 +256,45 @@ export class KeyManagementServiceClient {
       listCryptoKeyVersions:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cryptoKeyVersions'),
       listImportJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'importJobs')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'importJobs'),
+      listRetiredResources:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'retiredResources')
+    };
+
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+    };
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/keyRings/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/keyRings/*/cryptoKeys/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/keyRings/*/importJobs/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/ekmConfig}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/ekmConnections/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/keyRings/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/keyRings/*/cryptoKeys/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/keyRings/*/importJobs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/ekmConfig}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/ekmConnections/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/keyRings/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/keyRings/*/cryptoKeys/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/keyRings/*/importJobs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/ekmConfig}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/ekmConnections/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',}];
+    }
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    const deleteCryptoKeyResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteCryptoKeyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.kms.v1.DeleteCryptoKeyMetadata') as gax.protobuf.Type;
+    const deleteCryptoKeyVersionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteCryptoKeyVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata') as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      deleteCryptoKey: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteCryptoKeyResponse.decode.bind(deleteCryptoKeyResponse),
+        deleteCryptoKeyMetadata.decode.bind(deleteCryptoKeyMetadata)),
+      deleteCryptoKeyVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteCryptoKeyVersionResponse.decode.bind(deleteCryptoKeyVersionResponse),
+        deleteCryptoKeyVersionMetadata.decode.bind(deleteCryptoKeyVersionMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -292,7 +340,7 @@ export class KeyManagementServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const keyManagementServiceStubMethods =
-        ['listKeyRings', 'listCryptoKeys', 'listCryptoKeyVersions', 'listImportJobs', 'getKeyRing', 'getCryptoKey', 'getCryptoKeyVersion', 'getPublicKey', 'getImportJob', 'createKeyRing', 'createCryptoKey', 'createCryptoKeyVersion', 'importCryptoKeyVersion', 'createImportJob', 'updateCryptoKey', 'updateCryptoKeyVersion', 'updateCryptoKeyPrimaryVersion', 'destroyCryptoKeyVersion', 'restoreCryptoKeyVersion', 'encrypt', 'decrypt', 'rawEncrypt', 'rawDecrypt', 'asymmetricSign', 'asymmetricDecrypt', 'macSign', 'macVerify', 'decapsulate', 'generateRandomBytes'];
+        ['listKeyRings', 'listCryptoKeys', 'listCryptoKeyVersions', 'listImportJobs', 'listRetiredResources', 'getKeyRing', 'getCryptoKey', 'getCryptoKeyVersion', 'getPublicKey', 'getImportJob', 'getRetiredResource', 'createKeyRing', 'createCryptoKey', 'createCryptoKeyVersion', 'deleteCryptoKey', 'deleteCryptoKeyVersion', 'importCryptoKeyVersion', 'createImportJob', 'updateCryptoKey', 'updateCryptoKeyVersion', 'updateCryptoKeyPrimaryVersion', 'destroyCryptoKeyVersion', 'restoreCryptoKeyVersion', 'encrypt', 'decrypt', 'rawEncrypt', 'rawDecrypt', 'asymmetricSign', 'asymmetricDecrypt', 'macSign', 'macVerify', 'decapsulate', 'generateRandomBytes'];
     for (const methodName of keyManagementServiceStubMethods) {
       const callPromise = this.keyManagementServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -308,6 +356,7 @@ export class KeyManagementServiceClient {
 
       const descriptor =
         this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
         undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
@@ -878,6 +927,103 @@ export class KeyManagementServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getImportJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Retrieves a specific {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResource}
+ * resource, which represents the record of a deleted
+ * {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link protos.google.cloud.kms.v1.RetiredResource.name|name} of the
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResource} to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResource}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.get_retired_resource.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_GetRetiredResource_async
+ */
+  getRetiredResource(
+      request?: protos.google.cloud.kms.v1.IGetRetiredResourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IRetiredResource,
+        protos.google.cloud.kms.v1.IGetRetiredResourceRequest|undefined, {}|undefined
+      ]>;
+  getRetiredResource(
+      request: protos.google.cloud.kms.v1.IGetRetiredResourceRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IRetiredResource,
+          protos.google.cloud.kms.v1.IGetRetiredResourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRetiredResource(
+      request: protos.google.cloud.kms.v1.IGetRetiredResourceRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IRetiredResource,
+          protos.google.cloud.kms.v1.IGetRetiredResourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRetiredResource(
+      request?: protos.google.cloud.kms.v1.IGetRetiredResourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IRetiredResource,
+          protos.google.cloud.kms.v1.IGetRetiredResourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IRetiredResource,
+          protos.google.cloud.kms.v1.IGetRetiredResourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IRetiredResource,
+        protos.google.cloud.kms.v1.IGetRetiredResourceRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getRetiredResource request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.kms.v1.IRetiredResource,
+        protos.google.cloud.kms.v1.IGetRetiredResourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRetiredResource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getRetiredResource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.kms.v1.IRetiredResource,
+        protos.google.cloud.kms.v1.IGetRetiredResourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRetiredResource response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -3448,6 +3594,237 @@ export class KeyManagementServiceClient {
       });
   }
 
+/**
+ * Permanently deletes the given {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ * All child {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} must
+ * have been previously deleted using
+ * {@link protos.google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyVersion|KeyManagementService.DeleteCryptoKeyVersion}.
+ * The specified crypto key will be immediately and permanently deleted upon
+ * calling this method. This action cannot be undone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link protos.google.cloud.kms.v1.CryptoKey.name|name} of the
+ *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.delete_crypto_key.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_DeleteCryptoKey_async
+ */
+  deleteCryptoKey(
+      request?: protos.google.cloud.kms.v1.IDeleteCryptoKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteCryptoKey(
+      request: protos.google.cloud.kms.v1.IDeleteCryptoKeyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteCryptoKey(
+      request: protos.google.cloud.kms.v1.IDeleteCryptoKeyRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteCryptoKey(
+      request?: protos.google.cloud.kms.v1.IDeleteCryptoKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCryptoKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCryptoKey request %j', request);
+    return this.innerApiCalls.deleteCryptoKey(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCryptoKey response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteCryptoKey()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.delete_crypto_key.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_DeleteCryptoKey_async
+ */
+  async checkDeleteCryptoKeyProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.kms.v1.DeleteCryptoKeyMetadata>>{
+    this._log.info('deleteCryptoKey long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCryptoKey, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.kms.v1.DeleteCryptoKeyMetadata>;
+  }
+/**
+ * Permanently deletes the given
+ * {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. Only possible if
+ * the version has not been previously imported and if its
+ * {@link protos.google.cloud.kms.v1.CryptoKeyVersion.state|state} is one of
+ * {@link protos.CryptoKeyVersionState.DESTROYED|DESTROYED},
+ * {@link protos.CryptoKeyVersionState.IMPORT_FAILED|IMPORT_FAILED}, or
+ * {@link protos.CryptoKeyVersionState.GENERATION_FAILED|GENERATION_FAILED}.
+ * Successfully imported
+ * {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} cannot be deleted
+ * at this time. The specified version will be immediately and permanently
+ * deleted upon calling this method. This action cannot be undone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link protos.google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
+ *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.delete_crypto_key_version.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_DeleteCryptoKeyVersion_async
+ */
+  deleteCryptoKeyVersion(
+      request?: protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteCryptoKeyVersion(
+      request: protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteCryptoKeyVersion(
+      request: protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteCryptoKeyVersion(
+      request?: protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCryptoKeyVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCryptoKeyVersion request %j', request);
+    return this.innerApiCalls.deleteCryptoKeyVersion(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCryptoKeyVersion response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteCryptoKeyVersion()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.delete_crypto_key_version.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_DeleteCryptoKeyVersion_async
+ */
+  async checkDeleteCryptoKeyVersionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata>>{
+    this._log.info('deleteCryptoKeyVersion long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCryptoKeyVersion, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata>;
+  }
  /**
  * Lists {@link protos.google.cloud.kms.v1.KeyRing|KeyRings}.
  *
@@ -4446,6 +4823,229 @@ export class KeyManagementServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.kms.v1.IImportJob>;
   }
+ /**
+ * Lists the {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources} which are
+ * the records of deleted {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKeys}.
+ * RetiredResources prevent the reuse of these resource names after deletion.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project-specific location holding the
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources}, in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources} to be included in
+ *   the response. Further
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources} can subsequently be
+ *   obtained by including the
+ *   {@link protos.google.cloud.kms.v1.ListRetiredResourcesResponse.next_page_token|ListRetiredResourcesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link protos.google.cloud.kms.v1.ListRetiredResourcesResponse.next_page_token|ListRetiredResourcesResponse.next_page_token}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResource}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRetiredResourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listRetiredResources(
+      request?: protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IRetiredResource[],
+        protos.google.cloud.kms.v1.IListRetiredResourcesRequest|null,
+        protos.google.cloud.kms.v1.IListRetiredResourcesResponse
+      ]>;
+  listRetiredResources(
+      request: protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+          protos.google.cloud.kms.v1.IListRetiredResourcesResponse|null|undefined,
+          protos.google.cloud.kms.v1.IRetiredResource>): void;
+  listRetiredResources(
+      request: protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+          protos.google.cloud.kms.v1.IListRetiredResourcesResponse|null|undefined,
+          protos.google.cloud.kms.v1.IRetiredResource>): void;
+  listRetiredResources(
+      request?: protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+          protos.google.cloud.kms.v1.IListRetiredResourcesResponse|null|undefined,
+          protos.google.cloud.kms.v1.IRetiredResource>,
+      callback?: PaginationCallback<
+          protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+          protos.google.cloud.kms.v1.IListRetiredResourcesResponse|null|undefined,
+          protos.google.cloud.kms.v1.IRetiredResource>):
+      Promise<[
+        protos.google.cloud.kms.v1.IRetiredResource[],
+        protos.google.cloud.kms.v1.IListRetiredResourcesRequest|null,
+        protos.google.cloud.kms.v1.IListRetiredResourcesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+      protos.google.cloud.kms.v1.IListRetiredResourcesResponse|null|undefined,
+      protos.google.cloud.kms.v1.IRetiredResource>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRetiredResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRetiredResources request %j', request);
+    return this.innerApiCalls
+      .listRetiredResources(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.kms.v1.IRetiredResource[],
+        protos.google.cloud.kms.v1.IListRetiredResourcesRequest|null,
+        protos.google.cloud.kms.v1.IListRetiredResourcesResponse
+      ]) => {
+        this._log.info('listRetiredResources values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listRetiredResources`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project-specific location holding the
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources}, in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources} to be included in
+ *   the response. Further
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources} can subsequently be
+ *   obtained by including the
+ *   {@link protos.google.cloud.kms.v1.ListRetiredResourcesResponse.next_page_token|ListRetiredResourcesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link protos.google.cloud.kms.v1.ListRetiredResourcesResponse.next_page_token|ListRetiredResourcesResponse.next_page_token}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResource} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRetiredResourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listRetiredResourcesStream(
+      request?: protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listRetiredResources'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listRetiredResources stream %j', request);
+    return this.descriptors.page.listRetiredResources.createStream(
+      this.innerApiCalls.listRetiredResources as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listRetiredResources`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project-specific location holding the
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources}, in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources} to be included in
+ *   the response. Further
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResources} can subsequently be
+ *   obtained by including the
+ *   {@link protos.google.cloud.kms.v1.ListRetiredResourcesResponse.next_page_token|ListRetiredResourcesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link protos.google.cloud.kms.v1.ListRetiredResourcesResponse.next_page_token|ListRetiredResourcesResponse.next_page_token}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.kms.v1.RetiredResource|RetiredResource}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.list_retired_resources.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_ListRetiredResources_async
+ */
+  listRetiredResourcesAsync(
+      request?: protos.google.cloud.kms.v1.IListRetiredResourcesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.kms.v1.IRetiredResource>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listRetiredResources'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listRetiredResources iterate %j', request);
+    return this.descriptors.page.listRetiredResources.asyncIterate(
+      this.innerApiCalls['listRetiredResources'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.kms.v1.IRetiredResource>;
+  }
 /**
  * Gets the access control policy for a resource. Returns an empty policy
  * if the resource exists and does not have a policy set.
@@ -4662,32 +5262,233 @@ export class KeyManagementServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+/**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+   cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified autokeyConfig resource name string.
-   *
-   * @param {string} folder
-   * @returns {string} Resource name string.
-   */
-  autokeyConfigPath(folder:string) {
-    return this.pathTemplates.autokeyConfigPathTemplate.render({
-      folder: folder,
-    });
-  }
-
-  /**
-   * Parse the folder from AutokeyConfig resource.
-   *
-   * @param {string} autokeyConfigName
-   *   A fully-qualified path representing AutokeyConfig resource.
-   * @returns {string} A string representing the folder.
-   */
-  matchFolderFromAutokeyConfigName(autokeyConfigName: string) {
-    return this.pathTemplates.autokeyConfigPathTemplate.match(autokeyConfigName).folder;
-  }
 
   /**
    * Return a fully-qualified cryptoKey resource name string.
@@ -4912,6 +5713,29 @@ export class KeyManagementServiceClient {
   }
 
   /**
+   * Return a fully-qualified folderAutokeyConfig resource name string.
+   *
+   * @param {string} folder
+   * @returns {string} Resource name string.
+   */
+  folderAutokeyConfigPath(folder:string) {
+    return this.pathTemplates.folderAutokeyConfigPathTemplate.render({
+      folder: folder,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderAutokeyConfig resource.
+   *
+   * @param {string} folderAutokeyConfigName
+   *   A fully-qualified path representing folder_autokeyConfig resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderAutokeyConfigName(folderAutokeyConfigName: string) {
+    return this.pathTemplates.folderAutokeyConfigPathTemplate.match(folderAutokeyConfigName).folder;
+  }
+
+  /**
    * Return a fully-qualified importJob resource name string.
    *
    * @param {string} project
@@ -5108,6 +5932,52 @@ export class KeyManagementServiceClient {
   }
 
   /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project:string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectAutokeyConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectAutokeyConfigPath(project:string) {
+    return this.pathTemplates.projectAutokeyConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAutokeyConfig resource.
+   *
+   * @param {string} projectAutokeyConfigName
+   *   A fully-qualified path representing project_autokeyConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAutokeyConfigName(projectAutokeyConfigName: string) {
+    return this.pathTemplates.projectAutokeyConfigPathTemplate.match(projectAutokeyConfigName).project;
+  }
+
+  /**
    * Return a fully-qualified publicKey resource name string.
    *
    * @param {string} project
@@ -5180,6 +6050,55 @@ export class KeyManagementServiceClient {
    */
   matchCryptoKeyVersionFromPublicKeyName(publicKeyName: string) {
     return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified retiredResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} retired_resource
+   * @returns {string} Resource name string.
+   */
+  retiredResourcePath(project:string,location:string,retiredResource:string) {
+    return this.pathTemplates.retiredResourcePathTemplate.render({
+      project: project,
+      location: location,
+      retired_resource: retiredResource,
+    });
+  }
+
+  /**
+   * Parse the project from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).project;
+  }
+
+  /**
+   * Parse the location from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).location;
+  }
+
+  /**
+   * Parse the retired_resource from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the retired_resource.
+   */
+  matchRetiredResourceFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).retired_resource;
   }
 
   /**
@@ -5307,6 +6226,7 @@ export class KeyManagementServiceClient {
         stub.close();
         this.iamClient.close().catch(err => {throw err});
         this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

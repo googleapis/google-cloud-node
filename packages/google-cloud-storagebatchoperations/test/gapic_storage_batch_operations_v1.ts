@@ -599,6 +599,114 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
     });
 
+    describe('getBucketOperation', () => {
+        it('invokes getBucketOperation without error', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.BucketOperation()
+            );
+            client.innerApiCalls.getBucketOperation = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBucketOperation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBucketOperation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBucketOperation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBucketOperation without error using callback', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.BucketOperation()
+            );
+            client.innerApiCalls.getBucketOperation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBucketOperation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.storagebatchoperations.v1.IBucketOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBucketOperation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBucketOperation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBucketOperation with error', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBucketOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBucketOperation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBucketOperation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBucketOperation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBucketOperation with closed client', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBucketOperation(request), expectedError);
+        });
+    });
+
     describe('createJob', () => {
         it('invokes createJob without error', async () => {
             const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
@@ -991,6 +1099,251 @@ describe('v1.StorageBatchOperationsClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listBucketOperations', () => {
+        it('invokes listBucketOperations without error', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+            ];
+            client.innerApiCalls.listBucketOperations = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBucketOperations(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBucketOperations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBucketOperations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBucketOperations without error using callback', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+            ];
+            client.innerApiCalls.listBucketOperations = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBucketOperations(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.storagebatchoperations.v1.IBucketOperation[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBucketOperations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBucketOperations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBucketOperations with error', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBucketOperations = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBucketOperations(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBucketOperations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBucketOperations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBucketOperationsStream without error', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+            ];
+            client.descriptors.page.listBucketOperations.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBucketOperationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.storagebatchoperations.v1.BucketOperation[] = [];
+                stream.on('data', (response: protos.google.cloud.storagebatchoperations.v1.BucketOperation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBucketOperations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBucketOperations, request));
+            assert(
+                (client.descriptors.page.listBucketOperations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listBucketOperationsStream with error', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBucketOperations.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBucketOperationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.storagebatchoperations.v1.BucketOperation[] = [];
+                stream.on('data', (response: protos.google.cloud.storagebatchoperations.v1.BucketOperation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBucketOperations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBucketOperations, request));
+            assert(
+                (client.descriptors.page.listBucketOperations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listBucketOperations without error', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+              generateSampleMessage(new protos.google.cloud.storagebatchoperations.v1.BucketOperation()),
+            ];
+            client.descriptors.page.listBucketOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.storagebatchoperations.v1.IBucketOperation[] = [];
+            const iterable = client.listBucketOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBucketOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBucketOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listBucketOperations with error', async () => {
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBucketOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBucketOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.storagebatchoperations.v1.IBucketOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBucketOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBucketOperations.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -1420,6 +1773,60 @@ describe('v1.StorageBatchOperationsClient', () => {
     });
 
     describe('Path templates', () => {
+
+        describe('bucketOperation', async () => {
+            const fakePath = "/rendered/path/bucketOperation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                job: "jobValue",
+                bucket_operation: "bucketOperationValue",
+            };
+            const client = new storagebatchoperationsModule.v1.StorageBatchOperationsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.bucketOperationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.bucketOperationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('bucketOperationPath', () => {
+                const result = client.bucketOperationPath("projectValue", "locationValue", "jobValue", "bucketOperationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.bucketOperationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBucketOperationName', () => {
+                const result = client.matchProjectFromBucketOperationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.bucketOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBucketOperationName', () => {
+                const result = client.matchLocationFromBucketOperationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.bucketOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchJobFromBucketOperationName', () => {
+                const result = client.matchJobFromBucketOperationName(fakePath);
+                assert.strictEqual(result, "jobValue");
+                assert((client.pathTemplates.bucketOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBucketOperationFromBucketOperationName', () => {
+                const result = client.matchBucketOperationFromBucketOperationName(fakePath);
+                assert.strictEqual(result, "bucketOperationValue");
+                assert((client.pathTemplates.bucketOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
 
         describe('job', async () => {
             const fakePath = "/rendered/path/job";

@@ -34,13 +34,15 @@ const version = require('../../../package.json').version;
 
 /**
  *  Provides interfaces for managing [Cloud KMS
- *  Autokey](https://cloud.google.com/kms/help/autokey) folder-level
- *  configurations. A configuration is inherited by all descendent projects. A
- *  configuration at one folder overrides any other configurations in its
- *  ancestry. Setting a configuration on a folder is a prerequisite for Cloud KMS
- *  Autokey, so that users working in a descendant project can request
- *  provisioned {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKeys}, ready for Customer
- *  Managed Encryption Key (CMEK) use, on-demand.
+ *  Autokey](https://cloud.google.com/kms/help/autokey) folder-level or
+ *  project-level configurations. A configuration is inherited by all descendent
+ *  folders and projects. A configuration at a folder or project overrides any
+ *  other configurations in its ancestry. Setting a configuration on a folder is
+ *  a prerequisite for Cloud KMS Autokey, so that users working in a descendant
+ *  project can request provisioned {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKeys},
+ *  ready for Customer Managed Encryption Key (CMEK) use, on-demand when using
+ *  the dedicated key project mode. This is not required when using the delegated
+ *  key management mode for same-project keys.
  * @class
  * @memberof v1
  */
@@ -193,9 +195,6 @@ export class AutokeyAdminClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      autokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/autokeyConfig'
-      ),
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
@@ -207,6 +206,9 @@ export class AutokeyAdminClient {
       ),
       ekmConnectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ekmConnections/{ekm_connection}'
+      ),
+      folderAutokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/autokeyConfig'
       ),
       importJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}'
@@ -220,8 +222,14 @@ export class AutokeyAdminClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      projectAutokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/autokeyConfig'
+      ),
       publicKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/publicKey'
+      ),
+      retiredResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/retiredResources/{retired_resource}'
       ),
       singleTenantHsmInstancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/singleTenantHsmInstances/{single_tenant_hsm_instance}'
@@ -378,8 +386,8 @@ export class AutokeyAdminClient {
   // -- Service calls --
   // -------------------
 /**
- * Updates the {@link protos.google.cloud.kms.v1.AutokeyConfig|AutokeyConfig} for a
- * folder. The caller must have both `cloudkms.autokeyConfigs.update`
+ * Updates the {@link protos.google.cloud.kms.v1.AutokeyConfig|AutokeyConfig} for a folder
+ * or a project. The caller must have both `cloudkms.autokeyConfigs.update`
  * permission on the parent folder and `cloudkms.cryptoKeys.setIamPolicy`
  * permission on the provided key project. A
  * {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} creation in the folder's
@@ -483,14 +491,15 @@ export class AutokeyAdminClient {
       });
   }
 /**
- * Returns the {@link protos.google.cloud.kms.v1.AutokeyConfig|AutokeyConfig} for a
- * folder.
+ * Returns the {@link protos.google.cloud.kms.v1.AutokeyConfig|AutokeyConfig} for a folder
+ * or project.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. Name of the {@link protos.google.cloud.kms.v1.AutokeyConfig|AutokeyConfig}
- *   resource, e.g. `folders/{FOLDER_NUMBER}/autokeyConfig`.
+ *   resource, e.g. `folders/{FOLDER_NUMBER}/autokeyConfig` or
+ *   `projects/{PROJECT_NUMBER}/autokeyConfig`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -896,29 +905,6 @@ export class AutokeyAdminClient {
   // --------------------
 
   /**
-   * Return a fully-qualified autokeyConfig resource name string.
-   *
-   * @param {string} folder
-   * @returns {string} Resource name string.
-   */
-  autokeyConfigPath(folder:string) {
-    return this.pathTemplates.autokeyConfigPathTemplate.render({
-      folder: folder,
-    });
-  }
-
-  /**
-   * Parse the folder from AutokeyConfig resource.
-   *
-   * @param {string} autokeyConfigName
-   *   A fully-qualified path representing AutokeyConfig resource.
-   * @returns {string} A string representing the folder.
-   */
-  matchFolderFromAutokeyConfigName(autokeyConfigName: string) {
-    return this.pathTemplates.autokeyConfigPathTemplate.match(autokeyConfigName).folder;
-  }
-
-  /**
    * Return a fully-qualified cryptoKey resource name string.
    *
    * @param {string} project
@@ -1141,6 +1127,29 @@ export class AutokeyAdminClient {
   }
 
   /**
+   * Return a fully-qualified folderAutokeyConfig resource name string.
+   *
+   * @param {string} folder
+   * @returns {string} Resource name string.
+   */
+  folderAutokeyConfigPath(folder:string) {
+    return this.pathTemplates.folderAutokeyConfigPathTemplate.render({
+      folder: folder,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderAutokeyConfig resource.
+   *
+   * @param {string} folderAutokeyConfigName
+   *   A fully-qualified path representing folder_autokeyConfig resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderAutokeyConfigName(folderAutokeyConfigName: string) {
+    return this.pathTemplates.folderAutokeyConfigPathTemplate.match(folderAutokeyConfigName).folder;
+  }
+
+  /**
    * Return a fully-qualified importJob resource name string.
    *
    * @param {string} project
@@ -1324,6 +1333,29 @@ export class AutokeyAdminClient {
   }
 
   /**
+   * Return a fully-qualified projectAutokeyConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectAutokeyConfigPath(project:string) {
+    return this.pathTemplates.projectAutokeyConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAutokeyConfig resource.
+   *
+   * @param {string} projectAutokeyConfigName
+   *   A fully-qualified path representing project_autokeyConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAutokeyConfigName(projectAutokeyConfigName: string) {
+    return this.pathTemplates.projectAutokeyConfigPathTemplate.match(projectAutokeyConfigName).project;
+  }
+
+  /**
    * Return a fully-qualified publicKey resource name string.
    *
    * @param {string} project
@@ -1396,6 +1428,55 @@ export class AutokeyAdminClient {
    */
   matchCryptoKeyVersionFromPublicKeyName(publicKeyName: string) {
     return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified retiredResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} retired_resource
+   * @returns {string} Resource name string.
+   */
+  retiredResourcePath(project:string,location:string,retiredResource:string) {
+    return this.pathTemplates.retiredResourcePathTemplate.render({
+      project: project,
+      location: location,
+      retired_resource: retiredResource,
+    });
+  }
+
+  /**
+   * Parse the project from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).project;
+  }
+
+  /**
+   * Parse the location from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).location;
+  }
+
+  /**
+   * Parse the retired_resource from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the retired_resource.
+   */
+  matchRetiredResourceFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).retired_resource;
   }
 
   /**

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START storagebatchoperations_v1_generated_StorageBatchOperations_DeleteJob_async]
+function main(parent) {
+  // [START storagebatchoperations_v1_generated_StorageBatchOperations_ListBucketOperations_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,25 +29,25 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The `name` of the job to delete.
-   *  Format: projects/{project_id}/locations/global/jobs/{job_id} .
+   *  Required. Format: projects/{project_id}/locations/global/jobs/{job_id}.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. An optional request ID to identify requests. Specify a unique
-   *  request ID in case you need to retry your request. Requests with same
-   *  `request_id` will be ignored for at least 60 minutes since the first
-   *  request. The request ID must be a valid UUID with the exception that zero
-   *  UUID is not supported (00000000-0000-0000-0000-000000000000).
+   *  Optional. Filters results as defined by https://google.aip.dev/160.
    */
-  // const requestId = 'abc123'
+  // const filter = 'abc123'
   /**
-   *  Optional. If set to true, any child bucket operations of the job will also
-   *  be deleted. Highly recommended to be set to true by all clients. Users
-   *  cannot mutate bucket operations directly, so only the jobs.delete
-   *  permission is required to delete a job (and its child bucket operations).
+   *  Optional. The list page size. Default page size is 100.
    */
-  // const force = true
+  // const pageSize = 1234
+  /**
+   *  Optional. The list page token.
+   */
+  // const pageToken = 'abc123'
+  /**
+   *  Optional. Field to sort by. Supported fields are name, create_time.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Storagebatchoperations library
   const {StorageBatchOperationsClient} = require('@google-cloud/storagebatchoperations').v1;
@@ -55,19 +55,21 @@ function main(name) {
   // Instantiates a client
   const storagebatchoperationsClient = new StorageBatchOperationsClient();
 
-  async function callDeleteJob() {
+  async function callListBucketOperations() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await storagebatchoperationsClient.deleteJob(request);
-    console.log(response);
+    const iterable = storagebatchoperationsClient.listBucketOperationsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteJob();
-  // [END storagebatchoperations_v1_generated_StorageBatchOperations_DeleteJob_async]
+  callListBucketOperations();
+  // [END storagebatchoperations_v1_generated_StorageBatchOperations_ListBucketOperations_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -25,6 +25,11 @@
                 "cancelJob"
               ]
             },
+            "GetBucketOperation": {
+              "methods": [
+                "getBucketOperation"
+              ]
+            },
             "CreateJob": {
               "methods": [
                 "createJob"
@@ -35,6 +40,13 @@
                 "listJobs",
                 "listJobsStream",
                 "listJobsAsync"
+              ]
+            },
+            "ListBucketOperations": {
+              "methods": [
+                "listBucketOperations",
+                "listBucketOperationsStream",
+                "listBucketOperationsAsync"
               ]
             }
           }
@@ -57,6 +69,11 @@
                 "cancelJob"
               ]
             },
+            "GetBucketOperation": {
+              "methods": [
+                "getBucketOperation"
+              ]
+            },
             "CreateJob": {
               "methods": [
                 "createJob"
@@ -67,6 +84,13 @@
                 "listJobs",
                 "listJobsStream",
                 "listJobsAsync"
+              ]
+            },
+            "ListBucketOperations": {
+              "methods": [
+                "listBucketOperations",
+                "listBucketOperationsStream",
+                "listBucketOperationsAsync"
               ]
             }
           }

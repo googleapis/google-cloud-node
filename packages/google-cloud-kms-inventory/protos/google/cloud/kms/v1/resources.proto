@@ -491,12 +491,39 @@ message CryptoKeyVersion {
     KEM_XWING = 63;
 
     // The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+    // security level 1. Randomized version.
+    PQ_SIGN_ML_DSA_44 = 68;
+
+    // The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
     // security level 3. Randomized version.
     PQ_SIGN_ML_DSA_65 = 56;
+
+    // The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+    // security level 5. Randomized version.
+    PQ_SIGN_ML_DSA_87 = 69;
 
     // The post-quantum stateless hash-based digital signature algorithm, at
     // security level 1. Randomized version.
     PQ_SIGN_SLH_DSA_SHA2_128S = 57;
+
+    // The post-quantum stateless hash-based digital signature algorithm, at
+    // security level 1. Randomized pre-hash version supporting SHA256 digests.
+    PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60;
+
+    // The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+    // security level 1. Randomized version supporting externally-computed
+    // message representatives.
+    PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70;
+
+    // The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+    // security level 3. Randomized version supporting externally-computed
+    // message representatives.
+    PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67;
+
+    // The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+    // security level 5. Randomized version supporting externally-computed
+    // message representatives.
+    PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71;
   }
 
   // The state of a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion],
@@ -999,8 +1026,7 @@ message ImportJob {
   // operations are performed. Currently, this field is only populated for keys
   // stored in HSM_SINGLE_TENANT. Note, this list is non-exhaustive and may
   // apply to additional [ProtectionLevels][google.cloud.kms.v1.ProtectionLevel]
-  // in the future.
-  // Supported resources:
+  // in the future. Supported resources:
   // * `"projects/*/locations/*/singleTenantHsmInstances/*"`
   string crypto_key_backend = 11 [
     (google.api.field_behavior) = IMMUTABLE,
@@ -1038,6 +1064,40 @@ message KeyAccessJustificationsPolicy {
   // [CryptoKey][google.cloud.kms.v1.CryptoKey] associated with this policy will
   // fail.
   repeated AccessReason allowed_access_reasons = 1;
+}
+
+// A RetiredResource resource represents the record of a deleted
+// [CryptoKey][google.cloud.kms.v1.CryptoKey]. Its purpose is to provide
+// visibility into retained user data and to prevent reuse of these names for
+// new [CryptoKeys][google.cloud.kms.v1.CryptoKey].
+message RetiredResource {
+  option (google.api.resource) = {
+    type: "cloudkms.googleapis.com/RetiredResource"
+    pattern: "projects/{project}/locations/{location}/retiredResources/{retired_resource}"
+    plural: "retiredResources"
+    singular: "retiredResource"
+  };
+
+  // Output only. Identifier. The resource name for this
+  // [RetiredResource][google.cloud.kms.v1.RetiredResource] in the format
+  // `projects/*/locations/*/retiredResources/*`.
+  string name = 1 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.field_behavior) = IDENTIFIER
+  ];
+
+  // Output only. The full resource name of the original
+  // [CryptoKey][google.cloud.kms.v1.CryptoKey] that was deleted in the format
+  // `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+  string original_resource = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The resource type of the original deleted resource.
+  string resource_type = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The time at which the original resource was deleted and this
+  // RetiredResource record was created.
+  google.protobuf.Timestamp delete_time = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // [ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] specifies how

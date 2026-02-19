@@ -3747,9 +3747,8 @@
                          * Properties of a ContentBlock.
                          * @memberof google.maps.places.v1
                          * @interface IContentBlock
-                         * @property {string|null} [topic] ContentBlock topic
                          * @property {google.type.ILocalizedText|null} [content] ContentBlock content
-                         * @property {google.maps.places.v1.IReferences|null} [references] ContentBlock references
+                         * @property {Array.<string>|null} [referencedPlaces] ContentBlock referencedPlaces
                          */
     
                         /**
@@ -3761,19 +3760,12 @@
                          * @param {google.maps.places.v1.IContentBlock=} [properties] Properties to set
                          */
                         function ContentBlock(properties) {
+                            this.referencedPlaces = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
-    
-                        /**
-                         * ContentBlock topic.
-                         * @member {string} topic
-                         * @memberof google.maps.places.v1.ContentBlock
-                         * @instance
-                         */
-                        ContentBlock.prototype.topic = "";
     
                         /**
                          * ContentBlock content.
@@ -3784,12 +3776,12 @@
                         ContentBlock.prototype.content = null;
     
                         /**
-                         * ContentBlock references.
-                         * @member {google.maps.places.v1.IReferences|null|undefined} references
+                         * ContentBlock referencedPlaces.
+                         * @member {Array.<string>} referencedPlaces
                          * @memberof google.maps.places.v1.ContentBlock
                          * @instance
                          */
-                        ContentBlock.prototype.references = null;
+                        ContentBlock.prototype.referencedPlaces = $util.emptyArray;
     
                         /**
                          * Creates a new ContentBlock instance using the specified properties.
@@ -3815,12 +3807,11 @@
                         ContentBlock.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
                             if (message.content != null && Object.hasOwnProperty.call(message, "content"))
                                 $root.google.type.LocalizedText.encode(message.content, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.references != null && Object.hasOwnProperty.call(message, "references"))
-                                $root.google.maps.places.v1.References.encode(message.references, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.referencedPlaces != null && message.referencedPlaces.length)
+                                for (var i = 0; i < message.referencedPlaces.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.referencedPlaces[i]);
                             return writer;
                         };
     
@@ -3857,16 +3848,14 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
-                                case 1: {
-                                        message.topic = reader.string();
-                                        break;
-                                    }
                                 case 2: {
                                         message.content = $root.google.type.LocalizedText.decode(reader, reader.uint32());
                                         break;
                                     }
-                                case 3: {
-                                        message.references = $root.google.maps.places.v1.References.decode(reader, reader.uint32());
+                                case 4: {
+                                        if (!(message.referencedPlaces && message.referencedPlaces.length))
+                                            message.referencedPlaces = [];
+                                        message.referencedPlaces.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -3904,18 +3893,17 @@
                         ContentBlock.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.topic != null && message.hasOwnProperty("topic"))
-                                if (!$util.isString(message.topic))
-                                    return "topic: string expected";
                             if (message.content != null && message.hasOwnProperty("content")) {
                                 var error = $root.google.type.LocalizedText.verify(message.content);
                                 if (error)
                                     return "content." + error;
                             }
-                            if (message.references != null && message.hasOwnProperty("references")) {
-                                var error = $root.google.maps.places.v1.References.verify(message.references);
-                                if (error)
-                                    return "references." + error;
+                            if (message.referencedPlaces != null && message.hasOwnProperty("referencedPlaces")) {
+                                if (!Array.isArray(message.referencedPlaces))
+                                    return "referencedPlaces: array expected";
+                                for (var i = 0; i < message.referencedPlaces.length; ++i)
+                                    if (!$util.isString(message.referencedPlaces[i]))
+                                        return "referencedPlaces: string[] expected";
                             }
                             return null;
                         };
@@ -3932,17 +3920,17 @@
                             if (object instanceof $root.google.maps.places.v1.ContentBlock)
                                 return object;
                             var message = new $root.google.maps.places.v1.ContentBlock();
-                            if (object.topic != null)
-                                message.topic = String(object.topic);
                             if (object.content != null) {
                                 if (typeof object.content !== "object")
                                     throw TypeError(".google.maps.places.v1.ContentBlock.content: object expected");
                                 message.content = $root.google.type.LocalizedText.fromObject(object.content);
                             }
-                            if (object.references != null) {
-                                if (typeof object.references !== "object")
-                                    throw TypeError(".google.maps.places.v1.ContentBlock.references: object expected");
-                                message.references = $root.google.maps.places.v1.References.fromObject(object.references);
+                            if (object.referencedPlaces) {
+                                if (!Array.isArray(object.referencedPlaces))
+                                    throw TypeError(".google.maps.places.v1.ContentBlock.referencedPlaces: array expected");
+                                message.referencedPlaces = [];
+                                for (var i = 0; i < object.referencedPlaces.length; ++i)
+                                    message.referencedPlaces[i] = String(object.referencedPlaces[i]);
                             }
                             return message;
                         };
@@ -3960,17 +3948,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
-                                object.topic = "";
+                            if (options.arrays || options.defaults)
+                                object.referencedPlaces = [];
+                            if (options.defaults)
                                 object.content = null;
-                                object.references = null;
-                            }
-                            if (message.topic != null && message.hasOwnProperty("topic"))
-                                object.topic = message.topic;
                             if (message.content != null && message.hasOwnProperty("content"))
                                 object.content = $root.google.type.LocalizedText.toObject(message.content, options);
-                            if (message.references != null && message.hasOwnProperty("references"))
-                                object.references = $root.google.maps.places.v1.References.toObject(message.references, options);
+                            if (message.referencedPlaces && message.referencedPlaces.length) {
+                                object.referencedPlaces = [];
+                                for (var j = 0; j < message.referencedPlaces.length; ++j)
+                                    object.referencedPlaces[j] = message.referencedPlaces[j];
+                            }
                             return object;
                         };
     
@@ -4001,710 +3989,6 @@
                         };
     
                         return ContentBlock;
-                    })();
-    
-                    v1.References = (function() {
-    
-                        /**
-                         * Properties of a References.
-                         * @memberof google.maps.places.v1
-                         * @interface IReferences
-                         * @property {Array.<google.maps.places.v1.IReview>|null} [reviews] References reviews
-                         * @property {Array.<string>|null} [places] References places
-                         */
-    
-                        /**
-                         * Constructs a new References.
-                         * @memberof google.maps.places.v1
-                         * @classdesc Represents a References.
-                         * @implements IReferences
-                         * @constructor
-                         * @param {google.maps.places.v1.IReferences=} [properties] Properties to set
-                         */
-                        function References(properties) {
-                            this.reviews = [];
-                            this.places = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * References reviews.
-                         * @member {Array.<google.maps.places.v1.IReview>} reviews
-                         * @memberof google.maps.places.v1.References
-                         * @instance
-                         */
-                        References.prototype.reviews = $util.emptyArray;
-    
-                        /**
-                         * References places.
-                         * @member {Array.<string>} places
-                         * @memberof google.maps.places.v1.References
-                         * @instance
-                         */
-                        References.prototype.places = $util.emptyArray;
-    
-                        /**
-                         * Creates a new References instance using the specified properties.
-                         * @function create
-                         * @memberof google.maps.places.v1.References
-                         * @static
-                         * @param {google.maps.places.v1.IReferences=} [properties] Properties to set
-                         * @returns {google.maps.places.v1.References} References instance
-                         */
-                        References.create = function create(properties) {
-                            return new References(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified References message. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.maps.places.v1.References
-                         * @static
-                         * @param {google.maps.places.v1.IReferences} message References message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        References.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.reviews != null && message.reviews.length)
-                                for (var i = 0; i < message.reviews.length; ++i)
-                                    $root.google.maps.places.v1.Review.encode(message.reviews[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.places != null && message.places.length)
-                                for (var i = 0; i < message.places.length; ++i)
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.places[i]);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified References message, length delimited. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.maps.places.v1.References
-                         * @static
-                         * @param {google.maps.places.v1.IReferences} message References message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        References.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a References message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.maps.places.v1.References
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.maps.places.v1.References} References
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        References.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.References();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.reviews && message.reviews.length))
-                                            message.reviews = [];
-                                        message.reviews.push($root.google.maps.places.v1.Review.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 2: {
-                                        if (!(message.places && message.places.length))
-                                            message.places = [];
-                                        message.places.push(reader.string());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a References message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.maps.places.v1.References
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.maps.places.v1.References} References
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        References.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a References message.
-                         * @function verify
-                         * @memberof google.maps.places.v1.References
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        References.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.reviews != null && message.hasOwnProperty("reviews")) {
-                                if (!Array.isArray(message.reviews))
-                                    return "reviews: array expected";
-                                for (var i = 0; i < message.reviews.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Review.verify(message.reviews[i]);
-                                    if (error)
-                                        return "reviews." + error;
-                                }
-                            }
-                            if (message.places != null && message.hasOwnProperty("places")) {
-                                if (!Array.isArray(message.places))
-                                    return "places: array expected";
-                                for (var i = 0; i < message.places.length; ++i)
-                                    if (!$util.isString(message.places[i]))
-                                        return "places: string[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a References message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.maps.places.v1.References
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.maps.places.v1.References} References
-                         */
-                        References.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.maps.places.v1.References)
-                                return object;
-                            var message = new $root.google.maps.places.v1.References();
-                            if (object.reviews) {
-                                if (!Array.isArray(object.reviews))
-                                    throw TypeError(".google.maps.places.v1.References.reviews: array expected");
-                                message.reviews = [];
-                                for (var i = 0; i < object.reviews.length; ++i) {
-                                    if (typeof object.reviews[i] !== "object")
-                                        throw TypeError(".google.maps.places.v1.References.reviews: object expected");
-                                    message.reviews[i] = $root.google.maps.places.v1.Review.fromObject(object.reviews[i]);
-                                }
-                            }
-                            if (object.places) {
-                                if (!Array.isArray(object.places))
-                                    throw TypeError(".google.maps.places.v1.References.places: array expected");
-                                message.places = [];
-                                for (var i = 0; i < object.places.length; ++i)
-                                    message.places[i] = String(object.places[i]);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a References message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.maps.places.v1.References
-                         * @static
-                         * @param {google.maps.places.v1.References} message References
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        References.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.reviews = [];
-                                object.places = [];
-                            }
-                            if (message.reviews && message.reviews.length) {
-                                object.reviews = [];
-                                for (var j = 0; j < message.reviews.length; ++j)
-                                    object.reviews[j] = $root.google.maps.places.v1.Review.toObject(message.reviews[j], options);
-                            }
-                            if (message.places && message.places.length) {
-                                object.places = [];
-                                for (var j = 0; j < message.places.length; ++j)
-                                    object.places[j] = message.places[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this References to JSON.
-                         * @function toJSON
-                         * @memberof google.maps.places.v1.References
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        References.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for References
-                         * @function getTypeUrl
-                         * @memberof google.maps.places.v1.References
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        References.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.maps.places.v1.References";
-                        };
-    
-                        return References;
-                    })();
-    
-                    v1.Review = (function() {
-    
-                        /**
-                         * Properties of a Review.
-                         * @memberof google.maps.places.v1
-                         * @interface IReview
-                         * @property {string|null} [name] Review name
-                         * @property {string|null} [relativePublishTimeDescription] Review relativePublishTimeDescription
-                         * @property {google.type.ILocalizedText|null} [text] Review text
-                         * @property {google.type.ILocalizedText|null} [originalText] Review originalText
-                         * @property {number|null} [rating] Review rating
-                         * @property {google.maps.places.v1.IAuthorAttribution|null} [authorAttribution] Review authorAttribution
-                         * @property {google.protobuf.ITimestamp|null} [publishTime] Review publishTime
-                         * @property {string|null} [flagContentUri] Review flagContentUri
-                         * @property {string|null} [googleMapsUri] Review googleMapsUri
-                         * @property {google.type.IDate|null} [visitDate] Review visitDate
-                         */
-    
-                        /**
-                         * Constructs a new Review.
-                         * @memberof google.maps.places.v1
-                         * @classdesc Represents a Review.
-                         * @implements IReview
-                         * @constructor
-                         * @param {google.maps.places.v1.IReview=} [properties] Properties to set
-                         */
-                        function Review(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Review name.
-                         * @member {string} name
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.name = "";
-    
-                        /**
-                         * Review relativePublishTimeDescription.
-                         * @member {string} relativePublishTimeDescription
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.relativePublishTimeDescription = "";
-    
-                        /**
-                         * Review text.
-                         * @member {google.type.ILocalizedText|null|undefined} text
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.text = null;
-    
-                        /**
-                         * Review originalText.
-                         * @member {google.type.ILocalizedText|null|undefined} originalText
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.originalText = null;
-    
-                        /**
-                         * Review rating.
-                         * @member {number} rating
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.rating = 0;
-    
-                        /**
-                         * Review authorAttribution.
-                         * @member {google.maps.places.v1.IAuthorAttribution|null|undefined} authorAttribution
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.authorAttribution = null;
-    
-                        /**
-                         * Review publishTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} publishTime
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.publishTime = null;
-    
-                        /**
-                         * Review flagContentUri.
-                         * @member {string} flagContentUri
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.flagContentUri = "";
-    
-                        /**
-                         * Review googleMapsUri.
-                         * @member {string} googleMapsUri
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.googleMapsUri = "";
-    
-                        /**
-                         * Review visitDate.
-                         * @member {google.type.IDate|null|undefined} visitDate
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         */
-                        Review.prototype.visitDate = null;
-    
-                        /**
-                         * Creates a new Review instance using the specified properties.
-                         * @function create
-                         * @memberof google.maps.places.v1.Review
-                         * @static
-                         * @param {google.maps.places.v1.IReview=} [properties] Properties to set
-                         * @returns {google.maps.places.v1.Review} Review instance
-                         */
-                        Review.create = function create(properties) {
-                            return new Review(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.maps.places.v1.Review
-                         * @static
-                         * @param {google.maps.places.v1.IReview} message Review message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Review.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.relativePublishTimeDescription != null && Object.hasOwnProperty.call(message, "relativePublishTimeDescription"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.relativePublishTimeDescription);
-                            if (message.rating != null && Object.hasOwnProperty.call(message, "rating"))
-                                writer.uint32(/* id 7, wireType 1 =*/57).double(message.rating);
-                            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
-                                $root.google.type.LocalizedText.encode(message.text, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-                            if (message.originalText != null && Object.hasOwnProperty.call(message, "originalText"))
-                                $root.google.type.LocalizedText.encode(message.originalText, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
-                            if (message.authorAttribution != null && Object.hasOwnProperty.call(message, "authorAttribution"))
-                                $root.google.maps.places.v1.AuthorAttribution.encode(message.authorAttribution, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
-                            if (message.publishTime != null && Object.hasOwnProperty.call(message, "publishTime"))
-                                $root.google.protobuf.Timestamp.encode(message.publishTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
-                            if (message.flagContentUri != null && Object.hasOwnProperty.call(message, "flagContentUri"))
-                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.flagContentUri);
-                            if (message.googleMapsUri != null && Object.hasOwnProperty.call(message, "googleMapsUri"))
-                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.googleMapsUri);
-                            if (message.visitDate != null && Object.hasOwnProperty.call(message, "visitDate"))
-                                $root.google.type.Date.encode(message.visitDate, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.maps.places.v1.Review
-                         * @static
-                         * @param {google.maps.places.v1.IReview} message Review message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Review.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Review message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.maps.places.v1.Review
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.maps.places.v1.Review} Review
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Review.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Review();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.relativePublishTimeDescription = reader.string();
-                                        break;
-                                    }
-                                case 9: {
-                                        message.text = $root.google.type.LocalizedText.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 12: {
-                                        message.originalText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 7: {
-                                        message.rating = reader.double();
-                                        break;
-                                    }
-                                case 13: {
-                                        message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 14: {
-                                        message.publishTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 15: {
-                                        message.flagContentUri = reader.string();
-                                        break;
-                                    }
-                                case 16: {
-                                        message.googleMapsUri = reader.string();
-                                        break;
-                                    }
-                                case 17: {
-                                        message.visitDate = $root.google.type.Date.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Review message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.maps.places.v1.Review
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.maps.places.v1.Review} Review
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Review.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Review message.
-                         * @function verify
-                         * @memberof google.maps.places.v1.Review
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Review.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.relativePublishTimeDescription != null && message.hasOwnProperty("relativePublishTimeDescription"))
-                                if (!$util.isString(message.relativePublishTimeDescription))
-                                    return "relativePublishTimeDescription: string expected";
-                            if (message.text != null && message.hasOwnProperty("text")) {
-                                var error = $root.google.type.LocalizedText.verify(message.text);
-                                if (error)
-                                    return "text." + error;
-                            }
-                            if (message.originalText != null && message.hasOwnProperty("originalText")) {
-                                var error = $root.google.type.LocalizedText.verify(message.originalText);
-                                if (error)
-                                    return "originalText." + error;
-                            }
-                            if (message.rating != null && message.hasOwnProperty("rating"))
-                                if (typeof message.rating !== "number")
-                                    return "rating: number expected";
-                            if (message.authorAttribution != null && message.hasOwnProperty("authorAttribution")) {
-                                var error = $root.google.maps.places.v1.AuthorAttribution.verify(message.authorAttribution);
-                                if (error)
-                                    return "authorAttribution." + error;
-                            }
-                            if (message.publishTime != null && message.hasOwnProperty("publishTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.publishTime);
-                                if (error)
-                                    return "publishTime." + error;
-                            }
-                            if (message.flagContentUri != null && message.hasOwnProperty("flagContentUri"))
-                                if (!$util.isString(message.flagContentUri))
-                                    return "flagContentUri: string expected";
-                            if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri"))
-                                if (!$util.isString(message.googleMapsUri))
-                                    return "googleMapsUri: string expected";
-                            if (message.visitDate != null && message.hasOwnProperty("visitDate")) {
-                                var error = $root.google.type.Date.verify(message.visitDate);
-                                if (error)
-                                    return "visitDate." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Review message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.maps.places.v1.Review
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.maps.places.v1.Review} Review
-                         */
-                        Review.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.maps.places.v1.Review)
-                                return object;
-                            var message = new $root.google.maps.places.v1.Review();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.relativePublishTimeDescription != null)
-                                message.relativePublishTimeDescription = String(object.relativePublishTimeDescription);
-                            if (object.text != null) {
-                                if (typeof object.text !== "object")
-                                    throw TypeError(".google.maps.places.v1.Review.text: object expected");
-                                message.text = $root.google.type.LocalizedText.fromObject(object.text);
-                            }
-                            if (object.originalText != null) {
-                                if (typeof object.originalText !== "object")
-                                    throw TypeError(".google.maps.places.v1.Review.originalText: object expected");
-                                message.originalText = $root.google.type.LocalizedText.fromObject(object.originalText);
-                            }
-                            if (object.rating != null)
-                                message.rating = Number(object.rating);
-                            if (object.authorAttribution != null) {
-                                if (typeof object.authorAttribution !== "object")
-                                    throw TypeError(".google.maps.places.v1.Review.authorAttribution: object expected");
-                                message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.fromObject(object.authorAttribution);
-                            }
-                            if (object.publishTime != null) {
-                                if (typeof object.publishTime !== "object")
-                                    throw TypeError(".google.maps.places.v1.Review.publishTime: object expected");
-                                message.publishTime = $root.google.protobuf.Timestamp.fromObject(object.publishTime);
-                            }
-                            if (object.flagContentUri != null)
-                                message.flagContentUri = String(object.flagContentUri);
-                            if (object.googleMapsUri != null)
-                                message.googleMapsUri = String(object.googleMapsUri);
-                            if (object.visitDate != null) {
-                                if (typeof object.visitDate !== "object")
-                                    throw TypeError(".google.maps.places.v1.Review.visitDate: object expected");
-                                message.visitDate = $root.google.type.Date.fromObject(object.visitDate);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Review message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.maps.places.v1.Review
-                         * @static
-                         * @param {google.maps.places.v1.Review} message Review
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Review.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.relativePublishTimeDescription = "";
-                                object.rating = 0;
-                                object.text = null;
-                                object.originalText = null;
-                                object.authorAttribution = null;
-                                object.publishTime = null;
-                                object.flagContentUri = "";
-                                object.googleMapsUri = "";
-                                object.visitDate = null;
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.relativePublishTimeDescription != null && message.hasOwnProperty("relativePublishTimeDescription"))
-                                object.relativePublishTimeDescription = message.relativePublishTimeDescription;
-                            if (message.rating != null && message.hasOwnProperty("rating"))
-                                object.rating = options.json && !isFinite(message.rating) ? String(message.rating) : message.rating;
-                            if (message.text != null && message.hasOwnProperty("text"))
-                                object.text = $root.google.type.LocalizedText.toObject(message.text, options);
-                            if (message.originalText != null && message.hasOwnProperty("originalText"))
-                                object.originalText = $root.google.type.LocalizedText.toObject(message.originalText, options);
-                            if (message.authorAttribution != null && message.hasOwnProperty("authorAttribution"))
-                                object.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.toObject(message.authorAttribution, options);
-                            if (message.publishTime != null && message.hasOwnProperty("publishTime"))
-                                object.publishTime = $root.google.protobuf.Timestamp.toObject(message.publishTime, options);
-                            if (message.flagContentUri != null && message.hasOwnProperty("flagContentUri"))
-                                object.flagContentUri = message.flagContentUri;
-                            if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri"))
-                                object.googleMapsUri = message.googleMapsUri;
-                            if (message.visitDate != null && message.hasOwnProperty("visitDate"))
-                                object.visitDate = $root.google.type.Date.toObject(message.visitDate, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Review to JSON.
-                         * @function toJSON
-                         * @memberof google.maps.places.v1.Review
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Review.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for Review
-                         * @function getTypeUrl
-                         * @memberof google.maps.places.v1.Review
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        Review.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.maps.places.v1.Review";
-                        };
-    
-                        return Review;
                     })();
     
                     v1.ContextualContent = (function() {
@@ -6599,6 +5883,444 @@
                         return Photo;
                     })();
     
+                    v1.Review = (function() {
+    
+                        /**
+                         * Properties of a Review.
+                         * @memberof google.maps.places.v1
+                         * @interface IReview
+                         * @property {string|null} [name] Review name
+                         * @property {string|null} [relativePublishTimeDescription] Review relativePublishTimeDescription
+                         * @property {google.type.ILocalizedText|null} [text] Review text
+                         * @property {google.type.ILocalizedText|null} [originalText] Review originalText
+                         * @property {number|null} [rating] Review rating
+                         * @property {google.maps.places.v1.IAuthorAttribution|null} [authorAttribution] Review authorAttribution
+                         * @property {google.protobuf.ITimestamp|null} [publishTime] Review publishTime
+                         * @property {string|null} [flagContentUri] Review flagContentUri
+                         * @property {string|null} [googleMapsUri] Review googleMapsUri
+                         * @property {google.type.IDate|null} [visitDate] Review visitDate
+                         */
+    
+                        /**
+                         * Constructs a new Review.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a Review.
+                         * @implements IReview
+                         * @constructor
+                         * @param {google.maps.places.v1.IReview=} [properties] Properties to set
+                         */
+                        function Review(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Review name.
+                         * @member {string} name
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.name = "";
+    
+                        /**
+                         * Review relativePublishTimeDescription.
+                         * @member {string} relativePublishTimeDescription
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.relativePublishTimeDescription = "";
+    
+                        /**
+                         * Review text.
+                         * @member {google.type.ILocalizedText|null|undefined} text
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.text = null;
+    
+                        /**
+                         * Review originalText.
+                         * @member {google.type.ILocalizedText|null|undefined} originalText
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.originalText = null;
+    
+                        /**
+                         * Review rating.
+                         * @member {number} rating
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.rating = 0;
+    
+                        /**
+                         * Review authorAttribution.
+                         * @member {google.maps.places.v1.IAuthorAttribution|null|undefined} authorAttribution
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.authorAttribution = null;
+    
+                        /**
+                         * Review publishTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} publishTime
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.publishTime = null;
+    
+                        /**
+                         * Review flagContentUri.
+                         * @member {string} flagContentUri
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.flagContentUri = "";
+    
+                        /**
+                         * Review googleMapsUri.
+                         * @member {string} googleMapsUri
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.googleMapsUri = "";
+    
+                        /**
+                         * Review visitDate.
+                         * @member {google.type.IDate|null|undefined} visitDate
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.visitDate = null;
+    
+                        /**
+                         * Creates a new Review instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {google.maps.places.v1.IReview=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.Review} Review instance
+                         */
+                        Review.create = function create(properties) {
+                            return new Review(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {google.maps.places.v1.IReview} message Review message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Review.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.relativePublishTimeDescription != null && Object.hasOwnProperty.call(message, "relativePublishTimeDescription"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.relativePublishTimeDescription);
+                            if (message.rating != null && Object.hasOwnProperty.call(message, "rating"))
+                                writer.uint32(/* id 7, wireType 1 =*/57).double(message.rating);
+                            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                $root.google.type.LocalizedText.encode(message.text, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.originalText != null && Object.hasOwnProperty.call(message, "originalText"))
+                                $root.google.type.LocalizedText.encode(message.originalText, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.authorAttribution != null && Object.hasOwnProperty.call(message, "authorAttribution"))
+                                $root.google.maps.places.v1.AuthorAttribution.encode(message.authorAttribution, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.publishTime != null && Object.hasOwnProperty.call(message, "publishTime"))
+                                $root.google.protobuf.Timestamp.encode(message.publishTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.flagContentUri != null && Object.hasOwnProperty.call(message, "flagContentUri"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.flagContentUri);
+                            if (message.googleMapsUri != null && Object.hasOwnProperty.call(message, "googleMapsUri"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.googleMapsUri);
+                            if (message.visitDate != null && Object.hasOwnProperty.call(message, "visitDate"))
+                                $root.google.type.Date.encode(message.visitDate, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {google.maps.places.v1.IReview} message Review message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Review.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Review message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.Review} Review
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Review.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Review();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.relativePublishTimeDescription = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.text = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.originalText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.rating = reader.double();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.publishTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.flagContentUri = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.googleMapsUri = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.visitDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Review message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.Review} Review
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Review.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Review message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Review.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.relativePublishTimeDescription != null && message.hasOwnProperty("relativePublishTimeDescription"))
+                                if (!$util.isString(message.relativePublishTimeDescription))
+                                    return "relativePublishTimeDescription: string expected";
+                            if (message.text != null && message.hasOwnProperty("text")) {
+                                var error = $root.google.type.LocalizedText.verify(message.text);
+                                if (error)
+                                    return "text." + error;
+                            }
+                            if (message.originalText != null && message.hasOwnProperty("originalText")) {
+                                var error = $root.google.type.LocalizedText.verify(message.originalText);
+                                if (error)
+                                    return "originalText." + error;
+                            }
+                            if (message.rating != null && message.hasOwnProperty("rating"))
+                                if (typeof message.rating !== "number")
+                                    return "rating: number expected";
+                            if (message.authorAttribution != null && message.hasOwnProperty("authorAttribution")) {
+                                var error = $root.google.maps.places.v1.AuthorAttribution.verify(message.authorAttribution);
+                                if (error)
+                                    return "authorAttribution." + error;
+                            }
+                            if (message.publishTime != null && message.hasOwnProperty("publishTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.publishTime);
+                                if (error)
+                                    return "publishTime." + error;
+                            }
+                            if (message.flagContentUri != null && message.hasOwnProperty("flagContentUri"))
+                                if (!$util.isString(message.flagContentUri))
+                                    return "flagContentUri: string expected";
+                            if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri"))
+                                if (!$util.isString(message.googleMapsUri))
+                                    return "googleMapsUri: string expected";
+                            if (message.visitDate != null && message.hasOwnProperty("visitDate")) {
+                                var error = $root.google.type.Date.verify(message.visitDate);
+                                if (error)
+                                    return "visitDate." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Review message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.Review} Review
+                         */
+                        Review.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.Review)
+                                return object;
+                            var message = new $root.google.maps.places.v1.Review();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.relativePublishTimeDescription != null)
+                                message.relativePublishTimeDescription = String(object.relativePublishTimeDescription);
+                            if (object.text != null) {
+                                if (typeof object.text !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.text: object expected");
+                                message.text = $root.google.type.LocalizedText.fromObject(object.text);
+                            }
+                            if (object.originalText != null) {
+                                if (typeof object.originalText !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.originalText: object expected");
+                                message.originalText = $root.google.type.LocalizedText.fromObject(object.originalText);
+                            }
+                            if (object.rating != null)
+                                message.rating = Number(object.rating);
+                            if (object.authorAttribution != null) {
+                                if (typeof object.authorAttribution !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.authorAttribution: object expected");
+                                message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.fromObject(object.authorAttribution);
+                            }
+                            if (object.publishTime != null) {
+                                if (typeof object.publishTime !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.publishTime: object expected");
+                                message.publishTime = $root.google.protobuf.Timestamp.fromObject(object.publishTime);
+                            }
+                            if (object.flagContentUri != null)
+                                message.flagContentUri = String(object.flagContentUri);
+                            if (object.googleMapsUri != null)
+                                message.googleMapsUri = String(object.googleMapsUri);
+                            if (object.visitDate != null) {
+                                if (typeof object.visitDate !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.visitDate: object expected");
+                                message.visitDate = $root.google.type.Date.fromObject(object.visitDate);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Review message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {google.maps.places.v1.Review} message Review
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Review.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.relativePublishTimeDescription = "";
+                                object.rating = 0;
+                                object.text = null;
+                                object.originalText = null;
+                                object.authorAttribution = null;
+                                object.publishTime = null;
+                                object.flagContentUri = "";
+                                object.googleMapsUri = "";
+                                object.visitDate = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.relativePublishTimeDescription != null && message.hasOwnProperty("relativePublishTimeDescription"))
+                                object.relativePublishTimeDescription = message.relativePublishTimeDescription;
+                            if (message.rating != null && message.hasOwnProperty("rating"))
+                                object.rating = options.json && !isFinite(message.rating) ? String(message.rating) : message.rating;
+                            if (message.text != null && message.hasOwnProperty("text"))
+                                object.text = $root.google.type.LocalizedText.toObject(message.text, options);
+                            if (message.originalText != null && message.hasOwnProperty("originalText"))
+                                object.originalText = $root.google.type.LocalizedText.toObject(message.originalText, options);
+                            if (message.authorAttribution != null && message.hasOwnProperty("authorAttribution"))
+                                object.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.toObject(message.authorAttribution, options);
+                            if (message.publishTime != null && message.hasOwnProperty("publishTime"))
+                                object.publishTime = $root.google.protobuf.Timestamp.toObject(message.publishTime, options);
+                            if (message.flagContentUri != null && message.hasOwnProperty("flagContentUri"))
+                                object.flagContentUri = message.flagContentUri;
+                            if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri"))
+                                object.googleMapsUri = message.googleMapsUri;
+                            if (message.visitDate != null && message.hasOwnProperty("visitDate"))
+                                object.visitDate = $root.google.type.Date.toObject(message.visitDate, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Review to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Review.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Review
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Review.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.Review";
+                        };
+    
+                        return Review;
+                    })();
+    
                     v1.EVChargeOptions = (function() {
     
                         /**
@@ -8195,6 +7917,7 @@
                          * @property {Array.<string>|null} [types] Place types
                          * @property {string|null} [primaryType] Place primaryType
                          * @property {google.type.ILocalizedText|null} [primaryTypeDisplayName] Place primaryTypeDisplayName
+                         * @property {google.type.ILocalizedText|null} [googleMapsTypeLabel] Place googleMapsTypeLabel
                          * @property {string|null} [nationalPhoneNumber] Place nationalPhoneNumber
                          * @property {string|null} [internationalPhoneNumber] Place internationalPhoneNumber
                          * @property {string|null} [formattedAddress] Place formattedAddress
@@ -8256,6 +7979,7 @@
                          * @property {Array.<google.maps.places.v1.Place.IContainingPlace>|null} [containingPlaces] Place containingPlaces
                          * @property {boolean|null} [pureServiceAreaBusiness] Place pureServiceAreaBusiness
                          * @property {google.maps.places.v1.IAddressDescriptor|null} [addressDescriptor] Place addressDescriptor
+                         * @property {google.maps.places.v1.Place.IGoogleMapsLinks|null} [googleMapsLinks] Place googleMapsLinks
                          * @property {google.maps.places.v1.IPriceRange|null} [priceRange] Place priceRange
                          * @property {google.maps.places.v1.Place.IReviewSummary|null} [reviewSummary] Place reviewSummary
                          * @property {google.maps.places.v1.Place.IEvChargeAmenitySummary|null} [evChargeAmenitySummary] Place evChargeAmenitySummary
@@ -8336,6 +8060,14 @@
                          * @instance
                          */
                         Place.prototype.primaryTypeDisplayName = null;
+    
+                        /**
+                         * Place googleMapsTypeLabel.
+                         * @member {google.type.ILocalizedText|null|undefined} googleMapsTypeLabel
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.googleMapsTypeLabel = null;
     
                         /**
                          * Place nationalPhoneNumber.
@@ -8826,6 +8558,14 @@
                         Place.prototype.addressDescriptor = null;
     
                         /**
+                         * Place googleMapsLinks.
+                         * @member {google.maps.places.v1.Place.IGoogleMapsLinks|null|undefined} googleMapsLinks
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.googleMapsLinks = null;
+    
+                        /**
                          * Place priceRange.
                          * @member {google.maps.places.v1.IPriceRange|null|undefined} priceRange
                          * @memberof google.maps.places.v1.Place
@@ -9209,6 +8949,8 @@
                                 writer.uint32(/* id 83, wireType 0 =*/664).bool(message.pureServiceAreaBusiness);
                             if (message.addressDescriptor != null && Object.hasOwnProperty.call(message, "addressDescriptor"))
                                 $root.google.maps.places.v1.AddressDescriptor.encode(message.addressDescriptor, writer.uint32(/* id 84, wireType 2 =*/674).fork()).ldelim();
+                            if (message.googleMapsLinks != null && Object.hasOwnProperty.call(message, "googleMapsLinks"))
+                                $root.google.maps.places.v1.Place.GoogleMapsLinks.encode(message.googleMapsLinks, writer.uint32(/* id 85, wireType 2 =*/682).fork()).ldelim();
                             if (message.priceRange != null && Object.hasOwnProperty.call(message, "priceRange"))
                                 $root.google.maps.places.v1.PriceRange.encode(message.priceRange, writer.uint32(/* id 86, wireType 2 =*/690).fork()).ldelim();
                             if (message.reviewSummary != null && Object.hasOwnProperty.call(message, "reviewSummary"))
@@ -9227,6 +8969,8 @@
                                 writer.uint32(/* id 93, wireType 2 =*/746).string(message.movedPlace);
                             if (message.movedPlaceId != null && Object.hasOwnProperty.call(message, "movedPlaceId"))
                                 writer.uint32(/* id 94, wireType 2 =*/754).string(message.movedPlaceId);
+                            if (message.googleMapsTypeLabel != null && Object.hasOwnProperty.call(message, "googleMapsTypeLabel"))
+                                $root.google.type.LocalizedText.encode(message.googleMapsTypeLabel, writer.uint32(/* id 96, wireType 2 =*/770).fork()).ldelim();
                             return writer;
                         };
     
@@ -9287,6 +9031,10 @@
                                     }
                                 case 32: {
                                         message.primaryTypeDisplayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 96: {
+                                        message.googleMapsTypeLabel = $root.google.type.LocalizedText.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -9549,6 +9297,10 @@
                                         message.addressDescriptor = $root.google.maps.places.v1.AddressDescriptor.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 85: {
+                                        message.googleMapsLinks = $root.google.maps.places.v1.Place.GoogleMapsLinks.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 86: {
                                         message.priceRange = $root.google.maps.places.v1.PriceRange.decode(reader, reader.uint32());
                                         break;
@@ -9638,6 +9390,11 @@
                                 var error = $root.google.type.LocalizedText.verify(message.primaryTypeDisplayName);
                                 if (error)
                                     return "primaryTypeDisplayName." + error;
+                            }
+                            if (message.googleMapsTypeLabel != null && message.hasOwnProperty("googleMapsTypeLabel")) {
+                                var error = $root.google.type.LocalizedText.verify(message.googleMapsTypeLabel);
+                                if (error)
+                                    return "googleMapsTypeLabel." + error;
                             }
                             if (message.nationalPhoneNumber != null && message.hasOwnProperty("nationalPhoneNumber"))
                                 if (!$util.isString(message.nationalPhoneNumber))
@@ -9971,6 +9728,11 @@
                                 if (error)
                                     return "addressDescriptor." + error;
                             }
+                            if (message.googleMapsLinks != null && message.hasOwnProperty("googleMapsLinks")) {
+                                var error = $root.google.maps.places.v1.Place.GoogleMapsLinks.verify(message.googleMapsLinks);
+                                if (error)
+                                    return "googleMapsLinks." + error;
+                            }
                             if (message.priceRange != null && message.hasOwnProperty("priceRange")) {
                                 var error = $root.google.maps.places.v1.PriceRange.verify(message.priceRange);
                                 if (error)
@@ -10039,6 +9801,11 @@
                                 if (typeof object.primaryTypeDisplayName !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.primaryTypeDisplayName: object expected");
                                 message.primaryTypeDisplayName = $root.google.type.LocalizedText.fromObject(object.primaryTypeDisplayName);
+                            }
+                            if (object.googleMapsTypeLabel != null) {
+                                if (typeof object.googleMapsTypeLabel !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.googleMapsTypeLabel: object expected");
+                                message.googleMapsTypeLabel = $root.google.type.LocalizedText.fromObject(object.googleMapsTypeLabel);
                             }
                             if (object.nationalPhoneNumber != null)
                                 message.nationalPhoneNumber = String(object.nationalPhoneNumber);
@@ -10323,6 +10090,11 @@
                                     throw TypeError(".google.maps.places.v1.Place.addressDescriptor: object expected");
                                 message.addressDescriptor = $root.google.maps.places.v1.AddressDescriptor.fromObject(object.addressDescriptor);
                             }
+                            if (object.googleMapsLinks != null) {
+                                if (typeof object.googleMapsLinks !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.googleMapsLinks: object expected");
+                                message.googleMapsLinks = $root.google.maps.places.v1.Place.GoogleMapsLinks.fromObject(object.googleMapsLinks);
+                            }
                             if (object.priceRange != null) {
                                 if (typeof object.priceRange !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.priceRange: object expected");
@@ -10409,6 +10181,7 @@
                                 object.evChargeOptions = null;
                                 object.generativeSummary = null;
                                 object.addressDescriptor = null;
+                                object.googleMapsLinks = null;
                                 object.priceRange = null;
                                 object.reviewSummary = null;
                                 object.timeZone = null;
@@ -10418,6 +10191,7 @@
                                 object.consumerAlert = null;
                                 object.movedPlace = "";
                                 object.movedPlaceId = "";
+                                object.googleMapsTypeLabel = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10657,6 +10431,8 @@
                             }
                             if (message.addressDescriptor != null && message.hasOwnProperty("addressDescriptor"))
                                 object.addressDescriptor = $root.google.maps.places.v1.AddressDescriptor.toObject(message.addressDescriptor, options);
+                            if (message.googleMapsLinks != null && message.hasOwnProperty("googleMapsLinks"))
+                                object.googleMapsLinks = $root.google.maps.places.v1.Place.GoogleMapsLinks.toObject(message.googleMapsLinks, options);
                             if (message.priceRange != null && message.hasOwnProperty("priceRange"))
                                 object.priceRange = $root.google.maps.places.v1.PriceRange.toObject(message.priceRange, options);
                             if (message.reviewSummary != null && message.hasOwnProperty("reviewSummary"))
@@ -10675,6 +10451,8 @@
                                 object.movedPlace = message.movedPlace;
                             if (message.movedPlaceId != null && message.hasOwnProperty("movedPlaceId"))
                                 object.movedPlaceId = message.movedPlaceId;
+                            if (message.googleMapsTypeLabel != null && message.hasOwnProperty("googleMapsTypeLabel"))
+                                object.googleMapsTypeLabel = $root.google.type.LocalizedText.toObject(message.googleMapsTypeLabel, options);
                             return object;
                         };
     
@@ -14571,6 +14349,304 @@
                             };
     
                             return ContainingPlace;
+                        })();
+    
+                        Place.GoogleMapsLinks = (function() {
+    
+                            /**
+                             * Properties of a GoogleMapsLinks.
+                             * @memberof google.maps.places.v1.Place
+                             * @interface IGoogleMapsLinks
+                             * @property {string|null} [directionsUri] GoogleMapsLinks directionsUri
+                             * @property {string|null} [placeUri] GoogleMapsLinks placeUri
+                             * @property {string|null} [writeAReviewUri] GoogleMapsLinks writeAReviewUri
+                             * @property {string|null} [reviewsUri] GoogleMapsLinks reviewsUri
+                             * @property {string|null} [photosUri] GoogleMapsLinks photosUri
+                             */
+    
+                            /**
+                             * Constructs a new GoogleMapsLinks.
+                             * @memberof google.maps.places.v1.Place
+                             * @classdesc Represents a GoogleMapsLinks.
+                             * @implements IGoogleMapsLinks
+                             * @constructor
+                             * @param {google.maps.places.v1.Place.IGoogleMapsLinks=} [properties] Properties to set
+                             */
+                            function GoogleMapsLinks(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GoogleMapsLinks directionsUri.
+                             * @member {string} directionsUri
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @instance
+                             */
+                            GoogleMapsLinks.prototype.directionsUri = "";
+    
+                            /**
+                             * GoogleMapsLinks placeUri.
+                             * @member {string} placeUri
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @instance
+                             */
+                            GoogleMapsLinks.prototype.placeUri = "";
+    
+                            /**
+                             * GoogleMapsLinks writeAReviewUri.
+                             * @member {string} writeAReviewUri
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @instance
+                             */
+                            GoogleMapsLinks.prototype.writeAReviewUri = "";
+    
+                            /**
+                             * GoogleMapsLinks reviewsUri.
+                             * @member {string} reviewsUri
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @instance
+                             */
+                            GoogleMapsLinks.prototype.reviewsUri = "";
+    
+                            /**
+                             * GoogleMapsLinks photosUri.
+                             * @member {string} photosUri
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @instance
+                             */
+                            GoogleMapsLinks.prototype.photosUri = "";
+    
+                            /**
+                             * Creates a new GoogleMapsLinks instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @static
+                             * @param {google.maps.places.v1.Place.IGoogleMapsLinks=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.Place.GoogleMapsLinks} GoogleMapsLinks instance
+                             */
+                            GoogleMapsLinks.create = function create(properties) {
+                                return new GoogleMapsLinks(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleMapsLinks message. Does not implicitly {@link google.maps.places.v1.Place.GoogleMapsLinks.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @static
+                             * @param {google.maps.places.v1.Place.IGoogleMapsLinks} message GoogleMapsLinks message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleMapsLinks.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.directionsUri != null && Object.hasOwnProperty.call(message, "directionsUri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.directionsUri);
+                                if (message.placeUri != null && Object.hasOwnProperty.call(message, "placeUri"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.placeUri);
+                                if (message.writeAReviewUri != null && Object.hasOwnProperty.call(message, "writeAReviewUri"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.writeAReviewUri);
+                                if (message.reviewsUri != null && Object.hasOwnProperty.call(message, "reviewsUri"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.reviewsUri);
+                                if (message.photosUri != null && Object.hasOwnProperty.call(message, "photosUri"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.photosUri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleMapsLinks message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.GoogleMapsLinks.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @static
+                             * @param {google.maps.places.v1.Place.IGoogleMapsLinks} message GoogleMapsLinks message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleMapsLinks.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GoogleMapsLinks message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.Place.GoogleMapsLinks} GoogleMapsLinks
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleMapsLinks.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.GoogleMapsLinks();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.directionsUri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.placeUri = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.writeAReviewUri = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.reviewsUri = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.photosUri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GoogleMapsLinks message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.Place.GoogleMapsLinks} GoogleMapsLinks
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleMapsLinks.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GoogleMapsLinks message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GoogleMapsLinks.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.directionsUri != null && message.hasOwnProperty("directionsUri"))
+                                    if (!$util.isString(message.directionsUri))
+                                        return "directionsUri: string expected";
+                                if (message.placeUri != null && message.hasOwnProperty("placeUri"))
+                                    if (!$util.isString(message.placeUri))
+                                        return "placeUri: string expected";
+                                if (message.writeAReviewUri != null && message.hasOwnProperty("writeAReviewUri"))
+                                    if (!$util.isString(message.writeAReviewUri))
+                                        return "writeAReviewUri: string expected";
+                                if (message.reviewsUri != null && message.hasOwnProperty("reviewsUri"))
+                                    if (!$util.isString(message.reviewsUri))
+                                        return "reviewsUri: string expected";
+                                if (message.photosUri != null && message.hasOwnProperty("photosUri"))
+                                    if (!$util.isString(message.photosUri))
+                                        return "photosUri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GoogleMapsLinks message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.Place.GoogleMapsLinks} GoogleMapsLinks
+                             */
+                            GoogleMapsLinks.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.Place.GoogleMapsLinks)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.Place.GoogleMapsLinks();
+                                if (object.directionsUri != null)
+                                    message.directionsUri = String(object.directionsUri);
+                                if (object.placeUri != null)
+                                    message.placeUri = String(object.placeUri);
+                                if (object.writeAReviewUri != null)
+                                    message.writeAReviewUri = String(object.writeAReviewUri);
+                                if (object.reviewsUri != null)
+                                    message.reviewsUri = String(object.reviewsUri);
+                                if (object.photosUri != null)
+                                    message.photosUri = String(object.photosUri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GoogleMapsLinks message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @static
+                             * @param {google.maps.places.v1.Place.GoogleMapsLinks} message GoogleMapsLinks
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GoogleMapsLinks.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.directionsUri = "";
+                                    object.placeUri = "";
+                                    object.writeAReviewUri = "";
+                                    object.reviewsUri = "";
+                                    object.photosUri = "";
+                                }
+                                if (message.directionsUri != null && message.hasOwnProperty("directionsUri"))
+                                    object.directionsUri = message.directionsUri;
+                                if (message.placeUri != null && message.hasOwnProperty("placeUri"))
+                                    object.placeUri = message.placeUri;
+                                if (message.writeAReviewUri != null && message.hasOwnProperty("writeAReviewUri"))
+                                    object.writeAReviewUri = message.writeAReviewUri;
+                                if (message.reviewsUri != null && message.hasOwnProperty("reviewsUri"))
+                                    object.reviewsUri = message.reviewsUri;
+                                if (message.photosUri != null && message.hasOwnProperty("photosUri"))
+                                    object.photosUri = message.photosUri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GoogleMapsLinks to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GoogleMapsLinks.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GoogleMapsLinks
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.Place.GoogleMapsLinks
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GoogleMapsLinks.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.Place.GoogleMapsLinks";
+                            };
+    
+                            return GoogleMapsLinks;
                         })();
     
                         Place.ReviewSummary = (function() {
@@ -24721,6 +24797,272 @@
                         values[valuesById[3] = "WALK"] = 3;
                         values[valuesById[4] = "TWO_WHEELER"] = 4;
                         return values;
+                    })();
+    
+                    v1.References = (function() {
+    
+                        /**
+                         * Properties of a References.
+                         * @memberof google.maps.places.v1
+                         * @interface IReferences
+                         * @property {Array.<google.maps.places.v1.IReview>|null} [reviews] References reviews
+                         * @property {Array.<string>|null} [places] References places
+                         */
+    
+                        /**
+                         * Constructs a new References.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a References.
+                         * @implements IReferences
+                         * @constructor
+                         * @param {google.maps.places.v1.IReferences=} [properties] Properties to set
+                         */
+                        function References(properties) {
+                            this.reviews = [];
+                            this.places = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * References reviews.
+                         * @member {Array.<google.maps.places.v1.IReview>} reviews
+                         * @memberof google.maps.places.v1.References
+                         * @instance
+                         */
+                        References.prototype.reviews = $util.emptyArray;
+    
+                        /**
+                         * References places.
+                         * @member {Array.<string>} places
+                         * @memberof google.maps.places.v1.References
+                         * @instance
+                         */
+                        References.prototype.places = $util.emptyArray;
+    
+                        /**
+                         * Creates a new References instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.References
+                         * @static
+                         * @param {google.maps.places.v1.IReferences=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.References} References instance
+                         */
+                        References.create = function create(properties) {
+                            return new References(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified References message. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.References
+                         * @static
+                         * @param {google.maps.places.v1.IReferences} message References message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        References.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reviews != null && message.reviews.length)
+                                for (var i = 0; i < message.reviews.length; ++i)
+                                    $root.google.maps.places.v1.Review.encode(message.reviews[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.places != null && message.places.length)
+                                for (var i = 0; i < message.places.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.places[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified References message, length delimited. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.References
+                         * @static
+                         * @param {google.maps.places.v1.IReferences} message References message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        References.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a References message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.References
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.References} References
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        References.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.References();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.reviews && message.reviews.length))
+                                            message.reviews = [];
+                                        message.reviews.push($root.google.maps.places.v1.Review.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.places && message.places.length))
+                                            message.places = [];
+                                        message.places.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a References message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.References
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.References} References
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        References.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a References message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.References
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        References.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reviews != null && message.hasOwnProperty("reviews")) {
+                                if (!Array.isArray(message.reviews))
+                                    return "reviews: array expected";
+                                for (var i = 0; i < message.reviews.length; ++i) {
+                                    var error = $root.google.maps.places.v1.Review.verify(message.reviews[i]);
+                                    if (error)
+                                        return "reviews." + error;
+                                }
+                            }
+                            if (message.places != null && message.hasOwnProperty("places")) {
+                                if (!Array.isArray(message.places))
+                                    return "places: array expected";
+                                for (var i = 0; i < message.places.length; ++i)
+                                    if (!$util.isString(message.places[i]))
+                                        return "places: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a References message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.References
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.References} References
+                         */
+                        References.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.References)
+                                return object;
+                            var message = new $root.google.maps.places.v1.References();
+                            if (object.reviews) {
+                                if (!Array.isArray(object.reviews))
+                                    throw TypeError(".google.maps.places.v1.References.reviews: array expected");
+                                message.reviews = [];
+                                for (var i = 0; i < object.reviews.length; ++i) {
+                                    if (typeof object.reviews[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.References.reviews: object expected");
+                                    message.reviews[i] = $root.google.maps.places.v1.Review.fromObject(object.reviews[i]);
+                                }
+                            }
+                            if (object.places) {
+                                if (!Array.isArray(object.places))
+                                    throw TypeError(".google.maps.places.v1.References.places: array expected");
+                                message.places = [];
+                                for (var i = 0; i < object.places.length; ++i)
+                                    message.places[i] = String(object.places[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a References message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.References
+                         * @static
+                         * @param {google.maps.places.v1.References} message References
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        References.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.reviews = [];
+                                object.places = [];
+                            }
+                            if (message.reviews && message.reviews.length) {
+                                object.reviews = [];
+                                for (var j = 0; j < message.reviews.length; ++j)
+                                    object.reviews[j] = $root.google.maps.places.v1.Review.toObject(message.reviews[j], options);
+                            }
+                            if (message.places && message.places.length) {
+                                object.places = [];
+                                for (var j = 0; j < message.places.length; ++j)
+                                    object.places[j] = message.places[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this References to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.References
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        References.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for References
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.References
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        References.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.References";
+                        };
+    
+                        return References;
                     })();
     
                     return v1;

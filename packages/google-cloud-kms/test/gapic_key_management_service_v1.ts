@@ -25,7 +25,7 @@ import * as keymanagementserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, IamProtos, LocationProtos} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -52,6 +52,22 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
@@ -796,6 +812,114 @@ describe('v1.KeyManagementServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.getImportJob(request), expectedError);
+        });
+    });
+
+    describe('getRetiredResource', () => {
+        it('invokes getRetiredResource without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.GetRetiredResourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.GetRetiredResourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.kms.v1.RetiredResource()
+            );
+            client.innerApiCalls.getRetiredResource = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRetiredResource(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRetiredResource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRetiredResource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRetiredResource without error using callback', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.GetRetiredResourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.GetRetiredResourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.kms.v1.RetiredResource()
+            );
+            client.innerApiCalls.getRetiredResource = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRetiredResource(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.kms.v1.IRetiredResource|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRetiredResource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRetiredResource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRetiredResource with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.GetRetiredResourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.GetRetiredResourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRetiredResource = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRetiredResource(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRetiredResource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRetiredResource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRetiredResource with closed client', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.GetRetiredResourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.GetRetiredResourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRetiredResource(request), expectedError);
         });
     });
 
@@ -2967,6 +3091,314 @@ describe('v1.KeyManagementServiceClient', () => {
         });
     });
 
+    describe('deleteCryptoKey', () => {
+        it('invokes deleteCryptoKey without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DeleteCryptoKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DeleteCryptoKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCryptoKey = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteCryptoKey(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCryptoKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCryptoKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCryptoKey without error using callback', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DeleteCryptoKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DeleteCryptoKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCryptoKey = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteCryptoKey(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCryptoKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCryptoKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCryptoKey with call error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DeleteCryptoKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DeleteCryptoKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCryptoKey = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteCryptoKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCryptoKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCryptoKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCryptoKey with LRO error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DeleteCryptoKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DeleteCryptoKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCryptoKey = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteCryptoKey(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCryptoKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCryptoKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteCryptoKeyProgress without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteCryptoKeyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteCryptoKeyProgress with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteCryptoKeyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteCryptoKeyVersion', () => {
+        it('invokes deleteCryptoKeyVersion without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCryptoKeyVersion = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteCryptoKeyVersion(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCryptoKeyVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCryptoKeyVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCryptoKeyVersion without error using callback', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCryptoKeyVersion = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteCryptoKeyVersion(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCryptoKeyVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCryptoKeyVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCryptoKeyVersion with call error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCryptoKeyVersion = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteCryptoKeyVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCryptoKeyVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCryptoKeyVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCryptoKeyVersion with LRO error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCryptoKeyVersion = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteCryptoKeyVersion(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCryptoKeyVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCryptoKeyVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteCryptoKeyVersionProgress without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteCryptoKeyVersionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteCryptoKeyVersionProgress with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteCryptoKeyVersionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('listKeyRings', () => {
         it('invokes listKeyRings without error', async () => {
             const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
@@ -3946,6 +4378,251 @@ describe('v1.KeyManagementServiceClient', () => {
             );
         });
     });
+
+    describe('listRetiredResources', () => {
+        it('invokes listRetiredResources without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.ListRetiredResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.ListRetiredResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+            ];
+            client.innerApiCalls.listRetiredResources = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRetiredResources(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRetiredResources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRetiredResources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRetiredResources without error using callback', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.ListRetiredResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.ListRetiredResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+            ];
+            client.innerApiCalls.listRetiredResources = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRetiredResources(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.kms.v1.IRetiredResource[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRetiredResources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRetiredResources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRetiredResources with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.ListRetiredResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.ListRetiredResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRetiredResources = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRetiredResources(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRetiredResources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRetiredResources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRetiredResourcesStream without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.ListRetiredResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.ListRetiredResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+            ];
+            client.descriptors.page.listRetiredResources.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRetiredResourcesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.kms.v1.RetiredResource[] = [];
+                stream.on('data', (response: protos.google.cloud.kms.v1.RetiredResource) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRetiredResources.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRetiredResources, request));
+            assert(
+                (client.descriptors.page.listRetiredResources.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listRetiredResourcesStream with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.ListRetiredResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.ListRetiredResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRetiredResources.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRetiredResourcesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.kms.v1.RetiredResource[] = [];
+                stream.on('data', (response: protos.google.cloud.kms.v1.RetiredResource) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRetiredResources.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRetiredResources, request));
+            assert(
+                (client.descriptors.page.listRetiredResources.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listRetiredResources without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.ListRetiredResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.ListRetiredResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.RetiredResource()),
+            ];
+            client.descriptors.page.listRetiredResources.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.kms.v1.IRetiredResource[] = [];
+            const iterable = client.listRetiredResourcesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRetiredResources.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRetiredResources.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listRetiredResources with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.ListRetiredResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.ListRetiredResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRetiredResources.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRetiredResourcesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.kms.v1.IRetiredResource[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRetiredResources.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRetiredResources.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getIamPolicy', () => {
         it('invokes getIamPolicy without error', async () => {
             const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
@@ -4388,38 +5065,263 @@ describe('v1.KeyManagementServiceClient', () => {
             );
         });
     });
-
-    describe('Path templates', () => {
-
-        describe('autokeyConfig', async () => {
-            const fakePath = "/rendered/path/autokeyConfig";
-            const expectedParameters = {
-                folder: "folderValue",
-            };
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
             const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.autokeyConfigPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.autokeyConfigPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('autokeyConfigPath', () => {
-                const result = client.autokeyConfigPath("folderValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.autokeyConfigPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
             });
-
-            it('matchFolderFromAutokeyConfigName', () => {
-                const result = client.matchFolderFromAutokeyConfigName(fakePath);
-                assert.strictEqual(result, "folderValue");
-                assert((client.pathTemplates.autokeyConfigPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
+    });
+
+    describe('Path templates', () => {
 
         describe('cryptoKey', async () => {
             const fakePath = "/rendered/path/cryptoKey";
@@ -4621,6 +5523,36 @@ describe('v1.KeyManagementServiceClient', () => {
             });
         });
 
+        describe('folderAutokeyConfig', async () => {
+            const fakePath = "/rendered/path/folderAutokeyConfig";
+            const expectedParameters = {
+                folder: "folderValue",
+            };
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderAutokeyConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderAutokeyConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderAutokeyConfigPath', () => {
+                const result = client.folderAutokeyConfigPath("folderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderAutokeyConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderAutokeyConfigName', () => {
+                const result = client.matchFolderFromFolderAutokeyConfigName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderAutokeyConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('importJob', async () => {
             const fakePath = "/rendered/path/importJob";
             const expectedParameters = {
@@ -4805,6 +5737,66 @@ describe('v1.KeyManagementServiceClient', () => {
             });
         });
 
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAutokeyConfig', async () => {
+            const fakePath = "/rendered/path/projectAutokeyConfig";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectAutokeyConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAutokeyConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAutokeyConfigPath', () => {
+                const result = client.projectAutokeyConfigPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAutokeyConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAutokeyConfigName', () => {
+                const result = client.matchProjectFromProjectAutokeyConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAutokeyConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('publicKey', async () => {
             const fakePath = "/rendered/path/publicKey";
             const expectedParameters = {
@@ -4863,6 +5855,52 @@ describe('v1.KeyManagementServiceClient', () => {
                 const result = client.matchCryptoKeyVersionFromPublicKeyName(fakePath);
                 assert.strictEqual(result, "cryptoKeyVersionValue");
                 assert((client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('retiredResource', async () => {
+            const fakePath = "/rendered/path/retiredResource";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                retired_resource: "retiredResourceValue",
+            };
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.retiredResourcePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.retiredResourcePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('retiredResourcePath', () => {
+                const result = client.retiredResourcePath("projectValue", "locationValue", "retiredResourceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.retiredResourcePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRetiredResourceName', () => {
+                const result = client.matchProjectFromRetiredResourceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.retiredResourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRetiredResourceName', () => {
+                const result = client.matchLocationFromRetiredResourceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.retiredResourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRetiredResourceFromRetiredResourceName', () => {
+                const result = client.matchRetiredResourceFromRetiredResourceName(fakePath);
+                assert.strictEqual(result, "retiredResourceValue");
+                assert((client.pathTemplates.retiredResourcePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -1264,6 +1264,8 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+                                    case 7:
                                         break;
                                     }
                                 if (message.lastTransitionTime != null && message.hasOwnProperty("lastTransitionTime")) {
@@ -1342,6 +1344,14 @@
                                 case "TYPE_CANCELLED":
                                 case 5:
                                     message.type = 5;
+                                    break;
+                                case "TYPE_APP_CREATED":
+                                case 6:
+                                    message.type = 6;
+                                    break;
+                                case "TYPE_APP_COMPONENTS_REGISTERED":
+                                case 7:
+                                    message.type = 7;
                                     break;
                                 }
                                 if (object.lastTransitionTime != null) {
@@ -1442,6 +1452,8 @@
                              * @property {number} TYPE_RUNNING=3 TYPE_RUNNING value
                              * @property {number} TYPE_SUCCEEDED=4 TYPE_SUCCEEDED value
                              * @property {number} TYPE_CANCELLED=5 TYPE_CANCELLED value
+                             * @property {number} TYPE_APP_CREATED=6 TYPE_APP_CREATED value
+                             * @property {number} TYPE_APP_COMPONENTS_REGISTERED=7 TYPE_APP_COMPONENTS_REGISTERED value
                              */
                             UnitOperationCondition.Type = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -1450,6 +1462,8 @@
                                 values[valuesById[3] = "TYPE_RUNNING"] = 3;
                                 values[valuesById[4] = "TYPE_SUCCEEDED"] = 4;
                                 values[valuesById[5] = "TYPE_CANCELLED"] = 5;
+                                values[valuesById[6] = "TYPE_APP_CREATED"] = 6;
+                                values[valuesById[7] = "TYPE_APP_COMPONENTS_REGISTERED"] = 7;
                                 return values;
                             })();
     

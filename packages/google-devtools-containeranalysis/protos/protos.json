@@ -163,6 +163,10 @@
                 "layerCount": {
                   "type": "int32",
                   "id": 3
+                },
+                "registry": {
+                  "type": "string",
+                  "id": 4
                 }
               }
             },
@@ -3331,6 +3335,10 @@
                 "cvssV2": {
                   "type": "CVSS",
                   "id": 8
+                },
+                "advisoryPublishTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 9
                 }
               },
               "nested": {

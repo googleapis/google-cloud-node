@@ -1800,8 +1800,14 @@ export namespace google {
                         ML_KEM_768 = 47,
                         ML_KEM_1024 = 48,
                         KEM_XWING = 63,
+                        PQ_SIGN_ML_DSA_44 = 68,
                         PQ_SIGN_ML_DSA_65 = 56,
-                        PQ_SIGN_SLH_DSA_SHA2_128S = 57
+                        PQ_SIGN_ML_DSA_87 = 69,
+                        PQ_SIGN_SLH_DSA_SHA2_128S = 57,
+                        PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60,
+                        PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70,
+                        PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67,
+                        PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
                     }
 
                     /** CryptoKeyVersionState enum. */
@@ -2544,6 +2550,121 @@ export namespace google {
 
                     /**
                      * Gets the default type url for KeyAccessJustificationsPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetiredResource. */
+                interface IRetiredResource {
+
+                    /** RetiredResource name */
+                    name?: (string|null);
+
+                    /** RetiredResource originalResource */
+                    originalResource?: (string|null);
+
+                    /** RetiredResource resourceType */
+                    resourceType?: (string|null);
+
+                    /** RetiredResource deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a RetiredResource. */
+                class RetiredResource implements IRetiredResource {
+
+                    /**
+                     * Constructs a new RetiredResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IRetiredResource);
+
+                    /** RetiredResource name. */
+                    public name: string;
+
+                    /** RetiredResource originalResource. */
+                    public originalResource: string;
+
+                    /** RetiredResource resourceType. */
+                    public resourceType: string;
+
+                    /** RetiredResource deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new RetiredResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetiredResource instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IRetiredResource): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Encodes the specified RetiredResource message. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                     * @param message RetiredResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IRetiredResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetiredResource message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                     * @param message RetiredResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IRetiredResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetiredResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetiredResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Decodes a RetiredResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetiredResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Verifies a RetiredResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetiredResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetiredResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Creates a plain object from a RetiredResource message. Also converts values to other types if specified.
+                     * @param message RetiredResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.RetiredResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetiredResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetiredResource
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

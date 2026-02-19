@@ -61,7 +61,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | cancel job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storagebatchoperations/samples/generated/v1/storage_batch_operations.cancel_job.js) |
 | create job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storagebatchoperations/samples/generated/v1/storage_batch_operations.create_job.js) |
 | delete job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storagebatchoperations/samples/generated/v1/storage_batch_operations.delete_job.js) |
+| get bucket operation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storagebatchoperations/samples/generated/v1/storage_batch_operations.get_bucket_operation.js) |
 | get job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storagebatchoperations/samples/generated/v1/storage_batch_operations.get_job.js) |
+| list bucket operations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storagebatchoperations/samples/generated/v1/storage_batch_operations.list_bucket_operations.js) |
 | list jobs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storagebatchoperations/samples/generated/v1/storage_batch_operations.list_jobs.js) |
 
 

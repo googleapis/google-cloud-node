@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START storagebatchoperations_v1_generated_StorageBatchOperations_DeleteJob_async]
+  // [START cloudkms_v1_generated_KeyManagementService_DeleteCryptoKeyVersion_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,45 +29,31 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The `name` of the job to delete.
-   *  Format: projects/{project_id}/locations/global/jobs/{job_id} .
+   *  Required. The name google.cloud.kms.v1.CryptoKeyVersion.name  of the
+   *  CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  to delete.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. An optional request ID to identify requests. Specify a unique
-   *  request ID in case you need to retry your request. Requests with same
-   *  `request_id` will be ignored for at least 60 minutes since the first
-   *  request. The request ID must be a valid UUID with the exception that zero
-   *  UUID is not supported (00000000-0000-0000-0000-000000000000).
-   */
-  // const requestId = 'abc123'
-  /**
-   *  Optional. If set to true, any child bucket operations of the job will also
-   *  be deleted. Highly recommended to be set to true by all clients. Users
-   *  cannot mutate bucket operations directly, so only the jobs.delete
-   *  permission is required to delete a job (and its child bucket operations).
-   */
-  // const force = true
 
-  // Imports the Storagebatchoperations library
-  const {StorageBatchOperationsClient} = require('@google-cloud/storagebatchoperations').v1;
+  // Imports the Kms library
+  const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
 
   // Instantiates a client
-  const storagebatchoperationsClient = new StorageBatchOperationsClient();
+  const kmsClient = new KeyManagementServiceClient();
 
-  async function callDeleteJob() {
+  async function callDeleteCryptoKeyVersion() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await storagebatchoperationsClient.deleteJob(request);
+    const [operation] = await kmsClient.deleteCryptoKeyVersion(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteJob();
-  // [END storagebatchoperations_v1_generated_StorageBatchOperations_DeleteJob_async]
+  callDeleteCryptoKeyVersion();
+  // [END cloudkms_v1_generated_KeyManagementService_DeleteCryptoKeyVersion_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -983,6 +983,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount */
             layerCount?: (number|null);
+
+            /** BaseImage registry */
+            registry?: (string|null);
         }
 
         /** Represents a BaseImage. */
@@ -1002,6 +1005,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount. */
             public layerCount: number;
+
+            /** BaseImage registry. */
+            public registry: string;
 
             /**
              * Creates a new BaseImage instance using the specified properties.
@@ -14648,6 +14654,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote cvssV2 */
             cvssV2?: (grafeas.v1.ICVSS|null);
+
+            /** VulnerabilityNote advisoryPublishTime */
+            advisoryPublishTime?: (google.protobuf.ITimestamp|null);
         }
 
         /** Represents a VulnerabilityNote. */
@@ -14682,6 +14691,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote cvssV2. */
             public cvssV2?: (grafeas.v1.ICVSS|null);
+
+            /** VulnerabilityNote advisoryPublishTime. */
+            public advisoryPublishTime?: (google.protobuf.ITimestamp|null);
 
             /**
              * Creates a new VulnerabilityNote instance using the specified properties.

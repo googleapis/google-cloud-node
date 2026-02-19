@@ -1038,6 +1038,9 @@ export namespace google {
 
                     /** AutokeyConfig etag */
                     etag?: (string|null);
+
+                    /** AutokeyConfig keyProjectResolutionMode */
+                    keyProjectResolutionMode?: (google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode|keyof typeof google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode|null);
                 }
 
                 /** Represents an AutokeyConfig. */
@@ -1060,6 +1063,9 @@ export namespace google {
 
                     /** AutokeyConfig etag. */
                     public etag: string;
+
+                    /** AutokeyConfig keyProjectResolutionMode. */
+                    public keyProjectResolutionMode: (google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode|keyof typeof google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode);
 
                     /**
                      * Creates a new AutokeyConfig instance using the specified properties.
@@ -1146,7 +1152,16 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         ACTIVE = 1,
                         KEY_PROJECT_DELETED = 2,
-                        UNINITIALIZED = 3
+                        UNINITIALIZED = 3,
+                        KEY_PROJECT_PERMISSION_DENIED = 4
+                    }
+
+                    /** KeyProjectResolutionMode enum. */
+                    enum KeyProjectResolutionMode {
+                        KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED = 0,
+                        DEDICATED_KEY_PROJECT = 1,
+                        RESOURCE_PROJECT = 2,
+                        DISABLED = 3
                     }
                 }
 
@@ -7413,8 +7428,14 @@ export namespace google {
                         ML_KEM_768 = 47,
                         ML_KEM_1024 = 48,
                         KEM_XWING = 63,
+                        PQ_SIGN_ML_DSA_44 = 68,
                         PQ_SIGN_ML_DSA_65 = 56,
-                        PQ_SIGN_SLH_DSA_SHA2_128S = 57
+                        PQ_SIGN_ML_DSA_87 = 69,
+                        PQ_SIGN_SLH_DSA_SHA2_128S = 57,
+                        PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60,
+                        PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70,
+                        PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67,
+                        PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
                     }
 
                     /** CryptoKeyVersionState enum. */
@@ -8163,6 +8184,121 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RetiredResource. */
+                interface IRetiredResource {
+
+                    /** RetiredResource name */
+                    name?: (string|null);
+
+                    /** RetiredResource originalResource */
+                    originalResource?: (string|null);
+
+                    /** RetiredResource resourceType */
+                    resourceType?: (string|null);
+
+                    /** RetiredResource deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a RetiredResource. */
+                class RetiredResource implements IRetiredResource {
+
+                    /**
+                     * Constructs a new RetiredResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IRetiredResource);
+
+                    /** RetiredResource name. */
+                    public name: string;
+
+                    /** RetiredResource originalResource. */
+                    public originalResource: string;
+
+                    /** RetiredResource resourceType. */
+                    public resourceType: string;
+
+                    /** RetiredResource deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new RetiredResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetiredResource instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IRetiredResource): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Encodes the specified RetiredResource message. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                     * @param message RetiredResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IRetiredResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetiredResource message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                     * @param message RetiredResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IRetiredResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetiredResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetiredResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Decodes a RetiredResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetiredResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Verifies a RetiredResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetiredResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetiredResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Creates a plain object from a RetiredResource message. Also converts values to other types if specified.
+                     * @param message RetiredResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.RetiredResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetiredResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetiredResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** ProtectionLevel enum. */
                 enum ProtectionLevel {
                     PROTECTION_LEVEL_UNSPECIFIED = 0,
@@ -8266,6 +8402,20 @@ export namespace google {
                     public listImportJobs(request: google.cloud.kms.v1.IListImportJobsRequest): Promise<google.cloud.kms.v1.ListImportJobsResponse>;
 
                     /**
+                     * Calls ListRetiredResources.
+                     * @param request ListRetiredResourcesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRetiredResourcesResponse
+                     */
+                    public listRetiredResources(request: google.cloud.kms.v1.IListRetiredResourcesRequest, callback: google.cloud.kms.v1.KeyManagementService.ListRetiredResourcesCallback): void;
+
+                    /**
+                     * Calls ListRetiredResources.
+                     * @param request ListRetiredResourcesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRetiredResources(request: google.cloud.kms.v1.IListRetiredResourcesRequest): Promise<google.cloud.kms.v1.ListRetiredResourcesResponse>;
+
+                    /**
                      * Calls GetKeyRing.
                      * @param request GetKeyRingRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and KeyRing
@@ -8336,6 +8486,20 @@ export namespace google {
                     public getImportJob(request: google.cloud.kms.v1.IGetImportJobRequest): Promise<google.cloud.kms.v1.ImportJob>;
 
                     /**
+                     * Calls GetRetiredResource.
+                     * @param request GetRetiredResourceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetiredResource
+                     */
+                    public getRetiredResource(request: google.cloud.kms.v1.IGetRetiredResourceRequest, callback: google.cloud.kms.v1.KeyManagementService.GetRetiredResourceCallback): void;
+
+                    /**
+                     * Calls GetRetiredResource.
+                     * @param request GetRetiredResourceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRetiredResource(request: google.cloud.kms.v1.IGetRetiredResourceRequest): Promise<google.cloud.kms.v1.RetiredResource>;
+
+                    /**
                      * Calls CreateKeyRing.
                      * @param request CreateKeyRingRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and KeyRing
@@ -8376,6 +8540,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public createCryptoKeyVersion(request: google.cloud.kms.v1.ICreateCryptoKeyVersionRequest): Promise<google.cloud.kms.v1.CryptoKeyVersion>;
+
+                    /**
+                     * Calls DeleteCryptoKey.
+                     * @param request DeleteCryptoKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteCryptoKey(request: google.cloud.kms.v1.IDeleteCryptoKeyRequest, callback: google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyCallback): void;
+
+                    /**
+                     * Calls DeleteCryptoKey.
+                     * @param request DeleteCryptoKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCryptoKey(request: google.cloud.kms.v1.IDeleteCryptoKeyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteCryptoKeyVersion.
+                     * @param request DeleteCryptoKeyVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteCryptoKeyVersion(request: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest, callback: google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyVersionCallback): void;
+
+                    /**
+                     * Calls DeleteCryptoKeyVersion.
+                     * @param request DeleteCryptoKeyVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCryptoKeyVersion(request: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls ImportCryptoKeyVersion.
@@ -8647,6 +8839,13 @@ export namespace google {
                     type ListImportJobsCallback = (error: (Error|null), response?: google.cloud.kms.v1.ListImportJobsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|listRetiredResources}.
+                     * @param error Error, if any
+                     * @param [response] ListRetiredResourcesResponse
+                     */
+                    type ListRetiredResourcesCallback = (error: (Error|null), response?: google.cloud.kms.v1.ListRetiredResourcesResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|getKeyRing}.
                      * @param error Error, if any
                      * @param [response] KeyRing
@@ -8682,6 +8881,13 @@ export namespace google {
                     type GetImportJobCallback = (error: (Error|null), response?: google.cloud.kms.v1.ImportJob) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|getRetiredResource}.
+                     * @param error Error, if any
+                     * @param [response] RetiredResource
+                     */
+                    type GetRetiredResourceCallback = (error: (Error|null), response?: google.cloud.kms.v1.RetiredResource) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|createKeyRing}.
                      * @param error Error, if any
                      * @param [response] KeyRing
@@ -8701,6 +8907,20 @@ export namespace google {
                      * @param [response] CryptoKeyVersion
                      */
                     type CreateCryptoKeyVersionCallback = (error: (Error|null), response?: google.cloud.kms.v1.CryptoKeyVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|deleteCryptoKey}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteCryptoKeyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|deleteCryptoKeyVersion}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteCryptoKeyVersionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|importCryptoKeyVersion}.
@@ -9318,6 +9538,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ListRetiredResourcesRequest. */
+                interface IListRetiredResourcesRequest {
+
+                    /** ListRetiredResourcesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRetiredResourcesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRetiredResourcesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListRetiredResourcesRequest. */
+                class ListRetiredResourcesRequest implements IListRetiredResourcesRequest {
+
+                    /**
+                     * Constructs a new ListRetiredResourcesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListRetiredResourcesRequest);
+
+                    /** ListRetiredResourcesRequest parent. */
+                    public parent: string;
+
+                    /** ListRetiredResourcesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRetiredResourcesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListRetiredResourcesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRetiredResourcesRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListRetiredResourcesRequest): google.cloud.kms.v1.ListRetiredResourcesRequest;
+
+                    /**
+                     * Encodes the specified ListRetiredResourcesRequest message. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesRequest.verify|verify} messages.
+                     * @param message ListRetiredResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListRetiredResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRetiredResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesRequest.verify|verify} messages.
+                     * @param message ListRetiredResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListRetiredResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRetiredResourcesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRetiredResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListRetiredResourcesRequest;
+
+                    /**
+                     * Decodes a ListRetiredResourcesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRetiredResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListRetiredResourcesRequest;
+
+                    /**
+                     * Verifies a ListRetiredResourcesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRetiredResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRetiredResourcesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListRetiredResourcesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRetiredResourcesRequest message. Also converts values to other types if specified.
+                     * @param message ListRetiredResourcesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListRetiredResourcesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRetiredResourcesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRetiredResourcesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ListKeyRingsResponse. */
                 interface IListKeyRingsResponse {
 
@@ -9748,6 +10077,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListImportJobsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRetiredResourcesResponse. */
+                interface IListRetiredResourcesResponse {
+
+                    /** ListRetiredResourcesResponse retiredResources */
+                    retiredResources?: (google.cloud.kms.v1.IRetiredResource[]|null);
+
+                    /** ListRetiredResourcesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRetiredResourcesResponse totalSize */
+                    totalSize?: (number|Long|string|null);
+                }
+
+                /** Represents a ListRetiredResourcesResponse. */
+                class ListRetiredResourcesResponse implements IListRetiredResourcesResponse {
+
+                    /**
+                     * Constructs a new ListRetiredResourcesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListRetiredResourcesResponse);
+
+                    /** ListRetiredResourcesResponse retiredResources. */
+                    public retiredResources: google.cloud.kms.v1.IRetiredResource[];
+
+                    /** ListRetiredResourcesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRetiredResourcesResponse totalSize. */
+                    public totalSize: (number|Long|string);
+
+                    /**
+                     * Creates a new ListRetiredResourcesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRetiredResourcesResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListRetiredResourcesResponse): google.cloud.kms.v1.ListRetiredResourcesResponse;
+
+                    /**
+                     * Encodes the specified ListRetiredResourcesResponse message. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesResponse.verify|verify} messages.
+                     * @param message ListRetiredResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListRetiredResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRetiredResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesResponse.verify|verify} messages.
+                     * @param message ListRetiredResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListRetiredResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRetiredResourcesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRetiredResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListRetiredResourcesResponse;
+
+                    /**
+                     * Decodes a ListRetiredResourcesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRetiredResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListRetiredResourcesResponse;
+
+                    /**
+                     * Verifies a ListRetiredResourcesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRetiredResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRetiredResourcesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListRetiredResourcesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRetiredResourcesResponse message. Also converts values to other types if specified.
+                     * @param message ListRetiredResourcesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListRetiredResourcesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRetiredResourcesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRetiredResourcesResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10245,6 +10683,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetRetiredResourceRequest. */
+                interface IGetRetiredResourceRequest {
+
+                    /** GetRetiredResourceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRetiredResourceRequest. */
+                class GetRetiredResourceRequest implements IGetRetiredResourceRequest {
+
+                    /**
+                     * Constructs a new GetRetiredResourceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IGetRetiredResourceRequest);
+
+                    /** GetRetiredResourceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRetiredResourceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRetiredResourceRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IGetRetiredResourceRequest): google.cloud.kms.v1.GetRetiredResourceRequest;
+
+                    /**
+                     * Encodes the specified GetRetiredResourceRequest message. Does not implicitly {@link google.cloud.kms.v1.GetRetiredResourceRequest.verify|verify} messages.
+                     * @param message GetRetiredResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IGetRetiredResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRetiredResourceRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetRetiredResourceRequest.verify|verify} messages.
+                     * @param message GetRetiredResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IGetRetiredResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRetiredResourceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRetiredResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.GetRetiredResourceRequest;
+
+                    /**
+                     * Decodes a GetRetiredResourceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRetiredResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.GetRetiredResourceRequest;
+
+                    /**
+                     * Verifies a GetRetiredResourceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRetiredResourceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRetiredResourceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.GetRetiredResourceRequest;
+
+                    /**
+                     * Creates a plain object from a GetRetiredResourceRequest message. Also converts values to other types if specified.
+                     * @param message GetRetiredResourceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.GetRetiredResourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRetiredResourceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRetiredResourceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateKeyRingRequest. */
                 interface ICreateKeyRingRequest {
 
@@ -10566,6 +11101,200 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateCryptoKeyVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCryptoKeyRequest. */
+                interface IDeleteCryptoKeyRequest {
+
+                    /** DeleteCryptoKeyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCryptoKeyRequest. */
+                class DeleteCryptoKeyRequest implements IDeleteCryptoKeyRequest {
+
+                    /**
+                     * Constructs a new DeleteCryptoKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDeleteCryptoKeyRequest);
+
+                    /** DeleteCryptoKeyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCryptoKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCryptoKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDeleteCryptoKeyRequest): google.cloud.kms.v1.DeleteCryptoKeyRequest;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyRequest message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyRequest.verify|verify} messages.
+                     * @param message DeleteCryptoKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDeleteCryptoKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyRequest.verify|verify} messages.
+                     * @param message DeleteCryptoKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDeleteCryptoKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCryptoKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DeleteCryptoKeyRequest;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCryptoKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DeleteCryptoKeyRequest;
+
+                    /**
+                     * Verifies a DeleteCryptoKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCryptoKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCryptoKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DeleteCryptoKeyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCryptoKeyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCryptoKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DeleteCryptoKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCryptoKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCryptoKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCryptoKeyVersionRequest. */
+                interface IDeleteCryptoKeyVersionRequest {
+
+                    /** DeleteCryptoKeyVersionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCryptoKeyVersionRequest. */
+                class DeleteCryptoKeyVersionRequest implements IDeleteCryptoKeyVersionRequest {
+
+                    /**
+                     * Constructs a new DeleteCryptoKeyVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest);
+
+                    /** DeleteCryptoKeyVersionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCryptoKeyVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCryptoKeyVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest): google.cloud.kms.v1.DeleteCryptoKeyVersionRequest;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionRequest.verify|verify} messages.
+                     * @param message DeleteCryptoKeyVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionRequest.verify|verify} messages.
+                     * @param message DeleteCryptoKeyVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCryptoKeyVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DeleteCryptoKeyVersionRequest;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCryptoKeyVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DeleteCryptoKeyVersionRequest;
+
+                    /**
+                     * Verifies a DeleteCryptoKeyVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCryptoKeyVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCryptoKeyVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DeleteCryptoKeyVersionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCryptoKeyVersionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCryptoKeyVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DeleteCryptoKeyVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCryptoKeyVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCryptoKeyVersionRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -13955,6 +14684,194 @@ export namespace google {
 
                     /**
                      * Gets the default type url for LocationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCryptoKeyMetadata. */
+                interface IDeleteCryptoKeyMetadata {
+
+                    /** DeleteCryptoKeyMetadata retiredResource */
+                    retiredResource?: (string|null);
+                }
+
+                /** Represents a DeleteCryptoKeyMetadata. */
+                class DeleteCryptoKeyMetadata implements IDeleteCryptoKeyMetadata {
+
+                    /**
+                     * Constructs a new DeleteCryptoKeyMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDeleteCryptoKeyMetadata);
+
+                    /** DeleteCryptoKeyMetadata retiredResource. */
+                    public retiredResource: string;
+
+                    /**
+                     * Creates a new DeleteCryptoKeyMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCryptoKeyMetadata instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDeleteCryptoKeyMetadata): google.cloud.kms.v1.DeleteCryptoKeyMetadata;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyMetadata message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyMetadata.verify|verify} messages.
+                     * @param message DeleteCryptoKeyMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDeleteCryptoKeyMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyMetadata.verify|verify} messages.
+                     * @param message DeleteCryptoKeyMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDeleteCryptoKeyMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCryptoKeyMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DeleteCryptoKeyMetadata;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCryptoKeyMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DeleteCryptoKeyMetadata;
+
+                    /**
+                     * Verifies a DeleteCryptoKeyMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCryptoKeyMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCryptoKeyMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DeleteCryptoKeyMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteCryptoKeyMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteCryptoKeyMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DeleteCryptoKeyMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCryptoKeyMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCryptoKeyMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCryptoKeyVersionMetadata. */
+                interface IDeleteCryptoKeyVersionMetadata {
+                }
+
+                /** Represents a DeleteCryptoKeyVersionMetadata. */
+                class DeleteCryptoKeyVersionMetadata implements IDeleteCryptoKeyVersionMetadata {
+
+                    /**
+                     * Constructs a new DeleteCryptoKeyVersionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata);
+
+                    /**
+                     * Creates a new DeleteCryptoKeyVersionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCryptoKeyVersionMetadata instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata): google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyVersionMetadata message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata.verify|verify} messages.
+                     * @param message DeleteCryptoKeyVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyVersionMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata.verify|verify} messages.
+                     * @param message DeleteCryptoKeyVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyVersionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCryptoKeyVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyVersionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCryptoKeyVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata;
+
+                    /**
+                     * Verifies a DeleteCryptoKeyVersionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCryptoKeyVersionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCryptoKeyVersionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteCryptoKeyVersionMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteCryptoKeyVersionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCryptoKeyVersionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCryptoKeyVersionMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

@@ -278,6 +278,7 @@
                          * @property {google.cloud.dataproc.v1.IInstanceGroupAutoscalingPolicyConfig|null} [workerConfig] AutoscalingPolicy workerConfig
                          * @property {google.cloud.dataproc.v1.IInstanceGroupAutoscalingPolicyConfig|null} [secondaryWorkerConfig] AutoscalingPolicy secondaryWorkerConfig
                          * @property {Object.<string,string>|null} [labels] AutoscalingPolicy labels
+                         * @property {google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType|null} [clusterType] AutoscalingPolicy clusterType
                          */
     
                         /**
@@ -344,6 +345,14 @@
                          */
                         AutoscalingPolicy.prototype.labels = $util.emptyObject;
     
+                        /**
+                         * AutoscalingPolicy clusterType.
+                         * @member {google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType} clusterType
+                         * @memberof google.cloud.dataproc.v1.AutoscalingPolicy
+                         * @instance
+                         */
+                        AutoscalingPolicy.prototype.clusterType = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -395,6 +404,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.clusterType != null && Object.hasOwnProperty.call(message, "clusterType"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.clusterType);
                             return writer;
                         };
     
@@ -474,6 +485,10 @@
                                         message.labels[key] = value;
                                         break;
                                     }
+                                case 7: {
+                                        message.clusterType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -542,6 +557,15 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.clusterType != null && message.hasOwnProperty("clusterType"))
+                                switch (message.clusterType) {
+                                default:
+                                    return "clusterType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -583,6 +607,26 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            switch (object.clusterType) {
+                            default:
+                                if (typeof object.clusterType === "number") {
+                                    message.clusterType = object.clusterType;
+                                    break;
+                                }
+                                break;
+                            case "CLUSTER_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.clusterType = 0;
+                                break;
+                            case "STANDARD":
+                            case 1:
+                                message.clusterType = 1;
+                                break;
+                            case "ZERO_SCALE":
+                            case 2:
+                                message.clusterType = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -606,6 +650,7 @@
                                 object.name = "";
                                 object.workerConfig = null;
                                 object.secondaryWorkerConfig = null;
+                                object.clusterType = options.enums === String ? "CLUSTER_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
@@ -626,6 +671,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.clusterType != null && message.hasOwnProperty("clusterType"))
+                                object.clusterType = options.enums === String ? $root.google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType[message.clusterType] === undefined ? message.clusterType : $root.google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType[message.clusterType] : message.clusterType;
                             return object;
                         };
     
@@ -654,6 +701,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.dataproc.v1.AutoscalingPolicy";
                         };
+    
+                        /**
+                         * ClusterType enum.
+                         * @name google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType
+                         * @enum {number}
+                         * @property {number} CLUSTER_TYPE_UNSPECIFIED=0 CLUSTER_TYPE_UNSPECIFIED value
+                         * @property {number} STANDARD=1 STANDARD value
+                         * @property {number} ZERO_SCALE=2 ZERO_SCALE value
+                         */
+                        AutoscalingPolicy.ClusterType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLUSTER_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STANDARD"] = 1;
+                            values[valuesById[2] = "ZERO_SCALE"] = 2;
+                            return values;
+                        })();
     
                         return AutoscalingPolicy;
                     })();
@@ -13464,6 +13527,7 @@
                          * Properties of a ClusterConfig.
                          * @memberof google.cloud.dataproc.v1
                          * @interface IClusterConfig
+                         * @property {google.cloud.dataproc.v1.ClusterConfig.ClusterType|null} [clusterType] ClusterConfig clusterType
                          * @property {google.cloud.dataproc.v1.ClusterConfig.ClusterTier|null} [clusterTier] ClusterConfig clusterTier
                          * @property {string|null} [configBucket] ClusterConfig configBucket
                          * @property {string|null} [tempBucket] ClusterConfig tempBucket
@@ -13499,6 +13563,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ClusterConfig clusterType.
+                         * @member {google.cloud.dataproc.v1.ClusterConfig.ClusterType} clusterType
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.clusterType = 0;
     
                         /**
                          * ClusterConfig clusterTier.
@@ -13694,6 +13766,8 @@
                             if (message.auxiliaryNodeGroups != null && message.auxiliaryNodeGroups.length)
                                 for (var i = 0; i < message.auxiliaryNodeGroups.length; ++i)
                                     $root.google.cloud.dataproc.v1.AuxiliaryNodeGroup.encode(message.auxiliaryNodeGroups[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                            if (message.clusterType != null && Object.hasOwnProperty.call(message, "clusterType"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).int32(message.clusterType);
                             if (message.clusterTier != null && Object.hasOwnProperty.call(message, "clusterTier"))
                                 writer.uint32(/* id 29, wireType 0 =*/232).int32(message.clusterTier);
                             return writer;
@@ -13732,6 +13806,10 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 27: {
+                                        message.clusterType = reader.int32();
+                                        break;
+                                    }
                                 case 29: {
                                         message.clusterTier = reader.int32();
                                         break;
@@ -13839,6 +13917,16 @@
                         ClusterConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.clusterType != null && message.hasOwnProperty("clusterType"))
+                                switch (message.clusterType) {
+                                default:
+                                    return "clusterType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             if (message.clusterTier != null && message.hasOwnProperty("clusterTier"))
                                 switch (message.clusterTier) {
                                 default:
@@ -13947,6 +14035,30 @@
                             if (object instanceof $root.google.cloud.dataproc.v1.ClusterConfig)
                                 return object;
                             var message = new $root.google.cloud.dataproc.v1.ClusterConfig();
+                            switch (object.clusterType) {
+                            default:
+                                if (typeof object.clusterType === "number") {
+                                    message.clusterType = object.clusterType;
+                                    break;
+                                }
+                                break;
+                            case "CLUSTER_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.clusterType = 0;
+                                break;
+                            case "STANDARD":
+                            case 1:
+                                message.clusterType = 1;
+                                break;
+                            case "SINGLE_NODE":
+                            case 2:
+                                message.clusterType = 2;
+                                break;
+                            case "ZERO_SCALE":
+                            case 3:
+                                message.clusterType = 3;
+                                break;
+                            }
                             switch (object.clusterTier) {
                             default:
                                 if (typeof object.clusterTier === "number") {
@@ -14086,6 +14198,7 @@
                                 object.endpointConfig = null;
                                 object.metastoreConfig = null;
                                 object.dataprocMetricConfig = null;
+                                object.clusterType = options.enums === String ? "CLUSTER_TYPE_UNSPECIFIED" : 0;
                                 object.clusterTier = options.enums === String ? "CLUSTER_TIER_UNSPECIFIED" : 0;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
@@ -14126,6 +14239,8 @@
                                 for (var j = 0; j < message.auxiliaryNodeGroups.length; ++j)
                                     object.auxiliaryNodeGroups[j] = $root.google.cloud.dataproc.v1.AuxiliaryNodeGroup.toObject(message.auxiliaryNodeGroups[j], options);
                             }
+                            if (message.clusterType != null && message.hasOwnProperty("clusterType"))
+                                object.clusterType = options.enums === String ? $root.google.cloud.dataproc.v1.ClusterConfig.ClusterType[message.clusterType] === undefined ? message.clusterType : $root.google.cloud.dataproc.v1.ClusterConfig.ClusterType[message.clusterType] : message.clusterType;
                             if (message.clusterTier != null && message.hasOwnProperty("clusterTier"))
                                 object.clusterTier = options.enums === String ? $root.google.cloud.dataproc.v1.ClusterConfig.ClusterTier[message.clusterTier] === undefined ? message.clusterTier : $root.google.cloud.dataproc.v1.ClusterConfig.ClusterTier[message.clusterTier] : message.clusterTier;
                             return object;
@@ -14156,6 +14271,24 @@
                             }
                             return typeUrlPrefix + "/google.cloud.dataproc.v1.ClusterConfig";
                         };
+    
+                        /**
+                         * ClusterType enum.
+                         * @name google.cloud.dataproc.v1.ClusterConfig.ClusterType
+                         * @enum {number}
+                         * @property {number} CLUSTER_TYPE_UNSPECIFIED=0 CLUSTER_TYPE_UNSPECIFIED value
+                         * @property {number} STANDARD=1 STANDARD value
+                         * @property {number} SINGLE_NODE=2 SINGLE_NODE value
+                         * @property {number} ZERO_SCALE=3 ZERO_SCALE value
+                         */
+                        ClusterConfig.ClusterType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLUSTER_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STANDARD"] = 1;
+                            values[valuesById[2] = "SINGLE_NODE"] = 2;
+                            values[valuesById[3] = "ZERO_SCALE"] = 3;
+                            return values;
+                        })();
     
                         /**
                          * ClusterTier enum.

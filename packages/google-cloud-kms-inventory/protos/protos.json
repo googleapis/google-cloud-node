@@ -644,8 +644,14 @@
                             "ML_KEM_768": 47,
                             "ML_KEM_1024": 48,
                             "KEM_XWING": 63,
+                            "PQ_SIGN_ML_DSA_44": 68,
                             "PQ_SIGN_ML_DSA_65": 56,
-                            "PQ_SIGN_SLH_DSA_SHA2_128S": 57
+                            "PQ_SIGN_ML_DSA_87": 69,
+                            "PQ_SIGN_SLH_DSA_SHA2_128S": 57,
+                            "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256": 60,
+                            "PQ_SIGN_ML_DSA_44_EXTERNAL_MU": 70,
+                            "PQ_SIGN_ML_DSA_65_EXTERNAL_MU": 67,
+                            "PQ_SIGN_ML_DSA_87_EXTERNAL_MU": 71
                           }
                         },
                         "CryptoKeyVersionState": {
@@ -863,6 +869,44 @@
                           "rule": "repeated",
                           "type": "AccessReason",
                           "id": 1
+                        }
+                      }
+                    },
+                    "RetiredResource": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/RetiredResource",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/retiredResources/{retired_resource}",
+                        "(google.api.resource).plural": "retiredResources",
+                        "(google.api.resource).singular": "retiredResource"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "originalResource": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resourceType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
