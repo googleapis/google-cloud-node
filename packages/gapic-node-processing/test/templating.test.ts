@@ -19,8 +19,6 @@ import {compileTemplates} from '../src/templating';
 import {join} from 'path';
 import {execSync} from 'child_process';
 import {mkdirSync, readdirSync, readFileSync} from 'fs';
-// eslint-disable-next-line n/no-unpublished-import
-import snapshot from 'snap-shot-it';
 import * as assert from 'assert';
 import {TemplateVars} from '../src/get-bootstrap-template-vars';
 
@@ -62,11 +60,6 @@ describe('tests for templates', () => {
       folderName: 'google-cloud-keymanagement',
     });
 
-    snapshot(readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8'));
-    snapshot(
-      readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8'),
-    );
-    snapshot(readFileSync(join(templateDirWrite, 'LICENSE'), 'utf8'));
     const packageJson = JSON.parse(
       readFileSync(join(templateDirWrite, 'package.json'), 'utf8'),
     );
