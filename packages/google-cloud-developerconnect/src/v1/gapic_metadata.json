@@ -50,6 +50,16 @@
                 "fetchSelf"
               ]
             },
+            "StartOAuth": {
+              "methods": [
+                "startOAuth"
+              ]
+            },
+            "FinishOAuth": {
+              "methods": [
+                "finishOAuth"
+              ]
+            },
             "CreateConnection": {
               "methods": [
                 "createConnection"
@@ -187,6 +197,16 @@
                 "fetchSelf"
               ]
             },
+            "StartOAuth": {
+              "methods": [
+                "startOAuth"
+              ]
+            },
+            "FinishOAuth": {
+              "methods": [
+                "finishOAuth"
+              ]
+            },
             "CreateConnection": {
               "methods": [
                 "createConnection"
@@ -293,6 +313,11 @@
                 "getInsightsConfig"
               ]
             },
+            "GetDeploymentEvent": {
+              "methods": [
+                "getDeploymentEvent"
+              ]
+            },
             "CreateInsightsConfig": {
               "methods": [
                 "createInsightsConfig"
@@ -313,6 +338,13 @@
                 "listInsightsConfigs",
                 "listInsightsConfigsStream",
                 "listInsightsConfigsAsync"
+              ]
+            },
+            "ListDeploymentEvents": {
+              "methods": [
+                "listDeploymentEvents",
+                "listDeploymentEventsStream",
+                "listDeploymentEventsAsync"
               ]
             }
           }
@@ -325,6 +357,11 @@
                 "getInsightsConfig"
               ]
             },
+            "GetDeploymentEvent": {
+              "methods": [
+                "getDeploymentEvent"
+              ]
+            },
             "CreateInsightsConfig": {
               "methods": [
                 "createInsightsConfig"
@@ -345,6 +382,13 @@
                 "listInsightsConfigs",
                 "listInsightsConfigsStream",
                 "listInsightsConfigsAsync"
+              ]
+            },
+            "ListDeploymentEvents": {
+              "methods": [
+                "listDeploymentEvents",
+                "listDeploymentEventsStream",
+                "listDeploymentEventsAsync"
               ]
             }
           }

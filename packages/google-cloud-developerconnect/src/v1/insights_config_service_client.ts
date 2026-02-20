@@ -37,7 +37,7 @@ const version = require('../../../package.json').version;
  *
  *  The InsightsConfig resource is the core configuration object to capture
  *  events from your Software Development Lifecycle. It acts as the central hub
- *  for managing how Developer connect understands your application, its runtime
+ *  for managing how Developer Connect understands your application, its runtime
  *  environments, and the artifacts deployed within them.
  *  A user can create an InsightsConfig, list previously-requested
  *  InsightsConfigs or get InsightsConfigs by their ID to determine the status of
@@ -198,6 +198,9 @@ export class InsightsConfigServiceClient {
       connectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connections/{connection}'
       ),
+      deploymentEventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/insightsConfigs/{insights_config}/deploymentEvents/{deployment_event}'
+      ),
       gitRepositoryLinkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}'
       ),
@@ -220,7 +223,9 @@ export class InsightsConfigServiceClient {
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
       listInsightsConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'insightsConfigs')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'insightsConfigs'),
+      listDeploymentEvents:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deploymentEvents')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -307,7 +312,7 @@ export class InsightsConfigServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const insightsConfigServiceStubMethods =
-        ['listInsightsConfigs', 'createInsightsConfig', 'getInsightsConfig', 'updateInsightsConfig', 'deleteInsightsConfig'];
+        ['listInsightsConfigs', 'createInsightsConfig', 'getInsightsConfig', 'updateInsightsConfig', 'deleteInsightsConfig', 'getDeploymentEvent', 'listDeploymentEvents'];
     for (const methodName of insightsConfigServiceStubMethods) {
       const callPromise = this.insightsConfigServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -496,6 +501,102 @@ export class InsightsConfigServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getInsightsConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets a single Deployment Event.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment event to retrieve.
+ *   Format:
+ *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}/deploymentEvents/{uuid}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/insights_config_service.get_deployment_event.js</caption>
+ * region_tag:developerconnect_v1_generated_InsightsConfigService_GetDeploymentEvent_async
+ */
+  getDeploymentEvent(
+      request?: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+        protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|undefined, {}|undefined
+      ]>;
+  getDeploymentEvent(
+      request: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+          protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeploymentEvent(
+      request: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+          protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeploymentEvent(
+      request?: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+          protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+          protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+        protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getDeploymentEvent request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+        protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDeploymentEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getDeploymentEvent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+        protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDeploymentEvent response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -749,7 +850,7 @@ export class InsightsConfigServiceClient {
     return decodeOperation as LROperation<protos.google.cloud.developerconnect.v1.InsightsConfig, protos.google.cloud.developerconnect.v1.OperationMetadata>;
   }
 /**
- * Delete a single Insight.
+ * Deletes a single Insight.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1089,6 +1190,233 @@ export class InsightsConfigServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.developerconnect.v1.IInsightsConfig>;
+  }
+ /**
+ * Lists Deployment Events in a given insights config.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent insights config that owns this collection of
+ *   deployment events. Format:
+ *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of deployment events to return. The service
+ *   may return fewer than this value. If unspecified, at most 50 deployment
+ *   events will be returned. The maximum value is 1000; values above 1000 will
+ *   be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListDeploymentEvents`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListDeploymentEvents`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter expression that matches a subset of the DeploymentEvents.
+ *   https://google.aip.dev/160.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDeploymentEventsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listDeploymentEvents(
+      request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IDeploymentEvent[],
+        protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest|null,
+        protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
+      ]>;
+  listDeploymentEvents(
+      request: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent>): void;
+  listDeploymentEvents(
+      request: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent>): void;
+  listDeploymentEvents(
+      request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent>,
+      callback?: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IDeploymentEvent[],
+        protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest|null,
+        protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeploymentEvents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeploymentEvents request %j', request);
+    return this.innerApiCalls
+      .listDeploymentEvents(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.developerconnect.v1.IDeploymentEvent[],
+        protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest|null,
+        protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
+      ]) => {
+        this._log.info('listDeploymentEvents values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listDeploymentEvents`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent insights config that owns this collection of
+ *   deployment events. Format:
+ *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of deployment events to return. The service
+ *   may return fewer than this value. If unspecified, at most 50 deployment
+ *   events will be returned. The maximum value is 1000; values above 1000 will
+ *   be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListDeploymentEvents`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListDeploymentEvents`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter expression that matches a subset of the DeploymentEvents.
+ *   https://google.aip.dev/160.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDeploymentEventsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listDeploymentEventsStream(
+      request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listDeploymentEvents'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listDeploymentEvents stream %j', request);
+    return this.descriptors.page.listDeploymentEvents.createStream(
+      this.innerApiCalls.listDeploymentEvents as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listDeploymentEvents`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent insights config that owns this collection of
+ *   deployment events. Format:
+ *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of deployment events to return. The service
+ *   may return fewer than this value. If unspecified, at most 50 deployment
+ *   events will be returned. The maximum value is 1000; values above 1000 will
+ *   be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListDeploymentEvents`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListDeploymentEvents`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter expression that matches a subset of the DeploymentEvents.
+ *   https://google.aip.dev/160.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/insights_config_service.list_deployment_events.js</caption>
+ * region_tag:developerconnect_v1_generated_InsightsConfigService_ListDeploymentEvents_async
+ */
+  listDeploymentEventsAsync(
+      request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.developerconnect.v1.IDeploymentEvent>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listDeploymentEvents'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listDeploymentEvents iterate %j', request);
+    return this.descriptors.page.listDeploymentEvents.asyncIterate(
+      this.innerApiCalls['listDeploymentEvents'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.developerconnect.v1.IDeploymentEvent>;
   }
 /**
    * Gets information about a location.
@@ -1492,6 +1820,68 @@ export class InsightsConfigServiceClient {
    */
   matchConnectionFromConnectionName(connectionName: string) {
     return this.pathTemplates.connectionPathTemplate.match(connectionName).connection;
+  }
+
+  /**
+   * Return a fully-qualified deploymentEvent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} insights_config
+   * @param {string} deployment_event
+   * @returns {string} Resource name string.
+   */
+  deploymentEventPath(project:string,location:string,insightsConfig:string,deploymentEvent:string) {
+    return this.pathTemplates.deploymentEventPathTemplate.render({
+      project: project,
+      location: location,
+      insights_config: insightsConfig,
+      deployment_event: deploymentEvent,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentEvent resource.
+   *
+   * @param {string} deploymentEventName
+   *   A fully-qualified path representing DeploymentEvent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentEventName(deploymentEventName: string) {
+    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).project;
+  }
+
+  /**
+   * Parse the location from DeploymentEvent resource.
+   *
+   * @param {string} deploymentEventName
+   *   A fully-qualified path representing DeploymentEvent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentEventName(deploymentEventName: string) {
+    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).location;
+  }
+
+  /**
+   * Parse the insights_config from DeploymentEvent resource.
+   *
+   * @param {string} deploymentEventName
+   *   A fully-qualified path representing DeploymentEvent resource.
+   * @returns {string} A string representing the insights_config.
+   */
+  matchInsightsConfigFromDeploymentEventName(deploymentEventName: string) {
+    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).insights_config;
+  }
+
+  /**
+   * Parse the deployment_event from DeploymentEvent resource.
+   *
+   * @param {string} deploymentEventName
+   *   A fully-qualified path representing DeploymentEvent resource.
+   * @returns {string} A string representing the deployment_event.
+   */
+  matchDeploymentEventFromDeploymentEventName(deploymentEventName: string) {
+    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).deployment_event;
   }
 
   /**
