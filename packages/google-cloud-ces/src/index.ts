@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1beta from './v1beta';
 
 const AgentServiceClient = v1.AgentServiceClient;
 type AgentServiceClient = v1.AgentServiceClient;
@@ -27,7 +28,7 @@ type ToolServiceClient = v1.ToolServiceClient;
 const WidgetServiceClient = v1.WidgetServiceClient;
 type WidgetServiceClient = v1.WidgetServiceClient;
 
-export {v1, AgentServiceClient, SessionServiceClient, ToolServiceClient, WidgetServiceClient};
-export default {v1, AgentServiceClient, SessionServiceClient, ToolServiceClient, WidgetServiceClient};
+export {v1, v1beta, AgentServiceClient, SessionServiceClient, ToolServiceClient, WidgetServiceClient};
+export default {v1, v1beta, AgentServiceClient, SessionServiceClient, ToolServiceClient, WidgetServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

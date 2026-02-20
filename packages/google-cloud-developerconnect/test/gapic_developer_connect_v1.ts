@@ -1139,6 +1139,222 @@ describe('v1.DeveloperConnectClient', () => {
         });
     });
 
+    describe('startOAuth', () => {
+        it('invokes startOAuth without error', async () => {
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.StartOAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.StartOAuthRequest', ['accountConnector']);
+            request.accountConnector = defaultValue1;
+            const expectedHeaderRequestParams = `account_connector=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.StartOAuthResponse()
+            );
+            client.innerApiCalls.startOAuth = stubSimpleCall(expectedResponse);
+            const [response] = await client.startOAuth(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startOAuth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startOAuth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startOAuth without error using callback', async () => {
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.StartOAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.StartOAuthRequest', ['accountConnector']);
+            request.accountConnector = defaultValue1;
+            const expectedHeaderRequestParams = `account_connector=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.StartOAuthResponse()
+            );
+            client.innerApiCalls.startOAuth = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.startOAuth(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.developerconnect.v1.IStartOAuthResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startOAuth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startOAuth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startOAuth with error', async () => {
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.StartOAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.StartOAuthRequest', ['accountConnector']);
+            request.accountConnector = defaultValue1;
+            const expectedHeaderRequestParams = `account_connector=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.startOAuth = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.startOAuth(request), expectedError);
+            const actualRequest = (client.innerApiCalls.startOAuth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startOAuth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startOAuth with closed client', async () => {
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.StartOAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.StartOAuthRequest', ['accountConnector']);
+            request.accountConnector = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.startOAuth(request), expectedError);
+        });
+    });
+
+    describe('finishOAuth', () => {
+        it('invokes finishOAuth without error', async () => {
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.FinishOAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.FinishOAuthRequest', ['accountConnector']);
+            request.accountConnector = defaultValue1;
+            const expectedHeaderRequestParams = `account_connector=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.FinishOAuthResponse()
+            );
+            client.innerApiCalls.finishOAuth = stubSimpleCall(expectedResponse);
+            const [response] = await client.finishOAuth(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.finishOAuth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.finishOAuth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes finishOAuth without error using callback', async () => {
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.FinishOAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.FinishOAuthRequest', ['accountConnector']);
+            request.accountConnector = defaultValue1;
+            const expectedHeaderRequestParams = `account_connector=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.FinishOAuthResponse()
+            );
+            client.innerApiCalls.finishOAuth = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.finishOAuth(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.developerconnect.v1.IFinishOAuthResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.finishOAuth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.finishOAuth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes finishOAuth with error', async () => {
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.FinishOAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.FinishOAuthRequest', ['accountConnector']);
+            request.accountConnector = defaultValue1;
+            const expectedHeaderRequestParams = `account_connector=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.finishOAuth = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.finishOAuth(request), expectedError);
+            const actualRequest = (client.innerApiCalls.finishOAuth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.finishOAuth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes finishOAuth with closed client', async () => {
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.FinishOAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.FinishOAuthRequest', ['accountConnector']);
+            request.accountConnector = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.finishOAuth(request), expectedError);
+        });
+    });
+
     describe('createConnection', () => {
         it('invokes createConnection without error', async () => {
             const client = new developerconnectModule.v1.DeveloperConnectClient({
@@ -4710,6 +4926,60 @@ describe('v1.DeveloperConnectClient', () => {
             });
         });
 
+        describe('deploymentEvent', async () => {
+            const fakePath = "/rendered/path/deploymentEvent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                insights_config: "insightsConfigValue",
+                deployment_event: "deploymentEventValue",
+            };
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deploymentEventPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deploymentEventPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deploymentEventPath', () => {
+                const result = client.deploymentEventPath("projectValue", "locationValue", "insightsConfigValue", "deploymentEventValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deploymentEventPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDeploymentEventName', () => {
+                const result = client.matchProjectFromDeploymentEventName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.deploymentEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDeploymentEventName', () => {
+                const result = client.matchLocationFromDeploymentEventName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.deploymentEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightsConfigFromDeploymentEventName', () => {
+                const result = client.matchInsightsConfigFromDeploymentEventName(fakePath);
+                assert.strictEqual(result, "insightsConfigValue");
+                assert((client.pathTemplates.deploymentEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeploymentEventFromDeploymentEventName', () => {
+                const result = client.matchDeploymentEventFromDeploymentEventName(fakePath);
+                assert.strictEqual(result, "deploymentEventValue");
+                assert((client.pathTemplates.deploymentEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('gitRepositoryLink', async () => {
             const fakePath = "/rendered/path/gitRepositoryLink";
             const expectedParameters = {
@@ -4810,6 +5080,52 @@ describe('v1.DeveloperConnectClient', () => {
             });
         });
 
+        describe('instance', async () => {
+            const fakePath = "/rendered/path/instance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+            };
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.instancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.instancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('instancePath', () => {
+                const result = client.instancePath("projectValue", "locationValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.instancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInstanceName', () => {
+                const result = client.matchProjectFromInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInstanceName', () => {
+                const result = client.matchLocationFromInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromInstanceName', () => {
+                const result = client.matchInstanceFromInstanceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('location', async () => {
             const fakePath = "/rendered/path/location";
             const expectedParameters = {
@@ -4878,8 +5194,62 @@ describe('v1.DeveloperConnectClient', () => {
             });
         });
 
-        describe('secretVersion', async () => {
-            const fakePath = "/rendered/path/secretVersion";
+        describe('projectLocationSecretSecretVersion', async () => {
+            const fakePath = "/rendered/path/projectLocationSecretSecretVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                secret: "secretValue",
+                secret_version: "secretVersionValue",
+            };
+            const client = new developerconnectModule.v1.DeveloperConnectClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationSecretSecretVersionPath', () => {
+                const result = client.projectLocationSecretSecretVersionPath("projectValue", "locationValue", "secretValue", "secretVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationSecretSecretVersionName', () => {
+                const result = client.matchProjectFromProjectLocationSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationSecretSecretVersionName', () => {
+                const result = client.matchLocationFromProjectLocationSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretFromProjectLocationSecretSecretVersionName', () => {
+                const result = client.matchSecretFromProjectLocationSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "secretValue");
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretVersionFromProjectLocationSecretSecretVersionName', () => {
+                const result = client.matchSecretVersionFromProjectLocationSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "secretVersionValue");
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSecretSecretVersion', async () => {
+            const fakePath = "/rendered/path/projectSecretSecretVersion";
             const expectedParameters = {
                 project: "projectValue",
                 secret: "secretValue",
@@ -4890,36 +5260,36 @@ describe('v1.DeveloperConnectClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.secretVersionPathTemplate.render =
+            client.pathTemplates.projectSecretSecretVersionPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.secretVersionPathTemplate.match =
+            client.pathTemplates.projectSecretSecretVersionPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('secretVersionPath', () => {
-                const result = client.secretVersionPath("projectValue", "secretValue", "secretVersionValue");
+            it('projectSecretSecretVersionPath', () => {
+                const result = client.projectSecretSecretVersionPath("projectValue", "secretValue", "secretVersionValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.secretVersionPathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectSecretSecretVersionPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromSecretVersionName', () => {
-                const result = client.matchProjectFromSecretVersionName(fakePath);
+            it('matchProjectFromProjectSecretSecretVersionName', () => {
+                const result = client.matchProjectFromProjectSecretSecretVersionName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectSecretSecretVersionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchSecretFromSecretVersionName', () => {
-                const result = client.matchSecretFromSecretVersionName(fakePath);
+            it('matchSecretFromProjectSecretSecretVersionName', () => {
+                const result = client.matchSecretFromProjectSecretSecretVersionName(fakePath);
                 assert.strictEqual(result, "secretValue");
-                assert((client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectSecretSecretVersionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchSecretVersionFromSecretVersionName', () => {
-                const result = client.matchSecretVersionFromSecretVersionName(fakePath);
+            it('matchSecretVersionFromProjectSecretSecretVersionName', () => {
+                const result = client.matchSecretVersionFromProjectSecretSecretVersionName(fakePath);
                 assert.strictEqual(result, "secretVersionValue");
-                assert((client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectSecretSecretVersionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

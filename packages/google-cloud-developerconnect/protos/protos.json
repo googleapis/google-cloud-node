@@ -16,8 +16,8 @@
                     "objc_class_prefix": "DeveloperConnect",
                     "php_namespace": "Google\\Cloud\\DeveloperConnect\\V1",
                     "ruby_package": "Google::Cloud::DeveloperConnect::V1",
-                    "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Service",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}"
+                    "(google.api.resource_definition).type": "securesourcemanager.googleapis.com/Instance",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/instances/{instance}"
                   },
                   "nested": {
                     "DeveloperConnect": {
@@ -553,6 +553,42 @@
                               }
                             }
                           ]
+                        },
+                        "StartOAuth": {
+                          "requestType": "StartOAuthRequest",
+                          "responseType": "StartOAuthResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{account_connector=projects/*/locations/*/accountConnectors/*}/users:startOAuthFlow",
+                            "(google.api.method_signature)": "account_connector"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{account_connector=projects/*/locations/*/accountConnectors/*}/users:startOAuthFlow"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "account_connector"
+                            }
+                          ]
+                        },
+                        "FinishOAuth": {
+                          "requestType": "FinishOAuthRequest",
+                          "responseType": "FinishOAuthResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{account_connector=projects/*/locations/*/accountConnectors/*}/users:finishOAuthFlow",
+                            "(google.api.method_signature)": "account_connector"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{account_connector=projects/*/locations/*/accountConnectors/*}/users:finishOAuthFlow"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "account_connector"
+                            }
+                          ]
                         }
                       }
                     },
@@ -643,7 +679,9 @@
                             "gitlabConfig",
                             "gitlabEnterpriseConfig",
                             "bitbucketDataCenterConfig",
-                            "bitbucketCloudConfig"
+                            "bitbucketCloudConfig",
+                            "secureSourceManagerInstanceConfig",
+                            "httpConfig"
                           ]
                         }
                       },
@@ -671,6 +709,17 @@
                         "bitbucketCloudConfig": {
                           "type": "BitbucketCloudConfig",
                           "id": 18
+                        },
+                        "secureSourceManagerInstanceConfig": {
+                          "type": "SecureSourceManagerInstanceConfig",
+                          "id": 20
+                        },
+                        "httpConfig": {
+                          "type": "GenericHTTPEndpointConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "name": {
                           "type": "string",
@@ -788,6 +837,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "httpProxyBaseUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -823,6 +879,99 @@
                             "PENDING_USER_OAUTH": 2,
                             "PENDING_INSTALL_APP": 3,
                             "COMPLETE": 10
+                          }
+                        }
+                      }
+                    },
+                    "GenericHTTPEndpointConfig": {
+                      "oneofs": {
+                        "authentication": {
+                          "oneof": [
+                            "basicAuthentication",
+                            "bearerTokenAuthentication"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "basicAuthentication": {
+                          "type": "BasicAuthentication",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bearerTokenAuthentication": {
+                          "type": "BearerTokenAuthentication",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hostUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "serviceDirectoryConfig": {
+                          "type": "ServiceDirectoryConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sslCaCertificate": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BasicAuthentication": {
+                          "oneofs": {
+                            "password": {
+                              "oneof": [
+                                "passwordSecretVersion"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "passwordSecretVersion": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                              }
+                            },
+                            "username": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "BearerTokenAuthentication": {
+                          "oneofs": {
+                            "token": {
+                              "oneof": [
+                                "tokenSecretVersion"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "tokenSecretVersion": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                              }
+                            }
                           }
                         }
                       }
@@ -863,7 +1012,8 @@
                           "values": {
                             "GIT_HUB_APP_UNSPECIFIED": 0,
                             "DEVELOPER_CONNECT": 1,
-                            "FIREBASE": 2
+                            "FIREBASE": 2,
+                            "GEMINI_CODE_ASSIST": 3
                           }
                         }
                       }
@@ -940,6 +1090,13 @@
                           "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "organization": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }
@@ -1157,6 +1314,18 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SecureSourceManagerInstanceConfig": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "securesourcemanager.googleapis.com/Instance"
                           }
                         }
                       }
@@ -1682,6 +1851,140 @@
                         }
                       }
                     },
+                    "StartOAuthRequest": {
+                      "fields": {
+                        "accountConnector": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "developerconnect.googleapis.com/AccountConnector"
+                          }
+                        }
+                      }
+                    },
+                    "StartOAuthResponse": {
+                      "oneofs": {
+                        "id": {
+                          "oneof": [
+                            "systemProviderId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "systemProviderId": {
+                          "type": "SystemProvider",
+                          "id": 7
+                        },
+                        "ticket": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "codeChallenge": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "codeChallengeMethod": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "clientId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "authUri": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "FinishOAuthRequest": {
+                      "oneofs": {
+                        "params": {
+                          "oneof": [
+                            "oauthParams",
+                            "googleOauthParams"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "oauthParams": {
+                          "type": "OAuthParams",
+                          "id": 2
+                        },
+                        "googleOauthParams": {
+                          "type": "GoogleOAuthParams",
+                          "id": 3
+                        },
+                        "accountConnector": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "developerconnect.googleapis.com/AccountConnector"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "OAuthParams": {
+                          "fields": {
+                            "code": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "ticket": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "GoogleOAuthParams": {
+                          "fields": {
+                            "scopes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "versionInfo": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "ticket": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FinishOAuthResponse": {
+                      "fields": {
+                        "exchangeError": {
+                          "type": "ExchangeError",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ExchangeError": {
                       "fields": {
                         "code": {
@@ -2152,7 +2455,10 @@
                       "fields": {
                         "providerOauthConfig": {
                           "type": "ProviderOAuthConfig",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "name": {
                           "type": "string",
@@ -2258,7 +2564,7 @@
                           "type": "SystemProvider",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "scopes": {
@@ -2390,6 +2696,42 @@
                               }
                             }
                           ]
+                        },
+                        "GetDeploymentEvent": {
+                          "requestType": "GetDeploymentEventRequest",
+                          "responseType": "DeploymentEvent",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/insightsConfigs/*/deploymentEvents/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/insightsConfigs/*/deploymentEvents/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDeploymentEvents": {
+                          "requestType": "ListDeploymentEventsRequest",
+                          "responseType": "ListDeploymentEventsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/insightsConfigs/*}/deploymentEvents",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/insightsConfigs/*}/deploymentEvents"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2404,7 +2746,8 @@
                       "oneofs": {
                         "insightsConfigContext": {
                           "oneof": [
-                            "appHubApplication"
+                            "appHubApplication",
+                            "projects"
                           ]
                         }
                       },
@@ -2412,6 +2755,13 @@
                         "appHubApplication": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "projects": {
+                          "type": "Projects",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2503,16 +2853,30 @@
                         }
                       }
                     },
+                    "Projects": {
+                      "fields": {
+                        "projectIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "RuntimeConfig": {
                       "oneofs": {
                         "runtime": {
                           "oneof": [
-                            "gkeWorkload"
+                            "gkeWorkload",
+                            "googleCloudRun"
                           ]
                         },
                         "derivedFrom": {
                           "oneof": [
-                            "appHubWorkload"
+                            "appHubWorkload",
+                            "appHubService"
                           ]
                         }
                       },
@@ -2524,9 +2888,23 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "googleCloudRun": {
+                          "type": "GoogleCloudRun",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "appHubWorkload": {
                           "type": "AppHubWorkload",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "appHubService": {
+                          "type": "AppHubService",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -2574,9 +2952,45 @@
                         }
                       }
                     },
+                    "GoogleCloudRun": {
+                      "fields": {
+                        "serviceUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
                     "AppHubWorkload": {
                       "fields": {
                         "workload": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "criticality": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "environment": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AppHubService": {
+                      "fields": {
+                        "apphubService": {
                           "type": "string",
                           "id": 1,
                           "options": {
@@ -2661,6 +3075,201 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "DeploymentEvent": {
+                      "options": {
+                        "(google.api.resource).type": "developerconnect.googleapis.com/DeploymentEvent",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/insightsConfigs/{insights_config}/deploymentEvents/{deployment_event}",
+                        "(google.api.resource).plural": "deploymentEvents",
+                        "(google.api.resource).singular": "deploymentEvent"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "runtimeConfig": {
+                          "type": "RuntimeConfig",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "runtimeDeploymentUri": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "artifactDeployments": {
+                          "rule": "repeated",
+                          "type": "ArtifactDeployment",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deployTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "undeployTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STATE_ACTIVE": 1,
+                            "STATE_INACTIVE": 2
+                          }
+                        }
+                      }
+                    },
+                    "GetDeploymentEventRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "developerconnect.googleapis.com/DeploymentEvent"
+                          }
+                        }
+                      }
+                    },
+                    "ListDeploymentEventsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "developerconnect.googleapis.com/DeploymentEvent"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDeploymentEventsResponse": {
+                      "fields": {
+                        "deploymentEvents": {
+                          "rule": "repeated",
+                          "type": "DeploymentEvent",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ArtifactDeployment": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "artifactReference": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "artifactAlias": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sourceCommitUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deployTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "undeployTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "containerStatusSummary": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }

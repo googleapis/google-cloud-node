@@ -193,11 +193,17 @@ export class DeveloperConnectClient {
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
+      deploymentEventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/insightsConfigs/{insights_config}/deploymentEvents/{deployment_event}'
+      ),
       gitRepositoryLinkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}'
       ),
       insightsConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/insightsConfigs/{insights_config}'
+      ),
+      instancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
@@ -205,7 +211,10 @@ export class DeveloperConnectClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      secretVersionPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}'
+      ),
+      projectSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}/versions/{secret_version}'
       ),
       servicePathTemplate: new this._gaxModule.PathTemplate(
@@ -374,7 +383,7 @@ export class DeveloperConnectClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const developerConnectStubMethods =
-        ['listConnections', 'getConnection', 'createConnection', 'updateConnection', 'deleteConnection', 'createGitRepositoryLink', 'deleteGitRepositoryLink', 'listGitRepositoryLinks', 'getGitRepositoryLink', 'fetchReadWriteToken', 'fetchReadToken', 'fetchLinkableGitRepositories', 'fetchGitHubInstallations', 'fetchGitRefs', 'listAccountConnectors', 'getAccountConnector', 'createAccountConnector', 'updateAccountConnector', 'deleteAccountConnector', 'fetchAccessToken', 'listUsers', 'deleteUser', 'fetchSelf', 'deleteSelf'];
+        ['listConnections', 'getConnection', 'createConnection', 'updateConnection', 'deleteConnection', 'createGitRepositoryLink', 'deleteGitRepositoryLink', 'listGitRepositoryLinks', 'getGitRepositoryLink', 'fetchReadWriteToken', 'fetchReadToken', 'fetchLinkableGitRepositories', 'fetchGitHubInstallations', 'fetchGitRefs', 'listAccountConnectors', 'getAccountConnector', 'createAccountConnector', 'updateAccountConnector', 'deleteAccountConnector', 'fetchAccessToken', 'listUsers', 'deleteUser', 'fetchSelf', 'deleteSelf', 'startOAuth', 'finishOAuth'];
     for (const methodName of developerConnectStubMethods) {
       const callPromise = this.developerConnectStub.then(
         stub => (...args: Array<{}>) => {
@@ -1237,6 +1246,200 @@ export class DeveloperConnectClient {
         throw error;
       });
   }
+/**
+ * Starts OAuth flow for an account connector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.accountConnector
+ *   Required. The resource name of the AccountConnector in the format
+ *   `projects/* /locations/* /accountConnectors/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.StartOAuthResponse|StartOAuthResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.start_o_auth.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_StartOAuth_async
+ */
+  startOAuth(
+      request?: protos.google.cloud.developerconnect.v1.IStartOAuthRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IStartOAuthResponse,
+        protos.google.cloud.developerconnect.v1.IStartOAuthRequest|undefined, {}|undefined
+      ]>;
+  startOAuth(
+      request: protos.google.cloud.developerconnect.v1.IStartOAuthRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IStartOAuthResponse,
+          protos.google.cloud.developerconnect.v1.IStartOAuthRequest|null|undefined,
+          {}|null|undefined>): void;
+  startOAuth(
+      request: protos.google.cloud.developerconnect.v1.IStartOAuthRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IStartOAuthResponse,
+          protos.google.cloud.developerconnect.v1.IStartOAuthRequest|null|undefined,
+          {}|null|undefined>): void;
+  startOAuth(
+      request?: protos.google.cloud.developerconnect.v1.IStartOAuthRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IStartOAuthResponse,
+          protos.google.cloud.developerconnect.v1.IStartOAuthRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IStartOAuthResponse,
+          protos.google.cloud.developerconnect.v1.IStartOAuthRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IStartOAuthResponse,
+        protos.google.cloud.developerconnect.v1.IStartOAuthRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'account_connector': request.accountConnector ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('startOAuth request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IStartOAuthResponse,
+        protos.google.cloud.developerconnect.v1.IStartOAuthRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('startOAuth response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.startOAuth(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IStartOAuthResponse,
+        protos.google.cloud.developerconnect.v1.IStartOAuthRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('startOAuth response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Finishes OAuth flow for an account connector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams} request.oauthParams
+ *   The params returned by non-Google OAuth 2.0 flow redirect.
+ * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams} request.googleOauthParams
+ *   The params returned by Google OAuth flow redirects.
+ * @param {string} request.accountConnector
+ *   Required. The resource name of the AccountConnector in the format
+ *   `projects/* /locations/* /accountConnectors/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FinishOAuthResponse|FinishOAuthResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.finish_o_auth.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_FinishOAuth_async
+ */
+  finishOAuth(
+      request?: protos.google.cloud.developerconnect.v1.IFinishOAuthRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFinishOAuthResponse,
+        protos.google.cloud.developerconnect.v1.IFinishOAuthRequest|undefined, {}|undefined
+      ]>;
+  finishOAuth(
+      request: protos.google.cloud.developerconnect.v1.IFinishOAuthRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IFinishOAuthResponse,
+          protos.google.cloud.developerconnect.v1.IFinishOAuthRequest|null|undefined,
+          {}|null|undefined>): void;
+  finishOAuth(
+      request: protos.google.cloud.developerconnect.v1.IFinishOAuthRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IFinishOAuthResponse,
+          protos.google.cloud.developerconnect.v1.IFinishOAuthRequest|null|undefined,
+          {}|null|undefined>): void;
+  finishOAuth(
+      request?: protos.google.cloud.developerconnect.v1.IFinishOAuthRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IFinishOAuthResponse,
+          protos.google.cloud.developerconnect.v1.IFinishOAuthRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IFinishOAuthResponse,
+          protos.google.cloud.developerconnect.v1.IFinishOAuthRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFinishOAuthResponse,
+        protos.google.cloud.developerconnect.v1.IFinishOAuthRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'account_connector': request.accountConnector ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('finishOAuth request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IFinishOAuthResponse,
+        protos.google.cloud.developerconnect.v1.IFinishOAuthRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('finishOAuth response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.finishOAuth(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IFinishOAuthResponse,
+        protos.google.cloud.developerconnect.v1.IFinishOAuthRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('finishOAuth response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
 /**
  * Creates a new Connection in a given project and location.
@@ -1633,8 +1836,9 @@ export class DeveloperConnectClient {
  * Creates a GitRepositoryLink. Upon linking a Git Repository, Developer
  * Connect will configure the Git Repository to send webhook events to
  * Developer Connect. Connections that use Firebase GitHub Application will
- * have events forwarded to the Firebase service. All other Connections will
- * have events forwarded to Cloud Build.
+ * have events forwarded to the Firebase service. Connections that use Gemini
+ * Code Assist will have events forwarded to Gemini Code Assist service. All
+ * other Connections will have events forwarded to Cloud Build.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -4202,6 +4406,68 @@ export class DeveloperConnectClient {
   }
 
   /**
+   * Return a fully-qualified deploymentEvent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} insights_config
+   * @param {string} deployment_event
+   * @returns {string} Resource name string.
+   */
+  deploymentEventPath(project:string,location:string,insightsConfig:string,deploymentEvent:string) {
+    return this.pathTemplates.deploymentEventPathTemplate.render({
+      project: project,
+      location: location,
+      insights_config: insightsConfig,
+      deployment_event: deploymentEvent,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentEvent resource.
+   *
+   * @param {string} deploymentEventName
+   *   A fully-qualified path representing DeploymentEvent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentEventName(deploymentEventName: string) {
+    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).project;
+  }
+
+  /**
+   * Parse the location from DeploymentEvent resource.
+   *
+   * @param {string} deploymentEventName
+   *   A fully-qualified path representing DeploymentEvent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentEventName(deploymentEventName: string) {
+    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).location;
+  }
+
+  /**
+   * Parse the insights_config from DeploymentEvent resource.
+   *
+   * @param {string} deploymentEventName
+   *   A fully-qualified path representing DeploymentEvent resource.
+   * @returns {string} A string representing the insights_config.
+   */
+  matchInsightsConfigFromDeploymentEventName(deploymentEventName: string) {
+    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).insights_config;
+  }
+
+  /**
+   * Parse the deployment_event from DeploymentEvent resource.
+   *
+   * @param {string} deploymentEventName
+   *   A fully-qualified path representing DeploymentEvent resource.
+   * @returns {string} A string representing the deployment_event.
+   */
+  matchDeploymentEventFromDeploymentEventName(deploymentEventName: string) {
+    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).deployment_event;
+  }
+
+  /**
    * Return a fully-qualified gitRepositoryLink resource name string.
    *
    * @param {string} project
@@ -4313,6 +4579,55 @@ export class DeveloperConnectClient {
   }
 
   /**
+   * Return a fully-qualified instance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  instancePath(project:string,location:string,instance:string) {
+    return this.pathTemplates.instancePathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).project;
+  }
+
+  /**
+   * Parse the location from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).location;
+  }
+
+  /**
+   * Parse the instance from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).instance;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -4372,15 +4687,77 @@ export class DeveloperConnectClient {
   }
 
   /**
-   * Return a fully-qualified secretVersion resource name string.
+   * Return a fully-qualified projectLocationSecretSecretVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} secret
+   * @param {string} secret_version
+   * @returns {string} Resource name string.
+   */
+  projectLocationSecretSecretVersionPath(project:string,location:string,secret:string,secretVersion:string) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render({
+      project: project,
+      location: location,
+      secret: secret,
+      secret_version: secretVersion,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSecretSecretVersionName(projectLocationSecretSecretVersionName: string) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(projectLocationSecretSecretVersionName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSecretSecretVersionName(projectLocationSecretSecretVersionName: string) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(projectLocationSecretSecretVersionName).location;
+  }
+
+  /**
+   * Parse the secret from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the secret.
+   */
+  matchSecretFromProjectLocationSecretSecretVersionName(projectLocationSecretSecretVersionName: string) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(projectLocationSecretSecretVersionName).secret;
+  }
+
+  /**
+   * Parse the secret_version from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the secret_version.
+   */
+  matchSecretVersionFromProjectLocationSecretSecretVersionName(projectLocationSecretSecretVersionName: string) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(projectLocationSecretSecretVersionName).secret_version;
+  }
+
+  /**
+   * Return a fully-qualified projectSecretSecretVersion resource name string.
    *
    * @param {string} project
    * @param {string} secret
    * @param {string} secret_version
    * @returns {string} Resource name string.
    */
-  secretVersionPath(project:string,secret:string,secretVersion:string) {
-    return this.pathTemplates.secretVersionPathTemplate.render({
+  projectSecretSecretVersionPath(project:string,secret:string,secretVersion:string) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.render({
       project: project,
       secret: secret,
       secret_version: secretVersion,
@@ -4388,36 +4765,36 @@ export class DeveloperConnectClient {
   }
 
   /**
-   * Parse the project from SecretVersion resource.
+   * Parse the project from ProjectSecretSecretVersion resource.
    *
-   * @param {string} secretVersionName
-   *   A fully-qualified path representing SecretVersion resource.
+   * @param {string} projectSecretSecretVersionName
+   *   A fully-qualified path representing project_secret_secret_version resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).project;
+  matchProjectFromProjectSecretSecretVersionName(projectSecretSecretVersionName: string) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(projectSecretSecretVersionName).project;
   }
 
   /**
-   * Parse the secret from SecretVersion resource.
+   * Parse the secret from ProjectSecretSecretVersion resource.
    *
-   * @param {string} secretVersionName
-   *   A fully-qualified path representing SecretVersion resource.
+   * @param {string} projectSecretSecretVersionName
+   *   A fully-qualified path representing project_secret_secret_version resource.
    * @returns {string} A string representing the secret.
    */
-  matchSecretFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).secret;
+  matchSecretFromProjectSecretSecretVersionName(projectSecretSecretVersionName: string) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(projectSecretSecretVersionName).secret;
   }
 
   /**
-   * Parse the secret_version from SecretVersion resource.
+   * Parse the secret_version from ProjectSecretSecretVersion resource.
    *
-   * @param {string} secretVersionName
-   *   A fully-qualified path representing SecretVersion resource.
+   * @param {string} projectSecretSecretVersionName
+   *   A fully-qualified path representing project_secret_secret_version resource.
    * @returns {string} A string representing the secret_version.
    */
-  matchSecretVersionFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).secret_version;
+  matchSecretVersionFromProjectSecretSecretVersionName(projectSecretSecretVersionName: string) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(projectSecretSecretVersionName).secret_version;
   }
 
   /**

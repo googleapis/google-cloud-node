@@ -383,6 +383,114 @@ describe('v1.InsightsConfigServiceClient', () => {
         });
     });
 
+    describe('getDeploymentEvent', () => {
+        it('invokes getDeploymentEvent without error', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.GetDeploymentEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.GetDeploymentEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.DeploymentEvent()
+            );
+            client.innerApiCalls.getDeploymentEvent = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDeploymentEvent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeploymentEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeploymentEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeploymentEvent without error using callback', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.GetDeploymentEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.GetDeploymentEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.DeploymentEvent()
+            );
+            client.innerApiCalls.getDeploymentEvent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDeploymentEvent(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.developerconnect.v1.IDeploymentEvent|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeploymentEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeploymentEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeploymentEvent with error', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.GetDeploymentEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.GetDeploymentEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDeploymentEvent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDeploymentEvent(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDeploymentEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeploymentEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeploymentEvent with closed client', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.GetDeploymentEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.GetDeploymentEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDeploymentEvent(request), expectedError);
+        });
+    });
+
     describe('createInsightsConfig', () => {
         it('invokes createInsightsConfig without error', async () => {
             const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
@@ -1093,6 +1201,251 @@ describe('v1.InsightsConfigServiceClient', () => {
             );
         });
     });
+
+    describe('listDeploymentEvents', () => {
+        it('invokes listDeploymentEvents without error', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.ListDeploymentEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.ListDeploymentEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+            ];
+            client.innerApiCalls.listDeploymentEvents = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDeploymentEvents(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeploymentEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentEvents without error using callback', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.ListDeploymentEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.ListDeploymentEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+            ];
+            client.innerApiCalls.listDeploymentEvents = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDeploymentEvents(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.developerconnect.v1.IDeploymentEvent[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeploymentEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentEvents with error', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.ListDeploymentEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.ListDeploymentEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDeploymentEvents = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDeploymentEvents(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDeploymentEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentEventsStream without error', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.ListDeploymentEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.ListDeploymentEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+            ];
+            client.descriptors.page.listDeploymentEvents.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDeploymentEventsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.developerconnect.v1.DeploymentEvent[] = [];
+                stream.on('data', (response: protos.google.cloud.developerconnect.v1.DeploymentEvent) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDeploymentEvents.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeploymentEvents, request));
+            assert(
+                (client.descriptors.page.listDeploymentEvents.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDeploymentEventsStream with error', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.ListDeploymentEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.ListDeploymentEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeploymentEvents.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDeploymentEventsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.developerconnect.v1.DeploymentEvent[] = [];
+                stream.on('data', (response: protos.google.cloud.developerconnect.v1.DeploymentEvent) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDeploymentEvents.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeploymentEvents, request));
+            assert(
+                (client.descriptors.page.listDeploymentEvents.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDeploymentEvents without error', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.ListDeploymentEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.ListDeploymentEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+              generateSampleMessage(new protos.google.cloud.developerconnect.v1.DeploymentEvent()),
+            ];
+            client.descriptors.page.listDeploymentEvents.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.developerconnect.v1.IDeploymentEvent[] = [];
+            const iterable = client.listDeploymentEventsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeploymentEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeploymentEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDeploymentEvents with error', async () => {
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.developerconnect.v1.ListDeploymentEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.developerconnect.v1.ListDeploymentEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeploymentEvents.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDeploymentEventsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.developerconnect.v1.IDeploymentEvent[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeploymentEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeploymentEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
             const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
@@ -1605,6 +1958,60 @@ describe('v1.InsightsConfigServiceClient', () => {
                 const result = client.matchConnectionFromConnectionName(fakePath);
                 assert.strictEqual(result, "connectionValue");
                 assert((client.pathTemplates.connectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deploymentEvent', async () => {
+            const fakePath = "/rendered/path/deploymentEvent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                insights_config: "insightsConfigValue",
+                deployment_event: "deploymentEventValue",
+            };
+            const client = new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deploymentEventPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deploymentEventPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deploymentEventPath', () => {
+                const result = client.deploymentEventPath("projectValue", "locationValue", "insightsConfigValue", "deploymentEventValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deploymentEventPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDeploymentEventName', () => {
+                const result = client.matchProjectFromDeploymentEventName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.deploymentEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDeploymentEventName', () => {
+                const result = client.matchLocationFromDeploymentEventName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.deploymentEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightsConfigFromDeploymentEventName', () => {
+                const result = client.matchInsightsConfigFromDeploymentEventName(fakePath);
+                assert.strictEqual(result, "insightsConfigValue");
+                assert((client.pathTemplates.deploymentEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeploymentEventFromDeploymentEventName', () => {
+                const result = client.matchDeploymentEventFromDeploymentEventName(fakePath);
+                assert.strictEqual(result, "deploymentEventValue");
+                assert((client.pathTemplates.deploymentEventPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -72,6 +72,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | fetch read token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_read_token.js) |
 | fetch read write token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_read_write_token.js) |
 | fetch self | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_self.js) |
+| finish o auth | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.finish_o_auth.js) |
 | get account connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.get_account_connector.js) |
 | get connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.get_connection.js) |
 | get git repository link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.get_git_repository_link.js) |
@@ -79,11 +80,14 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.list_connections.js) |
 | list git repository links | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.list_git_repository_links.js) |
 | list users | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.list_users.js) |
+| start o auth | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.start_o_auth.js) |
 | update account connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.update_account_connector.js) |
 | update connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.update_connection.js) |
 | create insights config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.create_insights_config.js) |
 | delete insights config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.delete_insights_config.js) |
+| get deployment event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.get_deployment_event.js) |
 | get insights config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.get_insights_config.js) |
+| list deployment events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.list_deployment_events.js) |
 | list insights configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.list_insights_configs.js) |
 | update insights config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.update_insights_config.js) |
 | cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/snippet_metadata_google.cloud.developerconnect.v1.json) |

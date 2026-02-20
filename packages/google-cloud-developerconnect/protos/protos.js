@@ -890,6 +890,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|startOAuth}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef StartOAuthCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.StartOAuthResponse} [response] StartOAuthResponse
+                         */
+    
+                        /**
+                         * Calls StartOAuth.
+                         * @function startOAuth
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthRequest} request StartOAuthRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.StartOAuthCallback} callback Node-style callback called with the error, if any, and StartOAuthResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.startOAuth = function startOAuth(request, callback) {
+                            return this.rpcCall(startOAuth, $root.google.cloud.developerconnect.v1.StartOAuthRequest, $root.google.cloud.developerconnect.v1.StartOAuthResponse, request, callback);
+                        }, "name", { value: "StartOAuth" });
+    
+                        /**
+                         * Calls StartOAuth.
+                         * @function startOAuth
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthRequest} request StartOAuthRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.StartOAuthResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|finishOAuth}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef FinishOAuthCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.FinishOAuthResponse} [response] FinishOAuthResponse
+                         */
+    
+                        /**
+                         * Calls FinishOAuth.
+                         * @function finishOAuth
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthRequest} request FinishOAuthRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.FinishOAuthCallback} callback Node-style callback called with the error, if any, and FinishOAuthResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.finishOAuth = function finishOAuth(request, callback) {
+                            return this.rpcCall(finishOAuth, $root.google.cloud.developerconnect.v1.FinishOAuthRequest, $root.google.cloud.developerconnect.v1.FinishOAuthResponse, request, callback);
+                        }, "name", { value: "FinishOAuth" });
+    
+                        /**
+                         * Calls FinishOAuth.
+                         * @function finishOAuth
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthRequest} request FinishOAuthRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.FinishOAuthResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return DeveloperConnect;
                     })();
     
@@ -1521,6 +1587,8 @@
                          * @property {google.cloud.developerconnect.v1.IGitLabEnterpriseConfig|null} [gitlabEnterpriseConfig] Connection gitlabEnterpriseConfig
                          * @property {google.cloud.developerconnect.v1.IBitbucketDataCenterConfig|null} [bitbucketDataCenterConfig] Connection bitbucketDataCenterConfig
                          * @property {google.cloud.developerconnect.v1.IBitbucketCloudConfig|null} [bitbucketCloudConfig] Connection bitbucketCloudConfig
+                         * @property {google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig|null} [secureSourceManagerInstanceConfig] Connection secureSourceManagerInstanceConfig
+                         * @property {google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig|null} [httpConfig] Connection httpConfig
                          * @property {string|null} [name] Connection name
                          * @property {google.protobuf.ITimestamp|null} [createTime] Connection createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Connection updateTime
@@ -1600,6 +1668,22 @@
                          * @instance
                          */
                         Connection.prototype.bitbucketCloudConfig = null;
+    
+                        /**
+                         * Connection secureSourceManagerInstanceConfig.
+                         * @member {google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig|null|undefined} secureSourceManagerInstanceConfig
+                         * @memberof google.cloud.developerconnect.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.secureSourceManagerInstanceConfig = null;
+    
+                        /**
+                         * Connection httpConfig.
+                         * @member {google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig|null|undefined} httpConfig
+                         * @memberof google.cloud.developerconnect.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.httpConfig = null;
     
                         /**
                          * Connection name.
@@ -1710,12 +1794,12 @@
     
                         /**
                          * Connection connectionConfig.
-                         * @member {"githubConfig"|"githubEnterpriseConfig"|"gitlabConfig"|"gitlabEnterpriseConfig"|"bitbucketDataCenterConfig"|"bitbucketCloudConfig"|undefined} connectionConfig
+                         * @member {"githubConfig"|"githubEnterpriseConfig"|"gitlabConfig"|"gitlabEnterpriseConfig"|"bitbucketDataCenterConfig"|"bitbucketCloudConfig"|"secureSourceManagerInstanceConfig"|"httpConfig"|undefined} connectionConfig
                          * @memberof google.cloud.developerconnect.v1.Connection
                          * @instance
                          */
                         Object.defineProperty(Connection.prototype, "connectionConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["githubConfig", "githubEnterpriseConfig", "gitlabConfig", "gitlabEnterpriseConfig", "bitbucketDataCenterConfig", "bitbucketCloudConfig"]),
+                            get: $util.oneOfGetter($oneOfFields = ["githubConfig", "githubEnterpriseConfig", "gitlabConfig", "gitlabEnterpriseConfig", "bitbucketDataCenterConfig", "bitbucketCloudConfig", "secureSourceManagerInstanceConfig", "httpConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1783,6 +1867,10 @@
                                 $root.google.cloud.developerconnect.v1.BitbucketCloudConfig.encode(message.bitbucketCloudConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.gitProxyConfig != null && Object.hasOwnProperty.call(message, "gitProxyConfig"))
                                 $root.google.cloud.developerconnect.v1.GitProxyConfig.encode(message.gitProxyConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.secureSourceManagerInstanceConfig != null && Object.hasOwnProperty.call(message, "secureSourceManagerInstanceConfig"))
+                                $root.google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig.encode(message.secureSourceManagerInstanceConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.httpConfig != null && Object.hasOwnProperty.call(message, "httpConfig"))
+                                $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.encode(message.httpConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -1841,6 +1929,14 @@
                                     }
                                 case 18: {
                                         message.bitbucketCloudConfig = $root.google.cloud.developerconnect.v1.BitbucketCloudConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        message.secureSourceManagerInstanceConfig = $root.google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 21: {
+                                        message.httpConfig = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -2027,6 +2123,26 @@
                                         return "bitbucketCloudConfig." + error;
                                 }
                             }
+                            if (message.secureSourceManagerInstanceConfig != null && message.hasOwnProperty("secureSourceManagerInstanceConfig")) {
+                                if (properties.connectionConfig === 1)
+                                    return "connectionConfig: multiple values";
+                                properties.connectionConfig = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig.verify(message.secureSourceManagerInstanceConfig);
+                                    if (error)
+                                        return "secureSourceManagerInstanceConfig." + error;
+                                }
+                            }
+                            if (message.httpConfig != null && message.hasOwnProperty("httpConfig")) {
+                                if (properties.connectionConfig === 1)
+                                    return "connectionConfig: multiple values";
+                                properties.connectionConfig = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.verify(message.httpConfig);
+                                    if (error)
+                                        return "httpConfig." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -2132,6 +2248,16 @@
                                 if (typeof object.bitbucketCloudConfig !== "object")
                                     throw TypeError(".google.cloud.developerconnect.v1.Connection.bitbucketCloudConfig: object expected");
                                 message.bitbucketCloudConfig = $root.google.cloud.developerconnect.v1.BitbucketCloudConfig.fromObject(object.bitbucketCloudConfig);
+                            }
+                            if (object.secureSourceManagerInstanceConfig != null) {
+                                if (typeof object.secureSourceManagerInstanceConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.Connection.secureSourceManagerInstanceConfig: object expected");
+                                message.secureSourceManagerInstanceConfig = $root.google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig.fromObject(object.secureSourceManagerInstanceConfig);
+                            }
+                            if (object.httpConfig != null) {
+                                if (typeof object.httpConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.Connection.httpConfig: object expected");
+                                message.httpConfig = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.fromObject(object.httpConfig);
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -2283,6 +2409,16 @@
                             }
                             if (message.gitProxyConfig != null && message.hasOwnProperty("gitProxyConfig"))
                                 object.gitProxyConfig = $root.google.cloud.developerconnect.v1.GitProxyConfig.toObject(message.gitProxyConfig, options);
+                            if (message.secureSourceManagerInstanceConfig != null && message.hasOwnProperty("secureSourceManagerInstanceConfig")) {
+                                object.secureSourceManagerInstanceConfig = $root.google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig.toObject(message.secureSourceManagerInstanceConfig, options);
+                                if (options.oneofs)
+                                    object.connectionConfig = "secureSourceManagerInstanceConfig";
+                            }
+                            if (message.httpConfig != null && message.hasOwnProperty("httpConfig")) {
+                                object.httpConfig = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.toObject(message.httpConfig, options);
+                                if (options.oneofs)
+                                    object.connectionConfig = "httpConfig";
+                            }
                             return object;
                         };
     
@@ -2527,6 +2663,7 @@
                          * @memberof google.cloud.developerconnect.v1
                          * @interface IGitProxyConfig
                          * @property {boolean|null} [enabled] GitProxyConfig enabled
+                         * @property {string|null} [httpProxyBaseUri] GitProxyConfig httpProxyBaseUri
                          */
     
                         /**
@@ -2551,6 +2688,14 @@
                          * @instance
                          */
                         GitProxyConfig.prototype.enabled = false;
+    
+                        /**
+                         * GitProxyConfig httpProxyBaseUri.
+                         * @member {string} httpProxyBaseUri
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @instance
+                         */
+                        GitProxyConfig.prototype.httpProxyBaseUri = "";
     
                         /**
                          * Creates a new GitProxyConfig instance using the specified properties.
@@ -2578,6 +2723,8 @@
                                 writer = $Writer.create();
                             if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                            if (message.httpProxyBaseUri != null && Object.hasOwnProperty.call(message, "httpProxyBaseUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.httpProxyBaseUri);
                             return writer;
                         };
     
@@ -2618,6 +2765,10 @@
                                         message.enabled = reader.bool();
                                         break;
                                     }
+                                case 2: {
+                                        message.httpProxyBaseUri = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2656,6 +2807,9 @@
                             if (message.enabled != null && message.hasOwnProperty("enabled"))
                                 if (typeof message.enabled !== "boolean")
                                     return "enabled: boolean expected";
+                            if (message.httpProxyBaseUri != null && message.hasOwnProperty("httpProxyBaseUri"))
+                                if (!$util.isString(message.httpProxyBaseUri))
+                                    return "httpProxyBaseUri: string expected";
                             return null;
                         };
     
@@ -2673,6 +2827,8 @@
                             var message = new $root.google.cloud.developerconnect.v1.GitProxyConfig();
                             if (object.enabled != null)
                                 message.enabled = Boolean(object.enabled);
+                            if (object.httpProxyBaseUri != null)
+                                message.httpProxyBaseUri = String(object.httpProxyBaseUri);
                             return message;
                         };
     
@@ -2689,10 +2845,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.enabled = false;
+                                object.httpProxyBaseUri = "";
+                            }
                             if (message.enabled != null && message.hasOwnProperty("enabled"))
                                 object.enabled = message.enabled;
+                            if (message.httpProxyBaseUri != null && message.hasOwnProperty("httpProxyBaseUri"))
+                                object.httpProxyBaseUri = message.httpProxyBaseUri;
                             return object;
                         };
     
@@ -3031,6 +3191,816 @@
                         return InstallationState;
                     })();
     
+                    v1.GenericHTTPEndpointConfig = (function() {
+    
+                        /**
+                         * Properties of a GenericHTTPEndpointConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGenericHTTPEndpointConfig
+                         * @property {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication|null} [basicAuthentication] GenericHTTPEndpointConfig basicAuthentication
+                         * @property {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication|null} [bearerTokenAuthentication] GenericHTTPEndpointConfig bearerTokenAuthentication
+                         * @property {string|null} [hostUri] GenericHTTPEndpointConfig hostUri
+                         * @property {google.cloud.developerconnect.v1.IServiceDirectoryConfig|null} [serviceDirectoryConfig] GenericHTTPEndpointConfig serviceDirectoryConfig
+                         * @property {string|null} [sslCaCertificate] GenericHTTPEndpointConfig sslCaCertificate
+                         */
+    
+                        /**
+                         * Constructs a new GenericHTTPEndpointConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GenericHTTPEndpointConfig.
+                         * @implements IGenericHTTPEndpointConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig=} [properties] Properties to set
+                         */
+                        function GenericHTTPEndpointConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GenericHTTPEndpointConfig basicAuthentication.
+                         * @member {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication|null|undefined} basicAuthentication
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @instance
+                         */
+                        GenericHTTPEndpointConfig.prototype.basicAuthentication = null;
+    
+                        /**
+                         * GenericHTTPEndpointConfig bearerTokenAuthentication.
+                         * @member {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication|null|undefined} bearerTokenAuthentication
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @instance
+                         */
+                        GenericHTTPEndpointConfig.prototype.bearerTokenAuthentication = null;
+    
+                        /**
+                         * GenericHTTPEndpointConfig hostUri.
+                         * @member {string} hostUri
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @instance
+                         */
+                        GenericHTTPEndpointConfig.prototype.hostUri = "";
+    
+                        /**
+                         * GenericHTTPEndpointConfig serviceDirectoryConfig.
+                         * @member {google.cloud.developerconnect.v1.IServiceDirectoryConfig|null|undefined} serviceDirectoryConfig
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @instance
+                         */
+                        GenericHTTPEndpointConfig.prototype.serviceDirectoryConfig = null;
+    
+                        /**
+                         * GenericHTTPEndpointConfig sslCaCertificate.
+                         * @member {string} sslCaCertificate
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @instance
+                         */
+                        GenericHTTPEndpointConfig.prototype.sslCaCertificate = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * GenericHTTPEndpointConfig authentication.
+                         * @member {"basicAuthentication"|"bearerTokenAuthentication"|undefined} authentication
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @instance
+                         */
+                        Object.defineProperty(GenericHTTPEndpointConfig.prototype, "authentication", {
+                            get: $util.oneOfGetter($oneOfFields = ["basicAuthentication", "bearerTokenAuthentication"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new GenericHTTPEndpointConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig} GenericHTTPEndpointConfig instance
+                         */
+                        GenericHTTPEndpointConfig.create = function create(properties) {
+                            return new GenericHTTPEndpointConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GenericHTTPEndpointConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig} message GenericHTTPEndpointConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenericHTTPEndpointConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.basicAuthentication != null && Object.hasOwnProperty.call(message, "basicAuthentication"))
+                                $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication.encode(message.basicAuthentication, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.bearerTokenAuthentication != null && Object.hasOwnProperty.call(message, "bearerTokenAuthentication"))
+                                $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication.encode(message.bearerTokenAuthentication, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.hostUri != null && Object.hasOwnProperty.call(message, "hostUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.hostUri);
+                            if (message.serviceDirectoryConfig != null && Object.hasOwnProperty.call(message, "serviceDirectoryConfig"))
+                                $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.encode(message.serviceDirectoryConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.sslCaCertificate != null && Object.hasOwnProperty.call(message, "sslCaCertificate"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.sslCaCertificate);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GenericHTTPEndpointConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig} message GenericHTTPEndpointConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenericHTTPEndpointConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GenericHTTPEndpointConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig} GenericHTTPEndpointConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenericHTTPEndpointConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.basicAuthentication = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.bearerTokenAuthentication = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.hostUri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.sslCaCertificate = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GenericHTTPEndpointConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig} GenericHTTPEndpointConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenericHTTPEndpointConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GenericHTTPEndpointConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GenericHTTPEndpointConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.basicAuthentication != null && message.hasOwnProperty("basicAuthentication")) {
+                                properties.authentication = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication.verify(message.basicAuthentication);
+                                    if (error)
+                                        return "basicAuthentication." + error;
+                                }
+                            }
+                            if (message.bearerTokenAuthentication != null && message.hasOwnProperty("bearerTokenAuthentication")) {
+                                if (properties.authentication === 1)
+                                    return "authentication: multiple values";
+                                properties.authentication = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication.verify(message.bearerTokenAuthentication);
+                                    if (error)
+                                        return "bearerTokenAuthentication." + error;
+                                }
+                            }
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                if (!$util.isString(message.hostUri))
+                                    return "hostUri: string expected";
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig")) {
+                                var error = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.verify(message.serviceDirectoryConfig);
+                                if (error)
+                                    return "serviceDirectoryConfig." + error;
+                            }
+                            if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
+                                if (!$util.isString(message.sslCaCertificate))
+                                    return "sslCaCertificate: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GenericHTTPEndpointConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig} GenericHTTPEndpointConfig
+                         */
+                        GenericHTTPEndpointConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig();
+                            if (object.basicAuthentication != null) {
+                                if (typeof object.basicAuthentication !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.basicAuthentication: object expected");
+                                message.basicAuthentication = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication.fromObject(object.basicAuthentication);
+                            }
+                            if (object.bearerTokenAuthentication != null) {
+                                if (typeof object.bearerTokenAuthentication !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.bearerTokenAuthentication: object expected");
+                                message.bearerTokenAuthentication = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication.fromObject(object.bearerTokenAuthentication);
+                            }
+                            if (object.hostUri != null)
+                                message.hostUri = String(object.hostUri);
+                            if (object.serviceDirectoryConfig != null) {
+                                if (typeof object.serviceDirectoryConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.serviceDirectoryConfig: object expected");
+                                message.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.fromObject(object.serviceDirectoryConfig);
+                            }
+                            if (object.sslCaCertificate != null)
+                                message.sslCaCertificate = String(object.sslCaCertificate);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GenericHTTPEndpointConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig} message GenericHTTPEndpointConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GenericHTTPEndpointConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hostUri = "";
+                                object.serviceDirectoryConfig = null;
+                                object.sslCaCertificate = "";
+                            }
+                            if (message.basicAuthentication != null && message.hasOwnProperty("basicAuthentication")) {
+                                object.basicAuthentication = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication.toObject(message.basicAuthentication, options);
+                                if (options.oneofs)
+                                    object.authentication = "basicAuthentication";
+                            }
+                            if (message.bearerTokenAuthentication != null && message.hasOwnProperty("bearerTokenAuthentication")) {
+                                object.bearerTokenAuthentication = $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication.toObject(message.bearerTokenAuthentication, options);
+                                if (options.oneofs)
+                                    object.authentication = "bearerTokenAuthentication";
+                            }
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                object.hostUri = message.hostUri;
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig"))
+                                object.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.toObject(message.serviceDirectoryConfig, options);
+                            if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
+                                object.sslCaCertificate = message.sslCaCertificate;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GenericHTTPEndpointConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GenericHTTPEndpointConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GenericHTTPEndpointConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenericHTTPEndpointConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GenericHTTPEndpointConfig";
+                        };
+    
+                        GenericHTTPEndpointConfig.BasicAuthentication = (function() {
+    
+                            /**
+                             * Properties of a BasicAuthentication.
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                             * @interface IBasicAuthentication
+                             * @property {string|null} [passwordSecretVersion] BasicAuthentication passwordSecretVersion
+                             * @property {string|null} [username] BasicAuthentication username
+                             */
+    
+                            /**
+                             * Constructs a new BasicAuthentication.
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                             * @classdesc Represents a BasicAuthentication.
+                             * @implements IBasicAuthentication
+                             * @constructor
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication=} [properties] Properties to set
+                             */
+                            function BasicAuthentication(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BasicAuthentication passwordSecretVersion.
+                             * @member {string|null|undefined} passwordSecretVersion
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @instance
+                             */
+                            BasicAuthentication.prototype.passwordSecretVersion = null;
+    
+                            /**
+                             * BasicAuthentication username.
+                             * @member {string} username
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @instance
+                             */
+                            BasicAuthentication.prototype.username = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * BasicAuthentication password.
+                             * @member {"passwordSecretVersion"|undefined} password
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @instance
+                             */
+                            Object.defineProperty(BasicAuthentication.prototype, "password", {
+                                get: $util.oneOfGetter($oneOfFields = ["passwordSecretVersion"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new BasicAuthentication instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication=} [properties] Properties to set
+                             * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication} BasicAuthentication instance
+                             */
+                            BasicAuthentication.create = function create(properties) {
+                                return new BasicAuthentication(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BasicAuthentication message. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication} message BasicAuthentication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BasicAuthentication.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+                                if (message.passwordSecretVersion != null && Object.hasOwnProperty.call(message, "passwordSecretVersion"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.passwordSecretVersion);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BasicAuthentication message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication} message BasicAuthentication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BasicAuthentication.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BasicAuthentication message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication} BasicAuthentication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BasicAuthentication.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.passwordSecretVersion = reader.string();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.username = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BasicAuthentication message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication} BasicAuthentication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BasicAuthentication.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BasicAuthentication message.
+                             * @function verify
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BasicAuthentication.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.passwordSecretVersion != null && message.hasOwnProperty("passwordSecretVersion")) {
+                                    properties.password = 1;
+                                    if (!$util.isString(message.passwordSecretVersion))
+                                        return "passwordSecretVersion: string expected";
+                                }
+                                if (message.username != null && message.hasOwnProperty("username"))
+                                    if (!$util.isString(message.username))
+                                        return "username: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BasicAuthentication message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication} BasicAuthentication
+                             */
+                            BasicAuthentication.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication)
+                                    return object;
+                                var message = new $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication();
+                                if (object.passwordSecretVersion != null)
+                                    message.passwordSecretVersion = String(object.passwordSecretVersion);
+                                if (object.username != null)
+                                    message.username = String(object.username);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BasicAuthentication message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication} message BasicAuthentication
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BasicAuthentication.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.username = "";
+                                if (message.username != null && message.hasOwnProperty("username"))
+                                    object.username = message.username;
+                                if (message.passwordSecretVersion != null && message.hasOwnProperty("passwordSecretVersion")) {
+                                    object.passwordSecretVersion = message.passwordSecretVersion;
+                                    if (options.oneofs)
+                                        object.password = "passwordSecretVersion";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BasicAuthentication to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BasicAuthentication.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BasicAuthentication
+                             * @function getTypeUrl
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BasicAuthentication.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication";
+                            };
+    
+                            return BasicAuthentication;
+                        })();
+    
+                        GenericHTTPEndpointConfig.BearerTokenAuthentication = (function() {
+    
+                            /**
+                             * Properties of a BearerTokenAuthentication.
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                             * @interface IBearerTokenAuthentication
+                             * @property {string|null} [tokenSecretVersion] BearerTokenAuthentication tokenSecretVersion
+                             */
+    
+                            /**
+                             * Constructs a new BearerTokenAuthentication.
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig
+                             * @classdesc Represents a BearerTokenAuthentication.
+                             * @implements IBearerTokenAuthentication
+                             * @constructor
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication=} [properties] Properties to set
+                             */
+                            function BearerTokenAuthentication(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BearerTokenAuthentication tokenSecretVersion.
+                             * @member {string|null|undefined} tokenSecretVersion
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @instance
+                             */
+                            BearerTokenAuthentication.prototype.tokenSecretVersion = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * BearerTokenAuthentication token.
+                             * @member {"tokenSecretVersion"|undefined} token
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @instance
+                             */
+                            Object.defineProperty(BearerTokenAuthentication.prototype, "token", {
+                                get: $util.oneOfGetter($oneOfFields = ["tokenSecretVersion"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new BearerTokenAuthentication instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication=} [properties] Properties to set
+                             * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication} BearerTokenAuthentication instance
+                             */
+                            BearerTokenAuthentication.create = function create(properties) {
+                                return new BearerTokenAuthentication(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BearerTokenAuthentication message. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication} message BearerTokenAuthentication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BearerTokenAuthentication.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.tokenSecretVersion != null && Object.hasOwnProperty.call(message, "tokenSecretVersion"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.tokenSecretVersion);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BearerTokenAuthentication message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication} message BearerTokenAuthentication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BearerTokenAuthentication.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BearerTokenAuthentication message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication} BearerTokenAuthentication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BearerTokenAuthentication.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.tokenSecretVersion = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BearerTokenAuthentication message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication} BearerTokenAuthentication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BearerTokenAuthentication.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BearerTokenAuthentication message.
+                             * @function verify
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BearerTokenAuthentication.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.tokenSecretVersion != null && message.hasOwnProperty("tokenSecretVersion")) {
+                                    properties.token = 1;
+                                    if (!$util.isString(message.tokenSecretVersion))
+                                        return "tokenSecretVersion: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BearerTokenAuthentication message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication} BearerTokenAuthentication
+                             */
+                            BearerTokenAuthentication.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication)
+                                    return object;
+                                var message = new $root.google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication();
+                                if (object.tokenSecretVersion != null)
+                                    message.tokenSecretVersion = String(object.tokenSecretVersion);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BearerTokenAuthentication message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication} message BearerTokenAuthentication
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BearerTokenAuthentication.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.tokenSecretVersion != null && message.hasOwnProperty("tokenSecretVersion")) {
+                                    object.tokenSecretVersion = message.tokenSecretVersion;
+                                    if (options.oneofs)
+                                        object.token = "tokenSecretVersion";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BearerTokenAuthentication to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BearerTokenAuthentication.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BearerTokenAuthentication
+                             * @function getTypeUrl
+                             * @memberof google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BearerTokenAuthentication.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication";
+                            };
+    
+                            return BearerTokenAuthentication;
+                        })();
+    
+                        return GenericHTTPEndpointConfig;
+                    })();
+    
                     v1.GitHubConfig = (function() {
     
                         /**
@@ -3216,6 +4186,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential")) {
@@ -3262,6 +4233,10 @@
                             case "FIREBASE":
                             case 2:
                                 message.githubApp = 2;
+                                break;
+                            case "GEMINI_CODE_ASSIST":
+                            case 3:
+                                message.githubApp = 3;
                                 break;
                             }
                             if (object.authorizerCredential != null) {
@@ -3353,12 +4328,14 @@
                          * @property {number} GIT_HUB_APP_UNSPECIFIED=0 GIT_HUB_APP_UNSPECIFIED value
                          * @property {number} DEVELOPER_CONNECT=1 DEVELOPER_CONNECT value
                          * @property {number} FIREBASE=2 FIREBASE value
+                         * @property {number} GEMINI_CODE_ASSIST=3 GEMINI_CODE_ASSIST value
                          */
                         GitHubConfig.GitHubApp = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "GIT_HUB_APP_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "DEVELOPER_CONNECT"] = 1;
                             values[valuesById[2] = "FIREBASE"] = 2;
+                            values[valuesById[3] = "GEMINI_CODE_ASSIST"] = 3;
                             return values;
                         })();
     
@@ -3381,6 +4358,7 @@
                          * @property {google.cloud.developerconnect.v1.IServiceDirectoryConfig|null} [serviceDirectoryConfig] GitHubEnterpriseConfig serviceDirectoryConfig
                          * @property {string|null} [serverVersion] GitHubEnterpriseConfig serverVersion
                          * @property {string|null} [sslCaCertificate] GitHubEnterpriseConfig sslCaCertificate
+                         * @property {string|null} [organization] GitHubEnterpriseConfig organization
                          */
     
                         /**
@@ -3479,6 +4457,14 @@
                         GitHubEnterpriseConfig.prototype.sslCaCertificate = "";
     
                         /**
+                         * GitHubEnterpriseConfig organization.
+                         * @member {string} organization
+                         * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
+                         * @instance
+                         */
+                        GitHubEnterpriseConfig.prototype.organization = "";
+    
+                        /**
                          * Creates a new GitHubEnterpriseConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.developerconnect.v1.GitHubEnterpriseConfig
@@ -3522,6 +4508,8 @@
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.serverVersion);
                             if (message.sslCaCertificate != null && Object.hasOwnProperty.call(message, "sslCaCertificate"))
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.sslCaCertificate);
+                            if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.organization);
                             return writer;
                         };
     
@@ -3598,6 +4586,10 @@
                                         message.sslCaCertificate = reader.string();
                                         break;
                                     }
+                                case 15: {
+                                        message.organization = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3665,6 +4657,9 @@
                             if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
                                 if (!$util.isString(message.sslCaCertificate))
                                     return "sslCaCertificate: string expected";
+                            if (message.organization != null && message.hasOwnProperty("organization"))
+                                if (!$util.isString(message.organization))
+                                    return "organization: string expected";
                             return null;
                         };
     
@@ -3717,6 +4712,8 @@
                                 message.serverVersion = String(object.serverVersion);
                             if (object.sslCaCertificate != null)
                                 message.sslCaCertificate = String(object.sslCaCertificate);
+                            if (object.organization != null)
+                                message.organization = String(object.organization);
                             return message;
                         };
     
@@ -3752,6 +4749,7 @@
                                 object.serviceDirectoryConfig = null;
                                 object.serverVersion = "";
                                 object.sslCaCertificate = "";
+                                object.organization = "";
                             }
                             if (message.hostUri != null && message.hasOwnProperty("hostUri"))
                                 object.hostUri = message.hostUri;
@@ -3779,6 +4777,8 @@
                                 object.serverVersion = message.serverVersion;
                             if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
                                 object.sslCaCertificate = message.sslCaCertificate;
+                            if (message.organization != null && message.hasOwnProperty("organization"))
+                                object.organization = message.organization;
                             return object;
                         };
     
@@ -5737,6 +6737,211 @@
                         };
     
                         return BitbucketCloudConfig;
+                    })();
+    
+                    v1.SecureSourceManagerInstanceConfig = (function() {
+    
+                        /**
+                         * Properties of a SecureSourceManagerInstanceConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface ISecureSourceManagerInstanceConfig
+                         * @property {string|null} [instance] SecureSourceManagerInstanceConfig instance
+                         */
+    
+                        /**
+                         * Constructs a new SecureSourceManagerInstanceConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a SecureSourceManagerInstanceConfig.
+                         * @implements ISecureSourceManagerInstanceConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig=} [properties] Properties to set
+                         */
+                        function SecureSourceManagerInstanceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecureSourceManagerInstanceConfig instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @instance
+                         */
+                        SecureSourceManagerInstanceConfig.prototype.instance = "";
+    
+                        /**
+                         * Creates a new SecureSourceManagerInstanceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig} SecureSourceManagerInstanceConfig instance
+                         */
+                        SecureSourceManagerInstanceConfig.create = function create(properties) {
+                            return new SecureSourceManagerInstanceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecureSourceManagerInstanceConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig} message SecureSourceManagerInstanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecureSourceManagerInstanceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecureSourceManagerInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig} message SecureSourceManagerInstanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecureSourceManagerInstanceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecureSourceManagerInstanceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig} SecureSourceManagerInstanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecureSourceManagerInstanceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecureSourceManagerInstanceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig} SecureSourceManagerInstanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecureSourceManagerInstanceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecureSourceManagerInstanceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecureSourceManagerInstanceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecureSourceManagerInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig} SecureSourceManagerInstanceConfig
+                         */
+                        SecureSourceManagerInstanceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecureSourceManagerInstanceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig} message SecureSourceManagerInstanceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecureSourceManagerInstanceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.instance = "";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecureSourceManagerInstanceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecureSourceManagerInstanceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SecureSourceManagerInstanceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SecureSourceManagerInstanceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig";
+                        };
+    
+                        return SecureSourceManagerInstanceConfig;
                     })();
     
                     v1.ListConnectionsRequest = (function() {
@@ -10664,6 +11869,1641 @@
                         };
     
                         return FetchAccessTokenResponse;
+                    })();
+    
+                    v1.StartOAuthRequest = (function() {
+    
+                        /**
+                         * Properties of a StartOAuthRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IStartOAuthRequest
+                         * @property {string|null} [accountConnector] StartOAuthRequest accountConnector
+                         */
+    
+                        /**
+                         * Constructs a new StartOAuthRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a StartOAuthRequest.
+                         * @implements IStartOAuthRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthRequest=} [properties] Properties to set
+                         */
+                        function StartOAuthRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StartOAuthRequest accountConnector.
+                         * @member {string} accountConnector
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @instance
+                         */
+                        StartOAuthRequest.prototype.accountConnector = "";
+    
+                        /**
+                         * Creates a new StartOAuthRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.StartOAuthRequest} StartOAuthRequest instance
+                         */
+                        StartOAuthRequest.create = function create(properties) {
+                            return new StartOAuthRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StartOAuthRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.StartOAuthRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthRequest} message StartOAuthRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartOAuthRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accountConnector != null && Object.hasOwnProperty.call(message, "accountConnector"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.accountConnector);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StartOAuthRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.StartOAuthRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthRequest} message StartOAuthRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartOAuthRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StartOAuthRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.StartOAuthRequest} StartOAuthRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartOAuthRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.StartOAuthRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.accountConnector = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StartOAuthRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.StartOAuthRequest} StartOAuthRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartOAuthRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StartOAuthRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StartOAuthRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector"))
+                                if (!$util.isString(message.accountConnector))
+                                    return "accountConnector: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StartOAuthRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.StartOAuthRequest} StartOAuthRequest
+                         */
+                        StartOAuthRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.StartOAuthRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.StartOAuthRequest();
+                            if (object.accountConnector != null)
+                                message.accountConnector = String(object.accountConnector);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StartOAuthRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.StartOAuthRequest} message StartOAuthRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StartOAuthRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.accountConnector = "";
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector"))
+                                object.accountConnector = message.accountConnector;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StartOAuthRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StartOAuthRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StartOAuthRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StartOAuthRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.StartOAuthRequest";
+                        };
+    
+                        return StartOAuthRequest;
+                    })();
+    
+                    v1.StartOAuthResponse = (function() {
+    
+                        /**
+                         * Properties of a StartOAuthResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IStartOAuthResponse
+                         * @property {google.cloud.developerconnect.v1.SystemProvider|null} [systemProviderId] StartOAuthResponse systemProviderId
+                         * @property {string|null} [ticket] StartOAuthResponse ticket
+                         * @property {string|null} [codeChallenge] StartOAuthResponse codeChallenge
+                         * @property {string|null} [codeChallengeMethod] StartOAuthResponse codeChallengeMethod
+                         * @property {string|null} [clientId] StartOAuthResponse clientId
+                         * @property {Array.<string>|null} [scopes] StartOAuthResponse scopes
+                         * @property {string|null} [authUri] StartOAuthResponse authUri
+                         */
+    
+                        /**
+                         * Constructs a new StartOAuthResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a StartOAuthResponse.
+                         * @implements IStartOAuthResponse
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthResponse=} [properties] Properties to set
+                         */
+                        function StartOAuthResponse(properties) {
+                            this.scopes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StartOAuthResponse systemProviderId.
+                         * @member {google.cloud.developerconnect.v1.SystemProvider|null|undefined} systemProviderId
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @instance
+                         */
+                        StartOAuthResponse.prototype.systemProviderId = null;
+    
+                        /**
+                         * StartOAuthResponse ticket.
+                         * @member {string} ticket
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @instance
+                         */
+                        StartOAuthResponse.prototype.ticket = "";
+    
+                        /**
+                         * StartOAuthResponse codeChallenge.
+                         * @member {string} codeChallenge
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @instance
+                         */
+                        StartOAuthResponse.prototype.codeChallenge = "";
+    
+                        /**
+                         * StartOAuthResponse codeChallengeMethod.
+                         * @member {string} codeChallengeMethod
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @instance
+                         */
+                        StartOAuthResponse.prototype.codeChallengeMethod = "";
+    
+                        /**
+                         * StartOAuthResponse clientId.
+                         * @member {string} clientId
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @instance
+                         */
+                        StartOAuthResponse.prototype.clientId = "";
+    
+                        /**
+                         * StartOAuthResponse scopes.
+                         * @member {Array.<string>} scopes
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @instance
+                         */
+                        StartOAuthResponse.prototype.scopes = $util.emptyArray;
+    
+                        /**
+                         * StartOAuthResponse authUri.
+                         * @member {string} authUri
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @instance
+                         */
+                        StartOAuthResponse.prototype.authUri = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * StartOAuthResponse id.
+                         * @member {"systemProviderId"|undefined} id
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @instance
+                         */
+                        Object.defineProperty(StartOAuthResponse.prototype, "id", {
+                            get: $util.oneOfGetter($oneOfFields = ["systemProviderId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new StartOAuthResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthResponse=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.StartOAuthResponse} StartOAuthResponse instance
+                         */
+                        StartOAuthResponse.create = function create(properties) {
+                            return new StartOAuthResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StartOAuthResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.StartOAuthResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthResponse} message StartOAuthResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartOAuthResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ticket != null && Object.hasOwnProperty.call(message, "ticket"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.ticket);
+                            if (message.codeChallenge != null && Object.hasOwnProperty.call(message, "codeChallenge"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.codeChallenge);
+                            if (message.codeChallengeMethod != null && Object.hasOwnProperty.call(message, "codeChallengeMethod"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.codeChallengeMethod);
+                            if (message.clientId != null && Object.hasOwnProperty.call(message, "clientId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.clientId);
+                            if (message.scopes != null && message.scopes.length)
+                                for (var i = 0; i < message.scopes.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.scopes[i]);
+                            if (message.authUri != null && Object.hasOwnProperty.call(message, "authUri"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.authUri);
+                            if (message.systemProviderId != null && Object.hasOwnProperty.call(message, "systemProviderId"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.systemProviderId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StartOAuthResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.StartOAuthResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IStartOAuthResponse} message StartOAuthResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartOAuthResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StartOAuthResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.StartOAuthResponse} StartOAuthResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartOAuthResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.StartOAuthResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 7: {
+                                        message.systemProviderId = reader.int32();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.ticket = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.codeChallenge = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.codeChallengeMethod = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.clientId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.scopes && message.scopes.length))
+                                            message.scopes = [];
+                                        message.scopes.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.authUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StartOAuthResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.StartOAuthResponse} StartOAuthResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartOAuthResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StartOAuthResponse message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StartOAuthResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.systemProviderId != null && message.hasOwnProperty("systemProviderId")) {
+                                properties.id = 1;
+                                switch (message.systemProviderId) {
+                                default:
+                                    return "systemProviderId: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    break;
+                                }
+                            }
+                            if (message.ticket != null && message.hasOwnProperty("ticket"))
+                                if (!$util.isString(message.ticket))
+                                    return "ticket: string expected";
+                            if (message.codeChallenge != null && message.hasOwnProperty("codeChallenge"))
+                                if (!$util.isString(message.codeChallenge))
+                                    return "codeChallenge: string expected";
+                            if (message.codeChallengeMethod != null && message.hasOwnProperty("codeChallengeMethod"))
+                                if (!$util.isString(message.codeChallengeMethod))
+                                    return "codeChallengeMethod: string expected";
+                            if (message.clientId != null && message.hasOwnProperty("clientId"))
+                                if (!$util.isString(message.clientId))
+                                    return "clientId: string expected";
+                            if (message.scopes != null && message.hasOwnProperty("scopes")) {
+                                if (!Array.isArray(message.scopes))
+                                    return "scopes: array expected";
+                                for (var i = 0; i < message.scopes.length; ++i)
+                                    if (!$util.isString(message.scopes[i]))
+                                        return "scopes: string[] expected";
+                            }
+                            if (message.authUri != null && message.hasOwnProperty("authUri"))
+                                if (!$util.isString(message.authUri))
+                                    return "authUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StartOAuthResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.StartOAuthResponse} StartOAuthResponse
+                         */
+                        StartOAuthResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.StartOAuthResponse)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.StartOAuthResponse();
+                            switch (object.systemProviderId) {
+                            default:
+                                if (typeof object.systemProviderId === "number") {
+                                    message.systemProviderId = object.systemProviderId;
+                                    break;
+                                }
+                                break;
+                            case "SYSTEM_PROVIDER_UNSPECIFIED":
+                            case 0:
+                                message.systemProviderId = 0;
+                                break;
+                            case "GITHUB":
+                            case 1:
+                                message.systemProviderId = 1;
+                                break;
+                            case "GITLAB":
+                            case 2:
+                                message.systemProviderId = 2;
+                                break;
+                            case "GOOGLE":
+                            case 3:
+                                message.systemProviderId = 3;
+                                break;
+                            case "SENTRY":
+                            case 4:
+                                message.systemProviderId = 4;
+                                break;
+                            case "ROVO":
+                            case 5:
+                                message.systemProviderId = 5;
+                                break;
+                            case "NEW_RELIC":
+                            case 6:
+                                message.systemProviderId = 6;
+                                break;
+                            case "DATASTAX":
+                            case 7:
+                                message.systemProviderId = 7;
+                                break;
+                            case "DYNATRACE":
+                            case 8:
+                                message.systemProviderId = 8;
+                                break;
+                            }
+                            if (object.ticket != null)
+                                message.ticket = String(object.ticket);
+                            if (object.codeChallenge != null)
+                                message.codeChallenge = String(object.codeChallenge);
+                            if (object.codeChallengeMethod != null)
+                                message.codeChallengeMethod = String(object.codeChallengeMethod);
+                            if (object.clientId != null)
+                                message.clientId = String(object.clientId);
+                            if (object.scopes) {
+                                if (!Array.isArray(object.scopes))
+                                    throw TypeError(".google.cloud.developerconnect.v1.StartOAuthResponse.scopes: array expected");
+                                message.scopes = [];
+                                for (var i = 0; i < object.scopes.length; ++i)
+                                    message.scopes[i] = String(object.scopes[i]);
+                            }
+                            if (object.authUri != null)
+                                message.authUri = String(object.authUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StartOAuthResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.StartOAuthResponse} message StartOAuthResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StartOAuthResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.scopes = [];
+                            if (options.defaults) {
+                                object.ticket = "";
+                                object.codeChallenge = "";
+                                object.codeChallengeMethod = "";
+                                object.clientId = "";
+                                object.authUri = "";
+                            }
+                            if (message.ticket != null && message.hasOwnProperty("ticket"))
+                                object.ticket = message.ticket;
+                            if (message.codeChallenge != null && message.hasOwnProperty("codeChallenge"))
+                                object.codeChallenge = message.codeChallenge;
+                            if (message.codeChallengeMethod != null && message.hasOwnProperty("codeChallengeMethod"))
+                                object.codeChallengeMethod = message.codeChallengeMethod;
+                            if (message.clientId != null && message.hasOwnProperty("clientId"))
+                                object.clientId = message.clientId;
+                            if (message.scopes && message.scopes.length) {
+                                object.scopes = [];
+                                for (var j = 0; j < message.scopes.length; ++j)
+                                    object.scopes[j] = message.scopes[j];
+                            }
+                            if (message.authUri != null && message.hasOwnProperty("authUri"))
+                                object.authUri = message.authUri;
+                            if (message.systemProviderId != null && message.hasOwnProperty("systemProviderId")) {
+                                object.systemProviderId = options.enums === String ? $root.google.cloud.developerconnect.v1.SystemProvider[message.systemProviderId] === undefined ? message.systemProviderId : $root.google.cloud.developerconnect.v1.SystemProvider[message.systemProviderId] : message.systemProviderId;
+                                if (options.oneofs)
+                                    object.id = "systemProviderId";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StartOAuthResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StartOAuthResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StartOAuthResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.StartOAuthResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StartOAuthResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.StartOAuthResponse";
+                        };
+    
+                        return StartOAuthResponse;
+                    })();
+    
+                    v1.FinishOAuthRequest = (function() {
+    
+                        /**
+                         * Properties of a FinishOAuthRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IFinishOAuthRequest
+                         * @property {google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams|null} [oauthParams] FinishOAuthRequest oauthParams
+                         * @property {google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams|null} [googleOauthParams] FinishOAuthRequest googleOauthParams
+                         * @property {string|null} [accountConnector] FinishOAuthRequest accountConnector
+                         */
+    
+                        /**
+                         * Constructs a new FinishOAuthRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a FinishOAuthRequest.
+                         * @implements IFinishOAuthRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthRequest=} [properties] Properties to set
+                         */
+                        function FinishOAuthRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FinishOAuthRequest oauthParams.
+                         * @member {google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams|null|undefined} oauthParams
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @instance
+                         */
+                        FinishOAuthRequest.prototype.oauthParams = null;
+    
+                        /**
+                         * FinishOAuthRequest googleOauthParams.
+                         * @member {google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams|null|undefined} googleOauthParams
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @instance
+                         */
+                        FinishOAuthRequest.prototype.googleOauthParams = null;
+    
+                        /**
+                         * FinishOAuthRequest accountConnector.
+                         * @member {string} accountConnector
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @instance
+                         */
+                        FinishOAuthRequest.prototype.accountConnector = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FinishOAuthRequest params.
+                         * @member {"oauthParams"|"googleOauthParams"|undefined} params
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @instance
+                         */
+                        Object.defineProperty(FinishOAuthRequest.prototype, "params", {
+                            get: $util.oneOfGetter($oneOfFields = ["oauthParams", "googleOauthParams"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FinishOAuthRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest} FinishOAuthRequest instance
+                         */
+                        FinishOAuthRequest.create = function create(properties) {
+                            return new FinishOAuthRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FinishOAuthRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthRequest} message FinishOAuthRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FinishOAuthRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accountConnector != null && Object.hasOwnProperty.call(message, "accountConnector"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.accountConnector);
+                            if (message.oauthParams != null && Object.hasOwnProperty.call(message, "oauthParams"))
+                                $root.google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams.encode(message.oauthParams, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.googleOauthParams != null && Object.hasOwnProperty.call(message, "googleOauthParams"))
+                                $root.google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.encode(message.googleOauthParams, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FinishOAuthRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthRequest} message FinishOAuthRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FinishOAuthRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FinishOAuthRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest} FinishOAuthRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FinishOAuthRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FinishOAuthRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.oauthParams = $root.google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.googleOauthParams = $root.google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.accountConnector = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FinishOAuthRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest} FinishOAuthRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FinishOAuthRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FinishOAuthRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FinishOAuthRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.oauthParams != null && message.hasOwnProperty("oauthParams")) {
+                                properties.params = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams.verify(message.oauthParams);
+                                    if (error)
+                                        return "oauthParams." + error;
+                                }
+                            }
+                            if (message.googleOauthParams != null && message.hasOwnProperty("googleOauthParams")) {
+                                if (properties.params === 1)
+                                    return "params: multiple values";
+                                properties.params = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.verify(message.googleOauthParams);
+                                    if (error)
+                                        return "googleOauthParams." + error;
+                                }
+                            }
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector"))
+                                if (!$util.isString(message.accountConnector))
+                                    return "accountConnector: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FinishOAuthRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest} FinishOAuthRequest
+                         */
+                        FinishOAuthRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.FinishOAuthRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.FinishOAuthRequest();
+                            if (object.oauthParams != null) {
+                                if (typeof object.oauthParams !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.FinishOAuthRequest.oauthParams: object expected");
+                                message.oauthParams = $root.google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams.fromObject(object.oauthParams);
+                            }
+                            if (object.googleOauthParams != null) {
+                                if (typeof object.googleOauthParams !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.FinishOAuthRequest.googleOauthParams: object expected");
+                                message.googleOauthParams = $root.google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.fromObject(object.googleOauthParams);
+                            }
+                            if (object.accountConnector != null)
+                                message.accountConnector = String(object.accountConnector);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FinishOAuthRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.FinishOAuthRequest} message FinishOAuthRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FinishOAuthRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.accountConnector = "";
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector"))
+                                object.accountConnector = message.accountConnector;
+                            if (message.oauthParams != null && message.hasOwnProperty("oauthParams")) {
+                                object.oauthParams = $root.google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams.toObject(message.oauthParams, options);
+                                if (options.oneofs)
+                                    object.params = "oauthParams";
+                            }
+                            if (message.googleOauthParams != null && message.hasOwnProperty("googleOauthParams")) {
+                                object.googleOauthParams = $root.google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.toObject(message.googleOauthParams, options);
+                                if (options.oneofs)
+                                    object.params = "googleOauthParams";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FinishOAuthRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FinishOAuthRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FinishOAuthRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FinishOAuthRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.FinishOAuthRequest";
+                        };
+    
+                        FinishOAuthRequest.OAuthParams = (function() {
+    
+                            /**
+                             * Properties of a OAuthParams.
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                             * @interface IOAuthParams
+                             * @property {string|null} [code] OAuthParams code
+                             * @property {string|null} [ticket] OAuthParams ticket
+                             */
+    
+                            /**
+                             * Constructs a new OAuthParams.
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                             * @classdesc Represents a OAuthParams.
+                             * @implements IOAuthParams
+                             * @constructor
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams=} [properties] Properties to set
+                             */
+                            function OAuthParams(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OAuthParams code.
+                             * @member {string} code
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @instance
+                             */
+                            OAuthParams.prototype.code = "";
+    
+                            /**
+                             * OAuthParams ticket.
+                             * @member {string} ticket
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @instance
+                             */
+                            OAuthParams.prototype.ticket = "";
+    
+                            /**
+                             * Creates a new OAuthParams instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams=} [properties] Properties to set
+                             * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams} OAuthParams instance
+                             */
+                            OAuthParams.create = function create(properties) {
+                                return new OAuthParams(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OAuthParams message. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams} message OAuthParams message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OAuthParams.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+                                if (message.ticket != null && Object.hasOwnProperty.call(message, "ticket"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.ticket);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OAuthParams message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams} message OAuthParams message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OAuthParams.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a OAuthParams message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams} OAuthParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OAuthParams.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.code = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.ticket = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a OAuthParams message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams} OAuthParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OAuthParams.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a OAuthParams message.
+                             * @function verify
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OAuthParams.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    if (!$util.isString(message.code))
+                                        return "code: string expected";
+                                if (message.ticket != null && message.hasOwnProperty("ticket"))
+                                    if (!$util.isString(message.ticket))
+                                        return "ticket: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a OAuthParams message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams} OAuthParams
+                             */
+                            OAuthParams.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams)
+                                    return object;
+                                var message = new $root.google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams();
+                                if (object.code != null)
+                                    message.code = String(object.code);
+                                if (object.ticket != null)
+                                    message.ticket = String(object.ticket);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a OAuthParams message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams} message OAuthParams
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OAuthParams.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.code = "";
+                                    object.ticket = "";
+                                }
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    object.code = message.code;
+                                if (message.ticket != null && message.hasOwnProperty("ticket"))
+                                    object.ticket = message.ticket;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OAuthParams to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OAuthParams.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OAuthParams
+                             * @function getTypeUrl
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OAuthParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams";
+                            };
+    
+                            return OAuthParams;
+                        })();
+    
+                        FinishOAuthRequest.GoogleOAuthParams = (function() {
+    
+                            /**
+                             * Properties of a GoogleOAuthParams.
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                             * @interface IGoogleOAuthParams
+                             * @property {Array.<string>|null} [scopes] GoogleOAuthParams scopes
+                             * @property {string|null} [versionInfo] GoogleOAuthParams versionInfo
+                             * @property {string|null} [ticket] GoogleOAuthParams ticket
+                             */
+    
+                            /**
+                             * Constructs a new GoogleOAuthParams.
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest
+                             * @classdesc Represents a GoogleOAuthParams.
+                             * @implements IGoogleOAuthParams
+                             * @constructor
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams=} [properties] Properties to set
+                             */
+                            function GoogleOAuthParams(properties) {
+                                this.scopes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GoogleOAuthParams scopes.
+                             * @member {Array.<string>} scopes
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @instance
+                             */
+                            GoogleOAuthParams.prototype.scopes = $util.emptyArray;
+    
+                            /**
+                             * GoogleOAuthParams versionInfo.
+                             * @member {string} versionInfo
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @instance
+                             */
+                            GoogleOAuthParams.prototype.versionInfo = "";
+    
+                            /**
+                             * GoogleOAuthParams ticket.
+                             * @member {string} ticket
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @instance
+                             */
+                            GoogleOAuthParams.prototype.ticket = "";
+    
+                            /**
+                             * Creates a new GoogleOAuthParams instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams=} [properties] Properties to set
+                             * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams} GoogleOAuthParams instance
+                             */
+                            GoogleOAuthParams.create = function create(properties) {
+                                return new GoogleOAuthParams(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleOAuthParams message. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams} message GoogleOAuthParams message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleOAuthParams.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.scopes != null && message.scopes.length)
+                                    for (var i = 0; i < message.scopes.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.scopes[i]);
+                                if (message.versionInfo != null && Object.hasOwnProperty.call(message, "versionInfo"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.versionInfo);
+                                if (message.ticket != null && Object.hasOwnProperty.call(message, "ticket"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.ticket);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleOAuthParams message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams} message GoogleOAuthParams message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleOAuthParams.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GoogleOAuthParams message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams} GoogleOAuthParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleOAuthParams.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.scopes && message.scopes.length))
+                                                message.scopes = [];
+                                            message.scopes.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.versionInfo = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.ticket = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GoogleOAuthParams message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams} GoogleOAuthParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleOAuthParams.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GoogleOAuthParams message.
+                             * @function verify
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GoogleOAuthParams.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.scopes != null && message.hasOwnProperty("scopes")) {
+                                    if (!Array.isArray(message.scopes))
+                                        return "scopes: array expected";
+                                    for (var i = 0; i < message.scopes.length; ++i)
+                                        if (!$util.isString(message.scopes[i]))
+                                            return "scopes: string[] expected";
+                                }
+                                if (message.versionInfo != null && message.hasOwnProperty("versionInfo"))
+                                    if (!$util.isString(message.versionInfo))
+                                        return "versionInfo: string expected";
+                                if (message.ticket != null && message.hasOwnProperty("ticket"))
+                                    if (!$util.isString(message.ticket))
+                                        return "ticket: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GoogleOAuthParams message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams} GoogleOAuthParams
+                             */
+                            GoogleOAuthParams.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams)
+                                    return object;
+                                var message = new $root.google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams();
+                                if (object.scopes) {
+                                    if (!Array.isArray(object.scopes))
+                                        throw TypeError(".google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.scopes: array expected");
+                                    message.scopes = [];
+                                    for (var i = 0; i < object.scopes.length; ++i)
+                                        message.scopes[i] = String(object.scopes[i]);
+                                }
+                                if (object.versionInfo != null)
+                                    message.versionInfo = String(object.versionInfo);
+                                if (object.ticket != null)
+                                    message.ticket = String(object.ticket);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GoogleOAuthParams message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @static
+                             * @param {google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams} message GoogleOAuthParams
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GoogleOAuthParams.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.scopes = [];
+                                if (options.defaults) {
+                                    object.versionInfo = "";
+                                    object.ticket = "";
+                                }
+                                if (message.scopes && message.scopes.length) {
+                                    object.scopes = [];
+                                    for (var j = 0; j < message.scopes.length; ++j)
+                                        object.scopes[j] = message.scopes[j];
+                                }
+                                if (message.versionInfo != null && message.hasOwnProperty("versionInfo"))
+                                    object.versionInfo = message.versionInfo;
+                                if (message.ticket != null && message.hasOwnProperty("ticket"))
+                                    object.ticket = message.ticket;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GoogleOAuthParams to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GoogleOAuthParams.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GoogleOAuthParams
+                             * @function getTypeUrl
+                             * @memberof google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GoogleOAuthParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams";
+                            };
+    
+                            return GoogleOAuthParams;
+                        })();
+    
+                        return FinishOAuthRequest;
+                    })();
+    
+                    v1.FinishOAuthResponse = (function() {
+    
+                        /**
+                         * Properties of a FinishOAuthResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IFinishOAuthResponse
+                         * @property {google.cloud.developerconnect.v1.IExchangeError|null} [exchangeError] FinishOAuthResponse exchangeError
+                         */
+    
+                        /**
+                         * Constructs a new FinishOAuthResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a FinishOAuthResponse.
+                         * @implements IFinishOAuthResponse
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthResponse=} [properties] Properties to set
+                         */
+                        function FinishOAuthResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FinishOAuthResponse exchangeError.
+                         * @member {google.cloud.developerconnect.v1.IExchangeError|null|undefined} exchangeError
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @instance
+                         */
+                        FinishOAuthResponse.prototype.exchangeError = null;
+    
+                        /**
+                         * Creates a new FinishOAuthResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthResponse=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.FinishOAuthResponse} FinishOAuthResponse instance
+                         */
+                        FinishOAuthResponse.create = function create(properties) {
+                            return new FinishOAuthResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FinishOAuthResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthResponse} message FinishOAuthResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FinishOAuthResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.exchangeError != null && Object.hasOwnProperty.call(message, "exchangeError"))
+                                $root.google.cloud.developerconnect.v1.ExchangeError.encode(message.exchangeError, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FinishOAuthResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFinishOAuthResponse} message FinishOAuthResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FinishOAuthResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FinishOAuthResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.FinishOAuthResponse} FinishOAuthResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FinishOAuthResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FinishOAuthResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.exchangeError = $root.google.cloud.developerconnect.v1.ExchangeError.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FinishOAuthResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.FinishOAuthResponse} FinishOAuthResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FinishOAuthResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FinishOAuthResponse message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FinishOAuthResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.exchangeError != null && message.hasOwnProperty("exchangeError")) {
+                                var error = $root.google.cloud.developerconnect.v1.ExchangeError.verify(message.exchangeError);
+                                if (error)
+                                    return "exchangeError." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FinishOAuthResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.FinishOAuthResponse} FinishOAuthResponse
+                         */
+                        FinishOAuthResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.FinishOAuthResponse)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.FinishOAuthResponse();
+                            if (object.exchangeError != null) {
+                                if (typeof object.exchangeError !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.FinishOAuthResponse.exchangeError: object expected");
+                                message.exchangeError = $root.google.cloud.developerconnect.v1.ExchangeError.fromObject(object.exchangeError);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FinishOAuthResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.FinishOAuthResponse} message FinishOAuthResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FinishOAuthResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.exchangeError = null;
+                            if (message.exchangeError != null && message.hasOwnProperty("exchangeError"))
+                                object.exchangeError = $root.google.cloud.developerconnect.v1.ExchangeError.toObject(message.exchangeError, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FinishOAuthResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FinishOAuthResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FinishOAuthResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.FinishOAuthResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FinishOAuthResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.FinishOAuthResponse";
+                        };
+    
+                        return FinishOAuthResponse;
                     })();
     
                     v1.ExchangeError = (function() {
@@ -16971,6 +19811,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|getDeploymentEvent}.
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @typedef GetDeploymentEventCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.DeploymentEvent} [response] DeploymentEvent
+                         */
+    
+                        /**
+                         * Calls GetDeploymentEvent.
+                         * @function getDeploymentEvent
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IGetDeploymentEventRequest} request GetDeploymentEventRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.InsightsConfigService.GetDeploymentEventCallback} callback Node-style callback called with the error, if any, and DeploymentEvent
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InsightsConfigService.prototype.getDeploymentEvent = function getDeploymentEvent(request, callback) {
+                            return this.rpcCall(getDeploymentEvent, $root.google.cloud.developerconnect.v1.GetDeploymentEventRequest, $root.google.cloud.developerconnect.v1.DeploymentEvent, request, callback);
+                        }, "name", { value: "GetDeploymentEvent" });
+    
+                        /**
+                         * Calls GetDeploymentEvent.
+                         * @function getDeploymentEvent
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IGetDeploymentEventRequest} request GetDeploymentEventRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.DeploymentEvent>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|listDeploymentEvents}.
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @typedef ListDeploymentEventsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.ListDeploymentEventsResponse} [response] ListDeploymentEventsResponse
+                         */
+    
+                        /**
+                         * Calls ListDeploymentEvents.
+                         * @function listDeploymentEvents
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsRequest} request ListDeploymentEventsRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.InsightsConfigService.ListDeploymentEventsCallback} callback Node-style callback called with the error, if any, and ListDeploymentEventsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InsightsConfigService.prototype.listDeploymentEvents = function listDeploymentEvents(request, callback) {
+                            return this.rpcCall(listDeploymentEvents, $root.google.cloud.developerconnect.v1.ListDeploymentEventsRequest, $root.google.cloud.developerconnect.v1.ListDeploymentEventsResponse, request, callback);
+                        }, "name", { value: "ListDeploymentEvents" });
+    
+                        /**
+                         * Calls ListDeploymentEvents.
+                         * @function listDeploymentEvents
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsRequest} request ListDeploymentEventsRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.ListDeploymentEventsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return InsightsConfigService;
                     })();
     
@@ -16981,6 +19887,7 @@
                          * @memberof google.cloud.developerconnect.v1
                          * @interface IInsightsConfig
                          * @property {string|null} [appHubApplication] InsightsConfig appHubApplication
+                         * @property {google.cloud.developerconnect.v1.IProjects|null} [projects] InsightsConfig projects
                          * @property {string|null} [name] InsightsConfig name
                          * @property {google.protobuf.ITimestamp|null} [createTime] InsightsConfig createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] InsightsConfig updateTime
@@ -17020,6 +19927,14 @@
                          * @instance
                          */
                         InsightsConfig.prototype.appHubApplication = null;
+    
+                        /**
+                         * InsightsConfig projects.
+                         * @member {google.cloud.developerconnect.v1.IProjects|null|undefined} projects
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.projects = null;
     
                         /**
                          * InsightsConfig name.
@@ -17106,12 +20021,12 @@
     
                         /**
                          * InsightsConfig insightsConfigContext.
-                         * @member {"appHubApplication"|undefined} insightsConfigContext
+                         * @member {"appHubApplication"|"projects"|undefined} insightsConfigContext
                          * @memberof google.cloud.developerconnect.v1.InsightsConfig
                          * @instance
                          */
                         Object.defineProperty(InsightsConfig.prototype, "insightsConfigContext", {
-                            get: $util.oneOfGetter($oneOfFields = ["appHubApplication"]),
+                            get: $util.oneOfGetter($oneOfFields = ["appHubApplication", "projects"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -17166,6 +20081,8 @@
                             if (message.errors != null && message.errors.length)
                                 for (var i = 0; i < message.errors.length; ++i)
                                     $root.google.rpc.Status.encode(message.errors[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.projects != null && Object.hasOwnProperty.call(message, "projects"))
+                                $root.google.cloud.developerconnect.v1.Projects.encode(message.projects, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -17204,6 +20121,10 @@
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.appHubApplication = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.projects = $root.google.cloud.developerconnect.v1.Projects.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -17331,6 +20252,16 @@
                                 if (!$util.isString(message.appHubApplication))
                                     return "appHubApplication: string expected";
                             }
+                            if (message.projects != null && message.hasOwnProperty("projects")) {
+                                if (properties.insightsConfigContext === 1)
+                                    return "insightsConfigContext: multiple values";
+                                properties.insightsConfigContext = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.Projects.verify(message.projects);
+                                    if (error)
+                                        return "projects." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -17417,6 +20348,11 @@
                             var message = new $root.google.cloud.developerconnect.v1.InsightsConfig();
                             if (object.appHubApplication != null)
                                 message.appHubApplication = String(object.appHubApplication);
+                            if (object.projects != null) {
+                                if (typeof object.projects !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.projects: object expected");
+                                message.projects = $root.google.cloud.developerconnect.v1.Projects.fromObject(object.projects);
+                            }
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.createTime != null) {
@@ -17572,6 +20508,11 @@
                                 for (var j = 0; j < message.errors.length; ++j)
                                     object.errors[j] = $root.google.rpc.Status.toObject(message.errors[j], options);
                             }
+                            if (message.projects != null && message.hasOwnProperty("projects")) {
+                                object.projects = $root.google.cloud.developerconnect.v1.Projects.toObject(message.projects, options);
+                                if (options.oneofs)
+                                    object.insightsConfigContext = "projects";
+                            }
                             return object;
                         };
     
@@ -17622,6 +20563,227 @@
                         return InsightsConfig;
                     })();
     
+                    v1.Projects = (function() {
+    
+                        /**
+                         * Properties of a Projects.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IProjects
+                         * @property {Array.<string>|null} [projectIds] Projects projectIds
+                         */
+    
+                        /**
+                         * Constructs a new Projects.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a Projects.
+                         * @implements IProjects
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IProjects=} [properties] Properties to set
+                         */
+                        function Projects(properties) {
+                            this.projectIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Projects projectIds.
+                         * @member {Array.<string>} projectIds
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @instance
+                         */
+                        Projects.prototype.projectIds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Projects instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IProjects=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.Projects} Projects instance
+                         */
+                        Projects.create = function create(properties) {
+                            return new Projects(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Projects message. Does not implicitly {@link google.cloud.developerconnect.v1.Projects.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IProjects} message Projects message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Projects.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectIds != null && message.projectIds.length)
+                                for (var i = 0; i < message.projectIds.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectIds[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Projects message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.Projects.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IProjects} message Projects message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Projects.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Projects message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.Projects} Projects
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Projects.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.Projects();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.projectIds && message.projectIds.length))
+                                            message.projectIds = [];
+                                        message.projectIds.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Projects message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.Projects} Projects
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Projects.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Projects message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Projects.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectIds != null && message.hasOwnProperty("projectIds")) {
+                                if (!Array.isArray(message.projectIds))
+                                    return "projectIds: array expected";
+                                for (var i = 0; i < message.projectIds.length; ++i)
+                                    if (!$util.isString(message.projectIds[i]))
+                                        return "projectIds: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Projects message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.Projects} Projects
+                         */
+                        Projects.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.Projects)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.Projects();
+                            if (object.projectIds) {
+                                if (!Array.isArray(object.projectIds))
+                                    throw TypeError(".google.cloud.developerconnect.v1.Projects.projectIds: array expected");
+                                message.projectIds = [];
+                                for (var i = 0; i < object.projectIds.length; ++i)
+                                    message.projectIds[i] = String(object.projectIds[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Projects message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.Projects} message Projects
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Projects.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.projectIds = [];
+                            if (message.projectIds && message.projectIds.length) {
+                                object.projectIds = [];
+                                for (var j = 0; j < message.projectIds.length; ++j)
+                                    object.projectIds[j] = message.projectIds[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Projects to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Projects.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Projects
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.Projects
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Projects.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.Projects";
+                        };
+    
+                        return Projects;
+                    })();
+    
                     v1.RuntimeConfig = (function() {
     
                         /**
@@ -17629,7 +20791,9 @@
                          * @memberof google.cloud.developerconnect.v1
                          * @interface IRuntimeConfig
                          * @property {google.cloud.developerconnect.v1.IGKEWorkload|null} [gkeWorkload] RuntimeConfig gkeWorkload
+                         * @property {google.cloud.developerconnect.v1.IGoogleCloudRun|null} [googleCloudRun] RuntimeConfig googleCloudRun
                          * @property {google.cloud.developerconnect.v1.IAppHubWorkload|null} [appHubWorkload] RuntimeConfig appHubWorkload
+                         * @property {google.cloud.developerconnect.v1.IAppHubService|null} [appHubService] RuntimeConfig appHubService
                          * @property {string|null} [uri] RuntimeConfig uri
                          * @property {google.cloud.developerconnect.v1.RuntimeConfig.State|null} [state] RuntimeConfig state
                          */
@@ -17658,12 +20822,28 @@
                         RuntimeConfig.prototype.gkeWorkload = null;
     
                         /**
+                         * RuntimeConfig googleCloudRun.
+                         * @member {google.cloud.developerconnect.v1.IGoogleCloudRun|null|undefined} googleCloudRun
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @instance
+                         */
+                        RuntimeConfig.prototype.googleCloudRun = null;
+    
+                        /**
                          * RuntimeConfig appHubWorkload.
                          * @member {google.cloud.developerconnect.v1.IAppHubWorkload|null|undefined} appHubWorkload
                          * @memberof google.cloud.developerconnect.v1.RuntimeConfig
                          * @instance
                          */
                         RuntimeConfig.prototype.appHubWorkload = null;
+    
+                        /**
+                         * RuntimeConfig appHubService.
+                         * @member {google.cloud.developerconnect.v1.IAppHubService|null|undefined} appHubService
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @instance
+                         */
+                        RuntimeConfig.prototype.appHubService = null;
     
                         /**
                          * RuntimeConfig uri.
@@ -17686,23 +20866,23 @@
     
                         /**
                          * RuntimeConfig runtime.
-                         * @member {"gkeWorkload"|undefined} runtime
+                         * @member {"gkeWorkload"|"googleCloudRun"|undefined} runtime
                          * @memberof google.cloud.developerconnect.v1.RuntimeConfig
                          * @instance
                          */
                         Object.defineProperty(RuntimeConfig.prototype, "runtime", {
-                            get: $util.oneOfGetter($oneOfFields = ["gkeWorkload"]),
+                            get: $util.oneOfGetter($oneOfFields = ["gkeWorkload", "googleCloudRun"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
                         /**
                          * RuntimeConfig derivedFrom.
-                         * @member {"appHubWorkload"|undefined} derivedFrom
+                         * @member {"appHubWorkload"|"appHubService"|undefined} derivedFrom
                          * @memberof google.cloud.developerconnect.v1.RuntimeConfig
                          * @instance
                          */
                         Object.defineProperty(RuntimeConfig.prototype, "derivedFrom", {
-                            get: $util.oneOfGetter($oneOfFields = ["appHubWorkload"]),
+                            get: $util.oneOfGetter($oneOfFields = ["appHubWorkload", "appHubService"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -17738,6 +20918,10 @@
                                 $root.google.cloud.developerconnect.v1.GKEWorkload.encode(message.gkeWorkload, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.appHubWorkload != null && Object.hasOwnProperty.call(message, "appHubWorkload"))
                                 $root.google.cloud.developerconnect.v1.AppHubWorkload.encode(message.appHubWorkload, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.googleCloudRun != null && Object.hasOwnProperty.call(message, "googleCloudRun"))
+                                $root.google.cloud.developerconnect.v1.GoogleCloudRun.encode(message.googleCloudRun, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.appHubService != null && Object.hasOwnProperty.call(message, "appHubService"))
+                                $root.google.cloud.developerconnect.v1.AppHubService.encode(message.appHubService, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -17778,8 +20962,16 @@
                                         message.gkeWorkload = $root.google.cloud.developerconnect.v1.GKEWorkload.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 5: {
+                                        message.googleCloudRun = $root.google.cloud.developerconnect.v1.GoogleCloudRun.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 4: {
                                         message.appHubWorkload = $root.google.cloud.developerconnect.v1.AppHubWorkload.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.appHubService = $root.google.cloud.developerconnect.v1.AppHubService.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -17834,12 +21026,32 @@
                                         return "gkeWorkload." + error;
                                 }
                             }
+                            if (message.googleCloudRun != null && message.hasOwnProperty("googleCloudRun")) {
+                                if (properties.runtime === 1)
+                                    return "runtime: multiple values";
+                                properties.runtime = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GoogleCloudRun.verify(message.googleCloudRun);
+                                    if (error)
+                                        return "googleCloudRun." + error;
+                                }
+                            }
                             if (message.appHubWorkload != null && message.hasOwnProperty("appHubWorkload")) {
                                 properties.derivedFrom = 1;
                                 {
                                     var error = $root.google.cloud.developerconnect.v1.AppHubWorkload.verify(message.appHubWorkload);
                                     if (error)
                                         return "appHubWorkload." + error;
+                                }
+                            }
+                            if (message.appHubService != null && message.hasOwnProperty("appHubService")) {
+                                if (properties.derivedFrom === 1)
+                                    return "derivedFrom: multiple values";
+                                properties.derivedFrom = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.AppHubService.verify(message.appHubService);
+                                    if (error)
+                                        return "appHubService." + error;
                                 }
                             }
                             if (message.uri != null && message.hasOwnProperty("uri"))
@@ -17874,10 +21086,20 @@
                                     throw TypeError(".google.cloud.developerconnect.v1.RuntimeConfig.gkeWorkload: object expected");
                                 message.gkeWorkload = $root.google.cloud.developerconnect.v1.GKEWorkload.fromObject(object.gkeWorkload);
                             }
+                            if (object.googleCloudRun != null) {
+                                if (typeof object.googleCloudRun !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.RuntimeConfig.googleCloudRun: object expected");
+                                message.googleCloudRun = $root.google.cloud.developerconnect.v1.GoogleCloudRun.fromObject(object.googleCloudRun);
+                            }
                             if (object.appHubWorkload != null) {
                                 if (typeof object.appHubWorkload !== "object")
                                     throw TypeError(".google.cloud.developerconnect.v1.RuntimeConfig.appHubWorkload: object expected");
                                 message.appHubWorkload = $root.google.cloud.developerconnect.v1.AppHubWorkload.fromObject(object.appHubWorkload);
+                            }
+                            if (object.appHubService != null) {
+                                if (typeof object.appHubService !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.RuntimeConfig.appHubService: object expected");
+                                message.appHubService = $root.google.cloud.developerconnect.v1.AppHubService.fromObject(object.appHubService);
                             }
                             if (object.uri != null)
                                 message.uri = String(object.uri);
@@ -17934,6 +21156,16 @@
                                 object.appHubWorkload = $root.google.cloud.developerconnect.v1.AppHubWorkload.toObject(message.appHubWorkload, options);
                                 if (options.oneofs)
                                     object.derivedFrom = "appHubWorkload";
+                            }
+                            if (message.googleCloudRun != null && message.hasOwnProperty("googleCloudRun")) {
+                                object.googleCloudRun = $root.google.cloud.developerconnect.v1.GoogleCloudRun.toObject(message.googleCloudRun, options);
+                                if (options.oneofs)
+                                    object.runtime = "googleCloudRun";
+                            }
+                            if (message.appHubService != null && message.hasOwnProperty("appHubService")) {
+                                object.appHubService = $root.google.cloud.developerconnect.v1.AppHubService.toObject(message.appHubService, options);
+                                if (options.oneofs)
+                                    object.derivedFrom = "appHubService";
                             }
                             return object;
                         };
@@ -18212,6 +21444,211 @@
                         return GKEWorkload;
                     })();
     
+                    v1.GoogleCloudRun = (function() {
+    
+                        /**
+                         * Properties of a GoogleCloudRun.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGoogleCloudRun
+                         * @property {string|null} [serviceUri] GoogleCloudRun serviceUri
+                         */
+    
+                        /**
+                         * Constructs a new GoogleCloudRun.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GoogleCloudRun.
+                         * @implements IGoogleCloudRun
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGoogleCloudRun=} [properties] Properties to set
+                         */
+                        function GoogleCloudRun(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleCloudRun serviceUri.
+                         * @member {string} serviceUri
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @instance
+                         */
+                        GoogleCloudRun.prototype.serviceUri = "";
+    
+                        /**
+                         * Creates a new GoogleCloudRun instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGoogleCloudRun=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GoogleCloudRun} GoogleCloudRun instance
+                         */
+                        GoogleCloudRun.create = function create(properties) {
+                            return new GoogleCloudRun(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleCloudRun message. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleCloudRun.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGoogleCloudRun} message GoogleCloudRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleCloudRun.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceUri != null && Object.hasOwnProperty.call(message, "serviceUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleCloudRun message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleCloudRun.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGoogleCloudRun} message GoogleCloudRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleCloudRun.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleCloudRun message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GoogleCloudRun} GoogleCloudRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleCloudRun.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GoogleCloudRun();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.serviceUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleCloudRun message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GoogleCloudRun} GoogleCloudRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleCloudRun.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleCloudRun message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleCloudRun.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                if (!$util.isString(message.serviceUri))
+                                    return "serviceUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleCloudRun message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GoogleCloudRun} GoogleCloudRun
+                         */
+                        GoogleCloudRun.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GoogleCloudRun)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GoogleCloudRun();
+                            if (object.serviceUri != null)
+                                message.serviceUri = String(object.serviceUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleCloudRun message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GoogleCloudRun} message GoogleCloudRun
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleCloudRun.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.serviceUri = "";
+                            if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                object.serviceUri = message.serviceUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleCloudRun to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleCloudRun.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoogleCloudRun
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GoogleCloudRun
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoogleCloudRun.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GoogleCloudRun";
+                        };
+    
+                        return GoogleCloudRun;
+                    })();
+    
                     v1.AppHubWorkload = (function() {
     
                         /**
@@ -18462,6 +21899,258 @@
                         };
     
                         return AppHubWorkload;
+                    })();
+    
+                    v1.AppHubService = (function() {
+    
+                        /**
+                         * Properties of an AppHubService.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IAppHubService
+                         * @property {string|null} [apphubService] AppHubService apphubService
+                         * @property {string|null} [criticality] AppHubService criticality
+                         * @property {string|null} [environment] AppHubService environment
+                         */
+    
+                        /**
+                         * Constructs a new AppHubService.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an AppHubService.
+                         * @implements IAppHubService
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IAppHubService=} [properties] Properties to set
+                         */
+                        function AppHubService(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AppHubService apphubService.
+                         * @member {string} apphubService
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @instance
+                         */
+                        AppHubService.prototype.apphubService = "";
+    
+                        /**
+                         * AppHubService criticality.
+                         * @member {string} criticality
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @instance
+                         */
+                        AppHubService.prototype.criticality = "";
+    
+                        /**
+                         * AppHubService environment.
+                         * @member {string} environment
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @instance
+                         */
+                        AppHubService.prototype.environment = "";
+    
+                        /**
+                         * Creates a new AppHubService instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IAppHubService=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.AppHubService} AppHubService instance
+                         */
+                        AppHubService.create = function create(properties) {
+                            return new AppHubService(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AppHubService message. Does not implicitly {@link google.cloud.developerconnect.v1.AppHubService.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IAppHubService} message AppHubService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppHubService.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.apphubService != null && Object.hasOwnProperty.call(message, "apphubService"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.apphubService);
+                            if (message.criticality != null && Object.hasOwnProperty.call(message, "criticality"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.criticality);
+                            if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.environment);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AppHubService message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.AppHubService.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IAppHubService} message AppHubService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppHubService.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AppHubService message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.AppHubService} AppHubService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppHubService.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.AppHubService();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.apphubService = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.criticality = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.environment = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AppHubService message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.AppHubService} AppHubService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppHubService.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AppHubService message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AppHubService.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.apphubService != null && message.hasOwnProperty("apphubService"))
+                                if (!$util.isString(message.apphubService))
+                                    return "apphubService: string expected";
+                            if (message.criticality != null && message.hasOwnProperty("criticality"))
+                                if (!$util.isString(message.criticality))
+                                    return "criticality: string expected";
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                if (!$util.isString(message.environment))
+                                    return "environment: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AppHubService message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.AppHubService} AppHubService
+                         */
+                        AppHubService.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.AppHubService)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.AppHubService();
+                            if (object.apphubService != null)
+                                message.apphubService = String(object.apphubService);
+                            if (object.criticality != null)
+                                message.criticality = String(object.criticality);
+                            if (object.environment != null)
+                                message.environment = String(object.environment);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AppHubService message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.AppHubService} message AppHubService
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AppHubService.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.apphubService = "";
+                                object.criticality = "";
+                                object.environment = "";
+                            }
+                            if (message.apphubService != null && message.hasOwnProperty("apphubService"))
+                                object.apphubService = message.apphubService;
+                            if (message.criticality != null && message.hasOwnProperty("criticality"))
+                                object.criticality = message.criticality;
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                object.environment = message.environment;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AppHubService to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AppHubService.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AppHubService
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.AppHubService
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AppHubService.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.AppHubService";
+                        };
+    
+                        return AppHubService;
                     })();
     
                     v1.ArtifactConfig = (function() {
@@ -19193,6 +22882,1584 @@
                         };
     
                         return GoogleArtifactRegistry;
+                    })();
+    
+                    v1.DeploymentEvent = (function() {
+    
+                        /**
+                         * Properties of a DeploymentEvent.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IDeploymentEvent
+                         * @property {string|null} [name] DeploymentEvent name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeploymentEvent createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] DeploymentEvent updateTime
+                         * @property {google.cloud.developerconnect.v1.IRuntimeConfig|null} [runtimeConfig] DeploymentEvent runtimeConfig
+                         * @property {string|null} [runtimeDeploymentUri] DeploymentEvent runtimeDeploymentUri
+                         * @property {google.cloud.developerconnect.v1.DeploymentEvent.State|null} [state] DeploymentEvent state
+                         * @property {Array.<google.cloud.developerconnect.v1.IArtifactDeployment>|null} [artifactDeployments] DeploymentEvent artifactDeployments
+                         * @property {google.protobuf.ITimestamp|null} [deployTime] DeploymentEvent deployTime
+                         * @property {google.protobuf.ITimestamp|null} [undeployTime] DeploymentEvent undeployTime
+                         */
+    
+                        /**
+                         * Constructs a new DeploymentEvent.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a DeploymentEvent.
+                         * @implements IDeploymentEvent
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IDeploymentEvent=} [properties] Properties to set
+                         */
+                        function DeploymentEvent(properties) {
+                            this.artifactDeployments = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeploymentEvent name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         */
+                        DeploymentEvent.prototype.name = "";
+    
+                        /**
+                         * DeploymentEvent createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         */
+                        DeploymentEvent.prototype.createTime = null;
+    
+                        /**
+                         * DeploymentEvent updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         */
+                        DeploymentEvent.prototype.updateTime = null;
+    
+                        /**
+                         * DeploymentEvent runtimeConfig.
+                         * @member {google.cloud.developerconnect.v1.IRuntimeConfig|null|undefined} runtimeConfig
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         */
+                        DeploymentEvent.prototype.runtimeConfig = null;
+    
+                        /**
+                         * DeploymentEvent runtimeDeploymentUri.
+                         * @member {string} runtimeDeploymentUri
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         */
+                        DeploymentEvent.prototype.runtimeDeploymentUri = "";
+    
+                        /**
+                         * DeploymentEvent state.
+                         * @member {google.cloud.developerconnect.v1.DeploymentEvent.State} state
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         */
+                        DeploymentEvent.prototype.state = 0;
+    
+                        /**
+                         * DeploymentEvent artifactDeployments.
+                         * @member {Array.<google.cloud.developerconnect.v1.IArtifactDeployment>} artifactDeployments
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         */
+                        DeploymentEvent.prototype.artifactDeployments = $util.emptyArray;
+    
+                        /**
+                         * DeploymentEvent deployTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deployTime
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         */
+                        DeploymentEvent.prototype.deployTime = null;
+    
+                        /**
+                         * DeploymentEvent undeployTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} undeployTime
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         */
+                        DeploymentEvent.prototype.undeployTime = null;
+    
+                        /**
+                         * Creates a new DeploymentEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeploymentEvent=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.DeploymentEvent} DeploymentEvent instance
+                         */
+                        DeploymentEvent.create = function create(properties) {
+                            return new DeploymentEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentEvent message. Does not implicitly {@link google.cloud.developerconnect.v1.DeploymentEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeploymentEvent} message DeploymentEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.runtimeConfig != null && Object.hasOwnProperty.call(message, "runtimeConfig"))
+                                $root.google.cloud.developerconnect.v1.RuntimeConfig.encode(message.runtimeConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.artifactDeployments != null && message.artifactDeployments.length)
+                                for (var i = 0; i < message.artifactDeployments.length; ++i)
+                                    $root.google.cloud.developerconnect.v1.ArtifactDeployment.encode(message.artifactDeployments[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.deployTime != null && Object.hasOwnProperty.call(message, "deployTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deployTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.state);
+                            if (message.undeployTime != null && Object.hasOwnProperty.call(message, "undeployTime"))
+                                $root.google.protobuf.Timestamp.encode(message.undeployTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.runtimeDeploymentUri != null && Object.hasOwnProperty.call(message, "runtimeDeploymentUri"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.runtimeDeploymentUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentEvent message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeploymentEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeploymentEvent} message DeploymentEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeploymentEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.DeploymentEvent} DeploymentEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentEvent.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.DeploymentEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.runtimeConfig = $root.google.cloud.developerconnect.v1.RuntimeConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.runtimeDeploymentUri = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.artifactDeployments && message.artifactDeployments.length))
+                                            message.artifactDeployments = [];
+                                        message.artifactDeployments.push($root.google.cloud.developerconnect.v1.ArtifactDeployment.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 10: {
+                                        message.deployTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.undeployTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeploymentEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.DeploymentEvent} DeploymentEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeploymentEvent message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeploymentEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.runtimeConfig != null && message.hasOwnProperty("runtimeConfig")) {
+                                var error = $root.google.cloud.developerconnect.v1.RuntimeConfig.verify(message.runtimeConfig);
+                                if (error)
+                                    return "runtimeConfig." + error;
+                            }
+                            if (message.runtimeDeploymentUri != null && message.hasOwnProperty("runtimeDeploymentUri"))
+                                if (!$util.isString(message.runtimeDeploymentUri))
+                                    return "runtimeDeploymentUri: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.artifactDeployments != null && message.hasOwnProperty("artifactDeployments")) {
+                                if (!Array.isArray(message.artifactDeployments))
+                                    return "artifactDeployments: array expected";
+                                for (var i = 0; i < message.artifactDeployments.length; ++i) {
+                                    var error = $root.google.cloud.developerconnect.v1.ArtifactDeployment.verify(message.artifactDeployments[i]);
+                                    if (error)
+                                        return "artifactDeployments." + error;
+                                }
+                            }
+                            if (message.deployTime != null && message.hasOwnProperty("deployTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deployTime);
+                                if (error)
+                                    return "deployTime." + error;
+                            }
+                            if (message.undeployTime != null && message.hasOwnProperty("undeployTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.undeployTime);
+                                if (error)
+                                    return "undeployTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeploymentEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.DeploymentEvent} DeploymentEvent
+                         */
+                        DeploymentEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.DeploymentEvent)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.DeploymentEvent();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.DeploymentEvent.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.DeploymentEvent.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.runtimeConfig != null) {
+                                if (typeof object.runtimeConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.DeploymentEvent.runtimeConfig: object expected");
+                                message.runtimeConfig = $root.google.cloud.developerconnect.v1.RuntimeConfig.fromObject(object.runtimeConfig);
+                            }
+                            if (object.runtimeDeploymentUri != null)
+                                message.runtimeDeploymentUri = String(object.runtimeDeploymentUri);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "STATE_ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "STATE_INACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            if (object.artifactDeployments) {
+                                if (!Array.isArray(object.artifactDeployments))
+                                    throw TypeError(".google.cloud.developerconnect.v1.DeploymentEvent.artifactDeployments: array expected");
+                                message.artifactDeployments = [];
+                                for (var i = 0; i < object.artifactDeployments.length; ++i) {
+                                    if (typeof object.artifactDeployments[i] !== "object")
+                                        throw TypeError(".google.cloud.developerconnect.v1.DeploymentEvent.artifactDeployments: object expected");
+                                    message.artifactDeployments[i] = $root.google.cloud.developerconnect.v1.ArtifactDeployment.fromObject(object.artifactDeployments[i]);
+                                }
+                            }
+                            if (object.deployTime != null) {
+                                if (typeof object.deployTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.DeploymentEvent.deployTime: object expected");
+                                message.deployTime = $root.google.protobuf.Timestamp.fromObject(object.deployTime);
+                            }
+                            if (object.undeployTime != null) {
+                                if (typeof object.undeployTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.DeploymentEvent.undeployTime: object expected");
+                                message.undeployTime = $root.google.protobuf.Timestamp.fromObject(object.undeployTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeploymentEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.DeploymentEvent} message DeploymentEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeploymentEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.artifactDeployments = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.runtimeConfig = null;
+                                object.deployTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.undeployTime = null;
+                                object.runtimeDeploymentUri = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.runtimeConfig != null && message.hasOwnProperty("runtimeConfig"))
+                                object.runtimeConfig = $root.google.cloud.developerconnect.v1.RuntimeConfig.toObject(message.runtimeConfig, options);
+                            if (message.artifactDeployments && message.artifactDeployments.length) {
+                                object.artifactDeployments = [];
+                                for (var j = 0; j < message.artifactDeployments.length; ++j)
+                                    object.artifactDeployments[j] = $root.google.cloud.developerconnect.v1.ArtifactDeployment.toObject(message.artifactDeployments[j], options);
+                            }
+                            if (message.deployTime != null && message.hasOwnProperty("deployTime"))
+                                object.deployTime = $root.google.protobuf.Timestamp.toObject(message.deployTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.developerconnect.v1.DeploymentEvent.State[message.state] === undefined ? message.state : $root.google.cloud.developerconnect.v1.DeploymentEvent.State[message.state] : message.state;
+                            if (message.undeployTime != null && message.hasOwnProperty("undeployTime"))
+                                object.undeployTime = $root.google.protobuf.Timestamp.toObject(message.undeployTime, options);
+                            if (message.runtimeDeploymentUri != null && message.hasOwnProperty("runtimeDeploymentUri"))
+                                object.runtimeDeploymentUri = message.runtimeDeploymentUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeploymentEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeploymentEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeploymentEvent
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.DeploymentEvent
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeploymentEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.DeploymentEvent";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.developerconnect.v1.DeploymentEvent.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} STATE_ACTIVE=1 STATE_ACTIVE value
+                         * @property {number} STATE_INACTIVE=2 STATE_INACTIVE value
+                         */
+                        DeploymentEvent.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STATE_ACTIVE"] = 1;
+                            values[valuesById[2] = "STATE_INACTIVE"] = 2;
+                            return values;
+                        })();
+    
+                        return DeploymentEvent;
+                    })();
+    
+                    v1.GetDeploymentEventRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDeploymentEventRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGetDeploymentEventRequest
+                         * @property {string|null} [name] GetDeploymentEventRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDeploymentEventRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GetDeploymentEventRequest.
+                         * @implements IGetDeploymentEventRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGetDeploymentEventRequest=} [properties] Properties to set
+                         */
+                        function GetDeploymentEventRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDeploymentEventRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @instance
+                         */
+                        GetDeploymentEventRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDeploymentEventRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGetDeploymentEventRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GetDeploymentEventRequest} GetDeploymentEventRequest instance
+                         */
+                        GetDeploymentEventRequest.create = function create(properties) {
+                            return new GetDeploymentEventRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDeploymentEventRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.GetDeploymentEventRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGetDeploymentEventRequest} message GetDeploymentEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDeploymentEventRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDeploymentEventRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GetDeploymentEventRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGetDeploymentEventRequest} message GetDeploymentEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDeploymentEventRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDeploymentEventRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GetDeploymentEventRequest} GetDeploymentEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDeploymentEventRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GetDeploymentEventRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDeploymentEventRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GetDeploymentEventRequest} GetDeploymentEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDeploymentEventRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDeploymentEventRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDeploymentEventRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDeploymentEventRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GetDeploymentEventRequest} GetDeploymentEventRequest
+                         */
+                        GetDeploymentEventRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GetDeploymentEventRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GetDeploymentEventRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDeploymentEventRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GetDeploymentEventRequest} message GetDeploymentEventRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDeploymentEventRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDeploymentEventRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDeploymentEventRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDeploymentEventRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GetDeploymentEventRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDeploymentEventRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GetDeploymentEventRequest";
+                        };
+    
+                        return GetDeploymentEventRequest;
+                    })();
+    
+                    v1.ListDeploymentEventsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDeploymentEventsRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IListDeploymentEventsRequest
+                         * @property {string|null} [parent] ListDeploymentEventsRequest parent
+                         * @property {number|null} [pageSize] ListDeploymentEventsRequest pageSize
+                         * @property {string|null} [pageToken] ListDeploymentEventsRequest pageToken
+                         * @property {string|null} [filter] ListDeploymentEventsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListDeploymentEventsRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ListDeploymentEventsRequest.
+                         * @implements IListDeploymentEventsRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsRequest=} [properties] Properties to set
+                         */
+                        function ListDeploymentEventsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDeploymentEventsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @instance
+                         */
+                        ListDeploymentEventsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDeploymentEventsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @instance
+                         */
+                        ListDeploymentEventsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDeploymentEventsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @instance
+                         */
+                        ListDeploymentEventsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListDeploymentEventsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @instance
+                         */
+                        ListDeploymentEventsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListDeploymentEventsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ListDeploymentEventsRequest} ListDeploymentEventsRequest instance
+                         */
+                        ListDeploymentEventsRequest.create = function create(properties) {
+                            return new ListDeploymentEventsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentEventsRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.ListDeploymentEventsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsRequest} message ListDeploymentEventsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentEventsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentEventsRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListDeploymentEventsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsRequest} message ListDeploymentEventsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentEventsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentEventsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ListDeploymentEventsRequest} ListDeploymentEventsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentEventsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListDeploymentEventsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentEventsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ListDeploymentEventsRequest} ListDeploymentEventsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentEventsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDeploymentEventsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDeploymentEventsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDeploymentEventsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ListDeploymentEventsRequest} ListDeploymentEventsRequest
+                         */
+                        ListDeploymentEventsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ListDeploymentEventsRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ListDeploymentEventsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDeploymentEventsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ListDeploymentEventsRequest} message ListDeploymentEventsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDeploymentEventsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDeploymentEventsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDeploymentEventsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDeploymentEventsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDeploymentEventsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ListDeploymentEventsRequest";
+                        };
+    
+                        return ListDeploymentEventsRequest;
+                    })();
+    
+                    v1.ListDeploymentEventsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDeploymentEventsResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IListDeploymentEventsResponse
+                         * @property {Array.<google.cloud.developerconnect.v1.IDeploymentEvent>|null} [deploymentEvents] ListDeploymentEventsResponse deploymentEvents
+                         * @property {string|null} [nextPageToken] ListDeploymentEventsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDeploymentEventsResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ListDeploymentEventsResponse.
+                         * @implements IListDeploymentEventsResponse
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsResponse=} [properties] Properties to set
+                         */
+                        function ListDeploymentEventsResponse(properties) {
+                            this.deploymentEvents = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDeploymentEventsResponse deploymentEvents.
+                         * @member {Array.<google.cloud.developerconnect.v1.IDeploymentEvent>} deploymentEvents
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @instance
+                         */
+                        ListDeploymentEventsResponse.prototype.deploymentEvents = $util.emptyArray;
+    
+                        /**
+                         * ListDeploymentEventsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @instance
+                         */
+                        ListDeploymentEventsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListDeploymentEventsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ListDeploymentEventsResponse} ListDeploymentEventsResponse instance
+                         */
+                        ListDeploymentEventsResponse.create = function create(properties) {
+                            return new ListDeploymentEventsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentEventsResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.ListDeploymentEventsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsResponse} message ListDeploymentEventsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentEventsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.deploymentEvents != null && message.deploymentEvents.length)
+                                for (var i = 0; i < message.deploymentEvents.length; ++i)
+                                    $root.google.cloud.developerconnect.v1.DeploymentEvent.encode(message.deploymentEvents[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentEventsResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListDeploymentEventsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListDeploymentEventsResponse} message ListDeploymentEventsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentEventsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentEventsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ListDeploymentEventsResponse} ListDeploymentEventsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentEventsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListDeploymentEventsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.deploymentEvents && message.deploymentEvents.length))
+                                            message.deploymentEvents = [];
+                                        message.deploymentEvents.push($root.google.cloud.developerconnect.v1.DeploymentEvent.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentEventsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ListDeploymentEventsResponse} ListDeploymentEventsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentEventsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDeploymentEventsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDeploymentEventsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.deploymentEvents != null && message.hasOwnProperty("deploymentEvents")) {
+                                if (!Array.isArray(message.deploymentEvents))
+                                    return "deploymentEvents: array expected";
+                                for (var i = 0; i < message.deploymentEvents.length; ++i) {
+                                    var error = $root.google.cloud.developerconnect.v1.DeploymentEvent.verify(message.deploymentEvents[i]);
+                                    if (error)
+                                        return "deploymentEvents." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDeploymentEventsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ListDeploymentEventsResponse} ListDeploymentEventsResponse
+                         */
+                        ListDeploymentEventsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ListDeploymentEventsResponse)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ListDeploymentEventsResponse();
+                            if (object.deploymentEvents) {
+                                if (!Array.isArray(object.deploymentEvents))
+                                    throw TypeError(".google.cloud.developerconnect.v1.ListDeploymentEventsResponse.deploymentEvents: array expected");
+                                message.deploymentEvents = [];
+                                for (var i = 0; i < object.deploymentEvents.length; ++i) {
+                                    if (typeof object.deploymentEvents[i] !== "object")
+                                        throw TypeError(".google.cloud.developerconnect.v1.ListDeploymentEventsResponse.deploymentEvents: object expected");
+                                    message.deploymentEvents[i] = $root.google.cloud.developerconnect.v1.DeploymentEvent.fromObject(object.deploymentEvents[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDeploymentEventsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ListDeploymentEventsResponse} message ListDeploymentEventsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDeploymentEventsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.deploymentEvents = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.deploymentEvents && message.deploymentEvents.length) {
+                                object.deploymentEvents = [];
+                                for (var j = 0; j < message.deploymentEvents.length; ++j)
+                                    object.deploymentEvents[j] = $root.google.cloud.developerconnect.v1.DeploymentEvent.toObject(message.deploymentEvents[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDeploymentEventsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDeploymentEventsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDeploymentEventsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ListDeploymentEventsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDeploymentEventsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ListDeploymentEventsResponse";
+                        };
+    
+                        return ListDeploymentEventsResponse;
+                    })();
+    
+                    v1.ArtifactDeployment = (function() {
+    
+                        /**
+                         * Properties of an ArtifactDeployment.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IArtifactDeployment
+                         * @property {string|null} [id] ArtifactDeployment id
+                         * @property {string|null} [artifactReference] ArtifactDeployment artifactReference
+                         * @property {string|null} [artifactAlias] ArtifactDeployment artifactAlias
+                         * @property {Array.<string>|null} [sourceCommitUris] ArtifactDeployment sourceCommitUris
+                         * @property {google.protobuf.ITimestamp|null} [deployTime] ArtifactDeployment deployTime
+                         * @property {google.protobuf.ITimestamp|null} [undeployTime] ArtifactDeployment undeployTime
+                         * @property {string|null} [containerStatusSummary] ArtifactDeployment containerStatusSummary
+                         */
+    
+                        /**
+                         * Constructs a new ArtifactDeployment.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an ArtifactDeployment.
+                         * @implements IArtifactDeployment
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IArtifactDeployment=} [properties] Properties to set
+                         */
+                        function ArtifactDeployment(properties) {
+                            this.sourceCommitUris = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ArtifactDeployment id.
+                         * @member {string} id
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @instance
+                         */
+                        ArtifactDeployment.prototype.id = "";
+    
+                        /**
+                         * ArtifactDeployment artifactReference.
+                         * @member {string} artifactReference
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @instance
+                         */
+                        ArtifactDeployment.prototype.artifactReference = "";
+    
+                        /**
+                         * ArtifactDeployment artifactAlias.
+                         * @member {string} artifactAlias
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @instance
+                         */
+                        ArtifactDeployment.prototype.artifactAlias = "";
+    
+                        /**
+                         * ArtifactDeployment sourceCommitUris.
+                         * @member {Array.<string>} sourceCommitUris
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @instance
+                         */
+                        ArtifactDeployment.prototype.sourceCommitUris = $util.emptyArray;
+    
+                        /**
+                         * ArtifactDeployment deployTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deployTime
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @instance
+                         */
+                        ArtifactDeployment.prototype.deployTime = null;
+    
+                        /**
+                         * ArtifactDeployment undeployTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} undeployTime
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @instance
+                         */
+                        ArtifactDeployment.prototype.undeployTime = null;
+    
+                        /**
+                         * ArtifactDeployment containerStatusSummary.
+                         * @member {string} containerStatusSummary
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @instance
+                         */
+                        ArtifactDeployment.prototype.containerStatusSummary = "";
+    
+                        /**
+                         * Creates a new ArtifactDeployment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IArtifactDeployment=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ArtifactDeployment} ArtifactDeployment instance
+                         */
+                        ArtifactDeployment.create = function create(properties) {
+                            return new ArtifactDeployment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ArtifactDeployment message. Does not implicitly {@link google.cloud.developerconnect.v1.ArtifactDeployment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IArtifactDeployment} message ArtifactDeployment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ArtifactDeployment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.artifactReference != null && Object.hasOwnProperty.call(message, "artifactReference"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.artifactReference);
+                            if (message.deployTime != null && Object.hasOwnProperty.call(message, "deployTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deployTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.undeployTime != null && Object.hasOwnProperty.call(message, "undeployTime"))
+                                $root.google.protobuf.Timestamp.encode(message.undeployTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.sourceCommitUris != null && message.sourceCommitUris.length)
+                                for (var i = 0; i < message.sourceCommitUris.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.sourceCommitUris[i]);
+                            if (message.containerStatusSummary != null && Object.hasOwnProperty.call(message, "containerStatusSummary"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.containerStatusSummary);
+                            if (message.artifactAlias != null && Object.hasOwnProperty.call(message, "artifactAlias"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.artifactAlias);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ArtifactDeployment message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ArtifactDeployment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IArtifactDeployment} message ArtifactDeployment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ArtifactDeployment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ArtifactDeployment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ArtifactDeployment} ArtifactDeployment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ArtifactDeployment.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ArtifactDeployment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.artifactReference = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.artifactAlias = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.sourceCommitUris && message.sourceCommitUris.length))
+                                            message.sourceCommitUris = [];
+                                        message.sourceCommitUris.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.deployTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.undeployTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.containerStatusSummary = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ArtifactDeployment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ArtifactDeployment} ArtifactDeployment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ArtifactDeployment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ArtifactDeployment message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ArtifactDeployment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.artifactReference != null && message.hasOwnProperty("artifactReference"))
+                                if (!$util.isString(message.artifactReference))
+                                    return "artifactReference: string expected";
+                            if (message.artifactAlias != null && message.hasOwnProperty("artifactAlias"))
+                                if (!$util.isString(message.artifactAlias))
+                                    return "artifactAlias: string expected";
+                            if (message.sourceCommitUris != null && message.hasOwnProperty("sourceCommitUris")) {
+                                if (!Array.isArray(message.sourceCommitUris))
+                                    return "sourceCommitUris: array expected";
+                                for (var i = 0; i < message.sourceCommitUris.length; ++i)
+                                    if (!$util.isString(message.sourceCommitUris[i]))
+                                        return "sourceCommitUris: string[] expected";
+                            }
+                            if (message.deployTime != null && message.hasOwnProperty("deployTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deployTime);
+                                if (error)
+                                    return "deployTime." + error;
+                            }
+                            if (message.undeployTime != null && message.hasOwnProperty("undeployTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.undeployTime);
+                                if (error)
+                                    return "undeployTime." + error;
+                            }
+                            if (message.containerStatusSummary != null && message.hasOwnProperty("containerStatusSummary"))
+                                if (!$util.isString(message.containerStatusSummary))
+                                    return "containerStatusSummary: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ArtifactDeployment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ArtifactDeployment} ArtifactDeployment
+                         */
+                        ArtifactDeployment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ArtifactDeployment)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ArtifactDeployment();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.artifactReference != null)
+                                message.artifactReference = String(object.artifactReference);
+                            if (object.artifactAlias != null)
+                                message.artifactAlias = String(object.artifactAlias);
+                            if (object.sourceCommitUris) {
+                                if (!Array.isArray(object.sourceCommitUris))
+                                    throw TypeError(".google.cloud.developerconnect.v1.ArtifactDeployment.sourceCommitUris: array expected");
+                                message.sourceCommitUris = [];
+                                for (var i = 0; i < object.sourceCommitUris.length; ++i)
+                                    message.sourceCommitUris[i] = String(object.sourceCommitUris[i]);
+                            }
+                            if (object.deployTime != null) {
+                                if (typeof object.deployTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.ArtifactDeployment.deployTime: object expected");
+                                message.deployTime = $root.google.protobuf.Timestamp.fromObject(object.deployTime);
+                            }
+                            if (object.undeployTime != null) {
+                                if (typeof object.undeployTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.ArtifactDeployment.undeployTime: object expected");
+                                message.undeployTime = $root.google.protobuf.Timestamp.fromObject(object.undeployTime);
+                            }
+                            if (object.containerStatusSummary != null)
+                                message.containerStatusSummary = String(object.containerStatusSummary);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ArtifactDeployment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ArtifactDeployment} message ArtifactDeployment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ArtifactDeployment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.sourceCommitUris = [];
+                            if (options.defaults) {
+                                object.id = "";
+                                object.artifactReference = "";
+                                object.deployTime = null;
+                                object.undeployTime = null;
+                                object.containerStatusSummary = "";
+                                object.artifactAlias = "";
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.artifactReference != null && message.hasOwnProperty("artifactReference"))
+                                object.artifactReference = message.artifactReference;
+                            if (message.deployTime != null && message.hasOwnProperty("deployTime"))
+                                object.deployTime = $root.google.protobuf.Timestamp.toObject(message.deployTime, options);
+                            if (message.undeployTime != null && message.hasOwnProperty("undeployTime"))
+                                object.undeployTime = $root.google.protobuf.Timestamp.toObject(message.undeployTime, options);
+                            if (message.sourceCommitUris && message.sourceCommitUris.length) {
+                                object.sourceCommitUris = [];
+                                for (var j = 0; j < message.sourceCommitUris.length; ++j)
+                                    object.sourceCommitUris[j] = message.sourceCommitUris[j];
+                            }
+                            if (message.containerStatusSummary != null && message.hasOwnProperty("containerStatusSummary"))
+                                object.containerStatusSummary = message.containerStatusSummary;
+                            if (message.artifactAlias != null && message.hasOwnProperty("artifactAlias"))
+                                object.artifactAlias = message.artifactAlias;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ArtifactDeployment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ArtifactDeployment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ArtifactDeployment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ArtifactDeployment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ArtifactDeployment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ArtifactDeployment";
+                        };
+    
+                        return ArtifactDeployment;
                     })();
     
                     v1.CreateInsightsConfigRequest = (function() {
