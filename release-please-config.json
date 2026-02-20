@@ -224,7 +224,7 @@
     "packages/google-streetview-publish": {},
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
-    "packages/google-cloud-visionai": {}
+    "packages/google-cloud-visionai": {},
     "packages/google-cloud-ces": {}
   },
   "plugins": [
