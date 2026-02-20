@@ -223,7 +223,11 @@
     "packages/google-streetview-publish": {},
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
+<<<<<<< sofisl-patch-19
     "packages/google-cloud-workflows": {},
+=======
+    "packages/google-cloud-workloadmanager": {},
+>>>>>>> main
     "packages/google-cloud-ces": {}
   },
   "plugins": [
