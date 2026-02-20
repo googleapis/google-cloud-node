@@ -1,12 +1,9 @@
 {
   "bump-minor-pre-major": true,
   "initial-version": "0.1.0",
+  "separate-pull-requests": false,
   "commit-batch-size": 1,
   "packages": {
-    "handwritten/logging-winston": {},
-    "handwritten/bigquery": {},
-    "handwritten/cloud-profiler": {},
-    "handwritten/logging-bunyan": {},
     "packages/gapic-node-processing": {},
     "packages/google-ads-admanager": {},
     "packages/google-ads-datamanager": {},

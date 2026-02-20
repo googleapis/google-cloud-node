@@ -193,6 +193,9 @@ export class KeyTrackingServiceClient {
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
+      organizationProtectedResourceScopePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/protectedResourceScope'
+      ),
       projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/protectedResourcesSummary'
       ),
@@ -363,16 +366,25 @@ export class KeyTrackingServiceClient {
   // -------------------
 /**
  * Returns aggregate information about the resources protected by the given
- * Cloud KMS {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}. Only resources within
- * the same Cloud organization as the key will be returned. The project that
- * holds the key must be part of an organization in order for this call to
- * succeed.
+ * Cloud KMS {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}. By default,
+ * summary of resources within the same Cloud organization as the key will be
+ * returned, which requires the KMS organization service account to be
+ * configured(refer
+ * https://docs.cloud.google.com/kms/docs/view-key-usage#required-roles).
+ * If the KMS organization service account is not configured or key's project
+ * is not part of an organization, set
+ * {@link protos.google.cloud.kms.inventory.v1.GetProtectedResourcesSummaryRequest.fallback_scope|fallback_scope}
+ * to `FALLBACK_SCOPE_PROJECT` to retrieve a summary of protected resources
+ * within the key's project.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The resource name of the
  *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ * @param {google.cloud.kms.inventory.v1.FallbackScope} [request.fallbackScope]
+ *   Optional. The scope to use if the kms organization service account is not
+ *   configured.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -463,13 +475,20 @@ export class KeyTrackingServiceClient {
 
  /**
  * Returns metadata about the resources protected by the given Cloud KMS
- * {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} in the given Cloud organization.
+ * {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} in the given Cloud
+ * organization/project.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.scope
- *   Required. Resource name of the organization.
- *   Example: organizations/123
+ *   Required. A scope can be an organization or a project. Resources protected
+ *   by the crypto key in provided scope will be returned.
+ *
+ *   The following values are allowed:
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/12345678")
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
  * @param {string} request.cryptoKey
  *   Required. The resource name of the
  *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
@@ -594,8 +613,14 @@ export class KeyTrackingServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.scope
- *   Required. Resource name of the organization.
- *   Example: organizations/123
+ *   Required. A scope can be an organization or a project. Resources protected
+ *   by the crypto key in provided scope will be returned.
+ *
+ *   The following values are allowed:
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/12345678")
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
  * @param {string} request.cryptoKey
  *   Required. The resource name of the
  *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
@@ -669,8 +694,14 @@ export class KeyTrackingServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.scope
- *   Required. Resource name of the organization.
- *   Example: organizations/123
+ *   Required. A scope can be an organization or a project. Resources protected
+ *   by the crypto key in provided scope will be returned.
+ *
+ *   The following values are allowed:
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/12345678")
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
  * @param {string} request.cryptoKey
  *   Required. The resource name of the
  *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
@@ -1010,6 +1041,29 @@ export class KeyTrackingServiceClient {
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
     return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
+  }
+
+  /**
+   * Return a fully-qualified organizationProtectedResourceScope resource name string.
+   *
+   * @param {string} organization
+   * @returns {string} Resource name string.
+   */
+  organizationProtectedResourceScopePath(organization:string) {
+    return this.pathTemplates.organizationProtectedResourceScopePathTemplate.render({
+      organization: organization,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationProtectedResourceScope resource.
+   *
+   * @param {string} organizationProtectedResourceScopeName
+   *   A fully-qualified path representing organization_protectedResourceScope resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationProtectedResourceScopeName(organizationProtectedResourceScopeName: string) {
+    return this.pathTemplates.organizationProtectedResourceScopePathTemplate.match(organizationProtectedResourceScopeName).organization;
   }
 
   /**

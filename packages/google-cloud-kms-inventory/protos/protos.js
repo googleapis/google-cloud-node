@@ -753,6 +753,7 @@
                              * @memberof google.cloud.kms.inventory.v1
                              * @interface IGetProtectedResourcesSummaryRequest
                              * @property {string|null} [name] GetProtectedResourcesSummaryRequest name
+                             * @property {google.cloud.kms.inventory.v1.FallbackScope|null} [fallbackScope] GetProtectedResourcesSummaryRequest fallbackScope
                              */
     
                             /**
@@ -777,6 +778,14 @@
                              * @instance
                              */
                             GetProtectedResourcesSummaryRequest.prototype.name = "";
+    
+                            /**
+                             * GetProtectedResourcesSummaryRequest fallbackScope.
+                             * @member {google.cloud.kms.inventory.v1.FallbackScope} fallbackScope
+                             * @memberof google.cloud.kms.inventory.v1.GetProtectedResourcesSummaryRequest
+                             * @instance
+                             */
+                            GetProtectedResourcesSummaryRequest.prototype.fallbackScope = 0;
     
                             /**
                              * Creates a new GetProtectedResourcesSummaryRequest instance using the specified properties.
@@ -804,6 +813,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.fallbackScope != null && Object.hasOwnProperty.call(message, "fallbackScope"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.fallbackScope);
                                 return writer;
                             };
     
@@ -844,6 +855,10 @@
                                             message.name = reader.string();
                                             break;
                                         }
+                                    case 2: {
+                                            message.fallbackScope = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -882,6 +897,14 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.fallbackScope != null && message.hasOwnProperty("fallbackScope"))
+                                    switch (message.fallbackScope) {
+                                    default:
+                                        return "fallbackScope: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -899,6 +922,22 @@
                                 var message = new $root.google.cloud.kms.inventory.v1.GetProtectedResourcesSummaryRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                switch (object.fallbackScope) {
+                                default:
+                                    if (typeof object.fallbackScope === "number") {
+                                        message.fallbackScope = object.fallbackScope;
+                                        break;
+                                    }
+                                    break;
+                                case "FALLBACK_SCOPE_UNSPECIFIED":
+                                case 0:
+                                    message.fallbackScope = 0;
+                                    break;
+                                case "FALLBACK_SCOPE_PROJECT":
+                                case 1:
+                                    message.fallbackScope = 1;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -915,10 +954,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.fallbackScope = options.enums === String ? "FALLBACK_SCOPE_UNSPECIFIED" : 0;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.fallbackScope != null && message.hasOwnProperty("fallbackScope"))
+                                    object.fallbackScope = options.enums === String ? $root.google.cloud.kms.inventory.v1.FallbackScope[message.fallbackScope] === undefined ? message.fallbackScope : $root.google.cloud.kms.inventory.v1.FallbackScope[message.fallbackScope] : message.fallbackScope;
                                 return object;
                             };
     
@@ -963,6 +1006,7 @@
                              * @property {Object.<string,number|Long>|null} [resourceTypes] ProtectedResourcesSummary resourceTypes
                              * @property {Object.<string,number|Long>|null} [cloudProducts] ProtectedResourcesSummary cloudProducts
                              * @property {Object.<string,number|Long>|null} [locations] ProtectedResourcesSummary locations
+                             * @property {Array.<google.cloud.kms.inventory.v1.IWarning>|null} [warnings] ProtectedResourcesSummary warnings
                              */
     
                             /**
@@ -977,6 +1021,7 @@
                                 this.resourceTypes = {};
                                 this.cloudProducts = {};
                                 this.locations = {};
+                                this.warnings = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -1032,6 +1077,14 @@
                             ProtectedResourcesSummary.prototype.locations = $util.emptyObject;
     
                             /**
+                             * ProtectedResourcesSummary warnings.
+                             * @member {Array.<google.cloud.kms.inventory.v1.IWarning>} warnings
+                             * @memberof google.cloud.kms.inventory.v1.ProtectedResourcesSummary
+                             * @instance
+                             */
+                            ProtectedResourcesSummary.prototype.warnings = $util.emptyArray;
+    
+                            /**
                              * Creates a new ProtectedResourcesSummary instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.kms.inventory.v1.ProtectedResourcesSummary
@@ -1070,6 +1123,9 @@
                                 if (message.cloudProducts != null && Object.hasOwnProperty.call(message, "cloudProducts"))
                                     for (var keys = Object.keys(message.cloudProducts), i = 0; i < keys.length; ++i)
                                         writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.cloudProducts[keys[i]]).ldelim();
+                                if (message.warnings != null && message.warnings.length)
+                                    for (var i = 0; i < message.warnings.length; ++i)
+                                        $root.google.cloud.kms.inventory.v1.Warning.encode(message.warnings[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1187,6 +1243,12 @@
                                             message.locations[key] = value;
                                             break;
                                         }
+                                    case 7: {
+                                            if (!(message.warnings && message.warnings.length))
+                                                message.warnings = [];
+                                            message.warnings.push($root.google.cloud.kms.inventory.v1.Warning.decode(reader, reader.uint32()));
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1254,6 +1316,15 @@
                                     for (var i = 0; i < key.length; ++i)
                                         if (!$util.isInteger(message.locations[key[i]]) && !(message.locations[key[i]] && $util.isInteger(message.locations[key[i]].low) && $util.isInteger(message.locations[key[i]].high)))
                                             return "locations: integer|Long{k:string} expected";
+                                }
+                                if (message.warnings != null && message.hasOwnProperty("warnings")) {
+                                    if (!Array.isArray(message.warnings))
+                                        return "warnings: array expected";
+                                    for (var i = 0; i < message.warnings.length; ++i) {
+                                        var error = $root.google.cloud.kms.inventory.v1.Warning.verify(message.warnings[i]);
+                                        if (error)
+                                            return "warnings." + error;
+                                    }
                                 }
                                 return null;
                             };
@@ -1325,6 +1396,16 @@
                                         else if (typeof object.locations[keys[i]] === "object")
                                             message.locations[keys[i]] = new $util.LongBits(object.locations[keys[i]].low >>> 0, object.locations[keys[i]].high >>> 0).toNumber();
                                 }
+                                if (object.warnings) {
+                                    if (!Array.isArray(object.warnings))
+                                        throw TypeError(".google.cloud.kms.inventory.v1.ProtectedResourcesSummary.warnings: array expected");
+                                    message.warnings = [];
+                                    for (var i = 0; i < object.warnings.length; ++i) {
+                                        if (typeof object.warnings[i] !== "object")
+                                            throw TypeError(".google.cloud.kms.inventory.v1.ProtectedResourcesSummary.warnings: object expected");
+                                        message.warnings[i] = $root.google.cloud.kms.inventory.v1.Warning.fromObject(object.warnings[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -1341,6 +1422,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.warnings = [];
                                 if (options.objects || options.defaults) {
                                     object.resourceTypes = {};
                                     object.locations = {};
@@ -1388,6 +1471,11 @@
                                             object.cloudProducts[keys2[j]] = options.longs === String ? String(message.cloudProducts[keys2[j]]) : message.cloudProducts[keys2[j]];
                                         else
                                             object.cloudProducts[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.cloudProducts[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.cloudProducts[keys2[j]].low >>> 0, message.cloudProducts[keys2[j]].high >>> 0).toNumber() : message.cloudProducts[keys2[j]];
+                                }
+                                if (message.warnings && message.warnings.length) {
+                                    object.warnings = [];
+                                    for (var j = 0; j < message.warnings.length; ++j)
+                                        object.warnings[j] = $root.google.cloud.kms.inventory.v1.Warning.toObject(message.warnings[j], options);
                                 }
                                 return object;
                             };
@@ -2455,6 +2543,296 @@
                             };
     
                             return ProtectedResource;
+                        })();
+    
+                        v1.Warning = (function() {
+    
+                            /**
+                             * Properties of a Warning.
+                             * @memberof google.cloud.kms.inventory.v1
+                             * @interface IWarning
+                             * @property {google.cloud.kms.inventory.v1.Warning.WarningCode|null} [warningCode] Warning warningCode
+                             * @property {string|null} [displayMessage] Warning displayMessage
+                             */
+    
+                            /**
+                             * Constructs a new Warning.
+                             * @memberof google.cloud.kms.inventory.v1
+                             * @classdesc Represents a Warning.
+                             * @implements IWarning
+                             * @constructor
+                             * @param {google.cloud.kms.inventory.v1.IWarning=} [properties] Properties to set
+                             */
+                            function Warning(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Warning warningCode.
+                             * @member {google.cloud.kms.inventory.v1.Warning.WarningCode} warningCode
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @instance
+                             */
+                            Warning.prototype.warningCode = 0;
+    
+                            /**
+                             * Warning displayMessage.
+                             * @member {string} displayMessage
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @instance
+                             */
+                            Warning.prototype.displayMessage = "";
+    
+                            /**
+                             * Creates a new Warning instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @static
+                             * @param {google.cloud.kms.inventory.v1.IWarning=} [properties] Properties to set
+                             * @returns {google.cloud.kms.inventory.v1.Warning} Warning instance
+                             */
+                            Warning.create = function create(properties) {
+                                return new Warning(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Warning message. Does not implicitly {@link google.cloud.kms.inventory.v1.Warning.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @static
+                             * @param {google.cloud.kms.inventory.v1.IWarning} message Warning message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Warning.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.warningCode != null && Object.hasOwnProperty.call(message, "warningCode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.warningCode);
+                                if (message.displayMessage != null && Object.hasOwnProperty.call(message, "displayMessage"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayMessage);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Warning message, length delimited. Does not implicitly {@link google.cloud.kms.inventory.v1.Warning.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @static
+                             * @param {google.cloud.kms.inventory.v1.IWarning} message Warning message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Warning.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Warning message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.inventory.v1.Warning} Warning
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Warning.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.inventory.v1.Warning();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.warningCode = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayMessage = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Warning message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.inventory.v1.Warning} Warning
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Warning.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Warning message.
+                             * @function verify
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Warning.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.warningCode != null && message.hasOwnProperty("warningCode"))
+                                    switch (message.warningCode) {
+                                    default:
+                                        return "warningCode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.displayMessage != null && message.hasOwnProperty("displayMessage"))
+                                    if (!$util.isString(message.displayMessage))
+                                        return "displayMessage: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Warning message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.inventory.v1.Warning} Warning
+                             */
+                            Warning.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.inventory.v1.Warning)
+                                    return object;
+                                var message = new $root.google.cloud.kms.inventory.v1.Warning();
+                                switch (object.warningCode) {
+                                default:
+                                    if (typeof object.warningCode === "number") {
+                                        message.warningCode = object.warningCode;
+                                        break;
+                                    }
+                                    break;
+                                case "WARNING_CODE_UNSPECIFIED":
+                                case 0:
+                                    message.warningCode = 0;
+                                    break;
+                                case "INSUFFICIENT_PERMISSIONS_PARTIAL_DATA":
+                                case 1:
+                                    message.warningCode = 1;
+                                    break;
+                                case "RESOURCE_LIMIT_EXCEEDED_PARTIAL_DATA":
+                                case 2:
+                                    message.warningCode = 2;
+                                    break;
+                                case "ORG_LESS_PROJECT_PARTIAL_DATA":
+                                case 3:
+                                    message.warningCode = 3;
+                                    break;
+                                }
+                                if (object.displayMessage != null)
+                                    message.displayMessage = String(object.displayMessage);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Warning message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @static
+                             * @param {google.cloud.kms.inventory.v1.Warning} message Warning
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Warning.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.warningCode = options.enums === String ? "WARNING_CODE_UNSPECIFIED" : 0;
+                                    object.displayMessage = "";
+                                }
+                                if (message.warningCode != null && message.hasOwnProperty("warningCode"))
+                                    object.warningCode = options.enums === String ? $root.google.cloud.kms.inventory.v1.Warning.WarningCode[message.warningCode] === undefined ? message.warningCode : $root.google.cloud.kms.inventory.v1.Warning.WarningCode[message.warningCode] : message.warningCode;
+                                if (message.displayMessage != null && message.hasOwnProperty("displayMessage"))
+                                    object.displayMessage = message.displayMessage;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Warning to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Warning.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Warning
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.inventory.v1.Warning
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Warning.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.inventory.v1.Warning";
+                            };
+    
+                            /**
+                             * WarningCode enum.
+                             * @name google.cloud.kms.inventory.v1.Warning.WarningCode
+                             * @enum {number}
+                             * @property {number} WARNING_CODE_UNSPECIFIED=0 WARNING_CODE_UNSPECIFIED value
+                             * @property {number} INSUFFICIENT_PERMISSIONS_PARTIAL_DATA=1 INSUFFICIENT_PERMISSIONS_PARTIAL_DATA value
+                             * @property {number} RESOURCE_LIMIT_EXCEEDED_PARTIAL_DATA=2 RESOURCE_LIMIT_EXCEEDED_PARTIAL_DATA value
+                             * @property {number} ORG_LESS_PROJECT_PARTIAL_DATA=3 ORG_LESS_PROJECT_PARTIAL_DATA value
+                             */
+                            Warning.WarningCode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "WARNING_CODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INSUFFICIENT_PERMISSIONS_PARTIAL_DATA"] = 1;
+                                values[valuesById[2] = "RESOURCE_LIMIT_EXCEEDED_PARTIAL_DATA"] = 2;
+                                values[valuesById[3] = "ORG_LESS_PROJECT_PARTIAL_DATA"] = 3;
+                                return values;
+                            })();
+    
+                            return Warning;
+                        })();
+    
+                        /**
+                         * FallbackScope enum.
+                         * @name google.cloud.kms.inventory.v1.FallbackScope
+                         * @enum {number}
+                         * @property {number} FALLBACK_SCOPE_UNSPECIFIED=0 FALLBACK_SCOPE_UNSPECIFIED value
+                         * @property {number} FALLBACK_SCOPE_PROJECT=1 FALLBACK_SCOPE_PROJECT value
+                         */
+                        v1.FallbackScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FALLBACK_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FALLBACK_SCOPE_PROJECT"] = 1;
+                            return values;
                         })();
     
                         return v1;

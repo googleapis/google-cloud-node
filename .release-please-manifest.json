@@ -1,4 +1,5 @@
 {
+  "handwritten/datastore": "10.1.0",
   "handwritten/logging-winston": "6.0.1",
   "handwritten/bigquery": "8.2.0",
   "handwritten/cloud-profiler": "6.0.4",

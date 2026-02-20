@@ -33,6 +33,11 @@ function main(name) {
    *  CryptoKey google.cloud.kms.v1.CryptoKey.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The scope to use if the kms organization service account is not
+   *  configured.
+   */
+  // const fallbackScope = {}
 
   // Imports the Inventory library
   const {KeyTrackingServiceClient} = require('@google-cloud/kms-inventory').v1;

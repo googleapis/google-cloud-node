@@ -16,16 +16,17 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const DataObjectSearchServiceClient = v1beta.DataObjectSearchServiceClient;
-type DataObjectSearchServiceClient = v1beta.DataObjectSearchServiceClient;
-const DataObjectServiceClient = v1beta.DataObjectServiceClient;
-type DataObjectServiceClient = v1beta.DataObjectServiceClient;
-const VectorSearchServiceClient = v1beta.VectorSearchServiceClient;
-type VectorSearchServiceClient = v1beta.VectorSearchServiceClient;
+const DataObjectSearchServiceClient = v1.DataObjectSearchServiceClient;
+type DataObjectSearchServiceClient = v1.DataObjectSearchServiceClient;
+const DataObjectServiceClient = v1.DataObjectServiceClient;
+type DataObjectServiceClient = v1.DataObjectServiceClient;
+const VectorSearchServiceClient = v1.VectorSearchServiceClient;
+type VectorSearchServiceClient = v1.VectorSearchServiceClient;
 
-export {v1beta, DataObjectSearchServiceClient, DataObjectServiceClient, VectorSearchServiceClient};
-export default {v1beta, DataObjectSearchServiceClient, DataObjectServiceClient, VectorSearchServiceClient};
+export {v1, v1beta, DataObjectSearchServiceClient, DataObjectServiceClient, VectorSearchServiceClient};
+export default {v1, v1beta, DataObjectSearchServiceClient, DataObjectServiceClient, VectorSearchServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -23,6 +23,7124 @@ export namespace google {
         /** Namespace vectorsearch. */
         namespace vectorsearch {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** DistanceMetric enum. */
+                enum DistanceMetric {
+                    DISTANCE_METRIC_UNSPECIFIED = 0,
+                    DOT_PRODUCT = 1,
+                    COSINE_DISTANCE = 2
+                }
+
+                /** Properties of a DataObject. */
+                interface IDataObject {
+
+                    /** DataObject name */
+                    name?: (string|null);
+
+                    /** DataObject dataObjectId */
+                    dataObjectId?: (string|null);
+
+                    /** DataObject createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataObject updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataObject data */
+                    data?: (google.protobuf.IStruct|null);
+
+                    /** DataObject vectors */
+                    vectors?: ({ [k: string]: google.cloud.vectorsearch.v1.IVector }|null);
+
+                    /** DataObject etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DataObject. */
+                class DataObject implements IDataObject {
+
+                    /**
+                     * Constructs a new DataObject.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IDataObject);
+
+                    /** DataObject name. */
+                    public name: string;
+
+                    /** DataObject dataObjectId. */
+                    public dataObjectId: string;
+
+                    /** DataObject createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataObject updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataObject data. */
+                    public data?: (google.protobuf.IStruct|null);
+
+                    /** DataObject vectors. */
+                    public vectors: { [k: string]: google.cloud.vectorsearch.v1.IVector };
+
+                    /** DataObject etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DataObject instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataObject instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IDataObject): google.cloud.vectorsearch.v1.DataObject;
+
+                    /**
+                     * Encodes the specified DataObject message. Does not implicitly {@link google.cloud.vectorsearch.v1.DataObject.verify|verify} messages.
+                     * @param message DataObject message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IDataObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataObject message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.DataObject.verify|verify} messages.
+                     * @param message DataObject message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IDataObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataObject message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataObject
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.DataObject;
+
+                    /**
+                     * Decodes a DataObject message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataObject
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.DataObject;
+
+                    /**
+                     * Verifies a DataObject message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataObject message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataObject
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.DataObject;
+
+                    /**
+                     * Creates a plain object from a DataObject message. Also converts values to other types if specified.
+                     * @param message DataObject
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.DataObject, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataObject to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataObject
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Vector. */
+                interface IVector {
+
+                    /** Vector dense */
+                    dense?: (google.cloud.vectorsearch.v1.IDenseVector|null);
+
+                    /** Vector sparse */
+                    sparse?: (google.cloud.vectorsearch.v1.ISparseVector|null);
+                }
+
+                /** Represents a Vector. */
+                class Vector implements IVector {
+
+                    /**
+                     * Constructs a new Vector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IVector);
+
+                    /** Vector dense. */
+                    public dense?: (google.cloud.vectorsearch.v1.IDenseVector|null);
+
+                    /** Vector sparse. */
+                    public sparse?: (google.cloud.vectorsearch.v1.ISparseVector|null);
+
+                    /** Vector vectorType. */
+                    public vectorType?: ("dense"|"sparse");
+
+                    /**
+                     * Creates a new Vector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Vector instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IVector): google.cloud.vectorsearch.v1.Vector;
+
+                    /**
+                     * Encodes the specified Vector message. Does not implicitly {@link google.cloud.vectorsearch.v1.Vector.verify|verify} messages.
+                     * @param message Vector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IVector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Vector message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.Vector.verify|verify} messages.
+                     * @param message Vector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IVector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Vector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Vector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.Vector;
+
+                    /**
+                     * Decodes a Vector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Vector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.Vector;
+
+                    /**
+                     * Verifies a Vector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Vector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Vector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.Vector;
+
+                    /**
+                     * Creates a plain object from a Vector message. Also converts values to other types if specified.
+                     * @param message Vector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.Vector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Vector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Vector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DenseVector. */
+                interface IDenseVector {
+
+                    /** DenseVector values */
+                    values?: (number[]|null);
+                }
+
+                /** Represents a DenseVector. */
+                class DenseVector implements IDenseVector {
+
+                    /**
+                     * Constructs a new DenseVector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IDenseVector);
+
+                    /** DenseVector values. */
+                    public values: number[];
+
+                    /**
+                     * Creates a new DenseVector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DenseVector instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IDenseVector): google.cloud.vectorsearch.v1.DenseVector;
+
+                    /**
+                     * Encodes the specified DenseVector message. Does not implicitly {@link google.cloud.vectorsearch.v1.DenseVector.verify|verify} messages.
+                     * @param message DenseVector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IDenseVector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DenseVector message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.DenseVector.verify|verify} messages.
+                     * @param message DenseVector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IDenseVector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DenseVector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DenseVector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.DenseVector;
+
+                    /**
+                     * Decodes a DenseVector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DenseVector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.DenseVector;
+
+                    /**
+                     * Verifies a DenseVector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DenseVector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DenseVector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.DenseVector;
+
+                    /**
+                     * Creates a plain object from a DenseVector message. Also converts values to other types if specified.
+                     * @param message DenseVector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.DenseVector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DenseVector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DenseVector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SparseVector. */
+                interface ISparseVector {
+
+                    /** SparseVector values */
+                    values?: (number[]|null);
+
+                    /** SparseVector indices */
+                    indices?: (number[]|null);
+                }
+
+                /** Represents a SparseVector. */
+                class SparseVector implements ISparseVector {
+
+                    /**
+                     * Constructs a new SparseVector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ISparseVector);
+
+                    /** SparseVector values. */
+                    public values: number[];
+
+                    /** SparseVector indices. */
+                    public indices: number[];
+
+                    /**
+                     * Creates a new SparseVector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SparseVector instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ISparseVector): google.cloud.vectorsearch.v1.SparseVector;
+
+                    /**
+                     * Encodes the specified SparseVector message. Does not implicitly {@link google.cloud.vectorsearch.v1.SparseVector.verify|verify} messages.
+                     * @param message SparseVector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ISparseVector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SparseVector message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SparseVector.verify|verify} messages.
+                     * @param message SparseVector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ISparseVector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SparseVector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SparseVector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SparseVector;
+
+                    /**
+                     * Decodes a SparseVector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SparseVector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SparseVector;
+
+                    /**
+                     * Verifies a SparseVector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SparseVector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SparseVector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SparseVector;
+
+                    /**
+                     * Creates a plain object from a SparseVector message. Also converts values to other types if specified.
+                     * @param message SparseVector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.SparseVector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SparseVector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SparseVector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a DataObjectSearchService */
+                class DataObjectSearchService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DataObjectSearchService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DataObjectSearchService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataObjectSearchService;
+
+                    /**
+                     * Calls SearchDataObjects.
+                     * @param request SearchDataObjectsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchDataObjectsResponse
+                     */
+                    public searchDataObjects(request: google.cloud.vectorsearch.v1.ISearchDataObjectsRequest, callback: google.cloud.vectorsearch.v1.DataObjectSearchService.SearchDataObjectsCallback): void;
+
+                    /**
+                     * Calls SearchDataObjects.
+                     * @param request SearchDataObjectsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchDataObjects(request: google.cloud.vectorsearch.v1.ISearchDataObjectsRequest): Promise<google.cloud.vectorsearch.v1.SearchDataObjectsResponse>;
+
+                    /**
+                     * Calls QueryDataObjects.
+                     * @param request QueryDataObjectsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueryDataObjectsResponse
+                     */
+                    public queryDataObjects(request: google.cloud.vectorsearch.v1.IQueryDataObjectsRequest, callback: google.cloud.vectorsearch.v1.DataObjectSearchService.QueryDataObjectsCallback): void;
+
+                    /**
+                     * Calls QueryDataObjects.
+                     * @param request QueryDataObjectsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryDataObjects(request: google.cloud.vectorsearch.v1.IQueryDataObjectsRequest): Promise<google.cloud.vectorsearch.v1.QueryDataObjectsResponse>;
+
+                    /**
+                     * Calls AggregateDataObjects.
+                     * @param request AggregateDataObjectsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AggregateDataObjectsResponse
+                     */
+                    public aggregateDataObjects(request: google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest, callback: google.cloud.vectorsearch.v1.DataObjectSearchService.AggregateDataObjectsCallback): void;
+
+                    /**
+                     * Calls AggregateDataObjects.
+                     * @param request AggregateDataObjectsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public aggregateDataObjects(request: google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest): Promise<google.cloud.vectorsearch.v1.AggregateDataObjectsResponse>;
+
+                    /**
+                     * Calls BatchSearchDataObjects.
+                     * @param request BatchSearchDataObjectsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchSearchDataObjectsResponse
+                     */
+                    public batchSearchDataObjects(request: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest, callback: google.cloud.vectorsearch.v1.DataObjectSearchService.BatchSearchDataObjectsCallback): void;
+
+                    /**
+                     * Calls BatchSearchDataObjects.
+                     * @param request BatchSearchDataObjectsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchSearchDataObjects(request: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest): Promise<google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse>;
+                }
+
+                namespace DataObjectSearchService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectSearchService|searchDataObjects}.
+                     * @param error Error, if any
+                     * @param [response] SearchDataObjectsResponse
+                     */
+                    type SearchDataObjectsCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.SearchDataObjectsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectSearchService|queryDataObjects}.
+                     * @param error Error, if any
+                     * @param [response] QueryDataObjectsResponse
+                     */
+                    type QueryDataObjectsCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.QueryDataObjectsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectSearchService|aggregateDataObjects}.
+                     * @param error Error, if any
+                     * @param [response] AggregateDataObjectsResponse
+                     */
+                    type AggregateDataObjectsCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.AggregateDataObjectsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectSearchService|batchSearchDataObjects}.
+                     * @param error Error, if any
+                     * @param [response] BatchSearchDataObjectsResponse
+                     */
+                    type BatchSearchDataObjectsCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse) => void;
+                }
+
+                /** AggregationMethod enum. */
+                enum AggregationMethod {
+                    AGGREGATION_METHOD_UNSPECIFIED = 0,
+                    COUNT = 1
+                }
+
+                /** Properties of an OutputFields. */
+                interface IOutputFields {
+
+                    /** OutputFields dataFields */
+                    dataFields?: (string[]|null);
+
+                    /** OutputFields vectorFields */
+                    vectorFields?: (string[]|null);
+
+                    /** OutputFields metadataFields */
+                    metadataFields?: (string[]|null);
+                }
+
+                /** Represents an OutputFields. */
+                class OutputFields implements IOutputFields {
+
+                    /**
+                     * Constructs a new OutputFields.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IOutputFields);
+
+                    /** OutputFields dataFields. */
+                    public dataFields: string[];
+
+                    /** OutputFields vectorFields. */
+                    public vectorFields: string[];
+
+                    /** OutputFields metadataFields. */
+                    public metadataFields: string[];
+
+                    /**
+                     * Creates a new OutputFields instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OutputFields instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IOutputFields): google.cloud.vectorsearch.v1.OutputFields;
+
+                    /**
+                     * Encodes the specified OutputFields message. Does not implicitly {@link google.cloud.vectorsearch.v1.OutputFields.verify|verify} messages.
+                     * @param message OutputFields message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IOutputFields, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OutputFields message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.OutputFields.verify|verify} messages.
+                     * @param message OutputFields message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IOutputFields, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OutputFields message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OutputFields
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.OutputFields;
+
+                    /**
+                     * Decodes an OutputFields message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OutputFields
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.OutputFields;
+
+                    /**
+                     * Verifies an OutputFields message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OutputFields message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OutputFields
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.OutputFields;
+
+                    /**
+                     * Creates a plain object from an OutputFields message. Also converts values to other types if specified.
+                     * @param message OutputFields
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.OutputFields, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OutputFields to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutputFields
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchHint. */
+                interface ISearchHint {
+
+                    /** SearchHint knnHint */
+                    knnHint?: (google.cloud.vectorsearch.v1.SearchHint.IKnnHint|null);
+
+                    /** SearchHint indexHint */
+                    indexHint?: (google.cloud.vectorsearch.v1.SearchHint.IIndexHint|null);
+                }
+
+                /** Represents a SearchHint. */
+                class SearchHint implements ISearchHint {
+
+                    /**
+                     * Constructs a new SearchHint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ISearchHint);
+
+                    /** SearchHint knnHint. */
+                    public knnHint?: (google.cloud.vectorsearch.v1.SearchHint.IKnnHint|null);
+
+                    /** SearchHint indexHint. */
+                    public indexHint?: (google.cloud.vectorsearch.v1.SearchHint.IIndexHint|null);
+
+                    /** SearchHint indexType. */
+                    public indexType?: ("knnHint"|"indexHint");
+
+                    /**
+                     * Creates a new SearchHint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchHint instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ISearchHint): google.cloud.vectorsearch.v1.SearchHint;
+
+                    /**
+                     * Encodes the specified SearchHint message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.verify|verify} messages.
+                     * @param message SearchHint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ISearchHint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchHint message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.verify|verify} messages.
+                     * @param message SearchHint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ISearchHint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchHint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchHint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SearchHint;
+
+                    /**
+                     * Decodes a SearchHint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchHint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SearchHint;
+
+                    /**
+                     * Verifies a SearchHint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchHint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchHint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SearchHint;
+
+                    /**
+                     * Creates a plain object from a SearchHint message. Also converts values to other types if specified.
+                     * @param message SearchHint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.SearchHint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchHint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchHint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SearchHint {
+
+                    /** Properties of an IndexHint. */
+                    interface IIndexHint {
+
+                        /** IndexHint denseScannParams */
+                        denseScannParams?: (google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams|null);
+
+                        /** IndexHint name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents an IndexHint. */
+                    class IndexHint implements IIndexHint {
+
+                        /**
+                         * Constructs a new IndexHint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1.SearchHint.IIndexHint);
+
+                        /** IndexHint denseScannParams. */
+                        public denseScannParams?: (google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams|null);
+
+                        /** IndexHint name. */
+                        public name: string;
+
+                        /** IndexHint params. */
+                        public params?: "denseScannParams";
+
+                        /**
+                         * Creates a new IndexHint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IndexHint instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1.SearchHint.IIndexHint): google.cloud.vectorsearch.v1.SearchHint.IndexHint;
+
+                        /**
+                         * Encodes the specified IndexHint message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.verify|verify} messages.
+                         * @param message IndexHint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1.SearchHint.IIndexHint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IndexHint message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.verify|verify} messages.
+                         * @param message IndexHint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1.SearchHint.IIndexHint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IndexHint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IndexHint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SearchHint.IndexHint;
+
+                        /**
+                         * Decodes an IndexHint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IndexHint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SearchHint.IndexHint;
+
+                        /**
+                         * Verifies an IndexHint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IndexHint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IndexHint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SearchHint.IndexHint;
+
+                        /**
+                         * Creates a plain object from an IndexHint message. Also converts values to other types if specified.
+                         * @param message IndexHint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IndexHint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IndexHint
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace IndexHint {
+
+                        /** Properties of a DenseScannParams. */
+                        interface IDenseScannParams {
+
+                            /** DenseScannParams searchLeavesPct */
+                            searchLeavesPct?: (number|null);
+
+                            /** DenseScannParams initialCandidateCount */
+                            initialCandidateCount?: (number|null);
+                        }
+
+                        /** Represents a DenseScannParams. */
+                        class DenseScannParams implements IDenseScannParams {
+
+                            /**
+                             * Constructs a new DenseScannParams.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams);
+
+                            /** DenseScannParams searchLeavesPct. */
+                            public searchLeavesPct: number;
+
+                            /** DenseScannParams initialCandidateCount. */
+                            public initialCandidateCount: number;
+
+                            /**
+                             * Creates a new DenseScannParams instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DenseScannParams instance
+                             */
+                            public static create(properties?: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
+
+                            /**
+                             * Encodes the specified DenseScannParams message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
+                             * @param message DenseScannParams message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DenseScannParams message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
+                             * @param message DenseScannParams message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DenseScannParams message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DenseScannParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
+
+                            /**
+                             * Decodes a DenseScannParams message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DenseScannParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
+
+                            /**
+                             * Verifies a DenseScannParams message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DenseScannParams message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DenseScannParams
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
+
+                            /**
+                             * Creates a plain object from a DenseScannParams message. Also converts values to other types if specified.
+                             * @param message DenseScannParams
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DenseScannParams to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DenseScannParams
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a KnnHint. */
+                    interface IKnnHint {
+                    }
+
+                    /** Represents a KnnHint. */
+                    class KnnHint implements IKnnHint {
+
+                        /**
+                         * Constructs a new KnnHint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1.SearchHint.IKnnHint);
+
+                        /**
+                         * Creates a new KnnHint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns KnnHint instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1.SearchHint.IKnnHint): google.cloud.vectorsearch.v1.SearchHint.KnnHint;
+
+                        /**
+                         * Encodes the specified KnnHint message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.KnnHint.verify|verify} messages.
+                         * @param message KnnHint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1.SearchHint.IKnnHint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified KnnHint message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.KnnHint.verify|verify} messages.
+                         * @param message KnnHint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1.SearchHint.IKnnHint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a KnnHint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns KnnHint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SearchHint.KnnHint;
+
+                        /**
+                         * Decodes a KnnHint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns KnnHint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SearchHint.KnnHint;
+
+                        /**
+                         * Verifies a KnnHint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a KnnHint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns KnnHint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SearchHint.KnnHint;
+
+                        /**
+                         * Creates a plain object from a KnnHint message. Also converts values to other types if specified.
+                         * @param message KnnHint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1.SearchHint.KnnHint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this KnnHint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for KnnHint
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Search. */
+                interface ISearch {
+
+                    /** Search vectorSearch */
+                    vectorSearch?: (google.cloud.vectorsearch.v1.IVectorSearch|null);
+
+                    /** Search semanticSearch */
+                    semanticSearch?: (google.cloud.vectorsearch.v1.ISemanticSearch|null);
+
+                    /** Search textSearch */
+                    textSearch?: (google.cloud.vectorsearch.v1.ITextSearch|null);
+                }
+
+                /** Represents a Search. */
+                class Search implements ISearch {
+
+                    /**
+                     * Constructs a new Search.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ISearch);
+
+                    /** Search vectorSearch. */
+                    public vectorSearch?: (google.cloud.vectorsearch.v1.IVectorSearch|null);
+
+                    /** Search semanticSearch. */
+                    public semanticSearch?: (google.cloud.vectorsearch.v1.ISemanticSearch|null);
+
+                    /** Search textSearch. */
+                    public textSearch?: (google.cloud.vectorsearch.v1.ITextSearch|null);
+
+                    /** Search searchType. */
+                    public searchType?: ("vectorSearch"|"semanticSearch"|"textSearch");
+
+                    /**
+                     * Creates a new Search instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Search instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ISearch): google.cloud.vectorsearch.v1.Search;
+
+                    /**
+                     * Encodes the specified Search message. Does not implicitly {@link google.cloud.vectorsearch.v1.Search.verify|verify} messages.
+                     * @param message Search message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ISearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Search message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.Search.verify|verify} messages.
+                     * @param message Search message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ISearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Search message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Search
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.Search;
+
+                    /**
+                     * Decodes a Search message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Search
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.Search;
+
+                    /**
+                     * Verifies a Search message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Search message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Search
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.Search;
+
+                    /**
+                     * Creates a plain object from a Search message. Also converts values to other types if specified.
+                     * @param message Search
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.Search, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Search to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Search
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VectorSearch. */
+                interface IVectorSearch {
+
+                    /** VectorSearch vector */
+                    vector?: (google.cloud.vectorsearch.v1.IDenseVector|null);
+
+                    /** VectorSearch sparseVector */
+                    sparseVector?: (google.cloud.vectorsearch.v1.ISparseVector|null);
+
+                    /** VectorSearch searchField */
+                    searchField?: (string|null);
+
+                    /** VectorSearch filter */
+                    filter?: (google.protobuf.IStruct|null);
+
+                    /** VectorSearch topK */
+                    topK?: (number|null);
+
+                    /** VectorSearch outputFields */
+                    outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                    /** VectorSearch searchHint */
+                    searchHint?: (google.cloud.vectorsearch.v1.ISearchHint|null);
+
+                    /** VectorSearch distanceMetric */
+                    distanceMetric?: (google.cloud.vectorsearch.v1.DistanceMetric|keyof typeof google.cloud.vectorsearch.v1.DistanceMetric|null);
+                }
+
+                /** Represents a VectorSearch. */
+                class VectorSearch implements IVectorSearch {
+
+                    /**
+                     * Constructs a new VectorSearch.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IVectorSearch);
+
+                    /** VectorSearch vector. */
+                    public vector?: (google.cloud.vectorsearch.v1.IDenseVector|null);
+
+                    /** VectorSearch sparseVector. */
+                    public sparseVector?: (google.cloud.vectorsearch.v1.ISparseVector|null);
+
+                    /** VectorSearch searchField. */
+                    public searchField: string;
+
+                    /** VectorSearch filter. */
+                    public filter?: (google.protobuf.IStruct|null);
+
+                    /** VectorSearch topK. */
+                    public topK?: (number|null);
+
+                    /** VectorSearch outputFields. */
+                    public outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                    /** VectorSearch searchHint. */
+                    public searchHint?: (google.cloud.vectorsearch.v1.ISearchHint|null);
+
+                    /** VectorSearch distanceMetric. */
+                    public distanceMetric: (google.cloud.vectorsearch.v1.DistanceMetric|keyof typeof google.cloud.vectorsearch.v1.DistanceMetric);
+
+                    /** VectorSearch vectorType. */
+                    public vectorType?: ("vector"|"sparseVector");
+
+                    /**
+                     * Creates a new VectorSearch instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VectorSearch instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IVectorSearch): google.cloud.vectorsearch.v1.VectorSearch;
+
+                    /**
+                     * Encodes the specified VectorSearch message. Does not implicitly {@link google.cloud.vectorsearch.v1.VectorSearch.verify|verify} messages.
+                     * @param message VectorSearch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IVectorSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VectorSearch message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.VectorSearch.verify|verify} messages.
+                     * @param message VectorSearch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IVectorSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VectorSearch message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VectorSearch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.VectorSearch;
+
+                    /**
+                     * Decodes a VectorSearch message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VectorSearch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.VectorSearch;
+
+                    /**
+                     * Verifies a VectorSearch message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VectorSearch message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VectorSearch
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.VectorSearch;
+
+                    /**
+                     * Creates a plain object from a VectorSearch message. Also converts values to other types if specified.
+                     * @param message VectorSearch
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.VectorSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VectorSearch to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VectorSearch
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SemanticSearch. */
+                interface ISemanticSearch {
+
+                    /** SemanticSearch searchText */
+                    searchText?: (string|null);
+
+                    /** SemanticSearch searchField */
+                    searchField?: (string|null);
+
+                    /** SemanticSearch taskType */
+                    taskType?: (google.cloud.vectorsearch.v1.EmbeddingTaskType|keyof typeof google.cloud.vectorsearch.v1.EmbeddingTaskType|null);
+
+                    /** SemanticSearch outputFields */
+                    outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                    /** SemanticSearch filter */
+                    filter?: (google.protobuf.IStruct|null);
+
+                    /** SemanticSearch topK */
+                    topK?: (number|null);
+
+                    /** SemanticSearch searchHint */
+                    searchHint?: (google.cloud.vectorsearch.v1.ISearchHint|null);
+                }
+
+                /** Represents a SemanticSearch. */
+                class SemanticSearch implements ISemanticSearch {
+
+                    /**
+                     * Constructs a new SemanticSearch.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ISemanticSearch);
+
+                    /** SemanticSearch searchText. */
+                    public searchText: string;
+
+                    /** SemanticSearch searchField. */
+                    public searchField: string;
+
+                    /** SemanticSearch taskType. */
+                    public taskType: (google.cloud.vectorsearch.v1.EmbeddingTaskType|keyof typeof google.cloud.vectorsearch.v1.EmbeddingTaskType);
+
+                    /** SemanticSearch outputFields. */
+                    public outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                    /** SemanticSearch filter. */
+                    public filter?: (google.protobuf.IStruct|null);
+
+                    /** SemanticSearch topK. */
+                    public topK?: (number|null);
+
+                    /** SemanticSearch searchHint. */
+                    public searchHint?: (google.cloud.vectorsearch.v1.ISearchHint|null);
+
+                    /**
+                     * Creates a new SemanticSearch instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SemanticSearch instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ISemanticSearch): google.cloud.vectorsearch.v1.SemanticSearch;
+
+                    /**
+                     * Encodes the specified SemanticSearch message. Does not implicitly {@link google.cloud.vectorsearch.v1.SemanticSearch.verify|verify} messages.
+                     * @param message SemanticSearch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ISemanticSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SemanticSearch message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SemanticSearch.verify|verify} messages.
+                     * @param message SemanticSearch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ISemanticSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SemanticSearch message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SemanticSearch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SemanticSearch;
+
+                    /**
+                     * Decodes a SemanticSearch message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SemanticSearch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SemanticSearch;
+
+                    /**
+                     * Verifies a SemanticSearch message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SemanticSearch message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SemanticSearch
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SemanticSearch;
+
+                    /**
+                     * Creates a plain object from a SemanticSearch message. Also converts values to other types if specified.
+                     * @param message SemanticSearch
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.SemanticSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SemanticSearch to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SemanticSearch
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TextSearch. */
+                interface ITextSearch {
+
+                    /** TextSearch searchText */
+                    searchText?: (string|null);
+
+                    /** TextSearch dataFieldNames */
+                    dataFieldNames?: (string[]|null);
+
+                    /** TextSearch outputFields */
+                    outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                    /** TextSearch topK */
+                    topK?: (number|null);
+
+                    /** TextSearch filter */
+                    filter?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a TextSearch. */
+                class TextSearch implements ITextSearch {
+
+                    /**
+                     * Constructs a new TextSearch.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ITextSearch);
+
+                    /** TextSearch searchText. */
+                    public searchText: string;
+
+                    /** TextSearch dataFieldNames. */
+                    public dataFieldNames: string[];
+
+                    /** TextSearch outputFields. */
+                    public outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                    /** TextSearch topK. */
+                    public topK?: (number|null);
+
+                    /** TextSearch filter. */
+                    public filter?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new TextSearch instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextSearch instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ITextSearch): google.cloud.vectorsearch.v1.TextSearch;
+
+                    /**
+                     * Encodes the specified TextSearch message. Does not implicitly {@link google.cloud.vectorsearch.v1.TextSearch.verify|verify} messages.
+                     * @param message TextSearch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ITextSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextSearch message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.TextSearch.verify|verify} messages.
+                     * @param message TextSearch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ITextSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextSearch message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextSearch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.TextSearch;
+
+                    /**
+                     * Decodes a TextSearch message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextSearch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.TextSearch;
+
+                    /**
+                     * Verifies a TextSearch message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextSearch message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextSearch
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.TextSearch;
+
+                    /**
+                     * Creates a plain object from a TextSearch message. Also converts values to other types if specified.
+                     * @param message TextSearch
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.TextSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextSearch to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TextSearch
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchDataObjectsRequest. */
+                interface ISearchDataObjectsRequest {
+
+                    /** SearchDataObjectsRequest vectorSearch */
+                    vectorSearch?: (google.cloud.vectorsearch.v1.IVectorSearch|null);
+
+                    /** SearchDataObjectsRequest semanticSearch */
+                    semanticSearch?: (google.cloud.vectorsearch.v1.ISemanticSearch|null);
+
+                    /** SearchDataObjectsRequest textSearch */
+                    textSearch?: (google.cloud.vectorsearch.v1.ITextSearch|null);
+
+                    /** SearchDataObjectsRequest parent */
+                    parent?: (string|null);
+
+                    /** SearchDataObjectsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchDataObjectsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a SearchDataObjectsRequest. */
+                class SearchDataObjectsRequest implements ISearchDataObjectsRequest {
+
+                    /**
+                     * Constructs a new SearchDataObjectsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ISearchDataObjectsRequest);
+
+                    /** SearchDataObjectsRequest vectorSearch. */
+                    public vectorSearch?: (google.cloud.vectorsearch.v1.IVectorSearch|null);
+
+                    /** SearchDataObjectsRequest semanticSearch. */
+                    public semanticSearch?: (google.cloud.vectorsearch.v1.ISemanticSearch|null);
+
+                    /** SearchDataObjectsRequest textSearch. */
+                    public textSearch?: (google.cloud.vectorsearch.v1.ITextSearch|null);
+
+                    /** SearchDataObjectsRequest parent. */
+                    public parent: string;
+
+                    /** SearchDataObjectsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchDataObjectsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** SearchDataObjectsRequest searchType. */
+                    public searchType?: ("vectorSearch"|"semanticSearch"|"textSearch");
+
+                    /**
+                     * Creates a new SearchDataObjectsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchDataObjectsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ISearchDataObjectsRequest): google.cloud.vectorsearch.v1.SearchDataObjectsRequest;
+
+                    /**
+                     * Encodes the specified SearchDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchDataObjectsRequest.verify|verify} messages.
+                     * @param message SearchDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ISearchDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchDataObjectsRequest.verify|verify} messages.
+                     * @param message SearchDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ISearchDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchDataObjectsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SearchDataObjectsRequest;
+
+                    /**
+                     * Decodes a SearchDataObjectsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SearchDataObjectsRequest;
+
+                    /**
+                     * Verifies a SearchDataObjectsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchDataObjectsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SearchDataObjectsRequest;
+
+                    /**
+                     * Creates a plain object from a SearchDataObjectsRequest message. Also converts values to other types if specified.
+                     * @param message SearchDataObjectsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.SearchDataObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchDataObjectsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchDataObjectsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchResult. */
+                interface ISearchResult {
+
+                    /** SearchResult dataObject */
+                    dataObject?: (google.cloud.vectorsearch.v1.IDataObject|null);
+
+                    /** SearchResult distance */
+                    distance?: (number|null);
+                }
+
+                /** Represents a SearchResult. */
+                class SearchResult implements ISearchResult {
+
+                    /**
+                     * Constructs a new SearchResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ISearchResult);
+
+                    /** SearchResult dataObject. */
+                    public dataObject?: (google.cloud.vectorsearch.v1.IDataObject|null);
+
+                    /** SearchResult distance. */
+                    public distance?: (number|null);
+
+                    /**
+                     * Creates a new SearchResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchResult instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ISearchResult): google.cloud.vectorsearch.v1.SearchResult;
+
+                    /**
+                     * Encodes the specified SearchResult message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchResult.verify|verify} messages.
+                     * @param message SearchResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchResult message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchResult.verify|verify} messages.
+                     * @param message SearchResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SearchResult;
+
+                    /**
+                     * Decodes a SearchResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SearchResult;
+
+                    /**
+                     * Verifies a SearchResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SearchResult;
+
+                    /**
+                     * Creates a plain object from a SearchResult message. Also converts values to other types if specified.
+                     * @param message SearchResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.SearchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchDataObjectsResponse. */
+                interface ISearchDataObjectsResponse {
+
+                    /** SearchDataObjectsResponse results */
+                    results?: (google.cloud.vectorsearch.v1.ISearchResult[]|null);
+
+                    /** SearchDataObjectsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a SearchDataObjectsResponse. */
+                class SearchDataObjectsResponse implements ISearchDataObjectsResponse {
+
+                    /**
+                     * Constructs a new SearchDataObjectsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ISearchDataObjectsResponse);
+
+                    /** SearchDataObjectsResponse results. */
+                    public results: google.cloud.vectorsearch.v1.ISearchResult[];
+
+                    /** SearchDataObjectsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new SearchDataObjectsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchDataObjectsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ISearchDataObjectsResponse): google.cloud.vectorsearch.v1.SearchDataObjectsResponse;
+
+                    /**
+                     * Encodes the specified SearchDataObjectsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchDataObjectsResponse.verify|verify} messages.
+                     * @param message SearchDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ISearchDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchDataObjectsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchDataObjectsResponse.verify|verify} messages.
+                     * @param message SearchDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ISearchDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchDataObjectsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SearchDataObjectsResponse;
+
+                    /**
+                     * Decodes a SearchDataObjectsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SearchDataObjectsResponse;
+
+                    /**
+                     * Verifies a SearchDataObjectsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchDataObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchDataObjectsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SearchDataObjectsResponse;
+
+                    /**
+                     * Creates a plain object from a SearchDataObjectsResponse message. Also converts values to other types if specified.
+                     * @param message SearchDataObjectsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.SearchDataObjectsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchDataObjectsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchDataObjectsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AggregateDataObjectsRequest. */
+                interface IAggregateDataObjectsRequest {
+
+                    /** AggregateDataObjectsRequest parent */
+                    parent?: (string|null);
+
+                    /** AggregateDataObjectsRequest filter */
+                    filter?: (google.protobuf.IStruct|null);
+
+                    /** AggregateDataObjectsRequest aggregate */
+                    aggregate?: (google.cloud.vectorsearch.v1.AggregationMethod|keyof typeof google.cloud.vectorsearch.v1.AggregationMethod|null);
+                }
+
+                /** Represents an AggregateDataObjectsRequest. */
+                class AggregateDataObjectsRequest implements IAggregateDataObjectsRequest {
+
+                    /**
+                     * Constructs a new AggregateDataObjectsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest);
+
+                    /** AggregateDataObjectsRequest parent. */
+                    public parent: string;
+
+                    /** AggregateDataObjectsRequest filter. */
+                    public filter?: (google.protobuf.IStruct|null);
+
+                    /** AggregateDataObjectsRequest aggregate. */
+                    public aggregate: (google.cloud.vectorsearch.v1.AggregationMethod|keyof typeof google.cloud.vectorsearch.v1.AggregationMethod);
+
+                    /**
+                     * Creates a new AggregateDataObjectsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AggregateDataObjectsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest): google.cloud.vectorsearch.v1.AggregateDataObjectsRequest;
+
+                    /**
+                     * Encodes the specified AggregateDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.AggregateDataObjectsRequest.verify|verify} messages.
+                     * @param message AggregateDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AggregateDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.AggregateDataObjectsRequest.verify|verify} messages.
+                     * @param message AggregateDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AggregateDataObjectsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AggregateDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.AggregateDataObjectsRequest;
+
+                    /**
+                     * Decodes an AggregateDataObjectsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AggregateDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.AggregateDataObjectsRequest;
+
+                    /**
+                     * Verifies an AggregateDataObjectsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AggregateDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AggregateDataObjectsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.AggregateDataObjectsRequest;
+
+                    /**
+                     * Creates a plain object from an AggregateDataObjectsRequest message. Also converts values to other types if specified.
+                     * @param message AggregateDataObjectsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.AggregateDataObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AggregateDataObjectsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AggregateDataObjectsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AggregateDataObjectsResponse. */
+                interface IAggregateDataObjectsResponse {
+
+                    /** AggregateDataObjectsResponse aggregateResults */
+                    aggregateResults?: (google.protobuf.IStruct[]|null);
+                }
+
+                /** Represents an AggregateDataObjectsResponse. */
+                class AggregateDataObjectsResponse implements IAggregateDataObjectsResponse {
+
+                    /**
+                     * Constructs a new AggregateDataObjectsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse);
+
+                    /** AggregateDataObjectsResponse aggregateResults. */
+                    public aggregateResults: google.protobuf.IStruct[];
+
+                    /**
+                     * Creates a new AggregateDataObjectsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AggregateDataObjectsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse): google.cloud.vectorsearch.v1.AggregateDataObjectsResponse;
+
+                    /**
+                     * Encodes the specified AggregateDataObjectsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.AggregateDataObjectsResponse.verify|verify} messages.
+                     * @param message AggregateDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AggregateDataObjectsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.AggregateDataObjectsResponse.verify|verify} messages.
+                     * @param message AggregateDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AggregateDataObjectsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AggregateDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.AggregateDataObjectsResponse;
+
+                    /**
+                     * Decodes an AggregateDataObjectsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AggregateDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.AggregateDataObjectsResponse;
+
+                    /**
+                     * Verifies an AggregateDataObjectsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AggregateDataObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AggregateDataObjectsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.AggregateDataObjectsResponse;
+
+                    /**
+                     * Creates a plain object from an AggregateDataObjectsResponse message. Also converts values to other types if specified.
+                     * @param message AggregateDataObjectsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.AggregateDataObjectsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AggregateDataObjectsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AggregateDataObjectsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryDataObjectsRequest. */
+                interface IQueryDataObjectsRequest {
+
+                    /** QueryDataObjectsRequest parent */
+                    parent?: (string|null);
+
+                    /** QueryDataObjectsRequest filter */
+                    filter?: (google.protobuf.IStruct|null);
+
+                    /** QueryDataObjectsRequest outputFields */
+                    outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                    /** QueryDataObjectsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** QueryDataObjectsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a QueryDataObjectsRequest. */
+                class QueryDataObjectsRequest implements IQueryDataObjectsRequest {
+
+                    /**
+                     * Constructs a new QueryDataObjectsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IQueryDataObjectsRequest);
+
+                    /** QueryDataObjectsRequest parent. */
+                    public parent: string;
+
+                    /** QueryDataObjectsRequest filter. */
+                    public filter?: (google.protobuf.IStruct|null);
+
+                    /** QueryDataObjectsRequest outputFields. */
+                    public outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                    /** QueryDataObjectsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** QueryDataObjectsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new QueryDataObjectsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryDataObjectsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IQueryDataObjectsRequest): google.cloud.vectorsearch.v1.QueryDataObjectsRequest;
+
+                    /**
+                     * Encodes the specified QueryDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.QueryDataObjectsRequest.verify|verify} messages.
+                     * @param message QueryDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IQueryDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.QueryDataObjectsRequest.verify|verify} messages.
+                     * @param message QueryDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IQueryDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryDataObjectsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.QueryDataObjectsRequest;
+
+                    /**
+                     * Decodes a QueryDataObjectsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.QueryDataObjectsRequest;
+
+                    /**
+                     * Verifies a QueryDataObjectsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryDataObjectsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.QueryDataObjectsRequest;
+
+                    /**
+                     * Creates a plain object from a QueryDataObjectsRequest message. Also converts values to other types if specified.
+                     * @param message QueryDataObjectsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.QueryDataObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryDataObjectsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryDataObjectsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryDataObjectsResponse. */
+                interface IQueryDataObjectsResponse {
+
+                    /** QueryDataObjectsResponse dataObjects */
+                    dataObjects?: (google.cloud.vectorsearch.v1.IDataObject[]|null);
+
+                    /** QueryDataObjectsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a QueryDataObjectsResponse. */
+                class QueryDataObjectsResponse implements IQueryDataObjectsResponse {
+
+                    /**
+                     * Constructs a new QueryDataObjectsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IQueryDataObjectsResponse);
+
+                    /** QueryDataObjectsResponse dataObjects. */
+                    public dataObjects: google.cloud.vectorsearch.v1.IDataObject[];
+
+                    /** QueryDataObjectsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new QueryDataObjectsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryDataObjectsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IQueryDataObjectsResponse): google.cloud.vectorsearch.v1.QueryDataObjectsResponse;
+
+                    /**
+                     * Encodes the specified QueryDataObjectsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.QueryDataObjectsResponse.verify|verify} messages.
+                     * @param message QueryDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IQueryDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryDataObjectsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.QueryDataObjectsResponse.verify|verify} messages.
+                     * @param message QueryDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IQueryDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryDataObjectsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.QueryDataObjectsResponse;
+
+                    /**
+                     * Decodes a QueryDataObjectsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.QueryDataObjectsResponse;
+
+                    /**
+                     * Verifies a QueryDataObjectsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryDataObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryDataObjectsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.QueryDataObjectsResponse;
+
+                    /**
+                     * Creates a plain object from a QueryDataObjectsResponse message. Also converts values to other types if specified.
+                     * @param message QueryDataObjectsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.QueryDataObjectsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryDataObjectsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryDataObjectsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchSearchDataObjectsRequest. */
+                interface IBatchSearchDataObjectsRequest {
+
+                    /** BatchSearchDataObjectsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchSearchDataObjectsRequest searches */
+                    searches?: (google.cloud.vectorsearch.v1.ISearch[]|null);
+
+                    /** BatchSearchDataObjectsRequest combine */
+                    combine?: (google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.ICombineResultsOptions|null);
+                }
+
+                /** Represents a BatchSearchDataObjectsRequest. */
+                class BatchSearchDataObjectsRequest implements IBatchSearchDataObjectsRequest {
+
+                    /**
+                     * Constructs a new BatchSearchDataObjectsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest);
+
+                    /** BatchSearchDataObjectsRequest parent. */
+                    public parent: string;
+
+                    /** BatchSearchDataObjectsRequest searches. */
+                    public searches: google.cloud.vectorsearch.v1.ISearch[];
+
+                    /** BatchSearchDataObjectsRequest combine. */
+                    public combine?: (google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.ICombineResultsOptions|null);
+
+                    /**
+                     * Creates a new BatchSearchDataObjectsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchSearchDataObjectsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest): google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest;
+
+                    /**
+                     * Encodes the specified BatchSearchDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.verify|verify} messages.
+                     * @param message BatchSearchDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchSearchDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.verify|verify} messages.
+                     * @param message BatchSearchDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchSearchDataObjectsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchSearchDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest;
+
+                    /**
+                     * Decodes a BatchSearchDataObjectsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchSearchDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest;
+
+                    /**
+                     * Verifies a BatchSearchDataObjectsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchSearchDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchSearchDataObjectsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchSearchDataObjectsRequest message. Also converts values to other types if specified.
+                     * @param message BatchSearchDataObjectsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchSearchDataObjectsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchSearchDataObjectsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BatchSearchDataObjectsRequest {
+
+                    /** Properties of a CombineResultsOptions. */
+                    interface ICombineResultsOptions {
+
+                        /** CombineResultsOptions ranker */
+                        ranker?: (google.cloud.vectorsearch.v1.IRanker|null);
+
+                        /** CombineResultsOptions outputFields */
+                        outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                        /** CombineResultsOptions topK */
+                        topK?: (number|null);
+                    }
+
+                    /** Represents a CombineResultsOptions. */
+                    class CombineResultsOptions implements ICombineResultsOptions {
+
+                        /**
+                         * Constructs a new CombineResultsOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.ICombineResultsOptions);
+
+                        /** CombineResultsOptions ranker. */
+                        public ranker?: (google.cloud.vectorsearch.v1.IRanker|null);
+
+                        /** CombineResultsOptions outputFields. */
+                        public outputFields?: (google.cloud.vectorsearch.v1.IOutputFields|null);
+
+                        /** CombineResultsOptions topK. */
+                        public topK: number;
+
+                        /**
+                         * Creates a new CombineResultsOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CombineResultsOptions instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.ICombineResultsOptions): google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions;
+
+                        /**
+                         * Encodes the specified CombineResultsOptions message. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions.verify|verify} messages.
+                         * @param message CombineResultsOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.ICombineResultsOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CombineResultsOptions message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions.verify|verify} messages.
+                         * @param message CombineResultsOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.ICombineResultsOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CombineResultsOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CombineResultsOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions;
+
+                        /**
+                         * Decodes a CombineResultsOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CombineResultsOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions;
+
+                        /**
+                         * Verifies a CombineResultsOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CombineResultsOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CombineResultsOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions;
+
+                        /**
+                         * Creates a plain object from a CombineResultsOptions message. Also converts values to other types if specified.
+                         * @param message CombineResultsOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CombineResultsOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CombineResultsOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Ranker. */
+                interface IRanker {
+
+                    /** Ranker rrf */
+                    rrf?: (google.cloud.vectorsearch.v1.IReciprocalRankFusion|null);
+
+                    /** Ranker vertex */
+                    vertex?: (google.cloud.vectorsearch.v1.IVertexRanker|null);
+                }
+
+                /** Represents a Ranker. */
+                class Ranker implements IRanker {
+
+                    /**
+                     * Constructs a new Ranker.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IRanker);
+
+                    /** Ranker rrf. */
+                    public rrf?: (google.cloud.vectorsearch.v1.IReciprocalRankFusion|null);
+
+                    /** Ranker vertex. */
+                    public vertex?: (google.cloud.vectorsearch.v1.IVertexRanker|null);
+
+                    /** Ranker ranker. */
+                    public ranker?: ("rrf"|"vertex");
+
+                    /**
+                     * Creates a new Ranker instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Ranker instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IRanker): google.cloud.vectorsearch.v1.Ranker;
+
+                    /**
+                     * Encodes the specified Ranker message. Does not implicitly {@link google.cloud.vectorsearch.v1.Ranker.verify|verify} messages.
+                     * @param message Ranker message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IRanker, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Ranker message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.Ranker.verify|verify} messages.
+                     * @param message Ranker message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IRanker, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Ranker message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Ranker
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.Ranker;
+
+                    /**
+                     * Decodes a Ranker message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Ranker
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.Ranker;
+
+                    /**
+                     * Verifies a Ranker message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Ranker message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Ranker
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.Ranker;
+
+                    /**
+                     * Creates a plain object from a Ranker message. Also converts values to other types if specified.
+                     * @param message Ranker
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.Ranker, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Ranker to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Ranker
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReciprocalRankFusion. */
+                interface IReciprocalRankFusion {
+
+                    /** ReciprocalRankFusion weights */
+                    weights?: (number[]|null);
+                }
+
+                /** Represents a ReciprocalRankFusion. */
+                class ReciprocalRankFusion implements IReciprocalRankFusion {
+
+                    /**
+                     * Constructs a new ReciprocalRankFusion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IReciprocalRankFusion);
+
+                    /** ReciprocalRankFusion weights. */
+                    public weights: number[];
+
+                    /**
+                     * Creates a new ReciprocalRankFusion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReciprocalRankFusion instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IReciprocalRankFusion): google.cloud.vectorsearch.v1.ReciprocalRankFusion;
+
+                    /**
+                     * Encodes the specified ReciprocalRankFusion message. Does not implicitly {@link google.cloud.vectorsearch.v1.ReciprocalRankFusion.verify|verify} messages.
+                     * @param message ReciprocalRankFusion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IReciprocalRankFusion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReciprocalRankFusion message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ReciprocalRankFusion.verify|verify} messages.
+                     * @param message ReciprocalRankFusion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IReciprocalRankFusion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReciprocalRankFusion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReciprocalRankFusion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ReciprocalRankFusion;
+
+                    /**
+                     * Decodes a ReciprocalRankFusion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReciprocalRankFusion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ReciprocalRankFusion;
+
+                    /**
+                     * Verifies a ReciprocalRankFusion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReciprocalRankFusion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReciprocalRankFusion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ReciprocalRankFusion;
+
+                    /**
+                     * Creates a plain object from a ReciprocalRankFusion message. Also converts values to other types if specified.
+                     * @param message ReciprocalRankFusion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.ReciprocalRankFusion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReciprocalRankFusion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReciprocalRankFusion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VertexRanker. */
+                interface IVertexRanker {
+
+                    /** VertexRanker query */
+                    query?: (string|null);
+
+                    /** VertexRanker titleTemplate */
+                    titleTemplate?: (string|null);
+
+                    /** VertexRanker contentTemplate */
+                    contentTemplate?: (string|null);
+
+                    /** VertexRanker model */
+                    model?: (string|null);
+                }
+
+                /** Represents a VertexRanker. */
+                class VertexRanker implements IVertexRanker {
+
+                    /**
+                     * Constructs a new VertexRanker.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IVertexRanker);
+
+                    /** VertexRanker query. */
+                    public query: string;
+
+                    /** VertexRanker titleTemplate. */
+                    public titleTemplate: string;
+
+                    /** VertexRanker contentTemplate. */
+                    public contentTemplate: string;
+
+                    /** VertexRanker model. */
+                    public model: string;
+
+                    /**
+                     * Creates a new VertexRanker instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VertexRanker instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IVertexRanker): google.cloud.vectorsearch.v1.VertexRanker;
+
+                    /**
+                     * Encodes the specified VertexRanker message. Does not implicitly {@link google.cloud.vectorsearch.v1.VertexRanker.verify|verify} messages.
+                     * @param message VertexRanker message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IVertexRanker, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VertexRanker message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.VertexRanker.verify|verify} messages.
+                     * @param message VertexRanker message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IVertexRanker, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VertexRanker message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VertexRanker
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.VertexRanker;
+
+                    /**
+                     * Decodes a VertexRanker message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VertexRanker
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.VertexRanker;
+
+                    /**
+                     * Verifies a VertexRanker message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VertexRanker message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VertexRanker
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.VertexRanker;
+
+                    /**
+                     * Creates a plain object from a VertexRanker message. Also converts values to other types if specified.
+                     * @param message VertexRanker
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.VertexRanker, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VertexRanker to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VertexRanker
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchSearchDataObjectsResponse. */
+                interface IBatchSearchDataObjectsResponse {
+
+                    /** BatchSearchDataObjectsResponse results */
+                    results?: (google.cloud.vectorsearch.v1.ISearchDataObjectsResponse[]|null);
+                }
+
+                /** Represents a BatchSearchDataObjectsResponse. */
+                class BatchSearchDataObjectsResponse implements IBatchSearchDataObjectsResponse {
+
+                    /**
+                     * Constructs a new BatchSearchDataObjectsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse);
+
+                    /** BatchSearchDataObjectsResponse results. */
+                    public results: google.cloud.vectorsearch.v1.ISearchDataObjectsResponse[];
+
+                    /**
+                     * Creates a new BatchSearchDataObjectsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchSearchDataObjectsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse): google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse;
+
+                    /**
+                     * Encodes the specified BatchSearchDataObjectsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse.verify|verify} messages.
+                     * @param message BatchSearchDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchSearchDataObjectsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse.verify|verify} messages.
+                     * @param message BatchSearchDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchSearchDataObjectsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchSearchDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse;
+
+                    /**
+                     * Decodes a BatchSearchDataObjectsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchSearchDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse;
+
+                    /**
+                     * Verifies a BatchSearchDataObjectsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchSearchDataObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchSearchDataObjectsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchSearchDataObjectsResponse message. Also converts values to other types if specified.
+                     * @param message BatchSearchDataObjectsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchSearchDataObjectsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchSearchDataObjectsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** EmbeddingTaskType enum. */
+                enum EmbeddingTaskType {
+                    EMBEDDING_TASK_TYPE_UNSPECIFIED = 0,
+                    RETRIEVAL_QUERY = 1,
+                    RETRIEVAL_DOCUMENT = 2,
+                    SEMANTIC_SIMILARITY = 3,
+                    CLASSIFICATION = 4,
+                    CLUSTERING = 5,
+                    QUESTION_ANSWERING = 6,
+                    FACT_VERIFICATION = 7,
+                    CODE_RETRIEVAL_QUERY = 8
+                }
+
+                /** Properties of a VertexEmbeddingConfig. */
+                interface IVertexEmbeddingConfig {
+
+                    /** VertexEmbeddingConfig modelId */
+                    modelId?: (string|null);
+
+                    /** VertexEmbeddingConfig textTemplate */
+                    textTemplate?: (string|null);
+
+                    /** VertexEmbeddingConfig taskType */
+                    taskType?: (google.cloud.vectorsearch.v1.EmbeddingTaskType|keyof typeof google.cloud.vectorsearch.v1.EmbeddingTaskType|null);
+                }
+
+                /** Represents a VertexEmbeddingConfig. */
+                class VertexEmbeddingConfig implements IVertexEmbeddingConfig {
+
+                    /**
+                     * Constructs a new VertexEmbeddingConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IVertexEmbeddingConfig);
+
+                    /** VertexEmbeddingConfig modelId. */
+                    public modelId: string;
+
+                    /** VertexEmbeddingConfig textTemplate. */
+                    public textTemplate: string;
+
+                    /** VertexEmbeddingConfig taskType. */
+                    public taskType: (google.cloud.vectorsearch.v1.EmbeddingTaskType|keyof typeof google.cloud.vectorsearch.v1.EmbeddingTaskType);
+
+                    /**
+                     * Creates a new VertexEmbeddingConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VertexEmbeddingConfig instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IVertexEmbeddingConfig): google.cloud.vectorsearch.v1.VertexEmbeddingConfig;
+
+                    /**
+                     * Encodes the specified VertexEmbeddingConfig message. Does not implicitly {@link google.cloud.vectorsearch.v1.VertexEmbeddingConfig.verify|verify} messages.
+                     * @param message VertexEmbeddingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IVertexEmbeddingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VertexEmbeddingConfig message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.VertexEmbeddingConfig.verify|verify} messages.
+                     * @param message VertexEmbeddingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IVertexEmbeddingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VertexEmbeddingConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VertexEmbeddingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.VertexEmbeddingConfig;
+
+                    /**
+                     * Decodes a VertexEmbeddingConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VertexEmbeddingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.VertexEmbeddingConfig;
+
+                    /**
+                     * Verifies a VertexEmbeddingConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VertexEmbeddingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VertexEmbeddingConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.VertexEmbeddingConfig;
+
+                    /**
+                     * Creates a plain object from a VertexEmbeddingConfig message. Also converts values to other types if specified.
+                     * @param message VertexEmbeddingConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.VertexEmbeddingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VertexEmbeddingConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VertexEmbeddingConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a DataObjectService */
+                class DataObjectService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DataObjectService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DataObjectService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataObjectService;
+
+                    /**
+                     * Calls CreateDataObject.
+                     * @param request CreateDataObjectRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataObject
+                     */
+                    public createDataObject(request: google.cloud.vectorsearch.v1.ICreateDataObjectRequest, callback: google.cloud.vectorsearch.v1.DataObjectService.CreateDataObjectCallback): void;
+
+                    /**
+                     * Calls CreateDataObject.
+                     * @param request CreateDataObjectRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataObject(request: google.cloud.vectorsearch.v1.ICreateDataObjectRequest): Promise<google.cloud.vectorsearch.v1.DataObject>;
+
+                    /**
+                     * Calls BatchCreateDataObjects.
+                     * @param request BatchCreateDataObjectsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchCreateDataObjectsResponse
+                     */
+                    public batchCreateDataObjects(request: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsRequest, callback: google.cloud.vectorsearch.v1.DataObjectService.BatchCreateDataObjectsCallback): void;
+
+                    /**
+                     * Calls BatchCreateDataObjects.
+                     * @param request BatchCreateDataObjectsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreateDataObjects(request: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsRequest): Promise<google.cloud.vectorsearch.v1.BatchCreateDataObjectsResponse>;
+
+                    /**
+                     * Calls GetDataObject.
+                     * @param request GetDataObjectRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataObject
+                     */
+                    public getDataObject(request: google.cloud.vectorsearch.v1.IGetDataObjectRequest, callback: google.cloud.vectorsearch.v1.DataObjectService.GetDataObjectCallback): void;
+
+                    /**
+                     * Calls GetDataObject.
+                     * @param request GetDataObjectRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataObject(request: google.cloud.vectorsearch.v1.IGetDataObjectRequest): Promise<google.cloud.vectorsearch.v1.DataObject>;
+
+                    /**
+                     * Calls UpdateDataObject.
+                     * @param request UpdateDataObjectRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataObject
+                     */
+                    public updateDataObject(request: google.cloud.vectorsearch.v1.IUpdateDataObjectRequest, callback: google.cloud.vectorsearch.v1.DataObjectService.UpdateDataObjectCallback): void;
+
+                    /**
+                     * Calls UpdateDataObject.
+                     * @param request UpdateDataObjectRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataObject(request: google.cloud.vectorsearch.v1.IUpdateDataObjectRequest): Promise<google.cloud.vectorsearch.v1.DataObject>;
+
+                    /**
+                     * Calls BatchUpdateDataObjects.
+                     * @param request BatchUpdateDataObjectsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchUpdateDataObjectsResponse
+                     */
+                    public batchUpdateDataObjects(request: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsRequest, callback: google.cloud.vectorsearch.v1.DataObjectService.BatchUpdateDataObjectsCallback): void;
+
+                    /**
+                     * Calls BatchUpdateDataObjects.
+                     * @param request BatchUpdateDataObjectsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdateDataObjects(request: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsRequest): Promise<google.cloud.vectorsearch.v1.BatchUpdateDataObjectsResponse>;
+
+                    /**
+                     * Calls DeleteDataObject.
+                     * @param request DeleteDataObjectRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDataObject(request: google.cloud.vectorsearch.v1.IDeleteDataObjectRequest, callback: google.cloud.vectorsearch.v1.DataObjectService.DeleteDataObjectCallback): void;
+
+                    /**
+                     * Calls DeleteDataObject.
+                     * @param request DeleteDataObjectRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataObject(request: google.cloud.vectorsearch.v1.IDeleteDataObjectRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls BatchDeleteDataObjects.
+                     * @param request BatchDeleteDataObjectsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public batchDeleteDataObjects(request: google.cloud.vectorsearch.v1.IBatchDeleteDataObjectsRequest, callback: google.cloud.vectorsearch.v1.DataObjectService.BatchDeleteDataObjectsCallback): void;
+
+                    /**
+                     * Calls BatchDeleteDataObjects.
+                     * @param request BatchDeleteDataObjectsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchDeleteDataObjects(request: google.cloud.vectorsearch.v1.IBatchDeleteDataObjectsRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace DataObjectService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectService|createDataObject}.
+                     * @param error Error, if any
+                     * @param [response] DataObject
+                     */
+                    type CreateDataObjectCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.DataObject) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectService|batchCreateDataObjects}.
+                     * @param error Error, if any
+                     * @param [response] BatchCreateDataObjectsResponse
+                     */
+                    type BatchCreateDataObjectsCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.BatchCreateDataObjectsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectService|getDataObject}.
+                     * @param error Error, if any
+                     * @param [response] DataObject
+                     */
+                    type GetDataObjectCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.DataObject) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectService|updateDataObject}.
+                     * @param error Error, if any
+                     * @param [response] DataObject
+                     */
+                    type UpdateDataObjectCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.DataObject) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectService|batchUpdateDataObjects}.
+                     * @param error Error, if any
+                     * @param [response] BatchUpdateDataObjectsResponse
+                     */
+                    type BatchUpdateDataObjectsCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.BatchUpdateDataObjectsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectService|deleteDataObject}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDataObjectCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.DataObjectService|batchDeleteDataObjects}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type BatchDeleteDataObjectsCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a CreateDataObjectRequest. */
+                interface ICreateDataObjectRequest {
+
+                    /** CreateDataObjectRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDataObjectRequest dataObjectId */
+                    dataObjectId?: (string|null);
+
+                    /** CreateDataObjectRequest dataObject */
+                    dataObject?: (google.cloud.vectorsearch.v1.IDataObject|null);
+                }
+
+                /** Represents a CreateDataObjectRequest. */
+                class CreateDataObjectRequest implements ICreateDataObjectRequest {
+
+                    /**
+                     * Constructs a new CreateDataObjectRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ICreateDataObjectRequest);
+
+                    /** CreateDataObjectRequest parent. */
+                    public parent: string;
+
+                    /** CreateDataObjectRequest dataObjectId. */
+                    public dataObjectId: string;
+
+                    /** CreateDataObjectRequest dataObject. */
+                    public dataObject?: (google.cloud.vectorsearch.v1.IDataObject|null);
+
+                    /**
+                     * Creates a new CreateDataObjectRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDataObjectRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ICreateDataObjectRequest): google.cloud.vectorsearch.v1.CreateDataObjectRequest;
+
+                    /**
+                     * Encodes the specified CreateDataObjectRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.CreateDataObjectRequest.verify|verify} messages.
+                     * @param message CreateDataObjectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ICreateDataObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDataObjectRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.CreateDataObjectRequest.verify|verify} messages.
+                     * @param message CreateDataObjectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ICreateDataObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDataObjectRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDataObjectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.CreateDataObjectRequest;
+
+                    /**
+                     * Decodes a CreateDataObjectRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDataObjectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.CreateDataObjectRequest;
+
+                    /**
+                     * Verifies a CreateDataObjectRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDataObjectRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDataObjectRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.CreateDataObjectRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDataObjectRequest message. Also converts values to other types if specified.
+                     * @param message CreateDataObjectRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.CreateDataObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDataObjectRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDataObjectRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateDataObjectsRequest. */
+                interface IBatchCreateDataObjectsRequest {
+
+                    /** BatchCreateDataObjectsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateDataObjectsRequest requests */
+                    requests?: (google.cloud.vectorsearch.v1.ICreateDataObjectRequest[]|null);
+                }
+
+                /** Represents a BatchCreateDataObjectsRequest. */
+                class BatchCreateDataObjectsRequest implements IBatchCreateDataObjectsRequest {
+
+                    /**
+                     * Constructs a new BatchCreateDataObjectsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsRequest);
+
+                    /** BatchCreateDataObjectsRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreateDataObjectsRequest requests. */
+                    public requests: google.cloud.vectorsearch.v1.ICreateDataObjectRequest[];
+
+                    /**
+                     * Creates a new BatchCreateDataObjectsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateDataObjectsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsRequest): google.cloud.vectorsearch.v1.BatchCreateDataObjectsRequest;
+
+                    /**
+                     * Encodes the specified BatchCreateDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchCreateDataObjectsRequest.verify|verify} messages.
+                     * @param message BatchCreateDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchCreateDataObjectsRequest.verify|verify} messages.
+                     * @param message BatchCreateDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateDataObjectsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.BatchCreateDataObjectsRequest;
+
+                    /**
+                     * Decodes a BatchCreateDataObjectsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.BatchCreateDataObjectsRequest;
+
+                    /**
+                     * Verifies a BatchCreateDataObjectsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateDataObjectsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.BatchCreateDataObjectsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreateDataObjectsRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateDataObjectsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.BatchCreateDataObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateDataObjectsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateDataObjectsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateDataObjectsResponse. */
+                interface IBatchCreateDataObjectsResponse {
+
+                    /** BatchCreateDataObjectsResponse dataObjects */
+                    dataObjects?: (google.cloud.vectorsearch.v1.IDataObject[]|null);
+                }
+
+                /** Represents a BatchCreateDataObjectsResponse. */
+                class BatchCreateDataObjectsResponse implements IBatchCreateDataObjectsResponse {
+
+                    /**
+                     * Constructs a new BatchCreateDataObjectsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsResponse);
+
+                    /** BatchCreateDataObjectsResponse dataObjects. */
+                    public dataObjects: google.cloud.vectorsearch.v1.IDataObject[];
+
+                    /**
+                     * Creates a new BatchCreateDataObjectsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateDataObjectsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsResponse): google.cloud.vectorsearch.v1.BatchCreateDataObjectsResponse;
+
+                    /**
+                     * Encodes the specified BatchCreateDataObjectsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchCreateDataObjectsResponse.verify|verify} messages.
+                     * @param message BatchCreateDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateDataObjectsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchCreateDataObjectsResponse.verify|verify} messages.
+                     * @param message BatchCreateDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IBatchCreateDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateDataObjectsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.BatchCreateDataObjectsResponse;
+
+                    /**
+                     * Decodes a BatchCreateDataObjectsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.BatchCreateDataObjectsResponse;
+
+                    /**
+                     * Verifies a BatchCreateDataObjectsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateDataObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateDataObjectsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.BatchCreateDataObjectsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreateDataObjectsResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreateDataObjectsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.BatchCreateDataObjectsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateDataObjectsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateDataObjectsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDataObjectRequest. */
+                interface IGetDataObjectRequest {
+
+                    /** GetDataObjectRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataObjectRequest. */
+                class GetDataObjectRequest implements IGetDataObjectRequest {
+
+                    /**
+                     * Constructs a new GetDataObjectRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IGetDataObjectRequest);
+
+                    /** GetDataObjectRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataObjectRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataObjectRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IGetDataObjectRequest): google.cloud.vectorsearch.v1.GetDataObjectRequest;
+
+                    /**
+                     * Encodes the specified GetDataObjectRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.GetDataObjectRequest.verify|verify} messages.
+                     * @param message GetDataObjectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IGetDataObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataObjectRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.GetDataObjectRequest.verify|verify} messages.
+                     * @param message GetDataObjectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IGetDataObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataObjectRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataObjectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.GetDataObjectRequest;
+
+                    /**
+                     * Decodes a GetDataObjectRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataObjectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.GetDataObjectRequest;
+
+                    /**
+                     * Verifies a GetDataObjectRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataObjectRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataObjectRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.GetDataObjectRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataObjectRequest message. Also converts values to other types if specified.
+                     * @param message GetDataObjectRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.GetDataObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataObjectRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDataObjectRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDataObjectRequest. */
+                interface IUpdateDataObjectRequest {
+
+                    /** UpdateDataObjectRequest dataObject */
+                    dataObject?: (google.cloud.vectorsearch.v1.IDataObject|null);
+
+                    /** UpdateDataObjectRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDataObjectRequest. */
+                class UpdateDataObjectRequest implements IUpdateDataObjectRequest {
+
+                    /**
+                     * Constructs a new UpdateDataObjectRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IUpdateDataObjectRequest);
+
+                    /** UpdateDataObjectRequest dataObject. */
+                    public dataObject?: (google.cloud.vectorsearch.v1.IDataObject|null);
+
+                    /** UpdateDataObjectRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDataObjectRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDataObjectRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IUpdateDataObjectRequest): google.cloud.vectorsearch.v1.UpdateDataObjectRequest;
+
+                    /**
+                     * Encodes the specified UpdateDataObjectRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateDataObjectRequest.verify|verify} messages.
+                     * @param message UpdateDataObjectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IUpdateDataObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDataObjectRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateDataObjectRequest.verify|verify} messages.
+                     * @param message UpdateDataObjectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IUpdateDataObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDataObjectRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDataObjectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.UpdateDataObjectRequest;
+
+                    /**
+                     * Decodes an UpdateDataObjectRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDataObjectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.UpdateDataObjectRequest;
+
+                    /**
+                     * Verifies an UpdateDataObjectRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDataObjectRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDataObjectRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.UpdateDataObjectRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDataObjectRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDataObjectRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.UpdateDataObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDataObjectRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDataObjectRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateDataObjectsRequest. */
+                interface IBatchUpdateDataObjectsRequest {
+
+                    /** BatchUpdateDataObjectsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdateDataObjectsRequest requests */
+                    requests?: (google.cloud.vectorsearch.v1.IUpdateDataObjectRequest[]|null);
+                }
+
+                /** Represents a BatchUpdateDataObjectsRequest. */
+                class BatchUpdateDataObjectsRequest implements IBatchUpdateDataObjectsRequest {
+
+                    /**
+                     * Constructs a new BatchUpdateDataObjectsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsRequest);
+
+                    /** BatchUpdateDataObjectsRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdateDataObjectsRequest requests. */
+                    public requests: google.cloud.vectorsearch.v1.IUpdateDataObjectRequest[];
+
+                    /**
+                     * Creates a new BatchUpdateDataObjectsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateDataObjectsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsRequest): google.cloud.vectorsearch.v1.BatchUpdateDataObjectsRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdateDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchUpdateDataObjectsRequest.verify|verify} messages.
+                     * @param message BatchUpdateDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchUpdateDataObjectsRequest.verify|verify} messages.
+                     * @param message BatchUpdateDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateDataObjectsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.BatchUpdateDataObjectsRequest;
+
+                    /**
+                     * Decodes a BatchUpdateDataObjectsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.BatchUpdateDataObjectsRequest;
+
+                    /**
+                     * Verifies a BatchUpdateDataObjectsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateDataObjectsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.BatchUpdateDataObjectsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateDataObjectsRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdateDataObjectsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.BatchUpdateDataObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateDataObjectsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateDataObjectsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchUpdateDataObjectsResponse. */
+                interface IBatchUpdateDataObjectsResponse {
+                }
+
+                /** Represents a BatchUpdateDataObjectsResponse. */
+                class BatchUpdateDataObjectsResponse implements IBatchUpdateDataObjectsResponse {
+
+                    /**
+                     * Constructs a new BatchUpdateDataObjectsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsResponse);
+
+                    /**
+                     * Creates a new BatchUpdateDataObjectsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateDataObjectsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsResponse): google.cloud.vectorsearch.v1.BatchUpdateDataObjectsResponse;
+
+                    /**
+                     * Encodes the specified BatchUpdateDataObjectsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchUpdateDataObjectsResponse.verify|verify} messages.
+                     * @param message BatchUpdateDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateDataObjectsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchUpdateDataObjectsResponse.verify|verify} messages.
+                     * @param message BatchUpdateDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateDataObjectsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.BatchUpdateDataObjectsResponse;
+
+                    /**
+                     * Decodes a BatchUpdateDataObjectsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.BatchUpdateDataObjectsResponse;
+
+                    /**
+                     * Verifies a BatchUpdateDataObjectsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateDataObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateDataObjectsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.BatchUpdateDataObjectsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateDataObjectsResponse message. Also converts values to other types if specified.
+                     * @param message BatchUpdateDataObjectsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.BatchUpdateDataObjectsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateDataObjectsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchUpdateDataObjectsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDataObjectRequest. */
+                interface IDeleteDataObjectRequest {
+
+                    /** DeleteDataObjectRequest name */
+                    name?: (string|null);
+
+                    /** DeleteDataObjectRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteDataObjectRequest. */
+                class DeleteDataObjectRequest implements IDeleteDataObjectRequest {
+
+                    /**
+                     * Constructs a new DeleteDataObjectRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IDeleteDataObjectRequest);
+
+                    /** DeleteDataObjectRequest name. */
+                    public name: string;
+
+                    /** DeleteDataObjectRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteDataObjectRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDataObjectRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IDeleteDataObjectRequest): google.cloud.vectorsearch.v1.DeleteDataObjectRequest;
+
+                    /**
+                     * Encodes the specified DeleteDataObjectRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.DeleteDataObjectRequest.verify|verify} messages.
+                     * @param message DeleteDataObjectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IDeleteDataObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDataObjectRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.DeleteDataObjectRequest.verify|verify} messages.
+                     * @param message DeleteDataObjectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IDeleteDataObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDataObjectRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDataObjectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.DeleteDataObjectRequest;
+
+                    /**
+                     * Decodes a DeleteDataObjectRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDataObjectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.DeleteDataObjectRequest;
+
+                    /**
+                     * Verifies a DeleteDataObjectRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDataObjectRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDataObjectRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.DeleteDataObjectRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDataObjectRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDataObjectRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.DeleteDataObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDataObjectRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDataObjectRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeleteDataObjectsRequest. */
+                interface IBatchDeleteDataObjectsRequest {
+
+                    /** BatchDeleteDataObjectsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchDeleteDataObjectsRequest requests */
+                    requests?: (google.cloud.vectorsearch.v1.IDeleteDataObjectRequest[]|null);
+                }
+
+                /** Represents a BatchDeleteDataObjectsRequest. */
+                class BatchDeleteDataObjectsRequest implements IBatchDeleteDataObjectsRequest {
+
+                    /**
+                     * Constructs a new BatchDeleteDataObjectsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IBatchDeleteDataObjectsRequest);
+
+                    /** BatchDeleteDataObjectsRequest parent. */
+                    public parent: string;
+
+                    /** BatchDeleteDataObjectsRequest requests. */
+                    public requests: google.cloud.vectorsearch.v1.IDeleteDataObjectRequest[];
+
+                    /**
+                     * Creates a new BatchDeleteDataObjectsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeleteDataObjectsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IBatchDeleteDataObjectsRequest): google.cloud.vectorsearch.v1.BatchDeleteDataObjectsRequest;
+
+                    /**
+                     * Encodes the specified BatchDeleteDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchDeleteDataObjectsRequest.verify|verify} messages.
+                     * @param message BatchDeleteDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IBatchDeleteDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeleteDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.BatchDeleteDataObjectsRequest.verify|verify} messages.
+                     * @param message BatchDeleteDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IBatchDeleteDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeleteDataObjectsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeleteDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.BatchDeleteDataObjectsRequest;
+
+                    /**
+                     * Decodes a BatchDeleteDataObjectsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeleteDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.BatchDeleteDataObjectsRequest;
+
+                    /**
+                     * Verifies a BatchDeleteDataObjectsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeleteDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeleteDataObjectsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.BatchDeleteDataObjectsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchDeleteDataObjectsRequest message. Also converts values to other types if specified.
+                     * @param message BatchDeleteDataObjectsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.BatchDeleteDataObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeleteDataObjectsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeleteDataObjectsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a VectorSearchService */
+                class VectorSearchService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new VectorSearchService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new VectorSearchService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): VectorSearchService;
+
+                    /**
+                     * Calls ListCollections.
+                     * @param request ListCollectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCollectionsResponse
+                     */
+                    public listCollections(request: google.cloud.vectorsearch.v1.IListCollectionsRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.ListCollectionsCallback): void;
+
+                    /**
+                     * Calls ListCollections.
+                     * @param request ListCollectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCollections(request: google.cloud.vectorsearch.v1.IListCollectionsRequest): Promise<google.cloud.vectorsearch.v1.ListCollectionsResponse>;
+
+                    /**
+                     * Calls GetCollection.
+                     * @param request GetCollectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Collection
+                     */
+                    public getCollection(request: google.cloud.vectorsearch.v1.IGetCollectionRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.GetCollectionCallback): void;
+
+                    /**
+                     * Calls GetCollection.
+                     * @param request GetCollectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCollection(request: google.cloud.vectorsearch.v1.IGetCollectionRequest): Promise<google.cloud.vectorsearch.v1.Collection>;
+
+                    /**
+                     * Calls CreateCollection.
+                     * @param request CreateCollectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createCollection(request: google.cloud.vectorsearch.v1.ICreateCollectionRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.CreateCollectionCallback): void;
+
+                    /**
+                     * Calls CreateCollection.
+                     * @param request CreateCollectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCollection(request: google.cloud.vectorsearch.v1.ICreateCollectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateCollection.
+                     * @param request UpdateCollectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateCollection(request: google.cloud.vectorsearch.v1.IUpdateCollectionRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.UpdateCollectionCallback): void;
+
+                    /**
+                     * Calls UpdateCollection.
+                     * @param request UpdateCollectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCollection(request: google.cloud.vectorsearch.v1.IUpdateCollectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteCollection.
+                     * @param request DeleteCollectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteCollection(request: google.cloud.vectorsearch.v1.IDeleteCollectionRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.DeleteCollectionCallback): void;
+
+                    /**
+                     * Calls DeleteCollection.
+                     * @param request DeleteCollectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCollection(request: google.cloud.vectorsearch.v1.IDeleteCollectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListIndexes.
+                     * @param request ListIndexesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListIndexesResponse
+                     */
+                    public listIndexes(request: google.cloud.vectorsearch.v1.IListIndexesRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.ListIndexesCallback): void;
+
+                    /**
+                     * Calls ListIndexes.
+                     * @param request ListIndexesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listIndexes(request: google.cloud.vectorsearch.v1.IListIndexesRequest): Promise<google.cloud.vectorsearch.v1.ListIndexesResponse>;
+
+                    /**
+                     * Calls GetIndex.
+                     * @param request GetIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Index
+                     */
+                    public getIndex(request: google.cloud.vectorsearch.v1.IGetIndexRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.GetIndexCallback): void;
+
+                    /**
+                     * Calls GetIndex.
+                     * @param request GetIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIndex(request: google.cloud.vectorsearch.v1.IGetIndexRequest): Promise<google.cloud.vectorsearch.v1.Index>;
+
+                    /**
+                     * Calls CreateIndex.
+                     * @param request CreateIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createIndex(request: google.cloud.vectorsearch.v1.ICreateIndexRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.CreateIndexCallback): void;
+
+                    /**
+                     * Calls CreateIndex.
+                     * @param request CreateIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createIndex(request: google.cloud.vectorsearch.v1.ICreateIndexRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteIndex.
+                     * @param request DeleteIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteIndex(request: google.cloud.vectorsearch.v1.IDeleteIndexRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.DeleteIndexCallback): void;
+
+                    /**
+                     * Calls DeleteIndex.
+                     * @param request DeleteIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteIndex(request: google.cloud.vectorsearch.v1.IDeleteIndexRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ImportDataObjects.
+                     * @param request ImportDataObjectsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importDataObjects(request: google.cloud.vectorsearch.v1.IImportDataObjectsRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.ImportDataObjectsCallback): void;
+
+                    /**
+                     * Calls ImportDataObjects.
+                     * @param request ImportDataObjectsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importDataObjects(request: google.cloud.vectorsearch.v1.IImportDataObjectsRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace VectorSearchService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|listCollections}.
+                     * @param error Error, if any
+                     * @param [response] ListCollectionsResponse
+                     */
+                    type ListCollectionsCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.ListCollectionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|getCollection}.
+                     * @param error Error, if any
+                     * @param [response] Collection
+                     */
+                    type GetCollectionCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.Collection) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|createCollection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateCollectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|updateCollection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateCollectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|deleteCollection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteCollectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|listIndexes}.
+                     * @param error Error, if any
+                     * @param [response] ListIndexesResponse
+                     */
+                    type ListIndexesCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.ListIndexesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|getIndex}.
+                     * @param error Error, if any
+                     * @param [response] Index
+                     */
+                    type GetIndexCallback = (error: (Error|null), response?: google.cloud.vectorsearch.v1.Index) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|createIndex}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|deleteIndex}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|importDataObjects}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportDataObjectsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a Collection. */
+                interface ICollection {
+
+                    /** Collection name */
+                    name?: (string|null);
+
+                    /** Collection displayName */
+                    displayName?: (string|null);
+
+                    /** Collection description */
+                    description?: (string|null);
+
+                    /** Collection createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Collection updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Collection labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Collection vectorSchema */
+                    vectorSchema?: ({ [k: string]: google.cloud.vectorsearch.v1.IVectorField }|null);
+
+                    /** Collection dataSchema */
+                    dataSchema?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a Collection. */
+                class Collection implements ICollection {
+
+                    /**
+                     * Constructs a new Collection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ICollection);
+
+                    /** Collection name. */
+                    public name: string;
+
+                    /** Collection displayName. */
+                    public displayName: string;
+
+                    /** Collection description. */
+                    public description: string;
+
+                    /** Collection createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Collection updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Collection labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Collection vectorSchema. */
+                    public vectorSchema: { [k: string]: google.cloud.vectorsearch.v1.IVectorField };
+
+                    /** Collection dataSchema. */
+                    public dataSchema?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new Collection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Collection instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ICollection): google.cloud.vectorsearch.v1.Collection;
+
+                    /**
+                     * Encodes the specified Collection message. Does not implicitly {@link google.cloud.vectorsearch.v1.Collection.verify|verify} messages.
+                     * @param message Collection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ICollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Collection message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.Collection.verify|verify} messages.
+                     * @param message Collection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ICollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Collection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Collection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.Collection;
+
+                    /**
+                     * Decodes a Collection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Collection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.Collection;
+
+                    /**
+                     * Verifies a Collection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Collection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Collection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.Collection;
+
+                    /**
+                     * Creates a plain object from a Collection message. Also converts values to other types if specified.
+                     * @param message Collection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.Collection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Collection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Collection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VectorField. */
+                interface IVectorField {
+
+                    /** VectorField denseVector */
+                    denseVector?: (google.cloud.vectorsearch.v1.IDenseVectorField|null);
+
+                    /** VectorField sparseVector */
+                    sparseVector?: (google.cloud.vectorsearch.v1.ISparseVectorField|null);
+                }
+
+                /** Represents a VectorField. */
+                class VectorField implements IVectorField {
+
+                    /**
+                     * Constructs a new VectorField.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IVectorField);
+
+                    /** VectorField denseVector. */
+                    public denseVector?: (google.cloud.vectorsearch.v1.IDenseVectorField|null);
+
+                    /** VectorField sparseVector. */
+                    public sparseVector?: (google.cloud.vectorsearch.v1.ISparseVectorField|null);
+
+                    /** VectorField vectorTypeConfig. */
+                    public vectorTypeConfig?: ("denseVector"|"sparseVector");
+
+                    /**
+                     * Creates a new VectorField instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VectorField instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IVectorField): google.cloud.vectorsearch.v1.VectorField;
+
+                    /**
+                     * Encodes the specified VectorField message. Does not implicitly {@link google.cloud.vectorsearch.v1.VectorField.verify|verify} messages.
+                     * @param message VectorField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IVectorField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VectorField message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.VectorField.verify|verify} messages.
+                     * @param message VectorField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IVectorField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VectorField message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VectorField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.VectorField;
+
+                    /**
+                     * Decodes a VectorField message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VectorField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.VectorField;
+
+                    /**
+                     * Verifies a VectorField message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VectorField message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VectorField
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.VectorField;
+
+                    /**
+                     * Creates a plain object from a VectorField message. Also converts values to other types if specified.
+                     * @param message VectorField
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.VectorField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VectorField to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VectorField
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DenseVectorField. */
+                interface IDenseVectorField {
+
+                    /** DenseVectorField dimensions */
+                    dimensions?: (number|null);
+
+                    /** DenseVectorField vertexEmbeddingConfig */
+                    vertexEmbeddingConfig?: (google.cloud.vectorsearch.v1.IVertexEmbeddingConfig|null);
+                }
+
+                /** Represents a DenseVectorField. */
+                class DenseVectorField implements IDenseVectorField {
+
+                    /**
+                     * Constructs a new DenseVectorField.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IDenseVectorField);
+
+                    /** DenseVectorField dimensions. */
+                    public dimensions: number;
+
+                    /** DenseVectorField vertexEmbeddingConfig. */
+                    public vertexEmbeddingConfig?: (google.cloud.vectorsearch.v1.IVertexEmbeddingConfig|null);
+
+                    /**
+                     * Creates a new DenseVectorField instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DenseVectorField instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IDenseVectorField): google.cloud.vectorsearch.v1.DenseVectorField;
+
+                    /**
+                     * Encodes the specified DenseVectorField message. Does not implicitly {@link google.cloud.vectorsearch.v1.DenseVectorField.verify|verify} messages.
+                     * @param message DenseVectorField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IDenseVectorField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DenseVectorField message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.DenseVectorField.verify|verify} messages.
+                     * @param message DenseVectorField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IDenseVectorField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DenseVectorField message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DenseVectorField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.DenseVectorField;
+
+                    /**
+                     * Decodes a DenseVectorField message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DenseVectorField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.DenseVectorField;
+
+                    /**
+                     * Verifies a DenseVectorField message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DenseVectorField message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DenseVectorField
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.DenseVectorField;
+
+                    /**
+                     * Creates a plain object from a DenseVectorField message. Also converts values to other types if specified.
+                     * @param message DenseVectorField
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.DenseVectorField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DenseVectorField to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DenseVectorField
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SparseVectorField. */
+                interface ISparseVectorField {
+                }
+
+                /** Represents a SparseVectorField. */
+                class SparseVectorField implements ISparseVectorField {
+
+                    /**
+                     * Constructs a new SparseVectorField.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ISparseVectorField);
+
+                    /**
+                     * Creates a new SparseVectorField instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SparseVectorField instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ISparseVectorField): google.cloud.vectorsearch.v1.SparseVectorField;
+
+                    /**
+                     * Encodes the specified SparseVectorField message. Does not implicitly {@link google.cloud.vectorsearch.v1.SparseVectorField.verify|verify} messages.
+                     * @param message SparseVectorField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ISparseVectorField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SparseVectorField message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SparseVectorField.verify|verify} messages.
+                     * @param message SparseVectorField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ISparseVectorField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SparseVectorField message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SparseVectorField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SparseVectorField;
+
+                    /**
+                     * Decodes a SparseVectorField message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SparseVectorField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SparseVectorField;
+
+                    /**
+                     * Verifies a SparseVectorField message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SparseVectorField message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SparseVectorField
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SparseVectorField;
+
+                    /**
+                     * Creates a plain object from a SparseVectorField message. Also converts values to other types if specified.
+                     * @param message SparseVectorField
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.SparseVectorField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SparseVectorField to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SparseVectorField
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCollectionsRequest. */
+                interface IListCollectionsRequest {
+
+                    /** ListCollectionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCollectionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCollectionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListCollectionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListCollectionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListCollectionsRequest. */
+                class ListCollectionsRequest implements IListCollectionsRequest {
+
+                    /**
+                     * Constructs a new ListCollectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IListCollectionsRequest);
+
+                    /** ListCollectionsRequest parent. */
+                    public parent: string;
+
+                    /** ListCollectionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCollectionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListCollectionsRequest filter. */
+                    public filter: string;
+
+                    /** ListCollectionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListCollectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCollectionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IListCollectionsRequest): google.cloud.vectorsearch.v1.ListCollectionsRequest;
+
+                    /**
+                     * Encodes the specified ListCollectionsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.ListCollectionsRequest.verify|verify} messages.
+                     * @param message ListCollectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IListCollectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCollectionsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ListCollectionsRequest.verify|verify} messages.
+                     * @param message ListCollectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IListCollectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCollectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCollectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ListCollectionsRequest;
+
+                    /**
+                     * Decodes a ListCollectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCollectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ListCollectionsRequest;
+
+                    /**
+                     * Verifies a ListCollectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCollectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCollectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ListCollectionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListCollectionsRequest message. Also converts values to other types if specified.
+                     * @param message ListCollectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.ListCollectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCollectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCollectionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCollectionsResponse. */
+                interface IListCollectionsResponse {
+
+                    /** ListCollectionsResponse collections */
+                    collections?: (google.cloud.vectorsearch.v1.ICollection[]|null);
+
+                    /** ListCollectionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListCollectionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListCollectionsResponse. */
+                class ListCollectionsResponse implements IListCollectionsResponse {
+
+                    /**
+                     * Constructs a new ListCollectionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IListCollectionsResponse);
+
+                    /** ListCollectionsResponse collections. */
+                    public collections: google.cloud.vectorsearch.v1.ICollection[];
+
+                    /** ListCollectionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListCollectionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListCollectionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCollectionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IListCollectionsResponse): google.cloud.vectorsearch.v1.ListCollectionsResponse;
+
+                    /**
+                     * Encodes the specified ListCollectionsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.ListCollectionsResponse.verify|verify} messages.
+                     * @param message ListCollectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IListCollectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCollectionsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ListCollectionsResponse.verify|verify} messages.
+                     * @param message ListCollectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IListCollectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCollectionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCollectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ListCollectionsResponse;
+
+                    /**
+                     * Decodes a ListCollectionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCollectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ListCollectionsResponse;
+
+                    /**
+                     * Verifies a ListCollectionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCollectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCollectionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ListCollectionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListCollectionsResponse message. Also converts values to other types if specified.
+                     * @param message ListCollectionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.ListCollectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCollectionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCollectionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCollectionRequest. */
+                interface IGetCollectionRequest {
+
+                    /** GetCollectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCollectionRequest. */
+                class GetCollectionRequest implements IGetCollectionRequest {
+
+                    /**
+                     * Constructs a new GetCollectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IGetCollectionRequest);
+
+                    /** GetCollectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCollectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCollectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IGetCollectionRequest): google.cloud.vectorsearch.v1.GetCollectionRequest;
+
+                    /**
+                     * Encodes the specified GetCollectionRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.GetCollectionRequest.verify|verify} messages.
+                     * @param message GetCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IGetCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCollectionRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.GetCollectionRequest.verify|verify} messages.
+                     * @param message GetCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IGetCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCollectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.GetCollectionRequest;
+
+                    /**
+                     * Decodes a GetCollectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.GetCollectionRequest;
+
+                    /**
+                     * Verifies a GetCollectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCollectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.GetCollectionRequest;
+
+                    /**
+                     * Creates a plain object from a GetCollectionRequest message. Also converts values to other types if specified.
+                     * @param message GetCollectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.GetCollectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCollectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCollectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCollectionRequest. */
+                interface ICreateCollectionRequest {
+
+                    /** CreateCollectionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCollectionRequest collectionId */
+                    collectionId?: (string|null);
+
+                    /** CreateCollectionRequest collection */
+                    collection?: (google.cloud.vectorsearch.v1.ICollection|null);
+
+                    /** CreateCollectionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateCollectionRequest. */
+                class CreateCollectionRequest implements ICreateCollectionRequest {
+
+                    /**
+                     * Constructs a new CreateCollectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ICreateCollectionRequest);
+
+                    /** CreateCollectionRequest parent. */
+                    public parent: string;
+
+                    /** CreateCollectionRequest collectionId. */
+                    public collectionId: string;
+
+                    /** CreateCollectionRequest collection. */
+                    public collection?: (google.cloud.vectorsearch.v1.ICollection|null);
+
+                    /** CreateCollectionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateCollectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCollectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ICreateCollectionRequest): google.cloud.vectorsearch.v1.CreateCollectionRequest;
+
+                    /**
+                     * Encodes the specified CreateCollectionRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.CreateCollectionRequest.verify|verify} messages.
+                     * @param message CreateCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ICreateCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCollectionRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.CreateCollectionRequest.verify|verify} messages.
+                     * @param message CreateCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ICreateCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCollectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.CreateCollectionRequest;
+
+                    /**
+                     * Decodes a CreateCollectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.CreateCollectionRequest;
+
+                    /**
+                     * Verifies a CreateCollectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCollectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.CreateCollectionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCollectionRequest message. Also converts values to other types if specified.
+                     * @param message CreateCollectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.CreateCollectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCollectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCollectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCollectionRequest. */
+                interface IUpdateCollectionRequest {
+
+                    /** UpdateCollectionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateCollectionRequest collection */
+                    collection?: (google.cloud.vectorsearch.v1.ICollection|null);
+
+                    /** UpdateCollectionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateCollectionRequest. */
+                class UpdateCollectionRequest implements IUpdateCollectionRequest {
+
+                    /**
+                     * Constructs a new UpdateCollectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IUpdateCollectionRequest);
+
+                    /** UpdateCollectionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateCollectionRequest collection. */
+                    public collection?: (google.cloud.vectorsearch.v1.ICollection|null);
+
+                    /** UpdateCollectionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateCollectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCollectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IUpdateCollectionRequest): google.cloud.vectorsearch.v1.UpdateCollectionRequest;
+
+                    /**
+                     * Encodes the specified UpdateCollectionRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateCollectionRequest.verify|verify} messages.
+                     * @param message UpdateCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IUpdateCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCollectionRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateCollectionRequest.verify|verify} messages.
+                     * @param message UpdateCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IUpdateCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCollectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.UpdateCollectionRequest;
+
+                    /**
+                     * Decodes an UpdateCollectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.UpdateCollectionRequest;
+
+                    /**
+                     * Verifies an UpdateCollectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCollectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.UpdateCollectionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCollectionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCollectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.UpdateCollectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCollectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCollectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCollectionRequest. */
+                interface IDeleteCollectionRequest {
+
+                    /** DeleteCollectionRequest name */
+                    name?: (string|null);
+
+                    /** DeleteCollectionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteCollectionRequest. */
+                class DeleteCollectionRequest implements IDeleteCollectionRequest {
+
+                    /**
+                     * Constructs a new DeleteCollectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IDeleteCollectionRequest);
+
+                    /** DeleteCollectionRequest name. */
+                    public name: string;
+
+                    /** DeleteCollectionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteCollectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCollectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IDeleteCollectionRequest): google.cloud.vectorsearch.v1.DeleteCollectionRequest;
+
+                    /**
+                     * Encodes the specified DeleteCollectionRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.DeleteCollectionRequest.verify|verify} messages.
+                     * @param message DeleteCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IDeleteCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCollectionRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.DeleteCollectionRequest.verify|verify} messages.
+                     * @param message DeleteCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IDeleteCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCollectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.DeleteCollectionRequest;
+
+                    /**
+                     * Decodes a DeleteCollectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.DeleteCollectionRequest;
+
+                    /**
+                     * Verifies a DeleteCollectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCollectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.DeleteCollectionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCollectionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCollectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.DeleteCollectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCollectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCollectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Index. */
+                interface IIndex {
+
+                    /** Index dedicatedInfrastructure */
+                    dedicatedInfrastructure?: (google.cloud.vectorsearch.v1.IDedicatedInfrastructure|null);
+
+                    /** Index denseScann */
+                    denseScann?: (google.cloud.vectorsearch.v1.IDenseScannIndex|null);
+
+                    /** Index name */
+                    name?: (string|null);
+
+                    /** Index displayName */
+                    displayName?: (string|null);
+
+                    /** Index description */
+                    description?: (string|null);
+
+                    /** Index labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Index createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Index updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Index distanceMetric */
+                    distanceMetric?: (google.cloud.vectorsearch.v1.DistanceMetric|keyof typeof google.cloud.vectorsearch.v1.DistanceMetric|null);
+
+                    /** Index indexField */
+                    indexField?: (string|null);
+
+                    /** Index filterFields */
+                    filterFields?: (string[]|null);
+
+                    /** Index storeFields */
+                    storeFields?: (string[]|null);
+                }
+
+                /** Represents an Index. */
+                class Index implements IIndex {
+
+                    /**
+                     * Constructs a new Index.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IIndex);
+
+                    /** Index dedicatedInfrastructure. */
+                    public dedicatedInfrastructure?: (google.cloud.vectorsearch.v1.IDedicatedInfrastructure|null);
+
+                    /** Index denseScann. */
+                    public denseScann?: (google.cloud.vectorsearch.v1.IDenseScannIndex|null);
+
+                    /** Index name. */
+                    public name: string;
+
+                    /** Index displayName. */
+                    public displayName: string;
+
+                    /** Index description. */
+                    public description: string;
+
+                    /** Index labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Index createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Index updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Index distanceMetric. */
+                    public distanceMetric: (google.cloud.vectorsearch.v1.DistanceMetric|keyof typeof google.cloud.vectorsearch.v1.DistanceMetric);
+
+                    /** Index indexField. */
+                    public indexField: string;
+
+                    /** Index filterFields. */
+                    public filterFields: string[];
+
+                    /** Index storeFields. */
+                    public storeFields: string[];
+
+                    /** Index infraType. */
+                    public infraType?: "dedicatedInfrastructure";
+
+                    /** Index indexType. */
+                    public indexType?: "denseScann";
+
+                    /**
+                     * Creates a new Index instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Index instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IIndex): google.cloud.vectorsearch.v1.Index;
+
+                    /**
+                     * Encodes the specified Index message. Does not implicitly {@link google.cloud.vectorsearch.v1.Index.verify|verify} messages.
+                     * @param message Index message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IIndex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Index message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.Index.verify|verify} messages.
+                     * @param message Index message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IIndex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Index message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Index
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.Index;
+
+                    /**
+                     * Decodes an Index message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Index
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.Index;
+
+                    /**
+                     * Verifies an Index message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Index message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Index
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.Index;
+
+                    /**
+                     * Creates a plain object from an Index message. Also converts values to other types if specified.
+                     * @param message Index
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.Index, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Index to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Index
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateIndexRequest. */
+                interface ICreateIndexRequest {
+
+                    /** CreateIndexRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateIndexRequest indexId */
+                    indexId?: (string|null);
+
+                    /** CreateIndexRequest index */
+                    index?: (google.cloud.vectorsearch.v1.IIndex|null);
+
+                    /** CreateIndexRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateIndexRequest. */
+                class CreateIndexRequest implements ICreateIndexRequest {
+
+                    /**
+                     * Constructs a new CreateIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.ICreateIndexRequest);
+
+                    /** CreateIndexRequest parent. */
+                    public parent: string;
+
+                    /** CreateIndexRequest indexId. */
+                    public indexId: string;
+
+                    /** CreateIndexRequest index. */
+                    public index?: (google.cloud.vectorsearch.v1.IIndex|null);
+
+                    /** CreateIndexRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateIndexRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.ICreateIndexRequest): google.cloud.vectorsearch.v1.CreateIndexRequest;
+
+                    /**
+                     * Encodes the specified CreateIndexRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.CreateIndexRequest.verify|verify} messages.
+                     * @param message CreateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.ICreateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateIndexRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.CreateIndexRequest.verify|verify} messages.
+                     * @param message CreateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.ICreateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.CreateIndexRequest;
+
+                    /**
+                     * Decodes a CreateIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.CreateIndexRequest;
+
+                    /**
+                     * Verifies a CreateIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.CreateIndexRequest;
+
+                    /**
+                     * Creates a plain object from a CreateIndexRequest message. Also converts values to other types if specified.
+                     * @param message CreateIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.CreateIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateIndexRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateIndexRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteIndexRequest. */
+                interface IDeleteIndexRequest {
+
+                    /** DeleteIndexRequest name */
+                    name?: (string|null);
+
+                    /** DeleteIndexRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteIndexRequest. */
+                class DeleteIndexRequest implements IDeleteIndexRequest {
+
+                    /**
+                     * Constructs a new DeleteIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IDeleteIndexRequest);
+
+                    /** DeleteIndexRequest name. */
+                    public name: string;
+
+                    /** DeleteIndexRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteIndexRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IDeleteIndexRequest): google.cloud.vectorsearch.v1.DeleteIndexRequest;
+
+                    /**
+                     * Encodes the specified DeleteIndexRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.DeleteIndexRequest.verify|verify} messages.
+                     * @param message DeleteIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IDeleteIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteIndexRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.DeleteIndexRequest.verify|verify} messages.
+                     * @param message DeleteIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IDeleteIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.DeleteIndexRequest;
+
+                    /**
+                     * Decodes a DeleteIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.DeleteIndexRequest;
+
+                    /**
+                     * Verifies a DeleteIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.DeleteIndexRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteIndexRequest message. Also converts values to other types if specified.
+                     * @param message DeleteIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.DeleteIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteIndexRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteIndexRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIndexesRequest. */
+                interface IListIndexesRequest {
+
+                    /** ListIndexesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListIndexesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListIndexesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListIndexesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListIndexesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListIndexesRequest. */
+                class ListIndexesRequest implements IListIndexesRequest {
+
+                    /**
+                     * Constructs a new ListIndexesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IListIndexesRequest);
+
+                    /** ListIndexesRequest parent. */
+                    public parent: string;
+
+                    /** ListIndexesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListIndexesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListIndexesRequest filter. */
+                    public filter: string;
+
+                    /** ListIndexesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListIndexesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIndexesRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IListIndexesRequest): google.cloud.vectorsearch.v1.ListIndexesRequest;
+
+                    /**
+                     * Encodes the specified ListIndexesRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.ListIndexesRequest.verify|verify} messages.
+                     * @param message ListIndexesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IListIndexesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIndexesRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ListIndexesRequest.verify|verify} messages.
+                     * @param message ListIndexesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IListIndexesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIndexesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIndexesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ListIndexesRequest;
+
+                    /**
+                     * Decodes a ListIndexesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIndexesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ListIndexesRequest;
+
+                    /**
+                     * Verifies a ListIndexesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIndexesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIndexesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ListIndexesRequest;
+
+                    /**
+                     * Creates a plain object from a ListIndexesRequest message. Also converts values to other types if specified.
+                     * @param message ListIndexesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.ListIndexesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIndexesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIndexesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIndexesResponse. */
+                interface IListIndexesResponse {
+
+                    /** ListIndexesResponse indexes */
+                    indexes?: (google.cloud.vectorsearch.v1.IIndex[]|null);
+
+                    /** ListIndexesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListIndexesResponse. */
+                class ListIndexesResponse implements IListIndexesResponse {
+
+                    /**
+                     * Constructs a new ListIndexesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IListIndexesResponse);
+
+                    /** ListIndexesResponse indexes. */
+                    public indexes: google.cloud.vectorsearch.v1.IIndex[];
+
+                    /** ListIndexesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListIndexesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIndexesResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IListIndexesResponse): google.cloud.vectorsearch.v1.ListIndexesResponse;
+
+                    /**
+                     * Encodes the specified ListIndexesResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.ListIndexesResponse.verify|verify} messages.
+                     * @param message ListIndexesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IListIndexesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIndexesResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ListIndexesResponse.verify|verify} messages.
+                     * @param message ListIndexesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IListIndexesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIndexesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIndexesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ListIndexesResponse;
+
+                    /**
+                     * Decodes a ListIndexesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIndexesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ListIndexesResponse;
+
+                    /**
+                     * Verifies a ListIndexesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIndexesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIndexesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ListIndexesResponse;
+
+                    /**
+                     * Creates a plain object from a ListIndexesResponse message. Also converts values to other types if specified.
+                     * @param message ListIndexesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.ListIndexesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIndexesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIndexesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetIndexRequest. */
+                interface IGetIndexRequest {
+
+                    /** GetIndexRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetIndexRequest. */
+                class GetIndexRequest implements IGetIndexRequest {
+
+                    /**
+                     * Constructs a new GetIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IGetIndexRequest);
+
+                    /** GetIndexRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetIndexRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IGetIndexRequest): google.cloud.vectorsearch.v1.GetIndexRequest;
+
+                    /**
+                     * Encodes the specified GetIndexRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.GetIndexRequest.verify|verify} messages.
+                     * @param message GetIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IGetIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetIndexRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.GetIndexRequest.verify|verify} messages.
+                     * @param message GetIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IGetIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.GetIndexRequest;
+
+                    /**
+                     * Decodes a GetIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.GetIndexRequest;
+
+                    /**
+                     * Verifies a GetIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.GetIndexRequest;
+
+                    /**
+                     * Creates a plain object from a GetIndexRequest message. Also converts values to other types if specified.
+                     * @param message GetIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.GetIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetIndexRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetIndexRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IOperationMetadata): google.cloud.vectorsearch.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.vectorsearch.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDataObjectsRequest. */
+                interface IImportDataObjectsRequest {
+
+                    /** ImportDataObjectsRequest gcsImport */
+                    gcsImport?: (google.cloud.vectorsearch.v1.ImportDataObjectsRequest.IGcsImportConfig|null);
+
+                    /** ImportDataObjectsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ImportDataObjectsRequest. */
+                class ImportDataObjectsRequest implements IImportDataObjectsRequest {
+
+                    /**
+                     * Constructs a new ImportDataObjectsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IImportDataObjectsRequest);
+
+                    /** ImportDataObjectsRequest gcsImport. */
+                    public gcsImport?: (google.cloud.vectorsearch.v1.ImportDataObjectsRequest.IGcsImportConfig|null);
+
+                    /** ImportDataObjectsRequest name. */
+                    public name: string;
+
+                    /** ImportDataObjectsRequest config. */
+                    public config?: "gcsImport";
+
+                    /**
+                     * Creates a new ImportDataObjectsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataObjectsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IImportDataObjectsRequest): google.cloud.vectorsearch.v1.ImportDataObjectsRequest;
+
+                    /**
+                     * Encodes the specified ImportDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.ImportDataObjectsRequest.verify|verify} messages.
+                     * @param message ImportDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IImportDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ImportDataObjectsRequest.verify|verify} messages.
+                     * @param message ImportDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IImportDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataObjectsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ImportDataObjectsRequest;
+
+                    /**
+                     * Decodes an ImportDataObjectsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ImportDataObjectsRequest;
+
+                    /**
+                     * Verifies an ImportDataObjectsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataObjectsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ImportDataObjectsRequest;
+
+                    /**
+                     * Creates a plain object from an ImportDataObjectsRequest message. Also converts values to other types if specified.
+                     * @param message ImportDataObjectsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.ImportDataObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataObjectsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataObjectsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImportDataObjectsRequest {
+
+                    /** Properties of a GcsImportConfig. */
+                    interface IGcsImportConfig {
+
+                        /** GcsImportConfig contentsUri */
+                        contentsUri?: (string|null);
+
+                        /** GcsImportConfig errorUri */
+                        errorUri?: (string|null);
+
+                        /** GcsImportConfig outputUri */
+                        outputUri?: (string|null);
+                    }
+
+                    /** Represents a GcsImportConfig. */
+                    class GcsImportConfig implements IGcsImportConfig {
+
+                        /**
+                         * Constructs a new GcsImportConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1.ImportDataObjectsRequest.IGcsImportConfig);
+
+                        /** GcsImportConfig contentsUri. */
+                        public contentsUri: string;
+
+                        /** GcsImportConfig errorUri. */
+                        public errorUri: string;
+
+                        /** GcsImportConfig outputUri. */
+                        public outputUri: string;
+
+                        /**
+                         * Creates a new GcsImportConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsImportConfig instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1.ImportDataObjectsRequest.IGcsImportConfig): google.cloud.vectorsearch.v1.ImportDataObjectsRequest.GcsImportConfig;
+
+                        /**
+                         * Encodes the specified GcsImportConfig message. Does not implicitly {@link google.cloud.vectorsearch.v1.ImportDataObjectsRequest.GcsImportConfig.verify|verify} messages.
+                         * @param message GcsImportConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1.ImportDataObjectsRequest.IGcsImportConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsImportConfig message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ImportDataObjectsRequest.GcsImportConfig.verify|verify} messages.
+                         * @param message GcsImportConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1.ImportDataObjectsRequest.IGcsImportConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsImportConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsImportConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ImportDataObjectsRequest.GcsImportConfig;
+
+                        /**
+                         * Decodes a GcsImportConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsImportConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ImportDataObjectsRequest.GcsImportConfig;
+
+                        /**
+                         * Verifies a GcsImportConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsImportConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsImportConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ImportDataObjectsRequest.GcsImportConfig;
+
+                        /**
+                         * Creates a plain object from a GcsImportConfig message. Also converts values to other types if specified.
+                         * @param message GcsImportConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1.ImportDataObjectsRequest.GcsImportConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsImportConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsImportConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ImportDataObjectsMetadata. */
+                interface IImportDataObjectsMetadata {
+
+                    /** ImportDataObjectsMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataObjectsMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataObjectsMetadata successCount */
+                    successCount?: (number|Long|string|null);
+
+                    /** ImportDataObjectsMetadata failureCount */
+                    failureCount?: (number|Long|string|null);
+                }
+
+                /** Represents an ImportDataObjectsMetadata. */
+                class ImportDataObjectsMetadata implements IImportDataObjectsMetadata {
+
+                    /**
+                     * Constructs a new ImportDataObjectsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IImportDataObjectsMetadata);
+
+                    /** ImportDataObjectsMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataObjectsMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataObjectsMetadata successCount. */
+                    public successCount: (number|Long|string);
+
+                    /** ImportDataObjectsMetadata failureCount. */
+                    public failureCount: (number|Long|string);
+
+                    /**
+                     * Creates a new ImportDataObjectsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataObjectsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IImportDataObjectsMetadata): google.cloud.vectorsearch.v1.ImportDataObjectsMetadata;
+
+                    /**
+                     * Encodes the specified ImportDataObjectsMetadata message. Does not implicitly {@link google.cloud.vectorsearch.v1.ImportDataObjectsMetadata.verify|verify} messages.
+                     * @param message ImportDataObjectsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IImportDataObjectsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataObjectsMetadata message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ImportDataObjectsMetadata.verify|verify} messages.
+                     * @param message ImportDataObjectsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IImportDataObjectsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataObjectsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataObjectsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ImportDataObjectsMetadata;
+
+                    /**
+                     * Decodes an ImportDataObjectsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataObjectsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ImportDataObjectsMetadata;
+
+                    /**
+                     * Verifies an ImportDataObjectsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataObjectsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataObjectsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ImportDataObjectsMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportDataObjectsMetadata message. Also converts values to other types if specified.
+                     * @param message ImportDataObjectsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.ImportDataObjectsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataObjectsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataObjectsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDataObjectsResponse. */
+                interface IImportDataObjectsResponse {
+
+                    /** ImportDataObjectsResponse status */
+                    status?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an ImportDataObjectsResponse. */
+                class ImportDataObjectsResponse implements IImportDataObjectsResponse {
+
+                    /**
+                     * Constructs a new ImportDataObjectsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IImportDataObjectsResponse);
+
+                    /** ImportDataObjectsResponse status. */
+                    public status?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new ImportDataObjectsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataObjectsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IImportDataObjectsResponse): google.cloud.vectorsearch.v1.ImportDataObjectsResponse;
+
+                    /**
+                     * Encodes the specified ImportDataObjectsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.ImportDataObjectsResponse.verify|verify} messages.
+                     * @param message ImportDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IImportDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataObjectsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ImportDataObjectsResponse.verify|verify} messages.
+                     * @param message ImportDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IImportDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataObjectsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ImportDataObjectsResponse;
+
+                    /**
+                     * Decodes an ImportDataObjectsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ImportDataObjectsResponse;
+
+                    /**
+                     * Verifies an ImportDataObjectsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataObjectsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ImportDataObjectsResponse;
+
+                    /**
+                     * Creates a plain object from an ImportDataObjectsResponse message. Also converts values to other types if specified.
+                     * @param message ImportDataObjectsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.ImportDataObjectsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataObjectsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataObjectsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DedicatedInfrastructure. */
+                interface IDedicatedInfrastructure {
+
+                    /** DedicatedInfrastructure mode */
+                    mode?: (google.cloud.vectorsearch.v1.DedicatedInfrastructure.Mode|keyof typeof google.cloud.vectorsearch.v1.DedicatedInfrastructure.Mode|null);
+
+                    /** DedicatedInfrastructure autoscalingSpec */
+                    autoscalingSpec?: (google.cloud.vectorsearch.v1.DedicatedInfrastructure.IAutoscalingSpec|null);
+                }
+
+                /** Represents a DedicatedInfrastructure. */
+                class DedicatedInfrastructure implements IDedicatedInfrastructure {
+
+                    /**
+                     * Constructs a new DedicatedInfrastructure.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IDedicatedInfrastructure);
+
+                    /** DedicatedInfrastructure mode. */
+                    public mode?: (google.cloud.vectorsearch.v1.DedicatedInfrastructure.Mode|keyof typeof google.cloud.vectorsearch.v1.DedicatedInfrastructure.Mode|null);
+
+                    /** DedicatedInfrastructure autoscalingSpec. */
+                    public autoscalingSpec?: (google.cloud.vectorsearch.v1.DedicatedInfrastructure.IAutoscalingSpec|null);
+
+                    /**
+                     * Creates a new DedicatedInfrastructure instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DedicatedInfrastructure instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IDedicatedInfrastructure): google.cloud.vectorsearch.v1.DedicatedInfrastructure;
+
+                    /**
+                     * Encodes the specified DedicatedInfrastructure message. Does not implicitly {@link google.cloud.vectorsearch.v1.DedicatedInfrastructure.verify|verify} messages.
+                     * @param message DedicatedInfrastructure message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IDedicatedInfrastructure, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DedicatedInfrastructure message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.DedicatedInfrastructure.verify|verify} messages.
+                     * @param message DedicatedInfrastructure message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IDedicatedInfrastructure, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DedicatedInfrastructure message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DedicatedInfrastructure
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.DedicatedInfrastructure;
+
+                    /**
+                     * Decodes a DedicatedInfrastructure message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DedicatedInfrastructure
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.DedicatedInfrastructure;
+
+                    /**
+                     * Verifies a DedicatedInfrastructure message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DedicatedInfrastructure message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DedicatedInfrastructure
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.DedicatedInfrastructure;
+
+                    /**
+                     * Creates a plain object from a DedicatedInfrastructure message. Also converts values to other types if specified.
+                     * @param message DedicatedInfrastructure
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.DedicatedInfrastructure, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DedicatedInfrastructure to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DedicatedInfrastructure
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DedicatedInfrastructure {
+
+                    /** Properties of an AutoscalingSpec. */
+                    interface IAutoscalingSpec {
+
+                        /** AutoscalingSpec minReplicaCount */
+                        minReplicaCount?: (number|null);
+
+                        /** AutoscalingSpec maxReplicaCount */
+                        maxReplicaCount?: (number|null);
+                    }
+
+                    /** Represents an AutoscalingSpec. */
+                    class AutoscalingSpec implements IAutoscalingSpec {
+
+                        /**
+                         * Constructs a new AutoscalingSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1.DedicatedInfrastructure.IAutoscalingSpec);
+
+                        /** AutoscalingSpec minReplicaCount. */
+                        public minReplicaCount: number;
+
+                        /** AutoscalingSpec maxReplicaCount. */
+                        public maxReplicaCount: number;
+
+                        /**
+                         * Creates a new AutoscalingSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutoscalingSpec instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1.DedicatedInfrastructure.IAutoscalingSpec): google.cloud.vectorsearch.v1.DedicatedInfrastructure.AutoscalingSpec;
+
+                        /**
+                         * Encodes the specified AutoscalingSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1.DedicatedInfrastructure.AutoscalingSpec.verify|verify} messages.
+                         * @param message AutoscalingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1.DedicatedInfrastructure.IAutoscalingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutoscalingSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.DedicatedInfrastructure.AutoscalingSpec.verify|verify} messages.
+                         * @param message AutoscalingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1.DedicatedInfrastructure.IAutoscalingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutoscalingSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutoscalingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.DedicatedInfrastructure.AutoscalingSpec;
+
+                        /**
+                         * Decodes an AutoscalingSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutoscalingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.DedicatedInfrastructure.AutoscalingSpec;
+
+                        /**
+                         * Verifies an AutoscalingSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutoscalingSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutoscalingSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.DedicatedInfrastructure.AutoscalingSpec;
+
+                        /**
+                         * Creates a plain object from an AutoscalingSpec message. Also converts values to other types if specified.
+                         * @param message AutoscalingSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1.DedicatedInfrastructure.AutoscalingSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutoscalingSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutoscalingSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        STORAGE_OPTIMIZED = 1,
+                        PERFORMANCE_OPTIMIZED = 2
+                    }
+                }
+
+                /** Properties of a DenseScannIndex. */
+                interface IDenseScannIndex {
+
+                    /** DenseScannIndex featureNormType */
+                    featureNormType?: (google.cloud.vectorsearch.v1.DenseScannIndex.FeatureNormType|keyof typeof google.cloud.vectorsearch.v1.DenseScannIndex.FeatureNormType|null);
+                }
+
+                /** Represents a DenseScannIndex. */
+                class DenseScannIndex implements IDenseScannIndex {
+
+                    /**
+                     * Constructs a new DenseScannIndex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IDenseScannIndex);
+
+                    /** DenseScannIndex featureNormType. */
+                    public featureNormType: (google.cloud.vectorsearch.v1.DenseScannIndex.FeatureNormType|keyof typeof google.cloud.vectorsearch.v1.DenseScannIndex.FeatureNormType);
+
+                    /**
+                     * Creates a new DenseScannIndex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DenseScannIndex instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IDenseScannIndex): google.cloud.vectorsearch.v1.DenseScannIndex;
+
+                    /**
+                     * Encodes the specified DenseScannIndex message. Does not implicitly {@link google.cloud.vectorsearch.v1.DenseScannIndex.verify|verify} messages.
+                     * @param message DenseScannIndex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IDenseScannIndex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DenseScannIndex message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.DenseScannIndex.verify|verify} messages.
+                     * @param message DenseScannIndex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IDenseScannIndex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DenseScannIndex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DenseScannIndex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.DenseScannIndex;
+
+                    /**
+                     * Decodes a DenseScannIndex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DenseScannIndex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.DenseScannIndex;
+
+                    /**
+                     * Verifies a DenseScannIndex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DenseScannIndex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DenseScannIndex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.DenseScannIndex;
+
+                    /**
+                     * Creates a plain object from a DenseScannIndex message. Also converts values to other types if specified.
+                     * @param message DenseScannIndex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.DenseScannIndex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DenseScannIndex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DenseScannIndex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DenseScannIndex {
+
+                    /** FeatureNormType enum. */
+                    enum FeatureNormType {
+                        FEATURE_NORM_TYPE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        UNIT_L2_NORM = 2
+                    }
+                }
+            }
+
             /** Namespace v1beta. */
             namespace v1beta {
 

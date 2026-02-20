@@ -49,9 +49,16 @@ LATEST_VERSION=$(cat "${PACKAGE_PATH}/package.json" | jq -r ".version")
 echo "Latest version: ${LATEST_VERSION}"
  
 echo "Adding release-please config"
+# Determine which config file to use
+if [[ "${PACKAGE_PATH}" == packages/* ]]; then
+  CONFIG_FILE="release-please-config.json"
+else
+  CONFIG_FILE="release-please-submodules.json"
+fi
+
 # using a temp file because jq doesn't like writing to the input file as it reads
-cat release-please-config.json | jq --sort-keys ". * {\"packages\": {\"${PACKAGE_PATH}\": {}}}" > release-please-config2.json
-mv release-please-config2.json release-please-config.json
+cat "${CONFIG_FILE}" | jq --sort-keys ". * {\"packages\": {\"${PACKAGE_PATH}\": {}}}" > "${CONFIG_FILE}.tmp"
+mv "${CONFIG_FILE}.tmp" "${CONFIG_FILE}"
  
 echo "Adding release-please manifest version"
 # using a temp file because jq doesn't like writing to the input file as it reads
