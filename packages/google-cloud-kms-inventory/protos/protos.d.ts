@@ -357,6 +357,9 @@ export namespace google {
 
                         /** GetProtectedResourcesSummaryRequest name */
                         name?: (string|null);
+
+                        /** GetProtectedResourcesSummaryRequest fallbackScope */
+                        fallbackScope?: (google.cloud.kms.inventory.v1.FallbackScope|keyof typeof google.cloud.kms.inventory.v1.FallbackScope|null);
                     }
 
                     /** Represents a GetProtectedResourcesSummaryRequest. */
@@ -370,6 +373,9 @@ export namespace google {
 
                         /** GetProtectedResourcesSummaryRequest name. */
                         public name: string;
+
+                        /** GetProtectedResourcesSummaryRequest fallbackScope. */
+                        public fallbackScope: (google.cloud.kms.inventory.v1.FallbackScope|keyof typeof google.cloud.kms.inventory.v1.FallbackScope);
 
                         /**
                          * Creates a new GetProtectedResourcesSummaryRequest instance using the specified properties.
@@ -469,6 +475,9 @@ export namespace google {
 
                         /** ProtectedResourcesSummary locations */
                         locations?: ({ [k: string]: (number|Long|string) }|null);
+
+                        /** ProtectedResourcesSummary warnings */
+                        warnings?: (google.cloud.kms.inventory.v1.IWarning[]|null);
                     }
 
                     /** Represents a ProtectedResourcesSummary. */
@@ -497,6 +506,9 @@ export namespace google {
 
                         /** ProtectedResourcesSummary locations. */
                         public locations: { [k: string]: (number|Long|string) };
+
+                        /** ProtectedResourcesSummary warnings. */
+                        public warnings: google.cloud.kms.inventory.v1.IWarning[];
 
                         /**
                          * Creates a new ProtectedResourcesSummary instance using the specified properties.
@@ -949,6 +961,126 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Warning. */
+                    interface IWarning {
+
+                        /** Warning warningCode */
+                        warningCode?: (google.cloud.kms.inventory.v1.Warning.WarningCode|keyof typeof google.cloud.kms.inventory.v1.Warning.WarningCode|null);
+
+                        /** Warning displayMessage */
+                        displayMessage?: (string|null);
+                    }
+
+                    /** Represents a Warning. */
+                    class Warning implements IWarning {
+
+                        /**
+                         * Constructs a new Warning.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.inventory.v1.IWarning);
+
+                        /** Warning warningCode. */
+                        public warningCode: (google.cloud.kms.inventory.v1.Warning.WarningCode|keyof typeof google.cloud.kms.inventory.v1.Warning.WarningCode);
+
+                        /** Warning displayMessage. */
+                        public displayMessage: string;
+
+                        /**
+                         * Creates a new Warning instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Warning instance
+                         */
+                        public static create(properties?: google.cloud.kms.inventory.v1.IWarning): google.cloud.kms.inventory.v1.Warning;
+
+                        /**
+                         * Encodes the specified Warning message. Does not implicitly {@link google.cloud.kms.inventory.v1.Warning.verify|verify} messages.
+                         * @param message Warning message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.inventory.v1.IWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Warning message, length delimited. Does not implicitly {@link google.cloud.kms.inventory.v1.Warning.verify|verify} messages.
+                         * @param message Warning message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.inventory.v1.IWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Warning message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Warning
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.inventory.v1.Warning;
+
+                        /**
+                         * Decodes a Warning message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Warning
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.inventory.v1.Warning;
+
+                        /**
+                         * Verifies a Warning message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Warning message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Warning
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.inventory.v1.Warning;
+
+                        /**
+                         * Creates a plain object from a Warning message. Also converts values to other types if specified.
+                         * @param message Warning
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.inventory.v1.Warning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Warning to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Warning
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Warning {
+
+                        /** WarningCode enum. */
+                        enum WarningCode {
+                            WARNING_CODE_UNSPECIFIED = 0,
+                            INSUFFICIENT_PERMISSIONS_PARTIAL_DATA = 1,
+                            RESOURCE_LIMIT_EXCEEDED_PARTIAL_DATA = 2,
+                            ORG_LESS_PROJECT_PARTIAL_DATA = 3
+                        }
+                    }
+
+                    /** FallbackScope enum. */
+                    enum FallbackScope {
+                        FALLBACK_SCOPE_UNSPECIFIED = 0,
+                        FALLBACK_SCOPE_PROJECT = 1
                     }
                 }
             }

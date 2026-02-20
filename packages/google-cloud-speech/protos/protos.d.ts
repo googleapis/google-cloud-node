@@ -13668,6 +13668,9 @@ export namespace google {
 
                     /** StreamingRecognitionFeatures voiceActivityTimeout */
                     voiceActivityTimeout?: (google.cloud.speech.v2.StreamingRecognitionFeatures.IVoiceActivityTimeout|null);
+
+                    /** StreamingRecognitionFeatures endpointingSensitivity */
+                    endpointingSensitivity?: (google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity|keyof typeof google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity|null);
                 }
 
                 /** Represents a StreamingRecognitionFeatures. */
@@ -13687,6 +13690,9 @@ export namespace google {
 
                     /** StreamingRecognitionFeatures voiceActivityTimeout. */
                     public voiceActivityTimeout?: (google.cloud.speech.v2.StreamingRecognitionFeatures.IVoiceActivityTimeout|null);
+
+                    /** StreamingRecognitionFeatures endpointingSensitivity. */
+                    public endpointingSensitivity: (google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity|keyof typeof google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity);
 
                     /**
                      * Creates a new StreamingRecognitionFeatures instance using the specified properties.
@@ -13869,6 +13875,14 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** EndpointingSensitivity enum. */
+                    enum EndpointingSensitivity {
+                        ENDPOINTING_SENSITIVITY_UNSPECIFIED = 0,
+                        ENDPOINTING_SENSITIVITY_STANDARD = 1,
+                        ENDPOINTING_SENSITIVITY_SUPERSHORT = 2,
+                        ENDPOINTING_SENSITIVITY_SHORT = 3
                     }
                 }
 

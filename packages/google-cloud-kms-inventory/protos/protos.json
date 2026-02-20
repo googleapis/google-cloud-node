@@ -10,13 +10,14 @@
                   "nested": {
                     "v1": {
                       "options": {
-                        "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Kms.Inventory.V1",
                         "go_package": "cloud.google.com/go/kms/inventory/apiv1/inventorypb;inventorypb",
                         "java_multiple_files": true,
                         "java_outer_classname": "KeyTrackingServiceProto",
                         "java_package": "com.google.cloud.kms.inventory.v1",
-                        "php_namespace": "Google\\Cloud\\Kms\\Inventory\\V1"
+                        "php_namespace": "Google\\Cloud\\Kms\\Inventory\\V1",
+                        "(google.api.resource_definition).type": "kmsinventory.googleapis.com/ProtectedResourceScope",
+                        "(google.api.resource_definition).pattern": "projects/{project}/protectedResourceScope"
                       },
                       "nested": {
                         "KeyDashboardService": {
@@ -113,12 +114,16 @@
                               "responseType": "SearchProtectedResourcesResponse",
                               "options": {
                                 "(google.api.http).get": "/v1/{scope=organizations/*}/protectedResources:search",
+                                "(google.api.http).additional_bindings.get": "/v1/{scope=projects/*}/protectedResources:search",
                                 "(google.api.method_signature)": "scope, crypto_key"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v1/{scope=organizations/*}/protectedResources:search"
+                                    "get": "/v1/{scope=organizations/*}/protectedResources:search",
+                                    "additional_bindings": {
+                                      "get": "/v1/{scope=projects/*}/protectedResources:search"
+                                    }
                                   }
                                 },
                                 {
@@ -136,6 +141,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "kmsinventory.googleapis.com/ProtectedResourcesSummary"
+                              }
+                            },
+                            "fallbackScope": {
+                              "type": "FallbackScope",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -172,6 +184,11 @@
                               "keyType": "string",
                               "type": "int64",
                               "id": 4
+                            },
+                            "warnings": {
+                              "rule": "repeated",
+                              "type": "Warning",
+                              "id": 7
                             }
                           }
                         },
@@ -182,7 +199,7 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                                "(google.api.resource_reference).child_type": "kmsinventory.googleapis.com/ProtectedResourceScope"
                               }
                             },
                             "cryptoKey": {
@@ -281,6 +298,34 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
+                          }
+                        },
+                        "Warning": {
+                          "fields": {
+                            "warningCode": {
+                              "type": "WarningCode",
+                              "id": 1
+                            },
+                            "displayMessage": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "WarningCode": {
+                              "values": {
+                                "WARNING_CODE_UNSPECIFIED": 0,
+                                "INSUFFICIENT_PERMISSIONS_PARTIAL_DATA": 1,
+                                "RESOURCE_LIMIT_EXCEEDED_PARTIAL_DATA": 2,
+                                "ORG_LESS_PROJECT_PARTIAL_DATA": 3
+                              }
+                            }
+                          }
+                        },
+                        "FallbackScope": {
+                          "values": {
+                            "FALLBACK_SCOPE_UNSPECIFIED": 0,
+                            "FALLBACK_SCOPE_PROJECT": 1
                           }
                         }
                       }
