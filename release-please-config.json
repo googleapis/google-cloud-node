@@ -223,7 +223,7 @@
     "packages/google-streetview-publish": {},
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
-    "packages/google-cloud-workflows": {}
+    "packages/google-cloud-workflows": {},
     "packages/google-cloud-ces": {}
   },
   "plugins": [
