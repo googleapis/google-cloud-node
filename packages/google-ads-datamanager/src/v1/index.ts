@@ -17,3 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 export {IngestionServiceClient} from './ingestion_service_client';
+export {MarketingDataInsightsServiceClient} from './marketing_data_insights_service_client';
+export {PartnerLinkServiceClient} from './partner_link_service_client';
+export {UserListDirectLicenseServiceClient} from './user_list_direct_license_service_client';
+export {UserListGlobalLicenseServiceClient} from './user_list_global_license_service_client';
+export {UserListServiceClient} from './user_list_service_client';
