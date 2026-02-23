@@ -1256,6 +1256,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update network interface | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instances.update_network_interface.js) |
 | update shielded instance config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instances.update_shielded_instance_config.js) |
 | update shielded vm config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instances.update_shielded_vm_config.js) |
+| delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshot_groups.delete.js) |
+| get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshot_groups.get.js) |
+| get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshot_groups.get_iam_policy.js) |
+| insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshot_groups.insert.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshot_groups.list.js) |
+| set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshot_groups.set_iam_policy.js) |
+| test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshot_groups.test_iam_permissions.js) |
 | aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshots.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshots.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/instant_snapshots.get.js) |
@@ -1601,6 +1608,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instance_templates.insert.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instance_templates.list.js) |
 | bulk insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instances.bulk_insert.js) |
+| delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshot_groups.delete.js) |
+| get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshot_groups.get.js) |
+| get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshot_groups.get_iam_policy.js) |
+| insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshot_groups.insert.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshot_groups.list.js) |
+| set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshot_groups.set_iam_policy.js) |
+| test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshot_groups.test_iam_permissions.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshots.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshots.get.js) |
 | get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instant_snapshots.get_iam_policy.js) |
@@ -1731,6 +1745,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | perform maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_blocks.perform_maintenance.js) |
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_blocks.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_blocks.test_iam_permissions.js) |
+| get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_slots.get.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_slots.list.js) |
+| update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_slots.update.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.get.js) |
 | get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.get_iam_policy.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.list.js) |
