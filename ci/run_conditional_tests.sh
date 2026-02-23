@@ -19,6 +19,9 @@
 # with a non-zero
 set -eo pipefail
 
+# This is an arbitrary change in our CI folder to force a global re-run of all unit tests
+# on top of the parent PR. This will be deleted.
+
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 
 # Exit early if owl-bot-staging directory exists. The PR is not ready to merge.
