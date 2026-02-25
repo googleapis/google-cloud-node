@@ -24,164 +24,164 @@ if staging.is_dir():
     _tracked_paths.add(v1_library)
 
     # skip index, protos, package.json, and README.md
-    s.copy(v1_admin_library, "dev", excludes=["package.json", "README.md", "src/index.ts", "src/v1/index.ts",
+    s.copy(v1_admin_library, "handwritten/firestore/dev", excludes=["package.json", "README.md", "src/index.ts", "src/v1/index.ts",
         "tsconfig.json", "linkinator.config.json", "webpack.config.js"])
-    s.copy(v1beta1_library, "dev", excludes=["package.json", "README.md", "src/index.ts", "src/v1beta1/index.ts",
+    s.copy(v1beta1_library, "handwritten/firestore/dev", excludes=["package.json", "README.md", "src/index.ts", "src/v1beta1/index.ts",
         "tsconfig.json", "linkinator.config.json", "webpack.config.js"])
-    s.copy(v1_library, "dev", excludes=["package.json", "README.md", "src/index.ts", "src/v1/index.ts",
+    s.copy(v1_library, "handwritten/firestore/dev", excludes=["package.json", "README.md", "src/index.ts", "src/v1/index.ts",
         "tsconfig.json", "linkinator.config.json", "webpack.config.js"])
 
     # Fix dropping of google-cloud-resource-header
     # See: https://github.com/googleapis/nodejs-firestore/pull/375
     s.replace(
-        "dev/src/v1beta1/firestore_client.ts",
+        "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
         "return this\.innerApiCalls\.listen\(options\);",
         "return this.innerApiCalls.listen({}, options);",
     )
     s.replace(
-        "dev/src/v1/firestore_client.ts",
+        "handwritten/firestore/dev/src/v1/firestore_client.ts",
         "return this\.innerApiCalls\.listen\(options\);",
         "return this.innerApiCalls.listen({}, options);",
     )
     s.replace(
-        "dev/test/gapic_firestore_v1beta1.ts",
+        "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
         "calledWithExactly\(undefined\)",
         "calledWithExactly({}, undefined)",
     )
     s.replace(
-        "dev/src/v1beta1/firestore_client.ts",
+        "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
         "return this\.innerApiCalls\.write\(options\);",
         "return this.innerApiCalls.write({}, options);",
     )
     s.replace(
-        "dev/src/v1/firestore_client.ts",
+        "handwritten/firestore/dev/src/v1/firestore_client.ts",
         "return this\.innerApiCalls\.write\(options\);",
         "return this.innerApiCalls.write({}, options);",
     )
     s.replace(
-        "dev/test/gapic_firestore_v1.ts",
+        "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
         "calledWithExactly\(undefined\)",
         "calledWithExactly({}, undefined)",
     )
 
     # use the existing proto .js / .d.ts files
     s.replace(
-      "dev/src/v1/firestore_client.ts",
+      "handwritten/firestore/dev/src/v1/firestore_client.ts",
       "/protos/protos'",
       "/protos/firestore_v1_proto_api'"
     )
     s.replace(
-      "dev/test/gapic_firestore_v1.ts",
+      "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
       "/protos/protos'",
       "/protos/firestore_v1_proto_api'"
     )
     s.replace(
-      "dev/test/gapic_firestore_v1.ts",
+      "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
       "import \* as firestoreModule from '\.\./src';",
       "import * as firestoreModule from '../src/v1';"
     )
     s.replace(
-      "dev/test/gapic_firestore_v1.ts",
+      "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
       "firestoreModule\.v1",
       "firestoreModule"
     )
     s.replace(
-      "dev/src/v1/firestore_admin_client.ts",
+      "handwritten/firestore/dev/src/v1/firestore_admin_client.ts",
       "/protos/protos'",
       "/protos/firestore_admin_v1_proto_api'"
     )
     s.replace(
-      "dev/test/gapic_firestore_admin_v1.ts",
+      "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
       "/protos/protos'",
       "/protos/firestore_admin_v1_proto_api'"
     )
     s.replace(
-      "dev/test/gapic_firestore_admin_v1.ts",
+      "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
       "import \* as firestoreadminModule from '\.\./src';",
       "import * as firestoreadminModule from '../src/v1';"
     )
     s.replace(
-      "dev/test/gapic_firestore_admin_v1.ts",
+      "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
       "firestoreadminModule\.v1",
       "firestoreadminModule"
     )
     s.replace(
-      "dev/src/v1beta1/firestore_client.ts",
+      "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
       "/protos/protos'",
       "/protos/firestore_v1beta1_proto_api'"
     )
     s.replace(
-      "dev/test/gapic_firestore_v1beta1.ts",
+      "handwritten/firestore/dev/test/gapic_firestore_v1beta1.ts",
       "/protos/protos'",
       "/protos/firestore_v1beta1_proto_api'"
     )
     s.replace(
-      "dev/test/gapic_firestore_v1beta1.ts",
+      "handwritten/firestore/dev/test/gapic_firestore_v1beta1.ts",
       "import \* as firestoreModule from \'../src\';",
       "import * as firestoreModule from '../src/v1beta1';"
     )
     s.replace(
-      "dev/test/gapic_firestore_v1beta1.ts",
+      "handwritten/firestore/dev/test/gapic_firestore_v1beta1.ts",
       "firestoreModule\.v1beta1",
       "firestoreModule"
     )
     s.replace(
-       "dev/src/v1/firestore_client.ts",
+       "handwritten/firestore/dev/src/v1/firestore_client.ts",
        "\.\./\.\./protos/protos.json",
        "../../protos/v1.json"
     )
     s.replace(
-       "dev/src/v1/firestore_admin_client.ts",
+       "handwritten/firestore/dev/src/v1/firestore_admin_client.ts",
        "\.\./\.\./protos/protos.json",
        "../../protos/admin_v1.json"
     )
     s.replace(
-       "dev/src/v1beta1/firestore_client.ts",
+       "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
        "\.\./\.\./protos/protos.json",
        "../../protos/v1beta1.json"
     )
     s.replace(
-       "dev/test/gapic_firestore_v1.ts",
+       "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
        "\.\./protos/protos.json",
        "../protos/v1.json"
     )
     s.replace(
-       "dev/test/gapic_firestore_admin_v1.ts",
+       "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
        "\.\./protos/protos.json",
        "../protos/admin_v1.json"
     )
     s.replace(
-       "dev/test/gapic_firestore_v1beta1.ts",
+       "handwritten/firestore/dev/test/gapic_firestore_v1beta1.ts",
        "\.\./protos/protos.json",
        "../protos/v1beta1.json"
     )
 
     # Mark v1beta1 as deprecated
     s.replace(
-      "dev/src/v1beta1/firestore_client.ts",
+      "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
       "@class",
       "@class\n * @deprecated Use v1/firestore_client instead."
     )
     s.replace(
-      "dev/src/v1beta1/firestore_client.ts",
+      "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
       "const version",
       "// tslint:disable deprecation\n\nconst version",
       1
     )
 
-    os.rename("dev/.gitignore", ".gitignore")
-    os.rename("dev/.eslintignore", ".eslintignore")
-    os.rename("dev/.mocharc.js", ".mocharc.js")
-    os.rename("dev/.jsdoc.js", ".jsdoc.js")
-    os.rename("dev/.prettierrc.js", ".prettierrc.js")
-    os.unlink("dev/.eslintrc.json")
+    os.rename("handwritten/firestore/dev/.gitignore", ".gitignore")
+    os.rename("handwritten/firestore/dev/.eslintignore", ".eslintignore")
+    os.rename("handwritten/firestore/dev/.mocharc.js", ".mocharc.js")
+    os.rename("handwritten/firestore/dev/.jsdoc.js", ".jsdoc.js")
+    os.rename("handwritten/firestore/dev/.prettierrc.js", ".prettierrc.js")
+    os.unlink("handwritten/firestore/dev/.eslintrc.json")
 
     s.replace(".jsdoc.js", "protos", "build/protos", 1)
 
     # Remove auto-generated packaging tests
-    os.system('rm -rf dev/system-test/fixtures dev/system-test/install.ts')
+    os.system('rm -rf handwritten/firestore/dev/system-test/fixtures handwritten/firestore/dev/system-test/install.ts')
 
-    os.chdir("dev")
+    os.chdir("handwritten/firestore/dev")
     node.compile_protos()
     os.chdir("protos")
     os.unlink('protos.js')
@@ -193,26 +193,26 @@ if staging.is_dir():
     # Copy types into types/
     logger.debug("Running compile...")
     shell.run(["npm", "run", "compile"], hide_output=True)
-    s.copy("build/src/v1/firestore*.d.ts", "types/v1")
-    s.copy("build/src/v1beta1/firestore_client.d.ts", "types/v1beta1")
-    s.copy("build/protos/firestore*.d.ts", "types/protos")
+    s.copy("handwritten/firestore/build/src/v1/firestore*.d.ts", "types/v1")
+    s.copy("handwritten/firestore/build/src/v1beta1/firestore_client.d.ts", "types/v1beta1")
+    s.copy("handwritten/firestore/build/protos/firestore*.d.ts", "types/protos")
     s.replace(
-        "types/v1/firestore_client.d.ts",
+        "handwritten/firestore/types/v1/firestore_client.d.ts",
         "../../protos",
         "../protos"
     )
     s.replace(
-        "types/v1/firestore_admin_client.d.ts",
+        "handwritten/firestore/types/v1/firestore_admin_client.d.ts",
         "../../protos",
         "../protos"
     )
     s.replace(
-        "types/v1beta1/firestore_client.d.ts",
+        "handwritten/firestore/types/v1beta1/firestore_client.d.ts",
         "../../protos",
         "../protos"
     )
     s.replace(
-        "types/protos/firestore_admin_v1_proto_api.d.ts",
+        "handwritten/firestore/types/protos/firestore_admin_v1_proto_api.d.ts",
         'import Long = require\("long"\);',
         ""
     )
@@ -241,7 +241,7 @@ templates = common_templates.node_mono_repo_library(relative_dir="handwritten/fi
 s.copy(templates, excludes=[".eslintrc.json", ".kokoro/**/*", ".github/CODEOWNERS"])
 
 # Remove generated samples from veneer library:
-shell.run(('rm', '-rf', 'dev/samples/generated'), hide_output = False)
+shell.run(('rm', '-rf', 'handwritten/firestore/dev/samples/generated'), hide_output = False)
 
 shell.run(('node', 'handwritten/firestore/scripts/license.js', 'dev/protos'), hide_output = False)
 shell.run(('node', 'handwritten/firestore/scripts/license.js', 'types'), hide_output = False)
