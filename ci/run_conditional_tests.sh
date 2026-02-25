@@ -78,6 +78,16 @@ subdirs=(
 )
 
 RETVAL=0
+IN_PUSHED_DIR=false
+
+cleanup_pushd() {
+    if [ "${IN_PUSHED_DIR}" = true ]; then
+        popd > /dev/null || true
+        IN_PUSHED_DIR=false
+    fi
+}
+
+trap cleanup_pushd EXIT INT TERM
 # These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo). 
 # When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
 
@@ -146,17 +156,19 @@ for subdir in ${subdirs[@]}; do
         if [ "${should_test}" = true ]; then
             echo "running test in ${d}"
             pushd ${d}
+            IN_PUSHED_DIR=true
             # Temporarily allow failure.
             set +e
             ${test_script}
             ret=$?
             set -e
+            popd
+            IN_PUSHED_DIR=false
             if [ ${ret} -ne 0 ]; then
                 RETVAL=${ret}
                 # Since there are so many APIs, we should exit early if there's an error
                 break
             fi
-            popd
         fi
     done
 done
