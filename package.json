@@ -40,6 +40,7 @@
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
+    "long": "^5.3.2",
     "semistandard": "^17.0.0"
   },
   "engines": {
