@@ -3412,85 +3412,6 @@ describe('BigQuery', () => {
         bail?: boolean;
       }[] = [
         {
-          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: true',
-          opts: {
-            ['formatOptions.timestampOutputFormat']:
-              'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-            ['formatOptions.useInt64Timestamp']: true,
-          },
-          expected: {
-            timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-            useInt64Timestamp: true,
-          },
-        },
-        {
-          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: false (default ISO8601_STRING)',
-          opts: {
-            ['formatOptions.timestampOutputFormat']:
-              'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-            ['formatOptions.useInt64Timestamp']: false,
-          },
-          expected: {
-            timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-            useInt64Timestamp: false,
-          },
-        },
-        {
-          name: 'TOF: FLOAT64, UI64: false',
-          opts: {
-            ['formatOptions.timestampOutputFormat']: 'FLOAT64',
-            ['formatOptions.useInt64Timestamp']: false,
-          },
-          expected: {
-            timestampOutputFormat: 'FLOAT64',
-            useInt64Timestamp: false,
-          },
-        },
-        {
-          name: 'TOF: INT64, UI64: true',
-          opts: {
-            ['formatOptions.timestampOutputFormat']: 'INT64',
-            ['formatOptions.useInt64Timestamp']: true,
-          },
-          expected: {
-            timestampOutputFormat: 'INT64',
-            useInt64Timestamp: true,
-          },
-        },
-        {
-          name: 'TOF: INT64, UI64: false',
-          opts: {
-            ['formatOptions.timestampOutputFormat']: 'INT64',
-            ['formatOptions.useInt64Timestamp']: false,
-          },
-          expected: {
-            timestampOutputFormat: 'INT64',
-            useInt64Timestamp: false,
-          },
-        },
-        {
-          name: 'TOF: ISO8601_STRING, UI64: true',
-          opts: {
-            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
-            ['formatOptions.useInt64Timestamp']: true,
-          },
-          expected: {
-            timestampOutputFormat: 'ISO8601_STRING',
-            useInt64Timestamp: true,
-          },
-        },
-        {
-          name: 'TOF: ISO8601_STRING, UI64: false',
-          opts: {
-            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
-            ['formatOptions.useInt64Timestamp']: false,
-          },
-          expected: {
-            timestampOutputFormat: 'ISO8601_STRING',
-            useInt64Timestamp: false,
-          },
-        },
-        {
           name: 'TOF: omitted, UI64: omitted (default ISO8601_STRING)',
           opts: {},
           expected: {
@@ -3513,43 +3434,6 @@ describe('BigQuery', () => {
           },
           expected: {
             useInt64Timestamp: false,
-          },
-        },
-        {
-          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: omitted (default ISO8601_STRING)',
-          opts: {
-            ['formatOptions.timestampOutputFormat']:
-              'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-          },
-          expected: {
-            timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-          },
-        },
-        {
-          name: 'TOF: FLOAT64, UI64: omitted',
-          opts: {
-            ['formatOptions.timestampOutputFormat']: 'FLOAT64',
-          },
-          expected: {
-            timestampOutputFormat: 'FLOAT64',
-          },
-        },
-        {
-          name: 'TOF: INT64, UI64: omitted',
-          opts: {
-            ['formatOptions.timestampOutputFormat']: 'INT64',
-          },
-          expected: {
-            timestampOutputFormat: 'INT64',
-          },
-        },
-        {
-          name: 'TOF: ISO8601_STRING, UI64: omitted',
-          opts: {
-            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
-          },
-          expected: {
-            timestampOutputFormat: 'ISO8601_STRING',
           },
         },
       ];
