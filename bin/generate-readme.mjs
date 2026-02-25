@@ -18,14 +18,17 @@ import { request, Gaxios } from 'gaxios';
 import figures from 'figures';
 import { readFileSync, writeFileSync } from 'fs';
 import parseLinkHeader from 'parse-link-header';
+import { pathToFileURL } from 'url';
 
 const token = process.env.GITHUB_TOKEN;
 const smokeTest = !!process.env.SMOKE_TEST;
+const isCliExecution =
+  !!process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
 
 const headers = {};
 if (token) {
   headers.authorization = `token ${token}`;
-} else {
+} else if (isCliExecution) {
   console.warn('Please provide GITHUB_TOKEN env var for increased quota.');
 }
 const baseUrl = 'https://api.github.com';
@@ -115,7 +118,11 @@ async function downloadRepoMetadata () {
  * APIs, and to use the appropriate product support url.
  * Write the resulting file to disk.
  */
-async function processMetadata (repoMetadata) {
+export async function processMetadata (
+  repoMetadata,
+  requestImpl = request,
+  writeOutput = true
+) {
   const gaLibraries = [];
   const previewLibraries = [];
 
@@ -161,14 +168,19 @@ async function processMetadata (repoMetadata) {
       let remoteUrlExists = true;
       // if URL doesn't exist, fall back to the generic docs page
       try {
-        res = await request({
+        res = await requestImpl({
           url: supportDocsUrl,
           method: 'HEAD',
           validateStatus: () => true
         });
-      } catch (err) {
-        if (err.status === 404) {
+        if (res.status === 404) {
           remoteUrlExists = false;
+        }
+      } catch (err) {
+        if (err.status === 404 || (err.response && err.response.status === 404)) {
+          remoteUrlExists = false;
+        } else {
+          throw err;
         }
       }
 
@@ -191,7 +203,9 @@ async function processMetadata (repoMetadata) {
     });
   });
   const libraries = [...gaLibraries, ...previewLibraries];
-  writeFileSync('./libraries.json', JSON.stringify(libraries, null, 2), 'utf8');
+  if (writeOutput) {
+    writeFileSync('./libraries.json', JSON.stringify(libraries, null, 2), 'utf8');
+  }
   return libraries;
 }
 
@@ -224,18 +238,21 @@ async function generateReadme (libraries) {
  * Use the GitHub Search API to find all JavaScript and TypeScript repositories
  * in the `googleapis` GitHub organization.
  */
-async function getRepos () {
+export async function getRepos (
+  githubClient = github,
+  parseLinkHeaderImpl = parseLinkHeader
+) {
   let url = new URL('/orgs/googleapis/repos', baseUrl);
   url.searchParams.set('type', 'public');
   url.searchParams.set('per_page', 100);
   const repos = [];
   while (url) {
-    const res = await github.request({ url: url.href });
+    const res = await githubClient.request({ url: url.href });
     repos.push(...res.data.filter(r => (r.language === 'TypeScript' || r.language === 'JavaScript') && r.archived === false && r.private === false).map(r => r.full_name));
     url = null;
     if (res.headers.link) {
-      const link = parseLinkHeader(res.headers.link);
-      if (link.next) {
+      const link = parseLinkHeaderImpl(res.headers.link);
+      if (link && link.next && link.next.url) {
         url = new URL(link.next.url);
       }
     }
@@ -261,7 +278,10 @@ async function main () {
   }
   await generateReadme(libraries);
 }
-main().catch((err) => {
-  console.error(err.message);
-  process.exitCode = 1;
-});
+
+if (isCliExecution) {
+  main().catch((err) => {
+    console.error(err.message);
+    process.exitCode = 1;
+  });
+}
