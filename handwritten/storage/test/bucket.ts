@@ -3300,4 +3300,145 @@ describe('Bucket', () => {
       done();
     });
   });
+
+  describe('setMetadata', () => {
+    describe('encryption enforcement', () => {
+      it('should correctly format restrictionMode for all enforcement types', async () => {
+        const effectiveTime = '2026-02-02T12:00:00Z';
+        const encryptionMetadata = {
+          encryption: {
+            defaultKmsKeyName: 'kms-key-name',
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+              effectiveTime: effectiveTime,
+            },
+            customerManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'NotRestricted',
+              effectiveTime: effectiveTime,
+            },
+            customerSuppliedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+              effectiveTime: effectiveTime,
+            },
+          },
+        };
+
+        bucket.setMetadata = (metadata: BucketMetadata) => {
+          assert.strictEqual(
+            metadata.encryption?.defaultKmsKeyName,
+            encryptionMetadata.encryption.defaultKmsKeyName
+          );
+
+          assert.deepStrictEqual(
+            metadata.encryption?.googleManagedEncryptionEnforcementConfig,
+            {restrictionMode: 'FullyRestricted', effectiveTime: effectiveTime}
+          );
+
+          assert.deepStrictEqual(
+            metadata.encryption?.customerManagedEncryptionEnforcementConfig,
+            {restrictionMode: 'NotRestricted', effectiveTime: effectiveTime}
+          );
+
+          assert.deepStrictEqual(
+            metadata.encryption?.customerSuppliedEncryptionEnforcementConfig,
+            {restrictionMode: 'FullyRestricted', effectiveTime: effectiveTime}
+          );
+        };
+        bucket.setMetadata(encryptionMetadata, assert.ifError);
+      });
+
+      it('should preserve existing encryption fields during a partial update', done => {
+        bucket.metadata = {
+          encryption: {
+            defaultKmsKeyName: 'kms-key-name',
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+            },
+          },
+        };
+
+        const patch = {
+          encryption: {
+            customerSuppliedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+            },
+          },
+        };
+
+        bucket.setMetadata = (metadata: BucketMetadata) => {
+          assert.strictEqual(
+            metadata.encryption?.customerSuppliedEncryptionEnforcementConfig
+              ?.restrictionMode,
+            'FullyRestricted'
+          );
+          done();
+        };
+
+        bucket.setMetadata(patch, assert.ifError);
+      });
+
+      it('should reject or handle invalid restrictionMode values', done => {
+        const invalidMetadata = {
+          encryption: {
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'fully_restricted',
+            },
+          },
+        };
+
+        bucket.setMetadata = (metadata: BucketMetadata) => {
+          assert.strictEqual(
+            metadata.encryption?.googleManagedEncryptionEnforcementConfig
+              ?.restrictionMode,
+            'fully_restricted'
+          );
+          done();
+        };
+
+        bucket.setMetadata(invalidMetadata, assert.ifError);
+      });
+
+      it('should not include enforcement configs that are not provided', done => {
+        const partialMetadata = {
+          encryption: {
+            defaultKmsKeyName: 'test-key',
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+            },
+          },
+        };
+
+        bucket.setMetadata = (metadata: BucketMetadata) => {
+          assert.ok(metadata.encryption?.defaultKmsKeyName);
+          assert.ok(
+            metadata.encryption?.googleManagedEncryptionEnforcementConfig
+          );
+          assert.strictEqual(
+            metadata.encryption?.customerManagedEncryptionEnforcementConfig,
+            undefined
+          );
+          assert.strictEqual(
+            metadata.encryption?.customerSuppliedEncryptionEnforcementConfig,
+            undefined
+          );
+          done();
+        };
+
+        bucket.setMetadata(partialMetadata, assert.ifError);
+      });
+
+      it('should allow nullifying encryption enforcement', done => {
+        const clearMetadata = {
+          encryption: null,
+        };
+
+        bucket.setMetadata = (metadata: BucketMetadata) => {
+          assert.strictEqual(metadata.encryption, null);
+          done();
+        };
+
+        bucket.setMetadata(clearMetadata, assert.ifError);
+      });
+    });
+  });
 });

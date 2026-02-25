@@ -2992,6 +2992,89 @@ describe('storage', function () {
             `${metadata!.encryption!.defaultKmsKeyName}/cryptoKeyVersions/1`,
           );
         });
+
+        describe('encryption enforcement', () => {
+          it('should enforce FullyRestricted CSEK policy', async () => {
+            await bucket.setMetadata({
+              encryption: {
+                defaultKmsKeyName: kmsKeyName,
+                customerSuppliedEncryptionEnforcementConfig: {
+                  restrictionMode: 'FullyRestricted',
+                },
+              },
+            });
+
+            await new Promise(res =>
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+            );
+
+            const encryptionKey = crypto.randomBytes(32);
+            const file = bucket.file('csek-attempt', {encryptionKey});
+
+            await assert.rejects(
+              file.save(FILE_CONTENTS, {resumable: false}),
+              (err: ApiError) => {
+                const failureMessage =
+                  "Requested encryption type for object is not compliant with the bucket's encryption enforcement configuration.";
+                assert.strictEqual(err.code, 412);
+                assert.ok(err.message.includes(failureMessage));
+                return true;
+              }
+            );
+          });
+
+          it('should allow uploads that comply with enforcement', async () => {
+            await bucket.setMetadata({
+              encryption: {
+                googleManagedEncryptionEnforcementConfig: {
+                  restrictionMode: 'NotRestricted',
+                },
+              },
+            });
+
+            const file = bucket.file('compliant-file');
+            await file.save(FILE_CONTENTS);
+
+            const [metadata] = await file.getMetadata();
+            assert.ok(metadata.kmsKeyName || metadata.customerEncryption);
+          });
+
+          it('should retain defaultKmsKeyName when updating enforcement settings independently', async () => {
+            await bucket.setMetadata({
+              encryption: {
+                defaultKmsKeyName: kmsKeyName,
+              },
+            });
+
+            await new Promise(res =>
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+            );
+
+            await bucket.setMetadata({
+              encryption: {
+                googleManagedEncryptionEnforcementConfig: {
+                  restrictionMode: 'FullyRestricted',
+                },
+              },
+            });
+
+            await new Promise(res =>
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+            );
+
+            const [metadata] = await bucket.getMetadata();
+            assert.strictEqual(
+              metadata.encryption?.defaultKmsKeyName,
+              kmsKeyName
+            );
+
+            assert.strictEqual(
+              metadata.encryption?.googleManagedEncryptionEnforcementConfig
+                ?.restrictionMode,
+              'FullyRestricted'
+            );
+          });
+        });
       });
     });
 
