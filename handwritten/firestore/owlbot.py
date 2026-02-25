@@ -35,17 +35,17 @@ if staging.is_dir():
     # See: https://github.com/googleapis/nodejs-firestore/pull/375
     s.replace(
         "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
-        "return this\.innerApiCalls\.listen\(options\);",
+        r"return this\.innerApiCalls\.listen\(options\);",
         "return this.innerApiCalls.listen({}, options);",
     )
     s.replace(
         "handwritten/firestore/dev/src/v1/firestore_client.ts",
-        "return this\.innerApiCalls\.listen\(options\);",
+        r"return this\.innerApiCalls\.listen\(options\);",
         "return this.innerApiCalls.listen({}, options);",
     )
     s.replace(
         "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
-        "calledWithExactly\(undefined\)",
+        r"calledWithExactly\(undefined\)",
         "calledWithExactly({}, undefined)",
     )
     s.replace(
@@ -55,24 +55,24 @@ if staging.is_dir():
     )
     s.replace(
         "handwritten/firestore/dev/src/v1/firestore_client.ts",
-        "return this\.innerApiCalls\.write\(options\);",
+        r"return this\.innerApiCalls\.write\(options\);",
         "return this.innerApiCalls.write({}, options);",
     )
     s.replace(
         "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
-        "calledWithExactly\(undefined\)",
+        r"calledWithExactly\(undefined\)",
         "calledWithExactly({}, undefined)",
     )
 
     # use the existing proto .js / .d.ts files
     s.replace(
       "handwritten/firestore/dev/src/v1/firestore_client.ts",
-      "/protos/protos'",
+      r"/protos/protos'",
       "/protos/firestore_v1_proto_api'"
     )
     s.replace(
       "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
-      "/protos/protos'",
+      r"/protos/protos'",
       "/protos/firestore_v1_proto_api'"
     )
     s.replace(
@@ -82,7 +82,7 @@ if staging.is_dir():
     )
     s.replace(
       "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
-      "firestoreModule\.v1",
+      r"firestoreModule\.v1",
       "firestoreModule"
     )
     s.replace(
@@ -92,62 +92,62 @@ if staging.is_dir():
     )
     s.replace(
       "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
-      "/protos/protos'",
+      r"/protos/protos'",
       "/protos/firestore_admin_v1_proto_api'"
     )
     s.replace(
       "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
-      "import \* as firestoreadminModule from '\.\./src';",
+      r"import \* as firestoreadminModule from '\.\./src';",
       "import * as firestoreadminModule from '../src/v1';"
     )
     s.replace(
       "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
-      "firestoreadminModule\.v1",
+      r"firestoreadminModule\.v1",
       "firestoreadminModule"
     )
     s.replace(
       "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
-      "/protos/protos'",
+      r"/protos/protos'",
       "/protos/firestore_v1beta1_proto_api'"
     )
     s.replace(
       "handwritten/firestore/dev/test/gapic_firestore_v1beta1.ts",
-      "/protos/protos'",
+      r"/protos/protos'",
       "/protos/firestore_v1beta1_proto_api'"
     )
     s.replace(
       "handwritten/firestore/dev/test/gapic_firestore_v1beta1.ts",
-      "import \* as firestoreModule from \'../src\';",
+      r"import \* as firestoreModule from \'../src\';",
       "import * as firestoreModule from '../src/v1beta1';"
     )
     s.replace(
       "handwritten/firestore/dev/test/gapic_firestore_v1beta1.ts",
-      "firestoreModule\.v1beta1",
+      r"firestoreModule\.v1beta1",
       "firestoreModule"
     )
     s.replace(
        "handwritten/firestore/dev/src/v1/firestore_client.ts",
-       "\.\./\.\./protos/protos.json",
+       r"\.\./\.\./protos/protos.json",
        "../../protos/v1.json"
     )
     s.replace(
        "handwritten/firestore/dev/src/v1/firestore_admin_client.ts",
-       "\.\./\.\./protos/protos.json",
+       r"\.\./\.\./protos/protos.json",
        "../../protos/admin_v1.json"
     )
     s.replace(
        "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
-       "\.\./\.\./protos/protos.json",
+       r"\.\./\.\./protos/protos.json",
        "../../protos/v1beta1.json"
     )
     s.replace(
        "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
-       "\.\./protos/protos.json",
+       r"\.\./protos/protos.json",
        "../protos/v1.json"
     )
     s.replace(
        "handwritten/firestore/dev/test/gapic_firestore_admin_v1.ts",
-       "\.\./protos/protos.json",
+       r"\.\./protos/protos.json",
        "../protos/admin_v1.json"
     )
     s.replace(
@@ -159,12 +159,12 @@ if staging.is_dir():
     # Mark v1beta1 as deprecated
     s.replace(
       "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
-      "@class",
+      r"@class",
       "@class\n * @deprecated Use v1/firestore_client instead."
     )
     s.replace(
       "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
-      "const version",
+      r"const version",
       "// tslint:disable deprecation\n\nconst version",
       1
     )
@@ -176,7 +176,7 @@ if staging.is_dir():
     os.rename("handwritten/firestore/dev/.prettierrc.js", "handwritten/firestore/.prettierrc.js")
     os.unlink("handwritten/firestore/dev/.eslintrc.json")
 
-    s.replace("handwritten/firestore/.jsdoc.js", "protos", "build/protos", 1)
+    s.replace(".jsdoc.js", r"protos", "build/protos", 1)
 
     # Remove auto-generated packaging tests
     os.system('rm -rf handwritten/firestore/dev/system-test/fixtures handwritten/firestore/dev/system-test/install.ts')
@@ -195,17 +195,17 @@ if staging.is_dir():
     s.copy("handwritten/firestore/build/protos/firestore*.d.ts", "types/protos")
     s.replace(
         "handwritten/firestore/types/v1/firestore_client.d.ts",
-        "../../protos",
+        r"../../protos",
         "../protos"
     )
     s.replace(
         "handwritten/firestore/types/v1/firestore_admin_client.d.ts",
-        "../../protos",
+        r"../../protos",
         "../protos"
     )
     s.replace(
         "handwritten/firestore/types/v1beta1/firestore_client.d.ts",
-        "../../protos",
+        r"../../protos",
         "../protos"
     )
     s.replace(
@@ -214,13 +214,13 @@ if staging.is_dir():
         ""
     )
     s.replace(
-        "handwritten/firestore/types/protos/firestore_v1_proto_api.d.ts",
-        'import Long = require\("long"\);',
+        "types/protos/firestore_v1_proto_api.d.ts",
+        r'import Long = require\("long"\);',
         ""
     )
     s.replace(
-        "handwritten/firestore/types/protos/firestore_v1beta1_proto_api.d.ts",
-        'import Long = require\("long"\);',
+        "types/protos/firestore_v1beta1_proto_api.d.ts",
+        r'import Long = require\("long"\);',
         ""
     )
 
