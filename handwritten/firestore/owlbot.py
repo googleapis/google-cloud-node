@@ -234,7 +234,7 @@ if staging.is_dir():
 
 # Copy template files
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_mono_repo_library(
+templates = common_templates.node_library(
     source_location="build/src", test_project="node-gcloud-ci"
 )
 
