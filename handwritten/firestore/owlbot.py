@@ -169,26 +169,23 @@ if staging.is_dir():
       1
     )
 
-    os.rename("handwritten/firestore/dev/.gitignore", ".gitignore")
-    os.rename("handwritten/firestore/dev/.eslintignore", ".eslintignore")
-    os.rename("handwritten/firestore/dev/.mocharc.js", ".mocharc.js")
-    os.rename("handwritten/firestore/dev/.jsdoc.js", ".jsdoc.js")
-    os.rename("handwritten/firestore/dev/.prettierrc.js", ".prettierrc.js")
+    os.rename("handwritten/firestore/dev/.gitignore", "handwritten/firestore/.gitignore")
+    os.rename("handwritten/firestore/dev/.eslintignore", "handwritten/firestore/.eslintignore")
+    os.rename("handwritten/firestore/dev/.mocharc.js", "handwritten/firestore/.mocharc.js")
+    os.rename("handwritten/firestore/dev/.jsdoc.js", "handwritten/firestore/.jsdoc.js")
+    os.rename("handwritten/firestore/dev/.prettierrc.js", "handwritten/firestore/.prettierrc.js")
     os.unlink("handwritten/firestore/dev/.eslintrc.json")
 
-    s.replace(".jsdoc.js", "protos", "build/protos", 1)
+    s.replace("handwritten/firestore/.jsdoc.js", "protos", "build/protos", 1)
 
     # Remove auto-generated packaging tests
     os.system('rm -rf handwritten/firestore/dev/system-test/fixtures handwritten/firestore/dev/system-test/install.ts')
 
-    os.chdir("handwritten/firestore/dev")
-    node.compile_protos()
-    os.chdir("protos")
-    os.unlink('protos.js')
-    os.unlink('protos.d.ts')
-    os.unlink('protos.json')
-    subprocess.run('./update.sh', shell=True)
-    os.chdir("../../")
+    node.compile_protos_hermetic(relative_dir="handwritten/firestore/dev")
+    os.unlink('handwritten/firestore/dev/protos.js')
+    os.unlink('handwritten/firestore/dev/protos.d.ts')
+    os.unlink('handwritten/firestore/dev/protos.json')
+    subprocess.run('handwritten/firestore/dev/protos/update.sh', shell=True)
 
     # Copy types into types/
     logger.debug("Running compile...")
@@ -217,12 +214,12 @@ if staging.is_dir():
         ""
     )
     s.replace(
-        "types/protos/firestore_v1_proto_api.d.ts",
+        "handwritten/firestore/types/protos/firestore_v1_proto_api.d.ts",
         'import Long = require\("long"\);',
         ""
     )
     s.replace(
-        "types/protos/firestore_v1beta1_proto_api.d.ts",
+        "handwritten/firestore/types/protos/firestore_v1beta1_proto_api.d.ts",
         'import Long = require\("long"\);',
         ""
     )
@@ -246,6 +243,6 @@ shell.run(('rm', '-rf', 'handwritten/firestore/dev/samples/generated'), hide_out
 shell.run(('node', 'handwritten/firestore/scripts/license.js', 'dev/protos'), hide_output = False)
 shell.run(('node', 'handwritten/firestore/scripts/license.js', 'types'), hide_output = False)
 
-node.fix_hermetic(relative_dir="handwritten/firestore")  # fix formatting
+node.fix_hermetic(relative_dir="handwritten/firestore/dev")  # fix formatting
 
 
