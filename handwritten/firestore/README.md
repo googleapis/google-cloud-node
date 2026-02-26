@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Firestore: Node.js Client](https://github.com/googleapis/nodejs-firestore)
+# [Cloud Firestore: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/firestore)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/firestore.svg)](https://www.npmjs.com/package/@google-cloud/firestore)
@@ -10,23 +10,15 @@
 
 
 
-This is the Node.js Server SDK for [Google Cloud Firestore](https://firebase.google.com/docs/firestore/). Google Cloud Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development.
-
-This Cloud Firestore Server SDK uses Google’s Cloud Identity and Access Management for authentication and should only be used in trusted environments. Your Cloud Identity credentials allow you bypass all access restrictions and provide read and write access to all data in your Cloud Firestore project.
-
-The Cloud Firestore Server SDKs are designed to manage the full set of data in your Cloud Firestore project and work best with reliable network connectivity. Data operations performed via these SDKs directly access the Cloud Firestore backend and all document reads and writes are optimized for high throughput.
-
-Applications that use Google&#x27;s Server SDKs should not be used in end-user environments, such as on phones or on publicly hosted websites. If you are developing a Web or Node.js application that accesses Cloud Firestore on behalf of end users, use the firebase Client SDK.
-
-**Note:** This Cloud Firestore Server SDK does not support Firestore databases created in [Datastore mode](https://cloud.google.com/datastore/docs/firestore-or-datastore#in_datastore_mode). To access these databases, use the [Datastore SDK](https://www.npmjs.com/package/@google-cloud/datastore).
+Firestore Client Library for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-firestore/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/firestore/CHANGELOG.md).
 
 * [Cloud Firestore Node.js Client API Reference][client-docs]
 * [Cloud Firestore Documentation][product-docs]
-* [github.com/googleapis/nodejs-firestore](https://github.com/googleapis/nodejs-firestore)
+* [github.com/googleapis/google-cloud-node/handwritten/firestore](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/firestore)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -39,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -61,108 +53,6 @@ npm install @google-cloud/firestore
 ```
 
 
-### Using the client library
-
-```javascript
-const {Firestore} = require('@google-cloud/firestore');
-
-// Create a new client
-const firestore = new Firestore();
-
-async function quickstart() {
-  // Obtain a document reference.
-  const document = firestore.doc('posts/intro-to-firestore');
-
-  // Enter new data into the document.
-  await document.set({
-    title: 'Welcome to Firestore',
-    body: 'Hello World',
-  });
-  console.log('Entered new data into the document');
-
-  // Update an existing document.
-  await document.update({
-    body: 'My first Firestore app',
-  });
-  console.log('Updated an existing document');
-
-  // Read the document.
-  const doc = await document.get();
-  console.log('Read the document');
-
-  // Delete the document.
-  await document.delete();
-  console.log('Deleted the document');
-}
-quickstart();
-
-```
-
-### Using the client library with Pipelines
-
-```javascript
-
-const {Firestore} = require('@google-cloud/firestore');
-
-// Require/import Pipelines from '@google-cloud/firestore/pipelines'
-const {field} = require('@google-cloud/firestore/pipelines');
-
-// Create a new client
-const firestore = new Firestore({
-  projectId: 'firestore-sdk-nightly',
-  databaseId: 'enterprise'
-});
-
-async function pipelinesQuickstart() {
-  // Obtain a collection reference.
-  const collection = firestore.collection('books');
-
-  // Enter new documents into the document.
-  await collection.add({
-    "title": "Whispers of the Cobalt Sea",
-    "price": 12.99,
-    "author": "Elara Vance",
-    "yearPublished": 2023
-  });
-  await collection.add({
-    "title": "The Antigravity Cat's Guide to Napping",
-    "price": 24.50,
-    "author": "Mittens the IV",
-    "yearPublished": 2026
-  });
-  console.log('Entered new documents into the collection.');
-
-  // Define a Pipeline query that selects books published this century,
-  // orders them by price, and computes a discounted price (20% off).
-  const pipeline = firestore.pipeline().collection('books')
-      .where(field('yearPublished').greaterThanOrEqual(2000))
-      .sort(field('price').ascending())
-      .select('title', 'author', field('price').multiply(0.8).as('discountedPrice'));
-
-  // Execute the pipeline
-  const pipelineSnapshot = await pipeline.execute();
-  console.log('Executed the Pipeline.');
-
-  console.log('Results:');
-  pipelineSnapshot.results.forEach(pipelineResult=> {
-    console.log(pipelineResult.data());
-  });
-}
-pipelinesQuickstart();
-
-```
-
-
-## Samples
-
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-firestore/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
-
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Limit-to-last-query | [source code](https://github.com/googleapis/nodejs-firestore/blob/main/samples/limit-to-last-query.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-firestore&page=editor&open_in_editor=samples/limit-to-last-query.js,samples/README.md) |
-| Pipelines-quickstart | [source code](https://github.com/googleapis/nodejs-firestore/blob/main/samples/pipelines-quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-firestore&page=editor&open_in_editor=samples/pipelines-quickstart.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-firestore/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-firestore&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Solution-counters | [source code](https://github.com/googleapis/nodejs-firestore/blob/main/samples/solution-counters.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-firestore&page=editor&open_in_editor=samples/solution-counters.js,samples/README.md) |
 
 
 
@@ -212,7 +102,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-firestore/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -224,7 +114,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-firestore/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/firestore/latest
 [product-docs]: https://cloud.google.com/firestore
