@@ -1,0 +1,16 @@
+**/*.log
+**/node_modules
+/.coverage
+/coverage
+/.nyc_output
+/docs/
+/out/
+/build/
+temp/
+types/tsdoc-metadata.json
+system-test/secrets.js
+system-test/*key.json
+*.lock
+.DS_Store
+package-lock.json
+__pycache__
