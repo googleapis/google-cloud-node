@@ -235,7 +235,7 @@ templates = common_templates.node_mono_repo_library(relative_dir="handwritten/fi
     source_location="build/src", test_project="node-gcloud-ci"
 )
 
-s.copy(templates, destination="handwritten/firestore", excludes=[".eslintrc.json", ".kokoro/**/*", ".github/CODEOWNERS"])
+s.copy(templates, destination="handwritten/firestore", excludes=[".eslintrc.json", ".kokoro/**/*", ".github/CODEOWNERS", "README.md"])
 
 # Remove generated samples from veneer library:
 shell.run(('rm', '-rf', 'handwritten/firestore/dev/samples/generated'), hide_output = False)
