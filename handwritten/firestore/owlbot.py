@@ -181,7 +181,7 @@ if staging.is_dir():
     # Remove auto-generated packaging tests
     os.system('rm -rf handwritten/firestore/dev/system-test/fixtures handwritten/firestore/dev/system-test/install.ts')
 
-    node.compile_protos_hermetic(relative_dir="handwritten/firestore/dev")
+    node.compile_protos_hermetic(relative_dir="handwritten/firestore")
     os.unlink('handwritten/firestore/dev/protos.js')
     os.unlink('handwritten/firestore/dev/protos.d.ts')
     os.unlink('handwritten/firestore/dev/protos.json')
