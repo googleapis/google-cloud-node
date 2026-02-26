@@ -214,12 +214,12 @@ if staging.is_dir():
         ""
     )
     s.replace(
-        "types/protos/firestore_v1_proto_api.d.ts",
+        "handwritten/firestore/types/protos/firestore_v1_proto_api.d.ts",
         r'import Long = require\("long"\);',
         ""
     )
     s.replace(
-        "types/protos/firestore_v1beta1_proto_api.d.ts",
+        "handwritten/firestore/types/protos/firestore_v1beta1_proto_api.d.ts",
         r'import Long = require\("long"\);',
         ""
     )
@@ -235,13 +235,13 @@ templates = common_templates.node_mono_repo_library(relative_dir="handwritten/fi
     source_location="build/src", test_project="node-gcloud-ci"
 )
 
-s.copy(templates, excludes=[".eslintrc.json", ".kokoro/**/*", ".github/CODEOWNERS"])
+s.copy(templates, destination="handwritten/firestore", excludes=[".eslintrc.json", ".kokoro/**/*", ".github/CODEOWNERS"])
 
 # Remove generated samples from veneer library:
 shell.run(('rm', '-rf', 'handwritten/firestore/dev/samples/generated'), hide_output = False)
 
-shell.run(('node', 'handwritten/firestore/scripts/license.js', 'dev/protos'), hide_output = False)
-shell.run(('node', 'handwritten/firestore/scripts/license.js', 'types'), hide_output = False)
+shell.run(('node', 'handwritten/firestore/scripts/license.js', 'handwritten/firestore/dev/protos'), hide_output = False)
+shell.run(('node', 'handwritten/firestore/scripts/license.js', 'handwritten/firestore/types'), hide_output = False)
 
 node.fix_hermetic(relative_dir="handwritten/firestore")  # fix formatting
 
