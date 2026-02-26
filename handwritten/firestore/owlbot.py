@@ -189,10 +189,10 @@ if staging.is_dir():
 
     # Copy types into types/
     logger.debug("Running compile...")
-    shell.run(["npm", "run", "compile"], hide_output=True)
-    s.copy("handwritten/firestore/build/src/v1/firestore*.d.ts", "types/v1")
-    s.copy("handwritten/firestore/build/src/v1beta1/firestore_client.d.ts", "types/v1beta1")
-    s.copy("handwritten/firestore/build/protos/firestore*.d.ts", "types/protos")
+    shell.run(["npm", "run", "compile"], cwd="handwritten/firestore", hide_output=True)
+    s.copy("handwritten/firestore/build/src/v1/firestore*.d.ts", "handwritten/firestore/types/v1")
+    s.copy("handwritten/firestore/build/src/v1beta1/firestore_client.d.ts", "handwritten/firestore/types/v1beta1")
+    s.copy("handwritten/firestore/build/protos/firestore*.d.ts", "handwritten/firestore/types/protos")
     s.replace(
         "handwritten/firestore/types/v1/firestore_client.d.ts",
         r"../../protos",
