@@ -50,7 +50,7 @@ if staging.is_dir():
     )
     s.replace(
         "handwritten/firestore/dev/src/v1beta1/firestore_client.ts",
-        "return this\.innerApiCalls\.write\(options\);",
+        r"return this\.innerApiCalls\.write\(options\);",
         "return this.innerApiCalls.write({}, options);",
     )
     s.replace(
@@ -77,7 +77,7 @@ if staging.is_dir():
     )
     s.replace(
       "handwritten/firestore/dev/test/gapic_firestore_v1.ts",
-      "import \* as firestoreModule from '\.\./src';",
+      r"import \* as firestoreModule from '\.\./src';",
       "import * as firestoreModule from '../src/v1';"
     )
     s.replace(
@@ -87,7 +87,7 @@ if staging.is_dir():
     )
     s.replace(
       "handwritten/firestore/dev/src/v1/firestore_admin_client.ts",
-      "/protos/protos'",
+      r"/protos/protos'",
       "/protos/firestore_admin_v1_proto_api'"
     )
     s.replace(
@@ -152,7 +152,7 @@ if staging.is_dir():
     )
     s.replace(
        "handwritten/firestore/dev/test/gapic_firestore_v1beta1.ts",
-       "\.\./protos/protos.json",
+       r"\.\./protos/protos.json",
        "../protos/v1beta1.json"
     )
 
@@ -243,6 +243,6 @@ shell.run(('rm', '-rf', 'handwritten/firestore/dev/samples/generated'), hide_out
 shell.run(('node', 'handwritten/firestore/scripts/license.js', 'dev/protos'), hide_output = False)
 shell.run(('node', 'handwritten/firestore/scripts/license.js', 'types'), hide_output = False)
 
-node.fix_hermetic(relative_dir="handwritten/firestore/dev")  # fix formatting
+node.fix_hermetic(relative_dir="handwritten/firestore")  # fix formatting
 
 
