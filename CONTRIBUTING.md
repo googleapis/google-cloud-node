@@ -34,16 +34,7 @@ accept your pull requests.
 1.  Ensure that your code adheres to the existing style in the code to which
     you are contributing.
 1.  Ensure that your code has an appropriate set of tests which all pass.
-1.  Title your pull request following [Conventional Commits](https://www.conventionalcommits.org/) styling.
 1.  Submit a pull request.
-
-### Before you begin
-
-1.  [Select or create a Cloud Platform project][projects]. 
-1.  [Enable the Cloud Firestore API][enable_api]. 
-1.  [Set up authentication with a service account][auth] so you can access the
-    API from your local workstation.
-
 
 ## Running the tests
 
@@ -55,21 +46,10 @@ accept your pull requests.
 
 1.  Run the tests:
 
-        # Run unit tests.
         npm test
-
-        # Run sample integration tests.
-        npm run samples-test
-
-        # Run all system tests.
-        npm run system-test
 
 1.  Lint (and maybe fix) any changes:
 
         npm run fix
 
 [setup]: https://cloud.google.com/nodejs/docs/setup
-[projects]: https://console.cloud.google.com/project
-[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=firestore.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
