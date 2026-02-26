@@ -16,8 +16,8 @@ staging = Path("owl-bot-staging")
 if staging.is_dir():
   try:
     v1_admin_library = staging / "admin/v1"
-    v1beta1_library = staging / "v1beta1"
-    v1_library = staging / "v1"
+    v1beta1_library = staging / firestore / "v1beta1"
+    v1_library = staging / firestore / "v1"
 
     _tracked_paths.add(v1_admin_library)
     _tracked_paths.add(v1beta1_library)
