@@ -7,7 +7,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-firestore",
+  "repository": {
+    "type": "git",
+    "directory": "handwritten/firestore",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "main": "./build/src/index.js",
   "types": "./types/firestore.d.ts",
   "files": [
@@ -125,5 +129,6 @@
     },
     "./package.json": "./package.json",
     "./build/src/path": "./build/src/path.js"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/firestore"
 }

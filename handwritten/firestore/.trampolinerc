@@ -49,4 +49,4 @@ if [[ -z "${TRAMPOLINE_BUILD_FILE:-}" ]]; then
 fi
 
 # Secret Manager secrets.
-source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh
+source ${PROJECT_ROOT}/handwritten/firestore/.kokoro/populate-secrets.sh
