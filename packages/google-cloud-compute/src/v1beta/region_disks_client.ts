@@ -2060,8 +2060,7 @@ export class RegionDisksClient {
   }
 /**
  * Update the specified disk with the data included in the request. Update is
- * performed only on selected fields included as part of update-mask. Only the
- * following fields can be modified: user_license.
+ * performed only on selected fields included as part of update-mask.
  *
  * @param {Object} request
  *   The request object that will be sent.

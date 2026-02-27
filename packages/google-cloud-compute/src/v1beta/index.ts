@@ -122,6 +122,7 @@ export {RoutersClient} from './routers_client';
 export {RoutesClient} from './routes_client';
 export {SecurityPoliciesClient} from './security_policies_client';
 export {ServiceAttachmentsClient} from './service_attachments_client';
+export {SnapshotGroupsClient} from './snapshot_groups_client';
 export {SnapshotsClient} from './snapshots_client';
 export {SnapshotSettingsServiceClient} from './snapshot_settings_service_client';
 export {SslCertificatesClient} from './ssl_certificates_client';

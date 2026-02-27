@@ -402,6 +402,138 @@ describe('v1beta.RoutersClient', () => {
         });
     });
 
+    describe('deleteNamedSet', () => {
+        it('invokes deleteNamedSet without error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.deleteNamedSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteNamedSet(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNamedSet without error using callback', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.deleteNamedSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteNamedSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNamedSet with error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteNamedSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteNamedSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNamedSet with closed client', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteNamedSet(request), expectedError);
+        });
+    });
+
     describe('deleteRoutePolicy', () => {
         it('invokes deleteRoutePolicy without error', async () => {
             const client = new routersModule.v1beta.RoutersClient({
@@ -663,6 +795,138 @@ describe('v1beta.RoutersClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.get(request), expectedError);
+        });
+    });
+
+    describe('getNamedSet', () => {
+        it('invokes getNamedSet without error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.GetNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.RoutersGetNamedSetResponse()
+            );
+            client.innerApiCalls.getNamedSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.getNamedSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNamedSet without error using callback', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.GetNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.RoutersGetNamedSetResponse()
+            );
+            client.innerApiCalls.getNamedSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getNamedSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNamedSet with error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.GetNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getNamedSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getNamedSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNamedSet with closed client', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.GetNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getNamedSet(request), expectedError);
         });
     });
 
@@ -1314,6 +1578,138 @@ describe('v1beta.RoutersClient', () => {
         });
     });
 
+    describe('patchNamedSet', () => {
+        it('invokes patchNamedSet without error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.PatchNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.patchNamedSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.patchNamedSet(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.patchNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.patchNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes patchNamedSet without error using callback', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.PatchNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.patchNamedSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.patchNamedSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.patchNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.patchNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes patchNamedSet with error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.PatchNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.patchNamedSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.patchNamedSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.patchNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.patchNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes patchNamedSet with closed client', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.PatchNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.PatchNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.patchNamedSet(request), expectedError);
+        });
+    });
+
     describe('patchRoutePolicy', () => {
         it('invokes patchRoutePolicy without error', async () => {
             const client = new routersModule.v1beta.RoutersClient({
@@ -1839,6 +2235,138 @@ describe('v1beta.RoutersClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.update(request), expectedError);
+        });
+    });
+
+    describe('updateNamedSet', () => {
+        it('invokes updateNamedSet without error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.updateNamedSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateNamedSet(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNamedSet without error using callback', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.updateNamedSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateNamedSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNamedSet with error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNamedSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateNamedSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNamedSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNamedSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNamedSet with closed client', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateNamedSetRouterRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateNamedSet(request), expectedError);
         });
     });
 
@@ -2879,6 +3407,293 @@ describe('v1beta.RoutersClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.listBgpRoutes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listNamedSets', () => {
+        it('invokes listNamedSets without error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+            ];
+            client.innerApiCalls.listNamedSets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listNamedSets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNamedSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNamedSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNamedSets without error using callback', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+            ];
+            client.innerApiCalls.listNamedSets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listNamedSets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.INamedSet[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNamedSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNamedSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNamedSets with error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listNamedSets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listNamedSets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listNamedSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNamedSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNamedSetsStream without error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+            ];
+            client.descriptors.page.listNamedSets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listNamedSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1beta.NamedSet[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1beta.NamedSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listNamedSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNamedSets, request));
+            assert(
+                (client.descriptors.page.listNamedSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listNamedSetsStream with error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNamedSets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listNamedSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1beta.NamedSet[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1beta.NamedSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listNamedSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNamedSets, request));
+            assert(
+                (client.descriptors.page.listNamedSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listNamedSets without error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.NamedSet()),
+            ];
+            client.descriptors.page.listNamedSets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.compute.v1beta.INamedSet[] = [];
+            const iterable = client.listNamedSetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNamedSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNamedSets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listNamedSets with error', async () => {
+            const client = new routersModule.v1beta.RoutersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListNamedSetsRoutersRequest', ['router']);
+            request.router = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&router=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNamedSets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listNamedSetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.compute.v1beta.INamedSet[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNamedSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNamedSets.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )

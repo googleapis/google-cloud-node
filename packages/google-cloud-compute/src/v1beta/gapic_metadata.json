@@ -2506,6 +2506,11 @@
                 "applyUpdatesToInstances"
               ]
             },
+            "ConfigureAcceleratorTopologies": {
+              "methods": [
+                "configureAcceleratorTopologies"
+              ]
+            },
             "CreateInstances": {
               "methods": [
                 "createInstances"
@@ -2664,6 +2669,11 @@
             "ApplyUpdatesToInstances": {
               "methods": [
                 "applyUpdatesToInstances"
+              ]
+            },
+            "ConfigureAcceleratorTopologies": {
+              "methods": [
+                "configureAcceleratorTopologies"
               ]
             },
             "CreateInstances": {
@@ -10321,6 +10331,11 @@
                 "delete"
               ]
             },
+            "DeleteNamedSet": {
+              "methods": [
+                "deleteNamedSet"
+              ]
+            },
             "DeleteRoutePolicy": {
               "methods": [
                 "deleteRoutePolicy"
@@ -10329,6 +10344,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetNamedSet": {
+              "methods": [
+                "getNamedSet"
               ]
             },
             "GetNatIpInfo": {
@@ -10356,6 +10376,11 @@
                 "patch"
               ]
             },
+            "PatchNamedSet": {
+              "methods": [
+                "patchNamedSet"
+              ]
+            },
             "PatchRoutePolicy": {
               "methods": [
                 "patchRoutePolicy"
@@ -10374,6 +10399,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateNamedSet": {
+              "methods": [
+                "updateNamedSet"
               ]
             },
             "UpdateRoutePolicy": {
@@ -10407,6 +10437,13 @@
                 "listBgpRoutes",
                 "listBgpRoutesStream",
                 "listBgpRoutesAsync"
+              ]
+            },
+            "ListNamedSets": {
+              "methods": [
+                "listNamedSets",
+                "listNamedSetsStream",
+                "listNamedSetsAsync"
               ]
             },
             "ListRoutePolicies": {
@@ -10426,6 +10463,11 @@
                 "delete"
               ]
             },
+            "DeleteNamedSet": {
+              "methods": [
+                "deleteNamedSet"
+              ]
+            },
             "DeleteRoutePolicy": {
               "methods": [
                 "deleteRoutePolicy"
@@ -10434,6 +10476,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetNamedSet": {
+              "methods": [
+                "getNamedSet"
               ]
             },
             "GetNatIpInfo": {
@@ -10461,6 +10508,11 @@
                 "patch"
               ]
             },
+            "PatchNamedSet": {
+              "methods": [
+                "patchNamedSet"
+              ]
+            },
             "PatchRoutePolicy": {
               "methods": [
                 "patchRoutePolicy"
@@ -10479,6 +10531,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateNamedSet": {
+              "methods": [
+                "updateNamedSet"
               ]
             },
             "UpdateRoutePolicy": {
@@ -10512,6 +10569,13 @@
                 "listBgpRoutes",
                 "listBgpRoutesStream",
                 "listBgpRoutesAsync"
+              ]
+            },
+            "ListNamedSets": {
+              "methods": [
+                "listNamedSets",
+                "listNamedSetsStream",
+                "listNamedSetsAsync"
               ]
             },
             "ListRoutePolicies": {
@@ -10844,6 +10908,94 @@
                 "aggregatedList",
                 "aggregatedListStream",
                 "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SnapshotGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SnapshotGroupsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SnapshotGroupsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "List": {
