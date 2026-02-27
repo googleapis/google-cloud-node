@@ -771,8 +771,7 @@
                       "oneofs": {
                         "ranker": {
                           "oneof": [
-                            "rrf",
-                            "vertex"
+                            "rrf"
                           ]
                         }
                       },
@@ -780,10 +779,6 @@
                         "rrf": {
                           "type": "ReciprocalRankFusion",
                           "id": 1
-                        },
-                        "vertex": {
-                          "type": "VertexRanker",
-                          "id": 2
                         }
                       }
                     },
@@ -793,38 +788,6 @@
                           "rule": "repeated",
                           "type": "double",
                           "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "VertexRanker": {
-                      "fields": {
-                        "query": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "titleTemplate": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "contentTemplate": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "model": {
-                          "type": "string",
-                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }

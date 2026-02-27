@@ -410,9 +410,6 @@ message Ranker {
   oneof ranker {
     // Reciprocal Rank Fusion ranking.
     ReciprocalRankFusion rrf = 1;
-
-    // Vertex AI ranking.
-    VertexRanker vertex = 2;
   }
 }
 
@@ -420,24 +417,6 @@ message Ranker {
 message ReciprocalRankFusion {
   // Required. The weights to apply to each search result set during fusion.
   repeated double weights = 1 [(google.api.field_behavior) = REQUIRED];
-}
-
-// Defines a ranker using the Vertex AI ranking service.
-// See https://cloud.google.com/generative-ai-app-builder/docs/ranking for
-// details.
-message VertexRanker {
-  // Required. The query against which the records are ranked and scored.
-  string query = 1 [(google.api.field_behavior) = REQUIRED];
-
-  // Optional. The template used to generate the record's title.
-  string title_template = 2 [(google.api.field_behavior) = OPTIONAL];
-
-  // Optional. The template used to generate the record's content.
-  string content_template = 3 [(google.api.field_behavior) = OPTIONAL];
-
-  // Required. The model used for ranking documents. If no model is specified,
-  // then semantic-ranker-default@latest is used.
-  string model = 4 [(google.api.field_behavior) = REQUIRED];
 }
 
 // A response from a batch search operation.
