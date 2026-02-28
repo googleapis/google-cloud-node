@@ -21,7 +21,7 @@ import os
 logging.basicConfig(level=logging.DEBUG)
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_mono_repo_library(relative_dir="handwritten/logging-winston")
 s.copy(templates, excludes=[
     ".github/auto-label.yaml",
     ".github/release-please.yml",
@@ -30,8 +30,7 @@ s.copy(templates, excludes=[
     ".github/workflows/ci.yaml",
     ".kokoro"
 ]) 
-node.fix()
-
+node.fix_hermetic(relative_dir="handwritten/logging-winston")
 
 # --------------------------------------------------------------------------
 # Modify test configs
@@ -42,6 +41,7 @@ s.move(
     ".kokoro/common_env_vars.cfg",
     ".kokoro/common.cfg",
     merge=lambda src, dst, _, : f"{dst}\n{src}",
+    relative_dir="handwritten/logging-winston"
 )
 for path, subdirs, files in os.walk(f".kokoro/continuous"):
     for name in files:
@@ -51,4 +51,5 @@ for path, subdirs, files in os.walk(f".kokoro/continuous"):
                 ".kokoro/common_env_vars.cfg",
                 file_path,
                 merge=lambda src, dst, _, : f"{dst}\n{src}",
+                relative_dir="handwritten/logging-winston"
             )

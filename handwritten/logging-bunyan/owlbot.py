@@ -22,14 +22,14 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
-s.move(templates, excludes=[
+templates = common_templates.node_mono_repo_library(relative_dir="handwritten/logging-bunyan", source_location='build/src')
+s.move(templates, relative_dir="handwritten/logging-bunyan", excludes=[
     ".github/auto-label.yaml",
     ".github/release-please.yml",
     ".github/CODEOWNERS",
     ".github/sync-repo-settings.yaml",
 ])
-node.fix()
+node.fix_hermetic(relative_dir="handwritten/logging-bunyan")
 
 # --------------------------------------------------------------------------
 # Modify test configs
@@ -40,6 +40,7 @@ s.move(
     ".kokoro/common_env_vars.cfg",
     ".kokoro/common.cfg",
     merge=lambda src, dst, _, : f"{dst}\n{src}",
+    relative_dir="handwritten/logging-bunyan",
 )
 for path, subdirs, files in os.walk(f".kokoro/continuous"):
     for name in files:
@@ -49,4 +50,5 @@ for path, subdirs, files in os.walk(f".kokoro/continuous"):
                 ".kokoro/common_env_vars.cfg",
                 file_path,
                 merge=lambda src, dst, _, : f"{dst}\n{src}",
+                relative_dir="handwritten/logging-bunyan",
             )
