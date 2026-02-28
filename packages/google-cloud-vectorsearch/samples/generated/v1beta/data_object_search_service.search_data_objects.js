@@ -46,7 +46,9 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The standard list page size.
+   *  Optional. The standard list page size. Only supported for KNN. If not set,
+   *  up to search_type.top_k results will be returned. The maximum value is
+   *  1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**

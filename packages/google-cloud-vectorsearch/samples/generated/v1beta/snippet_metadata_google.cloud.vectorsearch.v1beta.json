@@ -22,7 +22,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 81,
+          "end": 83,
           "type": "FULL"
         }
       ],
@@ -82,7 +82,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 78,
+          "end": 79,
           "type": "FULL"
         }
       ],
@@ -454,7 +454,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 55,
+          "end": 61,
           "type": "FULL"
         }
       ],
@@ -465,6 +465,10 @@
         "parameters": [
           {
             "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
             "type": "TYPE_STRING"
           }
         ],

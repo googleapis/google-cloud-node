@@ -17129,6 +17129,7 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] DataObject updateTime
                          * @property {google.protobuf.IStruct|null} [data] DataObject data
                          * @property {Object.<string,google.cloud.vectorsearch.v1beta.IVector>|null} [vectors] DataObject vectors
+                         * @property {string|null} [etag] DataObject etag
                          */
     
                         /**
@@ -17196,6 +17197,14 @@
                         DataObject.prototype.vectors = $util.emptyObject;
     
                         /**
+                         * DataObject etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.vectorsearch.v1beta.DataObject
+                         * @instance
+                         */
+                        DataObject.prototype.etag = "";
+    
+                        /**
                          * Creates a new DataObject instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vectorsearch.v1beta.DataObject
@@ -17234,6 +17243,8 @@
                                     writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.vectorsearch.v1beta.Vector.encode(message.vectors[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.etag);
                             return writer;
                         };
     
@@ -17313,6 +17324,10 @@
                                         message.vectors[key] = value;
                                         break;
                                     }
+                                case 8: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17379,6 +17394,9 @@
                                         return "vectors." + error;
                                 }
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -17423,6 +17441,8 @@
                                     message.vectors[keys[i]] = $root.google.cloud.vectorsearch.v1beta.Vector.fromObject(object.vectors[keys[i]]);
                                 }
                             }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -17447,6 +17467,7 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.data = null;
+                                object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -17464,6 +17485,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.vectors[keys2[j]] = $root.google.cloud.vectorsearch.v1beta.Vector.toObject(message.vectors[keys2[j]], options);
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -18803,6 +18826,8 @@
                          * @interface ISearchHint
                          * @property {google.cloud.vectorsearch.v1beta.SearchHint.IIndexHint|null} [useIndex] SearchHint useIndex
                          * @property {boolean|null} [useKnn] SearchHint useKnn
+                         * @property {google.cloud.vectorsearch.v1beta.SearchHint.IKnnHint|null} [knnHint] SearchHint knnHint
+                         * @property {google.cloud.vectorsearch.v1beta.SearchHint.IIndexHint|null} [indexHint] SearchHint indexHint
                          */
     
                         /**
@@ -18836,17 +18861,33 @@
                          */
                         SearchHint.prototype.useKnn = null;
     
+                        /**
+                         * SearchHint knnHint.
+                         * @member {google.cloud.vectorsearch.v1beta.SearchHint.IKnnHint|null|undefined} knnHint
+                         * @memberof google.cloud.vectorsearch.v1beta.SearchHint
+                         * @instance
+                         */
+                        SearchHint.prototype.knnHint = null;
+    
+                        /**
+                         * SearchHint indexHint.
+                         * @member {google.cloud.vectorsearch.v1beta.SearchHint.IIndexHint|null|undefined} indexHint
+                         * @memberof google.cloud.vectorsearch.v1beta.SearchHint
+                         * @instance
+                         */
+                        SearchHint.prototype.indexHint = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * SearchHint indexType.
-                         * @member {"useIndex"|"useKnn"|undefined} indexType
+                         * @member {"useIndex"|"useKnn"|"knnHint"|"indexHint"|undefined} indexType
                          * @memberof google.cloud.vectorsearch.v1beta.SearchHint
                          * @instance
                          */
                         Object.defineProperty(SearchHint.prototype, "indexType", {
-                            get: $util.oneOfGetter($oneOfFields = ["useIndex", "useKnn"]),
+                            get: $util.oneOfGetter($oneOfFields = ["useIndex", "useKnn", "knnHint", "indexHint"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -18878,6 +18919,10 @@
                                 $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.encode(message.useIndex, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.useKnn != null && Object.hasOwnProperty.call(message, "useKnn"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useKnn);
+                            if (message.knnHint != null && Object.hasOwnProperty.call(message, "knnHint"))
+                                $root.google.cloud.vectorsearch.v1beta.SearchHint.KnnHint.encode(message.knnHint, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.indexHint != null && Object.hasOwnProperty.call(message, "indexHint"))
+                                $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.encode(message.indexHint, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -18920,6 +18965,14 @@
                                     }
                                 case 2: {
                                         message.useKnn = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.knnHint = $root.google.cloud.vectorsearch.v1beta.SearchHint.KnnHint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.indexHint = $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -18973,6 +19026,26 @@
                                 if (typeof message.useKnn !== "boolean")
                                     return "useKnn: boolean expected";
                             }
+                            if (message.knnHint != null && message.hasOwnProperty("knnHint")) {
+                                if (properties.indexType === 1)
+                                    return "indexType: multiple values";
+                                properties.indexType = 1;
+                                {
+                                    var error = $root.google.cloud.vectorsearch.v1beta.SearchHint.KnnHint.verify(message.knnHint);
+                                    if (error)
+                                        return "knnHint." + error;
+                                }
+                            }
+                            if (message.indexHint != null && message.hasOwnProperty("indexHint")) {
+                                if (properties.indexType === 1)
+                                    return "indexType: multiple values";
+                                properties.indexType = 1;
+                                {
+                                    var error = $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.verify(message.indexHint);
+                                    if (error)
+                                        return "indexHint." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -18995,6 +19068,16 @@
                             }
                             if (object.useKnn != null)
                                 message.useKnn = Boolean(object.useKnn);
+                            if (object.knnHint != null) {
+                                if (typeof object.knnHint !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.SearchHint.knnHint: object expected");
+                                message.knnHint = $root.google.cloud.vectorsearch.v1beta.SearchHint.KnnHint.fromObject(object.knnHint);
+                            }
+                            if (object.indexHint != null) {
+                                if (typeof object.indexHint !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.SearchHint.indexHint: object expected");
+                                message.indexHint = $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.fromObject(object.indexHint);
+                            }
                             return message;
                         };
     
@@ -19020,6 +19103,16 @@
                                 object.useKnn = message.useKnn;
                                 if (options.oneofs)
                                     object.indexType = "useKnn";
+                            }
+                            if (message.knnHint != null && message.hasOwnProperty("knnHint")) {
+                                object.knnHint = $root.google.cloud.vectorsearch.v1beta.SearchHint.KnnHint.toObject(message.knnHint, options);
+                                if (options.oneofs)
+                                    object.indexType = "knnHint";
+                            }
+                            if (message.indexHint != null && message.hasOwnProperty("indexHint")) {
+                                object.indexHint = $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.toObject(message.indexHint, options);
+                                if (options.oneofs)
+                                    object.indexType = "indexHint";
                             }
                             return object;
                         };
@@ -19056,6 +19149,7 @@
                              * Properties of an IndexHint.
                              * @memberof google.cloud.vectorsearch.v1beta.SearchHint
                              * @interface IIndexHint
+                             * @property {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.IDenseScannParams|null} [denseScannParams] IndexHint denseScannParams
                              * @property {string|null} [name] IndexHint name
                              */
     
@@ -19075,12 +19169,34 @@
                             }
     
                             /**
+                             * IndexHint denseScannParams.
+                             * @member {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.IDenseScannParams|null|undefined} denseScannParams
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint
+                             * @instance
+                             */
+                            IndexHint.prototype.denseScannParams = null;
+    
+                            /**
                              * IndexHint name.
                              * @member {string} name
                              * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint
                              * @instance
                              */
                             IndexHint.prototype.name = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * IndexHint params.
+                             * @member {"denseScannParams"|undefined} params
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint
+                             * @instance
+                             */
+                            Object.defineProperty(IndexHint.prototype, "params", {
+                                get: $util.oneOfGetter($oneOfFields = ["denseScannParams"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new IndexHint instance using the specified properties.
@@ -19108,6 +19224,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.denseScannParams != null && Object.hasOwnProperty.call(message, "denseScannParams"))
+                                    $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams.encode(message.denseScannParams, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 return writer;
                             };
     
@@ -19144,6 +19262,10 @@
                                     if (tag === error)
                                         break;
                                     switch (tag >>> 3) {
+                                    case 2: {
+                                            message.denseScannParams = $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 1: {
                                             message.name = reader.string();
                                             break;
@@ -19183,6 +19305,15 @@
                             IndexHint.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
+                                if (message.denseScannParams != null && message.hasOwnProperty("denseScannParams")) {
+                                    properties.params = 1;
+                                    {
+                                        var error = $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams.verify(message.denseScannParams);
+                                        if (error)
+                                            return "denseScannParams." + error;
+                                    }
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -19201,6 +19332,11 @@
                                 if (object instanceof $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint)
                                     return object;
                                 var message = new $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint();
+                                if (object.denseScannParams != null) {
+                                    if (typeof object.denseScannParams !== "object")
+                                        throw TypeError(".google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.denseScannParams: object expected");
+                                    message.denseScannParams = $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams.fromObject(object.denseScannParams);
+                                }
                                 if (object.name != null)
                                     message.name = String(object.name);
                                 return message;
@@ -19223,6 +19359,11 @@
                                     object.name = "";
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.denseScannParams != null && message.hasOwnProperty("denseScannParams")) {
+                                    object.denseScannParams = $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams.toObject(message.denseScannParams, options);
+                                    if (options.oneofs)
+                                        object.params = "denseScannParams";
+                                }
                                 return object;
                             };
     
@@ -19252,7 +19393,413 @@
                                 return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.SearchHint.IndexHint";
                             };
     
+                            IndexHint.DenseScannParams = (function() {
+    
+                                /**
+                                 * Properties of a DenseScannParams.
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint
+                                 * @interface IDenseScannParams
+                                 * @property {number|null} [searchLeavesPct] DenseScannParams searchLeavesPct
+                                 * @property {number|null} [initialCandidateCount] DenseScannParams initialCandidateCount
+                                 */
+    
+                                /**
+                                 * Constructs a new DenseScannParams.
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint
+                                 * @classdesc Represents a DenseScannParams.
+                                 * @implements IDenseScannParams
+                                 * @constructor
+                                 * @param {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.IDenseScannParams=} [properties] Properties to set
+                                 */
+                                function DenseScannParams(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DenseScannParams searchLeavesPct.
+                                 * @member {number} searchLeavesPct
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @instance
+                                 */
+                                DenseScannParams.prototype.searchLeavesPct = 0;
+    
+                                /**
+                                 * DenseScannParams initialCandidateCount.
+                                 * @member {number} initialCandidateCount
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @instance
+                                 */
+                                DenseScannParams.prototype.initialCandidateCount = 0;
+    
+                                /**
+                                 * Creates a new DenseScannParams instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.IDenseScannParams=} [properties] Properties to set
+                                 * @returns {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams} DenseScannParams instance
+                                 */
+                                DenseScannParams.create = function create(properties) {
+                                    return new DenseScannParams(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DenseScannParams message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.IDenseScannParams} message DenseScannParams message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DenseScannParams.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.searchLeavesPct != null && Object.hasOwnProperty.call(message, "searchLeavesPct"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.searchLeavesPct);
+                                    if (message.initialCandidateCount != null && Object.hasOwnProperty.call(message, "initialCandidateCount"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.initialCandidateCount);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DenseScannParams message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.IDenseScannParams} message DenseScannParams message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DenseScannParams.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DenseScannParams message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams} DenseScannParams
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DenseScannParams.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.searchLeavesPct = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.initialCandidateCount = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DenseScannParams message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams} DenseScannParams
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DenseScannParams.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DenseScannParams message.
+                                 * @function verify
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DenseScannParams.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.searchLeavesPct != null && message.hasOwnProperty("searchLeavesPct"))
+                                        if (!$util.isInteger(message.searchLeavesPct))
+                                            return "searchLeavesPct: integer expected";
+                                    if (message.initialCandidateCount != null && message.hasOwnProperty("initialCandidateCount"))
+                                        if (!$util.isInteger(message.initialCandidateCount))
+                                            return "initialCandidateCount: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DenseScannParams message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams} DenseScannParams
+                                 */
+                                DenseScannParams.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams)
+                                        return object;
+                                    var message = new $root.google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams();
+                                    if (object.searchLeavesPct != null)
+                                        message.searchLeavesPct = object.searchLeavesPct | 0;
+                                    if (object.initialCandidateCount != null)
+                                        message.initialCandidateCount = object.initialCandidateCount | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DenseScannParams message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams} message DenseScannParams
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DenseScannParams.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.searchLeavesPct = 0;
+                                        object.initialCandidateCount = 0;
+                                    }
+                                    if (message.searchLeavesPct != null && message.hasOwnProperty("searchLeavesPct"))
+                                        object.searchLeavesPct = message.searchLeavesPct;
+                                    if (message.initialCandidateCount != null && message.hasOwnProperty("initialCandidateCount"))
+                                        object.initialCandidateCount = message.initialCandidateCount;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DenseScannParams to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DenseScannParams.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DenseScannParams
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DenseScannParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.SearchHint.IndexHint.DenseScannParams";
+                                };
+    
+                                return DenseScannParams;
+                            })();
+    
                             return IndexHint;
+                        })();
+    
+                        SearchHint.KnnHint = (function() {
+    
+                            /**
+                             * Properties of a KnnHint.
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint
+                             * @interface IKnnHint
+                             */
+    
+                            /**
+                             * Constructs a new KnnHint.
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint
+                             * @classdesc Represents a KnnHint.
+                             * @implements IKnnHint
+                             * @constructor
+                             * @param {google.cloud.vectorsearch.v1beta.SearchHint.IKnnHint=} [properties] Properties to set
+                             */
+                            function KnnHint(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new KnnHint instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.SearchHint.IKnnHint=} [properties] Properties to set
+                             * @returns {google.cloud.vectorsearch.v1beta.SearchHint.KnnHint} KnnHint instance
+                             */
+                            KnnHint.create = function create(properties) {
+                                return new KnnHint(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified KnnHint message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchHint.KnnHint.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.SearchHint.IKnnHint} message KnnHint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            KnnHint.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified KnnHint message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchHint.KnnHint.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.SearchHint.IKnnHint} message KnnHint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            KnnHint.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a KnnHint message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.vectorsearch.v1beta.SearchHint.KnnHint} KnnHint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            KnnHint.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.SearchHint.KnnHint();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a KnnHint message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.vectorsearch.v1beta.SearchHint.KnnHint} KnnHint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            KnnHint.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a KnnHint message.
+                             * @function verify
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            KnnHint.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a KnnHint message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.vectorsearch.v1beta.SearchHint.KnnHint} KnnHint
+                             */
+                            KnnHint.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.vectorsearch.v1beta.SearchHint.KnnHint)
+                                    return object;
+                                return new $root.google.cloud.vectorsearch.v1beta.SearchHint.KnnHint();
+                            };
+    
+                            /**
+                             * Creates a plain object from a KnnHint message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.SearchHint.KnnHint} message KnnHint
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            KnnHint.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this KnnHint to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            KnnHint.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for KnnHint
+                             * @function getTypeUrl
+                             * @memberof google.cloud.vectorsearch.v1beta.SearchHint.KnnHint
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            KnnHint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.SearchHint.KnnHint";
+                            };
+    
+                            return KnnHint;
                         })();
     
                         return SearchHint;
@@ -23743,7 +24290,6 @@
                          * @memberof google.cloud.vectorsearch.v1beta
                          * @interface IRanker
                          * @property {google.cloud.vectorsearch.v1beta.IReciprocalRankFusion|null} [rrf] Ranker rrf
-                         * @property {google.cloud.vectorsearch.v1beta.IVertexRanker|null} [vertex] Ranker vertex
                          */
     
                         /**
@@ -23769,25 +24315,17 @@
                          */
                         Ranker.prototype.rrf = null;
     
-                        /**
-                         * Ranker vertex.
-                         * @member {google.cloud.vectorsearch.v1beta.IVertexRanker|null|undefined} vertex
-                         * @memberof google.cloud.vectorsearch.v1beta.Ranker
-                         * @instance
-                         */
-                        Ranker.prototype.vertex = null;
-    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Ranker ranker.
-                         * @member {"rrf"|"vertex"|undefined} ranker
+                         * @member {"rrf"|undefined} ranker
                          * @memberof google.cloud.vectorsearch.v1beta.Ranker
                          * @instance
                          */
                         Object.defineProperty(Ranker.prototype, "ranker", {
-                            get: $util.oneOfGetter($oneOfFields = ["rrf", "vertex"]),
+                            get: $util.oneOfGetter($oneOfFields = ["rrf"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -23817,8 +24355,6 @@
                                 writer = $Writer.create();
                             if (message.rrf != null && Object.hasOwnProperty.call(message, "rrf"))
                                 $root.google.cloud.vectorsearch.v1beta.ReciprocalRankFusion.encode(message.rrf, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.vertex != null && Object.hasOwnProperty.call(message, "vertex"))
-                                $root.google.cloud.vectorsearch.v1beta.VertexRanker.encode(message.vertex, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -23857,10 +24393,6 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rrf = $root.google.cloud.vectorsearch.v1beta.ReciprocalRankFusion.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        message.vertex = $root.google.cloud.vectorsearch.v1beta.VertexRanker.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -23907,16 +24439,6 @@
                                         return "rrf." + error;
                                 }
                             }
-                            if (message.vertex != null && message.hasOwnProperty("vertex")) {
-                                if (properties.ranker === 1)
-                                    return "ranker: multiple values";
-                                properties.ranker = 1;
-                                {
-                                    var error = $root.google.cloud.vectorsearch.v1beta.VertexRanker.verify(message.vertex);
-                                    if (error)
-                                        return "vertex." + error;
-                                }
-                            }
                             return null;
                         };
     
@@ -23936,11 +24458,6 @@
                                 if (typeof object.rrf !== "object")
                                     throw TypeError(".google.cloud.vectorsearch.v1beta.Ranker.rrf: object expected");
                                 message.rrf = $root.google.cloud.vectorsearch.v1beta.ReciprocalRankFusion.fromObject(object.rrf);
-                            }
-                            if (object.vertex != null) {
-                                if (typeof object.vertex !== "object")
-                                    throw TypeError(".google.cloud.vectorsearch.v1beta.Ranker.vertex: object expected");
-                                message.vertex = $root.google.cloud.vectorsearch.v1beta.VertexRanker.fromObject(object.vertex);
                             }
                             return message;
                         };
@@ -23962,11 +24479,6 @@
                                 object.rrf = $root.google.cloud.vectorsearch.v1beta.ReciprocalRankFusion.toObject(message.rrf, options);
                                 if (options.oneofs)
                                     object.ranker = "rrf";
-                            }
-                            if (message.vertex != null && message.hasOwnProperty("vertex")) {
-                                object.vertex = $root.google.cloud.vectorsearch.v1beta.VertexRanker.toObject(message.vertex, options);
-                                if (options.oneofs)
-                                    object.ranker = "vertex";
                             }
                             return object;
                         };
@@ -24227,281 +24739,6 @@
                         };
     
                         return ReciprocalRankFusion;
-                    })();
-    
-                    v1beta.VertexRanker = (function() {
-    
-                        /**
-                         * Properties of a VertexRanker.
-                         * @memberof google.cloud.vectorsearch.v1beta
-                         * @interface IVertexRanker
-                         * @property {string|null} [query] VertexRanker query
-                         * @property {string|null} [titleTemplate] VertexRanker titleTemplate
-                         * @property {string|null} [contentTemplate] VertexRanker contentTemplate
-                         * @property {string|null} [model] VertexRanker model
-                         */
-    
-                        /**
-                         * Constructs a new VertexRanker.
-                         * @memberof google.cloud.vectorsearch.v1beta
-                         * @classdesc Represents a VertexRanker.
-                         * @implements IVertexRanker
-                         * @constructor
-                         * @param {google.cloud.vectorsearch.v1beta.IVertexRanker=} [properties] Properties to set
-                         */
-                        function VertexRanker(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * VertexRanker query.
-                         * @member {string} query
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @instance
-                         */
-                        VertexRanker.prototype.query = "";
-    
-                        /**
-                         * VertexRanker titleTemplate.
-                         * @member {string} titleTemplate
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @instance
-                         */
-                        VertexRanker.prototype.titleTemplate = "";
-    
-                        /**
-                         * VertexRanker contentTemplate.
-                         * @member {string} contentTemplate
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @instance
-                         */
-                        VertexRanker.prototype.contentTemplate = "";
-    
-                        /**
-                         * VertexRanker model.
-                         * @member {string} model
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @instance
-                         */
-                        VertexRanker.prototype.model = "";
-    
-                        /**
-                         * Creates a new VertexRanker instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @static
-                         * @param {google.cloud.vectorsearch.v1beta.IVertexRanker=} [properties] Properties to set
-                         * @returns {google.cloud.vectorsearch.v1beta.VertexRanker} VertexRanker instance
-                         */
-                        VertexRanker.create = function create(properties) {
-                            return new VertexRanker(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified VertexRanker message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @static
-                         * @param {google.cloud.vectorsearch.v1beta.IVertexRanker} message VertexRanker message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VertexRanker.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
-                            if (message.titleTemplate != null && Object.hasOwnProperty.call(message, "titleTemplate"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.titleTemplate);
-                            if (message.contentTemplate != null && Object.hasOwnProperty.call(message, "contentTemplate"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.contentTemplate);
-                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.model);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified VertexRanker message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @static
-                         * @param {google.cloud.vectorsearch.v1beta.IVertexRanker} message VertexRanker message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VertexRanker.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a VertexRanker message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vectorsearch.v1beta.VertexRanker} VertexRanker
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VertexRanker.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.VertexRanker();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.query = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.titleTemplate = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.contentTemplate = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.model = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a VertexRanker message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vectorsearch.v1beta.VertexRanker} VertexRanker
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VertexRanker.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a VertexRanker message.
-                         * @function verify
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        VertexRanker.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.query != null && message.hasOwnProperty("query"))
-                                if (!$util.isString(message.query))
-                                    return "query: string expected";
-                            if (message.titleTemplate != null && message.hasOwnProperty("titleTemplate"))
-                                if (!$util.isString(message.titleTemplate))
-                                    return "titleTemplate: string expected";
-                            if (message.contentTemplate != null && message.hasOwnProperty("contentTemplate"))
-                                if (!$util.isString(message.contentTemplate))
-                                    return "contentTemplate: string expected";
-                            if (message.model != null && message.hasOwnProperty("model"))
-                                if (!$util.isString(message.model))
-                                    return "model: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a VertexRanker message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vectorsearch.v1beta.VertexRanker} VertexRanker
-                         */
-                        VertexRanker.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vectorsearch.v1beta.VertexRanker)
-                                return object;
-                            var message = new $root.google.cloud.vectorsearch.v1beta.VertexRanker();
-                            if (object.query != null)
-                                message.query = String(object.query);
-                            if (object.titleTemplate != null)
-                                message.titleTemplate = String(object.titleTemplate);
-                            if (object.contentTemplate != null)
-                                message.contentTemplate = String(object.contentTemplate);
-                            if (object.model != null)
-                                message.model = String(object.model);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a VertexRanker message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @static
-                         * @param {google.cloud.vectorsearch.v1beta.VertexRanker} message VertexRanker
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        VertexRanker.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.query = "";
-                                object.titleTemplate = "";
-                                object.contentTemplate = "";
-                                object.model = "";
-                            }
-                            if (message.query != null && message.hasOwnProperty("query"))
-                                object.query = message.query;
-                            if (message.titleTemplate != null && message.hasOwnProperty("titleTemplate"))
-                                object.titleTemplate = message.titleTemplate;
-                            if (message.contentTemplate != null && message.hasOwnProperty("contentTemplate"))
-                                object.contentTemplate = message.contentTemplate;
-                            if (message.model != null && message.hasOwnProperty("model"))
-                                object.model = message.model;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this VertexRanker to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        VertexRanker.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for VertexRanker
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        VertexRanker.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.VertexRanker";
-                        };
-    
-                        return VertexRanker;
                     })();
     
                     v1beta.BatchSearchDataObjectsResponse = (function() {
@@ -26941,6 +27178,7 @@
                          * @memberof google.cloud.vectorsearch.v1beta
                          * @interface IDeleteDataObjectRequest
                          * @property {string|null} [name] DeleteDataObjectRequest name
+                         * @property {string|null} [etag] DeleteDataObjectRequest etag
                          */
     
                         /**
@@ -26965,6 +27203,14 @@
                          * @instance
                          */
                         DeleteDataObjectRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteDataObjectRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.vectorsearch.v1beta.DeleteDataObjectRequest
+                         * @instance
+                         */
+                        DeleteDataObjectRequest.prototype.etag = "";
     
                         /**
                          * Creates a new DeleteDataObjectRequest instance using the specified properties.
@@ -26992,6 +27238,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
                             return writer;
                         };
     
@@ -27032,6 +27280,10 @@
                                         message.name = reader.string();
                                         break;
                                     }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -27070,6 +27322,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -27087,6 +27342,8 @@
                             var message = new $root.google.cloud.vectorsearch.v1beta.DeleteDataObjectRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -27103,10 +27360,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.etag = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -30520,6 +30781,8 @@
                          * Properties of an Index.
                          * @memberof google.cloud.vectorsearch.v1beta
                          * @interface IIndex
+                         * @property {google.cloud.vectorsearch.v1beta.IDedicatedInfrastructure|null} [dedicatedInfrastructure] Index dedicatedInfrastructure
+                         * @property {google.cloud.vectorsearch.v1beta.IDenseScannIndex|null} [denseScann] Index denseScann
                          * @property {string|null} [name] Index name
                          * @property {string|null} [displayName] Index displayName
                          * @property {string|null} [description] Index description
@@ -30549,6 +30812,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * Index dedicatedInfrastructure.
+                         * @member {google.cloud.vectorsearch.v1beta.IDedicatedInfrastructure|null|undefined} dedicatedInfrastructure
+                         * @memberof google.cloud.vectorsearch.v1beta.Index
+                         * @instance
+                         */
+                        Index.prototype.dedicatedInfrastructure = null;
+    
+                        /**
+                         * Index denseScann.
+                         * @member {google.cloud.vectorsearch.v1beta.IDenseScannIndex|null|undefined} denseScann
+                         * @memberof google.cloud.vectorsearch.v1beta.Index
+                         * @instance
+                         */
+                        Index.prototype.denseScann = null;
     
                         /**
                          * Index name.
@@ -30630,6 +30909,31 @@
                          */
                         Index.prototype.storeFields = $util.emptyArray;
     
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Index infraType.
+                         * @member {"dedicatedInfrastructure"|undefined} infraType
+                         * @memberof google.cloud.vectorsearch.v1beta.Index
+                         * @instance
+                         */
+                        Object.defineProperty(Index.prototype, "infraType", {
+                            get: $util.oneOfGetter($oneOfFields = ["dedicatedInfrastructure"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Index indexType.
+                         * @member {"denseScann"|undefined} indexType
+                         * @memberof google.cloud.vectorsearch.v1beta.Index
+                         * @instance
+                         */
+                        Object.defineProperty(Index.prototype, "indexType", {
+                            get: $util.oneOfGetter($oneOfFields = ["denseScann"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new Index instance using the specified properties.
                          * @function create
@@ -30677,6 +30981,10 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.dedicatedInfrastructure != null && Object.hasOwnProperty.call(message, "dedicatedInfrastructure"))
+                                $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.encode(message.dedicatedInfrastructure, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.denseScann != null && Object.hasOwnProperty.call(message, "denseScann"))
+                                $root.google.cloud.vectorsearch.v1beta.DenseScannIndex.encode(message.denseScann, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -30713,6 +31021,14 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 11: {
+                                        message.dedicatedInfrastructure = $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.denseScann = $root.google.cloud.vectorsearch.v1beta.DenseScannIndex.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.name = reader.string();
                                         break;
@@ -30811,6 +31127,23 @@
                         Index.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.dedicatedInfrastructure != null && message.hasOwnProperty("dedicatedInfrastructure")) {
+                                properties.infraType = 1;
+                                {
+                                    var error = $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.verify(message.dedicatedInfrastructure);
+                                    if (error)
+                                        return "dedicatedInfrastructure." + error;
+                                }
+                            }
+                            if (message.denseScann != null && message.hasOwnProperty("denseScann")) {
+                                properties.indexType = 1;
+                                {
+                                    var error = $root.google.cloud.vectorsearch.v1beta.DenseScannIndex.verify(message.denseScann);
+                                    if (error)
+                                        return "denseScann." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -30879,6 +31212,16 @@
                             if (object instanceof $root.google.cloud.vectorsearch.v1beta.Index)
                                 return object;
                             var message = new $root.google.cloud.vectorsearch.v1beta.Index();
+                            if (object.dedicatedInfrastructure != null) {
+                                if (typeof object.dedicatedInfrastructure !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.Index.dedicatedInfrastructure: object expected");
+                                message.dedicatedInfrastructure = $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.fromObject(object.dedicatedInfrastructure);
+                            }
+                            if (object.denseScann != null) {
+                                if (typeof object.denseScann !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.Index.denseScann: object expected");
+                                message.denseScann = $root.google.cloud.vectorsearch.v1beta.DenseScannIndex.fromObject(object.denseScann);
+                            }
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.displayName != null)
@@ -30998,6 +31341,16 @@
                                 object.labels = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.dedicatedInfrastructure != null && message.hasOwnProperty("dedicatedInfrastructure")) {
+                                object.dedicatedInfrastructure = $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.toObject(message.dedicatedInfrastructure, options);
+                                if (options.oneofs)
+                                    object.infraType = "dedicatedInfrastructure";
+                            }
+                            if (message.denseScann != null && message.hasOwnProperty("denseScann")) {
+                                object.denseScann = $root.google.cloud.vectorsearch.v1beta.DenseScannIndex.toObject(message.denseScann, options);
+                                if (options.oneofs)
+                                    object.indexType = "denseScann";
                             }
                             return object;
                         };
@@ -34604,6 +34957,767 @@
                         };
     
                         return ExportDataObjectsResponse;
+                    })();
+    
+                    v1beta.DedicatedInfrastructure = (function() {
+    
+                        /**
+                         * Properties of a DedicatedInfrastructure.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @interface IDedicatedInfrastructure
+                         * @property {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.Mode|null} [mode] DedicatedInfrastructure mode
+                         * @property {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.IAutoscalingSpec|null} [autoscalingSpec] DedicatedInfrastructure autoscalingSpec
+                         */
+    
+                        /**
+                         * Constructs a new DedicatedInfrastructure.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @classdesc Represents a DedicatedInfrastructure.
+                         * @implements IDedicatedInfrastructure
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1beta.IDedicatedInfrastructure=} [properties] Properties to set
+                         */
+                        function DedicatedInfrastructure(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DedicatedInfrastructure mode.
+                         * @member {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.Mode|null|undefined} mode
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @instance
+                         */
+                        DedicatedInfrastructure.prototype.mode = null;
+    
+                        /**
+                         * DedicatedInfrastructure autoscalingSpec.
+                         * @member {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.IAutoscalingSpec|null|undefined} autoscalingSpec
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @instance
+                         */
+                        DedicatedInfrastructure.prototype.autoscalingSpec = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DedicatedInfrastructure.prototype, "_mode", {
+                            get: $util.oneOfGetter($oneOfFields = ["mode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DedicatedInfrastructure instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IDedicatedInfrastructure=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure} DedicatedInfrastructure instance
+                         */
+                        DedicatedInfrastructure.create = function create(properties) {
+                            return new DedicatedInfrastructure(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DedicatedInfrastructure message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IDedicatedInfrastructure} message DedicatedInfrastructure message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DedicatedInfrastructure.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.mode);
+                            if (message.autoscalingSpec != null && Object.hasOwnProperty.call(message, "autoscalingSpec"))
+                                $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec.encode(message.autoscalingSpec, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DedicatedInfrastructure message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IDedicatedInfrastructure} message DedicatedInfrastructure message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DedicatedInfrastructure.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DedicatedInfrastructure message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure} DedicatedInfrastructure
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DedicatedInfrastructure.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.mode = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.autoscalingSpec = $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DedicatedInfrastructure message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure} DedicatedInfrastructure
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DedicatedInfrastructure.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DedicatedInfrastructure message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DedicatedInfrastructure.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.mode != null && message.hasOwnProperty("mode")) {
+                                properties._mode = 1;
+                                switch (message.mode) {
+                                default:
+                                    return "mode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.autoscalingSpec != null && message.hasOwnProperty("autoscalingSpec")) {
+                                var error = $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec.verify(message.autoscalingSpec);
+                                if (error)
+                                    return "autoscalingSpec." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DedicatedInfrastructure message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure} DedicatedInfrastructure
+                         */
+                        DedicatedInfrastructure.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure)
+                                return object;
+                            var message = new $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure();
+                            switch (object.mode) {
+                            default:
+                                if (typeof object.mode === "number") {
+                                    message.mode = object.mode;
+                                    break;
+                                }
+                                break;
+                            case "MODE_UNSPECIFIED":
+                            case 0:
+                                message.mode = 0;
+                                break;
+                            case "STORAGE_OPTIMIZED":
+                            case 1:
+                                message.mode = 1;
+                                break;
+                            case "PERFORMANCE_OPTIMIZED":
+                            case 2:
+                                message.mode = 2;
+                                break;
+                            }
+                            if (object.autoscalingSpec != null) {
+                                if (typeof object.autoscalingSpec !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.autoscalingSpec: object expected");
+                                message.autoscalingSpec = $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec.fromObject(object.autoscalingSpec);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DedicatedInfrastructure message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure} message DedicatedInfrastructure
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DedicatedInfrastructure.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.autoscalingSpec = null;
+                            if (message.mode != null && message.hasOwnProperty("mode")) {
+                                object.mode = options.enums === String ? $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.Mode[message.mode] : message.mode;
+                                if (options.oneofs)
+                                    object._mode = "mode";
+                            }
+                            if (message.autoscalingSpec != null && message.hasOwnProperty("autoscalingSpec"))
+                                object.autoscalingSpec = $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec.toObject(message.autoscalingSpec, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DedicatedInfrastructure to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DedicatedInfrastructure.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DedicatedInfrastructure
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DedicatedInfrastructure.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.DedicatedInfrastructure";
+                        };
+    
+                        DedicatedInfrastructure.AutoscalingSpec = (function() {
+    
+                            /**
+                             * Properties of an AutoscalingSpec.
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                             * @interface IAutoscalingSpec
+                             * @property {number|null} [minReplicaCount] AutoscalingSpec minReplicaCount
+                             * @property {number|null} [maxReplicaCount] AutoscalingSpec maxReplicaCount
+                             */
+    
+                            /**
+                             * Constructs a new AutoscalingSpec.
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure
+                             * @classdesc Represents an AutoscalingSpec.
+                             * @implements IAutoscalingSpec
+                             * @constructor
+                             * @param {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.IAutoscalingSpec=} [properties] Properties to set
+                             */
+                            function AutoscalingSpec(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutoscalingSpec minReplicaCount.
+                             * @member {number} minReplicaCount
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @instance
+                             */
+                            AutoscalingSpec.prototype.minReplicaCount = 0;
+    
+                            /**
+                             * AutoscalingSpec maxReplicaCount.
+                             * @member {number} maxReplicaCount
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @instance
+                             */
+                            AutoscalingSpec.prototype.maxReplicaCount = 0;
+    
+                            /**
+                             * Creates a new AutoscalingSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.IAutoscalingSpec=} [properties] Properties to set
+                             * @returns {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec} AutoscalingSpec instance
+                             */
+                            AutoscalingSpec.create = function create(properties) {
+                                return new AutoscalingSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutoscalingSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.IAutoscalingSpec} message AutoscalingSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutoscalingSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.minReplicaCount != null && Object.hasOwnProperty.call(message, "minReplicaCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.minReplicaCount);
+                                if (message.maxReplicaCount != null && Object.hasOwnProperty.call(message, "maxReplicaCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxReplicaCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutoscalingSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.IAutoscalingSpec} message AutoscalingSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutoscalingSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutoscalingSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec} AutoscalingSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutoscalingSpec.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.minReplicaCount = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.maxReplicaCount = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutoscalingSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec} AutoscalingSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutoscalingSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutoscalingSpec message.
+                             * @function verify
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutoscalingSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.minReplicaCount != null && message.hasOwnProperty("minReplicaCount"))
+                                    if (!$util.isInteger(message.minReplicaCount))
+                                        return "minReplicaCount: integer expected";
+                                if (message.maxReplicaCount != null && message.hasOwnProperty("maxReplicaCount"))
+                                    if (!$util.isInteger(message.maxReplicaCount))
+                                        return "maxReplicaCount: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutoscalingSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec} AutoscalingSpec
+                             */
+                            AutoscalingSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec)
+                                    return object;
+                                var message = new $root.google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec();
+                                if (object.minReplicaCount != null)
+                                    message.minReplicaCount = object.minReplicaCount | 0;
+                                if (object.maxReplicaCount != null)
+                                    message.maxReplicaCount = object.maxReplicaCount | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutoscalingSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec} message AutoscalingSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutoscalingSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.minReplicaCount = 0;
+                                    object.maxReplicaCount = 0;
+                                }
+                                if (message.minReplicaCount != null && message.hasOwnProperty("minReplicaCount"))
+                                    object.minReplicaCount = message.minReplicaCount;
+                                if (message.maxReplicaCount != null && message.hasOwnProperty("maxReplicaCount"))
+                                    object.maxReplicaCount = message.maxReplicaCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutoscalingSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutoscalingSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutoscalingSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutoscalingSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.AutoscalingSpec";
+                            };
+    
+                            return AutoscalingSpec;
+                        })();
+    
+                        /**
+                         * Mode enum.
+                         * @name google.cloud.vectorsearch.v1beta.DedicatedInfrastructure.Mode
+                         * @enum {number}
+                         * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                         * @property {number} STORAGE_OPTIMIZED=1 STORAGE_OPTIMIZED value
+                         * @property {number} PERFORMANCE_OPTIMIZED=2 PERFORMANCE_OPTIMIZED value
+                         */
+                        DedicatedInfrastructure.Mode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STORAGE_OPTIMIZED"] = 1;
+                            values[valuesById[2] = "PERFORMANCE_OPTIMIZED"] = 2;
+                            return values;
+                        })();
+    
+                        return DedicatedInfrastructure;
+                    })();
+    
+                    v1beta.DenseScannIndex = (function() {
+    
+                        /**
+                         * Properties of a DenseScannIndex.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @interface IDenseScannIndex
+                         * @property {google.cloud.vectorsearch.v1beta.DenseScannIndex.FeatureNormType|null} [featureNormType] DenseScannIndex featureNormType
+                         */
+    
+                        /**
+                         * Constructs a new DenseScannIndex.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @classdesc Represents a DenseScannIndex.
+                         * @implements IDenseScannIndex
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1beta.IDenseScannIndex=} [properties] Properties to set
+                         */
+                        function DenseScannIndex(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DenseScannIndex featureNormType.
+                         * @member {google.cloud.vectorsearch.v1beta.DenseScannIndex.FeatureNormType} featureNormType
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @instance
+                         */
+                        DenseScannIndex.prototype.featureNormType = 0;
+    
+                        /**
+                         * Creates a new DenseScannIndex instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IDenseScannIndex=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1beta.DenseScannIndex} DenseScannIndex instance
+                         */
+                        DenseScannIndex.create = function create(properties) {
+                            return new DenseScannIndex(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DenseScannIndex message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.DenseScannIndex.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IDenseScannIndex} message DenseScannIndex message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DenseScannIndex.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.featureNormType != null && Object.hasOwnProperty.call(message, "featureNormType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.featureNormType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DenseScannIndex message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.DenseScannIndex.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IDenseScannIndex} message DenseScannIndex message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DenseScannIndex.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DenseScannIndex message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1beta.DenseScannIndex} DenseScannIndex
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DenseScannIndex.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.DenseScannIndex();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.featureNormType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DenseScannIndex message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1beta.DenseScannIndex} DenseScannIndex
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DenseScannIndex.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DenseScannIndex message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DenseScannIndex.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.featureNormType != null && message.hasOwnProperty("featureNormType"))
+                                switch (message.featureNormType) {
+                                default:
+                                    return "featureNormType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DenseScannIndex message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1beta.DenseScannIndex} DenseScannIndex
+                         */
+                        DenseScannIndex.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1beta.DenseScannIndex)
+                                return object;
+                            var message = new $root.google.cloud.vectorsearch.v1beta.DenseScannIndex();
+                            switch (object.featureNormType) {
+                            default:
+                                if (typeof object.featureNormType === "number") {
+                                    message.featureNormType = object.featureNormType;
+                                    break;
+                                }
+                                break;
+                            case "FEATURE_NORM_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.featureNormType = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.featureNormType = 1;
+                                break;
+                            case "UNIT_L2_NORM":
+                            case 2:
+                                message.featureNormType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DenseScannIndex message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.DenseScannIndex} message DenseScannIndex
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DenseScannIndex.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.featureNormType = options.enums === String ? "FEATURE_NORM_TYPE_UNSPECIFIED" : 0;
+                            if (message.featureNormType != null && message.hasOwnProperty("featureNormType"))
+                                object.featureNormType = options.enums === String ? $root.google.cloud.vectorsearch.v1beta.DenseScannIndex.FeatureNormType[message.featureNormType] === undefined ? message.featureNormType : $root.google.cloud.vectorsearch.v1beta.DenseScannIndex.FeatureNormType[message.featureNormType] : message.featureNormType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DenseScannIndex to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DenseScannIndex.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DenseScannIndex
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1beta.DenseScannIndex
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DenseScannIndex.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.DenseScannIndex";
+                        };
+    
+                        /**
+                         * FeatureNormType enum.
+                         * @name google.cloud.vectorsearch.v1beta.DenseScannIndex.FeatureNormType
+                         * @enum {number}
+                         * @property {number} FEATURE_NORM_TYPE_UNSPECIFIED=0 FEATURE_NORM_TYPE_UNSPECIFIED value
+                         * @property {number} NONE=1 NONE value
+                         * @property {number} UNIT_L2_NORM=2 UNIT_L2_NORM value
+                         */
+                        DenseScannIndex.FeatureNormType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FEATURE_NORM_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NONE"] = 1;
+                            values[valuesById[2] = "UNIT_L2_NORM"] = 2;
+                            return values;
+                        })();
+    
+                        return DenseScannIndex;
                     })();
     
                     return v1beta;
