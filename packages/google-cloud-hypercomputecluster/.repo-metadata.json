@@ -1,7 +1,7 @@
 {
   "name": "hypercomputecluster",
   "name_pretty": "Cluster Director API",
-  "product_documentation": "https://cloud.google.com/blog/products/compute/managed-slurm-and-other-cluster-director-enhancements",
+  "product_documentation": "https://cloud.google.com/cluster-director/docs",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/hypercomputecluster/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "preview",
@@ -9,7 +9,7 @@
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/hypercomputecluster",
   "api_id": "hypercomputecluster.googleapis.com",
-  "default_version": "v1beta",
+  "default_version": "v1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO",
   "api_shortname": "hypercomputecluster"
