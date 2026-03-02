@@ -58,6 +58,7 @@ export class IngestionServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   ingestionServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -171,6 +172,27 @@ export class IngestionServiceClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      partnerLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'accountTypes/{account_type}/accounts/{account}/partnerLinks/{partner_link}'
+      ),
+      userListPathTemplate: new this._gaxModule.PathTemplate(
+        'accountTypes/{account_type}/accounts/{account}/userLists/{user_list}'
+      ),
+      userListDirectLicensePathTemplate: new this._gaxModule.PathTemplate(
+        'accountTypes/{account_type}/accounts/{account}/userListDirectLicenses/{user_list_direct_license}'
+      ),
+      userListGlobalLicensePathTemplate: new this._gaxModule.PathTemplate(
+        'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}'
+      ),
+      userListGlobalLicenseCustomerInfoPathTemplate: new this._gaxModule.PathTemplate(
+        'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}/customerInfos/{license_customer_info}'
+      ),
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -745,6 +767,267 @@ export class IngestionServiceClient {
       });
   }
 
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified partnerLink resource name string.
+   *
+   * @param {string} account_type
+   * @param {string} account
+   * @param {string} partner_link
+   * @returns {string} Resource name string.
+   */
+  partnerLinkPath(accountType:string,account:string,partnerLink:string) {
+    return this.pathTemplates.partnerLinkPathTemplate.render({
+      account_type: accountType,
+      account: account,
+      partner_link: partnerLink,
+    });
+  }
+
+  /**
+   * Parse the account_type from PartnerLink resource.
+   *
+   * @param {string} partnerLinkName
+   *   A fully-qualified path representing PartnerLink resource.
+   * @returns {string} A string representing the account_type.
+   */
+  matchAccountTypeFromPartnerLinkName(partnerLinkName: string) {
+    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName).account_type;
+  }
+
+  /**
+   * Parse the account from PartnerLink resource.
+   *
+   * @param {string} partnerLinkName
+   *   A fully-qualified path representing PartnerLink resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromPartnerLinkName(partnerLinkName: string) {
+    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName).account;
+  }
+
+  /**
+   * Parse the partner_link from PartnerLink resource.
+   *
+   * @param {string} partnerLinkName
+   *   A fully-qualified path representing PartnerLink resource.
+   * @returns {string} A string representing the partner_link.
+   */
+  matchPartnerLinkFromPartnerLinkName(partnerLinkName: string) {
+    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName).partner_link;
+  }
+
+  /**
+   * Return a fully-qualified userList resource name string.
+   *
+   * @param {string} account_type
+   * @param {string} account
+   * @param {string} user_list
+   * @returns {string} Resource name string.
+   */
+  userListPath(accountType:string,account:string,userList:string) {
+    return this.pathTemplates.userListPathTemplate.render({
+      account_type: accountType,
+      account: account,
+      user_list: userList,
+    });
+  }
+
+  /**
+   * Parse the account_type from UserList resource.
+   *
+   * @param {string} userListName
+   *   A fully-qualified path representing UserList resource.
+   * @returns {string} A string representing the account_type.
+   */
+  matchAccountTypeFromUserListName(userListName: string) {
+    return this.pathTemplates.userListPathTemplate.match(userListName).account_type;
+  }
+
+  /**
+   * Parse the account from UserList resource.
+   *
+   * @param {string} userListName
+   *   A fully-qualified path representing UserList resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromUserListName(userListName: string) {
+    return this.pathTemplates.userListPathTemplate.match(userListName).account;
+  }
+
+  /**
+   * Parse the user_list from UserList resource.
+   *
+   * @param {string} userListName
+   *   A fully-qualified path representing UserList resource.
+   * @returns {string} A string representing the user_list.
+   */
+  matchUserListFromUserListName(userListName: string) {
+    return this.pathTemplates.userListPathTemplate.match(userListName).user_list;
+  }
+
+  /**
+   * Return a fully-qualified userListDirectLicense resource name string.
+   *
+   * @param {string} account_type
+   * @param {string} account
+   * @param {string} user_list_direct_license
+   * @returns {string} Resource name string.
+   */
+  userListDirectLicensePath(accountType:string,account:string,userListDirectLicense:string) {
+    return this.pathTemplates.userListDirectLicensePathTemplate.render({
+      account_type: accountType,
+      account: account,
+      user_list_direct_license: userListDirectLicense,
+    });
+  }
+
+  /**
+   * Parse the account_type from UserListDirectLicense resource.
+   *
+   * @param {string} userListDirectLicenseName
+   *   A fully-qualified path representing UserListDirectLicense resource.
+   * @returns {string} A string representing the account_type.
+   */
+  matchAccountTypeFromUserListDirectLicenseName(userListDirectLicenseName: string) {
+    return this.pathTemplates.userListDirectLicensePathTemplate.match(userListDirectLicenseName).account_type;
+  }
+
+  /**
+   * Parse the account from UserListDirectLicense resource.
+   *
+   * @param {string} userListDirectLicenseName
+   *   A fully-qualified path representing UserListDirectLicense resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromUserListDirectLicenseName(userListDirectLicenseName: string) {
+    return this.pathTemplates.userListDirectLicensePathTemplate.match(userListDirectLicenseName).account;
+  }
+
+  /**
+   * Parse the user_list_direct_license from UserListDirectLicense resource.
+   *
+   * @param {string} userListDirectLicenseName
+   *   A fully-qualified path representing UserListDirectLicense resource.
+   * @returns {string} A string representing the user_list_direct_license.
+   */
+  matchUserListDirectLicenseFromUserListDirectLicenseName(userListDirectLicenseName: string) {
+    return this.pathTemplates.userListDirectLicensePathTemplate.match(userListDirectLicenseName).user_list_direct_license;
+  }
+
+  /**
+   * Return a fully-qualified userListGlobalLicense resource name string.
+   *
+   * @param {string} account_type
+   * @param {string} account
+   * @param {string} user_list_global_license
+   * @returns {string} Resource name string.
+   */
+  userListGlobalLicensePath(accountType:string,account:string,userListGlobalLicense:string) {
+    return this.pathTemplates.userListGlobalLicensePathTemplate.render({
+      account_type: accountType,
+      account: account,
+      user_list_global_license: userListGlobalLicense,
+    });
+  }
+
+  /**
+   * Parse the account_type from UserListGlobalLicense resource.
+   *
+   * @param {string} userListGlobalLicenseName
+   *   A fully-qualified path representing UserListGlobalLicense resource.
+   * @returns {string} A string representing the account_type.
+   */
+  matchAccountTypeFromUserListGlobalLicenseName(userListGlobalLicenseName: string) {
+    return this.pathTemplates.userListGlobalLicensePathTemplate.match(userListGlobalLicenseName).account_type;
+  }
+
+  /**
+   * Parse the account from UserListGlobalLicense resource.
+   *
+   * @param {string} userListGlobalLicenseName
+   *   A fully-qualified path representing UserListGlobalLicense resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromUserListGlobalLicenseName(userListGlobalLicenseName: string) {
+    return this.pathTemplates.userListGlobalLicensePathTemplate.match(userListGlobalLicenseName).account;
+  }
+
+  /**
+   * Parse the user_list_global_license from UserListGlobalLicense resource.
+   *
+   * @param {string} userListGlobalLicenseName
+   *   A fully-qualified path representing UserListGlobalLicense resource.
+   * @returns {string} A string representing the user_list_global_license.
+   */
+  matchUserListGlobalLicenseFromUserListGlobalLicenseName(userListGlobalLicenseName: string) {
+    return this.pathTemplates.userListGlobalLicensePathTemplate.match(userListGlobalLicenseName).user_list_global_license;
+  }
+
+  /**
+   * Return a fully-qualified userListGlobalLicenseCustomerInfo resource name string.
+   *
+   * @param {string} account_type
+   * @param {string} account
+   * @param {string} user_list_global_license
+   * @param {string} license_customer_info
+   * @returns {string} Resource name string.
+   */
+  userListGlobalLicenseCustomerInfoPath(accountType:string,account:string,userListGlobalLicense:string,licenseCustomerInfo:string) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.render({
+      account_type: accountType,
+      account: account,
+      user_list_global_license: userListGlobalLicense,
+      license_customer_info: licenseCustomerInfo,
+    });
+  }
+
+  /**
+   * Parse the account_type from UserListGlobalLicenseCustomerInfo resource.
+   *
+   * @param {string} userListGlobalLicenseCustomerInfoName
+   *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
+   * @returns {string} A string representing the account_type.
+   */
+  matchAccountTypeFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).account_type;
+  }
+
+  /**
+   * Parse the account from UserListGlobalLicenseCustomerInfo resource.
+   *
+   * @param {string} userListGlobalLicenseCustomerInfoName
+   *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).account;
+  }
+
+  /**
+   * Parse the user_list_global_license from UserListGlobalLicenseCustomerInfo resource.
+   *
+   * @param {string} userListGlobalLicenseCustomerInfoName
+   *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
+   * @returns {string} A string representing the user_list_global_license.
+   */
+  matchUserListGlobalLicenseFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).user_list_global_license;
+  }
+
+  /**
+   * Parse the license_customer_info from UserListGlobalLicenseCustomerInfo resource.
+   *
+   * @param {string} userListGlobalLicenseCustomerInfoName
+   *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
+   * @returns {string} A string representing the license_customer_info.
+   */
+  matchLicenseCustomerInfoFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).license_customer_info;
+  }
 
   /**
    * Terminate the gRPC channel and close the client.

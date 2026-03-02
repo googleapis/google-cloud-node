@@ -11,19 +11,35 @@
                     "csharp_namespace": "Google.Ads.DataManager.V1",
                     "go_package": "cloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "TermsOfServiceProto",
+                    "java_outer_classname": "UserListServiceProto",
                     "java_package": "com.google.ads.datamanager.v1",
                     "php_namespace": "Google\\Ads\\DataManager\\V1",
-                    "ruby_package": "Google::Ads::DataManager::V1"
+                    "ruby_package": "Google::Ads::DataManager::V1",
+                    "(google.api.resource_definition).type": "datamanager.googleapis.com/Account",
+                    "(google.api.resource_definition).pattern": "accountTypes/{account_type}/accounts/{account}"
                   },
                   "nested": {
+                    "AgeRange": {
+                      "values": {
+                        "AGE_RANGE_UNSPECIFIED": 0,
+                        "AGE_RANGE_UNKNOWN": 1,
+                        "AGE_RANGE_18_24": 2,
+                        "AGE_RANGE_25_34": 3,
+                        "AGE_RANGE_35_44": 4,
+                        "AGE_RANGE_45_54": 5,
+                        "AGE_RANGE_55_64": 6,
+                        "AGE_RANGE_65_UP": 7
+                      }
+                    },
                     "AudienceMember": {
                       "oneofs": {
                         "data": {
                           "oneof": [
                             "userData",
                             "pairData",
-                            "mobileData"
+                            "mobileData",
+                            "userIdData",
+                            "ppidData"
                           ]
                         }
                       },
@@ -47,6 +63,14 @@
                         "mobileData": {
                           "type": "MobileData",
                           "id": 5
+                        },
+                        "userIdData": {
+                          "type": "UserIdData",
+                          "id": 6
+                        },
+                        "ppidData": {
+                          "type": "PpidData",
+                          "id": 7
                         },
                         "consent": {
                           "type": "Consent",
@@ -72,6 +96,29 @@
                     "MobileData": {
                       "fields": {
                         "mobileIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UserIdData": {
+                      "fields": {
+                        "userId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PpidData": {
+                      "fields": {
+                        "ppids": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 1,
@@ -344,7 +391,8 @@
                             "DISPLAY_VIDEO_PARTNER": 2,
                             "DISPLAY_VIDEO_ADVERTISER": 3,
                             "DATA_PARTNER": 4,
-                            "GOOGLE_ANALYTICS_PROPERTY": 5
+                            "GOOGLE_ANALYTICS_PROPERTY": 5,
+                            "GOOGLE_AD_MANAGER_AUDIENCE_LINK": 6
                           }
                         }
                       }
@@ -532,10 +580,64 @@
                         "INVALID_REQUEST_ID": 48,
                         "MULTIPLE_DESTINATIONS_FOR_GOOGLE_ANALYTICS_EVENT": 49,
                         "FIELD_VALUE_TOO_LONG": 50,
-                        "TOO_MANY_ELEMENTS": 51
+                        "TOO_MANY_ELEMENTS": 51,
+                        "ALREADY_EXISTS": 52,
+                        "IMMUTABLE_FIELD_FOR_UPDATE": 53,
+                        "INVALID_RESOURCE_NAME": 54,
+                        "INVALID_FILTER": 55,
+                        "INVALID_UPDATE_MASK": 56,
+                        "INVALID_PAGE_TOKEN": 57,
+                        "CANNOT_UPDATE_DISABLED_LICENSE": 58,
+                        "CANNOT_CREATE_LICENSE_FOR_SENSITIVE_USERLIST": 59,
+                        "INSUFFICIENT_COST": 60,
+                        "CANNOT_DISABLE_LICENSE": 61,
+                        "INVALID_CLIENT_ACCOUNT_ID": 62,
+                        "PRICING_ONLY_ZERO_COST_ALLOWED": 63,
+                        "PRICE_TOO_HIGH": 64,
+                        "CUSTOMER_NOT_ALLOWED_TO_CREATE_LICENSE": 65,
+                        "INVALID_PRICING_END_DATE": 66,
+                        "CANNOT_LICENSE_LOGICAL_LIST_WITH_LICENSED_OR_SHARED_SEGMENT": 67,
+                        "MISMATCHED_ACCOUNT_TYPE": 68,
+                        "MEDIA_SHARE_COST_NOT_ALLOWED_FOR_LICENSE_TYPE": 69,
+                        "MEDIA_SHARE_COST_NOT_ALLOWED_FOR_CLIENT_CUSTOMER": 70,
+                        "INVALID_MEDIA_SHARE_COST": 71,
+                        "INVALID_COST_TYPE": 72,
+                        "MEDIA_SHARE_COST_NOT_ALLOWED_FOR_NON_COMMERCE_USER_LIST": 73,
+                        "MAX_COST_NOT_ALLOWED": 74,
+                        "COMMERCE_AUDIENCE_CAN_ONLY_BE_DIRECTLY_LICENSED": 75,
+                        "INVALID_DESCRIPTION": 76,
+                        "INVALID_DISPLAY_NAME": 77,
+                        "DISPLAY_NAME_ALREADY_USED": 78,
+                        "OWNERSHIP_REQUIRED_FOR_UPDATE": 79,
+                        "USER_LIST_MUTATION_NOT_SUPPORTED": 80,
+                        "SENSITIVE_USER_LIST_IMMUTABLE": 81,
+                        "BILLABLE_RECORD_COUNT_IMMUTABLE": 82,
+                        "USER_LIST_NAME_RESERVED": 83,
+                        "ADVERTISER_NOT_ALLOWLISTED_FOR_UPLOADED_DATA": 84,
+                        "UNSUPPORTED_PARTNER_AUDIENCE_SOURCE": 85,
+                        "COMMERCE_PARTNER_NOT_ALLOWED": 86,
+                        "UNSUPPORTED_PARTNER_AUDIENCE_INFO": 87,
+                        "PARTNER_MATCH_FOR_MANAGER_ACCOUNT_DISALLOWED": 88,
+                        "DATA_PARTNER_NOT_ALLOWLISTED_FOR_THIRD_PARTY_PARTNER_DATA": 89,
+                        "ADVERTISER_TOS_NOT_ACCEPTED": 90,
+                        "ADVERTISER_NOT_ALLOWLISTED_FOR_THIRD_PARTY_PARTNER_DATA": 91,
+                        "USER_LIST_TYPE_NOT_SUPPORTED_FOR_ACCOUNT": 92,
+                        "INVALID_COMMERCE_PARTNER": 93,
+                        "CUSTOMER_NOT_ALLOWLISTED_FOR_COMMERCE_AUDIENCE": 94,
+                        "UNSUPPORTED_USER_LIST_UPLOAD_KEY_TYPES": 95,
+                        "UNSUPPORTED_INGESTED_USER_LIST_INFO_CONFIG": 96,
+                        "UNSUPPORTED_ACCOUNT_TYPES_FOR_USER_LIST_TYPE": 97,
+                        "UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK": 98
                       }
                     },
                     "Event": {
+                      "oneofs": {
+                        "_conversionValue": {
+                          "oneof": [
+                            "conversionValue"
+                          ]
+                        }
+                      },
                       "fields": {
                         "destinationReferences": {
                           "rule": "repeated",
@@ -598,7 +700,8 @@
                           "type": "double",
                           "id": 9,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "eventSource": {
@@ -845,6 +948,14 @@
                         "LOW": 1,
                         "MEDIUM": 2,
                         "HIGH": 3
+                      }
+                    },
+                    "Gender": {
+                      "values": {
+                        "GENDER_UNSPECIFIED": 0,
+                        "GENDER_UNKNOWN": 1,
+                        "GENDER_MALE": 2,
+                        "GENDER_FEMALE": 3
                       }
                     },
                     "IngestionService": {
@@ -1168,7 +1279,9 @@
                               "oneof": [
                                 "userDataIngestionStatus",
                                 "mobileDataIngestionStatus",
-                                "pairDataIngestionStatus"
+                                "pairDataIngestionStatus",
+                                "userIdDataIngestionStatus",
+                                "ppidDataIngestionStatus"
                               ]
                             }
                           },
@@ -1184,6 +1297,14 @@
                             "pairDataIngestionStatus": {
                               "type": "IngestPairDataStatus",
                               "id": 3
+                            },
+                            "userIdDataIngestionStatus": {
+                              "type": "IngestUserIdDataStatus",
+                              "id": 4
+                            },
+                            "ppidDataIngestionStatus": {
+                              "type": "IngestPpidDataStatus",
+                              "id": 5
                             }
                           }
                         },
@@ -1193,7 +1314,9 @@
                               "oneof": [
                                 "userDataRemovalStatus",
                                 "mobileDataRemovalStatus",
-                                "pairDataRemovalStatus"
+                                "pairDataRemovalStatus",
+                                "userIdDataRemovalStatus",
+                                "ppidDataRemovalStatus"
                               ]
                             }
                           },
@@ -1209,6 +1332,14 @@
                             "pairDataRemovalStatus": {
                               "type": "RemovePairDataStatus",
                               "id": 3
+                            },
+                            "userIdDataRemovalStatus": {
+                              "type": "RemoveUserIdDataStatus",
+                              "id": 4
+                            },
+                            "ppidDataRemovalStatus": {
+                              "type": "RemovePpidDataStatus",
+                              "id": 5
                             }
                           }
                         },
@@ -1291,6 +1422,54 @@
                               "id": 1
                             },
                             "pairIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngestUserIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "userIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemoveUserIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "userIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngestPpidDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "ppidCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemovePpidDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "ppidCount": {
                               "type": "int64",
                               "id": 2
                             }
@@ -1418,6 +1597,2001 @@
                         "ACCEPTED": 1,
                         "REJECTED": 2
                       }
+                    },
+                    "MarketingDataInsightsService": {
+                      "options": {
+                        "(google.api.default_host)": "datamanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/datamanager"
+                      },
+                      "methods": {
+                        "RetrieveInsights": {
+                          "requestType": "RetrieveInsightsRequest",
+                          "responseType": "RetrieveInsightsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=accountTypes/*/accounts/*}/insights:retrieve",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=accountTypes/*/accounts/*}/insights:retrieve",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RetrieveInsightsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "baseline": {
+                          "type": "Baseline",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "userListId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Baseline": {
+                      "oneofs": {
+                        "baseline": {
+                          "oneof": [
+                            "baselineLocation",
+                            "locationAutoDetectionEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "baselineLocation": {
+                          "type": "Location",
+                          "id": 1
+                        },
+                        "locationAutoDetectionEnabled": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Location": {
+                          "fields": {
+                            "regionCodes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RetrieveInsightsResponse": {
+                      "fields": {
+                        "marketingDataInsights": {
+                          "rule": "repeated",
+                          "type": "MarketingDataInsight",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "MarketingDataInsight": {
+                          "fields": {
+                            "dimension": {
+                              "type": "AudienceInsightsDimension",
+                              "id": 1
+                            },
+                            "attributes": {
+                              "rule": "repeated",
+                              "type": "MarketingDataInsightsAttribute",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "AudienceInsightsDimension": {
+                              "values": {
+                                "AUDIENCE_INSIGHTS_DIMENSION_UNSPECIFIED": 0,
+                                "AUDIENCE_INSIGHTS_DIMENSION_UNKNOWN": 1,
+                                "AFFINITY_USER_INTEREST": 2,
+                                "IN_MARKET_USER_INTEREST": 3,
+                                "AGE_RANGE": 4,
+                                "GENDER": 5
+                              }
+                            },
+                            "MarketingDataInsightsAttribute": {
+                              "oneofs": {
+                                "_userInterestId": {
+                                  "oneof": [
+                                    "userInterestId"
+                                  ]
+                                },
+                                "_lift": {
+                                  "oneof": [
+                                    "lift"
+                                  ]
+                                },
+                                "_ageRange": {
+                                  "oneof": [
+                                    "ageRange"
+                                  ]
+                                },
+                                "_gender": {
+                                  "oneof": [
+                                    "gender"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "userInterestId": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "lift": {
+                                  "type": "float",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "ageRange": {
+                                  "type": "AgeRange",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "gender": {
+                                  "type": "Gender",
+                                  "id": 4,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "PartnerLinkService": {
+                      "options": {
+                        "(google.api.default_host)": "datamanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/datamanager"
+                      },
+                      "methods": {
+                        "CreatePartnerLink": {
+                          "requestType": "CreatePartnerLinkRequest",
+                          "responseType": "PartnerLink",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=accountTypes/*/accounts/*}/partnerLinks",
+                            "(google.api.http).body": "partner_link",
+                            "(google.api.method_signature)": "parent,partner_link"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=accountTypes/*/accounts/*}/partnerLinks",
+                                "body": "partner_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,partner_link"
+                            }
+                          ]
+                        },
+                        "DeletePartnerLink": {
+                          "requestType": "DeletePartnerLinkRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=accountTypes/*/accounts/*/partnerLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=accountTypes/*/accounts/*/partnerLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "SearchPartnerLinks": {
+                          "requestType": "SearchPartnerLinksRequest",
+                          "responseType": "SearchPartnerLinksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accountTypes/*/accounts/*}/partnerLinks:search",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accountTypes/*/accounts/*}/partnerLinks:search"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreatePartnerLinkRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamanager.googleapis.com/PartnerLink"
+                          }
+                        },
+                        "partnerLink": {
+                          "type": "PartnerLink",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeletePartnerLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamanager.googleapis.com/PartnerLink"
+                          }
+                        }
+                      }
+                    },
+                    "SearchPartnerLinksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamanager.googleapis.com/PartnerLink"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchPartnerLinksResponse": {
+                      "fields": {
+                        "partnerLinks": {
+                          "rule": "repeated",
+                          "type": "PartnerLink",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PartnerLink": {
+                      "options": {
+                        "(google.api.resource).type": "datamanager.googleapis.com/PartnerLink",
+                        "(google.api.resource).pattern": "accountTypes/{account_type}/accounts/{account}/partnerLinks/{partner_link}",
+                        "(google.api.resource).plural": "partnerLinks",
+                        "(google.api.resource).singular": "partnerLink"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "partnerLinkId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "owningAccount": {
+                          "type": "ProductAccount",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "partnerAccount": {
+                          "type": "ProductAccount",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UserList": {
+                      "options": {
+                        "(google.api.resource).type": "datamanager.googleapis.com/UserList",
+                        "(google.api.resource).pattern": "accountTypes/{account_type}/accounts/{account}/userLists/{user_list}",
+                        "(google.api.resource).plural": "userLists",
+                        "(google.api.resource).singular": "userList"
+                      },
+                      "oneofs": {
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_membershipStatus": {
+                          "oneof": [
+                            "membershipStatus"
+                          ]
+                        },
+                        "_integrationCode": {
+                          "oneof": [
+                            "integrationCode"
+                          ]
+                        },
+                        "_closingReason": {
+                          "oneof": [
+                            "closingReason"
+                          ]
+                        },
+                        "_accountAccessStatus": {
+                          "oneof": [
+                            "accountAccessStatus"
+                          ]
+                        },
+                        "userListInfo": {
+                          "oneof": [
+                            "ingestedUserListInfo"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "id": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "readOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "membershipStatus": {
+                          "type": "MembershipStatus",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "integrationCode": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "membershipDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "closingReason": {
+                          "type": "ClosingReason",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "accessReason": {
+                          "type": "AccessReason",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "accountAccessStatus": {
+                          "type": "AccessStatus",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "sizeInfo": {
+                          "type": "SizeInfo",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "targetNetworkInfo": {
+                          "type": "TargetNetworkInfo",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ingestedUserListInfo": {
+                          "type": "IngestedUserListInfo",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MembershipStatus": {
+                          "values": {
+                            "MEMBERSHIP_STATUS_UNSPECIFIED": 0,
+                            "OPEN": 1,
+                            "CLOSED": 2
+                          }
+                        },
+                        "ClosingReason": {
+                          "values": {
+                            "CLOSING_REASON_UNSPECIFIED": 0,
+                            "UNUSED": 1
+                          }
+                        },
+                        "AccessReason": {
+                          "values": {
+                            "ACCESS_REASON_UNSPECIFIED": 0,
+                            "OWNED": 1,
+                            "SHARED": 2,
+                            "LICENSED": 3,
+                            "SUBSCRIBED": 4,
+                            "AFFILIATED": 5
+                          }
+                        },
+                        "AccessStatus": {
+                          "values": {
+                            "ACCESS_STATUS_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
+                          }
+                        }
+                      }
+                    },
+                    "SizeInfo": {
+                      "fields": {
+                        "displayNetworkMembersCount": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "searchNetworkMembersCount": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TargetNetworkInfo": {
+                      "oneofs": {
+                        "_eligibleForSearch": {
+                          "oneof": [
+                            "eligibleForSearch"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "eligibleForDisplay": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "eligibleForSearch": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "IngestedUserListInfo": {
+                      "fields": {
+                        "uploadKeyTypes": {
+                          "rule": "repeated",
+                          "type": "UploadKeyType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "contactIdInfo": {
+                          "type": "ContactIdInfo",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mobileIdInfo": {
+                          "type": "MobileIdInfo",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userIdInfo": {
+                          "type": "UserIdInfo",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pairIdInfo": {
+                          "type": "PairIdInfo",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pseudonymousIdInfo": {
+                          "type": "PseudonymousIdInfo",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "partnerAudienceInfo": {
+                          "type": "PartnerAudienceInfo",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UploadKeyType": {
+                          "values": {
+                            "UPLOAD_KEY_TYPE_UNSPECIFIED": 0,
+                            "CONTACT_ID": 1,
+                            "MOBILE_ID": 2,
+                            "USER_ID": 3,
+                            "PAIR_ID": 4,
+                            "PSEUDONYMOUS_ID": 5
+                          }
+                        }
+                      }
+                    },
+                    "ContactIdInfo": {
+                      "oneofs": {
+                        "_dataSourceType": {
+                          "oneof": [
+                            "dataSourceType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dataSourceType": {
+                          "type": "DataSourceType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "matchRatePercentage": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "MobileIdInfo": {
+                      "oneofs": {
+                        "_dataSourceType": {
+                          "oneof": [
+                            "dataSourceType"
+                          ]
+                        },
+                        "_keySpace": {
+                          "oneof": [
+                            "keySpace"
+                          ]
+                        },
+                        "_appId": {
+                          "oneof": [
+                            "appId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dataSourceType": {
+                          "type": "DataSourceType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "keySpace": {
+                          "type": "KeySpace",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "appId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "KeySpace": {
+                          "values": {
+                            "KEY_SPACE_UNSPECIFIED": 0,
+                            "IOS": 1,
+                            "ANDROID": 2
+                          }
+                        }
+                      }
+                    },
+                    "UserIdInfo": {
+                      "oneofs": {
+                        "_dataSourceType": {
+                          "oneof": [
+                            "dataSourceType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dataSourceType": {
+                          "type": "DataSourceType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PairIdInfo": {
+                      "oneofs": {
+                        "_publisherId": {
+                          "oneof": [
+                            "publisherId"
+                          ]
+                        },
+                        "_publisherName": {
+                          "oneof": [
+                            "publisherName"
+                          ]
+                        },
+                        "_cleanRoomIdentifier": {
+                          "oneof": [
+                            "cleanRoomIdentifier"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "publisherId": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "publisherName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "matchRatePercentage": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "advertiserIdentifierCount": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cleanRoomIdentifier": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PartnerAudienceInfo": {
+                      "oneofs": {
+                        "_partnerAudienceSource": {
+                          "oneof": [
+                            "partnerAudienceSource"
+                          ]
+                        },
+                        "_commercePartner": {
+                          "oneof": [
+                            "commercePartner"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "partnerAudienceSource": {
+                          "type": "PartnerAudienceSource",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "commercePartner": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PartnerAudienceSource": {
+                          "values": {
+                            "PARTNER_AUDIENCE_SOURCE_UNSPECIFIED": 0,
+                            "COMMERCE_AUDIENCE": 1,
+                            "LINEAR_TV_AUDIENCE": 2,
+                            "AGENCY_PROVIDER_AUDIENCE": 3
+                          }
+                        }
+                      }
+                    },
+                    "PseudonymousIdInfo": {
+                      "oneofs": {
+                        "_syncStatus": {
+                          "oneof": [
+                            "syncStatus"
+                          ]
+                        },
+                        "_billableRecordCount": {
+                          "oneof": [
+                            "billableRecordCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "syncStatus": {
+                          "type": "SyncStatus",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "billableRecordCount": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SyncStatus": {
+                          "values": {
+                            "SYNC_STATUS_UNSPECIFIED": 0,
+                            "CREATED": 1,
+                            "READY_FOR_USE": 2,
+                            "FAILED": 3
+                          }
+                        }
+                      }
+                    },
+                    "DataSourceType": {
+                      "values": {
+                        "DATA_SOURCE_TYPE_UNSPECIFIED": 0,
+                        "DATA_SOURCE_TYPE_FIRST_PARTY": 1,
+                        "DATA_SOURCE_TYPE_THIRD_PARTY_CREDIT_BUREAU": 2,
+                        "DATA_SOURCE_TYPE_THIRD_PARTY_VOTER_FILE": 3,
+                        "DATA_SOURCE_TYPE_THIRD_PARTY_PARTNER_DATA": 4
+                      }
+                    },
+                    "UserListDirectLicense": {
+                      "options": {
+                        "(google.api.resource).type": "datamanager.googleapis.com/UserListDirectLicense",
+                        "(google.api.resource).pattern": "accountTypes/{account_type}/accounts/{account}/userListDirectLicenses/{user_list_direct_license}",
+                        "(google.api.resource).plural": "userListDirectLicenses",
+                        "(google.api.resource).singular": "userListDirectLicense"
+                      },
+                      "oneofs": {
+                        "_userListId": {
+                          "oneof": [
+                            "userListId"
+                          ]
+                        },
+                        "_clientAccountType": {
+                          "oneof": [
+                            "clientAccountType"
+                          ]
+                        },
+                        "_clientAccountId": {
+                          "oneof": [
+                            "clientAccountId"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "userListId": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "userListDisplayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clientAccountType": {
+                          "type": "UserListLicenseClientAccountType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "clientAccountId": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "clientAccountDisplayName": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "status": {
+                          "type": "UserListLicenseStatus",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "pricing": {
+                          "type": "UserListLicensePricing",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "historicalPricings": {
+                          "rule": "repeated",
+                          "type": "UserListLicensePricing",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "metrics": {
+                          "type": "UserListLicenseMetrics",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UserListLicenseClientAccountType": {
+                      "values": {
+                        "USER_LIST_LICENSE_CLIENT_ACCOUNT_TYPE_UNKNOWN": 0,
+                        "USER_LIST_LICENSE_CLIENT_ACCOUNT_TYPE_GOOGLE_ADS": 1,
+                        "USER_LIST_LICENSE_CLIENT_ACCOUNT_TYPE_DISPLAY_VIDEO_PARTNER": 2,
+                        "USER_LIST_LICENSE_CLIENT_ACCOUNT_TYPE_DISPLAY_VIDEO_ADVERTISER": 3,
+                        "USER_LIST_LICENSE_CLIENT_ACCOUNT_TYPE_GOOGLE_AD_MANAGER_AUDIENCE_LINK": 4
+                      }
+                    },
+                    "UserListLicenseMetrics": {
+                      "fields": {
+                        "clickCount": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "impressionCount": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "revenueUsdMicros": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startDate": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endDate": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UserListLicensePricing": {
+                      "oneofs": {
+                        "_costMicros": {
+                          "oneof": [
+                            "costMicros"
+                          ]
+                        },
+                        "_currencyCode": {
+                          "oneof": [
+                            "currencyCode"
+                          ]
+                        },
+                        "_costType": {
+                          "oneof": [
+                            "costType"
+                          ]
+                        },
+                        "_maxCostMicros": {
+                          "oneof": [
+                            "maxCostMicros"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pricingId": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "costMicros": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "currencyCode": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pricingActive": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "buyerApprovalState": {
+                          "type": "UserListPricingBuyerApprovalState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "costType": {
+                          "type": "UserListPricingCostType",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxCostMicros": {
+                          "type": "int64",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UserListPricingBuyerApprovalState": {
+                          "values": {
+                            "USER_LIST_PRICING_BUYER_APPROVAL_STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "APPROVED": 2,
+                            "REJECTED": 3
+                          }
+                        },
+                        "UserListPricingCostType": {
+                          "values": {
+                            "USER_LIST_PRICING_COST_TYPE_UNSPECIFIED": 0,
+                            "CPC": 1,
+                            "CPM": 2,
+                            "MEDIA_SHARE": 3
+                          }
+                        }
+                      }
+                    },
+                    "UserListLicenseStatus": {
+                      "values": {
+                        "USER_LIST_LICENSE_STATUS_UNSPECIFIED": 0,
+                        "USER_LIST_LICENSE_STATUS_ENABLED": 1,
+                        "USER_LIST_LICENSE_STATUS_DISABLED": 2
+                      }
+                    },
+                    "UserListDirectLicenseService": {
+                      "options": {
+                        "(google.api.default_host)": "datamanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/datamanager"
+                      },
+                      "methods": {
+                        "CreateUserListDirectLicense": {
+                          "requestType": "CreateUserListDirectLicenseRequest",
+                          "responseType": "UserListDirectLicense",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=accountTypes/*/accounts/*}/userListDirectLicenses",
+                            "(google.api.http).body": "user_list_direct_license",
+                            "(google.api.method_signature)": "parent,user_list_direct_license"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=accountTypes/*/accounts/*}/userListDirectLicenses",
+                                "body": "user_list_direct_license"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,user_list_direct_license"
+                            }
+                          ]
+                        },
+                        "GetUserListDirectLicense": {
+                          "requestType": "GetUserListDirectLicenseRequest",
+                          "responseType": "UserListDirectLicense",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=accountTypes/*/accounts/*/userListDirectLicenses/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=accountTypes/*/accounts/*/userListDirectLicenses/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateUserListDirectLicense": {
+                          "requestType": "UpdateUserListDirectLicenseRequest",
+                          "responseType": "UserListDirectLicense",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{user_list_direct_license.name=accountTypes/*/accounts/*/userListDirectLicenses/*}",
+                            "(google.api.http).body": "user_list_direct_license",
+                            "(google.api.method_signature)": "user_list_direct_license,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{user_list_direct_license.name=accountTypes/*/accounts/*/userListDirectLicenses/*}",
+                                "body": "user_list_direct_license"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "user_list_direct_license,update_mask"
+                            }
+                          ]
+                        },
+                        "ListUserListDirectLicenses": {
+                          "requestType": "ListUserListDirectLicensesRequest",
+                          "responseType": "ListUserListDirectLicensesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accountTypes/*/accounts/*}/userListDirectLicenses",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accountTypes/*/accounts/*}/userListDirectLicenses"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateUserListDirectLicenseRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamanager.googleapis.com/UserListDirectLicense"
+                          }
+                        },
+                        "userListDirectLicense": {
+                          "type": "UserListDirectLicense",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetUserListDirectLicenseRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamanager.googleapis.com/UserListDirectLicense"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateUserListDirectLicenseRequest": {
+                      "fields": {
+                        "userListDirectLicense": {
+                          "type": "UserListDirectLicense",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserListDirectLicensesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamanager.googleapis.com/UserListDirectLicense"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserListDirectLicensesResponse": {
+                      "fields": {
+                        "userListDirectLicenses": {
+                          "rule": "repeated",
+                          "type": "UserListDirectLicense",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UserListGlobalLicense": {
+                      "options": {
+                        "(google.api.resource).type": "datamanager.googleapis.com/UserListGlobalLicense",
+                        "(google.api.resource).pattern": "accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}",
+                        "(google.api.resource).plural": "userListGlobalLicenses",
+                        "(google.api.resource).singular": "userListGlobalLicense"
+                      },
+                      "oneofs": {
+                        "_userListId": {
+                          "oneof": [
+                            "userListId"
+                          ]
+                        },
+                        "_licenseType": {
+                          "oneof": [
+                            "licenseType"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "userListId": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "userListDisplayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "licenseType": {
+                          "type": "UserListGlobalLicenseType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "status": {
+                          "type": "UserListLicenseStatus",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "pricing": {
+                          "type": "UserListLicensePricing",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "historicalPricings": {
+                          "rule": "repeated",
+                          "type": "UserListLicensePricing",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "metrics": {
+                          "type": "UserListLicenseMetrics",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UserListGlobalLicenseCustomerInfo": {
+                      "options": {
+                        "(google.api.resource).type": "datamanager.googleapis.com/UserListGlobalLicenseCustomerInfo",
+                        "(google.api.resource).pattern": "accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}/customerInfos/{license_customer_info}",
+                        "(google.api.resource).plural": "userListGlobalLicenseCustomerInfos",
+                        "(google.api.resource).singular": "userListGlobalLicenseCustomerInfo"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "userListId": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "userListDisplayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "licenseType": {
+                          "type": "UserListGlobalLicenseType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "status": {
+                          "type": "UserListLicenseStatus",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pricing": {
+                          "type": "UserListLicensePricing",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clientAccountType": {
+                          "type": "UserListLicenseClientAccountType",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clientAccountId": {
+                          "type": "int64",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clientAccountDisplayName": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "historicalPricings": {
+                          "rule": "repeated",
+                          "type": "UserListLicensePricing",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "metrics": {
+                          "type": "UserListLicenseMetrics",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UserListGlobalLicenseType": {
+                      "values": {
+                        "USER_LIST_GLOBAL_LICENSE_TYPE_UNSPECIFIED": 0,
+                        "USER_LIST_GLOBAL_LICENSE_TYPE_RESELLER": 1,
+                        "USER_LIST_GLOBAL_LICENSE_TYPE_DATA_MART_SELL_SIDE": 2,
+                        "USER_LIST_GLOBAL_LICENSE_TYPE_DATA_MART_BUY_SIDE": 3
+                      }
+                    },
+                    "UserListGlobalLicenseService": {
+                      "options": {
+                        "(google.api.default_host)": "datamanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/datamanager"
+                      },
+                      "methods": {
+                        "CreateUserListGlobalLicense": {
+                          "requestType": "CreateUserListGlobalLicenseRequest",
+                          "responseType": "UserListGlobalLicense",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=accountTypes/*/accounts/*}/userListGlobalLicenses",
+                            "(google.api.http).body": "user_list_global_license",
+                            "(google.api.method_signature)": "parent,user_list_global_license"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=accountTypes/*/accounts/*}/userListGlobalLicenses",
+                                "body": "user_list_global_license"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,user_list_global_license"
+                            }
+                          ]
+                        },
+                        "UpdateUserListGlobalLicense": {
+                          "requestType": "UpdateUserListGlobalLicenseRequest",
+                          "responseType": "UserListGlobalLicense",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{user_list_global_license.name=accountTypes/*/accounts/*/userListGlobalLicenses/*}",
+                            "(google.api.http).body": "user_list_global_license",
+                            "(google.api.method_signature)": "user_list_global_license,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{user_list_global_license.name=accountTypes/*/accounts/*/userListGlobalLicenses/*}",
+                                "body": "user_list_global_license"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "user_list_global_license,update_mask"
+                            }
+                          ]
+                        },
+                        "GetUserListGlobalLicense": {
+                          "requestType": "GetUserListGlobalLicenseRequest",
+                          "responseType": "UserListGlobalLicense",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=accountTypes/*/accounts/*/userListGlobalLicenses/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=accountTypes/*/accounts/*/userListGlobalLicenses/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListUserListGlobalLicenses": {
+                          "requestType": "ListUserListGlobalLicensesRequest",
+                          "responseType": "ListUserListGlobalLicensesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accountTypes/*/accounts/*}/userListGlobalLicenses",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accountTypes/*/accounts/*}/userListGlobalLicenses"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListUserListGlobalLicenseCustomerInfos": {
+                          "requestType": "ListUserListGlobalLicenseCustomerInfosRequest",
+                          "responseType": "ListUserListGlobalLicenseCustomerInfosResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accountTypes/*/accounts/*/userListGlobalLicenses/*}/userListGlobalLicenseCustomerInfos",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accountTypes/*/accounts/*/userListGlobalLicenses/*}/userListGlobalLicenseCustomerInfos"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateUserListGlobalLicenseRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamanager.googleapis.com/UserListGlobalLicense"
+                          }
+                        },
+                        "userListGlobalLicense": {
+                          "type": "UserListGlobalLicense",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateUserListGlobalLicenseRequest": {
+                      "fields": {
+                        "userListGlobalLicense": {
+                          "type": "UserListGlobalLicense",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetUserListGlobalLicenseRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamanager.googleapis.com/UserListGlobalLicense"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserListGlobalLicensesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamanager.googleapis.com/UserListGlobalLicense"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserListGlobalLicensesResponse": {
+                      "fields": {
+                        "userListGlobalLicenses": {
+                          "rule": "repeated",
+                          "type": "UserListGlobalLicense",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListUserListGlobalLicenseCustomerInfosRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamanager.googleapis.com/UserListGlobalLicenseCustomerInfo"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserListGlobalLicenseCustomerInfosResponse": {
+                      "fields": {
+                        "userListGlobalLicenseCustomerInfos": {
+                          "rule": "repeated",
+                          "type": "UserListGlobalLicenseCustomerInfo",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UserListService": {
+                      "options": {
+                        "(google.api.default_host)": "datamanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/datamanager"
+                      },
+                      "methods": {
+                        "GetUserList": {
+                          "requestType": "GetUserListRequest",
+                          "responseType": "UserList",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=accountTypes/*/accounts/*/userLists/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=accountTypes/*/accounts/*/userLists/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListUserLists": {
+                          "requestType": "ListUserListsRequest",
+                          "responseType": "ListUserListsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accountTypes/*/accounts/*}/userLists",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accountTypes/*/accounts/*}/userLists"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateUserList": {
+                          "requestType": "CreateUserListRequest",
+                          "responseType": "UserList",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=accountTypes/*/accounts/*}/userLists",
+                            "(google.api.http).body": "user_list",
+                            "(google.api.method_signature)": "parent,user_list"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=accountTypes/*/accounts/*}/userLists",
+                                "body": "user_list"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,user_list"
+                            }
+                          ]
+                        },
+                        "UpdateUserList": {
+                          "requestType": "UpdateUserListRequest",
+                          "responseType": "UserList",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{user_list.name=accountTypes/*/accounts/*/userLists/*}",
+                            "(google.api.http).body": "user_list",
+                            "(google.api.method_signature)": "user_list,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{user_list.name=accountTypes/*/accounts/*/userLists/*}",
+                                "body": "user_list"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "user_list,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteUserList": {
+                          "requestType": "DeleteUserListRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=accountTypes/*/accounts/*/userLists/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=accountTypes/*/accounts/*/userLists/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetUserListRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamanager.googleapis.com/UserList"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserListsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamanager.googleapis.com/UserList"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserListsResponse": {
+                      "fields": {
+                        "userLists": {
+                          "rule": "repeated",
+                          "type": "UserList",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateUserListRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamanager.googleapis.com/UserList"
+                          }
+                        },
+                        "userList": {
+                          "type": "UserList",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateUserListRequest": {
+                      "fields": {
+                        "userList": {
+                          "type": "UserList",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteUserListRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamanager.googleapis.com/UserList"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1455,6 +3629,83 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             },
             "http": {
@@ -3182,6 +5433,18 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             }

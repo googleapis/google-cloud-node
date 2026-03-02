@@ -28,11 +28,19 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "DeleteNamedSet": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteRoutePolicy": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Get": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetNamedSet": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -64,11 +72,19 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListNamedSets": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListRoutePolicies": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Patch": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PatchNamedSet": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -85,6 +101,10 @@
           "retry_params_name": "default"
         },
         "Update": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateNamedSet": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

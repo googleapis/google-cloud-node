@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.4.0...aiplatform-v6.5.0) (2026-03-02)
+
+
+### Features
+
+* Add `traffic_type, tool_use_prompt_tokens_details` to message `GenerateContentResponse.UsageMetadata` ([#7266](https://github.com/googleapis/google-cloud-node/issues/7266)) ([9f91e05](https://github.com/googleapis/google-cloud-node/commit/9f91e0513bf7a60239aef5e4222993184c63fbb2))
+
 ## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.3.0...aiplatform-v6.4.0) (2026-02-03)
 
 
