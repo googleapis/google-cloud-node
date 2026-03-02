@@ -8620,6 +8620,12 @@ export namespace google {
 
                         /** LayoutConfig returnBoundingBoxes */
                         returnBoundingBoxes?: (boolean|null);
+
+                        /** LayoutConfig enableImageAnnotation */
+                        enableImageAnnotation?: (boolean|null);
+
+                        /** LayoutConfig enableTableAnnotation */
+                        enableTableAnnotation?: (boolean|null);
                     }
 
                     /** Represents a LayoutConfig. */
@@ -8639,6 +8645,12 @@ export namespace google {
 
                         /** LayoutConfig returnBoundingBoxes. */
                         public returnBoundingBoxes: boolean;
+
+                        /** LayoutConfig enableImageAnnotation. */
+                        public enableImageAnnotation: boolean;
+
+                        /** LayoutConfig enableTableAnnotation. */
+                        public enableTableAnnotation: boolean;
 
                         /**
                          * Creates a new LayoutConfig instance using the specified properties.
