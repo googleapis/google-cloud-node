@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/developerconnect-v0.6.1...developerconnect-v0.7.0) (2026-03-02)
+
+
+### Features
+
+* [developerconnect] Add Secure Source Manager and Generic HTTP Endpoint connection types ([#7284](https://github.com/googleapis/google-cloud-node/issues/7284)) ([b23e571](https://github.com/googleapis/google-cloud-node/commit/b23e571f96992f373cc6c413d026f322e8e58176))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/developerconnect-v0.6.0...developerconnect-v0.6.1) (2025-10-13)
 
 

@@ -5,6 +5,328 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "77042f508c0e4d03569ef4eae7e0dd8f235cd469",
+          "message": "[ces] add public libraries for CES v1beta",
+          "issues": [
+            "7285"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "9146f2714244d2e7c50220ccb4380b738acab857",
+          "message": "Add initial files for google.cloud.ces.v1",
+          "issues": [
+            "7241"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "82a005b5-f13a-4f62-b6e3-6e88408f9ae1",
+      "createTime": "2026-03-02T16:41:40.032Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8a30212142e5403294368da827cb33d3b167209d",
+          "message": "Add initial files for google.cloud.workloadmanager.v1",
+          "issues": [
+            "7265"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workloadmanager",
+      "id": "69c8f974-5f6f-4363-b9d7-8db7adc29259",
+      "createTime": "2026-03-02T16:41:40.001Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1cc4a84c3cab7894d8877488dcd7454aef62a8a2",
+          "message": "Add initial files for google.cloud.visionai.v1",
+          "issues": [
+            "7275"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/visionai",
+      "id": "2b2a2e09-ed6f-4239-8005-a9309c8964db",
+      "createTime": "2026-03-02T16:41:39.968Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "faf79df319ddd7d732413aa0b745160bfb815198",
+          "message": "Expand workflows to receive both workflows and executions",
+          "issues": [
+            "7271"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "3eba0a4f-2744-4eb9-8d9c-ad4d2b45ab98",
+      "createTime": "2026-03-02T16:41:39.937Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0faaf8cf11c10c807fad495758c33e601589cf4c",
+          "message": "[vectorsearch] introduce new v1 vectorsearch surface and make it default version",
+          "issues": [
+            "7273"
+          ],
+          "breakingChangeNote": "[vectorsearch] introduce new v1 vectorsearch surface and make it default version ([#7273](https://github.com/googleapis/google-cloud-node/issues/7273))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "8d909ea4-d3b1-4642-b846-3bb70801ad20",
+      "createTime": "2026-03-02T16:41:39.898Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4b8da3eefef2c4af0f39f186b4d60257fa146eae",
+          "message": "[storagebatchoperations] add new transformation `update_object_custom_context`",
+          "issues": [
+            "7309"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storagebatchoperations",
+      "id": "d5ce6e2d-882a-4987-bbff-bae0c22ef452",
+      "createTime": "2026-03-02T16:41:39.867Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4373c581d895ad3785f1b3493bda83def6a0024c",
+          "message": "Adds endpointing sensitivity to streaming recognition features",
+          "issues": [
+            "7270"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "4524053f-fd26-4b60-ae8c-df2b6f8bf957",
+      "createTime": "2026-03-02T16:41:39.833Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6fb4665242b13e9c8b29ae3df6696155076297d",
+          "message": "[networkmanagement] Add API fields related to GKE Pods and Network Policies",
+          "issues": [
+            "7292"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "f87378b8-a21d-4633-853c-e0ce5b6e78af",
+      "createTime": "2026-03-02T16:41:39.799Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "34a365988184038c96de95cf0d8bf4bb5d8a8ccf",
+          "message": "[inventory] Add support for project level key usage tracking",
+          "issues": []
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "54be806f-3d7a-449d-b521-33ec30ba360e",
+      "createTime": "2026-03-02T16:41:39.764Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "a28d23fde5441c969b380dbd0dff0dc48836c01e",
+          "message": "Enable google-cloud-discoveryengine tests to run on windows",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "f9b1ee9a92eb12f57a56db1bf591d3ec3afb4864",
+          "message": "Try an alternative bash script for windows compatibility without an additional dependency",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "23b81e4ae4c2dbe26f3731df4bd6cac9c687753b",
+          "message": "Enable google-cloud-discoveryengine tests to run on windows",
+          "issues": []
+        }
+      ],
+      "version": "2.5.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "394651a4-0bfd-4335-b80e-b65dba1fef35",
+      "createTime": "2026-03-02T16:41:39.736Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b23e571f96992f373cc6c413d026f322e8e58176",
+          "message": "[developerconnect] Add Secure Source Manager and Generic HTTP Endpoint connection types",
+          "issues": [
+            "7284"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "300f53ce-1df2-4071-9efd-2dba3822b202",
+      "createTime": "2026-03-02T16:41:39.704Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1bacdf222c3995c0b3e44d972c952645367e3fa0",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20260213",
+          "issues": [
+            "7296"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "2d1a22c828cd8dfecb2083d3bc270210a79a41e3",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20260106 (#1147)",
+          "issues": [
+            "7272"
+          ]
+        }
+      ],
+      "version": "6.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "974dfa02-4a93-42e2-9fcd-8cb33113b9db",
+      "createTime": "2026-03-02T16:41:39.673Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9f91e0513bf7a60239aef5e4222993184c63fbb2",
+          "message": "Add `traffic_type, tool_use_prompt_tokens_details` to message `GenerateContentResponse.UsageMetadata`",
+          "issues": [
+            "7266"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "b753f790-11a4-4fc1-a364-393a85e1e90c",
+      "createTime": "2026-03-02T16:41:39.642Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32115d95be2fc2e06da22aa5101c94ddb3bf82db",
+          "message": "[datamanager] add `UserListService` for creating and managing user lists",
+          "issues": [
+            "7290"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "9b0bb1b0-9564-4ab3-81d3-cd76c26a94b2",
+      "createTime": "2026-03-02T16:41:39.608Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f1456f9e8bdd5c2b2d579d6a451036d98b8ee26e",
+          "message": "Bug preventing apiPath generation when apiId includes letter v",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "6d705f413ead1e2adfe3dc1d703d4637ab36b6d9",
+          "message": "Bug preventing apiPath generation when apiId includes letter v",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "76baebbdc05758953af5550b71f3144a7eafbfb4",
+          "message": "Bug preventing apiPath generation when apiId includes letter v",
+          "issues": []
+        }
+      ],
+      "version": "0.1.7",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "0bce40fb-fc26-4fef-ba28-8f1c2c90521c",
+      "createTime": "2026-03-02T16:41:39.566Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "95cccbe3c0b9e89a443c6a7bfffaa282616203ad",
           "message": "[places] Add `googleMapsTypeLabel` field to show type information on Google Maps",
           "issues": [
@@ -68363,5 +68685,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-02-19T13:03:03.636Z"
+  "updateTime": "2026-03-02T16:41:40.032Z"
 }
