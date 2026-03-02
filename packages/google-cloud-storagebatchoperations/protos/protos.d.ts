@@ -1420,6 +1420,9 @@ export namespace google {
                     /** Job rewriteObject */
                     rewriteObject?: (google.cloud.storagebatchoperations.v1.IRewriteObject|null);
 
+                    /** Job updateObjectCustomContext */
+                    updateObjectCustomContext?: (google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext|null);
+
                     /** Job loggingConfig */
                     loggingConfig?: (google.cloud.storagebatchoperations.v1.ILoggingConfig|null);
 
@@ -1478,6 +1481,9 @@ export namespace google {
                     /** Job rewriteObject. */
                     public rewriteObject?: (google.cloud.storagebatchoperations.v1.IRewriteObject|null);
 
+                    /** Job updateObjectCustomContext. */
+                    public updateObjectCustomContext?: (google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext|null);
+
                     /** Job loggingConfig. */
                     public loggingConfig?: (google.cloud.storagebatchoperations.v1.ILoggingConfig|null);
 
@@ -1509,7 +1515,7 @@ export namespace google {
                     public source?: "bucketList";
 
                     /** Job transformation. */
-                    public transformation?: ("putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject");
+                    public transformation?: ("putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject"|"updateObjectCustomContext");
 
                     /**
                      * Creates a new Job instance using the specified properties.
@@ -1629,6 +1635,9 @@ export namespace google {
                     /** BucketOperation rewriteObject */
                     rewriteObject?: (google.cloud.storagebatchoperations.v1.IRewriteObject|null);
 
+                    /** BucketOperation updateObjectCustomContext */
+                    updateObjectCustomContext?: (google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext|null);
+
                     /** BucketOperation createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -1681,6 +1690,9 @@ export namespace google {
                     /** BucketOperation rewriteObject. */
                     public rewriteObject?: (google.cloud.storagebatchoperations.v1.IRewriteObject|null);
 
+                    /** BucketOperation updateObjectCustomContext. */
+                    public updateObjectCustomContext?: (google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext|null);
+
                     /** BucketOperation createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
@@ -1703,7 +1715,7 @@ export namespace google {
                     public objectConfiguration?: ("prefixList"|"manifest");
 
                     /** BucketOperation transformation. */
-                    public transformation?: ("putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject");
+                    public transformation?: ("putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject"|"updateObjectCustomContext");
 
                     /**
                      * Creates a new BucketOperation instance using the specified properties.
@@ -2755,6 +2767,312 @@ export namespace google {
 
                     /**
                      * Gets the default type url for PutMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ObjectCustomContextPayload. */
+                interface IObjectCustomContextPayload {
+
+                    /** ObjectCustomContextPayload value */
+                    value?: (string|null);
+                }
+
+                /** Represents an ObjectCustomContextPayload. */
+                class ObjectCustomContextPayload implements IObjectCustomContextPayload {
+
+                    /**
+                     * Constructs a new ObjectCustomContextPayload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload);
+
+                    /** ObjectCustomContextPayload value. */
+                    public value?: (string|null);
+
+                    /**
+                     * Creates a new ObjectCustomContextPayload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ObjectCustomContextPayload instance
+                     */
+                    public static create(properties?: google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload): google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload;
+
+                    /**
+                     * Encodes the specified ObjectCustomContextPayload message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload.verify|verify} messages.
+                     * @param message ObjectCustomContextPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ObjectCustomContextPayload message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload.verify|verify} messages.
+                     * @param message ObjectCustomContextPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ObjectCustomContextPayload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ObjectCustomContextPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload;
+
+                    /**
+                     * Decodes an ObjectCustomContextPayload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ObjectCustomContextPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload;
+
+                    /**
+                     * Verifies an ObjectCustomContextPayload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ObjectCustomContextPayload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ObjectCustomContextPayload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload;
+
+                    /**
+                     * Creates a plain object from an ObjectCustomContextPayload message. Also converts values to other types if specified.
+                     * @param message ObjectCustomContextPayload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ObjectCustomContextPayload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ObjectCustomContextPayload
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CustomContextUpdates. */
+                interface ICustomContextUpdates {
+
+                    /** CustomContextUpdates updates */
+                    updates?: ({ [k: string]: google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload }|null);
+
+                    /** CustomContextUpdates keysToClear */
+                    keysToClear?: (string[]|null);
+                }
+
+                /** Represents a CustomContextUpdates. */
+                class CustomContextUpdates implements ICustomContextUpdates {
+
+                    /**
+                     * Constructs a new CustomContextUpdates.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storagebatchoperations.v1.ICustomContextUpdates);
+
+                    /** CustomContextUpdates updates. */
+                    public updates: { [k: string]: google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload };
+
+                    /** CustomContextUpdates keysToClear. */
+                    public keysToClear: string[];
+
+                    /**
+                     * Creates a new CustomContextUpdates instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomContextUpdates instance
+                     */
+                    public static create(properties?: google.cloud.storagebatchoperations.v1.ICustomContextUpdates): google.cloud.storagebatchoperations.v1.CustomContextUpdates;
+
+                    /**
+                     * Encodes the specified CustomContextUpdates message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.CustomContextUpdates.verify|verify} messages.
+                     * @param message CustomContextUpdates message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storagebatchoperations.v1.ICustomContextUpdates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomContextUpdates message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.CustomContextUpdates.verify|verify} messages.
+                     * @param message CustomContextUpdates message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storagebatchoperations.v1.ICustomContextUpdates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomContextUpdates message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomContextUpdates
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storagebatchoperations.v1.CustomContextUpdates;
+
+                    /**
+                     * Decodes a CustomContextUpdates message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomContextUpdates
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storagebatchoperations.v1.CustomContextUpdates;
+
+                    /**
+                     * Verifies a CustomContextUpdates message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomContextUpdates message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomContextUpdates
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storagebatchoperations.v1.CustomContextUpdates;
+
+                    /**
+                     * Creates a plain object from a CustomContextUpdates message. Also converts values to other types if specified.
+                     * @param message CustomContextUpdates
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storagebatchoperations.v1.CustomContextUpdates, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomContextUpdates to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomContextUpdates
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateObjectCustomContext. */
+                interface IUpdateObjectCustomContext {
+
+                    /** UpdateObjectCustomContext customContextUpdates */
+                    customContextUpdates?: (google.cloud.storagebatchoperations.v1.ICustomContextUpdates|null);
+
+                    /** UpdateObjectCustomContext clearAll */
+                    clearAll?: (boolean|null);
+                }
+
+                /** Represents an UpdateObjectCustomContext. */
+                class UpdateObjectCustomContext implements IUpdateObjectCustomContext {
+
+                    /**
+                     * Constructs a new UpdateObjectCustomContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext);
+
+                    /** UpdateObjectCustomContext customContextUpdates. */
+                    public customContextUpdates?: (google.cloud.storagebatchoperations.v1.ICustomContextUpdates|null);
+
+                    /** UpdateObjectCustomContext clearAll. */
+                    public clearAll?: (boolean|null);
+
+                    /** UpdateObjectCustomContext action. */
+                    public action?: ("customContextUpdates"|"clearAll");
+
+                    /**
+                     * Creates a new UpdateObjectCustomContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateObjectCustomContext instance
+                     */
+                    public static create(properties?: google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext): google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext;
+
+                    /**
+                     * Encodes the specified UpdateObjectCustomContext message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.verify|verify} messages.
+                     * @param message UpdateObjectCustomContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateObjectCustomContext message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.verify|verify} messages.
+                     * @param message UpdateObjectCustomContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateObjectCustomContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateObjectCustomContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext;
+
+                    /**
+                     * Decodes an UpdateObjectCustomContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateObjectCustomContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext;
+
+                    /**
+                     * Verifies an UpdateObjectCustomContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateObjectCustomContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateObjectCustomContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext;
+
+                    /**
+                     * Creates a plain object from an UpdateObjectCustomContext message. Also converts values to other types if specified.
+                     * @param message UpdateObjectCustomContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateObjectCustomContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateObjectCustomContext
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

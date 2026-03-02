@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v5.2.0...network-management-v5.3.0) (2026-03-02)
+
+
+### Features
+
+* [networkmanagement] Add API fields related to GKE Pods and Network Policies ([#7292](https://github.com/googleapis/google-cloud-node/issues/7292)) ([d6fb466](https://github.com/googleapis/google-cloud-node/commit/d6fb4665242b13e9c8b29ae3df6696155076297d))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v5.1.1...network-management-v5.2.0) (2026-01-31)
 
 

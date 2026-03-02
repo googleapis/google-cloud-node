@@ -20,8 +20,18 @@ import * as v1 from './v1';
 
 const IngestionServiceClient = v1.IngestionServiceClient;
 type IngestionServiceClient = v1.IngestionServiceClient;
+const MarketingDataInsightsServiceClient = v1.MarketingDataInsightsServiceClient;
+type MarketingDataInsightsServiceClient = v1.MarketingDataInsightsServiceClient;
+const PartnerLinkServiceClient = v1.PartnerLinkServiceClient;
+type PartnerLinkServiceClient = v1.PartnerLinkServiceClient;
+const UserListDirectLicenseServiceClient = v1.UserListDirectLicenseServiceClient;
+type UserListDirectLicenseServiceClient = v1.UserListDirectLicenseServiceClient;
+const UserListGlobalLicenseServiceClient = v1.UserListGlobalLicenseServiceClient;
+type UserListGlobalLicenseServiceClient = v1.UserListGlobalLicenseServiceClient;
+const UserListServiceClient = v1.UserListServiceClient;
+type UserListServiceClient = v1.UserListServiceClient;
 
-export {v1, IngestionServiceClient};
-export default {v1, IngestionServiceClient};
+export {v1, IngestionServiceClient, MarketingDataInsightsServiceClient, PartnerLinkServiceClient, UserListDirectLicenseServiceClient, UserListGlobalLicenseServiceClient, UserListServiceClient};
+export default {v1, IngestionServiceClient, MarketingDataInsightsServiceClient, PartnerLinkServiceClient, UserListDirectLicenseServiceClient, UserListGlobalLicenseServiceClient, UserListServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

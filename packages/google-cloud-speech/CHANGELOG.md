@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.2.1...speech-v7.3.0) (2026-03-02)
+
+
+### Features
+
+* Adds endpointing sensitivity to streaming recognition features ([#7270](https://github.com/googleapis/google-cloud-node/issues/7270)) ([4373c58](https://github.com/googleapis/google-cloud-node/commit/4373c581d895ad3785f1b3493bda83def6a0024c))
+
 ## [7.2.1](https://github.com/googleapis/google-cloud-node/compare/speech-v7.2.0...speech-v7.2.1) (2025-10-13)
 
 

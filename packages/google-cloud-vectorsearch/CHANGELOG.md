@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.2.0...vectorsearch-v0.3.0) (2026-03-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* [vectorsearch] introduce new v1 vectorsearch surface and make it default version ([#7273](https://github.com/googleapis/google-cloud-node/issues/7273))
+
+### Features
+
+* [vectorsearch] introduce new v1 vectorsearch surface and make it default version ([#7273](https://github.com/googleapis/google-cloud-node/issues/7273)) ([0faaf8c](https://github.com/googleapis/google-cloud-node/commit/0faaf8cf11c10c807fad495758c33e601589cf4c))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.1.0...vectorsearch-v0.2.0) (2026-02-03)
 
 

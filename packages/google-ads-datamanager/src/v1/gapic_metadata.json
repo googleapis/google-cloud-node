@@ -58,6 +58,276 @@
           }
         }
       }
+    },
+    "MarketingDataInsightsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MarketingDataInsightsServiceClient",
+          "rpcs": {
+            "RetrieveInsights": {
+              "methods": [
+                "retrieveInsights"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MarketingDataInsightsServiceClient",
+          "rpcs": {
+            "RetrieveInsights": {
+              "methods": [
+                "retrieveInsights"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PartnerLinkService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PartnerLinkServiceClient",
+          "rpcs": {
+            "CreatePartnerLink": {
+              "methods": [
+                "createPartnerLink"
+              ]
+            },
+            "DeletePartnerLink": {
+              "methods": [
+                "deletePartnerLink"
+              ]
+            },
+            "SearchPartnerLinks": {
+              "methods": [
+                "searchPartnerLinks",
+                "searchPartnerLinksStream",
+                "searchPartnerLinksAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PartnerLinkServiceClient",
+          "rpcs": {
+            "CreatePartnerLink": {
+              "methods": [
+                "createPartnerLink"
+              ]
+            },
+            "DeletePartnerLink": {
+              "methods": [
+                "deletePartnerLink"
+              ]
+            },
+            "SearchPartnerLinks": {
+              "methods": [
+                "searchPartnerLinks",
+                "searchPartnerLinksStream",
+                "searchPartnerLinksAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserListDirectLicenseService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "UserListDirectLicenseServiceClient",
+          "rpcs": {
+            "CreateUserListDirectLicense": {
+              "methods": [
+                "createUserListDirectLicense"
+              ]
+            },
+            "GetUserListDirectLicense": {
+              "methods": [
+                "getUserListDirectLicense"
+              ]
+            },
+            "UpdateUserListDirectLicense": {
+              "methods": [
+                "updateUserListDirectLicense"
+              ]
+            },
+            "ListUserListDirectLicenses": {
+              "methods": [
+                "listUserListDirectLicenses",
+                "listUserListDirectLicensesStream",
+                "listUserListDirectLicensesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "UserListDirectLicenseServiceClient",
+          "rpcs": {
+            "CreateUserListDirectLicense": {
+              "methods": [
+                "createUserListDirectLicense"
+              ]
+            },
+            "GetUserListDirectLicense": {
+              "methods": [
+                "getUserListDirectLicense"
+              ]
+            },
+            "UpdateUserListDirectLicense": {
+              "methods": [
+                "updateUserListDirectLicense"
+              ]
+            },
+            "ListUserListDirectLicenses": {
+              "methods": [
+                "listUserListDirectLicenses",
+                "listUserListDirectLicensesStream",
+                "listUserListDirectLicensesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserListGlobalLicenseService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "UserListGlobalLicenseServiceClient",
+          "rpcs": {
+            "CreateUserListGlobalLicense": {
+              "methods": [
+                "createUserListGlobalLicense"
+              ]
+            },
+            "UpdateUserListGlobalLicense": {
+              "methods": [
+                "updateUserListGlobalLicense"
+              ]
+            },
+            "GetUserListGlobalLicense": {
+              "methods": [
+                "getUserListGlobalLicense"
+              ]
+            },
+            "ListUserListGlobalLicenses": {
+              "methods": [
+                "listUserListGlobalLicenses",
+                "listUserListGlobalLicensesStream",
+                "listUserListGlobalLicensesAsync"
+              ]
+            },
+            "ListUserListGlobalLicenseCustomerInfos": {
+              "methods": [
+                "listUserListGlobalLicenseCustomerInfos",
+                "listUserListGlobalLicenseCustomerInfosStream",
+                "listUserListGlobalLicenseCustomerInfosAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "UserListGlobalLicenseServiceClient",
+          "rpcs": {
+            "CreateUserListGlobalLicense": {
+              "methods": [
+                "createUserListGlobalLicense"
+              ]
+            },
+            "UpdateUserListGlobalLicense": {
+              "methods": [
+                "updateUserListGlobalLicense"
+              ]
+            },
+            "GetUserListGlobalLicense": {
+              "methods": [
+                "getUserListGlobalLicense"
+              ]
+            },
+            "ListUserListGlobalLicenses": {
+              "methods": [
+                "listUserListGlobalLicenses",
+                "listUserListGlobalLicensesStream",
+                "listUserListGlobalLicensesAsync"
+              ]
+            },
+            "ListUserListGlobalLicenseCustomerInfos": {
+              "methods": [
+                "listUserListGlobalLicenseCustomerInfos",
+                "listUserListGlobalLicenseCustomerInfosStream",
+                "listUserListGlobalLicenseCustomerInfosAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserListService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "UserListServiceClient",
+          "rpcs": {
+            "GetUserList": {
+              "methods": [
+                "getUserList"
+              ]
+            },
+            "CreateUserList": {
+              "methods": [
+                "createUserList"
+              ]
+            },
+            "UpdateUserList": {
+              "methods": [
+                "updateUserList"
+              ]
+            },
+            "DeleteUserList": {
+              "methods": [
+                "deleteUserList"
+              ]
+            },
+            "ListUserLists": {
+              "methods": [
+                "listUserLists",
+                "listUserListsStream",
+                "listUserListsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "UserListServiceClient",
+          "rpcs": {
+            "GetUserList": {
+              "methods": [
+                "getUserList"
+              ]
+            },
+            "CreateUserList": {
+              "methods": [
+                "createUserList"
+              ]
+            },
+            "UpdateUserList": {
+              "methods": [
+                "updateUserList"
+              ]
+            },
+            "DeleteUserList": {
+              "methods": [
+                "deleteUserList"
+              ]
+            },
+            "ListUserLists": {
+              "methods": [
+                "listUserLists",
+                "listUserListsStream",
+                "listUserListsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }
