@@ -3879,7 +3879,7 @@
       "regionTag": "compute_v1_generated_Disks_Update_async",
       "title": "AcceleratorTypes update Sample",
       "origin": "API_DEFINITION",
-      "description": " Updates the specified disk with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: user_license.",
+      "description": " Updates the specified disk with the data included in the request. The update is performed only on selected fields included as part of update-mask.",
       "canonical": true,
       "file": "disks.update.js",
       "language": "JAVASCRIPT",
@@ -4898,7 +4898,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 53,
+          "end": 59,
           "type": "FULL"
         }
       ],
@@ -4907,6 +4907,10 @@
         "fullName": "google.cloud.compute.v1.FirewallPolicies.ListAssociations",
         "async": true,
         "parameters": [
+          {
+            "name": "include_inherited_policies",
+            "type": "TYPE_BOOL"
+          },
           {
             "name": "target_resource",
             "type": "TYPE_STRING"
@@ -7359,7 +7363,7 @@
       "regionTag": "compute_v1_generated_GlobalNetworkEndpointGroups_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
-      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request.",
+      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request. Note: Use the following APIs to manage network endpoint groups:    -    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity    NEGs): zonal    API    -    To manage NEGs with regional scope (such as regional internet NEGs,    serverless NEGs, Private Service Connect NEGs): regional    API    -    To manage NEGs with global scope (such as global internet NEGs):global    API",
       "canonical": true,
       "file": "global_network_endpoint_groups.insert.js",
       "language": "JAVASCRIPT",
@@ -19367,7 +19371,7 @@
       "regionTag": "compute_v1_generated_NetworkEndpointGroups_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
-      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request.",
+      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request. Note: Use the following APIs to manage network endpoint groups:    -    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity    NEGs): zonal    API    -    To manage NEGs with regional scope (such as regional internet NEGs,    serverless NEGs, Private Service Connect NEGs): regional    API    -    To manage NEGs with global scope (such as global internet NEGs):global    API",
       "canonical": true,
       "file": "network_endpoint_groups.insert.js",
       "language": "JAVASCRIPT",
@@ -27899,7 +27903,7 @@
       "regionTag": "compute_v1_generated_RegionDisks_Update_async",
       "title": "AcceleratorTypes update Sample",
       "origin": "API_DEFINITION",
-      "description": " Update the specified disk with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: user_license.",
+      "description": " Update the specified disk with the data included in the request. Update is performed only on selected fields included as part of update-mask.",
       "canonical": true,
       "file": "region_disks.update.js",
       "language": "JAVASCRIPT",
@@ -28067,6 +28071,398 @@
           "service": {
             "shortName": "RegionDiskTypes",
             "fullName": "google.cloud.compute.v1.RegionDiskTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionHealthAggregationPolicies_AggregatedList_async",
+      "title": "AcceleratorTypes aggregatedList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the list of all HealthAggregationPolicy resources, regional and global, available to the specified project. To prevent failure, it is recommended that you set the `returnPartialSuccess` parameter to `true`.",
+      "canonical": true,
+      "file": "region_health_aggregation_policies.aggregated_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 155,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AggregatedList",
+        "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.AggregatedList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "include_all_scopes",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "service_project_number",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.HealthAggregationPolicyAggregatedList",
+        "client": {
+          "shortName": "RegionHealthAggregationPoliciesClient",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPoliciesClient"
+        },
+        "method": {
+          "shortName": "AggregatedList",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.AggregatedList",
+          "service": {
+            "shortName": "RegionHealthAggregationPolicies",
+            "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionHealthAggregationPolicies_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified HealthAggregationPolicy in the given region.",
+      "canonical": true,
+      "file": "region_health_aggregation_policies.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_aggregation_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "RegionHealthAggregationPoliciesClient",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPoliciesClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.Delete",
+          "service": {
+            "shortName": "RegionHealthAggregationPolicies",
+            "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionHealthAggregationPolicies_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified HealthAggregationPolicy resource in the given region.",
+      "canonical": true,
+      "file": "region_health_aggregation_policies.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_aggregation_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.HealthAggregationPolicy",
+        "client": {
+          "shortName": "RegionHealthAggregationPoliciesClient",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPoliciesClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.Get",
+          "service": {
+            "shortName": "RegionHealthAggregationPolicies",
+            "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionHealthAggregationPolicies_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a HealthAggregationPolicy in the specified project in the given region using the parameters that are included in the request.",
+      "canonical": true,
+      "file": "region_health_aggregation_policies.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_aggregation_policy_resource",
+            "type": ".google.cloud.compute.v1.HealthAggregationPolicy"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "RegionHealthAggregationPoliciesClient",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPoliciesClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.Insert",
+          "service": {
+            "shortName": "RegionHealthAggregationPolicies",
+            "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionHealthAggregationPolicies_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the HealthAggregationPolicies for a project in the given region.",
+      "canonical": true,
+      "file": "region_health_aggregation_policies.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 145,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.HealthAggregationPolicyList",
+        "client": {
+          "shortName": "RegionHealthAggregationPoliciesClient",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPoliciesClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.List",
+          "service": {
+            "shortName": "RegionHealthAggregationPolicies",
+            "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionHealthAggregationPolicies_Patch_async",
+      "title": "AcceleratorTypes patch Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified regional HealthAggregationPolicy resource with the data included in the request. This method supportsPATCH semantics and uses theJSON merge patch format and processing rules.",
+      "canonical": true,
+      "file": "region_health_aggregation_policies.patch.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Patch",
+        "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.Patch",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_aggregation_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "health_aggregation_policy_resource",
+            "type": ".google.cloud.compute.v1.HealthAggregationPolicy"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "RegionHealthAggregationPoliciesClient",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPoliciesClient"
+        },
+        "method": {
+          "shortName": "Patch",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.Patch",
+          "service": {
+            "shortName": "RegionHealthAggregationPolicies",
+            "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionHealthAggregationPolicies_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "region_health_aggregation_policies.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "RegionHealthAggregationPoliciesClient",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPoliciesClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies.TestIamPermissions",
+          "service": {
+            "shortName": "RegionHealthAggregationPolicies",
+            "fullName": "google.cloud.compute.v1.RegionHealthAggregationPolicies"
           }
         }
       }
@@ -28716,6 +29112,58 @@
         "method": {
           "shortName": "Patch",
           "fullName": "google.cloud.compute.v1.RegionHealthCheckServices.Patch",
+          "service": {
+            "shortName": "RegionHealthCheckServices",
+            "fullName": "google.cloud.compute.v1.RegionHealthCheckServices"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionHealthCheckServices_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "region_health_check_services.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.RegionHealthCheckServices.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "RegionHealthCheckServicesClient",
+          "fullName": "google.cloud.compute.v1.RegionHealthCheckServicesClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.RegionHealthCheckServices.TestIamPermissions",
           "service": {
             "shortName": "RegionHealthCheckServices",
             "fullName": "google.cloud.compute.v1.RegionHealthCheckServices"
@@ -31235,7 +31683,7 @@
       "regionTag": "compute_v1_generated_RegionNetworkEndpointGroups_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
-      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request.",
+      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request. Note: Use the following APIs to manage network endpoint groups:    -    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity    NEGs): zonal    API    -    To manage NEGs with regional scope (such as regional internet NEGs,    serverless NEGs, Private Service Connect NEGs): regional    API    -    To manage NEGs with global scope (such as global internet NEGs):global    API",
       "canonical": true,
       "file": "region_network_endpoint_groups.insert.js",
       "language": "JAVASCRIPT",
@@ -36319,6 +36767,186 @@
           "service": {
             "shortName": "Reservations",
             "fullName": "google.cloud.compute.v1.Reservations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_ReservationSlots_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves information about the specified reservation slot.",
+      "canonical": true,
+      "file": "reservation_slots.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1.ReservationSlots.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_slot",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.ReservationSlotsGetResponse",
+        "client": {
+          "shortName": "ReservationSlotsClient",
+          "fullName": "google.cloud.compute.v1.ReservationSlotsClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1.ReservationSlots.Get",
+          "service": {
+            "shortName": "ReservationSlots",
+            "fullName": "google.cloud.compute.v1.ReservationSlots"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_ReservationSlots_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a list of reservation slots under a single reservation.",
+      "canonical": true,
+      "file": "reservation_slots.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 151,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1.ReservationSlots.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parent_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.ReservationSlotsListResponse",
+        "client": {
+          "shortName": "ReservationSlotsClient",
+          "fullName": "google.cloud.compute.v1.ReservationSlotsClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1.ReservationSlots.List",
+          "service": {
+            "shortName": "ReservationSlots",
+            "fullName": "google.cloud.compute.v1.ReservationSlots"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_ReservationSlots_Update_async",
+      "title": "AcceleratorTypes update Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a reservation slot in the specified sub-block.",
+      "canonical": true,
+      "file": "reservation_slots.update.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Update",
+        "fullName": "google.cloud.compute.v1.ReservationSlots.Update",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_slot",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_slot_resource",
+            "type": ".google.cloud.compute.v1.ReservationSlot"
+          },
+          {
+            "name": "update_mask",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.Operation",
+        "client": {
+          "shortName": "ReservationSlotsClient",
+          "fullName": "google.cloud.compute.v1.ReservationSlotsClient"
+        },
+        "method": {
+          "shortName": "Update",
+          "fullName": "google.cloud.compute.v1.ReservationSlots.Update",
+          "service": {
+            "shortName": "ReservationSlots",
+            "fullName": "google.cloud.compute.v1.ReservationSlots"
           }
         }
       }
