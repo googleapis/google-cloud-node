@@ -95,6 +95,9 @@ message Job {
 
     // Rewrite the object and updates metadata like KMS key.
     RewriteObject rewrite_object = 20;
+
+    // Update object custom context.
+    UpdateObjectCustomContext update_object_custom_context = 23;
   }
 
   // Optional. Logging configuration.
@@ -194,6 +197,9 @@ message BucketOperation {
 
     // Rewrite the object and updates metadata like KMS key.
     RewriteObject rewrite_object = 14;
+
+    // Update object custom context.
+    UpdateObjectCustomContext update_object_custom_context = 15;
   }
 
   // Output only. The time that the BucketOperation was created.
@@ -405,6 +411,41 @@ message PutMetadata {
   // in https://cloud.google.com/storage/docs/object-lock
   optional ObjectRetention object_retention = 8
       [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Describes the payload of a user defined object custom context.
+message ObjectCustomContextPayload {
+  // The value of the object custom context.
+  // If set, `value` must NOT be an empty string since it is a required field in
+  // custom context. If unset, `value` will be ignored and no changes will be
+  // made to the `value` field of the custom context payload.
+  optional string value = 1;
+}
+
+// Describes a collection of updates to apply to custom contexts identified
+// by key.
+message CustomContextUpdates {
+  // Optional. Insert or update the existing custom contexts.
+  map<string, ObjectCustomContextPayload> updates = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Custom contexts to clear by key.
+  // A key cannot be present in both `updates` and `keys_to_clear`.
+  repeated string keys_to_clear = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Describes options to update object custom contexts.
+message UpdateObjectCustomContext {
+  // One of the actions must be set.
+  oneof action {
+    // A collection of updates to apply to specific custom contexts.
+    // Use this to add, update or delete individual contexts by key.
+    CustomContextUpdates custom_context_updates = 1;
+
+    // If set, must be set to true and all existing object custom contexts will
+    // be deleted.
+    bool clear_all = 2;
+  }
 }
 
 // A summary of errors by error code, plus a count and sample error log

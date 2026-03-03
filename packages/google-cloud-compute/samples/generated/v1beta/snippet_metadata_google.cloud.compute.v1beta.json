@@ -4007,7 +4007,7 @@
       "regionTag": "compute_v1beta_generated_Disks_Update_async",
       "title": "AcceleratorTypes update Sample",
       "origin": "API_DEFINITION",
-      "description": " Updates the specified disk with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: user_license.",
+      "description": " Updates the specified disk with the data included in the request. The update is performed only on selected fields included as part of update-mask.",
       "canonical": true,
       "file": "disks.update.js",
       "language": "JAVASCRIPT",
@@ -7883,7 +7883,7 @@
       "regionTag": "compute_v1beta_generated_GlobalNetworkEndpointGroups_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
-      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request.",
+      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request. Note: Use the following APIs to manage network endpoint groups:    -    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity    NEGs): zonal    API    -    To manage NEGs with regional scope (such as regional internet NEGs,    serverless NEGs, Private Service Connect NEGs): regional    API    -    To manage NEGs with global scope (such as global internet NEGs):global    API",
       "canonical": true,
       "file": "global_network_endpoint_groups.insert.js",
       "language": "JAVASCRIPT",
@@ -10508,6 +10508,62 @@
         "method": {
           "shortName": "ApplyUpdatesToInstances",
           "fullName": "google.cloud.compute.v1beta.InstanceGroupManagers.ApplyUpdatesToInstances",
+          "service": {
+            "shortName": "InstanceGroupManagers",
+            "fullName": "google.cloud.compute.v1beta.InstanceGroupManagers"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_InstanceGroupManagers_ConfigureAcceleratorTopologies_async",
+      "title": "AcceleratorTypes configureAcceleratorTopologies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the accelerator topologies configuration.",
+      "canonical": true,
+      "file": "instance_group_managers.configure_accelerator_topologies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ConfigureAcceleratorTopologies",
+        "fullName": "google.cloud.compute.v1beta.InstanceGroupManagers.ConfigureAcceleratorTopologies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance_group_manager",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance_group_managers_configure_accelerator_topologies_request_resource",
+            "type": ".google.cloud.compute.v1beta.InstanceGroupManagersConfigureAcceleratorTopologiesRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "InstanceGroupManagersClient",
+          "fullName": "google.cloud.compute.v1beta.InstanceGroupManagersClient"
+        },
+        "method": {
+          "shortName": "ConfigureAcceleratorTopologies",
+          "fullName": "google.cloud.compute.v1beta.InstanceGroupManagers.ConfigureAcceleratorTopologies",
           "service": {
             "shortName": "InstanceGroupManagers",
             "fullName": "google.cloud.compute.v1beta.InstanceGroupManagers"
@@ -16220,6 +16276,382 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_InstantSnapshotGroups_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " deletes a Zonal InstantSnapshotGroup resource",
+      "canonical": true,
+      "file": "instant_snapshot_groups.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instant_snapshot_group",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "InstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.Delete",
+          "service": {
+            "shortName": "InstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_InstantSnapshotGroups_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " returns the specified InstantSnapshotGroup resource in the specified zone.",
+      "canonical": true,
+      "file": "instant_snapshot_groups.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instant_snapshot_group",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.InstantSnapshotGroup",
+        "client": {
+          "shortName": "InstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.Get",
+          "service": {
+            "shortName": "InstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_InstantSnapshotGroups_GetIamPolicy_async",
+      "title": "AcceleratorTypes getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+      "canonical": true,
+      "file": "instant_snapshot_groups.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "options_requested_policy_version",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "InstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.GetIamPolicy",
+          "service": {
+            "shortName": "InstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_InstantSnapshotGroups_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " inserts a Zonal InstantSnapshotGroup resource",
+      "canonical": true,
+      "file": "instant_snapshot_groups.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instant_snapshot_group_resource",
+            "type": ".google.cloud.compute.v1beta.InstantSnapshotGroup"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source_consistency_group",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "InstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.Insert",
+          "service": {
+            "shortName": "InstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_InstantSnapshotGroups_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " retrieves the list of InstantSnapshotGroup resources contained within the specified zone.",
+      "canonical": true,
+      "file": "instant_snapshot_groups.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 145,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.ListInstantSnapshotGroups",
+        "client": {
+          "shortName": "InstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.List",
+          "service": {
+            "shortName": "InstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_InstantSnapshotGroups_SetIamPolicy_async",
+      "title": "AcceleratorTypes setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified resource. Replaces any existing policy.",
+      "canonical": true,
+      "file": "instant_snapshot_groups.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone_set_policy_request_resource",
+            "type": ".google.cloud.compute.v1beta.ZoneSetPolicyRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "InstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.SetIamPolicy",
+          "service": {
+            "shortName": "InstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_InstantSnapshotGroups_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "instant_snapshot_groups.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1beta.TestPermissionsRequest"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.TestPermissionsResponse",
+        "client": {
+          "shortName": "InstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups.TestIamPermissions",
+          "service": {
+            "shortName": "InstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.InstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_InstantSnapshots_AggregatedList_async",
       "title": "AcceleratorTypes aggregatedList Sample",
       "origin": "API_DEFINITION",
@@ -20883,7 +21315,7 @@
       "regionTag": "compute_v1beta_generated_NetworkEndpointGroups_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
-      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request.",
+      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request. Note: Use the following APIs to manage network endpoint groups:    -    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity    NEGs): zonal    API    -    To manage NEGs with regional scope (such as regional internet NEGs,    serverless NEGs, Private Service Connect NEGs): regional    API    -    To manage NEGs with global scope (such as global internet NEGs):global    API",
       "canonical": true,
       "file": "network_endpoint_groups.insert.js",
       "language": "JAVASCRIPT",
@@ -30567,7 +30999,7 @@
       "regionTag": "compute_v1beta_generated_RegionDisks_Update_async",
       "title": "AcceleratorTypes update Sample",
       "origin": "API_DEFINITION",
-      "description": " Update the specified disk with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: user_license.",
+      "description": " Update the specified disk with the data included in the request. Update is performed only on selected fields included as part of update-mask.",
       "canonical": true,
       "file": "region_disks.update.js",
       "language": "JAVASCRIPT",
@@ -34768,6 +35200,382 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_RegionInstantSnapshotGroups_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " deletes a Regional InstantSnapshotGroup resource",
+      "canonical": true,
+      "file": "region_instant_snapshot_groups.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instant_snapshot_group",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionInstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.Delete",
+          "service": {
+            "shortName": "RegionInstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionInstantSnapshotGroups_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " returns the specified InstantSnapshotGroup resource in the specified region.",
+      "canonical": true,
+      "file": "region_instant_snapshot_groups.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instant_snapshot_group",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.InstantSnapshotGroup",
+        "client": {
+          "shortName": "RegionInstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.Get",
+          "service": {
+            "shortName": "RegionInstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionInstantSnapshotGroups_GetIamPolicy_async",
+      "title": "AcceleratorTypes getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+      "canonical": true,
+      "file": "region_instant_snapshot_groups.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "options_requested_policy_version",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "RegionInstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.GetIamPolicy",
+          "service": {
+            "shortName": "RegionInstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionInstantSnapshotGroups_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " creates a Regional InstantSnapshotGroup resource",
+      "canonical": true,
+      "file": "region_instant_snapshot_groups.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instant_snapshot_group_resource",
+            "type": ".google.cloud.compute.v1beta.InstantSnapshotGroup"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source_consistency_group",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionInstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.Insert",
+          "service": {
+            "shortName": "RegionInstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionInstantSnapshotGroups_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " retrieves the list of InstantSnapshotGroup resources contained within the specified region.",
+      "canonical": true,
+      "file": "region_instant_snapshot_groups.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 145,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.ListInstantSnapshotGroups",
+        "client": {
+          "shortName": "RegionInstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.List",
+          "service": {
+            "shortName": "RegionInstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionInstantSnapshotGroups_SetIamPolicy_async",
+      "title": "AcceleratorTypes setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified resource. Replaces any existing policy.",
+      "canonical": true,
+      "file": "region_instant_snapshot_groups.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_set_policy_request_resource",
+            "type": ".google.cloud.compute.v1beta.RegionSetPolicyRequest"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "RegionInstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.SetIamPolicy",
+          "service": {
+            "shortName": "RegionInstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionInstantSnapshotGroups_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "region_instant_snapshot_groups.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1beta.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.TestPermissionsResponse",
+        "client": {
+          "shortName": "RegionInstantSnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups.TestIamPermissions",
+          "service": {
+            "shortName": "RegionInstantSnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.RegionInstantSnapshotGroups"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_RegionInstantSnapshots_Delete_async",
       "title": "AcceleratorTypes delete Sample",
       "origin": "API_DEFINITION",
@@ -35747,7 +36555,7 @@
       "regionTag": "compute_v1beta_generated_RegionNetworkEndpointGroups_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
-      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request.",
+      "description": " Creates a network endpoint group in the specified project using the parameters that are included in the request. Note: Use the following APIs to manage network endpoint groups:    -    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity    NEGs): zonal    API    -    To manage NEGs with regional scope (such as regional internet NEGs,    serverless NEGs, Private Service Connect NEGs): regional    API    -    To manage NEGs with global scope (such as global internet NEGs):global    API",
       "canonical": true,
       "file": "region_network_endpoint_groups.insert.js",
       "language": "JAVASCRIPT",
@@ -42520,6 +43328,186 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_ReservationSlots_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves information about the specified reservation slot.",
+      "canonical": true,
+      "file": "reservation_slots.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1beta.ReservationSlots.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_slot",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.ReservationSlotsGetResponse",
+        "client": {
+          "shortName": "ReservationSlotsClient",
+          "fullName": "google.cloud.compute.v1beta.ReservationSlotsClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1beta.ReservationSlots.Get",
+          "service": {
+            "shortName": "ReservationSlots",
+            "fullName": "google.cloud.compute.v1beta.ReservationSlots"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_ReservationSlots_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a list of reservation slots under a single reservation.",
+      "canonical": true,
+      "file": "reservation_slots.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 151,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.ReservationSlots.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parent_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.ReservationSlotsListResponse",
+        "client": {
+          "shortName": "ReservationSlotsClient",
+          "fullName": "google.cloud.compute.v1beta.ReservationSlotsClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.ReservationSlots.List",
+          "service": {
+            "shortName": "ReservationSlots",
+            "fullName": "google.cloud.compute.v1beta.ReservationSlots"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_ReservationSlots_Update_async",
+      "title": "AcceleratorTypes update Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a reservation slot in the specified sub-block.",
+      "canonical": true,
+      "file": "reservation_slots.update.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Update",
+        "fullName": "google.cloud.compute.v1beta.ReservationSlots.Update",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_slot",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_slot_resource",
+            "type": ".google.cloud.compute.v1beta.ReservationSlot"
+          },
+          {
+            "name": "update_mask",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "ReservationSlotsClient",
+          "fullName": "google.cloud.compute.v1beta.ReservationSlotsClient"
+        },
+        "method": {
+          "shortName": "Update",
+          "fullName": "google.cloud.compute.v1beta.ReservationSlots.Update",
+          "service": {
+            "shortName": "ReservationSlots",
+            "fullName": "google.cloud.compute.v1beta.ReservationSlots"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_ReservationSubBlocks_Get_async",
       "title": "AcceleratorTypes get Sample",
       "origin": "API_DEFINITION",
@@ -43952,6 +44940,62 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_Routers_DeleteNamedSet_async",
+      "title": "AcceleratorTypes deleteNamedSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes Named Set",
+      "canonical": true,
+      "file": "routers.delete_named_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteNamedSet",
+        "fullName": "google.cloud.compute.v1beta.Routers.DeleteNamedSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "named_set",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "router",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RoutersClient",
+          "fullName": "google.cloud.compute.v1beta.RoutersClient"
+        },
+        "method": {
+          "shortName": "DeleteNamedSet",
+          "fullName": "google.cloud.compute.v1beta.Routers.DeleteNamedSet",
+          "service": {
+            "shortName": "Routers",
+            "fullName": "google.cloud.compute.v1beta.Routers"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_Routers_DeleteRoutePolicy_async",
       "title": "AcceleratorTypes deleteRoutePolicy Sample",
       "origin": "API_DEFINITION",
@@ -44048,6 +45092,58 @@
         "method": {
           "shortName": "Get",
           "fullName": "google.cloud.compute.v1beta.Routers.Get",
+          "service": {
+            "shortName": "Routers",
+            "fullName": "google.cloud.compute.v1beta.Routers"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Routers_GetNamedSet_async",
+      "title": "AcceleratorTypes getNamedSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns specified Named Set",
+      "canonical": true,
+      "file": "routers.get_named_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetNamedSet",
+        "fullName": "google.cloud.compute.v1beta.Routers.GetNamedSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "named_set",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "router",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.RoutersGetNamedSetResponse",
+        "client": {
+          "shortName": "RoutersClient",
+          "fullName": "google.cloud.compute.v1beta.RoutersClient"
+        },
+        "method": {
+          "shortName": "GetNamedSet",
+          "fullName": "google.cloud.compute.v1beta.Routers.GetNamedSet",
           "service": {
             "shortName": "Routers",
             "fullName": "google.cloud.compute.v1beta.Routers"
@@ -44484,6 +45580,74 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_Routers_ListNamedSets_async",
+      "title": "AcceleratorTypes listNamedSets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a list of router named set subresources available to the specified project.",
+      "canonical": true,
+      "file": "routers.list_named_sets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 151,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListNamedSets",
+        "fullName": "google.cloud.compute.v1beta.Routers.ListNamedSets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "router",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.RoutersListNamedSets",
+        "client": {
+          "shortName": "RoutersClient",
+          "fullName": "google.cloud.compute.v1beta.RoutersClient"
+        },
+        "method": {
+          "shortName": "ListNamedSets",
+          "fullName": "google.cloud.compute.v1beta.Routers.ListNamedSets",
+          "service": {
+            "shortName": "Routers",
+            "fullName": "google.cloud.compute.v1beta.Routers"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_Routers_ListRoutePolicies_async",
       "title": "AcceleratorTypes listRoutePolicies Sample",
       "origin": "API_DEFINITION",
@@ -44600,6 +45764,62 @@
         "method": {
           "shortName": "Patch",
           "fullName": "google.cloud.compute.v1beta.Routers.Patch",
+          "service": {
+            "shortName": "Routers",
+            "fullName": "google.cloud.compute.v1beta.Routers"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Routers_PatchNamedSet_async",
+      "title": "AcceleratorTypes patchNamedSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Patches Named Set",
+      "canonical": true,
+      "file": "routers.patch_named_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PatchNamedSet",
+        "fullName": "google.cloud.compute.v1beta.Routers.PatchNamedSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "named_set_resource",
+            "type": ".google.cloud.compute.v1beta.NamedSet"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "router",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RoutersClient",
+          "fullName": "google.cloud.compute.v1beta.RoutersClient"
+        },
+        "method": {
+          "shortName": "PatchNamedSet",
+          "fullName": "google.cloud.compute.v1beta.Routers.PatchNamedSet",
           "service": {
             "shortName": "Routers",
             "fullName": "google.cloud.compute.v1beta.Routers"
@@ -44816,6 +46036,62 @@
         "method": {
           "shortName": "Update",
           "fullName": "google.cloud.compute.v1beta.Routers.Update",
+          "service": {
+            "shortName": "Routers",
+            "fullName": "google.cloud.compute.v1beta.Routers"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Routers_UpdateNamedSet_async",
+      "title": "AcceleratorTypes updateNamedSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates or creates new Named Set",
+      "canonical": true,
+      "file": "routers.update_named_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateNamedSet",
+        "fullName": "google.cloud.compute.v1beta.Routers.UpdateNamedSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "named_set_resource",
+            "type": ".google.cloud.compute.v1beta.NamedSet"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "router",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RoutersClient",
+          "fullName": "google.cloud.compute.v1beta.RoutersClient"
+        },
+        "method": {
+          "shortName": "UpdateNamedSet",
+          "fullName": "google.cloud.compute.v1beta.Routers.UpdateNamedSet",
           "service": {
             "shortName": "Routers",
             "fullName": "google.cloud.compute.v1beta.Routers"
@@ -46315,6 +47591,350 @@
           "service": {
             "shortName": "ServiceAttachments",
             "fullName": "google.cloud.compute.v1beta.ServiceAttachments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_SnapshotGroups_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified SnapshotGroup resource",
+      "canonical": true,
+      "file": "snapshot_groups.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1beta.SnapshotGroups.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_group",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "SnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroups.Delete",
+          "service": {
+            "shortName": "SnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.SnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_SnapshotGroups_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " returns the specified SnapshotGroup resource.",
+      "canonical": true,
+      "file": "snapshot_groups.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1beta.SnapshotGroups.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_group",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.SnapshotGroup",
+        "client": {
+          "shortName": "SnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroups.Get",
+          "service": {
+            "shortName": "SnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.SnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_SnapshotGroups_GetIamPolicy_async",
+      "title": "AcceleratorTypes getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+      "canonical": true,
+      "file": "snapshot_groups.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.SnapshotGroups.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "options_requested_policy_version",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "SnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroups.GetIamPolicy",
+          "service": {
+            "shortName": "SnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.SnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_SnapshotGroups_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a snapshot group in the specified project using the data included in the request.",
+      "canonical": true,
+      "file": "snapshot_groups.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1beta.SnapshotGroups.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_group_resource",
+            "type": ".google.cloud.compute.v1beta.SnapshotGroup"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "SnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroups.Insert",
+          "service": {
+            "shortName": "SnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.SnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_SnapshotGroups_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " retrieves the list of SnapshotGroup resources contained within the specified project.",
+      "canonical": true,
+      "file": "snapshot_groups.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 140,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.SnapshotGroups.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.ListSnapshotGroups",
+        "client": {
+          "shortName": "SnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroups.List",
+          "service": {
+            "shortName": "SnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.SnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_SnapshotGroups_SetIamPolicy_async",
+      "title": "AcceleratorTypes setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified resource. Replaces any existing policy.",
+      "canonical": true,
+      "file": "snapshot_groups.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.SnapshotGroups.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_set_policy_request_resource",
+            "type": ".google.cloud.compute.v1beta.GlobalSetPolicyRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "SnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroups.SetIamPolicy",
+          "service": {
+            "shortName": "SnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.SnapshotGroups"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_SnapshotGroups_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "snapshot_groups.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1beta.SnapshotGroups.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1beta.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.TestPermissionsResponse",
+        "client": {
+          "shortName": "SnapshotGroupsClient",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroupsClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1beta.SnapshotGroups.TestIamPermissions",
+          "service": {
+            "shortName": "SnapshotGroups",
+            "fullName": "google.cloud.compute.v1beta.SnapshotGroups"
           }
         }
       }

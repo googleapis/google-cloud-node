@@ -3205,6 +3205,7 @@
                          * @property {google.cloud.storagebatchoperations.v1.IDeleteObject|null} [deleteObject] Job deleteObject
                          * @property {google.cloud.storagebatchoperations.v1.IPutMetadata|null} [putMetadata] Job putMetadata
                          * @property {google.cloud.storagebatchoperations.v1.IRewriteObject|null} [rewriteObject] Job rewriteObject
+                         * @property {google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext|null} [updateObjectCustomContext] Job updateObjectCustomContext
                          * @property {google.cloud.storagebatchoperations.v1.ILoggingConfig|null} [loggingConfig] Job loggingConfig
                          * @property {google.protobuf.ITimestamp|null} [createTime] Job createTime
                          * @property {google.protobuf.ITimestamp|null} [scheduleTime] Job scheduleTime
@@ -3287,6 +3288,14 @@
                          * @instance
                          */
                         Job.prototype.rewriteObject = null;
+    
+                        /**
+                         * Job updateObjectCustomContext.
+                         * @member {google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext|null|undefined} updateObjectCustomContext
+                         * @memberof google.cloud.storagebatchoperations.v1.Job
+                         * @instance
+                         */
+                        Job.prototype.updateObjectCustomContext = null;
     
                         /**
                          * Job loggingConfig.
@@ -3376,12 +3385,12 @@
     
                         /**
                          * Job transformation.
-                         * @member {"putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject"|undefined} transformation
+                         * @member {"putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject"|"updateObjectCustomContext"|undefined} transformation
                          * @memberof google.cloud.storagebatchoperations.v1.Job
                          * @instance
                          */
                         Object.defineProperty(Job.prototype, "transformation", {
-                            get: $util.oneOfGetter($oneOfFields = ["putObjectHold", "deleteObject", "putMetadata", "rewriteObject"]),
+                            get: $util.oneOfGetter($oneOfFields = ["putObjectHold", "deleteObject", "putMetadata", "rewriteObject", "updateObjectCustomContext"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -3440,6 +3449,8 @@
                                 $root.google.cloud.storagebatchoperations.v1.RewriteObject.encode(message.rewriteObject, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.dryRun != null && Object.hasOwnProperty.call(message, "dryRun"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).bool(message.dryRun);
+                            if (message.updateObjectCustomContext != null && Object.hasOwnProperty.call(message, "updateObjectCustomContext"))
+                                $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.encode(message.updateObjectCustomContext, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             if (message.isMultiBucketJob != null && Object.hasOwnProperty.call(message, "isMultiBucketJob"))
                                 writer.uint32(/* id 24, wireType 0 =*/192).bool(message.isMultiBucketJob);
                             return writer;
@@ -3504,6 +3515,10 @@
                                     }
                                 case 20: {
                                         message.rewriteObject = $root.google.cloud.storagebatchoperations.v1.RewriteObject.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        message.updateObjectCustomContext = $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 9: {
@@ -3632,6 +3647,16 @@
                                         return "rewriteObject." + error;
                                 }
                             }
+                            if (message.updateObjectCustomContext != null && message.hasOwnProperty("updateObjectCustomContext")) {
+                                if (properties.transformation === 1)
+                                    return "transformation: multiple values";
+                                properties.transformation = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.verify(message.updateObjectCustomContext);
+                                    if (error)
+                                        return "updateObjectCustomContext." + error;
+                                }
+                            }
                             if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
                                 var error = $root.google.cloud.storagebatchoperations.v1.LoggingConfig.verify(message.loggingConfig);
                                 if (error)
@@ -3727,6 +3752,11 @@
                                 if (typeof object.rewriteObject !== "object")
                                     throw TypeError(".google.cloud.storagebatchoperations.v1.Job.rewriteObject: object expected");
                                 message.rewriteObject = $root.google.cloud.storagebatchoperations.v1.RewriteObject.fromObject(object.rewriteObject);
+                            }
+                            if (object.updateObjectCustomContext != null) {
+                                if (typeof object.updateObjectCustomContext !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.Job.updateObjectCustomContext: object expected");
+                                message.updateObjectCustomContext = $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.fromObject(object.updateObjectCustomContext);
                             }
                             if (object.loggingConfig != null) {
                                 if (typeof object.loggingConfig !== "object")
@@ -3877,6 +3907,11 @@
                             }
                             if (message.dryRun != null && message.hasOwnProperty("dryRun"))
                                 object.dryRun = message.dryRun;
+                            if (message.updateObjectCustomContext != null && message.hasOwnProperty("updateObjectCustomContext")) {
+                                object.updateObjectCustomContext = $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.toObject(message.updateObjectCustomContext, options);
+                                if (options.oneofs)
+                                    object.transformation = "updateObjectCustomContext";
+                            }
                             if (message.isMultiBucketJob != null && message.hasOwnProperty("isMultiBucketJob"))
                                 object.isMultiBucketJob = message.isMultiBucketJob;
                             return object;
@@ -3947,6 +3982,7 @@
                          * @property {google.cloud.storagebatchoperations.v1.IDeleteObject|null} [deleteObject] BucketOperation deleteObject
                          * @property {google.cloud.storagebatchoperations.v1.IPutMetadata|null} [putMetadata] BucketOperation putMetadata
                          * @property {google.cloud.storagebatchoperations.v1.IRewriteObject|null} [rewriteObject] BucketOperation rewriteObject
+                         * @property {google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext|null} [updateObjectCustomContext] BucketOperation updateObjectCustomContext
                          * @property {google.protobuf.ITimestamp|null} [createTime] BucketOperation createTime
                          * @property {google.protobuf.ITimestamp|null} [startTime] BucketOperation startTime
                          * @property {google.protobuf.ITimestamp|null} [completeTime] BucketOperation completeTime
@@ -4036,6 +4072,14 @@
                         BucketOperation.prototype.rewriteObject = null;
     
                         /**
+                         * BucketOperation updateObjectCustomContext.
+                         * @member {google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext|null|undefined} updateObjectCustomContext
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.updateObjectCustomContext = null;
+    
+                        /**
                          * BucketOperation createTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} createTime
                          * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
@@ -4099,12 +4143,12 @@
     
                         /**
                          * BucketOperation transformation.
-                         * @member {"putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject"|undefined} transformation
+                         * @member {"putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject"|"updateObjectCustomContext"|undefined} transformation
                          * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
                          * @instance
                          */
                         Object.defineProperty(BucketOperation.prototype, "transformation", {
-                            get: $util.oneOfGetter($oneOfFields = ["putObjectHold", "deleteObject", "putMetadata", "rewriteObject"]),
+                            get: $util.oneOfGetter($oneOfFields = ["putObjectHold", "deleteObject", "putMetadata", "rewriteObject", "updateObjectCustomContext"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4161,6 +4205,8 @@
                                 $root.google.cloud.storagebatchoperations.v1.PutMetadata.encode(message.putMetadata, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.rewriteObject != null && Object.hasOwnProperty.call(message, "rewriteObject"))
                                 $root.google.cloud.storagebatchoperations.v1.RewriteObject.encode(message.rewriteObject, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.updateObjectCustomContext != null && Object.hasOwnProperty.call(message, "updateObjectCustomContext"))
+                                $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.encode(message.updateObjectCustomContext, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -4227,6 +4273,10 @@
                                     }
                                 case 14: {
                                         message.rewriteObject = $root.google.cloud.storagebatchoperations.v1.RewriteObject.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.updateObjectCustomContext = $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 5: {
@@ -4353,6 +4403,16 @@
                                         return "rewriteObject." + error;
                                 }
                             }
+                            if (message.updateObjectCustomContext != null && message.hasOwnProperty("updateObjectCustomContext")) {
+                                if (properties.transformation === 1)
+                                    return "transformation: multiple values";
+                                properties.transformation = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.verify(message.updateObjectCustomContext);
+                                    if (error)
+                                        return "updateObjectCustomContext." + error;
+                                }
+                            }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime);
                                 if (error)
@@ -4442,6 +4502,11 @@
                                 if (typeof object.rewriteObject !== "object")
                                     throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.rewriteObject: object expected");
                                 message.rewriteObject = $root.google.cloud.storagebatchoperations.v1.RewriteObject.fromObject(object.rewriteObject);
+                            }
+                            if (object.updateObjectCustomContext != null) {
+                                if (typeof object.updateObjectCustomContext !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.updateObjectCustomContext: object expected");
+                                message.updateObjectCustomContext = $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.fromObject(object.updateObjectCustomContext);
                             }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
@@ -4580,6 +4645,11 @@
                                 object.rewriteObject = $root.google.cloud.storagebatchoperations.v1.RewriteObject.toObject(message.rewriteObject, options);
                                 if (options.oneofs)
                                     object.transformation = "rewriteObject";
+                            }
+                            if (message.updateObjectCustomContext != null && message.hasOwnProperty("updateObjectCustomContext")) {
+                                object.updateObjectCustomContext = $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.toObject(message.updateObjectCustomContext, options);
+                                if (options.oneofs)
+                                    object.transformation = "updateObjectCustomContext";
                             }
                             return object;
                         };
@@ -7061,6 +7131,769 @@
                         };
     
                         return PutMetadata;
+                    })();
+    
+                    v1.ObjectCustomContextPayload = (function() {
+    
+                        /**
+                         * Properties of an ObjectCustomContextPayload.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @interface IObjectCustomContextPayload
+                         * @property {string|null} [value] ObjectCustomContextPayload value
+                         */
+    
+                        /**
+                         * Constructs a new ObjectCustomContextPayload.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @classdesc Represents an ObjectCustomContextPayload.
+                         * @implements IObjectCustomContextPayload
+                         * @constructor
+                         * @param {google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload=} [properties] Properties to set
+                         */
+                        function ObjectCustomContextPayload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ObjectCustomContextPayload value.
+                         * @member {string|null|undefined} value
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @instance
+                         */
+                        ObjectCustomContextPayload.prototype.value = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ObjectCustomContextPayload.prototype, "_value", {
+                            get: $util.oneOfGetter($oneOfFields = ["value"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ObjectCustomContextPayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload=} [properties] Properties to set
+                         * @returns {google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload} ObjectCustomContextPayload instance
+                         */
+                        ObjectCustomContextPayload.create = function create(properties) {
+                            return new ObjectCustomContextPayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ObjectCustomContextPayload message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload} message ObjectCustomContextPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ObjectCustomContextPayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ObjectCustomContextPayload message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload} message ObjectCustomContextPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ObjectCustomContextPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ObjectCustomContextPayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload} ObjectCustomContextPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ObjectCustomContextPayload.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ObjectCustomContextPayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload} ObjectCustomContextPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ObjectCustomContextPayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ObjectCustomContextPayload message.
+                         * @function verify
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ObjectCustomContextPayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.value != null && message.hasOwnProperty("value")) {
+                                properties._value = 1;
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ObjectCustomContextPayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload} ObjectCustomContextPayload
+                         */
+                        ObjectCustomContextPayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload)
+                                return object;
+                            var message = new $root.google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload();
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ObjectCustomContextPayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload} message ObjectCustomContextPayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ObjectCustomContextPayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.value != null && message.hasOwnProperty("value")) {
+                                object.value = message.value;
+                                if (options.oneofs)
+                                    object._value = "value";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ObjectCustomContextPayload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ObjectCustomContextPayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ObjectCustomContextPayload
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ObjectCustomContextPayload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload";
+                        };
+    
+                        return ObjectCustomContextPayload;
+                    })();
+    
+                    v1.CustomContextUpdates = (function() {
+    
+                        /**
+                         * Properties of a CustomContextUpdates.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @interface ICustomContextUpdates
+                         * @property {Object.<string,google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload>|null} [updates] CustomContextUpdates updates
+                         * @property {Array.<string>|null} [keysToClear] CustomContextUpdates keysToClear
+                         */
+    
+                        /**
+                         * Constructs a new CustomContextUpdates.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @classdesc Represents a CustomContextUpdates.
+                         * @implements ICustomContextUpdates
+                         * @constructor
+                         * @param {google.cloud.storagebatchoperations.v1.ICustomContextUpdates=} [properties] Properties to set
+                         */
+                        function CustomContextUpdates(properties) {
+                            this.updates = {};
+                            this.keysToClear = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomContextUpdates updates.
+                         * @member {Object.<string,google.cloud.storagebatchoperations.v1.IObjectCustomContextPayload>} updates
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @instance
+                         */
+                        CustomContextUpdates.prototype.updates = $util.emptyObject;
+    
+                        /**
+                         * CustomContextUpdates keysToClear.
+                         * @member {Array.<string>} keysToClear
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @instance
+                         */
+                        CustomContextUpdates.prototype.keysToClear = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CustomContextUpdates instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.ICustomContextUpdates=} [properties] Properties to set
+                         * @returns {google.cloud.storagebatchoperations.v1.CustomContextUpdates} CustomContextUpdates instance
+                         */
+                        CustomContextUpdates.create = function create(properties) {
+                            return new CustomContextUpdates(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomContextUpdates message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.CustomContextUpdates.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.ICustomContextUpdates} message CustomContextUpdates message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomContextUpdates.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updates != null && Object.hasOwnProperty.call(message, "updates"))
+                                for (var keys = Object.keys(message.updates), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload.encode(message.updates[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.keysToClear != null && message.keysToClear.length)
+                                for (var i = 0; i < message.keysToClear.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.keysToClear[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomContextUpdates message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.CustomContextUpdates.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.ICustomContextUpdates} message CustomContextUpdates message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomContextUpdates.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomContextUpdates message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storagebatchoperations.v1.CustomContextUpdates} CustomContextUpdates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomContextUpdates.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storagebatchoperations.v1.CustomContextUpdates(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.updates === $util.emptyObject)
+                                            message.updates = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.updates[key] = value;
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.keysToClear && message.keysToClear.length))
+                                            message.keysToClear = [];
+                                        message.keysToClear.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomContextUpdates message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storagebatchoperations.v1.CustomContextUpdates} CustomContextUpdates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomContextUpdates.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomContextUpdates message.
+                         * @function verify
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomContextUpdates.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updates != null && message.hasOwnProperty("updates")) {
+                                if (!$util.isObject(message.updates))
+                                    return "updates: object expected";
+                                var key = Object.keys(message.updates);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload.verify(message.updates[key[i]]);
+                                    if (error)
+                                        return "updates." + error;
+                                }
+                            }
+                            if (message.keysToClear != null && message.hasOwnProperty("keysToClear")) {
+                                if (!Array.isArray(message.keysToClear))
+                                    return "keysToClear: array expected";
+                                for (var i = 0; i < message.keysToClear.length; ++i)
+                                    if (!$util.isString(message.keysToClear[i]))
+                                        return "keysToClear: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomContextUpdates message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storagebatchoperations.v1.CustomContextUpdates} CustomContextUpdates
+                         */
+                        CustomContextUpdates.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storagebatchoperations.v1.CustomContextUpdates)
+                                return object;
+                            var message = new $root.google.cloud.storagebatchoperations.v1.CustomContextUpdates();
+                            if (object.updates) {
+                                if (typeof object.updates !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.CustomContextUpdates.updates: object expected");
+                                message.updates = {};
+                                for (var keys = Object.keys(object.updates), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.updates[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.storagebatchoperations.v1.CustomContextUpdates.updates: object expected");
+                                    message.updates[keys[i]] = $root.google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload.fromObject(object.updates[keys[i]]);
+                                }
+                            }
+                            if (object.keysToClear) {
+                                if (!Array.isArray(object.keysToClear))
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.CustomContextUpdates.keysToClear: array expected");
+                                message.keysToClear = [];
+                                for (var i = 0; i < object.keysToClear.length; ++i)
+                                    message.keysToClear[i] = String(object.keysToClear[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomContextUpdates message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.CustomContextUpdates} message CustomContextUpdates
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomContextUpdates.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.keysToClear = [];
+                            if (options.objects || options.defaults)
+                                object.updates = {};
+                            var keys2;
+                            if (message.updates && (keys2 = Object.keys(message.updates)).length) {
+                                object.updates = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.updates[keys2[j]] = $root.google.cloud.storagebatchoperations.v1.ObjectCustomContextPayload.toObject(message.updates[keys2[j]], options);
+                            }
+                            if (message.keysToClear && message.keysToClear.length) {
+                                object.keysToClear = [];
+                                for (var j = 0; j < message.keysToClear.length; ++j)
+                                    object.keysToClear[j] = message.keysToClear[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomContextUpdates to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomContextUpdates.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomContextUpdates
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storagebatchoperations.v1.CustomContextUpdates
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomContextUpdates.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storagebatchoperations.v1.CustomContextUpdates";
+                        };
+    
+                        return CustomContextUpdates;
+                    })();
+    
+                    v1.UpdateObjectCustomContext = (function() {
+    
+                        /**
+                         * Properties of an UpdateObjectCustomContext.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @interface IUpdateObjectCustomContext
+                         * @property {google.cloud.storagebatchoperations.v1.ICustomContextUpdates|null} [customContextUpdates] UpdateObjectCustomContext customContextUpdates
+                         * @property {boolean|null} [clearAll] UpdateObjectCustomContext clearAll
+                         */
+    
+                        /**
+                         * Constructs a new UpdateObjectCustomContext.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @classdesc Represents an UpdateObjectCustomContext.
+                         * @implements IUpdateObjectCustomContext
+                         * @constructor
+                         * @param {google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext=} [properties] Properties to set
+                         */
+                        function UpdateObjectCustomContext(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateObjectCustomContext customContextUpdates.
+                         * @member {google.cloud.storagebatchoperations.v1.ICustomContextUpdates|null|undefined} customContextUpdates
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @instance
+                         */
+                        UpdateObjectCustomContext.prototype.customContextUpdates = null;
+    
+                        /**
+                         * UpdateObjectCustomContext clearAll.
+                         * @member {boolean|null|undefined} clearAll
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @instance
+                         */
+                        UpdateObjectCustomContext.prototype.clearAll = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * UpdateObjectCustomContext action.
+                         * @member {"customContextUpdates"|"clearAll"|undefined} action
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @instance
+                         */
+                        Object.defineProperty(UpdateObjectCustomContext.prototype, "action", {
+                            get: $util.oneOfGetter($oneOfFields = ["customContextUpdates", "clearAll"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new UpdateObjectCustomContext instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext=} [properties] Properties to set
+                         * @returns {google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext} UpdateObjectCustomContext instance
+                         */
+                        UpdateObjectCustomContext.create = function create(properties) {
+                            return new UpdateObjectCustomContext(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateObjectCustomContext message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext} message UpdateObjectCustomContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateObjectCustomContext.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customContextUpdates != null && Object.hasOwnProperty.call(message, "customContextUpdates"))
+                                $root.google.cloud.storagebatchoperations.v1.CustomContextUpdates.encode(message.customContextUpdates, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.clearAll != null && Object.hasOwnProperty.call(message, "clearAll"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clearAll);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateObjectCustomContext message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IUpdateObjectCustomContext} message UpdateObjectCustomContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateObjectCustomContext.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateObjectCustomContext message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext} UpdateObjectCustomContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateObjectCustomContext.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.customContextUpdates = $root.google.cloud.storagebatchoperations.v1.CustomContextUpdates.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.clearAll = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateObjectCustomContext message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext} UpdateObjectCustomContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateObjectCustomContext.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateObjectCustomContext message.
+                         * @function verify
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateObjectCustomContext.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.customContextUpdates != null && message.hasOwnProperty("customContextUpdates")) {
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.CustomContextUpdates.verify(message.customContextUpdates);
+                                    if (error)
+                                        return "customContextUpdates." + error;
+                                }
+                            }
+                            if (message.clearAll != null && message.hasOwnProperty("clearAll")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                if (typeof message.clearAll !== "boolean")
+                                    return "clearAll: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateObjectCustomContext message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext} UpdateObjectCustomContext
+                         */
+                        UpdateObjectCustomContext.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext)
+                                return object;
+                            var message = new $root.google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext();
+                            if (object.customContextUpdates != null) {
+                                if (typeof object.customContextUpdates !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext.customContextUpdates: object expected");
+                                message.customContextUpdates = $root.google.cloud.storagebatchoperations.v1.CustomContextUpdates.fromObject(object.customContextUpdates);
+                            }
+                            if (object.clearAll != null)
+                                message.clearAll = Boolean(object.clearAll);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateObjectCustomContext message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext} message UpdateObjectCustomContext
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateObjectCustomContext.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.customContextUpdates != null && message.hasOwnProperty("customContextUpdates")) {
+                                object.customContextUpdates = $root.google.cloud.storagebatchoperations.v1.CustomContextUpdates.toObject(message.customContextUpdates, options);
+                                if (options.oneofs)
+                                    object.action = "customContextUpdates";
+                            }
+                            if (message.clearAll != null && message.hasOwnProperty("clearAll")) {
+                                object.clearAll = message.clearAll;
+                                if (options.oneofs)
+                                    object.action = "clearAll";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateObjectCustomContext to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateObjectCustomContext.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateObjectCustomContext
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateObjectCustomContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storagebatchoperations.v1.UpdateObjectCustomContext";
+                        };
+    
+                        return UpdateObjectCustomContext;
                     })();
     
                     v1.ErrorSummary = (function() {
