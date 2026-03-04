@@ -286,9 +286,9 @@ describe('v1beta.EvaluationServiceClient', () => {
               new protos.google.cloud.ces.v1beta.UploadEvaluationAudioRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.ces.v1beta.UploadEvaluationAudioRequest', ['app']);
-            request.app = defaultValue1;
-            const expectedHeaderRequestParams = `app=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.cloud.ces.v1beta.UploadEvaluationAudioRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.ces.v1beta.UploadEvaluationAudioResponse()
             );
@@ -313,9 +313,9 @@ describe('v1beta.EvaluationServiceClient', () => {
               new protos.google.cloud.ces.v1beta.UploadEvaluationAudioRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.ces.v1beta.UploadEvaluationAudioRequest', ['app']);
-            request.app = defaultValue1;
-            const expectedHeaderRequestParams = `app=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.cloud.ces.v1beta.UploadEvaluationAudioRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.ces.v1beta.UploadEvaluationAudioResponse()
             );
@@ -351,9 +351,9 @@ describe('v1beta.EvaluationServiceClient', () => {
               new protos.google.cloud.ces.v1beta.UploadEvaluationAudioRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.ces.v1beta.UploadEvaluationAudioRequest', ['app']);
-            request.app = defaultValue1;
-            const expectedHeaderRequestParams = `app=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.cloud.ces.v1beta.UploadEvaluationAudioRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.uploadEvaluationAudio = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.uploadEvaluationAudio(request), expectedError);
@@ -375,8 +375,8 @@ describe('v1beta.EvaluationServiceClient', () => {
               new protos.google.cloud.ces.v1beta.UploadEvaluationAudioRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.ces.v1beta.UploadEvaluationAudioRequest', ['app']);
-            request.app = defaultValue1;
+              getTypeDefaultValue('.google.cloud.ces.v1beta.UploadEvaluationAudioRequest', ['name']);
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.uploadEvaluationAudio(request), expectedError);
@@ -5934,6 +5934,44 @@ describe('v1beta.EvaluationServiceClient', () => {
                 const result = client.matchScheduledEvaluationRunFromScheduledEvaluationRunName(fakePath);
                 assert.strictEqual(result, "scheduledEvaluationRunValue");
                 assert((client.pathTemplates.scheduledEvaluationRunPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('securitySettings', async () => {
+            const fakePath = "/rendered/path/securitySettings";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new evaluationserviceModule.v1beta.EvaluationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.securitySettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.securitySettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('securitySettingsPath', () => {
+                const result = client.securitySettingsPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.securitySettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSecuritySettingsName', () => {
+                const result = client.matchProjectFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSecuritySettingsName', () => {
+                const result = client.matchLocationFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
