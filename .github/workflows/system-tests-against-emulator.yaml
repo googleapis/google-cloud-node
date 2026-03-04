@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+name: system-tests-against-emulator
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      emulator:
+        image: gcr.io/cloud-spanner-emulator/emulator:latest
+        ports:
+          - 9010:9010
+          - 9020:9020
+
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: node --version
+      - run: npm install
+      - run: npm run system-test
+        env:
+          SPANNER_EMULATOR_HOST: localhost:9010
+          GCLOUD_PROJECT: emulator-test-project

@@ -230,6 +230,834 @@
           }
         }
       }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_MarketingDataInsightsService_RetrieveInsights_async",
+      "title": "IngestionService retrieveInsights Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves marketing data insights for a given user list. This feature is only available to data partners. Authorization Headers: This method supports the following optional headers to define how the API authorizes access for the request: * `login-account`: (Optional) The resource name of the account where the   Google Account of the credentials is a user. If not set, defaults to the   account of the request. Format:   `accountTypes/{loginAccountType}/accounts/{loginAccountId}` * `linked-account`: (Optional) The resource name of the account with an    established product link to the `login-account`. Format:    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`",
+      "canonical": true,
+      "file": "marketing_data_insights_service.retrieve_insights.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RetrieveInsights",
+        "fullName": "google.ads.datamanager.v1.MarketingDataInsightsService.RetrieveInsights",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "baseline",
+            "type": ".google.ads.datamanager.v1.Baseline"
+          },
+          {
+            "name": "user_list_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.RetrieveInsightsResponse",
+        "client": {
+          "shortName": "MarketingDataInsightsServiceClient",
+          "fullName": "google.ads.datamanager.v1.MarketingDataInsightsServiceClient"
+        },
+        "method": {
+          "shortName": "RetrieveInsights",
+          "fullName": "google.ads.datamanager.v1.MarketingDataInsightsService.RetrieveInsights",
+          "service": {
+            "shortName": "MarketingDataInsightsService",
+            "fullName": "google.ads.datamanager.v1.MarketingDataInsightsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_PartnerLinkService_CreatePartnerLink_async",
+      "title": "IngestionService createPartnerLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a partner link for the given account. Authorization Headers: This method supports the following optional headers to define how the API authorizes access for the request: * `login-account`: (Optional) The resource name of the account where the   Google Account of the credentials is a user. If not set, defaults to the   account of the request. Format:   `accountTypes/{loginAccountType}/accounts/{loginAccountId}` * `linked-account`: (Optional) The resource name of the account with an    established product link to the `login-account`. Format:    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`",
+      "canonical": true,
+      "file": "partner_link_service.create_partner_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePartnerLink",
+        "fullName": "google.ads.datamanager.v1.PartnerLinkService.CreatePartnerLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "partner_link",
+            "type": ".google.ads.datamanager.v1.PartnerLink"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.PartnerLink",
+        "client": {
+          "shortName": "PartnerLinkServiceClient",
+          "fullName": "google.ads.datamanager.v1.PartnerLinkServiceClient"
+        },
+        "method": {
+          "shortName": "CreatePartnerLink",
+          "fullName": "google.ads.datamanager.v1.PartnerLinkService.CreatePartnerLink",
+          "service": {
+            "shortName": "PartnerLinkService",
+            "fullName": "google.ads.datamanager.v1.PartnerLinkService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_PartnerLinkService_DeletePartnerLink_async",
+      "title": "IngestionService deletePartnerLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a partner link for the given account. Authorization Headers: This method supports the following optional headers to define how the API authorizes access for the request: * `login-account`: (Optional) The resource name of the account where the   Google Account of the credentials is a user. If not set, defaults to the   account of the request. Format:   `accountTypes/{loginAccountType}/accounts/{loginAccountId}` * `linked-account`: (Optional) The resource name of the account with an    established product link to the `login-account`. Format:    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`",
+      "canonical": true,
+      "file": "partner_link_service.delete_partner_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePartnerLink",
+        "fullName": "google.ads.datamanager.v1.PartnerLinkService.DeletePartnerLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "PartnerLinkServiceClient",
+          "fullName": "google.ads.datamanager.v1.PartnerLinkServiceClient"
+        },
+        "method": {
+          "shortName": "DeletePartnerLink",
+          "fullName": "google.ads.datamanager.v1.PartnerLinkService.DeletePartnerLink",
+          "service": {
+            "shortName": "PartnerLinkService",
+            "fullName": "google.ads.datamanager.v1.PartnerLinkService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_PartnerLinkService_SearchPartnerLinks_async",
+      "title": "IngestionService searchPartnerLinks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Searches for all partner links to and from a given account. Authorization Headers: This method supports the following optional headers to define how the API authorizes access for the request: * `login-account`: (Optional) The resource name of the account where the   Google Account of the credentials is a user. If not set, defaults to the   account of the request. Format:   `accountTypes/{loginAccountType}/accounts/{loginAccountId}` * `linked-account`: (Optional) The resource name of the account with an    established product link to the `login-account`. Format:    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`",
+      "canonical": true,
+      "file": "partner_link_service.search_partner_links.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 91,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchPartnerLinks",
+        "fullName": "google.ads.datamanager.v1.PartnerLinkService.SearchPartnerLinks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.SearchPartnerLinksResponse",
+        "client": {
+          "shortName": "PartnerLinkServiceClient",
+          "fullName": "google.ads.datamanager.v1.PartnerLinkServiceClient"
+        },
+        "method": {
+          "shortName": "SearchPartnerLinks",
+          "fullName": "google.ads.datamanager.v1.PartnerLinkService.SearchPartnerLinks",
+          "service": {
+            "shortName": "PartnerLinkService",
+            "fullName": "google.ads.datamanager.v1.PartnerLinkService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListDirectLicenseService_CreateUserListDirectLicense_async",
+      "title": "IngestionService createUserListDirectLicense Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a user list direct license. This feature is only available to data partners.",
+      "canonical": true,
+      "file": "user_list_direct_license_service.create_user_list_direct_license.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateUserListDirectLicense",
+        "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService.CreateUserListDirectLicense",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_list_direct_license",
+            "type": ".google.ads.datamanager.v1.UserListDirectLicense"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.UserListDirectLicense",
+        "client": {
+          "shortName": "UserListDirectLicenseServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListDirectLicenseServiceClient"
+        },
+        "method": {
+          "shortName": "CreateUserListDirectLicense",
+          "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService.CreateUserListDirectLicense",
+          "service": {
+            "shortName": "UserListDirectLicenseService",
+            "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListDirectLicenseService_GetUserListDirectLicense_async",
+      "title": "IngestionService getUserListDirectLicense Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a user list direct license. This feature is only available to data partners.",
+      "canonical": true,
+      "file": "user_list_direct_license_service.get_user_list_direct_license.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetUserListDirectLicense",
+        "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService.GetUserListDirectLicense",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.UserListDirectLicense",
+        "client": {
+          "shortName": "UserListDirectLicenseServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListDirectLicenseServiceClient"
+        },
+        "method": {
+          "shortName": "GetUserListDirectLicense",
+          "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService.GetUserListDirectLicense",
+          "service": {
+            "shortName": "UserListDirectLicenseService",
+            "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListDirectLicenseService_UpdateUserListDirectLicense_async",
+      "title": "IngestionService updateUserListDirectLicense Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a user list direct license. This feature is only available to data partners.",
+      "canonical": true,
+      "file": "user_list_direct_license_service.update_user_list_direct_license.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateUserListDirectLicense",
+        "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService.UpdateUserListDirectLicense",
+        "async": true,
+        "parameters": [
+          {
+            "name": "user_list_direct_license",
+            "type": ".google.ads.datamanager.v1.UserListDirectLicense"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.UserListDirectLicense",
+        "client": {
+          "shortName": "UserListDirectLicenseServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListDirectLicenseServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateUserListDirectLicense",
+          "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService.UpdateUserListDirectLicense",
+          "service": {
+            "shortName": "UserListDirectLicenseService",
+            "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListDirectLicenseService_ListUserListDirectLicenses_async",
+      "title": "IngestionService listUserListDirectLicenses Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all user list direct licenses owned by the parent account. This feature is only available to data partners.",
+      "canonical": true,
+      "file": "user_list_direct_license_service.list_user_list_direct_licenses.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 90,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListUserListDirectLicenses",
+        "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService.ListUserListDirectLicenses",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.ListUserListDirectLicensesResponse",
+        "client": {
+          "shortName": "UserListDirectLicenseServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListDirectLicenseServiceClient"
+        },
+        "method": {
+          "shortName": "ListUserListDirectLicenses",
+          "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService.ListUserListDirectLicenses",
+          "service": {
+            "shortName": "UserListDirectLicenseService",
+            "fullName": "google.ads.datamanager.v1.UserListDirectLicenseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListGlobalLicenseService_CreateUserListGlobalLicense_async",
+      "title": "IngestionService createUserListGlobalLicense Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a user list global license. This feature is only available to data partners.",
+      "canonical": true,
+      "file": "user_list_global_license_service.create_user_list_global_license.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateUserListGlobalLicense",
+        "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.CreateUserListGlobalLicense",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_list_global_license",
+            "type": ".google.ads.datamanager.v1.UserListGlobalLicense"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.UserListGlobalLicense",
+        "client": {
+          "shortName": "UserListGlobalLicenseServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseServiceClient"
+        },
+        "method": {
+          "shortName": "CreateUserListGlobalLicense",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.CreateUserListGlobalLicense",
+          "service": {
+            "shortName": "UserListGlobalLicenseService",
+            "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListGlobalLicenseService_UpdateUserListGlobalLicense_async",
+      "title": "IngestionService updateUserListGlobalLicense Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a user list global license. This feature is only available to data partners.",
+      "canonical": true,
+      "file": "user_list_global_license_service.update_user_list_global_license.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateUserListGlobalLicense",
+        "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.UpdateUserListGlobalLicense",
+        "async": true,
+        "parameters": [
+          {
+            "name": "user_list_global_license",
+            "type": ".google.ads.datamanager.v1.UserListGlobalLicense"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.UserListGlobalLicense",
+        "client": {
+          "shortName": "UserListGlobalLicenseServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateUserListGlobalLicense",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.UpdateUserListGlobalLicense",
+          "service": {
+            "shortName": "UserListGlobalLicenseService",
+            "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListGlobalLicenseService_GetUserListGlobalLicense_async",
+      "title": "IngestionService getUserListGlobalLicense Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a user list global license. This feature is only available to data partners.",
+      "canonical": true,
+      "file": "user_list_global_license_service.get_user_list_global_license.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetUserListGlobalLicense",
+        "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.GetUserListGlobalLicense",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.UserListGlobalLicense",
+        "client": {
+          "shortName": "UserListGlobalLicenseServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseServiceClient"
+        },
+        "method": {
+          "shortName": "GetUserListGlobalLicense",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.GetUserListGlobalLicense",
+          "service": {
+            "shortName": "UserListGlobalLicenseService",
+            "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListGlobalLicenseService_ListUserListGlobalLicenses_async",
+      "title": "IngestionService listUserListGlobalLicenses Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all user list global licenses owned by the parent account. This feature is only available to data partners.",
+      "canonical": true,
+      "file": "user_list_global_license_service.list_user_list_global_licenses.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 90,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListUserListGlobalLicenses",
+        "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.ListUserListGlobalLicenses",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.ListUserListGlobalLicensesResponse",
+        "client": {
+          "shortName": "UserListGlobalLicenseServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseServiceClient"
+        },
+        "method": {
+          "shortName": "ListUserListGlobalLicenses",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.ListUserListGlobalLicenses",
+          "service": {
+            "shortName": "UserListGlobalLicenseService",
+            "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListGlobalLicenseService_ListUserListGlobalLicenseCustomerInfos_async",
+      "title": "IngestionService listUserListGlobalLicenseCustomerInfos Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all customer info for a user list global license. This feature is only available to data partners.",
+      "canonical": true,
+      "file": "user_list_global_license_service.list_user_list_global_license_customer_infos.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 94,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListUserListGlobalLicenseCustomerInfos",
+        "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.ListUserListGlobalLicenseCustomerInfos",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.ListUserListGlobalLicenseCustomerInfosResponse",
+        "client": {
+          "shortName": "UserListGlobalLicenseServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseServiceClient"
+        },
+        "method": {
+          "shortName": "ListUserListGlobalLicenseCustomerInfos",
+          "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService.ListUserListGlobalLicenseCustomerInfos",
+          "service": {
+            "shortName": "UserListGlobalLicenseService",
+            "fullName": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListService_GetUserList_async",
+      "title": "IngestionService getUserList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a UserList. Authorization Headers: This method supports the following optional headers to define how the API authorizes access for the request: * `login-account`: (Optional) The resource name of the account where the   Google Account of the credentials is a user. If not set, defaults to the   account of the request. Format:   `accountTypes/{loginAccountType}/accounts/{loginAccountId}` * `linked-account`: (Optional) The resource name of the account with an    established product link to the `login-account`. Format:    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`",
+      "canonical": true,
+      "file": "user_list_service.get_user_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetUserList",
+        "fullName": "google.ads.datamanager.v1.UserListService.GetUserList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.UserList",
+        "client": {
+          "shortName": "UserListServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListServiceClient"
+        },
+        "method": {
+          "shortName": "GetUserList",
+          "fullName": "google.ads.datamanager.v1.UserListService.GetUserList",
+          "service": {
+            "shortName": "UserListService",
+            "fullName": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListService_ListUserLists_async",
+      "title": "IngestionService listUserLists Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists UserLists. Authorization Headers: This method supports the following optional headers to define how the API authorizes access for the request: * `login-account`: (Optional) The resource name of the account where the   Google Account of the credentials is a user. If not set, defaults to the   account of the request. Format:   `accountTypes/{loginAccountType}/accounts/{loginAccountId}` * `linked-account`: (Optional) The resource name of the account with an    established product link to the `login-account`. Format:    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`",
+      "canonical": true,
+      "file": "user_list_service.list_user_lists.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 93,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListUserLists",
+        "fullName": "google.ads.datamanager.v1.UserListService.ListUserLists",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.ListUserListsResponse",
+        "client": {
+          "shortName": "UserListServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListServiceClient"
+        },
+        "method": {
+          "shortName": "ListUserLists",
+          "fullName": "google.ads.datamanager.v1.UserListService.ListUserLists",
+          "service": {
+            "shortName": "UserListService",
+            "fullName": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListService_CreateUserList_async",
+      "title": "IngestionService createUserList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a UserList. Authorization Headers: This method supports the following optional headers to define how the API authorizes access for the request: * `login-account`: (Optional) The resource name of the account where the   Google Account of the credentials is a user. If not set, defaults to the   account of the request. Format:   `accountTypes/{loginAccountType}/accounts/{loginAccountId}` * `linked-account`: (Optional) The resource name of the account with an    established product link to the `login-account`. Format:    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`",
+      "canonical": true,
+      "file": "user_list_service.create_user_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateUserList",
+        "fullName": "google.ads.datamanager.v1.UserListService.CreateUserList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_list",
+            "type": ".google.ads.datamanager.v1.UserList"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.UserList",
+        "client": {
+          "shortName": "UserListServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListServiceClient"
+        },
+        "method": {
+          "shortName": "CreateUserList",
+          "fullName": "google.ads.datamanager.v1.UserListService.CreateUserList",
+          "service": {
+            "shortName": "UserListService",
+            "fullName": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListService_UpdateUserList_async",
+      "title": "IngestionService updateUserList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a UserList. Authorization Headers: This method supports the following optional headers to define how the API authorizes access for the request: * `login-account`: (Optional) The resource name of the account where the   Google Account of the credentials is a user. If not set, defaults to the   account of the request. Format:   `accountTypes/{loginAccountType}/accounts/{loginAccountId}` * `linked-account`: (Optional) The resource name of the account with an    established product link to the `login-account`. Format:    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`",
+      "canonical": true,
+      "file": "user_list_service.update_user_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateUserList",
+        "fullName": "google.ads.datamanager.v1.UserListService.UpdateUserList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "user_list",
+            "type": ".google.ads.datamanager.v1.UserList"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.UserList",
+        "client": {
+          "shortName": "UserListServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateUserList",
+          "fullName": "google.ads.datamanager.v1.UserListService.UpdateUserList",
+          "service": {
+            "shortName": "UserListService",
+            "fullName": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_UserListService_DeleteUserList_async",
+      "title": "IngestionService deleteUserList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a UserList. Authorization Headers: This method supports the following optional headers to define how the API authorizes access for the request: * `login-account`: (Optional) The resource name of the account where the   Google Account of the credentials is a user. If not set, defaults to the   account of the request. Format:   `accountTypes/{loginAccountType}/accounts/{loginAccountId}` * `linked-account`: (Optional) The resource name of the account with an    established product link to the `login-account`. Format:    `accountTypes/{linkedAccountType}/accounts/{linkedAccountId}`",
+      "canonical": true,
+      "file": "user_list_service.delete_user_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteUserList",
+        "fullName": "google.ads.datamanager.v1.UserListService.DeleteUserList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "UserListServiceClient",
+          "fullName": "google.ads.datamanager.v1.UserListServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteUserList",
+          "fullName": "google.ads.datamanager.v1.UserListService.DeleteUserList",
+          "service": {
+            "shortName": "UserListService",
+            "fullName": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      }
     }
   ]
 }

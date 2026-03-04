@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.4.0...kms-inventory-v2.5.0) (2026-03-02)
+
+
+### Features
+
+* [inventory] Add support for project level key usage tracking ([34a3659](https://github.com/googleapis/google-cloud-node/commit/34a365988184038c96de95cf0d8bf4bb5d8a8ccf))
+
 ## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.3.0...kms-inventory-v2.4.0) (2026-02-19)
 
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.5.3](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.2...discoveryengine-v2.5.3) (2026-03-02)
+
+
+### Bug Fixes
+
+* Enable google-cloud-discoveryengine tests to run on windows ([a28d23f](https://github.com/googleapis/google-cloud-node/commit/a28d23fde5441c969b380dbd0dff0dc48836c01e))
+* Enable google-cloud-discoveryengine tests to run on windows ([23b81e4](https://github.com/googleapis/google-cloud-node/commit/23b81e4ae4c2dbe26f3731df4bd6cac9c687753b))
+* Try an alternative bash script for windows compatibility without an additional dependency ([f9b1ee9](https://github.com/googleapis/google-cloud-node/commit/f9b1ee9a92eb12f57a56db1bf591d3ec3afb4864))
+
 ## [2.5.2](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.1...discoveryengine-v2.5.2) (2025-10-21)
 
 

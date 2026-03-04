@@ -511,4 +511,245 @@ describe('v1.IngestionServiceClient', () => {
             await assert.rejects(client.retrieveRequestStatus(request), expectedError);
         });
     });
+
+    describe('Path templates', () => {
+
+        describe('partnerLink', async () => {
+            const fakePath = "/rendered/path/partnerLink";
+            const expectedParameters = {
+                account_type: "accountTypeValue",
+                account: "accountValue",
+                partner_link: "partnerLinkValue",
+            };
+            const client = new ingestionserviceModule.v1.IngestionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.partnerLinkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.partnerLinkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('partnerLinkPath', () => {
+                const result = client.partnerLinkPath("accountTypeValue", "accountValue", "partnerLinkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.partnerLinkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountTypeFromPartnerLinkName', () => {
+                const result = client.matchAccountTypeFromPartnerLinkName(fakePath);
+                assert.strictEqual(result, "accountTypeValue");
+                assert((client.pathTemplates.partnerLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAccountFromPartnerLinkName', () => {
+                const result = client.matchAccountFromPartnerLinkName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.partnerLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPartnerLinkFromPartnerLinkName', () => {
+                const result = client.matchPartnerLinkFromPartnerLinkName(fakePath);
+                assert.strictEqual(result, "partnerLinkValue");
+                assert((client.pathTemplates.partnerLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('userList', async () => {
+            const fakePath = "/rendered/path/userList";
+            const expectedParameters = {
+                account_type: "accountTypeValue",
+                account: "accountValue",
+                user_list: "userListValue",
+            };
+            const client = new ingestionserviceModule.v1.IngestionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userListPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userListPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userListPath', () => {
+                const result = client.userListPath("accountTypeValue", "accountValue", "userListValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userListPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountTypeFromUserListName', () => {
+                const result = client.matchAccountTypeFromUserListName(fakePath);
+                assert.strictEqual(result, "accountTypeValue");
+                assert((client.pathTemplates.userListPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAccountFromUserListName', () => {
+                const result = client.matchAccountFromUserListName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.userListPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserListFromUserListName', () => {
+                const result = client.matchUserListFromUserListName(fakePath);
+                assert.strictEqual(result, "userListValue");
+                assert((client.pathTemplates.userListPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('userListDirectLicense', async () => {
+            const fakePath = "/rendered/path/userListDirectLicense";
+            const expectedParameters = {
+                account_type: "accountTypeValue",
+                account: "accountValue",
+                user_list_direct_license: "userListDirectLicenseValue",
+            };
+            const client = new ingestionserviceModule.v1.IngestionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userListDirectLicensePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userListDirectLicensePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userListDirectLicensePath', () => {
+                const result = client.userListDirectLicensePath("accountTypeValue", "accountValue", "userListDirectLicenseValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userListDirectLicensePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountTypeFromUserListDirectLicenseName', () => {
+                const result = client.matchAccountTypeFromUserListDirectLicenseName(fakePath);
+                assert.strictEqual(result, "accountTypeValue");
+                assert((client.pathTemplates.userListDirectLicensePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAccountFromUserListDirectLicenseName', () => {
+                const result = client.matchAccountFromUserListDirectLicenseName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.userListDirectLicensePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserListDirectLicenseFromUserListDirectLicenseName', () => {
+                const result = client.matchUserListDirectLicenseFromUserListDirectLicenseName(fakePath);
+                assert.strictEqual(result, "userListDirectLicenseValue");
+                assert((client.pathTemplates.userListDirectLicensePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('userListGlobalLicense', async () => {
+            const fakePath = "/rendered/path/userListGlobalLicense";
+            const expectedParameters = {
+                account_type: "accountTypeValue",
+                account: "accountValue",
+                user_list_global_license: "userListGlobalLicenseValue",
+            };
+            const client = new ingestionserviceModule.v1.IngestionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userListGlobalLicensePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userListGlobalLicensePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userListGlobalLicensePath', () => {
+                const result = client.userListGlobalLicensePath("accountTypeValue", "accountValue", "userListGlobalLicenseValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userListGlobalLicensePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountTypeFromUserListGlobalLicenseName', () => {
+                const result = client.matchAccountTypeFromUserListGlobalLicenseName(fakePath);
+                assert.strictEqual(result, "accountTypeValue");
+                assert((client.pathTemplates.userListGlobalLicensePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAccountFromUserListGlobalLicenseName', () => {
+                const result = client.matchAccountFromUserListGlobalLicenseName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.userListGlobalLicensePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserListGlobalLicenseFromUserListGlobalLicenseName', () => {
+                const result = client.matchUserListGlobalLicenseFromUserListGlobalLicenseName(fakePath);
+                assert.strictEqual(result, "userListGlobalLicenseValue");
+                assert((client.pathTemplates.userListGlobalLicensePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('userListGlobalLicenseCustomerInfo', async () => {
+            const fakePath = "/rendered/path/userListGlobalLicenseCustomerInfo";
+            const expectedParameters = {
+                account_type: "accountTypeValue",
+                account: "accountValue",
+                user_list_global_license: "userListGlobalLicenseValue",
+                license_customer_info: "licenseCustomerInfoValue",
+            };
+            const client = new ingestionserviceModule.v1.IngestionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userListGlobalLicenseCustomerInfoPath', () => {
+                const result = client.userListGlobalLicenseCustomerInfoPath("accountTypeValue", "accountValue", "userListGlobalLicenseValue", "licenseCustomerInfoValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountTypeFromUserListGlobalLicenseCustomerInfoName', () => {
+                const result = client.matchAccountTypeFromUserListGlobalLicenseCustomerInfoName(fakePath);
+                assert.strictEqual(result, "accountTypeValue");
+                assert((client.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAccountFromUserListGlobalLicenseCustomerInfoName', () => {
+                const result = client.matchAccountFromUserListGlobalLicenseCustomerInfoName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserListGlobalLicenseFromUserListGlobalLicenseCustomerInfoName', () => {
+                const result = client.matchUserListGlobalLicenseFromUserListGlobalLicenseCustomerInfoName(fakePath);
+                assert.strictEqual(result, "userListGlobalLicenseValue");
+                assert((client.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLicenseCustomerInfoFromUserListGlobalLicenseCustomerInfoName', () => {
+                const result = client.matchLicenseCustomerInfoFromUserListGlobalLicenseCustomerInfoName(fakePath);
+                assert.strictEqual(result, "licenseCustomerInfoValue");
+                assert((client.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

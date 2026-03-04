@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.1.0...datamanager-v0.2.0) (2026-03-02)
+
+
+### Features
+
+* [datamanager] add `UserListService` for creating and managing user lists ([#7290](https://github.com/googleapis/google-cloud-node/issues/7290)) ([32115d9](https://github.com/googleapis/google-cloud-node/commit/32115d95be2fc2e06da22aa5101c94ddb3bf82db))
+
 ## 0.1.0 (2025-11-11)
 
 

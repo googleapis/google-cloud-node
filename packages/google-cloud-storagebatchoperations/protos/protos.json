@@ -453,7 +453,8 @@
                             "putObjectHold",
                             "deleteObject",
                             "putMetadata",
-                            "rewriteObject"
+                            "rewriteObject",
+                            "updateObjectCustomContext"
                           ]
                         }
                       },
@@ -491,6 +492,10 @@
                         "rewriteObject": {
                           "type": "RewriteObject",
                           "id": 20
+                        },
+                        "updateObjectCustomContext": {
+                          "type": "UpdateObjectCustomContext",
+                          "id": 23
                         },
                         "loggingConfig": {
                           "type": "LoggingConfig",
@@ -589,7 +594,8 @@
                             "putObjectHold",
                             "deleteObject",
                             "putMetadata",
-                            "rewriteObject"
+                            "rewriteObject",
+                            "updateObjectCustomContext"
                           ]
                         }
                       },
@@ -628,6 +634,10 @@
                         "rewriteObject": {
                           "type": "RewriteObject",
                           "id": 14
+                        },
+                        "updateObjectCustomContext": {
+                          "type": "UpdateObjectCustomContext",
+                          "id": 15
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -951,6 +961,64 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "ObjectCustomContextPayload": {
+                      "oneofs": {
+                        "_value": {
+                          "oneof": [
+                            "value"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CustomContextUpdates": {
+                      "fields": {
+                        "updates": {
+                          "keyType": "string",
+                          "type": "ObjectCustomContextPayload",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "keysToClear": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateObjectCustomContext": {
+                      "oneofs": {
+                        "action": {
+                          "oneof": [
+                            "customContextUpdates",
+                            "clearAll"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "customContextUpdates": {
+                          "type": "CustomContextUpdates",
+                          "id": 1
+                        },
+                        "clearAll": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },
