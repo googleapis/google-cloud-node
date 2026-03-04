@@ -66,7 +66,7 @@
   "packages/google-cloud-configdelivery": "0.1.1",
   "packages/google-cloud-connectors": "0.5.1",
   "packages/google-cloud-contactcenterinsights": "4.1.1",
-  "packages/google-cloud-contentwarehouse": "2.3.0",
+  "packages/google-cloud-contentwarehouse": "2.4.0",
   "packages/google-cloud-datacatalog": "5.2.1",
   "packages/google-cloud-datacatalog-lineage": "2.1.1",
   "packages/google-cloud-dataform": "2.2.1",
