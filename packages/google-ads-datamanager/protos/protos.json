@@ -528,6 +528,11 @@
                       }
                     },
                     "ErrorReason": {
+                      "valuesOptions": {
+                        "INVALID_COUNTRY_CODE": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "ERROR_REASON_UNSPECIFIED": 0,
                         "INTERNAL_ERROR": 1,
@@ -627,7 +632,8 @@
                         "UNSUPPORTED_USER_LIST_UPLOAD_KEY_TYPES": 95,
                         "UNSUPPORTED_INGESTED_USER_LIST_INFO_CONFIG": 96,
                         "UNSUPPORTED_ACCOUNT_TYPES_FOR_USER_LIST_TYPE": 97,
-                        "UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK": 98
+                        "UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK": 98,
+                        "MEMBERSHIP_DURATION_TOO_LONG": 99
                       }
                     },
                     "Event": {
@@ -2345,6 +2351,16 @@
                             "publisherName"
                           ]
                         },
+                        "_matchRatePercentage": {
+                          "oneof": [
+                            "matchRatePercentage"
+                          ]
+                        },
+                        "_advertiserIdentifierCount": {
+                          "oneof": [
+                            "advertiserIdentifierCount"
+                          ]
+                        },
                         "_cleanRoomIdentifier": {
                           "oneof": [
                             "cleanRoomIdentifier"
@@ -2364,7 +2380,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.field_behavior)": "REQUIRED",
                             "proto3_optional": true
                           }
                         },
@@ -2372,14 +2388,16 @@
                           "type": "int32",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "advertiserIdentifierCount": {
                           "type": "int64",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "cleanRoomIdentifier": {

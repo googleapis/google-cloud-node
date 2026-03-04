@@ -5261,6 +5261,7 @@
                      * @property {number} UNSUPPORTED_INGESTED_USER_LIST_INFO_CONFIG=96 UNSUPPORTED_INGESTED_USER_LIST_INFO_CONFIG value
                      * @property {number} UNSUPPORTED_ACCOUNT_TYPES_FOR_USER_LIST_TYPE=97 UNSUPPORTED_ACCOUNT_TYPES_FOR_USER_LIST_TYPE value
                      * @property {number} UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK=98 UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK value
+                     * @property {number} MEMBERSHIP_DURATION_TOO_LONG=99 MEMBERSHIP_DURATION_TOO_LONG value
                      */
                     v1.ErrorReason = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -5363,6 +5364,7 @@
                         values[valuesById[96] = "UNSUPPORTED_INGESTED_USER_LIST_INFO_CONFIG"] = 96;
                         values[valuesById[97] = "UNSUPPORTED_ACCOUNT_TYPES_FOR_USER_LIST_TYPE"] = 97;
                         values[valuesById[98] = "UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK"] = 98;
+                        values[valuesById[99] = "MEMBERSHIP_DURATION_TOO_LONG"] = 99;
                         return values;
                     })();
     
@@ -21661,19 +21663,19 @@
     
                         /**
                          * PairIdInfo matchRatePercentage.
-                         * @member {number} matchRatePercentage
+                         * @member {number|null|undefined} matchRatePercentage
                          * @memberof google.ads.datamanager.v1.PairIdInfo
                          * @instance
                          */
-                        PairIdInfo.prototype.matchRatePercentage = 0;
+                        PairIdInfo.prototype.matchRatePercentage = null;
     
                         /**
                          * PairIdInfo advertiserIdentifierCount.
-                         * @member {number|Long} advertiserIdentifierCount
+                         * @member {number|Long|null|undefined} advertiserIdentifierCount
                          * @memberof google.ads.datamanager.v1.PairIdInfo
                          * @instance
                          */
-                        PairIdInfo.prototype.advertiserIdentifierCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        PairIdInfo.prototype.advertiserIdentifierCount = null;
     
                         /**
                          * PairIdInfo cleanRoomIdentifier.
@@ -21695,6 +21697,18 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PairIdInfo.prototype, "_publisherName", {
                             get: $util.oneOfGetter($oneOfFields = ["publisherName"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PairIdInfo.prototype, "_matchRatePercentage", {
+                            get: $util.oneOfGetter($oneOfFields = ["matchRatePercentage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PairIdInfo.prototype, "_advertiserIdentifierCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["advertiserIdentifierCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -21840,12 +21854,16 @@
                                 if (!$util.isString(message.publisherName))
                                     return "publisherName: string expected";
                             }
-                            if (message.matchRatePercentage != null && message.hasOwnProperty("matchRatePercentage"))
+                            if (message.matchRatePercentage != null && message.hasOwnProperty("matchRatePercentage")) {
+                                properties._matchRatePercentage = 1;
                                 if (!$util.isInteger(message.matchRatePercentage))
                                     return "matchRatePercentage: integer expected";
-                            if (message.advertiserIdentifierCount != null && message.hasOwnProperty("advertiserIdentifierCount"))
+                            }
+                            if (message.advertiserIdentifierCount != null && message.hasOwnProperty("advertiserIdentifierCount")) {
+                                properties._advertiserIdentifierCount = 1;
                                 if (!$util.isInteger(message.advertiserIdentifierCount) && !(message.advertiserIdentifierCount && $util.isInteger(message.advertiserIdentifierCount.low) && $util.isInteger(message.advertiserIdentifierCount.high)))
                                     return "advertiserIdentifierCount: integer|Long expected";
+                            }
                             if (message.cleanRoomIdentifier != null && message.hasOwnProperty("cleanRoomIdentifier")) {
                                 properties._cleanRoomIdentifier = 1;
                                 if (!$util.isString(message.cleanRoomIdentifier))
@@ -21906,14 +21924,6 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
-                                object.matchRatePercentage = 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.advertiserIdentifierCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.advertiserIdentifierCount = options.longs === String ? "0" : 0;
-                            }
                             if (message.publisherId != null && message.hasOwnProperty("publisherId")) {
                                 if (typeof message.publisherId === "number")
                                     object.publisherId = options.longs === String ? String(message.publisherId) : message.publisherId;
@@ -21927,13 +21937,19 @@
                                 if (options.oneofs)
                                     object._publisherName = "publisherName";
                             }
-                            if (message.matchRatePercentage != null && message.hasOwnProperty("matchRatePercentage"))
+                            if (message.matchRatePercentage != null && message.hasOwnProperty("matchRatePercentage")) {
                                 object.matchRatePercentage = message.matchRatePercentage;
-                            if (message.advertiserIdentifierCount != null && message.hasOwnProperty("advertiserIdentifierCount"))
+                                if (options.oneofs)
+                                    object._matchRatePercentage = "matchRatePercentage";
+                            }
+                            if (message.advertiserIdentifierCount != null && message.hasOwnProperty("advertiserIdentifierCount")) {
                                 if (typeof message.advertiserIdentifierCount === "number")
                                     object.advertiserIdentifierCount = options.longs === String ? String(message.advertiserIdentifierCount) : message.advertiserIdentifierCount;
                                 else
                                     object.advertiserIdentifierCount = options.longs === String ? $util.Long.prototype.toString.call(message.advertiserIdentifierCount) : options.longs === Number ? new $util.LongBits(message.advertiserIdentifierCount.low >>> 0, message.advertiserIdentifierCount.high >>> 0).toNumber() : message.advertiserIdentifierCount;
+                                if (options.oneofs)
+                                    object._advertiserIdentifierCount = "advertiserIdentifierCount";
+                            }
                             if (message.cleanRoomIdentifier != null && message.hasOwnProperty("cleanRoomIdentifier")) {
                                 object.cleanRoomIdentifier = message.cleanRoomIdentifier;
                                 if (options.oneofs)
