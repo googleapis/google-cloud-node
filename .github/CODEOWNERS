@@ -9,3 +9,4 @@
 *     @googleapis/cloud-sdk-nodejs-team
 /handwritten/bigquery @googleapis/bigquery-team
 /handwritten/cloud-profiler @googleapis/cloud-profiler-team
+/handwritten/storage @googleapis/gcs-team

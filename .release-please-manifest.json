@@ -1,9 +1,10 @@
 {
-  "handwritten/datastore": "10.1.0",
-  "handwritten/logging-winston": "6.0.1",
   "handwritten/bigquery": "8.2.0",
   "handwritten/cloud-profiler": "6.0.4",
+  "handwritten/datastore": "10.1.0",
   "handwritten/logging-bunyan": "5.1.1",
+  "handwritten/logging-winston": "6.0.1",
+  "handwritten/storage": "7.19.0",
   "packages/gapic-node-processing": "0.1.7",
   "packages/google-ads-admanager": "0.5.0",
   "packages/google-ads-datamanager": "0.2.0",
