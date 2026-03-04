@@ -56,7 +56,7 @@ async function main() {
 
   ({bucket, transferManager} = await performanceTestSetup(
     argv.project! as string,
-    argv.bucket! as string,
+    argv.bucket! as string
   ));
 
   switch (argv.test_type) {
@@ -104,7 +104,7 @@ async function performUploadManyFilesTest(): Promise<TestResult[]> {
     TEST_NAME_STRING,
     fileSizeRange.low,
     fileSizeRange.high,
-    DIRECTORY_PROBABILITY,
+    DIRECTORY_PROBABILITY
   );
 
   const start = performance.now();
@@ -153,7 +153,7 @@ async function performDownloadManyFilesTest(): Promise<TestResult[]> {
     TEST_NAME_STRING,
     fileSizeRange.low,
     fileSizeRange.high,
-    DIRECTORY_PROBABILITY,
+    DIRECTORY_PROBABILITY
   );
 
   await transferManager.uploadManyFiles(creationInfo.paths, {
@@ -210,7 +210,7 @@ async function performChunkUploadDownloadTest(): Promise<TestResult[]> {
     fileName,
     fileSizeRange.low,
     fileSizeRange.high,
-    getDirName(),
+    getDirName()
   );
   const file = bucket.file(`${fileName}`);
   let result: TestResult = {
