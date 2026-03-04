@@ -236,6 +236,9 @@ export class AgentServiceClient {
       scheduledEvaluationRunPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/scheduledEvaluationRuns/{scheduled_evaluation_run}'
       ),
+      securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securitySettings'
+      ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/tools/{tool}'
       ),
@@ -378,7 +381,7 @@ export class AgentServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const agentServiceStubMethods =
-        ['listApps', 'getApp', 'createApp', 'updateApp', 'deleteApp', 'exportApp', 'importApp', 'listAgents', 'getAgent', 'createAgent', 'updateAgent', 'deleteAgent', 'listExamples', 'getExample', 'createExample', 'updateExample', 'deleteExample', 'listTools', 'getTool', 'listConversations', 'getConversation', 'deleteConversation', 'batchDeleteConversations', 'createTool', 'updateTool', 'deleteTool', 'listGuardrails', 'getGuardrail', 'createGuardrail', 'updateGuardrail', 'deleteGuardrail', 'listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listToolsets', 'getToolset', 'createToolset', 'updateToolset', 'deleteToolset', 'listAppVersions', 'getAppVersion', 'createAppVersion', 'deleteAppVersion', 'restoreAppVersion', 'listChangelogs', 'getChangelog'];
+        ['listApps', 'getApp', 'createApp', 'updateApp', 'deleteApp', 'exportApp', 'importApp', 'getSecuritySettings', 'updateSecuritySettings', 'listAgents', 'getAgent', 'createAgent', 'updateAgent', 'deleteAgent', 'listExamples', 'getExample', 'createExample', 'updateExample', 'deleteExample', 'listTools', 'getTool', 'listConversations', 'getConversation', 'deleteConversation', 'batchDeleteConversations', 'createTool', 'updateTool', 'deleteTool', 'listGuardrails', 'getGuardrail', 'createGuardrail', 'updateGuardrail', 'deleteGuardrail', 'listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listToolsets', 'getToolset', 'createToolset', 'updateToolset', 'deleteToolset', 'listAppVersions', 'getAppVersion', 'createAppVersion', 'deleteAppVersion', 'restoreAppVersion', 'listChangelogs', 'getChangelog'];
     for (const methodName of agentServiceStubMethods) {
       const callPromise = this.agentServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -665,6 +668,198 @@ export class AgentServiceClient {
         {}|undefined
       ]) => {
         this._log.info('updateApp response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Retrieves the security settings for the project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the security settings to retrieve.
+ *   Format: `projects/{project}/locations/{location}/securitySettings`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.SecuritySettings|SecuritySettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/agent_service.get_security_settings.js</caption>
+ * region_tag:ces_v1beta_generated_AgentService_GetSecuritySettings_async
+ */
+  getSecuritySettings(
+      request?: protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.ces.v1beta.ISecuritySettings,
+        protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest|undefined, {}|undefined
+      ]>;
+  getSecuritySettings(
+      request: protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.ces.v1beta.ISecuritySettings,
+          protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSecuritySettings(
+      request: protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest,
+      callback: Callback<
+          protos.google.cloud.ces.v1beta.ISecuritySettings,
+          protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSecuritySettings(
+      request?: protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.ces.v1beta.ISecuritySettings,
+          protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.ces.v1beta.ISecuritySettings,
+          protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.ces.v1beta.ISecuritySettings,
+        protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getSecuritySettings request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.ces.v1beta.ISecuritySettings,
+        protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSecuritySettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getSecuritySettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.ces.v1beta.ISecuritySettings,
+        protos.google.cloud.ces.v1beta.IGetSecuritySettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSecuritySettings response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Updates the security settings for the project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.ces.v1beta.SecuritySettings} request.securitySettings
+ *   Required. The security settings to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to control which fields get updated. If the
+ *   mask is not present, all fields will be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.SecuritySettings|SecuritySettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/agent_service.update_security_settings.js</caption>
+ * region_tag:ces_v1beta_generated_AgentService_UpdateSecuritySettings_async
+ */
+  updateSecuritySettings(
+      request?: protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.ces.v1beta.ISecuritySettings,
+        protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest|undefined, {}|undefined
+      ]>;
+  updateSecuritySettings(
+      request: protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.ces.v1beta.ISecuritySettings,
+          protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSecuritySettings(
+      request: protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest,
+      callback: Callback<
+          protos.google.cloud.ces.v1beta.ISecuritySettings,
+          protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSecuritySettings(
+      request?: protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.ces.v1beta.ISecuritySettings,
+          protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.ces.v1beta.ISecuritySettings,
+          protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.ces.v1beta.ISecuritySettings,
+        protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'security_settings.name': request.securitySettings!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateSecuritySettings request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.ces.v1beta.ISecuritySettings,
+        protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSecuritySettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateSecuritySettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.ces.v1beta.ISecuritySettings,
+        protos.google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateSecuritySettings response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -7903,6 +8098,42 @@ export class AgentServiceClient {
    */
   matchScheduledEvaluationRunFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
     return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).scheduled_evaluation_run;
+  }
+
+  /**
+   * Return a fully-qualified securitySettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  securitySettingsPath(project:string,location:string) {
+    return this.pathTemplates.securitySettingsPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from SecuritySettings resource.
+   *
+   * @param {string} securitySettingsName
+   *   A fully-qualified path representing SecuritySettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSecuritySettingsName(securitySettingsName: string) {
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
+  }
+
+  /**
+   * Parse the location from SecuritySettings resource.
+   *
+   * @param {string} securitySettingsName
+   *   A fully-qualified path representing SecuritySettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSecuritySettingsName(securitySettingsName: string) {
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
   }
 
   /**

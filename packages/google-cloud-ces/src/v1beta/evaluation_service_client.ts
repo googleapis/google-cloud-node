@@ -235,6 +235,9 @@ export class EvaluationServiceClient {
       scheduledEvaluationRunPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/scheduledEvaluationRuns/{scheduled_evaluation_run}'
       ),
+      securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securitySettings'
+      ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/tools/{tool}'
       ),
@@ -466,13 +469,17 @@ export class EvaluationServiceClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
- * @param {string} request.app
- *   Required. The resource name of the App for which to upload the evaluation
- *   audio. Format: `projects/{project}/locations/{location}/apps/{app}`
+ * @param {string} request.name
+ *   Required. The resource name of the Evaluation for which to upload the
+ *   evaluation audio. Format:
+ *   `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}`
  * @param {Buffer} request.audioContent
  *   Required. The raw audio bytes.
  *   The format of the audio must be single-channel LINEAR16 with a sample
  *   rate of 16kHz (default InputAudioConfig).
+ * @param {string} [request.previousAudioGcsUri]
+ *   Optional. The Google Cloud Storage URI of the previously uploaded audio
+ *   file to be deleted. Format: `gs://<bucket-name>/<object-name>`
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -531,7 +538,7 @@ export class EvaluationServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'app': request.app ?? '',
+      'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('uploadEvaluationAudio request %j', request);
@@ -5740,6 +5747,42 @@ export class EvaluationServiceClient {
    */
   matchScheduledEvaluationRunFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
     return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).scheduled_evaluation_run;
+  }
+
+  /**
+   * Return a fully-qualified securitySettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  securitySettingsPath(project:string,location:string) {
+    return this.pathTemplates.securitySettingsPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from SecuritySettings resource.
+   *
+   * @param {string} securitySettingsName
+   *   A fully-qualified path representing SecuritySettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSecuritySettingsName(securitySettingsName: string) {
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
+  }
+
+  /**
+   * Parse the location from SecuritySettings resource.
+   *
+   * @param {string} securitySettingsName
+   *   A fully-qualified path representing SecuritySettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSecuritySettingsName(securitySettingsName: string) {
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
   }
 
   /**

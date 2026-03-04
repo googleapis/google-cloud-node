@@ -1,0 +1,147 @@
+{
+    "storage.buckets.delete": [
+        "deleteBucket"
+    ],
+    "storage.buckets.patch": [
+        "addLifecycleRuleInstancePrecondition",
+        "bucketMakePrivateInstancePrecondition",
+        "deleteLabelsInstancePrecondition",
+        "disableRequesterPaysInstancePrecondition",
+        "enableRequesterPaysInstancePrecondition",
+        "enableLoggingInstancePrecondition",
+        "removeRetentionPeriodInstancePrecondition",
+        "setCorsConfigurationInstancePrecondition",
+        "setLabelsInstancePrecondition",
+        "setRetentionPeriodInstancePrecondition",
+        "bucketSetStorageClassInstancePrecondition",
+        "bucketSetMetadataInstancePrecondition",
+        "addLifecycleRule",
+        "bucketMakePrivate",
+        "deleteLabels",
+        "disableRequesterPays",
+        "enableRequesterPays",
+        "enableLogging",
+        "removeRetentionPeriod",
+        "setCorsConfiguration",
+        "setLabels",
+        "setRetentionPeriod",
+        "bucketSetStorageClass",
+        "bucketSetMetadata"
+    ],
+    "storage.buckets.insert": [
+        "create",
+        "createBucket"
+    ],
+    "storage.buckets.get": [
+        "bucketGet",
+        "getLabels",
+        "bucketGetMetadata",
+        "bucketExists"
+    ],
+    "storage.objects.list": [
+        "getFilesStream"
+    ],
+    "storage.notifications.list": [
+        "getNotifications"
+    ],
+    "storage.buckets.lockRententionPolicy": [
+        "lock"
+    ],
+    "storage.objects.patch": [
+        "fileMakePrivateInstancePrecondition",
+        "setMetadataInstancePrecondition",
+        "fileMakePrivate",
+        "setMetadata"
+    ],
+    "storage.bucket_acl.insert": [
+        "bucketMakePublic"
+    ],
+    "storage.object_acl.insert": [
+        "fileMakePublic"
+    ],
+    "storage.objects.rewrite": [
+        "copy",
+        "move",
+        "rename",
+        "rotateEncryptionKey",
+        "setStorageClass"
+    ],
+    "storage.objects.insert": [
+        "bucketUploadResumableInstancePrecondition",
+        "saveResumableInstancePrecondition",
+        "bucketUploadMultipartInstancePrecondition",
+        "saveMultipartInstancePrecondition",
+        "createResumableUploadInstancePrecondition",
+        "bucketUploadResumable",
+        "saveResumable",
+        "bucketUploadMultipart",
+        "saveMultipart",
+        "createResumableUpload"
+    ],
+    "storage.resumable.upload": [
+        "bucketUploadResumableInstancePrecondition",
+        "saveResumableInstancePrecondition",
+        "bucketUploadResumable",
+        "saveResumable"
+    ],
+    "storage.objects.delete": [
+        "fileDeleteInstancePrecondition",
+        "fileDelete"
+    ],
+    "storage.objects.get": [
+        "get",
+        "download",
+        "exists",
+        "getExpirationDate",
+        "getMetadata",
+        "isPublic",
+        "createReadStream"
+    ],
+    "storage.notifications.delete": [
+        "notificationDelete"
+    ],
+    "storage.notifications.insert": [
+        "createNotification",
+        "notificationCreate"
+    ],
+    "storage.notifications.get": [
+        "notificationExists",
+        "notificationGet",
+        "notificationGetMetadata"
+    ],
+    "storage.buckets.getIamPolicy": [
+        "iamGetPolicy"
+    ],
+    "storage.buckets.setIamPolicy": [
+        "iamSetPolicy"
+    ],
+    "storage.buckets.testIamPermission": [
+        "iamTestPermissions"
+    ],
+    "storage.buckets.list": [
+        "getBuckets",
+        "getBucketsStream"
+    ],
+    "storage.objects.compose": [
+        "combineInstancePrecondition",
+        "combine"
+    ],
+    "storage.hmacKey.delete": [
+        "deleteHMAC"
+    ],
+    "storage.hmacKey.get": [
+        "getHMAC",
+        "getMetadataHMAC"
+    ],
+    "storage.hmacKey.update": [
+    ],
+    "storage.hmacKey.create": [
+        "createHMACKey"
+    ],
+    "storage.hmacKey.list": [
+        "getHMACKeyStream"
+    ],
+    "storage.serviceaccount.get": [
+        "getServiceAccount"
+    ]
+}

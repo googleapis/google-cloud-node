@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(app, audioContent) {
+function main(name, audioContent) {
   // [START ces_v1beta_generated_EvaluationService_UploadEvaluationAudio_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,16 +29,22 @@ function main(app, audioContent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the App for which to upload the evaluation
-   *  audio. Format: `projects/{project}/locations/{location}/apps/{app}`
+   *  Required. The resource name of the Evaluation for which to upload the
+   *  evaluation audio. Format:
+   *  `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}`
    */
-  // const app = 'abc123'
+  // const name = 'abc123'
   /**
    *  Required. The raw audio bytes.
    *  The format of the audio must be single-channel LINEAR16 with a sample
    *  rate of 16kHz (default InputAudioConfig).
    */
   // const audioContent = Buffer.from('string')
+  /**
+   *  Optional. The Google Cloud Storage URI of the previously uploaded audio
+   *  file to be deleted. Format: `gs://<bucket-name>/<object-name>`
+   */
+  // const previousAudioGcsUri = 'abc123'
 
   // Imports the Ces library
   const {EvaluationServiceClient} = require('@google-cloud/ces').v1beta;
@@ -49,7 +55,7 @@ function main(app, audioContent) {
   async function callUploadEvaluationAudio() {
     // Construct request
     const request = {
-      app,
+      name,
       audioContent,
     };
 
