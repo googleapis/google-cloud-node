@@ -371,21 +371,21 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
    */
   setMetadata(
     metadata: HmacKeyMetadata,
-    options?: SetMetadataOptions
+    options?: SetMetadataOptions,
   ): Promise<SetMetadataResponse<HmacKeyMetadata>>;
   setMetadata(
     metadata: HmacKeyMetadata,
-    callback: MetadataCallback<HmacKeyMetadata>
+    callback: MetadataCallback<HmacKeyMetadata>,
   ): void;
   setMetadata(
     metadata: HmacKeyMetadata,
     options: SetMetadataOptions,
-    callback: MetadataCallback<HmacKeyMetadata>
+    callback: MetadataCallback<HmacKeyMetadata>,
   ): void;
   setMetadata(
     metadata: HmacKeyMetadata,
     optionsOrCallback: SetMetadataOptions | MetadataCallback<HmacKeyMetadata>,
-    cb?: MetadataCallback<HmacKeyMetadata>
+    cb?: MetadataCallback<HmacKeyMetadata>,
   ): Promise<SetMetadataResponse<HmacKeyMetadata>> | void {
     // ETag preconditions are not currently supported. Retries should be disabled if the idempotency strategy is not set to RetryAlways
     if (

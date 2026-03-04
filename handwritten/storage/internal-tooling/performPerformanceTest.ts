@@ -54,7 +54,7 @@ async function main() {
 
   ({bucket} = await performanceTestSetup(
     argv.project! as string,
-    argv.bucket! as string
+    argv.bucket! as string,
   ));
 
   switch (argv.test_type) {
@@ -84,7 +84,7 @@ async function performRangedReadTest(): Promise<TestResult[]> {
     fileName,
     fileSizeRange.low,
     fileSizeRange.high,
-    getDirName()
+    getDirName(),
   );
   const file = bucket.file(`${fileName}`);
   const destinationFileName = generateRandomFileName(TEST_NAME_STRING);
@@ -142,7 +142,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
     fileName,
     fileSizeRange.low,
     fileSizeRange.high,
-    getDirName()
+    getDirName(),
   );
 
   for (let j = 0; j < DEFAULT_NUMBER_OF_WRITES; j++) {

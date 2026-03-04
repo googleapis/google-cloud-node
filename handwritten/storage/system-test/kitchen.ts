@@ -110,7 +110,7 @@ describe('resumable-upload', () => {
           file: filePath,
           retryOptions: retryOptions,
           metadata: {contentType: 'image/jpg'},
-        })
+        }),
       )
       .on('error', done)
       .on('response', resp => {
@@ -138,7 +138,7 @@ describe('resumable-upload', () => {
         type DoUploadCallback = (...args: any[]) => void;
         const doUpload = (
           opts: {interrupt?: boolean},
-          callback: DoUploadCallback
+          callback: DoUploadCallback,
         ) => {
           let sizeStreamed = 0;
           let destroyed = false;
@@ -183,7 +183,7 @@ describe('resumable-upload', () => {
               assert.strictEqual(metadata.size, size);
               assert.strictEqual(typeof metadata.size, 'number');
               done();
-            }
+            },
           );
         });
       });
@@ -223,7 +223,7 @@ describe('resumable-upload', () => {
           file: filePath,
           metadata,
           retryOptions: retryOptions,
-        })
+        }),
       )
       .on('error', (err: ErrorWithCode) => {
         assert.strictEqual(err.status, 400);
@@ -244,8 +244,8 @@ describe('resumable-upload', () => {
         file.createWriteStream({
           chunkSize,
         }),
-        e => (e ? reject(e) : resolve())
-      )
+        e => (e ? reject(e) : resolve()),
+      ),
     );
 
     const [results] = await file.getMetadata();
@@ -291,7 +291,7 @@ describe('resumable-upload', () => {
       });
 
       await new Promise<void>((resolve, reject) =>
-        pipeline(readable, writable, e => (e ? reject(e) : resolve()))
+        pipeline(readable, writable, e => (e ? reject(e) : resolve())),
       );
     }
 
@@ -302,7 +302,7 @@ describe('resumable-upload', () => {
     assert.equal(
       crc32cGenerated,
       count,
-      'crc32c should be generated on each upload'
+      'crc32c should be generated on each upload',
     );
     assert.equal(results.size, FILE_SIZE);
   });
@@ -326,14 +326,14 @@ describe('resumable-upload', () => {
             crc32c: true,
             clientCrc32c: crc32c,
             retryOptions: retryOptions,
-          })
+          }),
         )
         .on('error', err => {
           console.log(err);
           done(
             new Error(
-              `Upload failed unexpectedly on success path: ${err.message}`
-            )
+              `Upload failed unexpectedly on success path: ${err.message}`,
+            ),
           );
         })
         .on('response', resp => {
@@ -357,12 +357,12 @@ describe('resumable-upload', () => {
             clientCrc32c: KNOWN_CRC32C_OF_ZEROS,
             crc32c: true,
             retryOptions: retryOptions,
-          })
+          }),
         )
         .on('error', (err: Error) => {
           assert.ok(
             err.message.includes(EXPECTED_ERROR_MESSAGE_PART),
-            `Expected error message part "${EXPECTED_ERROR_MESSAGE_PART}" not found in: ${err.message}`
+            `Expected error message part "${EXPECTED_ERROR_MESSAGE_PART}" not found in: ${err.message}`,
           );
           done();
         });

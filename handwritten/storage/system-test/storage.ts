@@ -92,20 +92,20 @@ describe('storage', function () {
     logo: {
       path: path.join(
         getDirName(),
-        '../../../system-test/data/CloudPlatform_128px_Retina.png'
+        '../../../system-test/data/CloudPlatform_128px_Retina.png',
       ),
     },
     big: {
       path: path.join(
         getDirName(),
-        '../../../system-test/data/three-mb-file.tif'
+        '../../../system-test/data/three-mb-file.tif',
       ),
       hash: undefined,
     },
     html: {
       path: path.join(
         getDirName(),
-        '../../../system-test/data/long-html-file.html'
+        '../../../system-test/data/long-html-file.html',
       ),
     },
     empty: {
@@ -205,7 +205,7 @@ describe('storage', function () {
         await assert.rejects(
           file.download(),
           (err: Error) =>
-            err.message.indexOf('does not have storage.objects.get') > -1
+            err.message.indexOf('does not have storage.objects.get') > -1,
         );
       });
 
@@ -218,7 +218,7 @@ describe('storage', function () {
             /does not have storage\.objects\.create access/,
           ];
           assert(
-            allowedErrorMessages.some(msg => msg.test((e as Error).message))
+            allowedErrorMessages.some(msg => msg.test((e as Error).message)),
           );
         }
       });
@@ -231,7 +231,7 @@ describe('storage', function () {
       // Introduce a delay between tests to avoid getting an error.
       beforeEach(async () => {
         await new Promise(resolve =>
-          setTimeout(resolve, BUCKET_METADATA_UPDATE_WAIT_TIME)
+          setTimeout(resolve, BUCKET_METADATA_UPDATE_WAIT_TIME),
         );
       });
 
@@ -270,7 +270,7 @@ describe('storage', function () {
         const [accessControlGet] = await bucket.acl.get(opts);
         assert.strictEqual(
           (accessControlGet as AccessControlObject).role,
-          storage.acl.OWNER_ROLE
+          storage.acl.OWNER_ROLE,
         );
         await bucket.acl.delete(opts);
       });
@@ -302,7 +302,7 @@ describe('storage', function () {
           role: 'READER',
         });
         await new Promise(resolve =>
-          setTimeout(resolve, BUCKET_METADATA_UPDATE_WAIT_TIME)
+          setTimeout(resolve, BUCKET_METADATA_UPDATE_WAIT_TIME),
         );
         await bucket.acl.delete({entity: 'allUsers'});
       });
@@ -314,13 +314,13 @@ describe('storage', function () {
        */
       it.skip('should make files public', async () => {
         await Promise.all(
-          ['a', 'b', 'c'].map(text => createFileWithContentPromise(text))
+          ['a', 'b', 'c'].map(text => createFileWithContentPromise(text)),
         );
 
         await bucket.makePublic({includeFiles: true});
         const [files] = await bucket.getFiles();
         const resps = await Promise.all(
-          files.map(file => isFilePublicAsync(file))
+          files.map(file => isFilePublicAsync(file)),
         );
         resps.forEach(resp => assert.strictEqual(resp, true));
         await Promise.all([
@@ -338,7 +338,7 @@ describe('storage', function () {
         try {
           await bucket.makePublic();
           await new Promise(resolve =>
-            setTimeout(resolve, BUCKET_METADATA_UPDATE_WAIT_TIME)
+            setTimeout(resolve, BUCKET_METADATA_UPDATE_WAIT_TIME),
           );
           await bucket.makePrivate();
           assert.rejects(bucket.acl.get({entity: 'allUsers'}), err => {
@@ -352,13 +352,13 @@ describe('storage', function () {
 
       it('should make files private', async () => {
         await Promise.all(
-          ['a', 'b', 'c'].map(text => createFileWithContentPromise(text))
+          ['a', 'b', 'c'].map(text => createFileWithContentPromise(text)),
         );
 
         await bucket.makePrivate({includeFiles: true});
         const [files] = await bucket.getFiles();
         const resps = await Promise.all(
-          files.map(file => isFilePublicAsync(file))
+          files.map(file => isFilePublicAsync(file)),
         );
         resps.forEach(resp => {
           assert.strictEqual(resp, false);
@@ -400,7 +400,7 @@ describe('storage', function () {
         const [accessControlGet] = await file.acl.get({entity: USER_ACCOUNT});
         assert.strictEqual(
           (accessControlGet as AccessControlObject).role,
-          storage.acl.OWNER_ROLE
+          storage.acl.OWNER_ROLE,
         );
         await file.acl.delete({entity: USER_ACCOUNT});
       });
@@ -444,7 +444,7 @@ describe('storage', function () {
         assert.doesNotReject(file.makePrivate());
         assert.rejects(
           file.acl.get({entity: 'allUsers'}),
-          validateMakeFilePrivateRejects
+          validateMakeFilePrivateRejects,
         );
       });
 
@@ -517,11 +517,11 @@ describe('storage', function () {
           bucket.upload(FILES.big.path, {
             resumable: true,
             private: true,
-          })
+          }),
         );
         assert.rejects(
           file.acl.get({entity: 'allUsers'}),
-          validateMakeFilePrivateRejects
+          validateMakeFilePrivateRejects,
         );
       });
     });
@@ -574,7 +574,7 @@ describe('storage', function () {
         const legacyBucketReaderBinding = newPolicy!.bindings.filter(
           binding => {
             return binding.role === 'roles/storage.legacyBucketReader';
-          }
+          },
         )[0];
         assert(legacyBucketReaderBinding.members.includes('allUsers'));
       });
@@ -641,7 +641,7 @@ describe('storage', function () {
 
     const setPublicAccessPrevention = (
       bucket: Bucket,
-      configuration: string
+      configuration: string,
     ) => {
       return bucket.setMetadata({
         iamConfiguration: {
@@ -651,14 +651,14 @@ describe('storage', function () {
     };
 
     const validateUnexpectedPublicAccessPreventionValueError = (
-      err: ApiError
+      err: ApiError,
     ) => {
       assert.strictEqual(err.code, 400);
       return true;
     };
 
     const validateConfiguringPublicAccessWhenPAPEnforcedError = (
-      err: ApiError
+      err: ApiError,
     ) => {
       assert.strictEqual(err.code, 412);
       return true;
@@ -669,14 +669,14 @@ describe('storage', function () {
     it('inserts a bucket with enforced public access prevention', async () => {
       await setPublicAccessPrevention(
         bucket,
-        PUBLIC_ACCESS_PREVENTION_ENFORCED
+        PUBLIC_ACCESS_PREVENTION_ENFORCED,
       );
       const [bucketMetadata] = await bucket.getMetadata();
       const publicAccessPreventionStatus =
         bucketMetadata!.iamConfiguration!.publicAccessPrevention;
       return assert.strictEqual(
         publicAccessPreventionStatus,
-        PUBLIC_ACCESS_PREVENTION_ENFORCED
+        PUBLIC_ACCESS_PREVENTION_ENFORCED,
       );
     });
 
@@ -696,21 +696,21 @@ describe('storage', function () {
 
         await setPublicAccessPrevention(
           bucket,
-          PUBLIC_ACCESS_PREVENTION_ENFORCED
+          PUBLIC_ACCESS_PREVENTION_ENFORCED,
         );
       });
 
       it('bucket cannot be made public', async () => {
         return assert.rejects(
           () => bucket.makePublic(),
-          validateConfiguringPublicAccessWhenPAPEnforcedError
+          validateConfiguringPublicAccessWhenPAPEnforcedError,
         );
       });
 
       it('object cannot be made public via ACL', async () => {
         return assert.rejects(
           () => file.makePublic(),
-          validateConfiguringPublicAccessWhenPAPEnforcedError
+          validateConfiguringPublicAccessWhenPAPEnforcedError,
         );
       });
     });
@@ -718,21 +718,21 @@ describe('storage', function () {
     it('inserts a bucket with inherited public access prevention', async () => {
       await setPublicAccessPrevention(
         bucket,
-        PUBLIC_ACCESS_PREVENTION_INHERITED
+        PUBLIC_ACCESS_PREVENTION_INHERITED,
       );
       const [bucketMetadata] = await bucket.getMetadata();
       const publicAccessPreventionStatus =
         bucketMetadata!.iamConfiguration!.publicAccessPrevention;
       return assert.strictEqual(
         publicAccessPreventionStatus,
-        PUBLIC_ACCESS_PREVENTION_INHERITED
+        PUBLIC_ACCESS_PREVENTION_INHERITED,
       );
     });
 
     it('makes public a bucket with inherited public access prevention', async () => {
       await setPublicAccessPrevention(
         bucket,
-        PUBLIC_ACCESS_PREVENTION_INHERITED
+        PUBLIC_ACCESS_PREVENTION_INHERITED,
       );
       return assert.ok(() => bucket.makePublic());
     });
@@ -740,7 +740,7 @@ describe('storage', function () {
     it('should fail to insert a bucket with unexpected public access prevention value', async () => {
       await assert.rejects(
         () => setPublicAccessPrevention(bucket, 'unexpected value'),
-        validateUnexpectedPublicAccessPreventionValueError
+        validateUnexpectedPublicAccessPreventionValueError,
       );
     });
 
@@ -758,7 +758,7 @@ describe('storage', function () {
       const [updatedBucketMetadata] = await bucket.getMetadata();
       return assert.strictEqual(
         updatedBucketMetadata!.iamConfiguration!.publicAccessPrevention,
-        publicAccessPreventionStatus
+        publicAccessPreventionStatus,
       );
     });
 
@@ -775,13 +775,13 @@ describe('storage', function () {
         bucketMetadata!.iamConfiguration!.uniformBucketLevelAccess!.enabled;
       await setPublicAccessPrevention(
         bucket,
-        PUBLIC_ACCESS_PREVENTION_INHERITED
+        PUBLIC_ACCESS_PREVENTION_INHERITED,
       );
       const [updatedBucketMetadata] = await bucket.getMetadata();
       return assert.strictEqual(
         updatedBucketMetadata!.iamConfiguration!.uniformBucketLevelAccess!
           .enabled,
-        ublaSetting
+        ublaSetting,
       );
     });
   });
@@ -799,7 +799,7 @@ describe('storage', function () {
 
     const setTurboReplication = (
       bucket: Bucket,
-      turboReplicationConfiguration: string
+      turboReplicationConfiguration: string,
     ) => {
       return bucket.setMetadata({
         rpo: turboReplicationConfiguration,
@@ -925,7 +925,7 @@ describe('storage', function () {
         assert(metadata[0].softDeletePolicy.effectiveTime);
         assert.deepStrictEqual(
           metadata[0].softDeletePolicy.retentionDurationSeconds,
-          SOFT_DELETE_RETENTION_SECONDS.toString()
+          SOFT_DELETE_RETENTION_SECONDS.toString(),
         );
       });
 
@@ -954,7 +954,7 @@ describe('storage', function () {
         assert(softDeletedFile);
         assert.strictEqual(
           softDeletedFile.metadata.generation,
-          metadata.generation
+          metadata.generation,
         );
       });
 
@@ -988,7 +988,7 @@ describe('storage', function () {
         assert.strictEqual(softDeletedFiles.length, 2);
         assert.notStrictEqual(
           softDeletedFiles![0].metadata.restoreToken,
-          undefined
+          undefined,
         );
       });
 
@@ -1004,7 +1004,7 @@ describe('storage', function () {
         assert(softDeletedFile);
         assert.strictEqual(
           softDeletedFile.metadata.generation,
-          metadata.generation
+          metadata.generation,
         );
         assert.notStrictEqual(softDeletedFile.metadata.restoreToken, undefined);
       });
@@ -1023,7 +1023,7 @@ describe('storage', function () {
         assert(softDeletedFile);
         const restoredFile = await f1.restore({
           generation: parseInt(
-            softDeletedFile.metadata.generation?.toString() || '0'
+            softDeletedFile.metadata.generation?.toString() || '0',
           ),
           restoreToken: softDeletedFile.metadata.restoreToken,
         });
@@ -1129,7 +1129,7 @@ describe('storage', function () {
             await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
           } catch (err) {
             assert(
-              validateUniformBucketLevelAccessEnabledError(err as ApiError)
+              validateUniformBucketLevelAccessEnabledError(err as ApiError),
             );
             break;
           }
@@ -1144,7 +1144,7 @@ describe('storage', function () {
             await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
           } catch (err) {
             assert(
-              validateUniformBucketLevelAccessEnabledError(err as ApiError)
+              validateUniformBucketLevelAccessEnabledError(err as ApiError),
             );
             break;
           }
@@ -1261,7 +1261,7 @@ describe('storage', function () {
 
     after(async () => {
       await Promise.all(
-        bucketsToCreate.map(bucket => storage.bucket(bucket).delete())
+        bucketsToCreate.map(bucket => storage.bucket(bucket).delete()),
       );
     });
 
@@ -1404,7 +1404,7 @@ describe('storage', function () {
         const [metadata] = await bucket.getMetadata();
         assert.deepStrictEqual(
           metadata.labels,
-          Object.assign({}, LABELS, newLabels)
+          Object.assign({}, LABELS, newLabels),
         );
       });
 
@@ -1491,7 +1491,7 @@ describe('storage', function () {
       });
       assert.strictEqual(
         bucket.metadata.lifecycle!.rule!.length,
-        numExistingRules + 2
+        numExistingRules + 2,
       );
     });
 
@@ -1512,8 +1512,8 @@ describe('storage', function () {
             rule.action.type === 'Delete' &&
             typeof rule.condition.matchesPrefix === 'object' &&
             (rule.condition.matchesPrefix as string[]).length === 1 &&
-            Array.isArray(rule.condition.matchesPrefix)
-        )
+            Array.isArray(rule.condition.matchesPrefix),
+        ),
       );
     });
 
@@ -1532,8 +1532,8 @@ describe('storage', function () {
           (rule: LifecycleRule) =>
             typeof rule.action === 'object' &&
             rule.action.type === 'Delete' &&
-            Array.isArray(rule.condition.matchesPrefix)
-        )
+            Array.isArray(rule.condition.matchesPrefix),
+        ),
       );
     });
 
@@ -1576,8 +1576,8 @@ describe('storage', function () {
             typeof rule.action === 'object' &&
             rule.action.type === 'Delete' &&
             rule.condition.noncurrentTimeBefore === NONCURRENT_TIME_BEFORE &&
-            rule.condition.daysSinceNoncurrentTime === 100
-        )
+            rule.condition.daysSinceNoncurrentTime === 100,
+        ),
       );
     });
 
@@ -1600,8 +1600,8 @@ describe('storage', function () {
             typeof rule.action === 'object' &&
             rule.action.type === 'Delete' &&
             rule.condition.customTimeBefore === CUSTOM_TIME_BEFORE &&
-            rule.condition.daysSinceCustomTime === 100
-        )
+            rule.condition.daysSinceCustomTime === 100,
+        ),
       );
     });
 
@@ -1701,7 +1701,7 @@ describe('storage', function () {
       await storage.createBucket(bucket.name);
       const [metadata] = await bucket.getMetadata();
       assert(
-        [undefined, false].includes(metadata?.hierarchicalNamespace?.enabled)
+        [undefined, false].includes(metadata?.hierarchicalNamespace?.enabled),
       );
     });
 
@@ -1711,7 +1711,7 @@ describe('storage', function () {
       });
       const [metadata] = await bucket.getMetadata();
       assert(
-        [undefined, false].includes(metadata?.hierarchicalNamespace?.enabled)
+        [undefined, false].includes(metadata?.hierarchicalNamespace?.enabled),
       );
     });
 
@@ -1742,7 +1742,7 @@ describe('storage', function () {
         await bucket.getMetadata();
         assert.strictEqual(
           bucket.metadata!.retentionPolicy!.retentionPeriod,
-          `${RETENTION_DURATION_SECONDS}`
+          `${RETENTION_DURATION_SECONDS}`,
         );
       });
 
@@ -1753,7 +1753,7 @@ describe('storage', function () {
         await bucket.getMetadata();
         assert.strictEqual(
           bucket.metadata!.retentionPolicy!.retentionPeriod,
-          `${RETENTION_DURATION_SECONDS}`
+          `${RETENTION_DURATION_SECONDS}`,
         );
       });
 
@@ -1768,7 +1768,7 @@ describe('storage', function () {
           bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS / 2),
           (err: ApiError) => {
             return err.code === 403;
-          }
+          },
         );
       });
 
@@ -1779,7 +1779,7 @@ describe('storage', function () {
         await bucket.getMetadata();
         assert.strictEqual(
           bucket.metadata!.retentionPolicy!.retentionPeriod,
-          `${RETENTION_DURATION_SECONDS}`
+          `${RETENTION_DURATION_SECONDS}`,
         );
 
         await bucket.removeRetentionPeriod();
@@ -1853,12 +1853,12 @@ describe('storage', function () {
 
       after(async () => {
         await new Promise(resolve =>
-          setTimeout(resolve, RETENTION_PERIOD_SECONDS * 1000)
+          setTimeout(resolve, RETENTION_PERIOD_SECONDS * 1000),
         );
         await Promise.all(
           FILES.map(async file => {
             return file.delete();
-          })
+          }),
         );
       });
 
@@ -1946,7 +1946,7 @@ describe('storage', function () {
       const file = new File(objectRetentionBucket, fileName);
       const [metadata] = await file.setMetadata(
         {retention: null},
-        {overrideUnlockedRetention: true}
+        {overrideUnlockedRetention: true},
       );
       assert.strictEqual(metadata.retention, undefined);
     });
@@ -2047,7 +2047,7 @@ describe('storage', function () {
           // Get the service account for the "second" account (the
           // one that will read the requester pays file).
           const clientEmail = JSON.parse(
-            fs.readFileSync(key2!, 'utf-8')
+            fs.readFileSync(key2!, 'utf-8'),
           ).client_email;
           policy.bindings.push({
             role: 'roles/storage.admin',
@@ -2096,7 +2096,7 @@ describe('storage', function () {
          * @returns The result of the successful request pays operation.
          */
         async function requesterPaysDoubleTest<F extends requesterPaysFunction>(
-          testFunction: F
+          testFunction: F,
         ): Promise<ReturnType<F>> {
           const failureMessage =
             'Bucket is a requester pays bucket but no user project provided.';
@@ -2106,7 +2106,7 @@ describe('storage', function () {
               (err as Error).message.includes(failureMessage),
               `Expected '${
                 (err as Error).message
-              }' to include '${failureMessage}'`
+              }' to include '${failureMessage}'`,
             );
             return true;
           });
@@ -2129,14 +2129,14 @@ describe('storage', function () {
           await bucketNonAllowList.combine(
             sourceFiles,
             destinationFile,
-            USER_PROJECT_OPTIONS
+            USER_PROJECT_OPTIONS,
           );
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           function createFileAsync(fileObject: any) {
             return fileObject.file.save(
               fileObject.contents,
-              USER_PROJECT_OPTIONS
+              USER_PROJECT_OPTIONS,
             );
           }
         });
@@ -2189,7 +2189,7 @@ describe('storage', function () {
           await requesterPaysDoubleTest(async options => {
             return bucketNonAllowList.setStorageClass(
               'multi-regional',
-              options
+              options,
             );
           });
         });
@@ -2403,7 +2403,7 @@ describe('storage', function () {
             .on('end', () => {
               file.hash = hash.digest('base64');
               resolve();
-            })
+            }),
         );
       }
       await Promise.all(Object.keys(FILES).map(key => setHash(key)));
@@ -2469,7 +2469,7 @@ describe('storage', function () {
             },
           },
         }),
-        /Metadata part is too large/
+        /Metadata part is too large/,
       );
     });
 
@@ -2542,7 +2542,7 @@ describe('storage', function () {
       });
       assert.strictEqual(
         String(fileContents).slice(0, 20),
-        String(remoteContents)
+        String(remoteContents),
       );
     });
 
@@ -2613,7 +2613,7 @@ describe('storage', function () {
           .on('response', raw => {
             assert.strictEqual(
               raw.toJSON().headers['content-encoding'],
-              undefined
+              undefined,
             );
           })
           .pipe(fs.createWriteStream(tmpFilePath))
@@ -2766,8 +2766,8 @@ describe('storage', function () {
               [
                 'The target object is encrypted by a',
                 'customer-supplied encryption key.',
-              ].join(' ')
-            ) > -1
+              ].join(' '),
+            ) > -1,
           );
         });
       });
@@ -2874,7 +2874,7 @@ describe('storage', function () {
           const projectIdRegExp = /^.+\/locations/;
           const actualKmsKeyName = metadata!.kmsKeyName!.replace(
             projectIdRegExp,
-            ''
+            '',
           );
           let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
 
@@ -2894,7 +2894,7 @@ describe('storage', function () {
           const projectIdRegExp = /^.+\/locations/;
           const actualKmsKeyName = metadata!.kmsKeyName!.replace(
             projectIdRegExp,
-            ''
+            '',
           );
           let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
 
@@ -2934,7 +2934,7 @@ describe('storage', function () {
 
         beforeEach(async () => {
           await new Promise(res =>
-            setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+            setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
           );
           await bucket.setMetadata({
             encryption: {
@@ -2945,7 +2945,7 @@ describe('storage', function () {
 
         afterEach(async () => {
           await new Promise(res =>
-            setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+            setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
           );
           await bucket.setMetadata({
             encryption: null,
@@ -2960,7 +2960,7 @@ describe('storage', function () {
           const actualKmsKeyName =
             metadata!.encryption!.defaultKmsKeyName!.replace(
               projectIdRegExp,
-              ''
+              '',
             );
           const expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
           assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
@@ -2972,7 +2972,7 @@ describe('storage', function () {
 
           await createCryptoKeyAsync(cryptoKeyId);
           await new Promise(res =>
-            setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+            setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
           );
           await bucket.setMetadata({
             encryption: {
@@ -2989,7 +2989,7 @@ describe('storage', function () {
 
           assert.strictEqual(
             fileMetadata.kmsKeyName,
-            `${metadata!.encryption!.defaultKmsKeyName}/cryptoKeyVersions/1`
+            `${metadata!.encryption!.defaultKmsKeyName}/cryptoKeyVersions/1`,
           );
         });
       });
@@ -3017,7 +3017,7 @@ describe('storage', function () {
       const [metadata] = await copiedFile.getMetadata();
       assert.strictEqual(
         typeof metadata!.metadata!.originalProperty,
-        'undefined'
+        'undefined',
       );
       assert.strictEqual(metadata!.metadata!.newProperty, 'true');
       await Promise.all([file.delete, copiedFile.delete()]);
@@ -3110,7 +3110,7 @@ describe('storage', function () {
 
         async function uploadAndVerify(
           file: File,
-          options: Omit<UploadOptions, 'destination'>
+          options: Omit<UploadOptions, 'destination'>,
         ) {
           await bucket.upload(filePath, {
             destination: file,
@@ -3260,11 +3260,13 @@ describe('storage', function () {
       const [contents] = await destinationFile.download();
       assert.strictEqual(
         contents.toString(),
-        files.map(x => x.contents).join('')
+        files.map(x => x.contents).join(''),
       );
 
       await Promise.all(
-        sourceFiles.concat([destinationFile]).map(file => deleteFileAsync(file))
+        sourceFiles
+          .concat([destinationFile])
+          .map(file => deleteFileAsync(file)),
       );
     });
   });
@@ -3290,7 +3292,7 @@ describe('storage', function () {
       const ms = Math.pow(2, retries) * 1000 + Math.random() * 1000;
       return new Promise(done => {
         console.info(
-          `retrying "${test.title}" with accessId ${accessId} in ${ms}ms`
+          `retrying "${test.title}" with accessId ${accessId} in ${ms}ms`,
         );
         setTimeout(done, ms);
       });
@@ -3332,7 +3334,7 @@ describe('storage', function () {
       assert(hmacKeys.length > 0);
       assert(
         hmacKeys.some(hmacKey => hmacKey.id === accessId),
-        'created HMAC key not found from getHmacKeys result'
+        'created HMAC key not found from getHmacKeys result',
       );
     });
 
@@ -3361,7 +3363,7 @@ describe('storage', function () {
       assert(Array.isArray(hmacKeys));
       assert(
         !hmacKeys.some(hmacKey => hmacKey.id === accessId),
-        'deleted HMAC key is found from getHmacKeys result'
+        'deleted HMAC key is found from getHmacKeys result',
       );
     });
 
@@ -3396,16 +3398,17 @@ describe('storage', function () {
         const [hmacKeys] = await storage.getHmacKeys({projectId: HMAC_PROJECT});
         assert(
           hmacKeys.some(
-            hmacKey => hmacKey.metadata!.serviceAccountEmail === SERVICE_ACCOUNT
+            hmacKey =>
+              hmacKey.metadata!.serviceAccountEmail === SERVICE_ACCOUNT,
           ),
-          `Expected at least 1 key for service account: ${SERVICE_ACCOUNT}`
+          `Expected at least 1 key for service account: ${SERVICE_ACCOUNT}`,
         );
         assert(
           hmacKeys.some(
             hmacKey =>
-              hmacKey.metadata!.serviceAccountEmail === SECOND_SERVICE_ACCOUNT
+              hmacKey.metadata!.serviceAccountEmail === SECOND_SERVICE_ACCOUNT,
           ),
-          `Expected at least 1 key for service account: ${SECOND_SERVICE_ACCOUNT}`
+          `Expected at least 1 key for service account: ${SECOND_SERVICE_ACCOUNT}`,
         );
       });
 
@@ -3417,9 +3420,9 @@ describe('storage', function () {
         assert(
           hmacKeys.every(
             hmacKey =>
-              hmacKey.metadata!.serviceAccountEmail === SECOND_SERVICE_ACCOUNT
+              hmacKey.metadata!.serviceAccountEmail === SECOND_SERVICE_ACCOUNT,
           ),
-          'HMAC key belonging to other service accounts unexpected'
+          'HMAC key belonging to other service accounts unexpected',
         );
       });
     });
@@ -3480,7 +3483,7 @@ describe('storage', function () {
 
       assert.deepStrictEqual(
         (result as {prefixes: string[]}).prefixes,
-        expected
+        expected,
       );
     });
 
@@ -3621,7 +3624,7 @@ describe('storage', function () {
       assert.strictEqual(files![0].name, files![1].name);
       assert.notStrictEqual(
         files![0].metadata.generation,
-        files![1].metadata.generation
+        files![1].metadata.generation,
       );
     });
 
@@ -3637,7 +3640,7 @@ describe('storage', function () {
           assert.strictEqual(err.code, 412);
           assert.strictEqual(err.errors![0].reason, 'conditionNotMet');
           return true;
-        }
+        },
       );
       await bucketWithVersioning
         .file(fileName)
@@ -3698,7 +3701,7 @@ describe('storage', function () {
       await fetch(signedDeleteUrl, {method: 'DELETE'});
       assert.rejects(
         () => file.getMetadata(),
-        (err: ApiError) => err.code === 404
+        (err: ApiError) => err.code === 404,
       );
     });
   });
@@ -3772,10 +3775,10 @@ describe('storage', function () {
           assert(err instanceof Error);
           assert.strictEqual(
             err.message,
-            `Max allowed expiration is seven days (${SEVEN_DAYS_IN_SECONDS.toString()} seconds).`
+            `Max allowed expiration is seven days (${SEVEN_DAYS_IN_SECONDS.toString()} seconds).`,
           );
           return true;
-        }
+        },
       );
     });
 
@@ -3958,7 +3961,7 @@ describe('storage', function () {
         topic.name,
         {
           eventTypes: ['OBJECT_FINALIZE'],
-        }
+        },
       );
       notification = createNotificationData[0];
       subscription = topic.subscription(generateName());
@@ -4083,10 +4086,10 @@ describe('storage', function () {
       const TEST_UNIVERSE_DOMAIN = isNullOrUndefined('TEST_UNIVERSE_DOMAIN');
       const TEST_PROJECT_ID = isNullOrUndefined('TEST_UNIVERSE_PROJECT_ID');
       const TEST_UNIVERSE_LOCATION = isNullOrUndefined(
-        'TEST_UNIVERSE_LOCATION'
+        'TEST_UNIVERSE_LOCATION',
       );
       const CREDENTIAL_PATH = isNullOrUndefined(
-        'TEST_UNIVERSE_DOMAIN_CREDENTIAL'
+        'TEST_UNIVERSE_DOMAIN_CREDENTIAL',
       );
       // Create a client with universe domain credentials
       universeDomainStorage = new Storage({
@@ -4153,13 +4156,13 @@ describe('storage', function () {
   function deleteBucket(
     bucket: Bucket,
     options: {},
-    callback: DeleteBucketCallback
+    callback: DeleteBucketCallback,
   ): void;
   function deleteBucket(bucket: Bucket, callback: DeleteBucketCallback): void;
   function deleteBucket(
     bucket: Bucket,
     optsOrCb: {} | DeleteBucketCallback,
-    callback?: DeleteBucketCallback
+    callback?: DeleteBucketCallback,
   ) {
     let options = typeof optsOrCb === 'object' ? optsOrCb : {};
     callback =
@@ -4209,10 +4212,10 @@ describe('storage', function () {
     const [buckets] = await storage.getBuckets({prefix: TESTS_PREFIX});
     const limit = pLimit(10);
     await new Promise(resolve =>
-      setTimeout(resolve, RETENTION_DURATION_SECONDS * 1000)
+      setTimeout(resolve, RETENTION_DURATION_SECONDS * 1000),
     );
     return Promise.all(
-      buckets.map(bucket => limit(() => deleteBucketAsync(bucket)))
+      buckets.map(bucket => limit(() => deleteBucketAsync(bucket))),
     );
   }
 
@@ -4224,7 +4227,7 @@ describe('storage', function () {
     });
     const limit = pLimit(10);
     return Promise.all(
-      filteredTopics.map(topic => limit(() => deleteTopicAsync(topic)))
+      filteredTopics.map(topic => limit(() => deleteTopicAsync(topic))),
     );
   }
 
@@ -4251,7 +4254,7 @@ describe('storage', function () {
 
   async function deleteStaleHmacKeys(
     serviceAccountEmail: string,
-    projectId: string
+    projectId: string,
   ) {
     const old = new Date();
     old.setHours(old.getHours() - 1);
@@ -4271,8 +4274,8 @@ describe('storage', function () {
           limit(async () => {
             await hmacKey.setMetadata({state: 'INACTIVE'});
             await hmacKey.delete();
-          })
-        )
+          }),
+        ),
     );
   }
 
