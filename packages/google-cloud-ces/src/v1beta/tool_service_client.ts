@@ -228,6 +228,9 @@ export class ToolServiceClient {
       scheduledEvaluationRunPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/scheduledEvaluationRuns/{scheduled_evaluation_run}'
       ),
+      securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securitySettings'
+      ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/tools/{tool}'
       ),
@@ -394,14 +397,18 @@ export class ToolServiceClient {
  * @param {google.cloud.ces.v1beta.ToolsetTool} [request.toolsetTool]
  *   Optional. The toolset tool to execute. Only one tool should match the
  *   predicate from the toolset. Otherwise, an error will be returned.
+ * @param {google.protobuf.Struct} [request.variables]
+ *   Optional. The variables that are available for the tool execution.
+ * @param {google.protobuf.Struct} [request.context]
+ *   Optional. The
+ *   [ToolCallContext](https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps/tool/python#environment
+ *   for details) to be passed to the Python tool.
  * @param {string} request.parent
  *   Required. The resource name of the app which the tool/toolset belongs to.
  *   Format: `projects/{project}/locations/{location}/apps/{app}`
  * @param {google.protobuf.Struct} [request.args]
  *   Optional. The input parameters and values for the tool in JSON object
  *   format.
- * @param {google.protobuf.Struct} [request.variables]
- *   Optional. The variables that are available for the tool execution.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1690,6 +1697,42 @@ export class ToolServiceClient {
    */
   matchScheduledEvaluationRunFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
     return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).scheduled_evaluation_run;
+  }
+
+  /**
+   * Return a fully-qualified securitySettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  securitySettingsPath(project:string,location:string) {
+    return this.pathTemplates.securitySettingsPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from SecuritySettings resource.
+   *
+   * @param {string} securitySettingsName
+   *   A fully-qualified path representing SecuritySettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSecuritySettingsName(securitySettingsName: string) {
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
+  }
+
+  /**
+   * Parse the location from SecuritySettings resource.
+   *
+   * @param {string} securitySettingsName
+   *   A fully-qualified path representing SecuritySettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSecuritySettingsName(securitySettingsName: string) {
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
   }
 
   /**

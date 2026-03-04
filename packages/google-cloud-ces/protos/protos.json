@@ -8804,6 +8804,44 @@
                             }
                           ]
                         },
+                        "GetSecuritySettings": {
+                          "requestType": "GetSecuritySettingsRequest",
+                          "responseType": "SecuritySettings",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/securitySettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/securitySettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateSecuritySettings": {
+                          "requestType": "UpdateSecuritySettingsRequest",
+                          "responseType": "SecuritySettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{security_settings.name=projects/*/locations/*/securitySettings}",
+                            "(google.api.http).body": "security_settings",
+                            "(google.api.method_signature)": "security_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{security_settings.name=projects/*/locations/*/securitySettings}",
+                                "body": "security_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_settings,update_mask"
+                            }
+                          ]
+                        },
                         "ListAgents": {
                           "requestType": "ListAgentsRequest",
                           "responseType": "ListAgentsResponse",
@@ -11136,6 +11174,36 @@
                         }
                       }
                     },
+                    "GetSecuritySettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/SecuritySettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateSecuritySettingsRequest": {
+                      "fields": {
+                        "securitySettings": {
+                          "type": "SecuritySettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "App": {
                       "options": {
                         "(google.api.resource).type": "ces.googleapis.com/App",
@@ -13116,6 +13184,7 @@
                             "mcpTool",
                             "fileSearchTool",
                             "systemTool",
+                            "agentTool",
                             "widgetTool"
                           ]
                         }
@@ -13184,6 +13253,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "agentTool": {
+                          "type": "AgentTool",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "widgetTool": {
                           "type": "WidgetTool",
                           "id": 24,
@@ -13242,6 +13318,32 @@
                           "id": 20,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AgentTool": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "rootAgent": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/Agent"
                           }
                         }
                       }
@@ -17618,6 +17720,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "useToolFakes": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "remoteDialogflowQueryParameters": {
                           "type": "RemoteDialogflowQueryParameters",
                           "id": 15,
@@ -18036,6 +18145,79 @@
                         }
                       }
                     },
+                    "SecuritySettings": {
+                      "options": {
+                        "(google.api.resource).type": "ces.googleapis.com/SecuritySettings",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/securitySettings",
+                        "(google.api.resource).plural": "securitySettings",
+                        "(google.api.resource).singular": "securitySettings"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "endpointControlPolicy": {
+                          "type": "EndpointControlPolicy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "EndpointControlPolicy": {
+                      "fields": {
+                        "enforcementScope": {
+                          "type": "EnforcementScope",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowedOrigins": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EnforcementScope": {
+                          "values": {
+                            "ENFORCEMENT_SCOPE_UNSPECIFIED": 0,
+                            "VPCSC_ONLY": 1,
+                            "ALWAYS": 2
+                          }
+                        }
+                      }
+                    },
                     "EvaluationService": {
                       "options": {
                         "(google.api.default_host)": "ces.googleapis.com",
@@ -18074,19 +18256,19 @@
                           "requestType": "UploadEvaluationAudioRequest",
                           "responseType": "UploadEvaluationAudioResponse",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{app=projects/*/locations/*/apps/*}:uploadEvaluationAudio",
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/apps/*/evaluations/*}:uploadEvaluationAudio",
                             "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "app,audio_content"
+                            "(google.api.method_signature)": "name,audio_content"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{app=projects/*/locations/*/apps/*}:uploadEvaluationAudio",
+                                "post": "/v1beta/{name=projects/*/locations/*/apps/*/evaluations/*}:uploadEvaluationAudio",
                                 "body": "*"
                               }
                             },
                             {
-                              "(google.api.method_signature)": "app,audio_content"
+                              "(google.api.method_signature)": "name,audio_content"
                             }
                           ]
                         },
@@ -19474,12 +19656,12 @@
                     },
                     "UploadEvaluationAudioRequest": {
                       "fields": {
-                        "app": {
+                        "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "ces.googleapis.com/App"
+                            "(google.api.resource_reference).type": "ces.googleapis.com/Evaluation"
                           }
                         },
                         "audioContent": {
@@ -19487,6 +19669,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "previousAudioGcsUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -19497,11 +19686,11 @@
                           "type": "string",
                           "id": 1
                         },
-                        "audioTranscript": {
+                        "transcript": {
                           "type": "string",
                           "id": 2
                         },
-                        "audioDuration": {
+                        "duration": {
                           "type": "google.protobuf.Duration",
                           "id": 3
                         }
@@ -19904,6 +20093,12 @@
                             "tool",
                             "toolsetTool"
                           ]
+                        },
+                        "toolExecutionContext": {
+                          "oneof": [
+                            "variables",
+                            "context"
+                          ]
                         }
                       },
                       "fields": {
@@ -19922,6 +20117,20 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "variables": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "context": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "parent": {
                           "type": "string",
                           "id": 4,
@@ -19933,13 +20142,6 @@
                         "args": {
                           "type": "google.protobuf.Struct",
                           "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "variables": {
-                          "type": "google.protobuf.Struct",
-                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

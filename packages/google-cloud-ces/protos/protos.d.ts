@@ -28609,6 +28609,34 @@ export namespace google {
                     public importApp(request: google.cloud.ces.v1beta.IImportAppRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls GetSecuritySettings.
+                     * @param request GetSecuritySettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecuritySettings
+                     */
+                    public getSecuritySettings(request: google.cloud.ces.v1beta.IGetSecuritySettingsRequest, callback: google.cloud.ces.v1beta.AgentService.GetSecuritySettingsCallback): void;
+
+                    /**
+                     * Calls GetSecuritySettings.
+                     * @param request GetSecuritySettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSecuritySettings(request: google.cloud.ces.v1beta.IGetSecuritySettingsRequest): Promise<google.cloud.ces.v1beta.SecuritySettings>;
+
+                    /**
+                     * Calls UpdateSecuritySettings.
+                     * @param request UpdateSecuritySettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecuritySettings
+                     */
+                    public updateSecuritySettings(request: google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest, callback: google.cloud.ces.v1beta.AgentService.UpdateSecuritySettingsCallback): void;
+
+                    /**
+                     * Calls UpdateSecuritySettings.
+                     * @param request UpdateSecuritySettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSecuritySettings(request: google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest): Promise<google.cloud.ces.v1beta.SecuritySettings>;
+
+                    /**
                      * Calls ListAgents.
                      * @param request ListAgentsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListAgentsResponse
@@ -29233,6 +29261,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ImportAppCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.ces.v1beta.AgentService|getSecuritySettings}.
+                     * @param error Error, if any
+                     * @param [response] SecuritySettings
+                     */
+                    type GetSecuritySettingsCallback = (error: (Error|null), response?: google.cloud.ces.v1beta.SecuritySettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.ces.v1beta.AgentService|updateSecuritySettings}.
+                     * @param error Error, if any
+                     * @param [response] SecuritySettings
+                     */
+                    type UpdateSecuritySettingsCallback = (error: (Error|null), response?: google.cloud.ces.v1beta.SecuritySettings) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.ces.v1beta.AgentService|listAgents}.
@@ -36910,6 +36952,206 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetSecuritySettingsRequest. */
+                interface IGetSecuritySettingsRequest {
+
+                    /** GetSecuritySettingsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSecuritySettingsRequest. */
+                class GetSecuritySettingsRequest implements IGetSecuritySettingsRequest {
+
+                    /**
+                     * Constructs a new GetSecuritySettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IGetSecuritySettingsRequest);
+
+                    /** GetSecuritySettingsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSecuritySettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSecuritySettingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IGetSecuritySettingsRequest): google.cloud.ces.v1beta.GetSecuritySettingsRequest;
+
+                    /**
+                     * Encodes the specified GetSecuritySettingsRequest message. Does not implicitly {@link google.cloud.ces.v1beta.GetSecuritySettingsRequest.verify|verify} messages.
+                     * @param message GetSecuritySettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IGetSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSecuritySettingsRequest message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GetSecuritySettingsRequest.verify|verify} messages.
+                     * @param message GetSecuritySettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IGetSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSecuritySettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSecuritySettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GetSecuritySettingsRequest;
+
+                    /**
+                     * Decodes a GetSecuritySettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSecuritySettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GetSecuritySettingsRequest;
+
+                    /**
+                     * Verifies a GetSecuritySettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSecuritySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSecuritySettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GetSecuritySettingsRequest;
+
+                    /**
+                     * Creates a plain object from a GetSecuritySettingsRequest message. Also converts values to other types if specified.
+                     * @param message GetSecuritySettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.GetSecuritySettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSecuritySettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSecuritySettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSecuritySettingsRequest. */
+                interface IUpdateSecuritySettingsRequest {
+
+                    /** UpdateSecuritySettingsRequest securitySettings */
+                    securitySettings?: (google.cloud.ces.v1beta.ISecuritySettings|null);
+
+                    /** UpdateSecuritySettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateSecuritySettingsRequest. */
+                class UpdateSecuritySettingsRequest implements IUpdateSecuritySettingsRequest {
+
+                    /**
+                     * Constructs a new UpdateSecuritySettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest);
+
+                    /** UpdateSecuritySettingsRequest securitySettings. */
+                    public securitySettings?: (google.cloud.ces.v1beta.ISecuritySettings|null);
+
+                    /** UpdateSecuritySettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateSecuritySettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSecuritySettingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest): google.cloud.ces.v1beta.UpdateSecuritySettingsRequest;
+
+                    /**
+                     * Encodes the specified UpdateSecuritySettingsRequest message. Does not implicitly {@link google.cloud.ces.v1beta.UpdateSecuritySettingsRequest.verify|verify} messages.
+                     * @param message UpdateSecuritySettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSecuritySettingsRequest message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.UpdateSecuritySettingsRequest.verify|verify} messages.
+                     * @param message UpdateSecuritySettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IUpdateSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSecuritySettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSecuritySettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.UpdateSecuritySettingsRequest;
+
+                    /**
+                     * Decodes an UpdateSecuritySettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSecuritySettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.UpdateSecuritySettingsRequest;
+
+                    /**
+                     * Verifies an UpdateSecuritySettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSecuritySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSecuritySettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.UpdateSecuritySettingsRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSecuritySettingsRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSecuritySettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.UpdateSecuritySettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSecuritySettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSecuritySettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an App. */
                 interface IApp {
 
@@ -42842,6 +43084,9 @@ export namespace google {
                     /** Tool systemTool */
                     systemTool?: (google.cloud.ces.v1beta.ISystemTool|null);
 
+                    /** Tool agentTool */
+                    agentTool?: (google.cloud.ces.v1beta.IAgentTool|null);
+
                     /** Tool widgetTool */
                     widgetTool?: (google.cloud.ces.v1beta.IWidgetTool|null);
 
@@ -42906,6 +43151,9 @@ export namespace google {
                     /** Tool systemTool. */
                     public systemTool?: (google.cloud.ces.v1beta.ISystemTool|null);
 
+                    /** Tool agentTool. */
+                    public agentTool?: (google.cloud.ces.v1beta.IAgentTool|null);
+
                     /** Tool widgetTool. */
                     public widgetTool?: (google.cloud.ces.v1beta.IWidgetTool|null);
 
@@ -42934,7 +43182,7 @@ export namespace google {
                     public toolFakeConfig?: (google.cloud.ces.v1beta.IToolFakeConfig|null);
 
                     /** Tool toolType. */
-                    public toolType?: ("clientFunction"|"openApiTool"|"googleSearchTool"|"connectorTool"|"dataStoreTool"|"pythonFunction"|"mcpTool"|"fileSearchTool"|"systemTool"|"widgetTool");
+                    public toolType?: ("clientFunction"|"openApiTool"|"googleSearchTool"|"connectorTool"|"dataStoreTool"|"pythonFunction"|"mcpTool"|"fileSearchTool"|"systemTool"|"agentTool"|"widgetTool");
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -43008,6 +43256,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Tool
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AgentTool. */
+                interface IAgentTool {
+
+                    /** AgentTool name */
+                    name?: (string|null);
+
+                    /** AgentTool description */
+                    description?: (string|null);
+
+                    /** AgentTool rootAgent */
+                    rootAgent?: (string|null);
+                }
+
+                /** Represents an AgentTool. */
+                class AgentTool implements IAgentTool {
+
+                    /**
+                     * Constructs a new AgentTool.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IAgentTool);
+
+                    /** AgentTool name. */
+                    public name: string;
+
+                    /** AgentTool description. */
+                    public description: string;
+
+                    /** AgentTool rootAgent. */
+                    public rootAgent: string;
+
+                    /**
+                     * Creates a new AgentTool instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentTool instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IAgentTool): google.cloud.ces.v1beta.AgentTool;
+
+                    /**
+                     * Encodes the specified AgentTool message. Does not implicitly {@link google.cloud.ces.v1beta.AgentTool.verify|verify} messages.
+                     * @param message AgentTool message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IAgentTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentTool message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.AgentTool.verify|verify} messages.
+                     * @param message AgentTool message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IAgentTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentTool message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentTool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.AgentTool;
+
+                    /**
+                     * Decodes an AgentTool message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentTool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.AgentTool;
+
+                    /**
+                     * Verifies an AgentTool message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentTool message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentTool
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.AgentTool;
+
+                    /**
+                     * Creates a plain object from an AgentTool message. Also converts values to other types if specified.
+                     * @param message AgentTool
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.AgentTool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentTool to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentTool
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -55165,6 +55522,9 @@ export namespace google {
                     /** SessionConfig timeZone */
                     timeZone?: (string|null);
 
+                    /** SessionConfig useToolFakes */
+                    useToolFakes?: (boolean|null);
+
                     /** SessionConfig remoteDialogflowQueryParameters */
                     remoteDialogflowQueryParameters?: (google.cloud.ces.v1beta.SessionConfig.IRemoteDialogflowQueryParameters|null);
                 }
@@ -55198,6 +55558,9 @@ export namespace google {
 
                     /** SessionConfig timeZone. */
                     public timeZone: string;
+
+                    /** SessionConfig useToolFakes. */
+                    public useToolFakes: boolean;
 
                     /** SessionConfig remoteDialogflowQueryParameters. */
                     public remoteDialogflowQueryParameters?: (google.cloud.ces.v1beta.SessionConfig.IRemoteDialogflowQueryParameters|null);
@@ -57316,6 +57679,240 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SecuritySettings. */
+                interface ISecuritySettings {
+
+                    /** SecuritySettings name */
+                    name?: (string|null);
+
+                    /** SecuritySettings endpointControlPolicy */
+                    endpointControlPolicy?: (google.cloud.ces.v1beta.IEndpointControlPolicy|null);
+
+                    /** SecuritySettings createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecuritySettings updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecuritySettings etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a SecuritySettings. */
+                class SecuritySettings implements ISecuritySettings {
+
+                    /**
+                     * Constructs a new SecuritySettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.ISecuritySettings);
+
+                    /** SecuritySettings name. */
+                    public name: string;
+
+                    /** SecuritySettings endpointControlPolicy. */
+                    public endpointControlPolicy?: (google.cloud.ces.v1beta.IEndpointControlPolicy|null);
+
+                    /** SecuritySettings createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecuritySettings updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecuritySettings etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new SecuritySettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecuritySettings instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.ISecuritySettings): google.cloud.ces.v1beta.SecuritySettings;
+
+                    /**
+                     * Encodes the specified SecuritySettings message. Does not implicitly {@link google.cloud.ces.v1beta.SecuritySettings.verify|verify} messages.
+                     * @param message SecuritySettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.ISecuritySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecuritySettings message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.SecuritySettings.verify|verify} messages.
+                     * @param message SecuritySettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.ISecuritySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecuritySettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecuritySettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.SecuritySettings;
+
+                    /**
+                     * Decodes a SecuritySettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecuritySettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.SecuritySettings;
+
+                    /**
+                     * Verifies a SecuritySettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecuritySettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecuritySettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.SecuritySettings;
+
+                    /**
+                     * Creates a plain object from a SecuritySettings message. Also converts values to other types if specified.
+                     * @param message SecuritySettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.SecuritySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecuritySettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecuritySettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EndpointControlPolicy. */
+                interface IEndpointControlPolicy {
+
+                    /** EndpointControlPolicy enforcementScope */
+                    enforcementScope?: (google.cloud.ces.v1beta.EndpointControlPolicy.EnforcementScope|keyof typeof google.cloud.ces.v1beta.EndpointControlPolicy.EnforcementScope|null);
+
+                    /** EndpointControlPolicy allowedOrigins */
+                    allowedOrigins?: (string[]|null);
+                }
+
+                /** Represents an EndpointControlPolicy. */
+                class EndpointControlPolicy implements IEndpointControlPolicy {
+
+                    /**
+                     * Constructs a new EndpointControlPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IEndpointControlPolicy);
+
+                    /** EndpointControlPolicy enforcementScope. */
+                    public enforcementScope: (google.cloud.ces.v1beta.EndpointControlPolicy.EnforcementScope|keyof typeof google.cloud.ces.v1beta.EndpointControlPolicy.EnforcementScope);
+
+                    /** EndpointControlPolicy allowedOrigins. */
+                    public allowedOrigins: string[];
+
+                    /**
+                     * Creates a new EndpointControlPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EndpointControlPolicy instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IEndpointControlPolicy): google.cloud.ces.v1beta.EndpointControlPolicy;
+
+                    /**
+                     * Encodes the specified EndpointControlPolicy message. Does not implicitly {@link google.cloud.ces.v1beta.EndpointControlPolicy.verify|verify} messages.
+                     * @param message EndpointControlPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IEndpointControlPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EndpointControlPolicy message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EndpointControlPolicy.verify|verify} messages.
+                     * @param message EndpointControlPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IEndpointControlPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EndpointControlPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EndpointControlPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.EndpointControlPolicy;
+
+                    /**
+                     * Decodes an EndpointControlPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EndpointControlPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.EndpointControlPolicy;
+
+                    /**
+                     * Verifies an EndpointControlPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EndpointControlPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EndpointControlPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.EndpointControlPolicy;
+
+                    /**
+                     * Creates a plain object from an EndpointControlPolicy message. Also converts values to other types if specified.
+                     * @param message EndpointControlPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.EndpointControlPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EndpointControlPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EndpointControlPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EndpointControlPolicy {
+
+                    /** EnforcementScope enum. */
+                    enum EnforcementScope {
+                        ENFORCEMENT_SCOPE_UNSPECIFIED = 0,
+                        VPCSC_ONLY = 1,
+                        ALWAYS = 2
+                    }
                 }
 
                 /** Represents an EvaluationService */
@@ -61932,11 +62529,14 @@ export namespace google {
                 /** Properties of an UploadEvaluationAudioRequest. */
                 interface IUploadEvaluationAudioRequest {
 
-                    /** UploadEvaluationAudioRequest app */
-                    app?: (string|null);
+                    /** UploadEvaluationAudioRequest name */
+                    name?: (string|null);
 
                     /** UploadEvaluationAudioRequest audioContent */
                     audioContent?: (Uint8Array|Buffer|string|null);
+
+                    /** UploadEvaluationAudioRequest previousAudioGcsUri */
+                    previousAudioGcsUri?: (string|null);
                 }
 
                 /** Represents an UploadEvaluationAudioRequest. */
@@ -61948,11 +62548,14 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.ces.v1beta.IUploadEvaluationAudioRequest);
 
-                    /** UploadEvaluationAudioRequest app. */
-                    public app: string;
+                    /** UploadEvaluationAudioRequest name. */
+                    public name: string;
 
                     /** UploadEvaluationAudioRequest audioContent. */
                     public audioContent: (Uint8Array|Buffer|string);
+
+                    /** UploadEvaluationAudioRequest previousAudioGcsUri. */
+                    public previousAudioGcsUri: string;
 
                     /**
                      * Creates a new UploadEvaluationAudioRequest instance using the specified properties.
@@ -62038,11 +62641,11 @@ export namespace google {
                     /** UploadEvaluationAudioResponse audioGcsUri */
                     audioGcsUri?: (string|null);
 
-                    /** UploadEvaluationAudioResponse audioTranscript */
-                    audioTranscript?: (string|null);
+                    /** UploadEvaluationAudioResponse transcript */
+                    transcript?: (string|null);
 
-                    /** UploadEvaluationAudioResponse audioDuration */
-                    audioDuration?: (google.protobuf.IDuration|null);
+                    /** UploadEvaluationAudioResponse duration */
+                    duration?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents an UploadEvaluationAudioResponse. */
@@ -62057,11 +62660,11 @@ export namespace google {
                     /** UploadEvaluationAudioResponse audioGcsUri. */
                     public audioGcsUri: string;
 
-                    /** UploadEvaluationAudioResponse audioTranscript. */
-                    public audioTranscript: string;
+                    /** UploadEvaluationAudioResponse transcript. */
+                    public transcript: string;
 
-                    /** UploadEvaluationAudioResponse audioDuration. */
-                    public audioDuration?: (google.protobuf.IDuration|null);
+                    /** UploadEvaluationAudioResponse duration. */
+                    public duration?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new UploadEvaluationAudioResponse instance using the specified properties.
@@ -63851,14 +64454,17 @@ export namespace google {
                     /** ExecuteToolRequest toolsetTool */
                     toolsetTool?: (google.cloud.ces.v1beta.IToolsetTool|null);
 
+                    /** ExecuteToolRequest variables */
+                    variables?: (google.protobuf.IStruct|null);
+
+                    /** ExecuteToolRequest context */
+                    context?: (google.protobuf.IStruct|null);
+
                     /** ExecuteToolRequest parent */
                     parent?: (string|null);
 
                     /** ExecuteToolRequest args */
                     args?: (google.protobuf.IStruct|null);
-
-                    /** ExecuteToolRequest variables */
-                    variables?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents an ExecuteToolRequest. */
@@ -63876,17 +64482,23 @@ export namespace google {
                     /** ExecuteToolRequest toolsetTool. */
                     public toolsetTool?: (google.cloud.ces.v1beta.IToolsetTool|null);
 
+                    /** ExecuteToolRequest variables. */
+                    public variables?: (google.protobuf.IStruct|null);
+
+                    /** ExecuteToolRequest context. */
+                    public context?: (google.protobuf.IStruct|null);
+
                     /** ExecuteToolRequest parent. */
                     public parent: string;
 
                     /** ExecuteToolRequest args. */
                     public args?: (google.protobuf.IStruct|null);
 
-                    /** ExecuteToolRequest variables. */
-                    public variables?: (google.protobuf.IStruct|null);
-
                     /** ExecuteToolRequest toolIdentifier. */
                     public toolIdentifier?: ("tool"|"toolsetTool");
+
+                    /** ExecuteToolRequest toolExecutionContext. */
+                    public toolExecutionContext?: ("variables"|"context");
 
                     /**
                      * Creates a new ExecuteToolRequest instance using the specified properties.

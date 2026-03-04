@@ -139,6 +139,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_deployment.js) |
 | get example | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_example.js) |
 | get guardrail | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_guardrail.js) |
+| get security settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_security_settings.js) |
 | get tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_tool.js) |
 | get toolset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_toolset.js) |
 | import app | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.import_app.js) |
@@ -158,6 +159,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.update_deployment.js) |
 | update example | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.update_example.js) |
 | update guardrail | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.update_guardrail.js) |
+| update security settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.update_security_settings.js) |
 | update tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.update_tool.js) |
 | update toolset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.update_toolset.js) |
 | create evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.create_evaluation.js) |

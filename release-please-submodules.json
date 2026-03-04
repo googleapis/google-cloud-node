@@ -1,13 +1,7 @@
 {
-  "release-type": "node",
-  "separate-pull-requests": true,
   "commit-batch-size": 1,
   "include-component-in-tag": true,
-  "tag-separator": "-",
   "packages": {
-    "handwritten/logging-winston": {
-      "component": "logging-winston"
-    },
     "handwritten/bigquery": {
       "component": "bigquery"
     },
@@ -19,11 +13,20 @@
     },
     "handwritten/logging-bunyan": {
       "component": "logging-bunyan"
+    },
+    "handwritten/logging-winston": {
+      "component": "logging-winston"
+    },
+    "handwritten/storage": {
+      "component": "storage"
     }
   },
   "plugins": [
     {
       "type": "sentence-case"
     }
-  ]
+  ],
+  "release-type": "node",
+  "separate-pull-requests": true,
+  "tag-separator": "-"
 }
