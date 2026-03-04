@@ -2002,7 +2002,6 @@
                              * Properties of an IndexHint.
                              * @memberof google.cloud.vectorsearch.v1.SearchHint
                              * @interface IIndexHint
-                             * @property {google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams|null} [denseScannParams] IndexHint denseScannParams
                              * @property {string|null} [name] IndexHint name
                              */
     
@@ -2022,34 +2021,12 @@
                             }
     
                             /**
-                             * IndexHint denseScannParams.
-                             * @member {google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams|null|undefined} denseScannParams
-                             * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint
-                             * @instance
-                             */
-                            IndexHint.prototype.denseScannParams = null;
-    
-                            /**
                              * IndexHint name.
                              * @member {string} name
                              * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint
                              * @instance
                              */
                             IndexHint.prototype.name = "";
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * IndexHint params.
-                             * @member {"denseScannParams"|undefined} params
-                             * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint
-                             * @instance
-                             */
-                            Object.defineProperty(IndexHint.prototype, "params", {
-                                get: $util.oneOfGetter($oneOfFields = ["denseScannParams"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
     
                             /**
                              * Creates a new IndexHint instance using the specified properties.
@@ -2077,8 +2054,6 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                if (message.denseScannParams != null && Object.hasOwnProperty.call(message, "denseScannParams"))
-                                    $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.encode(message.denseScannParams, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2115,10 +2090,6 @@
                                     if (tag === error)
                                         break;
                                     switch (tag >>> 3) {
-                                    case 2: {
-                                            message.denseScannParams = $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.decode(reader, reader.uint32());
-                                            break;
-                                        }
                                     case 1: {
                                             message.name = reader.string();
                                             break;
@@ -2158,15 +2129,6 @@
                             IndexHint.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
-                                var properties = {};
-                                if (message.denseScannParams != null && message.hasOwnProperty("denseScannParams")) {
-                                    properties.params = 1;
-                                    {
-                                        var error = $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.verify(message.denseScannParams);
-                                        if (error)
-                                            return "denseScannParams." + error;
-                                    }
-                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -2185,11 +2147,6 @@
                                 if (object instanceof $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint)
                                     return object;
                                 var message = new $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint();
-                                if (object.denseScannParams != null) {
-                                    if (typeof object.denseScannParams !== "object")
-                                        throw TypeError(".google.cloud.vectorsearch.v1.SearchHint.IndexHint.denseScannParams: object expected");
-                                    message.denseScannParams = $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.fromObject(object.denseScannParams);
-                                }
                                 if (object.name != null)
                                     message.name = String(object.name);
                                 return message;
@@ -2212,11 +2169,6 @@
                                     object.name = "";
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
-                                if (message.denseScannParams != null && message.hasOwnProperty("denseScannParams")) {
-                                    object.denseScannParams = $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.toObject(message.denseScannParams, options);
-                                    if (options.oneofs)
-                                        object.params = "denseScannParams";
-                                }
                                 return object;
                             };
     
@@ -2245,235 +2197,6 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.vectorsearch.v1.SearchHint.IndexHint";
                             };
-    
-                            IndexHint.DenseScannParams = (function() {
-    
-                                /**
-                                 * Properties of a DenseScannParams.
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint
-                                 * @interface IDenseScannParams
-                                 * @property {number|null} [searchLeavesPct] DenseScannParams searchLeavesPct
-                                 * @property {number|null} [initialCandidateCount] DenseScannParams initialCandidateCount
-                                 */
-    
-                                /**
-                                 * Constructs a new DenseScannParams.
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint
-                                 * @classdesc Represents a DenseScannParams.
-                                 * @implements IDenseScannParams
-                                 * @constructor
-                                 * @param {google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams=} [properties] Properties to set
-                                 */
-                                function DenseScannParams(properties) {
-                                    if (properties)
-                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
-                                                this[keys[i]] = properties[keys[i]];
-                                }
-    
-                                /**
-                                 * DenseScannParams searchLeavesPct.
-                                 * @member {number} searchLeavesPct
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @instance
-                                 */
-                                DenseScannParams.prototype.searchLeavesPct = 0;
-    
-                                /**
-                                 * DenseScannParams initialCandidateCount.
-                                 * @member {number} initialCandidateCount
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @instance
-                                 */
-                                DenseScannParams.prototype.initialCandidateCount = 0;
-    
-                                /**
-                                 * Creates a new DenseScannParams instance using the specified properties.
-                                 * @function create
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @static
-                                 * @param {google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams=} [properties] Properties to set
-                                 * @returns {google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams} DenseScannParams instance
-                                 */
-                                DenseScannParams.create = function create(properties) {
-                                    return new DenseScannParams(properties);
-                                };
-    
-                                /**
-                                 * Encodes the specified DenseScannParams message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
-                                 * @function encode
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @static
-                                 * @param {google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams} message DenseScannParams message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                DenseScannParams.encode = function encode(message, writer) {
-                                    if (!writer)
-                                        writer = $Writer.create();
-                                    if (message.searchLeavesPct != null && Object.hasOwnProperty.call(message, "searchLeavesPct"))
-                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.searchLeavesPct);
-                                    if (message.initialCandidateCount != null && Object.hasOwnProperty.call(message, "initialCandidateCount"))
-                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.initialCandidateCount);
-                                    return writer;
-                                };
-    
-                                /**
-                                 * Encodes the specified DenseScannParams message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
-                                 * @function encodeDelimited
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @static
-                                 * @param {google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams} message DenseScannParams message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                DenseScannParams.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
-                                };
-    
-                                /**
-                                 * Decodes a DenseScannParams message from the specified reader or buffer.
-                                 * @function decode
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @param {number} [length] Message length if known beforehand
-                                 * @returns {google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams} DenseScannParams
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                DenseScannParams.decode = function decode(reader, length, error) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams();
-                                    while (reader.pos < end) {
-                                        var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
-                                        switch (tag >>> 3) {
-                                        case 1: {
-                                                message.searchLeavesPct = reader.int32();
-                                                break;
-                                            }
-                                        case 2: {
-                                                message.initialCandidateCount = reader.int32();
-                                                break;
-                                            }
-                                        default:
-                                            reader.skipType(tag & 7);
-                                            break;
-                                        }
-                                    }
-                                    return message;
-                                };
-    
-                                /**
-                                 * Decodes a DenseScannParams message from the specified reader or buffer, length delimited.
-                                 * @function decodeDelimited
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @returns {google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams} DenseScannParams
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                DenseScannParams.decodeDelimited = function decodeDelimited(reader) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = new $Reader(reader);
-                                    return this.decode(reader, reader.uint32());
-                                };
-    
-                                /**
-                                 * Verifies a DenseScannParams message.
-                                 * @function verify
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @static
-                                 * @param {Object.<string,*>} message Plain object to verify
-                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                 */
-                                DenseScannParams.verify = function verify(message) {
-                                    if (typeof message !== "object" || message === null)
-                                        return "object expected";
-                                    if (message.searchLeavesPct != null && message.hasOwnProperty("searchLeavesPct"))
-                                        if (!$util.isInteger(message.searchLeavesPct))
-                                            return "searchLeavesPct: integer expected";
-                                    if (message.initialCandidateCount != null && message.hasOwnProperty("initialCandidateCount"))
-                                        if (!$util.isInteger(message.initialCandidateCount))
-                                            return "initialCandidateCount: integer expected";
-                                    return null;
-                                };
-    
-                                /**
-                                 * Creates a DenseScannParams message from a plain object. Also converts values to their respective internal types.
-                                 * @function fromObject
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @static
-                                 * @param {Object.<string,*>} object Plain object
-                                 * @returns {google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams} DenseScannParams
-                                 */
-                                DenseScannParams.fromObject = function fromObject(object) {
-                                    if (object instanceof $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams)
-                                        return object;
-                                    var message = new $root.google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams();
-                                    if (object.searchLeavesPct != null)
-                                        message.searchLeavesPct = object.searchLeavesPct | 0;
-                                    if (object.initialCandidateCount != null)
-                                        message.initialCandidateCount = object.initialCandidateCount | 0;
-                                    return message;
-                                };
-    
-                                /**
-                                 * Creates a plain object from a DenseScannParams message. Also converts values to other types if specified.
-                                 * @function toObject
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @static
-                                 * @param {google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams} message DenseScannParams
-                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                 * @returns {Object.<string,*>} Plain object
-                                 */
-                                DenseScannParams.toObject = function toObject(message, options) {
-                                    if (!options)
-                                        options = {};
-                                    var object = {};
-                                    if (options.defaults) {
-                                        object.searchLeavesPct = 0;
-                                        object.initialCandidateCount = 0;
-                                    }
-                                    if (message.searchLeavesPct != null && message.hasOwnProperty("searchLeavesPct"))
-                                        object.searchLeavesPct = message.searchLeavesPct;
-                                    if (message.initialCandidateCount != null && message.hasOwnProperty("initialCandidateCount"))
-                                        object.initialCandidateCount = message.initialCandidateCount;
-                                    return object;
-                                };
-    
-                                /**
-                                 * Converts this DenseScannParams to JSON.
-                                 * @function toJSON
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @instance
-                                 * @returns {Object.<string,*>} JSON object
-                                 */
-                                DenseScannParams.prototype.toJSON = function toJSON() {
-                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                };
-    
-                                /**
-                                 * Gets the default type url for DenseScannParams
-                                 * @function getTypeUrl
-                                 * @memberof google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams
-                                 * @static
-                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                                 * @returns {string} The default type url
-                                 */
-                                DenseScannParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                    if (typeUrlPrefix === undefined) {
-                                        typeUrlPrefix = "type.googleapis.com";
-                                    }
-                                    return typeUrlPrefix + "/google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams";
-                                };
-    
-                                return DenseScannParams;
-                            })();
     
                             return IndexHint;
                         })();

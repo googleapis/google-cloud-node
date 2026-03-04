@@ -806,9 +806,6 @@ export namespace google {
                     /** Properties of an IndexHint. */
                     interface IIndexHint {
 
-                        /** IndexHint denseScannParams */
-                        denseScannParams?: (google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams|null);
-
                         /** IndexHint name */
                         name?: (string|null);
                     }
@@ -822,14 +819,8 @@ export namespace google {
                          */
                         constructor(properties?: google.cloud.vectorsearch.v1.SearchHint.IIndexHint);
 
-                        /** IndexHint denseScannParams. */
-                        public denseScannParams?: (google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams|null);
-
                         /** IndexHint name. */
                         public name: string;
-
-                        /** IndexHint params. */
-                        public params?: "denseScannParams";
 
                         /**
                          * Creates a new IndexHint instance using the specified properties.
@@ -907,112 +898,6 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace IndexHint {
-
-                        /** Properties of a DenseScannParams. */
-                        interface IDenseScannParams {
-
-                            /** DenseScannParams searchLeavesPct */
-                            searchLeavesPct?: (number|null);
-
-                            /** DenseScannParams initialCandidateCount */
-                            initialCandidateCount?: (number|null);
-                        }
-
-                        /** Represents a DenseScannParams. */
-                        class DenseScannParams implements IDenseScannParams {
-
-                            /**
-                             * Constructs a new DenseScannParams.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams);
-
-                            /** DenseScannParams searchLeavesPct. */
-                            public searchLeavesPct: number;
-
-                            /** DenseScannParams initialCandidateCount. */
-                            public initialCandidateCount: number;
-
-                            /**
-                             * Creates a new DenseScannParams instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns DenseScannParams instance
-                             */
-                            public static create(properties?: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
-
-                            /**
-                             * Encodes the specified DenseScannParams message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
-                             * @param message DenseScannParams message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified DenseScannParams message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
-                             * @param message DenseScannParams message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a DenseScannParams message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns DenseScannParams
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
-
-                            /**
-                             * Decodes a DenseScannParams message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns DenseScannParams
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
-
-                            /**
-                             * Verifies a DenseScannParams message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a DenseScannParams message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns DenseScannParams
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
-
-                            /**
-                             * Creates a plain object from a DenseScannParams message. Also converts values to other types if specified.
-                             * @param message DenseScannParams
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this DenseScannParams to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for DenseScannParams
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
                     }
 
                     /** Properties of a KnnHint. */

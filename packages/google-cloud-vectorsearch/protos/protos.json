@@ -269,47 +269,13 @@
                       },
                       "nested": {
                         "IndexHint": {
-                          "oneofs": {
-                            "params": {
-                              "oneof": [
-                                "denseScannParams"
-                              ]
-                            }
-                          },
                           "fields": {
-                            "denseScannParams": {
-                              "type": "DenseScannParams",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
                             "name": {
                               "type": "string",
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "DenseScannParams": {
-                              "fields": {
-                                "searchLeavesPct": {
-                                  "type": "int32",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                },
-                                "initialCandidateCount": {
-                                  "type": "int32",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                }
                               }
                             }
                           }
