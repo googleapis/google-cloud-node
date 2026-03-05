@@ -5938,6 +5938,7 @@
                                 case 5:
                                 case 8:
                                 case 6:
+                                case 9:
                                 case 7:
                                 case 3:
                                 case 4:
@@ -6057,6 +6058,10 @@
                             case "READY_FOR_SITE_TURNUP":
                             case 6:
                                 message.state = 6;
+                                break;
+                            case "OFFLINE":
+                            case 9:
+                                message.state = 9;
                                 break;
                             case "CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED":
                             case 7:
@@ -6245,6 +6250,7 @@
                          * @property {number} READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS=5 READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS value
                          * @property {number} CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED=8 CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED value
                          * @property {number} READY_FOR_SITE_TURNUP=6 READY_FOR_SITE_TURNUP value
+                         * @property {number} OFFLINE=9 OFFLINE value
                          * @property {number} CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED=7 CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED value
                          * @property {number} ACTIVE=3 ACTIVE value
                          * @property {number} CANCELLED=4 CANCELLED value
@@ -6257,6 +6263,7 @@
                             values[valuesById[5] = "READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS"] = 5;
                             values[valuesById[8] = "CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED"] = 8;
                             values[valuesById[6] = "READY_FOR_SITE_TURNUP"] = 6;
+                            values[valuesById[9] = "OFFLINE"] = 9;
                             values[valuesById[7] = "CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED"] = 7;
                             values[valuesById[3] = "ACTIVE"] = 3;
                             values[valuesById[4] = "CANCELLED"] = 4;
