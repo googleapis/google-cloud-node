@@ -1,0 +1,12 @@
+node_modules
+build
+.vscode
+package-lock.json
+.nyc_output
+.coverage
+package-lock.json
+gcp-metadata.tgz
+docs/
+__pycache__
+.DS_Store
+*.tgz

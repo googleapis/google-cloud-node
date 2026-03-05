@@ -1,0 +1,31 @@
+name: Feature Request
+description: Suggest an idea for this library
+labels:
+  - feature request
+body:
+  - type: markdown
+    attributes:
+      value: >
+        **PLEASE READ**: If you have a support contract with Google, please
+        create an issue in the [support
+        console](https://cloud.google.com/support/) instead of filing on GitHub.
+        This will ensure a timely response. Otherwise, please make sure to
+        follow the steps below.
+  - type: textarea
+    attributes:
+      label: >
+        What would you like to see in the library?
+      description: >
+        Screenshots can be provided in the issue body below.
+      placeholder: |
+        1. Set up authentication like so
+        2. Run the program like so
+        3. X would be nice to happen
+
+  - type: textarea
+    attributes:
+      label: Describe alternatives you've considered
+
+  - type: textarea
+    attributes:
+      label: Additional context/notes
