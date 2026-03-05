@@ -1,0 +1,35 @@
+// Copyright 2024 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * Package reader provides an EXPERIMENTAL thick client around the
+ * BigQuery storage API's BigQueryReadClient.
+ * More information about this new read client may also be found in
+ * the public documentation: https://cloud.google.com/bigquery/docs/read-api
+ *
+ * It is EXPERIMENTAL and subject to change or removal without notice. This is primarily to signal that this
+ * package may still make breaking changes to existing methods and functionality.
+ *
+ * @namespace reader
+ */
+
+export {ReadClient} from './read_client';
+export {TableReader} from './table_reader';
+export {ArrowTableReader} from './arrow_reader';
+export {ReadStream} from './read_stream';
+export {DataFormat, ArrowFormat, AvroFormat} from './data_format';
+export {setLogFunction} from '../util/logger';
+
+// polyfill array.at for Node < 14. Remove after Node 14 is deprecated.
+import 'core-js/full/array/at';
