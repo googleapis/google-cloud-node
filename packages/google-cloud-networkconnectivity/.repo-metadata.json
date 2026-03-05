@@ -1,16 +1,17 @@
 {
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/network-connectivity/latest",
-  "api_id": "networkconnectivity.googleapis.com",
-  "distribution_name": "@google-cloud/network-connectivity",
-  "release_level": "stable",
-  "default_version": "v1",
-  "language": "nodejs",
-  "name_pretty": "Network Connectivity Center",
-  "repo": "googleapis/google-cloud-node",
-  "product_documentation": "https://cloud.google.com/network-connectivity/docs",
-  "requires_billing": true,
-  "name": "network-connectivity",
+  "name": "networkconnectivity",
+  "name_pretty": "Network Connectivity API",
+  "product_documentation": "https://docs.cloud.google.com/network-connectivity/docs/concepts",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/networkconnectivity/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "api_shortname": "networkconnectivity",
-  "library_type": "GAPIC_AUTO"
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/networkconnectivity",
+  "api_id": "networkconnectivity.googleapis.com",
+  "default_version": "v1beta",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "networkconnectivity"
 }
+
