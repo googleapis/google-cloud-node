@@ -43,7 +43,8 @@ function main(parent) {
    */
   // const outputFields = {}
   /**
-   *  Optional. The standard list page size.
+   *  Optional. The standard list page size. Default is 100.
+   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**

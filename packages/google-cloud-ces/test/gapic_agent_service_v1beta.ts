@@ -495,6 +495,226 @@ describe('v1beta.AgentServiceClient', () => {
         });
     });
 
+    describe('getSecuritySettings', () => {
+        it('invokes getSecuritySettings without error', async () => {
+            const client = new agentserviceModule.v1beta.AgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.GetSecuritySettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.GetSecuritySettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.SecuritySettings()
+            );
+            client.innerApiCalls.getSecuritySettings = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSecuritySettings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSecuritySettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSecuritySettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSecuritySettings without error using callback', async () => {
+            const client = new agentserviceModule.v1beta.AgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.GetSecuritySettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.GetSecuritySettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.SecuritySettings()
+            );
+            client.innerApiCalls.getSecuritySettings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSecuritySettings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.ces.v1beta.ISecuritySettings|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSecuritySettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSecuritySettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSecuritySettings with error', async () => {
+            const client = new agentserviceModule.v1beta.AgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.GetSecuritySettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.GetSecuritySettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSecuritySettings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSecuritySettings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSecuritySettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSecuritySettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSecuritySettings with closed client', async () => {
+            const client = new agentserviceModule.v1beta.AgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.GetSecuritySettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.GetSecuritySettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSecuritySettings(request), expectedError);
+        });
+    });
+
+    describe('updateSecuritySettings', () => {
+        it('invokes updateSecuritySettings without error', async () => {
+            const client = new agentserviceModule.v1beta.AgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.UpdateSecuritySettingsRequest()
+            );
+            request.securitySettings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.UpdateSecuritySettingsRequest', ['securitySettings', 'name']);
+            request.securitySettings.name = defaultValue1;
+            const expectedHeaderRequestParams = `security_settings.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.SecuritySettings()
+            );
+            client.innerApiCalls.updateSecuritySettings = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSecuritySettings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSecuritySettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSecuritySettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSecuritySettings without error using callback', async () => {
+            const client = new agentserviceModule.v1beta.AgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.UpdateSecuritySettingsRequest()
+            );
+            request.securitySettings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.UpdateSecuritySettingsRequest', ['securitySettings', 'name']);
+            request.securitySettings.name = defaultValue1;
+            const expectedHeaderRequestParams = `security_settings.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.SecuritySettings()
+            );
+            client.innerApiCalls.updateSecuritySettings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSecuritySettings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.ces.v1beta.ISecuritySettings|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSecuritySettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSecuritySettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSecuritySettings with error', async () => {
+            const client = new agentserviceModule.v1beta.AgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.UpdateSecuritySettingsRequest()
+            );
+            request.securitySettings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.UpdateSecuritySettingsRequest', ['securitySettings', 'name']);
+            request.securitySettings.name = defaultValue1;
+            const expectedHeaderRequestParams = `security_settings.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSecuritySettings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateSecuritySettings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSecuritySettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSecuritySettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSecuritySettings with closed client', async () => {
+            const client = new agentserviceModule.v1beta.AgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.UpdateSecuritySettingsRequest()
+            );
+            request.securitySettings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.UpdateSecuritySettingsRequest', ['securitySettings', 'name']);
+            request.securitySettings.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateSecuritySettings(request), expectedError);
+        });
+    });
+
     describe('getAgent', () => {
         it('invokes getAgent without error', async () => {
             const client = new agentserviceModule.v1beta.AgentServiceClient({
@@ -8422,6 +8642,44 @@ describe('v1beta.AgentServiceClient', () => {
                 const result = client.matchScheduledEvaluationRunFromScheduledEvaluationRunName(fakePath);
                 assert.strictEqual(result, "scheduledEvaluationRunValue");
                 assert((client.pathTemplates.scheduledEvaluationRunPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('securitySettings', async () => {
+            const fakePath = "/rendered/path/securitySettings";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new agentserviceModule.v1beta.AgentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.securitySettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.securitySettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('securitySettingsPath', () => {
+                const result = client.securitySettingsPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.securitySettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSecuritySettingsName', () => {
+                const result = client.matchProjectFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSecuritySettingsName', () => {
+                const result = client.matchLocationFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -20,6 +20,16 @@
                 "updateApp"
               ]
             },
+            "GetSecuritySettings": {
+              "methods": [
+                "getSecuritySettings"
+              ]
+            },
+            "UpdateSecuritySettings": {
+              "methods": [
+                "updateSecuritySettings"
+              ]
+            },
             "GetAgent": {
               "methods": [
                 "getAgent"
@@ -283,6 +293,16 @@
             "UpdateApp": {
               "methods": [
                 "updateApp"
+              ]
+            },
+            "GetSecuritySettings": {
+              "methods": [
+                "getSecuritySettings"
+              ]
+            },
+            "UpdateSecuritySettings": {
+              "methods": [
+                "updateSecuritySettings"
               ]
             },
             "GetAgent": {

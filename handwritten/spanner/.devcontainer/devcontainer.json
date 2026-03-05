@@ -1,0 +1,24 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "Node.js & TypeScript",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"args": { "VARIANT": "18" },
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "Dockerfile"
+	},
+
+	"postCreateCommand": "bash .devcontainer/postCreate.sh",
+
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"debug.javascript.autoAttachFilter":"smart"
+			},
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			]
+		}
+	}
+}

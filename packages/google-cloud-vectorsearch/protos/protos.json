@@ -269,47 +269,13 @@
                       },
                       "nested": {
                         "IndexHint": {
-                          "oneofs": {
-                            "params": {
-                              "oneof": [
-                                "denseScannParams"
-                              ]
-                            }
-                          },
                           "fields": {
-                            "denseScannParams": {
-                              "type": "DenseScannParams",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
                             "name": {
                               "type": "string",
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "DenseScannParams": {
-                              "fields": {
-                                "searchLeavesPct": {
-                                  "type": "int32",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                },
-                                "initialCandidateCount": {
-                                  "type": "int32",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                }
                               }
                             }
                           }
@@ -771,8 +737,7 @@
                       "oneofs": {
                         "ranker": {
                           "oneof": [
-                            "rrf",
-                            "vertex"
+                            "rrf"
                           ]
                         }
                       },
@@ -780,10 +745,6 @@
                         "rrf": {
                           "type": "ReciprocalRankFusion",
                           "id": 1
-                        },
-                        "vertex": {
-                          "type": "VertexRanker",
-                          "id": 2
                         }
                       }
                     },
@@ -793,38 +754,6 @@
                           "rule": "repeated",
                           "type": "double",
                           "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "VertexRanker": {
-                      "fields": {
-                        "query": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "titleTemplate": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "contentTemplate": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "model": {
-                          "type": "string",
-                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -2118,10 +2047,13 @@
                 },
                 "v1beta": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.VectorSearch.V1Beta",
                     "go_package": "cloud.google.com/go/vectorsearch/apiv1beta/vectorsearchpb;vectorsearchpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VectorSearchServiceProto",
-                    "java_package": "com.google.cloud.vectorsearch.v1beta"
+                    "java_package": "com.google.cloud.vectorsearch.v1beta",
+                    "php_namespace": "Google\\Cloud\\VectorSearch\\V1beta",
+                    "ruby_package": "Google::Cloud::VectorSearch::V1beta"
                   },
                   "nested": {
                     "DistanceMetric": {
@@ -2150,7 +2082,6 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -2179,6 +2110,13 @@
                           "keyType": "string",
                           "type": "Vector",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2356,7 +2294,9 @@
                         "indexType": {
                           "oneof": [
                             "useIndex",
-                            "useKnn"
+                            "useKnn",
+                            "knnHint",
+                            "indexHint"
                           ]
                         }
                       },
@@ -2365,6 +2305,7 @@
                           "type": "IndexHint",
                           "id": 1,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -2372,21 +2313,74 @@
                           "type": "bool",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "knnHint": {
+                          "type": "KnnHint",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "indexHint": {
+                          "type": "IndexHint",
+                          "id": 4,
+                          "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
                       "nested": {
                         "IndexHint": {
+                          "oneofs": {
+                            "params": {
+                              "oneof": [
+                                "denseScannParams"
+                              ]
+                            }
+                          },
                           "fields": {
+                            "denseScannParams": {
+                              "type": "DenseScannParams",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "name": {
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DenseScannParams": {
+                              "fields": {
+                                "searchLeavesPct": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "initialCandidateCount": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
                               }
                             }
                           }
+                        },
+                        "KnnHint": {
+                          "fields": {}
                         }
                       }
                     },
@@ -2475,7 +2469,7 @@
                           }
                         },
                         "distanceMetric": {
-                          "type": "google.cloud.vectorsearch.v1beta.DistanceMetric",
+                          "type": "DistanceMetric",
                           "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -2510,7 +2504,7 @@
                           "type": "EmbeddingTaskType",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "outputFields": {
@@ -2697,7 +2691,8 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
                               }
                             }
                           }
@@ -2761,7 +2756,10 @@
                         "aggregateResults": {
                           "rule": "repeated",
                           "type": "google.protobuf.Struct",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2810,11 +2808,17 @@
                         "dataObjects": {
                           "rule": "repeated",
                           "type": "DataObject",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "nextPageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2876,8 +2880,7 @@
                       "oneofs": {
                         "ranker": {
                           "oneof": [
-                            "rrf",
-                            "vertex"
+                            "rrf"
                           ]
                         }
                       },
@@ -2885,10 +2888,6 @@
                         "rrf": {
                           "type": "ReciprocalRankFusion",
                           "id": 1
-                        },
-                        "vertex": {
-                          "type": "VertexRanker",
-                          "id": 2
                         }
                       }
                     },
@@ -2898,38 +2897,6 @@
                           "rule": "repeated",
                           "type": "double",
                           "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "VertexRanker": {
-                      "fields": {
-                        "query": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "titleTemplate": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "contentTemplate": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "model": {
-                          "type": "string",
-                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -3177,7 +3144,10 @@
                         "dataObjects": {
                           "rule": "repeated",
                           "type": "DataObject",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -3242,6 +3212,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "vectorsearch.googleapis.com/DataObject"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -3804,7 +3781,33 @@
                         "(google.api.resource).plural": "indexes",
                         "(google.api.resource).singular": "index"
                       },
+                      "oneofs": {
+                        "infraType": {
+                          "oneof": [
+                            "dedicatedInfrastructure"
+                          ]
+                        },
+                        "indexType": {
+                          "oneof": [
+                            "denseScann"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "dedicatedInfrastructure": {
+                          "type": "DedicatedInfrastructure",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "denseScann": {
+                          "type": "DenseScannIndex",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "name": {
                           "type": "string",
                           "id": 1,
@@ -3849,7 +3852,7 @@
                           }
                         },
                         "distanceMetric": {
-                          "type": "google.cloud.vectorsearch.v1beta.DistanceMetric",
+                          "type": "DistanceMetric",
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -4106,19 +4109,31 @@
                       "fields": {
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "successCount": {
                           "type": "int64",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "failureCount": {
                           "type": "int64",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -4185,16 +4200,95 @@
                       "fields": {
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "finishTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
                     "ExportDataObjectsResponse": {
                       "fields": {}
+                    },
+                    "DedicatedInfrastructure": {
+                      "oneofs": {
+                        "_mode": {
+                          "oneof": [
+                            "mode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "autoscalingSpec": {
+                          "type": "AutoscalingSpec",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AutoscalingSpec": {
+                          "fields": {
+                            "minReplicaCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxReplicaCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "STORAGE_OPTIMIZED": 1,
+                            "PERFORMANCE_OPTIMIZED": 2
+                          }
+                        }
+                      }
+                    },
+                    "DenseScannIndex": {
+                      "fields": {
+                        "featureNormType": {
+                          "type": "FeatureNormType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FeatureNormType": {
+                          "values": {
+                            "FEATURE_NORM_TYPE_UNSPECIFIED": 0,
+                            "NONE": 1,
+                            "UNIT_L2_NORM": 2
+                          }
+                        }
+                      }
                     }
                   }
                 }

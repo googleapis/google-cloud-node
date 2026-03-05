@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/* eslint-disable node/no-missing-require, no-unused-vars, no-undef */
+// eslint-disable-next-line no-undef
 const {Storage} = require('@google-cloud/storage');
 
 function main() {
+  // eslint-disable-next-line no-unused-vars
   const storage = new Storage();
 }
 

@@ -768,6 +768,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "dataplexConfig": {
+                          "type": "DataplexConfig",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -849,6 +856,14 @@
                             "graceEndTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 4
+                            }
+                          }
+                        },
+                        "DataplexConfig": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1
                             }
                           }
                         },
@@ -5654,6 +5669,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "dataplexConfig": {
+                          "type": "DataplexConfig",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -5735,6 +5757,14 @@
                             "graceEndTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 4
+                            }
+                          }
+                        },
+                        "DataplexConfig": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1
                             }
                           }
                         },
@@ -10763,6 +10793,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "dataplexConfig": {
+                          "type": "DataplexConfig",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -10844,6 +10881,14 @@
                             "graceEndTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 4
+                            }
+                          }
+                        },
+                        "DataplexConfig": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1
                             }
                           }
                         },

@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "7eb5628e05f7592c7c3857035f82e9f44d8d4ef4",
+          "message": "[contentwarehouse] Added a field for enabling image and table annotation for layout parser processor",
+          "issues": [
+            "7319"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "cfb064a7-0554-4ef7-ae1e-824c41504a8a",
+      "createTime": "2026-03-04T19:33:12.038Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "77042f508c0e4d03569ef4eae7e0dd8f235cd469",
           "message": "[ces] add public libraries for CES v1beta",
           "issues": [
@@ -68685,5 +68702,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-03-02T16:41:40.032Z"
+  "updateTime": "2026-03-04T19:33:12.038Z"
 }

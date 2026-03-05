@@ -1,0 +1,10 @@
+{
+  "name": "@google-cloud/firestore/pipelines",
+  "description": "pipelines",
+  "main": "../build/src/pipelines/index.js",
+  "typings": "../types/pipelines.d.ts",
+  "private": true,
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
