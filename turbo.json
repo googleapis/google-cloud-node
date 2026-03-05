@@ -7,6 +7,10 @@
     "test": {
       "dependsOn": ["compile"],
       "outputs": []
+    },
+    "system-test": {
+      "dependsOn": ["compile"],
+      "outputs": []
     }
   }
 }
