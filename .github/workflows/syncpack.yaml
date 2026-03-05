@@ -16,4 +16,4 @@ jobs:
           node-version: 18
       - run: npm install
       - run: npm install -g syncpack
-      - run: syncpack list-mismatches --config core/.syncpackrc.json --source "core/packages/*/package.json"
+      - run: syncpack lint --config core/.syncpackrc.json --source "core/packages/*/package.json"
