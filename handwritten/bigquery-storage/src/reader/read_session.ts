@@ -25,7 +25,7 @@ type ReadRowsResponse =
   protos.google.cloud.bigquery.storage.v1.IReadRowsResponse;
 type ReadSessionInfo = protos.google.cloud.bigquery.storage.v1.IReadSession;
 const ReadSessionInfo = protos.google.cloud.bigquery.storage.v1.ReadSession;
-type ArrowSerializationOptions = {
+type AvroArrowSerializationOptions = {
   picosTimestampPrecision: protos.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.PicosTimestampPrecision;
 };
 
@@ -39,9 +39,13 @@ export type GetStreamOptions = {
    */
   selectedFields?: string;
   /**
-   * Option to opt into higher precision timestamps.
+   * Option to opt into higher precision timestamps for arrow readers.
    */
-  arrowSerializationOptions?: ArrowSerializationOptions;
+  arrowSerializationOptions?: AvroArrowSerializationOptions;
+  /**
+   * Option to opt into higher precision timestamps for avro readers.
+   */
+  avroSerializationOptions?: AvroArrowSerializationOptions;
 };
 
 /**
@@ -93,6 +97,7 @@ export class ReadSession {
       dataFormat: this._format,
       selectedFields: options?.selectedFields?.split(','),
       arrowSerializationOptions: options?.arrowSerializationOptions,
+      avroSerializationOptions: options?.avroSerializationOptions,
     });
     this.trace(
       'session created',
