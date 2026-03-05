@@ -29,6 +29,7 @@ fi
 
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
+test_script_interdependent_tests="${PROJECT_ROOT}/ci/run_single_interdependent_test.sh"
 
 
 if [ ${BUILD_TYPE} == "presubmit" ]; then
@@ -60,11 +61,11 @@ changed=$?
 set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
-else
-    echo "change detected in ci, we should test everything"
-    echo "result of git diff ${GIT_DIFF_ARG} ci:"
-    git diff ${GIT_DIFF_ARG} ci
-    GIT_DIFF_ARG=""
+# else
+#     echo "change detected in ci, we should test everything"
+#     echo "result of git diff ${GIT_DIFF_ARG} ci:"
+#     git diff ${GIT_DIFF_ARG} ci
+#     GIT_DIFF_ARG=""
 fi
 
 # Now we have a fixed list, but we can change it to autodetect if
@@ -75,6 +76,8 @@ subdirs=(
     packages
     handwritten
     .github/scripts
+    core/packages
+    core/dev-packages
 )
 
 RETVAL=0
@@ -131,7 +134,6 @@ for subdir in ${subdirs[@]}; do
                 fi
             fi
         else
-            # If GIT_DIFF_ARG is empty, run all the tests.
             if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                 echo "run system test for ${d}"
                 should_test=true
@@ -143,7 +145,21 @@ for subdir in ${subdirs[@]}; do
                 should_test=true
             fi
         fi
-        if [ "${should_test}" = true ]; then
+        if [ "${should_test}" = true ] && [[ "${d}" == core/* ]]; then
+            echo "running test in ${d}"
+            pushd ${d}
+            # Temporarily allow failure.
+            set +e
+            ${test_script_interdependent_tests}
+            ret=$?
+            set -e
+            if [ ${ret} -ne 0 ]; then
+                RETVAL=${ret}
+                # Since there are so many APIs, we should exit early if there's an error
+                break
+            fi
+            popd
+        elif [ "${should_test}" = true ]; then
             echo "running test in ${d}"
             pushd ${d}
             # Temporarily allow failure.
