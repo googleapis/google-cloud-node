@@ -29,6 +29,8 @@ import {RecordBatch, Table, tableFromIPC} from 'apache-arrow';
 import {ArrowRecordBatchTableRowTransform} from '../src/reader/arrow_transform';
 import {ResourceStream} from '@google-cloud/paginator';
 import {ArrowTableReader} from '../src/reader';
+import {Transform, TransformCallback} from 'stream';
+type ReadSession = protos.google.cloud.bigquery.storage.v1.IReadSession;
 
 type ReadRowsResponse =
   protos.google.cloud.bigquery.storage.v1.IReadRowsResponse;
@@ -230,6 +232,132 @@ describe('reader.ReaderClient', () => {
     });
   });
 
+  describe('AvroReader', () => {
+    it('should read high precision timestamps from an avro stream', async () => {
+      const avro = require('avsc');
+      class AvroRawTransform extends Transform {
+        private session: ReadSession;
+
+        constructor(session: ReadSession) {
+          super({
+            objectMode: true,
+          });
+          this.session = session;
+        }
+
+        _transform(
+          serializedRecordBatch: any,
+          _: BufferEncoding,
+          callback: TransformCallback,
+        ): void {
+          const session = this.session;
+          const schema = JSON.parse(session?.avroSchema?.schema as string);
+          const avroType = avro.Type.forSchema(schema);
+          if (
+            !(
+              serializedRecordBatch.avroRows &&
+              serializedRecordBatch.avroRows.serializedBinaryRows
+            )
+          ) {
+            callback(null);
+            return;
+          }
+          const decodedData = avroType.decode(
+            serializedRecordBatch.avroRows.serializedBinaryRows,
+            0,
+          );
+          callback(null, decodedData.value);
+        }
+      }
+
+      const picosTableId = generateUuid();
+      const picosSchema: any = {
+        fields: [
+          {
+            name: 'customer_name',
+            type: 'STRING',
+            mode: 'REQUIRED',
+          },
+          {
+            name: 'row_num',
+            type: 'INTEGER',
+            mode: 'REQUIRED',
+          },
+          {
+            name: 'created_at',
+            type: 'TIMESTAMP',
+            mode: 'NULLABLE',
+            timestampPrecision: 12,
+          },
+        ],
+      };
+      const expectedTsValue = '2024-04-05T15:45:58.981123456789Z';
+      await bigquery
+        .dataset(datasetId)
+        .createTable(picosTableId, {schema: picosSchema});
+      await bigquery
+        .dataset(datasetId)
+        .table(picosTableId)
+        .insert([
+          {
+            customer_name: 'my-name',
+            row_num: 1,
+            created_at: expectedTsValue,
+          },
+        ]);
+
+      bqReadClient.initialize().catch(err => {
+        throw err;
+      });
+      const client = new ReadClient();
+      client.setClient(bqReadClient);
+
+      try {
+        const session = await client.createReadSession({
+          parent: `projects/${projectId}`,
+          table: `projects/${projectId}/datasets/${datasetId}/tables/${picosTableId}`,
+          dataFormat: AvroFormat,
+          avroSerializationOptions: {
+            picosTimestampPrecision:
+              protos.google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                .PicosTimestampPrecision.TIMESTAMP_PRECISION_PICOS,
+          },
+        });
+
+        assert.equal(session.dataFormat, AvroFormat);
+        assert.notEqual(session.streams, null);
+        assert.notEqual(session.streams?.length, 0);
+
+        const readStream = session.streams![0];
+        const connection = await client.createReadStream({
+          session,
+          streamName: readStream.name!,
+        });
+
+        const myStream = connection
+          .getRowsStream()
+          .pipe(new AvroRawTransform(session!));
+        const responses: ReadRowsResponse[] = [];
+        await new Promise((resolve, reject) => {
+          myStream.on('data', (data: ReadRowsResponse) => {
+            responses.push(data);
+          });
+          myStream.on('error', reject);
+          myStream.on('end', () => {
+            resolve(null);
+          });
+        });
+
+        assert.equal(responses.length, 1);
+        assert.equal((responses[0] as any)['created_at'], expectedTsValue);
+
+        connection.close();
+        client.close();
+      } finally {
+        client.close();
+      }
+    });
+  });
   describe('ArrowTableReader', () => {
     it('should allow to read a table as an Arrow byte stream', async () => {
       bqReadClient.initialize().catch(err => {
