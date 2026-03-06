@@ -1,0 +1,143 @@
+{
+  "nested": {
+    "testdata": {
+      "nested": {
+        "SimpleMessage": {
+          "fields": {
+            "name": {
+              "type": "string",
+              "id": 1
+            },
+            "value": {
+              "type": "int64",
+              "id": 2
+            },
+            "other": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        },
+        "GithubArchiveEntity": {
+          "fields": {
+            "id": {
+              "type": "int64",
+              "id": 1
+            },
+            "login": {
+              "type": "string",
+              "id": 2
+            },
+            "gravatar_id": {
+              "type": "string",
+              "id": 3
+            },
+            "avatar_url": {
+              "type": "string",
+              "id": 4
+            },
+            "url": {
+              "type": "string",
+              "id": 5
+            }
+          }
+        },
+        "GithubArchiveRepo": {
+          "fields": {
+            "id": {
+              "type": "int64",
+              "id": 1
+            },
+            "name": {
+              "type": "string",
+              "id": 2
+            },
+            "url": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        },
+        "GithubArchiveMessage": {
+          "fields": {
+            "type": {
+              "type": "string",
+              "id": 1
+            },
+            "public": {
+              "type": "bool",
+              "id": 2
+            },
+            "payload": {
+              "type": "string",
+              "id": 3
+            },
+            "repo": {
+              "type": "GithubArchiveRepo",
+              "id": 4
+            },
+            "actor": {
+              "type": "GithubArchiveEntity",
+              "id": 5
+            },
+            "org": {
+              "type": "GithubArchiveEntity",
+              "id": 6
+            },
+            "created_at": {
+              "type": "int64",
+              "id": 7
+            },
+            "id": {
+              "type": "string",
+              "id": 8
+            },
+            "other": {
+              "type": "string",
+              "id": 9
+            }
+          }
+        },
+        "ExtEnum": {
+          "values": {
+            "UNDEFINED": 0,
+            "THING": 1,
+            "OTHER_THING": 2
+          }
+        },
+        "ExternalEnumMessage": {
+          "fields": {
+            "msg_a": {
+              "type": "EnumMsgA",
+              "id": 1
+            },
+            "msg_b": {
+              "type": "EnumMsgB",
+              "id": 2
+            }
+          }
+        },
+        "EnumMsgA": {
+          "fields": {
+            "foo": {
+              "type": "string",
+              "id": 1
+            },
+            "bar": {
+              "type": "ExtEnum",
+              "id": 2
+            }
+          }
+        },
+        "EnumMsgB": {
+          "fields": {
+            "baz": {
+              "type": "ExtEnum",
+              "id": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

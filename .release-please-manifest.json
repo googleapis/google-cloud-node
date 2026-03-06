@@ -1,5 +1,6 @@
 {
   "handwritten/bigquery": "8.2.0",
+  "handwritten/bigquery-storage": "5.1.0",
   "handwritten/cloud-profiler": "6.0.4",
   "handwritten/datastore": "10.1.0",
   "handwritten/firestore": "8.3.0",
