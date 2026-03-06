@@ -33,3 +33,5 @@ jobs:
         env:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
+          TURBO_TELEMETRY_DISABLED: 1
+          SHELL: C:\Program Files\Git\bin\bash.exe

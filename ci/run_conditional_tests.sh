@@ -92,7 +92,6 @@ windows_exempt_tests=".github/scripts/fixtures/ .github/scripts/tests/ packages/
 
 for subdir in ${subdirs[@]}; do
     if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "units" ]]; then
-        TURBO_TELEMETRY_DISABLED=1
         cd ${PROJECT_ROOT}
 
         echo "installing turbo . . ."
