@@ -106,7 +106,7 @@ for subdir in ${subdirs[@]}; do
         turbo run test
         ret=$?
         set -e
-        
+
         if [ ${ret} -ne 0 ]; then
             RETVAL=${ret}
             break
