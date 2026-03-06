@@ -730,5 +730,62 @@ describe('Transfer Manager', () => {
 
       assert(called);
     });
+
+    it('should use CRC32C validation when specified', async () => {
+      mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
+        fakeHelper = sandbox.createStubInstance(FakeXMLHelper);
+        fakeHelper.uploadId = uploadId || '';
+        fakeHelper.partsMap = partsMap || new Map<number, string>();
+        fakeHelper.initiateUpload.resolves();
+        fakeHelper.uploadPart.callsFake((partNumber, chunk, validation) => {
+          assert.strictEqual(validation, 'crc32c');
+
+          return Promise.resolve();
+        });
+        fakeHelper.completeUpload.resolves();
+        fakeHelper.abortUpload.resolves();
+        return fakeHelper;
+      };
+
+      await transferManager.uploadFileInChunks(
+        filePath,
+        {validation: 'crc32c'},
+        mockGeneratorFunction
+      );
+
+      assert.strictEqual(fakeHelper.uploadPart.calledOnce, true);
+    });
+
+    it('should apply crc32c validation by default', async () => {
+      let assertionMade = false;
+
+      mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
+        fakeHelper = sandbox.createStubInstance(FakeXMLHelper);
+        fakeHelper.uploadId = uploadId || '';
+        fakeHelper.partsMap = partsMap || new Map<number, string>();
+        fakeHelper.initiateUpload.resolves();
+
+        fakeHelper.uploadPart.callsFake((partNumber, chunk, validation) => {
+          // Confirm the validation is set to 'crc32c' by default.
+          assert.strictEqual(validation, 'crc32c');
+          assertionMade = true;
+          return Promise.resolve();
+        });
+
+        fakeHelper.completeUpload.resolves();
+        fakeHelper.abortUpload.resolves();
+        return fakeHelper;
+      };
+
+      // Call the function without specifying any validation option.
+      await transferManager.uploadFileInChunks(
+        filePath,
+        {},
+        mockGeneratorFunction
+      );
+
+      assert.strictEqual(fakeHelper.uploadPart.calledOnce, true);
+      assert.strictEqual(assertionMade, true);
+    });
   });
 });

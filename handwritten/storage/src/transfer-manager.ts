@@ -127,7 +127,7 @@ export interface UploadFileInChunksOptions {
   uploadId?: string;
   autoAbortFailure?: boolean;
   partsMap?: Map<number, string>;
-  validation?: 'md5' | false;
+  validation?: 'md5' | 'crc32c' | false;
   headers?: {[key: string]: string};
 }
 
@@ -140,7 +140,7 @@ export interface MultiPartUploadHelper {
   uploadPart(
     partNumber: number,
     chunk: Buffer,
-    validation?: 'md5' | false,
+    validation?: 'md5' | 'crc32c' | false,
   ): Promise<void>;
   completeUpload(): Promise<GaxiosResponse | undefined>;
   abortUpload(): Promise<void>;
@@ -289,7 +289,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   async uploadPart(
     partNumber: number,
     chunk: Buffer,
-    validation?: 'md5' | false,
+    validation?: 'md5' | 'crc32c' | false,
   ): Promise<void> {
     const url = `${this.baseUrl}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
     let headers: Headers = this.#setGoogApiClientHeaders();
@@ -299,6 +299,10 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       headers = {
         'Content-MD5': hash,
       };
+    } else if (validation === 'crc32c') {
+      const crc = new CRC32C();
+      crc.update(chunk);
+      headers['x-goog-hash'] = `crc32c=${crc.toString()}`;
     }
 
     return AsyncRetry(async bail => {
@@ -806,6 +810,8 @@ export class TransferManager {
     );
     let partNumber = 1;
     let promises: Promise<void>[] = [];
+    const validation =
+      options.validation === undefined ? 'crc32c' : options.validation;
     try {
       if (options.uploadId === undefined) {
         await mpuHelper.initiateUpload(options.headers);
@@ -823,9 +829,7 @@ export class TransferManager {
           promises = [];
         }
         promises.push(
-          limit(() =>
-            mpuHelper.uploadPart(partNumber++, curChunk, options.validation),
-          ),
+          limit(() => mpuHelper.uploadPart(partNumber++, curChunk, validation))
         );
       }
       await Promise.all(promises);
