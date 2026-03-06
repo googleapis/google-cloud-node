@@ -19,6 +19,7 @@ import * as url from 'url';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
+import {FileMetadata} from './file';
 
 // Done to avoid a problem with mangling of identifiers when using esModuleInterop
 const fileURLToPath = url.fileURLToPath;
@@ -270,5 +271,32 @@ export class PassThroughShim extends PassThrough {
       this.shouldEmitWriting = false;
     }
     callback(null);
+  }
+}
+
+
+/**
+ * Validates Object Contexts for forbidden characters.
+ * Double quotes (") are forbidden in context keys and values as they
+ * interfere with GCS filter string syntax.
+ *
+ * @param {FileMetadata} [metadata] The metadata object to validate.
+ * @returns {void} Throws an error if validation fails.
+ */
+export function validateContexts(metadata?: FileMetadata): void {
+  const custom = metadata?.contexts?.custom;
+  if (!custom) return;
+
+  for (const [key, context] of Object.entries(custom)) {
+    if (key.includes('"')) {
+      throw new Error(
+        `Invalid context key "${key}": Forbidden character (") detected.`
+      );
+    }
+    if (context?.value && context.value.includes('"')) {
+      throw new Error(
+        `Invalid context value for key "${key}": Forbidden character (") detected.`
+      );
+    }
   }
 }

@@ -34,7 +34,7 @@ import * as path from 'path';
 import pLimit from 'p-limit';
 import {promisify} from 'util';
 import AsyncRetry from 'async-retry';
-import {convertObjKeysToSnakeCase} from './util.js';
+import {convertObjKeysToSnakeCase, validateContexts} from './util.js';
 
 import {Acl, AclMetadata} from './acl.js';
 import {Channel} from './channel.js';
@@ -44,6 +44,7 @@ import {
   CreateResumableUploadOptions,
   CreateWriteStreamOptions,
   FileMetadata,
+  ContextValue,
 } from './file.js';
 import {Iam} from './iam.js';
 import {Notification, NotificationMetadata} from './notification.js';
@@ -178,11 +179,17 @@ export interface GetFilesOptions {
   userProject?: string;
   versions?: boolean;
   fields?: string;
+  filter?: string;
 }
 
 export interface CombineOptions extends PreconditionOptions {
   kmsKeyName?: string;
   userProject?: string;
+  contexts?: {
+    custom: {
+      [key: string]: ContextValue;
+    } | null;
+  };
 }
 
 export interface CombineCallback {
@@ -1628,6 +1635,17 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       options = optionsOrCallback;
     }
 
+    if (options.contexts) {
+      try {
+        validateContexts({contexts: options.contexts});
+      } catch (err) {
+        if (callback) {
+          return (callback as CombineCallback)(err as Error, null, null);
+        }
+        return Promise.reject(err);
+      }
+    }
+
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata, // Not relevant but param is required
       AvailableServiceObjectMethods.setMetadata, // Same as above
@@ -1682,6 +1700,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           destination: {
             contentType: destinationFile.metadata.contentType,
             contentEncoding: destinationFile.metadata.contentEncoding,
+            contexts: options.contexts || destinationFile.metadata.contexts,
           },
           sourceObjects: (sources as File[]).map(source => {
             const sourceObject = {

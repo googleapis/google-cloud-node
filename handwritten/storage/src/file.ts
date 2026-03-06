@@ -61,6 +61,7 @@ import {
   unicodeJSONStringify,
   formatAsUTCISO,
   PassThroughShim,
+  validateContexts,
 } from './util.js';
 import {CRC32C, CRC32CValidatorGenerator} from './crc32c.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
@@ -382,6 +383,11 @@ export interface CopyOptions {
   metadata?: {
     [key: string]: string | boolean | number | null;
   };
+  contexts?: {
+    custom: {
+      [key: string]: ContextValue;
+    } | null;
+  };
   predefinedAcl?: string;
   token?: string;
   userProject?: string;
@@ -469,6 +475,12 @@ export interface RestoreOptions extends PreconditionOptions {
   projection?: 'full' | 'noAcl';
 }
 
+export interface ContextValue {
+  value: string | null;
+  readonly createTime?: string;
+  readonly updateTime?: string;
+}
+
 export interface FileMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   bucket?: string;
@@ -482,6 +494,11 @@ export interface FileMetadata extends BaseMetadata {
   customerEncryption?: {
     encryptionAlgorithm?: string;
     keySha256?: string;
+  };
+  contexts?: {
+    custom: {
+      [key: string]: ContextValue | null;
+    } | null;
   };
   customTime?: string;
   eventBasedHold?: boolean | null;
@@ -1290,6 +1307,17 @@ class File extends ServiceObject<File, FileMetadata> {
       callback = optionsOrCallback;
     } else if (optionsOrCallback) {
       options = {...optionsOrCallback};
+    }
+
+    if (options.contexts) {
+      try {
+        validateContexts({contexts: options.contexts});
+      } catch (err) {
+        if (callback) {
+          return (callback as CopyCallback)(err as Error, null, null);
+        }
+        return Promise.reject(err);
+      }
     }
 
     callback = callback || util.noop;
@@ -4127,6 +4155,13 @@ class File extends ServiceObject<File, FileMetadata> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
 
+    try {
+      validateContexts(options.metadata);
+    } catch (err) {
+      if (callback) return callback(err as Error);
+      return Promise.reject(err);
+    }
+
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
@@ -4229,6 +4264,13 @@ class File extends ServiceObject<File, FileMetadata> {
       typeof optionsOrCallback === 'function'
         ? (optionsOrCallback as MetadataCallback<FileMetadata>)
         : cb;
+
+    try {
+      validateContexts(metadata);
+    } catch (err) {
+      if (cb) return cb(err as Error);
+      return Promise.reject(err);
+    }
 
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata,
