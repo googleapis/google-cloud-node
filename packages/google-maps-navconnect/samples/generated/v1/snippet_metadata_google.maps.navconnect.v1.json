@@ -1,0 +1,103 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-navconnect",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.maps.navconnect.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "navigationconnect_v1_generated_NavConnectService_CreateTrip_async",
+      "title": "NavConnectService createTrip Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a trip. This must be called before the mobile application can start the trip. The returned trip will have the `auth_token` field set.",
+      "canonical": true,
+      "file": "nav_connect_service.create_trip.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTrip",
+        "fullName": "google.maps.navconnect.v1.NavConnectService.CreateTrip",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trip_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trip",
+            "type": ".google.maps.navconnect.v1.Trip"
+          }
+        ],
+        "resultType": ".google.maps.navconnect.v1.Trip",
+        "client": {
+          "shortName": "NavConnectServiceClient",
+          "fullName": "google.maps.navconnect.v1.NavConnectServiceClient"
+        },
+        "method": {
+          "shortName": "CreateTrip",
+          "fullName": "google.maps.navconnect.v1.NavConnectService.CreateTrip",
+          "service": {
+            "shortName": "NavConnectService",
+            "fullName": "google.maps.navconnect.v1.NavConnectService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "navigationconnect_v1_generated_NavConnectService_GetTrip_async",
+      "title": "NavConnectService getTrip Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a trip.",
+      "canonical": true,
+      "file": "nav_connect_service.get_trip.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTrip",
+        "fullName": "google.maps.navconnect.v1.NavConnectService.GetTrip",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.maps.navconnect.v1.Trip",
+        "client": {
+          "shortName": "NavConnectServiceClient",
+          "fullName": "google.maps.navconnect.v1.NavConnectServiceClient"
+        },
+        "method": {
+          "shortName": "GetTrip",
+          "fullName": "google.maps.navconnect.v1.NavConnectService.GetTrip",
+          "service": {
+            "shortName": "NavConnectService",
+            "fullName": "google.maps.navconnect.v1.NavConnectService"
+          }
+        }
+      }
+    }
+  ]
+}
