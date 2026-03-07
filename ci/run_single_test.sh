@@ -44,9 +44,8 @@ fi
 # to be updated, meaning this adds very little overhead.
 #
 # The filter is required to limit this action to just the current package.
-echo "bun install --filter ."
-bun install --filter .
-
+echo "bun install --frozen-lockfile --filter ."
+bun install --frozen-lockfile --filter .
 
 retval=0
 
