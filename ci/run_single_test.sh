@@ -39,13 +39,11 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER=xunit
 fi
 
-# Run install one more time (without --ignore-scripts) to handle per-package
-# post install scripts. Bun will check the lock file and see nothing needs
-# to be updated, meaning this adds very little overhead.
-#
-# The filter is required to limit this action to just the current package.
-echo "bun install --frozen-lockfile --filter ."
-bun install --frozen-lockfile --filter .
+# Run post install scripts.
+# Of the available post-install scripts, our repo only uses "prepare".
+echo "run post install scripts . . ."
+# Run script only if its defined.
+jq -e '.scripts.prepare' package.json > /dev/null && npm run prepare
 
 retval=0
 
