@@ -40,8 +40,13 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-echo "bun install --ignore-scripts --prod; bun install"
-bun install --ignore-scripts --prod; bun install
+#
+# The filter is needed to prevent bun from installing all packages in the repo
+# from the root. By default it prefers to analyze, install, and at the root
+# so dependencies can be deduplicated. We will try that in a separate PR for
+# comparison.
+echo "bun install --ignore-scripts --prod --filter .; bun install --filter ."
+bun install --ignore-scripts --prod --filter . ; bun install --filter .
 
 
 retval=0
