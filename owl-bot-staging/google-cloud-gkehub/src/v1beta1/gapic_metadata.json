@@ -1,0 +1,107 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.gkehub.v1beta1",
+  "libraryPackage": "@google-cloud/gke-hub",
+  "services": {
+    "GkeHubMembershipService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GkeHubMembershipServiceClient",
+          "rpcs": {
+            "GetMembership": {
+              "methods": [
+                "getMembership"
+              ]
+            },
+            "GenerateConnectManifest": {
+              "methods": [
+                "generateConnectManifest"
+              ]
+            },
+            "ValidateExclusivity": {
+              "methods": [
+                "validateExclusivity"
+              ]
+            },
+            "GenerateExclusivityManifest": {
+              "methods": [
+                "generateExclusivityManifest"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "createMembership"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "deleteMembership"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
+            "ListMemberships": {
+              "methods": [
+                "listMemberships",
+                "listMembershipsStream",
+                "listMembershipsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GkeHubMembershipServiceClient",
+          "rpcs": {
+            "GetMembership": {
+              "methods": [
+                "getMembership"
+              ]
+            },
+            "GenerateConnectManifest": {
+              "methods": [
+                "generateConnectManifest"
+              ]
+            },
+            "ValidateExclusivity": {
+              "methods": [
+                "validateExclusivity"
+              ]
+            },
+            "GenerateExclusivityManifest": {
+              "methods": [
+                "generateExclusivityManifest"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "createMembership"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "deleteMembership"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
+            "ListMemberships": {
+              "methods": [
+                "listMemberships",
+                "listMembershipsStream",
+                "listMembershipsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
