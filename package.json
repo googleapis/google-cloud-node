@@ -46,7 +46,8 @@
     "node": ">=18"
   },
   "workspaces": [
-    "packages",
-    "handwritten"
+    "packages/*",
+    "handwritten/*",
+    ".github/scripts/*"
   ]
 }
