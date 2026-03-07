@@ -1,6 +1,6 @@
 {
-  "name": "@google-cloud/networkconnectivity",
-  "version": "0.0.0",
+  "name": "@google-cloud/network-connectivity",
+  "version": "4.6.0", 
   "description": "Network Connectivity API client for Node.js",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "google cloud platform",
     "google cloud",
     "cloud",
-    "google networkconnectivity",
+    "google network-connectivity",
     "networkconnectivity",
     "Network Connectivity API"
   ],
