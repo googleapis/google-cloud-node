@@ -39,14 +39,13 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER=xunit
 fi
 
-# Install dependencies
+# Run install one more time (without --ignore-scripts) to handle per-package
+# post install scripts. Bun will check the lock file and see nothing needs
+# to be updated, meaning this adds very little overhead.
 #
-# The filter is needed to prevent bun from installing all packages in the repo
-# from the root. By default it prefers to analyze, install, and at the root
-# so dependencies can be deduplicated. We will try that in a separate PR for
-# comparison.
-echo "bun install --ignore-scripts --prod --filter .; bun install --filter ."
-bun install --ignore-scripts --prod --filter . ; bun install --filter .
+# The filter is required to limit this action to just the current package.
+echo "bun install --filter ."
+bun install --filter .
 
 
 retval=0

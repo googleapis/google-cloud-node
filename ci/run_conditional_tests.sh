@@ -30,6 +30,10 @@ fi
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
+# Install all dependencies globally to give Bun the opportunity to deduplicate
+# dependencies.
+bun install --ignore-scripts
+
 
 if [ ${BUILD_TYPE} == "presubmit" ]; then
     # For presubmit build, we want to know the difference from the
