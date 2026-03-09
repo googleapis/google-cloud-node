@@ -46,9 +46,9 @@ bun run "prepare"
 
 retval=0
 
-# Use NPM run to respece the currently installed node version.s
+# Use NPM run to respece the currently installed node version.
 set +e
-case ${TEST_TYPE} ins
+case ${TEST_TYPE} in
 lint)
     npm run prelint
     npm run lint
