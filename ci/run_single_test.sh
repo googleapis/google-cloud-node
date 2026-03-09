@@ -51,25 +51,23 @@ bun install --ignore-scripts --prod --filter . ; bun install --filter .
 
 retval=0
 
-# We use `npm run` here so that the test run respects the Node version
-# configured for this test run.
 set +e
 case ${TEST_TYPE} in
 lint)
-    npm run prelint
-    npm run lint
+    bun run prelint
+    bun run lint
     retval=$?
     ;;
 samples)
-    npm run samples-test
+    bun run samples-test
     retval=$?
     ;;
 system)
-    npm run system-test
+    bun run system-test
     retval=$?
     ;;
 units)
-    npm run test
+    bun run test
     retval=$?
     ;;
 *)
