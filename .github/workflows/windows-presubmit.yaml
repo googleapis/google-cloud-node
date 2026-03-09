@@ -35,3 +35,4 @@ jobs:
           TEST_TYPE: units
           TURBO_TELEMETRY_DISABLED: 1
           SHELL: C:\Program Files\Git\bin\bash.exe
+          npm_config_script_shell: "C:\\Program Files\\Git\\bin\\bash.exe"
