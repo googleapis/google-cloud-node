@@ -93,9 +93,6 @@ tests_with_credentials="packages/google-analytics-admin/ packages/google-area120
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
 windows_exempt_tests=".github/scripts/fixtures/ .github/scripts/tests/ packages/gapic-node-processing/ packages/typeless-sample-bot/"
 
-# Install all root and package/* dependencies at once (allowing for dedpulication).
-bun install --ignore-scripts
-
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
         if [ -f "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null; then

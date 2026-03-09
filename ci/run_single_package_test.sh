@@ -39,11 +39,6 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER=xunit
 fi
 
-# Install dependencies
-echo "Running `bun prepare` in ${d}"
-bun run "prepare"
-
-
 retval=0
 
 # Use NPM run to respece the currently installed node version.
