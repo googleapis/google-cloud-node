@@ -21,7 +21,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       # Preinstall package dependencies and compile them in parallel.
       - run: bun install --ignore-scripts
-      - run: bun run --parallel  --filter './packages/*' compile
+      - run: bun run --sequential  --filter './packages/*' compile
       - run: node --version
       - run: ci/run_conditional_tests.sh
         name: Run unit tests

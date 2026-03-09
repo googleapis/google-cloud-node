@@ -19,9 +19,9 @@ jobs:
         with:
           version: ^10.0.0
       - uses: oven-sh/setup-bun@v2
-      # Preinstall package dependencies and compile them in parallel.
+      # Preinstall package dependencies and compile them.
       - run: bun install --ignore-scripts
-      - run: bun run --parallel  --filter './packages/*' compile
+      - run: bun run --sequential  --filter './packages/*' compile
       - run: node --version
       - run: bash ci/run_conditional_tests.sh
         name: Run windows unit tests
