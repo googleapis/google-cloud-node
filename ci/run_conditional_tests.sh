@@ -94,12 +94,20 @@ for subdir in ${subdirs[@]}; do
     if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "units" ]]; then
         cd ${PROJECT_ROOT}
 
+        if [[ "$OSTYPE" == "msys" ]]; then
+            echo "setting script-shell to bash for Windows for compatibility"
+            npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
+        fi
+
+        echo "installing turbo . . ."
+        bun install -g turbo
+
         echo "installing dependencies . . ."
         bun install --ignore-scripts
 
         echo "running all unit tests for packages"
         set +e
-        bun x turbo run test
+        npx turbo run test
         ret=$?
         set -e
 
