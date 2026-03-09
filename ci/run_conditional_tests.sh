@@ -95,6 +95,7 @@ for subdir in ${subdirs[@]}; do
         cd ${PROJECT_ROOT}
 
         if [[ "$OSTYPE" == "msys" ]]; then
+            echo "setting script-shell to bash for Windows for compatibility"
             npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
         fi
 
