@@ -13,3 +13,4 @@
 /handwritten/firestore @googleapis/firestore-team
 /handwritten/spanner @googleapis/spanner-team
 /handwritten/bigquery-storage @googleapis/bigquery-team
+/core/paginator jsteam-handwritten-libraries
