@@ -94,6 +94,10 @@ for subdir in ${subdirs[@]}; do
     if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "units" ]]; then
         cd ${PROJECT_ROOT}
 
+        if [[ "$OSTYPE" == "msys" ]]; then
+            npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
+        fi
+
         echo "installing turbo . . ."
         bun install -g turbo
 
