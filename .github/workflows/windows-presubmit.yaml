@@ -26,6 +26,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
       - uses: oven-sh/setup-bun@v2
+      - name: Update Windows path to use Linux/MacOS compatible binaries from Git Bash
+        run: echo "C:\Program Files\Git\usr\bin" >> $GITHUB_PATH
+        shell: bash
+      - name: Check which cp is being used
+        run: where cp
+        shell: cmd
       - run: node --version
       - run: bash ci/run_conditional_tests.sh
         name: Run windows unit tests
