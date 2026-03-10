@@ -3376,8 +3376,12 @@ describe('Bucket', () => {
               restrictionMode: 'FullyRestricted',
             },
           };
-          assert.deepStrictEqual(reqOpts.json.encryption, expectedEncryption);
-          done();
+          try {
+            assert.deepStrictEqual(reqOpts.json.encryption, expectedEncryption);
+            done();
+          } catch (error) {
+            done(error);
+          }
         };
 
         bucket.setMetadata(patch, assert.ifError);
