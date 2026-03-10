@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalPassThroughEnv": ["PATH", "SystemRoot", "APPDATA", "LOCALAPPDATA"],
+  "globalPassThroughEnv": ["PATH", "SHELL", "SYSTEMROOT"],
   "tasks": {
     "compile": {
       "outputs": ["build/**"]
