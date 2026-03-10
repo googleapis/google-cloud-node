@@ -61,11 +61,11 @@ set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
 else
-    echo "skipping trigger of tests for now: tracking in #7540"
-    # echo "change detected in ci, we should test everything"
-    # echo "result of git diff ${GIT_DIFF_ARG} ci:"
-    # git diff ${GIT_DIFF_ARG} ci
-    # GIT_DIFF_ARG=""
+    # echo "skipping trigger of tests for now: tracking in #7540"
+    echo "change detected in ci, we should test everything"
+    echo "result of git diff ${GIT_DIFF_ARG} ci:"
+    git diff ${GIT_DIFF_ARG} ci
+    GIT_DIFF_ARG=""
 fi
 
 # Now we have a fixed list, but we can change it to autodetect if
@@ -93,6 +93,25 @@ tests_with_credentials="packages/google-analytics-admin/ packages/google-area120
 windows_exempt_tests=".github/scripts/fixtures/ .github/scripts/tests/ packages/gapic-node-processing/ packages/typeless-sample-bot/"
 
 for subdir in ${subdirs[@]}; do
+    if [[ ("${subdir}" == "packages" || "${subdir}" == ".github/scripts") && "${TEST_TYPE}" == "units" ]]; then
+        cd ${PROJECT_ROOT}
+
+        echo "installing turbo . . ."
+        pnpm install -g turbo
+
+        echo "running all unit tests for packages"
+        set +e
+        turbo run test
+        ret=$?
+        set -e
+
+        if [ ${ret} -ne 0 ]; then
+            RETVAL=${ret}
+            break
+        fi
+        continue
+    fi
+
     for d in `ls -d ${subdir}/*/`; do
         if [ -f "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null; then
             echo "Skipping ${d} (explicitly ignored in ignore.json)"

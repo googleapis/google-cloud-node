@@ -1,0 +1,10 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalPassThroughEnv": ["PATH", "SHELL", "SYSTEMROOT"],
+  "tasks": {
+    "test": {
+      "dependsOn": [],
+      "outputs": []
+    },
+  }
+}

@@ -19,9 +19,11 @@ jobs:
         with:
           version: ^10.0.0
       - run: node --version
+      - run: pnpm install
       - run: bash ci/run_conditional_tests.sh
         name: Run windows unit tests
         shell: bash
         env:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
+          TURBO_TELEMETRY_DISABLED: 1

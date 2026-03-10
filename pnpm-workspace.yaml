@@ -1,0 +1,6 @@
+packages:
+  - "packages/*"
+  - "containers/*"
+  - ".github/scripts/*"
+
+hoist: false
