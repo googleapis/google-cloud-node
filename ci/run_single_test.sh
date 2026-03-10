@@ -54,20 +54,20 @@ retval=0
 set +e
 case ${TEST_TYPE} in
 lint)
-    bun run prelint
-    bun run lint
+    pnpm prelint
+    pnpm lint
     retval=$?
     ;;
 samples)
-    bun run samples-test
+    pnpm samples-test
     retval=$?
     ;;
 system)
-    bun run system-test
+    pnpm system-test
     retval=$?
     ;;
 units)
-    bun run test
+    pnpm test
     retval=$?
     ;;
 *)
