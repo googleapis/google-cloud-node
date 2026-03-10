@@ -3303,7 +3303,7 @@ describe('Bucket', () => {
 
   describe('setMetadata', () => {
     describe('encryption enforcement', () => {
-      it('should correctly format restrictionMode for all enforcement types', async () => {
+      it('should correctly format restrictionMode for all enforcement types', () => {
         const effectiveTime = '2026-02-02T12:00:00Z';
         const encryptionMetadata = {
           encryption: {
@@ -3365,12 +3365,18 @@ describe('Bucket', () => {
           },
         };
 
-        bucket.setMetadata = (metadata: BucketMetadata) => {
-          assert.strictEqual(
-            metadata.encryption?.customerSuppliedEncryptionEnforcementConfig
-              ?.restrictionMode,
-            'FullyRestricted'
-          );
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (bucket as any).request = (reqOpts: {json: BucketMetadata}) => {
+          const expectedEncryption = {
+            defaultKmsKeyName: 'kms-key-name',
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+            },
+            customerSuppliedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+            },
+          };
+          assert.deepStrictEqual(reqOpts.json.encryption, expectedEncryption);
           done();
         };
 

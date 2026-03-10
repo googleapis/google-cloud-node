@@ -3036,7 +3036,7 @@ describe('storage', function () {
             await file.save(FILE_CONTENTS);
 
             const [metadata] = await file.getMetadata();
-            assert.ok(metadata.kmsKeyName || metadata.customerEncryption);
+            assert.ok(metadata.customerEncryption);
           });
 
           it('should retain defaultKmsKeyName when updating enforcement settings independently', async () => {
