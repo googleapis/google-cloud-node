@@ -610,13 +610,6 @@ export class TransferManager {
         .replace(/\//g, path.sep);
 
       let dest: string;
-      if (options.prefix || passThroughOptionsCopy.destination) {
-        dest = path.join(
-          options.prefix || '',
-          passThroughOptionsCopy.destination || '',
-          normalizedGcsName
-        );
-      }
       if (options.stripPrefix) {
         dest = normalizedGcsName.replace(regex, '');
       } else {
@@ -633,9 +626,9 @@ export class TransferManager {
       const hasIllegalDrive = /^[a-zA-Z]:/.test(file.name);
 
       if (isOutside || hasIllegalDrive) {
-        let reason: SkipReason = SkipReason.DOWNLOAD_ERROR;
-        if (isOutside) reason = SkipReason.PATH_TRAVERSAL;
-        else if (hasIllegalDrive) reason = SkipReason.ILLEGAL_CHARACTER;
+        const reason = isOutside
+          ? SkipReason.PATH_TRAVERSAL
+          : SkipReason.ILLEGAL_CHARACTER;
 
         const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
         skippedResult.skipped = true;
