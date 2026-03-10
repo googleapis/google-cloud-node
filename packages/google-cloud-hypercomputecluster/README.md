@@ -18,7 +18,7 @@ A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
 
 * [Cluster Director API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/hypercomputecluster/latest)
-
+* [Cluster Director API Documentation](https://cloud.google.com/cluster-director/docs)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -57,6 +57,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| create cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/hypercompute_cluster.create_cluster.js) |
+| delete cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/hypercompute_cluster.delete_cluster.js) |
+| get cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/hypercompute_cluster.get_cluster.js) |
+| list clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/hypercompute_cluster.list_clusters.js) |
+| update cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/hypercompute_cluster.update_cluster.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1/snippet_metadata_google.cloud.hypercomputecluster.v1.json) |
 | create cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/hypercompute_cluster.create_cluster.js) |
 | delete cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/hypercompute_cluster.delete_cluster.js) |
 | get cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-hypercomputecluster/samples/generated/v1alpha/hypercompute_cluster.get_cluster.js) |
