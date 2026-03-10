@@ -19101,6 +19101,14675 @@ export namespace google {
                     DELETING = 3
                 }
             }
+
+            /** Namespace v1beta. */
+            namespace v1beta {
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IOperationMetadata): google.cloud.networkconnectivity.v1beta.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a DataTransferService */
+                class DataTransferService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DataTransferService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DataTransferService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataTransferService;
+
+                    /**
+                     * Calls ListMulticloudDataTransferConfigs.
+                     * @param request ListMulticloudDataTransferConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMulticloudDataTransferConfigsResponse
+                     */
+                    public listMulticloudDataTransferConfigs(request: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.ListMulticloudDataTransferConfigsCallback): void;
+
+                    /**
+                     * Calls ListMulticloudDataTransferConfigs.
+                     * @param request ListMulticloudDataTransferConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMulticloudDataTransferConfigs(request: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsRequest): Promise<google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse>;
+
+                    /**
+                     * Calls GetMulticloudDataTransferConfig.
+                     * @param request GetMulticloudDataTransferConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MulticloudDataTransferConfig
+                     */
+                    public getMulticloudDataTransferConfig(request: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferConfigRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.GetMulticloudDataTransferConfigCallback): void;
+
+                    /**
+                     * Calls GetMulticloudDataTransferConfig.
+                     * @param request GetMulticloudDataTransferConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMulticloudDataTransferConfig(request: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferConfigRequest): Promise<google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig>;
+
+                    /**
+                     * Calls CreateMulticloudDataTransferConfig.
+                     * @param request CreateMulticloudDataTransferConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createMulticloudDataTransferConfig(request: google.cloud.networkconnectivity.v1beta.ICreateMulticloudDataTransferConfigRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.CreateMulticloudDataTransferConfigCallback): void;
+
+                    /**
+                     * Calls CreateMulticloudDataTransferConfig.
+                     * @param request CreateMulticloudDataTransferConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMulticloudDataTransferConfig(request: google.cloud.networkconnectivity.v1beta.ICreateMulticloudDataTransferConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateMulticloudDataTransferConfig.
+                     * @param request UpdateMulticloudDataTransferConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateMulticloudDataTransferConfig(request: google.cloud.networkconnectivity.v1beta.IUpdateMulticloudDataTransferConfigRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.UpdateMulticloudDataTransferConfigCallback): void;
+
+                    /**
+                     * Calls UpdateMulticloudDataTransferConfig.
+                     * @param request UpdateMulticloudDataTransferConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMulticloudDataTransferConfig(request: google.cloud.networkconnectivity.v1beta.IUpdateMulticloudDataTransferConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteMulticloudDataTransferConfig.
+                     * @param request DeleteMulticloudDataTransferConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteMulticloudDataTransferConfig(request: google.cloud.networkconnectivity.v1beta.IDeleteMulticloudDataTransferConfigRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.DeleteMulticloudDataTransferConfigCallback): void;
+
+                    /**
+                     * Calls DeleteMulticloudDataTransferConfig.
+                     * @param request DeleteMulticloudDataTransferConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMulticloudDataTransferConfig(request: google.cloud.networkconnectivity.v1beta.IDeleteMulticloudDataTransferConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListDestinations.
+                     * @param request ListDestinationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDestinationsResponse
+                     */
+                    public listDestinations(request: google.cloud.networkconnectivity.v1beta.IListDestinationsRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.ListDestinationsCallback): void;
+
+                    /**
+                     * Calls ListDestinations.
+                     * @param request ListDestinationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDestinations(request: google.cloud.networkconnectivity.v1beta.IListDestinationsRequest): Promise<google.cloud.networkconnectivity.v1beta.ListDestinationsResponse>;
+
+                    /**
+                     * Calls GetDestination.
+                     * @param request GetDestinationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Destination
+                     */
+                    public getDestination(request: google.cloud.networkconnectivity.v1beta.IGetDestinationRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.GetDestinationCallback): void;
+
+                    /**
+                     * Calls GetDestination.
+                     * @param request GetDestinationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDestination(request: google.cloud.networkconnectivity.v1beta.IGetDestinationRequest): Promise<google.cloud.networkconnectivity.v1beta.Destination>;
+
+                    /**
+                     * Calls CreateDestination.
+                     * @param request CreateDestinationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createDestination(request: google.cloud.networkconnectivity.v1beta.ICreateDestinationRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.CreateDestinationCallback): void;
+
+                    /**
+                     * Calls CreateDestination.
+                     * @param request CreateDestinationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDestination(request: google.cloud.networkconnectivity.v1beta.ICreateDestinationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateDestination.
+                     * @param request UpdateDestinationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateDestination(request: google.cloud.networkconnectivity.v1beta.IUpdateDestinationRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.UpdateDestinationCallback): void;
+
+                    /**
+                     * Calls UpdateDestination.
+                     * @param request UpdateDestinationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDestination(request: google.cloud.networkconnectivity.v1beta.IUpdateDestinationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteDestination.
+                     * @param request DeleteDestinationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteDestination(request: google.cloud.networkconnectivity.v1beta.IDeleteDestinationRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.DeleteDestinationCallback): void;
+
+                    /**
+                     * Calls DeleteDestination.
+                     * @param request DeleteDestinationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDestination(request: google.cloud.networkconnectivity.v1beta.IDeleteDestinationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetMulticloudDataTransferSupportedService.
+                     * @param request GetMulticloudDataTransferSupportedServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MulticloudDataTransferSupportedService
+                     */
+                    public getMulticloudDataTransferSupportedService(request: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferSupportedServiceRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.GetMulticloudDataTransferSupportedServiceCallback): void;
+
+                    /**
+                     * Calls GetMulticloudDataTransferSupportedService.
+                     * @param request GetMulticloudDataTransferSupportedServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMulticloudDataTransferSupportedService(request: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferSupportedServiceRequest): Promise<google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService>;
+
+                    /**
+                     * Calls ListMulticloudDataTransferSupportedServices.
+                     * @param request ListMulticloudDataTransferSupportedServicesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMulticloudDataTransferSupportedServicesResponse
+                     */
+                    public listMulticloudDataTransferSupportedServices(request: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesRequest, callback: google.cloud.networkconnectivity.v1beta.DataTransferService.ListMulticloudDataTransferSupportedServicesCallback): void;
+
+                    /**
+                     * Calls ListMulticloudDataTransferSupportedServices.
+                     * @param request ListMulticloudDataTransferSupportedServicesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMulticloudDataTransferSupportedServices(request: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesRequest): Promise<google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse>;
+                }
+
+                namespace DataTransferService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|listMulticloudDataTransferConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListMulticloudDataTransferConfigsResponse
+                     */
+                    type ListMulticloudDataTransferConfigsCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|getMulticloudDataTransferConfig}.
+                     * @param error Error, if any
+                     * @param [response] MulticloudDataTransferConfig
+                     */
+                    type GetMulticloudDataTransferConfigCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|createMulticloudDataTransferConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateMulticloudDataTransferConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|updateMulticloudDataTransferConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateMulticloudDataTransferConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|deleteMulticloudDataTransferConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteMulticloudDataTransferConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|listDestinations}.
+                     * @param error Error, if any
+                     * @param [response] ListDestinationsResponse
+                     */
+                    type ListDestinationsCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListDestinationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|getDestination}.
+                     * @param error Error, if any
+                     * @param [response] Destination
+                     */
+                    type GetDestinationCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.Destination) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|createDestination}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateDestinationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|updateDestination}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateDestinationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|deleteDestination}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteDestinationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|getMulticloudDataTransferSupportedService}.
+                     * @param error Error, if any
+                     * @param [response] MulticloudDataTransferSupportedService
+                     */
+                    type GetMulticloudDataTransferSupportedServiceCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.DataTransferService|listMulticloudDataTransferSupportedServices}.
+                     * @param error Error, if any
+                     * @param [response] ListMulticloudDataTransferSupportedServicesResponse
+                     */
+                    type ListMulticloudDataTransferSupportedServicesCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse) => void;
+                }
+
+                /** Properties of a MulticloudDataTransferConfig. */
+                interface IMulticloudDataTransferConfig {
+
+                    /** MulticloudDataTransferConfig name */
+                    name?: (string|null);
+
+                    /** MulticloudDataTransferConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MulticloudDataTransferConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MulticloudDataTransferConfig labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** MulticloudDataTransferConfig etag */
+                    etag?: (string|null);
+
+                    /** MulticloudDataTransferConfig description */
+                    description?: (string|null);
+
+                    /** MulticloudDataTransferConfig destinationsCount */
+                    destinationsCount?: (number|null);
+
+                    /** MulticloudDataTransferConfig destinationsActiveCount */
+                    destinationsActiveCount?: (number|null);
+
+                    /** MulticloudDataTransferConfig services */
+                    services?: ({ [k: string]: google.cloud.networkconnectivity.v1beta.IStateTimeline }|null);
+
+                    /** MulticloudDataTransferConfig uid */
+                    uid?: (string|null);
+                }
+
+                /** Represents a MulticloudDataTransferConfig. */
+                class MulticloudDataTransferConfig implements IMulticloudDataTransferConfig {
+
+                    /**
+                     * Constructs a new MulticloudDataTransferConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig);
+
+                    /** MulticloudDataTransferConfig name. */
+                    public name: string;
+
+                    /** MulticloudDataTransferConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MulticloudDataTransferConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MulticloudDataTransferConfig labels. */
+                    public labels: { [k: string]: string };
+
+                    /** MulticloudDataTransferConfig etag. */
+                    public etag: string;
+
+                    /** MulticloudDataTransferConfig description. */
+                    public description: string;
+
+                    /** MulticloudDataTransferConfig destinationsCount. */
+                    public destinationsCount: number;
+
+                    /** MulticloudDataTransferConfig destinationsActiveCount. */
+                    public destinationsActiveCount: number;
+
+                    /** MulticloudDataTransferConfig services. */
+                    public services: { [k: string]: google.cloud.networkconnectivity.v1beta.IStateTimeline };
+
+                    /** MulticloudDataTransferConfig uid. */
+                    public uid: string;
+
+                    /**
+                     * Creates a new MulticloudDataTransferConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MulticloudDataTransferConfig instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig): google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig;
+
+                    /**
+                     * Encodes the specified MulticloudDataTransferConfig message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig.verify|verify} messages.
+                     * @param message MulticloudDataTransferConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MulticloudDataTransferConfig message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig.verify|verify} messages.
+                     * @param message MulticloudDataTransferConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MulticloudDataTransferConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MulticloudDataTransferConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig;
+
+                    /**
+                     * Decodes a MulticloudDataTransferConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MulticloudDataTransferConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig;
+
+                    /**
+                     * Verifies a MulticloudDataTransferConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MulticloudDataTransferConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MulticloudDataTransferConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig;
+
+                    /**
+                     * Creates a plain object from a MulticloudDataTransferConfig message. Also converts values to other types if specified.
+                     * @param message MulticloudDataTransferConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MulticloudDataTransferConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MulticloudDataTransferConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMulticloudDataTransferConfigsRequest. */
+                interface IListMulticloudDataTransferConfigsRequest {
+
+                    /** ListMulticloudDataTransferConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMulticloudDataTransferConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMulticloudDataTransferConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListMulticloudDataTransferConfigsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListMulticloudDataTransferConfigsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListMulticloudDataTransferConfigsRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
+                }
+
+                /** Represents a ListMulticloudDataTransferConfigsRequest. */
+                class ListMulticloudDataTransferConfigsRequest implements IListMulticloudDataTransferConfigsRequest {
+
+                    /**
+                     * Constructs a new ListMulticloudDataTransferConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsRequest);
+
+                    /** ListMulticloudDataTransferConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListMulticloudDataTransferConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMulticloudDataTransferConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListMulticloudDataTransferConfigsRequest filter. */
+                    public filter: string;
+
+                    /** ListMulticloudDataTransferConfigsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListMulticloudDataTransferConfigsRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
+
+                    /**
+                     * Creates a new ListMulticloudDataTransferConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMulticloudDataTransferConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsRequest): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListMulticloudDataTransferConfigsRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsRequest.verify|verify} messages.
+                     * @param message ListMulticloudDataTransferConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMulticloudDataTransferConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsRequest.verify|verify} messages.
+                     * @param message ListMulticloudDataTransferConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMulticloudDataTransferConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMulticloudDataTransferConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsRequest;
+
+                    /**
+                     * Decodes a ListMulticloudDataTransferConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMulticloudDataTransferConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsRequest;
+
+                    /**
+                     * Verifies a ListMulticloudDataTransferConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMulticloudDataTransferConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMulticloudDataTransferConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMulticloudDataTransferConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListMulticloudDataTransferConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMulticloudDataTransferConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMulticloudDataTransferConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMulticloudDataTransferConfigsResponse. */
+                interface IListMulticloudDataTransferConfigsResponse {
+
+                    /** ListMulticloudDataTransferConfigsResponse multicloudDataTransferConfigs */
+                    multicloudDataTransferConfigs?: (google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig[]|null);
+
+                    /** ListMulticloudDataTransferConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListMulticloudDataTransferConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListMulticloudDataTransferConfigsResponse. */
+                class ListMulticloudDataTransferConfigsResponse implements IListMulticloudDataTransferConfigsResponse {
+
+                    /**
+                     * Constructs a new ListMulticloudDataTransferConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsResponse);
+
+                    /** ListMulticloudDataTransferConfigsResponse multicloudDataTransferConfigs. */
+                    public multicloudDataTransferConfigs: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig[];
+
+                    /** ListMulticloudDataTransferConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListMulticloudDataTransferConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListMulticloudDataTransferConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMulticloudDataTransferConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsResponse): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListMulticloudDataTransferConfigsResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse.verify|verify} messages.
+                     * @param message ListMulticloudDataTransferConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMulticloudDataTransferConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse.verify|verify} messages.
+                     * @param message ListMulticloudDataTransferConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMulticloudDataTransferConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMulticloudDataTransferConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse;
+
+                    /**
+                     * Decodes a ListMulticloudDataTransferConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMulticloudDataTransferConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse;
+
+                    /**
+                     * Verifies a ListMulticloudDataTransferConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMulticloudDataTransferConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMulticloudDataTransferConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMulticloudDataTransferConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListMulticloudDataTransferConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMulticloudDataTransferConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMulticloudDataTransferConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMulticloudDataTransferConfigRequest. */
+                interface IGetMulticloudDataTransferConfigRequest {
+
+                    /** GetMulticloudDataTransferConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMulticloudDataTransferConfigRequest. */
+                class GetMulticloudDataTransferConfigRequest implements IGetMulticloudDataTransferConfigRequest {
+
+                    /**
+                     * Constructs a new GetMulticloudDataTransferConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferConfigRequest);
+
+                    /** GetMulticloudDataTransferConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMulticloudDataTransferConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMulticloudDataTransferConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferConfigRequest): google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Encodes the specified GetMulticloudDataTransferConfigRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferConfigRequest.verify|verify} messages.
+                     * @param message GetMulticloudDataTransferConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMulticloudDataTransferConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferConfigRequest.verify|verify} messages.
+                     * @param message GetMulticloudDataTransferConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMulticloudDataTransferConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMulticloudDataTransferConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Decodes a GetMulticloudDataTransferConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMulticloudDataTransferConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Verifies a GetMulticloudDataTransferConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMulticloudDataTransferConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMulticloudDataTransferConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetMulticloudDataTransferConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetMulticloudDataTransferConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMulticloudDataTransferConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMulticloudDataTransferConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateMulticloudDataTransferConfigRequest. */
+                interface ICreateMulticloudDataTransferConfigRequest {
+
+                    /** CreateMulticloudDataTransferConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMulticloudDataTransferConfigRequest multicloudDataTransferConfigId */
+                    multicloudDataTransferConfigId?: (string|null);
+
+                    /** CreateMulticloudDataTransferConfigRequest multicloudDataTransferConfig */
+                    multicloudDataTransferConfig?: (google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig|null);
+
+                    /** CreateMulticloudDataTransferConfigRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateMulticloudDataTransferConfigRequest. */
+                class CreateMulticloudDataTransferConfigRequest implements ICreateMulticloudDataTransferConfigRequest {
+
+                    /**
+                     * Constructs a new CreateMulticloudDataTransferConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ICreateMulticloudDataTransferConfigRequest);
+
+                    /** CreateMulticloudDataTransferConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateMulticloudDataTransferConfigRequest multicloudDataTransferConfigId. */
+                    public multicloudDataTransferConfigId: string;
+
+                    /** CreateMulticloudDataTransferConfigRequest multicloudDataTransferConfig. */
+                    public multicloudDataTransferConfig?: (google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig|null);
+
+                    /** CreateMulticloudDataTransferConfigRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateMulticloudDataTransferConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMulticloudDataTransferConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ICreateMulticloudDataTransferConfigRequest): google.cloud.networkconnectivity.v1beta.CreateMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateMulticloudDataTransferConfigRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateMulticloudDataTransferConfigRequest.verify|verify} messages.
+                     * @param message CreateMulticloudDataTransferConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ICreateMulticloudDataTransferConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMulticloudDataTransferConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateMulticloudDataTransferConfigRequest.verify|verify} messages.
+                     * @param message CreateMulticloudDataTransferConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ICreateMulticloudDataTransferConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMulticloudDataTransferConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMulticloudDataTransferConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.CreateMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Decodes a CreateMulticloudDataTransferConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMulticloudDataTransferConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.CreateMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Verifies a CreateMulticloudDataTransferConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMulticloudDataTransferConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMulticloudDataTransferConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.CreateMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMulticloudDataTransferConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateMulticloudDataTransferConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.CreateMulticloudDataTransferConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMulticloudDataTransferConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMulticloudDataTransferConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateMulticloudDataTransferConfigRequest. */
+                interface IUpdateMulticloudDataTransferConfigRequest {
+
+                    /** UpdateMulticloudDataTransferConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateMulticloudDataTransferConfigRequest multicloudDataTransferConfig */
+                    multicloudDataTransferConfig?: (google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig|null);
+
+                    /** UpdateMulticloudDataTransferConfigRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateMulticloudDataTransferConfigRequest. */
+                class UpdateMulticloudDataTransferConfigRequest implements IUpdateMulticloudDataTransferConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateMulticloudDataTransferConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IUpdateMulticloudDataTransferConfigRequest);
+
+                    /** UpdateMulticloudDataTransferConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateMulticloudDataTransferConfigRequest multicloudDataTransferConfig. */
+                    public multicloudDataTransferConfig?: (google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferConfig|null);
+
+                    /** UpdateMulticloudDataTransferConfigRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateMulticloudDataTransferConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMulticloudDataTransferConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IUpdateMulticloudDataTransferConfigRequest): google.cloud.networkconnectivity.v1beta.UpdateMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateMulticloudDataTransferConfigRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateMulticloudDataTransferConfigRequest.verify|verify} messages.
+                     * @param message UpdateMulticloudDataTransferConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IUpdateMulticloudDataTransferConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMulticloudDataTransferConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateMulticloudDataTransferConfigRequest.verify|verify} messages.
+                     * @param message UpdateMulticloudDataTransferConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IUpdateMulticloudDataTransferConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMulticloudDataTransferConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMulticloudDataTransferConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.UpdateMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Decodes an UpdateMulticloudDataTransferConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMulticloudDataTransferConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.UpdateMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Verifies an UpdateMulticloudDataTransferConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMulticloudDataTransferConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMulticloudDataTransferConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.UpdateMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMulticloudDataTransferConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMulticloudDataTransferConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.UpdateMulticloudDataTransferConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMulticloudDataTransferConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMulticloudDataTransferConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMulticloudDataTransferConfigRequest. */
+                interface IDeleteMulticloudDataTransferConfigRequest {
+
+                    /** DeleteMulticloudDataTransferConfigRequest name */
+                    name?: (string|null);
+
+                    /** DeleteMulticloudDataTransferConfigRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteMulticloudDataTransferConfigRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteMulticloudDataTransferConfigRequest. */
+                class DeleteMulticloudDataTransferConfigRequest implements IDeleteMulticloudDataTransferConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteMulticloudDataTransferConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IDeleteMulticloudDataTransferConfigRequest);
+
+                    /** DeleteMulticloudDataTransferConfigRequest name. */
+                    public name: string;
+
+                    /** DeleteMulticloudDataTransferConfigRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteMulticloudDataTransferConfigRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteMulticloudDataTransferConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMulticloudDataTransferConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IDeleteMulticloudDataTransferConfigRequest): google.cloud.networkconnectivity.v1beta.DeleteMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteMulticloudDataTransferConfigRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteMulticloudDataTransferConfigRequest.verify|verify} messages.
+                     * @param message DeleteMulticloudDataTransferConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IDeleteMulticloudDataTransferConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMulticloudDataTransferConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteMulticloudDataTransferConfigRequest.verify|verify} messages.
+                     * @param message DeleteMulticloudDataTransferConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IDeleteMulticloudDataTransferConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMulticloudDataTransferConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMulticloudDataTransferConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.DeleteMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Decodes a DeleteMulticloudDataTransferConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMulticloudDataTransferConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.DeleteMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Verifies a DeleteMulticloudDataTransferConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMulticloudDataTransferConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMulticloudDataTransferConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.DeleteMulticloudDataTransferConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMulticloudDataTransferConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMulticloudDataTransferConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.DeleteMulticloudDataTransferConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMulticloudDataTransferConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMulticloudDataTransferConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Destination. */
+                interface IDestination {
+
+                    /** Destination name */
+                    name?: (string|null);
+
+                    /** Destination createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Destination updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Destination labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Destination etag */
+                    etag?: (string|null);
+
+                    /** Destination description */
+                    description?: (string|null);
+
+                    /** Destination ipPrefix */
+                    ipPrefix?: (string|null);
+
+                    /** Destination endpoints */
+                    endpoints?: (google.cloud.networkconnectivity.v1beta.Destination.IDestinationEndpoint[]|null);
+
+                    /** Destination stateTimeline */
+                    stateTimeline?: (google.cloud.networkconnectivity.v1beta.IStateTimeline|null);
+
+                    /** Destination uid */
+                    uid?: (string|null);
+                }
+
+                /** Represents a Destination. */
+                class Destination implements IDestination {
+
+                    /**
+                     * Constructs a new Destination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IDestination);
+
+                    /** Destination name. */
+                    public name: string;
+
+                    /** Destination createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Destination updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Destination labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Destination etag. */
+                    public etag: string;
+
+                    /** Destination description. */
+                    public description: string;
+
+                    /** Destination ipPrefix. */
+                    public ipPrefix: string;
+
+                    /** Destination endpoints. */
+                    public endpoints: google.cloud.networkconnectivity.v1beta.Destination.IDestinationEndpoint[];
+
+                    /** Destination stateTimeline. */
+                    public stateTimeline?: (google.cloud.networkconnectivity.v1beta.IStateTimeline|null);
+
+                    /** Destination uid. */
+                    public uid: string;
+
+                    /**
+                     * Creates a new Destination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Destination instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IDestination): google.cloud.networkconnectivity.v1beta.Destination;
+
+                    /**
+                     * Encodes the specified Destination message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Destination.verify|verify} messages.
+                     * @param message Destination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Destination.verify|verify} messages.
+                     * @param message Destination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Destination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Destination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Destination;
+
+                    /**
+                     * Decodes a Destination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Destination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Destination;
+
+                    /**
+                     * Verifies a Destination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Destination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Destination;
+
+                    /**
+                     * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                     * @param message Destination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.Destination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Destination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Destination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Destination {
+
+                    /** Properties of a DestinationEndpoint. */
+                    interface IDestinationEndpoint {
+
+                        /** DestinationEndpoint asn */
+                        asn?: (number|Long|string|null);
+
+                        /** DestinationEndpoint csp */
+                        csp?: (string|null);
+
+                        /** DestinationEndpoint state */
+                        state?: (google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint.State|keyof typeof google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint.State|null);
+
+                        /** DestinationEndpoint updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a DestinationEndpoint. */
+                    class DestinationEndpoint implements IDestinationEndpoint {
+
+                        /**
+                         * Constructs a new DestinationEndpoint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.Destination.IDestinationEndpoint);
+
+                        /** DestinationEndpoint asn. */
+                        public asn: (number|Long|string);
+
+                        /** DestinationEndpoint csp. */
+                        public csp: string;
+
+                        /** DestinationEndpoint state. */
+                        public state: (google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint.State|keyof typeof google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint.State);
+
+                        /** DestinationEndpoint updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new DestinationEndpoint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DestinationEndpoint instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.Destination.IDestinationEndpoint): google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint;
+
+                        /**
+                         * Encodes the specified DestinationEndpoint message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint.verify|verify} messages.
+                         * @param message DestinationEndpoint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.Destination.IDestinationEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DestinationEndpoint message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint.verify|verify} messages.
+                         * @param message DestinationEndpoint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.Destination.IDestinationEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DestinationEndpoint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DestinationEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint;
+
+                        /**
+                         * Decodes a DestinationEndpoint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DestinationEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint;
+
+                        /**
+                         * Verifies a DestinationEndpoint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DestinationEndpoint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DestinationEndpoint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint;
+
+                        /**
+                         * Creates a plain object from a DestinationEndpoint message. Also converts values to other types if specified.
+                         * @param message DestinationEndpoint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.Destination.DestinationEndpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DestinationEndpoint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DestinationEndpoint
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DestinationEndpoint {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            VALID = 1,
+                            INVALID = 2
+                        }
+                    }
+                }
+
+                /** Properties of a ListDestinationsRequest. */
+                interface IListDestinationsRequest {
+
+                    /** ListDestinationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDestinationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDestinationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDestinationsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListDestinationsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListDestinationsRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
+                }
+
+                /** Represents a ListDestinationsRequest. */
+                class ListDestinationsRequest implements IListDestinationsRequest {
+
+                    /**
+                     * Constructs a new ListDestinationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListDestinationsRequest);
+
+                    /** ListDestinationsRequest parent. */
+                    public parent: string;
+
+                    /** ListDestinationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDestinationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDestinationsRequest filter. */
+                    public filter: string;
+
+                    /** ListDestinationsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListDestinationsRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
+
+                    /**
+                     * Creates a new ListDestinationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDestinationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListDestinationsRequest): google.cloud.networkconnectivity.v1beta.ListDestinationsRequest;
+
+                    /**
+                     * Encodes the specified ListDestinationsRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListDestinationsRequest.verify|verify} messages.
+                     * @param message ListDestinationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListDestinationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDestinationsRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListDestinationsRequest.verify|verify} messages.
+                     * @param message ListDestinationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListDestinationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDestinationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDestinationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListDestinationsRequest;
+
+                    /**
+                     * Decodes a ListDestinationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDestinationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListDestinationsRequest;
+
+                    /**
+                     * Verifies a ListDestinationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDestinationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDestinationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListDestinationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDestinationsRequest message. Also converts values to other types if specified.
+                     * @param message ListDestinationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListDestinationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDestinationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDestinationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDestinationsResponse. */
+                interface IListDestinationsResponse {
+
+                    /** ListDestinationsResponse destinations */
+                    destinations?: (google.cloud.networkconnectivity.v1beta.IDestination[]|null);
+
+                    /** ListDestinationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDestinationsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListDestinationsResponse. */
+                class ListDestinationsResponse implements IListDestinationsResponse {
+
+                    /**
+                     * Constructs a new ListDestinationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListDestinationsResponse);
+
+                    /** ListDestinationsResponse destinations. */
+                    public destinations: google.cloud.networkconnectivity.v1beta.IDestination[];
+
+                    /** ListDestinationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDestinationsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListDestinationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDestinationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListDestinationsResponse): google.cloud.networkconnectivity.v1beta.ListDestinationsResponse;
+
+                    /**
+                     * Encodes the specified ListDestinationsResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListDestinationsResponse.verify|verify} messages.
+                     * @param message ListDestinationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListDestinationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDestinationsResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListDestinationsResponse.verify|verify} messages.
+                     * @param message ListDestinationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListDestinationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDestinationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDestinationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListDestinationsResponse;
+
+                    /**
+                     * Decodes a ListDestinationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDestinationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListDestinationsResponse;
+
+                    /**
+                     * Verifies a ListDestinationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDestinationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDestinationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListDestinationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDestinationsResponse message. Also converts values to other types if specified.
+                     * @param message ListDestinationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListDestinationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDestinationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDestinationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDestinationRequest. */
+                interface IGetDestinationRequest {
+
+                    /** GetDestinationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDestinationRequest. */
+                class GetDestinationRequest implements IGetDestinationRequest {
+
+                    /**
+                     * Constructs a new GetDestinationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetDestinationRequest);
+
+                    /** GetDestinationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDestinationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDestinationRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetDestinationRequest): google.cloud.networkconnectivity.v1beta.GetDestinationRequest;
+
+                    /**
+                     * Encodes the specified GetDestinationRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetDestinationRequest.verify|verify} messages.
+                     * @param message GetDestinationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetDestinationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDestinationRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetDestinationRequest.verify|verify} messages.
+                     * @param message GetDestinationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetDestinationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDestinationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDestinationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetDestinationRequest;
+
+                    /**
+                     * Decodes a GetDestinationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDestinationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetDestinationRequest;
+
+                    /**
+                     * Verifies a GetDestinationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDestinationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDestinationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetDestinationRequest;
+
+                    /**
+                     * Creates a plain object from a GetDestinationRequest message. Also converts values to other types if specified.
+                     * @param message GetDestinationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetDestinationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDestinationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDestinationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDestinationRequest. */
+                interface ICreateDestinationRequest {
+
+                    /** CreateDestinationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDestinationRequest destinationId */
+                    destinationId?: (string|null);
+
+                    /** CreateDestinationRequest destination */
+                    destination?: (google.cloud.networkconnectivity.v1beta.IDestination|null);
+
+                    /** CreateDestinationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateDestinationRequest. */
+                class CreateDestinationRequest implements ICreateDestinationRequest {
+
+                    /**
+                     * Constructs a new CreateDestinationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ICreateDestinationRequest);
+
+                    /** CreateDestinationRequest parent. */
+                    public parent: string;
+
+                    /** CreateDestinationRequest destinationId. */
+                    public destinationId: string;
+
+                    /** CreateDestinationRequest destination. */
+                    public destination?: (google.cloud.networkconnectivity.v1beta.IDestination|null);
+
+                    /** CreateDestinationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateDestinationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDestinationRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ICreateDestinationRequest): google.cloud.networkconnectivity.v1beta.CreateDestinationRequest;
+
+                    /**
+                     * Encodes the specified CreateDestinationRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateDestinationRequest.verify|verify} messages.
+                     * @param message CreateDestinationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ICreateDestinationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDestinationRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateDestinationRequest.verify|verify} messages.
+                     * @param message CreateDestinationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ICreateDestinationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDestinationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDestinationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.CreateDestinationRequest;
+
+                    /**
+                     * Decodes a CreateDestinationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDestinationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.CreateDestinationRequest;
+
+                    /**
+                     * Verifies a CreateDestinationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDestinationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDestinationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.CreateDestinationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDestinationRequest message. Also converts values to other types if specified.
+                     * @param message CreateDestinationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.CreateDestinationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDestinationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDestinationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDestinationRequest. */
+                interface IUpdateDestinationRequest {
+
+                    /** UpdateDestinationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDestinationRequest destination */
+                    destination?: (google.cloud.networkconnectivity.v1beta.IDestination|null);
+
+                    /** UpdateDestinationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateDestinationRequest. */
+                class UpdateDestinationRequest implements IUpdateDestinationRequest {
+
+                    /**
+                     * Constructs a new UpdateDestinationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IUpdateDestinationRequest);
+
+                    /** UpdateDestinationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDestinationRequest destination. */
+                    public destination?: (google.cloud.networkconnectivity.v1beta.IDestination|null);
+
+                    /** UpdateDestinationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateDestinationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDestinationRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IUpdateDestinationRequest): google.cloud.networkconnectivity.v1beta.UpdateDestinationRequest;
+
+                    /**
+                     * Encodes the specified UpdateDestinationRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateDestinationRequest.verify|verify} messages.
+                     * @param message UpdateDestinationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IUpdateDestinationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDestinationRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateDestinationRequest.verify|verify} messages.
+                     * @param message UpdateDestinationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IUpdateDestinationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDestinationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDestinationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.UpdateDestinationRequest;
+
+                    /**
+                     * Decodes an UpdateDestinationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDestinationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.UpdateDestinationRequest;
+
+                    /**
+                     * Verifies an UpdateDestinationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDestinationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDestinationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.UpdateDestinationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDestinationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDestinationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.UpdateDestinationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDestinationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDestinationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDestinationRequest. */
+                interface IDeleteDestinationRequest {
+
+                    /** DeleteDestinationRequest name */
+                    name?: (string|null);
+
+                    /** DeleteDestinationRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteDestinationRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteDestinationRequest. */
+                class DeleteDestinationRequest implements IDeleteDestinationRequest {
+
+                    /**
+                     * Constructs a new DeleteDestinationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IDeleteDestinationRequest);
+
+                    /** DeleteDestinationRequest name. */
+                    public name: string;
+
+                    /** DeleteDestinationRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteDestinationRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteDestinationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDestinationRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IDeleteDestinationRequest): google.cloud.networkconnectivity.v1beta.DeleteDestinationRequest;
+
+                    /**
+                     * Encodes the specified DeleteDestinationRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteDestinationRequest.verify|verify} messages.
+                     * @param message DeleteDestinationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IDeleteDestinationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDestinationRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteDestinationRequest.verify|verify} messages.
+                     * @param message DeleteDestinationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IDeleteDestinationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDestinationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDestinationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.DeleteDestinationRequest;
+
+                    /**
+                     * Decodes a DeleteDestinationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDestinationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.DeleteDestinationRequest;
+
+                    /**
+                     * Verifies a DeleteDestinationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDestinationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDestinationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.DeleteDestinationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDestinationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDestinationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.DeleteDestinationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDestinationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDestinationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StateTimeline. */
+                interface IStateTimeline {
+
+                    /** StateTimeline states */
+                    states?: (google.cloud.networkconnectivity.v1beta.StateTimeline.IStateMetadata[]|null);
+                }
+
+                /** Represents a StateTimeline. */
+                class StateTimeline implements IStateTimeline {
+
+                    /**
+                     * Constructs a new StateTimeline.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IStateTimeline);
+
+                    /** StateTimeline states. */
+                    public states: google.cloud.networkconnectivity.v1beta.StateTimeline.IStateMetadata[];
+
+                    /**
+                     * Creates a new StateTimeline instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StateTimeline instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IStateTimeline): google.cloud.networkconnectivity.v1beta.StateTimeline;
+
+                    /**
+                     * Encodes the specified StateTimeline message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.StateTimeline.verify|verify} messages.
+                     * @param message StateTimeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IStateTimeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StateTimeline message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.StateTimeline.verify|verify} messages.
+                     * @param message StateTimeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IStateTimeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StateTimeline message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StateTimeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.StateTimeline;
+
+                    /**
+                     * Decodes a StateTimeline message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StateTimeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.StateTimeline;
+
+                    /**
+                     * Verifies a StateTimeline message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StateTimeline message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StateTimeline
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.StateTimeline;
+
+                    /**
+                     * Creates a plain object from a StateTimeline message. Also converts values to other types if specified.
+                     * @param message StateTimeline
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.StateTimeline, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StateTimeline to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StateTimeline
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace StateTimeline {
+
+                    /** Properties of a StateMetadata. */
+                    interface IStateMetadata {
+
+                        /** StateMetadata state */
+                        state?: (google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata.State|keyof typeof google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata.State|null);
+
+                        /** StateMetadata effectiveTime */
+                        effectiveTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a StateMetadata. */
+                    class StateMetadata implements IStateMetadata {
+
+                        /**
+                         * Constructs a new StateMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.StateTimeline.IStateMetadata);
+
+                        /** StateMetadata state. */
+                        public state: (google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata.State|keyof typeof google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata.State);
+
+                        /** StateMetadata effectiveTime. */
+                        public effectiveTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new StateMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StateMetadata instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.StateTimeline.IStateMetadata): google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata;
+
+                        /**
+                         * Encodes the specified StateMetadata message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata.verify|verify} messages.
+                         * @param message StateMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.StateTimeline.IStateMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StateMetadata message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata.verify|verify} messages.
+                         * @param message StateMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.StateTimeline.IStateMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StateMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StateMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata;
+
+                        /**
+                         * Decodes a StateMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StateMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata;
+
+                        /**
+                         * Verifies a StateMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StateMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StateMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata;
+
+                        /**
+                         * Creates a plain object from a StateMetadata message. Also converts values to other types if specified.
+                         * @param message StateMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.StateTimeline.StateMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StateMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StateMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StateMetadata {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ADDING = 1,
+                            ACTIVE = 2,
+                            DELETING = 3,
+                            SUSPENDING = 4,
+                            SUSPENDED = 5
+                        }
+                    }
+                }
+
+                /** Properties of a MulticloudDataTransferSupportedService. */
+                interface IMulticloudDataTransferSupportedService {
+
+                    /** MulticloudDataTransferSupportedService name */
+                    name?: (string|null);
+
+                    /** MulticloudDataTransferSupportedService serviceConfigs */
+                    serviceConfigs?: (google.cloud.networkconnectivity.v1beta.IServiceConfig[]|null);
+                }
+
+                /** Represents a MulticloudDataTransferSupportedService. */
+                class MulticloudDataTransferSupportedService implements IMulticloudDataTransferSupportedService {
+
+                    /**
+                     * Constructs a new MulticloudDataTransferSupportedService.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferSupportedService);
+
+                    /** MulticloudDataTransferSupportedService name. */
+                    public name: string;
+
+                    /** MulticloudDataTransferSupportedService serviceConfigs. */
+                    public serviceConfigs: google.cloud.networkconnectivity.v1beta.IServiceConfig[];
+
+                    /**
+                     * Creates a new MulticloudDataTransferSupportedService instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MulticloudDataTransferSupportedService instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferSupportedService): google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService;
+
+                    /**
+                     * Encodes the specified MulticloudDataTransferSupportedService message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService.verify|verify} messages.
+                     * @param message MulticloudDataTransferSupportedService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferSupportedService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MulticloudDataTransferSupportedService message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService.verify|verify} messages.
+                     * @param message MulticloudDataTransferSupportedService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferSupportedService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MulticloudDataTransferSupportedService message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MulticloudDataTransferSupportedService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService;
+
+                    /**
+                     * Decodes a MulticloudDataTransferSupportedService message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MulticloudDataTransferSupportedService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService;
+
+                    /**
+                     * Verifies a MulticloudDataTransferSupportedService message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MulticloudDataTransferSupportedService message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MulticloudDataTransferSupportedService
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService;
+
+                    /**
+                     * Creates a plain object from a MulticloudDataTransferSupportedService message. Also converts values to other types if specified.
+                     * @param message MulticloudDataTransferSupportedService
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MulticloudDataTransferSupportedService to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MulticloudDataTransferSupportedService
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServiceConfig. */
+                interface IServiceConfig {
+
+                    /** ServiceConfig eligibilityCriteria */
+                    eligibilityCriteria?: (google.cloud.networkconnectivity.v1beta.ServiceConfig.EligibilityCriteria|keyof typeof google.cloud.networkconnectivity.v1beta.ServiceConfig.EligibilityCriteria|null);
+
+                    /** ServiceConfig supportEndTime */
+                    supportEndTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ServiceConfig. */
+                class ServiceConfig implements IServiceConfig {
+
+                    /**
+                     * Constructs a new ServiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IServiceConfig);
+
+                    /** ServiceConfig eligibilityCriteria. */
+                    public eligibilityCriteria: (google.cloud.networkconnectivity.v1beta.ServiceConfig.EligibilityCriteria|keyof typeof google.cloud.networkconnectivity.v1beta.ServiceConfig.EligibilityCriteria);
+
+                    /** ServiceConfig supportEndTime. */
+                    public supportEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ServiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceConfig instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IServiceConfig): google.cloud.networkconnectivity.v1beta.ServiceConfig;
+
+                    /**
+                     * Encodes the specified ServiceConfig message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ServiceConfig.verify|verify} messages.
+                     * @param message ServiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceConfig message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ServiceConfig.verify|verify} messages.
+                     * @param message ServiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ServiceConfig;
+
+                    /**
+                     * Decodes a ServiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ServiceConfig;
+
+                    /**
+                     * Verifies a ServiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ServiceConfig;
+
+                    /**
+                     * Creates a plain object from a ServiceConfig message. Also converts values to other types if specified.
+                     * @param message ServiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ServiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ServiceConfig {
+
+                    /** EligibilityCriteria enum. */
+                    enum EligibilityCriteria {
+                        ELIGIBILITY_CRITERIA_UNSPECIFIED = 0,
+                        NETWORK_SERVICE_TIER_PREMIUM_ONLY = 1,
+                        NETWORK_SERVICE_TIER_STANDARD_ONLY = 2,
+                        REQUEST_ENDPOINT_REGIONAL_ENDPOINT_ONLY = 3
+                    }
+                }
+
+                /** Properties of a GetMulticloudDataTransferSupportedServiceRequest. */
+                interface IGetMulticloudDataTransferSupportedServiceRequest {
+
+                    /** GetMulticloudDataTransferSupportedServiceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMulticloudDataTransferSupportedServiceRequest. */
+                class GetMulticloudDataTransferSupportedServiceRequest implements IGetMulticloudDataTransferSupportedServiceRequest {
+
+                    /**
+                     * Constructs a new GetMulticloudDataTransferSupportedServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferSupportedServiceRequest);
+
+                    /** GetMulticloudDataTransferSupportedServiceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMulticloudDataTransferSupportedServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMulticloudDataTransferSupportedServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferSupportedServiceRequest): google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferSupportedServiceRequest;
+
+                    /**
+                     * Encodes the specified GetMulticloudDataTransferSupportedServiceRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferSupportedServiceRequest.verify|verify} messages.
+                     * @param message GetMulticloudDataTransferSupportedServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferSupportedServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMulticloudDataTransferSupportedServiceRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferSupportedServiceRequest.verify|verify} messages.
+                     * @param message GetMulticloudDataTransferSupportedServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetMulticloudDataTransferSupportedServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMulticloudDataTransferSupportedServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMulticloudDataTransferSupportedServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferSupportedServiceRequest;
+
+                    /**
+                     * Decodes a GetMulticloudDataTransferSupportedServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMulticloudDataTransferSupportedServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferSupportedServiceRequest;
+
+                    /**
+                     * Verifies a GetMulticloudDataTransferSupportedServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMulticloudDataTransferSupportedServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMulticloudDataTransferSupportedServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferSupportedServiceRequest;
+
+                    /**
+                     * Creates a plain object from a GetMulticloudDataTransferSupportedServiceRequest message. Also converts values to other types if specified.
+                     * @param message GetMulticloudDataTransferSupportedServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetMulticloudDataTransferSupportedServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMulticloudDataTransferSupportedServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMulticloudDataTransferSupportedServiceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMulticloudDataTransferSupportedServicesRequest. */
+                interface IListMulticloudDataTransferSupportedServicesRequest {
+
+                    /** ListMulticloudDataTransferSupportedServicesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMulticloudDataTransferSupportedServicesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMulticloudDataTransferSupportedServicesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListMulticloudDataTransferSupportedServicesRequest. */
+                class ListMulticloudDataTransferSupportedServicesRequest implements IListMulticloudDataTransferSupportedServicesRequest {
+
+                    /**
+                     * Constructs a new ListMulticloudDataTransferSupportedServicesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesRequest);
+
+                    /** ListMulticloudDataTransferSupportedServicesRequest parent. */
+                    public parent: string;
+
+                    /** ListMulticloudDataTransferSupportedServicesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMulticloudDataTransferSupportedServicesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListMulticloudDataTransferSupportedServicesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMulticloudDataTransferSupportedServicesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesRequest): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesRequest;
+
+                    /**
+                     * Encodes the specified ListMulticloudDataTransferSupportedServicesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesRequest.verify|verify} messages.
+                     * @param message ListMulticloudDataTransferSupportedServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMulticloudDataTransferSupportedServicesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesRequest.verify|verify} messages.
+                     * @param message ListMulticloudDataTransferSupportedServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMulticloudDataTransferSupportedServicesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMulticloudDataTransferSupportedServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesRequest;
+
+                    /**
+                     * Decodes a ListMulticloudDataTransferSupportedServicesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMulticloudDataTransferSupportedServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesRequest;
+
+                    /**
+                     * Verifies a ListMulticloudDataTransferSupportedServicesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMulticloudDataTransferSupportedServicesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMulticloudDataTransferSupportedServicesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesRequest;
+
+                    /**
+                     * Creates a plain object from a ListMulticloudDataTransferSupportedServicesRequest message. Also converts values to other types if specified.
+                     * @param message ListMulticloudDataTransferSupportedServicesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMulticloudDataTransferSupportedServicesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMulticloudDataTransferSupportedServicesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMulticloudDataTransferSupportedServicesResponse. */
+                interface IListMulticloudDataTransferSupportedServicesResponse {
+
+                    /** ListMulticloudDataTransferSupportedServicesResponse multicloudDataTransferSupportedServices */
+                    multicloudDataTransferSupportedServices?: (google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferSupportedService[]|null);
+
+                    /** ListMulticloudDataTransferSupportedServicesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListMulticloudDataTransferSupportedServicesResponse. */
+                class ListMulticloudDataTransferSupportedServicesResponse implements IListMulticloudDataTransferSupportedServicesResponse {
+
+                    /**
+                     * Constructs a new ListMulticloudDataTransferSupportedServicesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesResponse);
+
+                    /** ListMulticloudDataTransferSupportedServicesResponse multicloudDataTransferSupportedServices. */
+                    public multicloudDataTransferSupportedServices: google.cloud.networkconnectivity.v1beta.IMulticloudDataTransferSupportedService[];
+
+                    /** ListMulticloudDataTransferSupportedServicesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListMulticloudDataTransferSupportedServicesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMulticloudDataTransferSupportedServicesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesResponse): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse;
+
+                    /**
+                     * Encodes the specified ListMulticloudDataTransferSupportedServicesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse.verify|verify} messages.
+                     * @param message ListMulticloudDataTransferSupportedServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMulticloudDataTransferSupportedServicesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse.verify|verify} messages.
+                     * @param message ListMulticloudDataTransferSupportedServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListMulticloudDataTransferSupportedServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMulticloudDataTransferSupportedServicesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMulticloudDataTransferSupportedServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse;
+
+                    /**
+                     * Decodes a ListMulticloudDataTransferSupportedServicesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMulticloudDataTransferSupportedServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse;
+
+                    /**
+                     * Verifies a ListMulticloudDataTransferSupportedServicesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMulticloudDataTransferSupportedServicesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMulticloudDataTransferSupportedServicesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse;
+
+                    /**
+                     * Creates a plain object from a ListMulticloudDataTransferSupportedServicesResponse message. Also converts values to other types if specified.
+                     * @param message ListMulticloudDataTransferSupportedServicesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMulticloudDataTransferSupportedServicesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMulticloudDataTransferSupportedServicesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a HubService */
+                class HubService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new HubService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new HubService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): HubService;
+
+                    /**
+                     * Calls ListHubs.
+                     * @param request ListHubsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListHubsResponse
+                     */
+                    public listHubs(request: google.cloud.networkconnectivity.v1beta.IListHubsRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.ListHubsCallback): void;
+
+                    /**
+                     * Calls ListHubs.
+                     * @param request ListHubsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listHubs(request: google.cloud.networkconnectivity.v1beta.IListHubsRequest): Promise<google.cloud.networkconnectivity.v1beta.ListHubsResponse>;
+
+                    /**
+                     * Calls GetHub.
+                     * @param request GetHubRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Hub
+                     */
+                    public getHub(request: google.cloud.networkconnectivity.v1beta.IGetHubRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.GetHubCallback): void;
+
+                    /**
+                     * Calls GetHub.
+                     * @param request GetHubRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getHub(request: google.cloud.networkconnectivity.v1beta.IGetHubRequest): Promise<google.cloud.networkconnectivity.v1beta.Hub>;
+
+                    /**
+                     * Calls CreateHub.
+                     * @param request CreateHubRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createHub(request: google.cloud.networkconnectivity.v1beta.ICreateHubRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.CreateHubCallback): void;
+
+                    /**
+                     * Calls CreateHub.
+                     * @param request CreateHubRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createHub(request: google.cloud.networkconnectivity.v1beta.ICreateHubRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateHub.
+                     * @param request UpdateHubRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateHub(request: google.cloud.networkconnectivity.v1beta.IUpdateHubRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.UpdateHubCallback): void;
+
+                    /**
+                     * Calls UpdateHub.
+                     * @param request UpdateHubRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateHub(request: google.cloud.networkconnectivity.v1beta.IUpdateHubRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteHub.
+                     * @param request DeleteHubRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteHub(request: google.cloud.networkconnectivity.v1beta.IDeleteHubRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.DeleteHubCallback): void;
+
+                    /**
+                     * Calls DeleteHub.
+                     * @param request DeleteHubRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteHub(request: google.cloud.networkconnectivity.v1beta.IDeleteHubRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListHubSpokes.
+                     * @param request ListHubSpokesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListHubSpokesResponse
+                     */
+                    public listHubSpokes(request: google.cloud.networkconnectivity.v1beta.IListHubSpokesRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.ListHubSpokesCallback): void;
+
+                    /**
+                     * Calls ListHubSpokes.
+                     * @param request ListHubSpokesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listHubSpokes(request: google.cloud.networkconnectivity.v1beta.IListHubSpokesRequest): Promise<google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse>;
+
+                    /**
+                     * Calls QueryHubStatus.
+                     * @param request QueryHubStatusRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueryHubStatusResponse
+                     */
+                    public queryHubStatus(request: google.cloud.networkconnectivity.v1beta.IQueryHubStatusRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.QueryHubStatusCallback): void;
+
+                    /**
+                     * Calls QueryHubStatus.
+                     * @param request QueryHubStatusRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryHubStatus(request: google.cloud.networkconnectivity.v1beta.IQueryHubStatusRequest): Promise<google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse>;
+
+                    /**
+                     * Calls ListSpokes.
+                     * @param request ListSpokesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSpokesResponse
+                     */
+                    public listSpokes(request: google.cloud.networkconnectivity.v1beta.IListSpokesRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.ListSpokesCallback): void;
+
+                    /**
+                     * Calls ListSpokes.
+                     * @param request ListSpokesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSpokes(request: google.cloud.networkconnectivity.v1beta.IListSpokesRequest): Promise<google.cloud.networkconnectivity.v1beta.ListSpokesResponse>;
+
+                    /**
+                     * Calls GetSpoke.
+                     * @param request GetSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Spoke
+                     */
+                    public getSpoke(request: google.cloud.networkconnectivity.v1beta.IGetSpokeRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.GetSpokeCallback): void;
+
+                    /**
+                     * Calls GetSpoke.
+                     * @param request GetSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSpoke(request: google.cloud.networkconnectivity.v1beta.IGetSpokeRequest): Promise<google.cloud.networkconnectivity.v1beta.Spoke>;
+
+                    /**
+                     * Calls CreateSpoke.
+                     * @param request CreateSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSpoke(request: google.cloud.networkconnectivity.v1beta.ICreateSpokeRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.CreateSpokeCallback): void;
+
+                    /**
+                     * Calls CreateSpoke.
+                     * @param request CreateSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSpoke(request: google.cloud.networkconnectivity.v1beta.ICreateSpokeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateSpoke.
+                     * @param request UpdateSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateSpoke(request: google.cloud.networkconnectivity.v1beta.IUpdateSpokeRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.UpdateSpokeCallback): void;
+
+                    /**
+                     * Calls UpdateSpoke.
+                     * @param request UpdateSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSpoke(request: google.cloud.networkconnectivity.v1beta.IUpdateSpokeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RejectHubSpoke.
+                     * @param request RejectHubSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public rejectHubSpoke(request: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.RejectHubSpokeCallback): void;
+
+                    /**
+                     * Calls RejectHubSpoke.
+                     * @param request RejectHubSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rejectHubSpoke(request: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls AcceptHubSpoke.
+                     * @param request AcceptHubSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public acceptHubSpoke(request: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.AcceptHubSpokeCallback): void;
+
+                    /**
+                     * Calls AcceptHubSpoke.
+                     * @param request AcceptHubSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public acceptHubSpoke(request: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls AcceptSpokeUpdate.
+                     * @param request AcceptSpokeUpdateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public acceptSpokeUpdate(request: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.AcceptSpokeUpdateCallback): void;
+
+                    /**
+                     * Calls AcceptSpokeUpdate.
+                     * @param request AcceptSpokeUpdateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public acceptSpokeUpdate(request: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RejectSpokeUpdate.
+                     * @param request RejectSpokeUpdateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public rejectSpokeUpdate(request: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.RejectSpokeUpdateCallback): void;
+
+                    /**
+                     * Calls RejectSpokeUpdate.
+                     * @param request RejectSpokeUpdateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rejectSpokeUpdate(request: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteSpoke.
+                     * @param request DeleteSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSpoke(request: google.cloud.networkconnectivity.v1beta.IDeleteSpokeRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.DeleteSpokeCallback): void;
+
+                    /**
+                     * Calls DeleteSpoke.
+                     * @param request DeleteSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSpoke(request: google.cloud.networkconnectivity.v1beta.IDeleteSpokeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRouteTable.
+                     * @param request GetRouteTableRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RouteTable
+                     */
+                    public getRouteTable(request: google.cloud.networkconnectivity.v1beta.IGetRouteTableRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.GetRouteTableCallback): void;
+
+                    /**
+                     * Calls GetRouteTable.
+                     * @param request GetRouteTableRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRouteTable(request: google.cloud.networkconnectivity.v1beta.IGetRouteTableRequest): Promise<google.cloud.networkconnectivity.v1beta.RouteTable>;
+
+                    /**
+                     * Calls GetRoute.
+                     * @param request GetRouteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Route
+                     */
+                    public getRoute(request: google.cloud.networkconnectivity.v1beta.IGetRouteRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.GetRouteCallback): void;
+
+                    /**
+                     * Calls GetRoute.
+                     * @param request GetRouteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRoute(request: google.cloud.networkconnectivity.v1beta.IGetRouteRequest): Promise<google.cloud.networkconnectivity.v1beta.Route>;
+
+                    /**
+                     * Calls ListRoutes.
+                     * @param request ListRoutesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRoutesResponse
+                     */
+                    public listRoutes(request: google.cloud.networkconnectivity.v1beta.IListRoutesRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.ListRoutesCallback): void;
+
+                    /**
+                     * Calls ListRoutes.
+                     * @param request ListRoutesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRoutes(request: google.cloud.networkconnectivity.v1beta.IListRoutesRequest): Promise<google.cloud.networkconnectivity.v1beta.ListRoutesResponse>;
+
+                    /**
+                     * Calls ListRouteTables.
+                     * @param request ListRouteTablesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRouteTablesResponse
+                     */
+                    public listRouteTables(request: google.cloud.networkconnectivity.v1beta.IListRouteTablesRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.ListRouteTablesCallback): void;
+
+                    /**
+                     * Calls ListRouteTables.
+                     * @param request ListRouteTablesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRouteTables(request: google.cloud.networkconnectivity.v1beta.IListRouteTablesRequest): Promise<google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse>;
+
+                    /**
+                     * Calls GetGroup.
+                     * @param request GetGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Group
+                     */
+                    public getGroup(request: google.cloud.networkconnectivity.v1beta.IGetGroupRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.GetGroupCallback): void;
+
+                    /**
+                     * Calls GetGroup.
+                     * @param request GetGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGroup(request: google.cloud.networkconnectivity.v1beta.IGetGroupRequest): Promise<google.cloud.networkconnectivity.v1beta.Group>;
+
+                    /**
+                     * Calls ListGroups.
+                     * @param request ListGroupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGroupsResponse
+                     */
+                    public listGroups(request: google.cloud.networkconnectivity.v1beta.IListGroupsRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.ListGroupsCallback): void;
+
+                    /**
+                     * Calls ListGroups.
+                     * @param request ListGroupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGroups(request: google.cloud.networkconnectivity.v1beta.IListGroupsRequest): Promise<google.cloud.networkconnectivity.v1beta.ListGroupsResponse>;
+
+                    /**
+                     * Calls UpdateGroup.
+                     * @param request UpdateGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateGroup(request: google.cloud.networkconnectivity.v1beta.IUpdateGroupRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.UpdateGroupCallback): void;
+
+                    /**
+                     * Calls UpdateGroup.
+                     * @param request UpdateGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateGroup(request: google.cloud.networkconnectivity.v1beta.IUpdateGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateGatewayAdvertisedRoute.
+                     * @param request CreateGatewayAdvertisedRouteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createGatewayAdvertisedRoute(request: google.cloud.networkconnectivity.v1beta.ICreateGatewayAdvertisedRouteRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.CreateGatewayAdvertisedRouteCallback): void;
+
+                    /**
+                     * Calls CreateGatewayAdvertisedRoute.
+                     * @param request CreateGatewayAdvertisedRouteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createGatewayAdvertisedRoute(request: google.cloud.networkconnectivity.v1beta.ICreateGatewayAdvertisedRouteRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetGatewayAdvertisedRoute.
+                     * @param request GetGatewayAdvertisedRouteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GatewayAdvertisedRoute
+                     */
+                    public getGatewayAdvertisedRoute(request: google.cloud.networkconnectivity.v1beta.IGetGatewayAdvertisedRouteRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.GetGatewayAdvertisedRouteCallback): void;
+
+                    /**
+                     * Calls GetGatewayAdvertisedRoute.
+                     * @param request GetGatewayAdvertisedRouteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGatewayAdvertisedRoute(request: google.cloud.networkconnectivity.v1beta.IGetGatewayAdvertisedRouteRequest): Promise<google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute>;
+
+                    /**
+                     * Calls ListGatewayAdvertisedRoutes.
+                     * @param request ListGatewayAdvertisedRoutesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGatewayAdvertisedRoutesResponse
+                     */
+                    public listGatewayAdvertisedRoutes(request: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.ListGatewayAdvertisedRoutesCallback): void;
+
+                    /**
+                     * Calls ListGatewayAdvertisedRoutes.
+                     * @param request ListGatewayAdvertisedRoutesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGatewayAdvertisedRoutes(request: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesRequest): Promise<google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse>;
+
+                    /**
+                     * Calls UpdateGatewayAdvertisedRoute.
+                     * @param request UpdateGatewayAdvertisedRouteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateGatewayAdvertisedRoute(request: google.cloud.networkconnectivity.v1beta.IUpdateGatewayAdvertisedRouteRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.UpdateGatewayAdvertisedRouteCallback): void;
+
+                    /**
+                     * Calls UpdateGatewayAdvertisedRoute.
+                     * @param request UpdateGatewayAdvertisedRouteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateGatewayAdvertisedRoute(request: google.cloud.networkconnectivity.v1beta.IUpdateGatewayAdvertisedRouteRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteGatewayAdvertisedRoute.
+                     * @param request DeleteGatewayAdvertisedRouteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteGatewayAdvertisedRoute(request: google.cloud.networkconnectivity.v1beta.IDeleteGatewayAdvertisedRouteRequest, callback: google.cloud.networkconnectivity.v1beta.HubService.DeleteGatewayAdvertisedRouteCallback): void;
+
+                    /**
+                     * Calls DeleteGatewayAdvertisedRoute.
+                     * @param request DeleteGatewayAdvertisedRouteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteGatewayAdvertisedRoute(request: google.cloud.networkconnectivity.v1beta.IDeleteGatewayAdvertisedRouteRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace HubService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|listHubs}.
+                     * @param error Error, if any
+                     * @param [response] ListHubsResponse
+                     */
+                    type ListHubsCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListHubsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|getHub}.
+                     * @param error Error, if any
+                     * @param [response] Hub
+                     */
+                    type GetHubCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.Hub) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|createHub}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateHubCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|updateHub}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateHubCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|deleteHub}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteHubCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|listHubSpokes}.
+                     * @param error Error, if any
+                     * @param [response] ListHubSpokesResponse
+                     */
+                    type ListHubSpokesCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|queryHubStatus}.
+                     * @param error Error, if any
+                     * @param [response] QueryHubStatusResponse
+                     */
+                    type QueryHubStatusCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|listSpokes}.
+                     * @param error Error, if any
+                     * @param [response] ListSpokesResponse
+                     */
+                    type ListSpokesCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListSpokesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|getSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Spoke
+                     */
+                    type GetSpokeCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.Spoke) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|createSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|updateSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|rejectHubSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RejectHubSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|acceptHubSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type AcceptHubSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|acceptSpokeUpdate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type AcceptSpokeUpdateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|rejectSpokeUpdate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RejectSpokeUpdateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|deleteSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|getRouteTable}.
+                     * @param error Error, if any
+                     * @param [response] RouteTable
+                     */
+                    type GetRouteTableCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.RouteTable) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|getRoute}.
+                     * @param error Error, if any
+                     * @param [response] Route
+                     */
+                    type GetRouteCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.Route) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|listRoutes}.
+                     * @param error Error, if any
+                     * @param [response] ListRoutesResponse
+                     */
+                    type ListRoutesCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListRoutesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|listRouteTables}.
+                     * @param error Error, if any
+                     * @param [response] ListRouteTablesResponse
+                     */
+                    type ListRouteTablesCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|getGroup}.
+                     * @param error Error, if any
+                     * @param [response] Group
+                     */
+                    type GetGroupCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.Group) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|listGroups}.
+                     * @param error Error, if any
+                     * @param [response] ListGroupsResponse
+                     */
+                    type ListGroupsCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListGroupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|updateGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|createGatewayAdvertisedRoute}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateGatewayAdvertisedRouteCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|getGatewayAdvertisedRoute}.
+                     * @param error Error, if any
+                     * @param [response] GatewayAdvertisedRoute
+                     */
+                    type GetGatewayAdvertisedRouteCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|listGatewayAdvertisedRoutes}.
+                     * @param error Error, if any
+                     * @param [response] ListGatewayAdvertisedRoutesResponse
+                     */
+                    type ListGatewayAdvertisedRoutesCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|updateGatewayAdvertisedRoute}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateGatewayAdvertisedRouteCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.HubService|deleteGatewayAdvertisedRoute}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteGatewayAdvertisedRouteCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** RouteType enum. */
+                enum RouteType {
+                    ROUTE_TYPE_UNSPECIFIED = 0,
+                    VPC_PRIMARY_SUBNET = 1,
+                    VPC_SECONDARY_SUBNET = 2,
+                    DYNAMIC_ROUTE = 3
+                }
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    CREATING = 1,
+                    ACTIVE = 2,
+                    DELETING = 3,
+                    ACCEPTING = 8,
+                    REJECTING = 9,
+                    UPDATING = 6,
+                    INACTIVE = 7,
+                    OBSOLETE = 10,
+                    FAILED = 11
+                }
+
+                /** SpokeType enum. */
+                enum SpokeType {
+                    SPOKE_TYPE_UNSPECIFIED = 0,
+                    VPN_TUNNEL = 1,
+                    INTERCONNECT_ATTACHMENT = 2,
+                    ROUTER_APPLIANCE = 3,
+                    VPC_NETWORK = 4,
+                    GATEWAY = 5,
+                    PRODUCER_VPC_NETWORK = 7
+                }
+
+                /** PolicyMode enum. */
+                enum PolicyMode {
+                    POLICY_MODE_UNSPECIFIED = 0,
+                    PRESET = 1
+                }
+
+                /** PresetTopology enum. */
+                enum PresetTopology {
+                    PRESET_TOPOLOGY_UNSPECIFIED = 0,
+                    MESH = 2,
+                    STAR = 3,
+                    HYBRID_INSPECTION = 4
+                }
+
+                /** LocationFeature enum. */
+                enum LocationFeature {
+                    LOCATION_FEATURE_UNSPECIFIED = 0,
+                    SITE_TO_CLOUD_SPOKES = 1,
+                    SITE_TO_SITE_SPOKES = 2,
+                    GATEWAY_SPOKES = 3
+                }
+
+                /** Properties of a Hub. */
+                interface IHub {
+
+                    /** Hub name */
+                    name?: (string|null);
+
+                    /** Hub createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hub updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hub labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Hub description */
+                    description?: (string|null);
+
+                    /** Hub uniqueId */
+                    uniqueId?: (string|null);
+
+                    /** Hub state */
+                    state?: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State|null);
+
+                    /** Hub routingVpcs */
+                    routingVpcs?: (google.cloud.networkconnectivity.v1beta.IRoutingVPC[]|null);
+
+                    /** Hub routeTables */
+                    routeTables?: (string[]|null);
+
+                    /** Hub spokeSummary */
+                    spokeSummary?: (google.cloud.networkconnectivity.v1beta.ISpokeSummary|null);
+
+                    /** Hub policyMode */
+                    policyMode?: (google.cloud.networkconnectivity.v1beta.PolicyMode|keyof typeof google.cloud.networkconnectivity.v1beta.PolicyMode|null);
+
+                    /** Hub presetTopology */
+                    presetTopology?: (google.cloud.networkconnectivity.v1beta.PresetTopology|keyof typeof google.cloud.networkconnectivity.v1beta.PresetTopology|null);
+
+                    /** Hub exportPsc */
+                    exportPsc?: (boolean|null);
+                }
+
+                /** Represents a Hub. */
+                class Hub implements IHub {
+
+                    /**
+                     * Constructs a new Hub.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IHub);
+
+                    /** Hub name. */
+                    public name: string;
+
+                    /** Hub createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hub updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hub labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Hub description. */
+                    public description: string;
+
+                    /** Hub uniqueId. */
+                    public uniqueId: string;
+
+                    /** Hub state. */
+                    public state: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State);
+
+                    /** Hub routingVpcs. */
+                    public routingVpcs: google.cloud.networkconnectivity.v1beta.IRoutingVPC[];
+
+                    /** Hub routeTables. */
+                    public routeTables: string[];
+
+                    /** Hub spokeSummary. */
+                    public spokeSummary?: (google.cloud.networkconnectivity.v1beta.ISpokeSummary|null);
+
+                    /** Hub policyMode. */
+                    public policyMode: (google.cloud.networkconnectivity.v1beta.PolicyMode|keyof typeof google.cloud.networkconnectivity.v1beta.PolicyMode);
+
+                    /** Hub presetTopology. */
+                    public presetTopology: (google.cloud.networkconnectivity.v1beta.PresetTopology|keyof typeof google.cloud.networkconnectivity.v1beta.PresetTopology);
+
+                    /** Hub exportPsc. */
+                    public exportPsc?: (boolean|null);
+
+                    /**
+                     * Creates a new Hub instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Hub instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IHub): google.cloud.networkconnectivity.v1beta.Hub;
+
+                    /**
+                     * Encodes the specified Hub message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Hub.verify|verify} messages.
+                     * @param message Hub message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IHub, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Hub message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Hub.verify|verify} messages.
+                     * @param message Hub message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IHub, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Hub message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Hub
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Hub;
+
+                    /**
+                     * Decodes a Hub message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Hub
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Hub;
+
+                    /**
+                     * Verifies a Hub message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Hub message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Hub
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Hub;
+
+                    /**
+                     * Creates a plain object from a Hub message. Also converts values to other types if specified.
+                     * @param message Hub
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.Hub, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Hub to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Hub
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RoutingVPC. */
+                interface IRoutingVPC {
+
+                    /** RoutingVPC uri */
+                    uri?: (string|null);
+
+                    /** RoutingVPC requiredForNewSiteToSiteDataTransferSpokes */
+                    requiredForNewSiteToSiteDataTransferSpokes?: (boolean|null);
+                }
+
+                /** Represents a RoutingVPC. */
+                class RoutingVPC implements IRoutingVPC {
+
+                    /**
+                     * Constructs a new RoutingVPC.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IRoutingVPC);
+
+                    /** RoutingVPC uri. */
+                    public uri: string;
+
+                    /** RoutingVPC requiredForNewSiteToSiteDataTransferSpokes. */
+                    public requiredForNewSiteToSiteDataTransferSpokes: boolean;
+
+                    /**
+                     * Creates a new RoutingVPC instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RoutingVPC instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IRoutingVPC): google.cloud.networkconnectivity.v1beta.RoutingVPC;
+
+                    /**
+                     * Encodes the specified RoutingVPC message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RoutingVPC.verify|verify} messages.
+                     * @param message RoutingVPC message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IRoutingVPC, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RoutingVPC message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RoutingVPC.verify|verify} messages.
+                     * @param message RoutingVPC message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IRoutingVPC, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RoutingVPC message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RoutingVPC
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.RoutingVPC;
+
+                    /**
+                     * Decodes a RoutingVPC message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RoutingVPC
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.RoutingVPC;
+
+                    /**
+                     * Verifies a RoutingVPC message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RoutingVPC message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RoutingVPC
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.RoutingVPC;
+
+                    /**
+                     * Creates a plain object from a RoutingVPC message. Also converts values to other types if specified.
+                     * @param message RoutingVPC
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.RoutingVPC, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RoutingVPC to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RoutingVPC
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Spoke. */
+                interface ISpoke {
+
+                    /** Spoke name */
+                    name?: (string|null);
+
+                    /** Spoke createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Spoke updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Spoke labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Spoke description */
+                    description?: (string|null);
+
+                    /** Spoke hub */
+                    hub?: (string|null);
+
+                    /** Spoke group */
+                    group?: (string|null);
+
+                    /** Spoke linkedVpnTunnels */
+                    linkedVpnTunnels?: (google.cloud.networkconnectivity.v1beta.ILinkedVpnTunnels|null);
+
+                    /** Spoke linkedInterconnectAttachments */
+                    linkedInterconnectAttachments?: (google.cloud.networkconnectivity.v1beta.ILinkedInterconnectAttachments|null);
+
+                    /** Spoke linkedRouterApplianceInstances */
+                    linkedRouterApplianceInstances?: (google.cloud.networkconnectivity.v1beta.ILinkedRouterApplianceInstances|null);
+
+                    /** Spoke linkedVpcNetwork */
+                    linkedVpcNetwork?: (google.cloud.networkconnectivity.v1beta.ILinkedVpcNetwork|null);
+
+                    /** Spoke gateway */
+                    gateway?: (google.cloud.networkconnectivity.v1beta.IGateway|null);
+
+                    /** Spoke linkedProducerVpcNetwork */
+                    linkedProducerVpcNetwork?: (google.cloud.networkconnectivity.v1beta.ILinkedProducerVpcNetwork|null);
+
+                    /** Spoke uniqueId */
+                    uniqueId?: (string|null);
+
+                    /** Spoke state */
+                    state?: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State|null);
+
+                    /** Spoke reasons */
+                    reasons?: (google.cloud.networkconnectivity.v1beta.Spoke.IStateReason[]|null);
+
+                    /** Spoke spokeType */
+                    spokeType?: (google.cloud.networkconnectivity.v1beta.SpokeType|keyof typeof google.cloud.networkconnectivity.v1beta.SpokeType|null);
+
+                    /** Spoke etag */
+                    etag?: (string|null);
+
+                    /** Spoke fieldPathsPendingUpdate */
+                    fieldPathsPendingUpdate?: (string[]|null);
+                }
+
+                /** Represents a Spoke. */
+                class Spoke implements ISpoke {
+
+                    /**
+                     * Constructs a new Spoke.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ISpoke);
+
+                    /** Spoke name. */
+                    public name: string;
+
+                    /** Spoke createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Spoke updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Spoke labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Spoke description. */
+                    public description: string;
+
+                    /** Spoke hub. */
+                    public hub: string;
+
+                    /** Spoke group. */
+                    public group: string;
+
+                    /** Spoke linkedVpnTunnels. */
+                    public linkedVpnTunnels?: (google.cloud.networkconnectivity.v1beta.ILinkedVpnTunnels|null);
+
+                    /** Spoke linkedInterconnectAttachments. */
+                    public linkedInterconnectAttachments?: (google.cloud.networkconnectivity.v1beta.ILinkedInterconnectAttachments|null);
+
+                    /** Spoke linkedRouterApplianceInstances. */
+                    public linkedRouterApplianceInstances?: (google.cloud.networkconnectivity.v1beta.ILinkedRouterApplianceInstances|null);
+
+                    /** Spoke linkedVpcNetwork. */
+                    public linkedVpcNetwork?: (google.cloud.networkconnectivity.v1beta.ILinkedVpcNetwork|null);
+
+                    /** Spoke gateway. */
+                    public gateway?: (google.cloud.networkconnectivity.v1beta.IGateway|null);
+
+                    /** Spoke linkedProducerVpcNetwork. */
+                    public linkedProducerVpcNetwork?: (google.cloud.networkconnectivity.v1beta.ILinkedProducerVpcNetwork|null);
+
+                    /** Spoke uniqueId. */
+                    public uniqueId: string;
+
+                    /** Spoke state. */
+                    public state: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State);
+
+                    /** Spoke reasons. */
+                    public reasons: google.cloud.networkconnectivity.v1beta.Spoke.IStateReason[];
+
+                    /** Spoke spokeType. */
+                    public spokeType: (google.cloud.networkconnectivity.v1beta.SpokeType|keyof typeof google.cloud.networkconnectivity.v1beta.SpokeType);
+
+                    /** Spoke etag. */
+                    public etag: string;
+
+                    /** Spoke fieldPathsPendingUpdate. */
+                    public fieldPathsPendingUpdate: string[];
+
+                    /**
+                     * Creates a new Spoke instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Spoke instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ISpoke): google.cloud.networkconnectivity.v1beta.Spoke;
+
+                    /**
+                     * Encodes the specified Spoke message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Spoke.verify|verify} messages.
+                     * @param message Spoke message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ISpoke, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Spoke message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Spoke.verify|verify} messages.
+                     * @param message Spoke message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ISpoke, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Spoke message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Spoke
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Spoke;
+
+                    /**
+                     * Decodes a Spoke message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Spoke
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Spoke;
+
+                    /**
+                     * Verifies a Spoke message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Spoke message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Spoke
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Spoke;
+
+                    /**
+                     * Creates a plain object from a Spoke message. Also converts values to other types if specified.
+                     * @param message Spoke
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.Spoke, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Spoke to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Spoke
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Spoke {
+
+                    /** Properties of a StateReason. */
+                    interface IStateReason {
+
+                        /** StateReason code */
+                        code?: (google.cloud.networkconnectivity.v1beta.Spoke.StateReason.Code|keyof typeof google.cloud.networkconnectivity.v1beta.Spoke.StateReason.Code|null);
+
+                        /** StateReason message */
+                        message?: (string|null);
+
+                        /** StateReason userDetails */
+                        userDetails?: (string|null);
+                    }
+
+                    /** Represents a StateReason. */
+                    class StateReason implements IStateReason {
+
+                        /**
+                         * Constructs a new StateReason.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.Spoke.IStateReason);
+
+                        /** StateReason code. */
+                        public code: (google.cloud.networkconnectivity.v1beta.Spoke.StateReason.Code|keyof typeof google.cloud.networkconnectivity.v1beta.Spoke.StateReason.Code);
+
+                        /** StateReason message. */
+                        public message: string;
+
+                        /** StateReason userDetails. */
+                        public userDetails: string;
+
+                        /**
+                         * Creates a new StateReason instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StateReason instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.Spoke.IStateReason): google.cloud.networkconnectivity.v1beta.Spoke.StateReason;
+
+                        /**
+                         * Encodes the specified StateReason message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Spoke.StateReason.verify|verify} messages.
+                         * @param message StateReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.Spoke.IStateReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StateReason message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Spoke.StateReason.verify|verify} messages.
+                         * @param message StateReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.Spoke.IStateReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StateReason message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StateReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Spoke.StateReason;
+
+                        /**
+                         * Decodes a StateReason message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StateReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Spoke.StateReason;
+
+                        /**
+                         * Verifies a StateReason message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StateReason message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StateReason
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Spoke.StateReason;
+
+                        /**
+                         * Creates a plain object from a StateReason message. Also converts values to other types if specified.
+                         * @param message StateReason
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.Spoke.StateReason, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StateReason to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StateReason
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StateReason {
+
+                        /** Code enum. */
+                        enum Code {
+                            CODE_UNSPECIFIED = 0,
+                            PENDING_REVIEW = 1,
+                            REJECTED = 2,
+                            PAUSED = 3,
+                            FAILED = 4,
+                            UPDATE_PENDING_REVIEW = 5,
+                            UPDATE_REJECTED = 6,
+                            UPDATE_FAILED = 7
+                        }
+                    }
+                }
+
+                /** Properties of a RouteTable. */
+                interface IRouteTable {
+
+                    /** RouteTable name */
+                    name?: (string|null);
+
+                    /** RouteTable createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RouteTable updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RouteTable labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** RouteTable description */
+                    description?: (string|null);
+
+                    /** RouteTable uid */
+                    uid?: (string|null);
+
+                    /** RouteTable state */
+                    state?: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State|null);
+                }
+
+                /** Represents a RouteTable. */
+                class RouteTable implements IRouteTable {
+
+                    /**
+                     * Constructs a new RouteTable.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IRouteTable);
+
+                    /** RouteTable name. */
+                    public name: string;
+
+                    /** RouteTable createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RouteTable updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RouteTable labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RouteTable description. */
+                    public description: string;
+
+                    /** RouteTable uid. */
+                    public uid: string;
+
+                    /** RouteTable state. */
+                    public state: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State);
+
+                    /**
+                     * Creates a new RouteTable instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RouteTable instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IRouteTable): google.cloud.networkconnectivity.v1beta.RouteTable;
+
+                    /**
+                     * Encodes the specified RouteTable message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RouteTable.verify|verify} messages.
+                     * @param message RouteTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IRouteTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RouteTable message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RouteTable.verify|verify} messages.
+                     * @param message RouteTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IRouteTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RouteTable message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RouteTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.RouteTable;
+
+                    /**
+                     * Decodes a RouteTable message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RouteTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.RouteTable;
+
+                    /**
+                     * Verifies a RouteTable message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RouteTable message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RouteTable
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.RouteTable;
+
+                    /**
+                     * Creates a plain object from a RouteTable message. Also converts values to other types if specified.
+                     * @param message RouteTable
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.RouteTable, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RouteTable to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RouteTable
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Route. */
+                interface IRoute {
+
+                    /** Route name */
+                    name?: (string|null);
+
+                    /** Route createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Route updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Route ipCidrRange */
+                    ipCidrRange?: (string|null);
+
+                    /** Route type */
+                    type?: (google.cloud.networkconnectivity.v1beta.RouteType|keyof typeof google.cloud.networkconnectivity.v1beta.RouteType|null);
+
+                    /** Route nextHopVpcNetwork */
+                    nextHopVpcNetwork?: (google.cloud.networkconnectivity.v1beta.INextHopVpcNetwork|null);
+
+                    /** Route labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Route description */
+                    description?: (string|null);
+
+                    /** Route uid */
+                    uid?: (string|null);
+
+                    /** Route state */
+                    state?: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State|null);
+
+                    /** Route spoke */
+                    spoke?: (string|null);
+
+                    /** Route location */
+                    location?: (string|null);
+
+                    /** Route priority */
+                    priority?: (number|Long|string|null);
+
+                    /** Route nextHopVpnTunnel */
+                    nextHopVpnTunnel?: (google.cloud.networkconnectivity.v1beta.INextHopVPNTunnel|null);
+
+                    /** Route nextHopRouterApplianceInstance */
+                    nextHopRouterApplianceInstance?: (google.cloud.networkconnectivity.v1beta.INextHopRouterApplianceInstance|null);
+
+                    /** Route nextHopInterconnectAttachment */
+                    nextHopInterconnectAttachment?: (google.cloud.networkconnectivity.v1beta.INextHopInterconnectAttachment|null);
+
+                    /** Route nextHopSpoke */
+                    nextHopSpoke?: (google.cloud.networkconnectivity.v1beta.INextHopSpoke|null);
+                }
+
+                /** Represents a Route. */
+                class Route implements IRoute {
+
+                    /**
+                     * Constructs a new Route.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IRoute);
+
+                    /** Route name. */
+                    public name: string;
+
+                    /** Route createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Route updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Route ipCidrRange. */
+                    public ipCidrRange: string;
+
+                    /** Route type. */
+                    public type: (google.cloud.networkconnectivity.v1beta.RouteType|keyof typeof google.cloud.networkconnectivity.v1beta.RouteType);
+
+                    /** Route nextHopVpcNetwork. */
+                    public nextHopVpcNetwork?: (google.cloud.networkconnectivity.v1beta.INextHopVpcNetwork|null);
+
+                    /** Route labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Route description. */
+                    public description: string;
+
+                    /** Route uid. */
+                    public uid: string;
+
+                    /** Route state. */
+                    public state: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State);
+
+                    /** Route spoke. */
+                    public spoke: string;
+
+                    /** Route location. */
+                    public location: string;
+
+                    /** Route priority. */
+                    public priority: (number|Long|string);
+
+                    /** Route nextHopVpnTunnel. */
+                    public nextHopVpnTunnel?: (google.cloud.networkconnectivity.v1beta.INextHopVPNTunnel|null);
+
+                    /** Route nextHopRouterApplianceInstance. */
+                    public nextHopRouterApplianceInstance?: (google.cloud.networkconnectivity.v1beta.INextHopRouterApplianceInstance|null);
+
+                    /** Route nextHopInterconnectAttachment. */
+                    public nextHopInterconnectAttachment?: (google.cloud.networkconnectivity.v1beta.INextHopInterconnectAttachment|null);
+
+                    /** Route nextHopSpoke. */
+                    public nextHopSpoke?: (google.cloud.networkconnectivity.v1beta.INextHopSpoke|null);
+
+                    /**
+                     * Creates a new Route instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Route instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IRoute): google.cloud.networkconnectivity.v1beta.Route;
+
+                    /**
+                     * Encodes the specified Route message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Route.verify|verify} messages.
+                     * @param message Route message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Route message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Route.verify|verify} messages.
+                     * @param message Route message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Route message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Route
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Route;
+
+                    /**
+                     * Decodes a Route message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Route
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Route;
+
+                    /**
+                     * Verifies a Route message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Route message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Route
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Route;
+
+                    /**
+                     * Creates a plain object from a Route message. Also converts values to other types if specified.
+                     * @param message Route
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.Route, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Route to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Route
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Group. */
+                interface IGroup {
+
+                    /** Group name */
+                    name?: (string|null);
+
+                    /** Group createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Group updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Group labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Group description */
+                    description?: (string|null);
+
+                    /** Group uid */
+                    uid?: (string|null);
+
+                    /** Group state */
+                    state?: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State|null);
+
+                    /** Group autoAccept */
+                    autoAccept?: (google.cloud.networkconnectivity.v1beta.IAutoAccept|null);
+
+                    /** Group routeTable */
+                    routeTable?: (string|null);
+                }
+
+                /** Represents a Group. */
+                class Group implements IGroup {
+
+                    /**
+                     * Constructs a new Group.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGroup);
+
+                    /** Group name. */
+                    public name: string;
+
+                    /** Group createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Group updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Group labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Group description. */
+                    public description: string;
+
+                    /** Group uid. */
+                    public uid: string;
+
+                    /** Group state. */
+                    public state: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State);
+
+                    /** Group autoAccept. */
+                    public autoAccept?: (google.cloud.networkconnectivity.v1beta.IAutoAccept|null);
+
+                    /** Group routeTable. */
+                    public routeTable: string;
+
+                    /**
+                     * Creates a new Group instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Group instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGroup): google.cloud.networkconnectivity.v1beta.Group;
+
+                    /**
+                     * Encodes the specified Group message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Group.verify|verify} messages.
+                     * @param message Group message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Group message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Group.verify|verify} messages.
+                     * @param message Group message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Group message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Group
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Group;
+
+                    /**
+                     * Decodes a Group message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Group
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Group;
+
+                    /**
+                     * Verifies a Group message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Group message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Group
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Group;
+
+                    /**
+                     * Creates a plain object from a Group message. Also converts values to other types if specified.
+                     * @param message Group
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.Group, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Group to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Group
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutoAccept. */
+                interface IAutoAccept {
+
+                    /** AutoAccept autoAcceptProjects */
+                    autoAcceptProjects?: (string[]|null);
+                }
+
+                /** Represents an AutoAccept. */
+                class AutoAccept implements IAutoAccept {
+
+                    /**
+                     * Constructs a new AutoAccept.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IAutoAccept);
+
+                    /** AutoAccept autoAcceptProjects. */
+                    public autoAcceptProjects: string[];
+
+                    /**
+                     * Creates a new AutoAccept instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutoAccept instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IAutoAccept): google.cloud.networkconnectivity.v1beta.AutoAccept;
+
+                    /**
+                     * Encodes the specified AutoAccept message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AutoAccept.verify|verify} messages.
+                     * @param message AutoAccept message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IAutoAccept, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutoAccept message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AutoAccept.verify|verify} messages.
+                     * @param message AutoAccept message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IAutoAccept, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutoAccept message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutoAccept
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.AutoAccept;
+
+                    /**
+                     * Decodes an AutoAccept message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutoAccept
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.AutoAccept;
+
+                    /**
+                     * Verifies an AutoAccept message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutoAccept message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutoAccept
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.AutoAccept;
+
+                    /**
+                     * Creates a plain object from an AutoAccept message. Also converts values to other types if specified.
+                     * @param message AutoAccept
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.AutoAccept, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutoAccept to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutoAccept
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListHubsRequest. */
+                interface IListHubsRequest {
+
+                    /** ListHubsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListHubsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListHubsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListHubsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListHubsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListHubsRequest. */
+                class ListHubsRequest implements IListHubsRequest {
+
+                    /**
+                     * Constructs a new ListHubsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListHubsRequest);
+
+                    /** ListHubsRequest parent. */
+                    public parent: string;
+
+                    /** ListHubsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListHubsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListHubsRequest filter. */
+                    public filter: string;
+
+                    /** ListHubsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListHubsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListHubsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListHubsRequest): google.cloud.networkconnectivity.v1beta.ListHubsRequest;
+
+                    /**
+                     * Encodes the specified ListHubsRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListHubsRequest.verify|verify} messages.
+                     * @param message ListHubsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListHubsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListHubsRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListHubsRequest.verify|verify} messages.
+                     * @param message ListHubsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListHubsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListHubsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListHubsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListHubsRequest;
+
+                    /**
+                     * Decodes a ListHubsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListHubsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListHubsRequest;
+
+                    /**
+                     * Verifies a ListHubsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListHubsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListHubsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListHubsRequest;
+
+                    /**
+                     * Creates a plain object from a ListHubsRequest message. Also converts values to other types if specified.
+                     * @param message ListHubsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListHubsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListHubsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListHubsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListHubsResponse. */
+                interface IListHubsResponse {
+
+                    /** ListHubsResponse hubs */
+                    hubs?: (google.cloud.networkconnectivity.v1beta.IHub[]|null);
+
+                    /** ListHubsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListHubsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListHubsResponse. */
+                class ListHubsResponse implements IListHubsResponse {
+
+                    /**
+                     * Constructs a new ListHubsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListHubsResponse);
+
+                    /** ListHubsResponse hubs. */
+                    public hubs: google.cloud.networkconnectivity.v1beta.IHub[];
+
+                    /** ListHubsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListHubsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListHubsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListHubsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListHubsResponse): google.cloud.networkconnectivity.v1beta.ListHubsResponse;
+
+                    /**
+                     * Encodes the specified ListHubsResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListHubsResponse.verify|verify} messages.
+                     * @param message ListHubsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListHubsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListHubsResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListHubsResponse.verify|verify} messages.
+                     * @param message ListHubsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListHubsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListHubsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListHubsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListHubsResponse;
+
+                    /**
+                     * Decodes a ListHubsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListHubsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListHubsResponse;
+
+                    /**
+                     * Verifies a ListHubsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListHubsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListHubsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListHubsResponse;
+
+                    /**
+                     * Creates a plain object from a ListHubsResponse message. Also converts values to other types if specified.
+                     * @param message ListHubsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListHubsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListHubsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListHubsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetHubRequest. */
+                interface IGetHubRequest {
+
+                    /** GetHubRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetHubRequest. */
+                class GetHubRequest implements IGetHubRequest {
+
+                    /**
+                     * Constructs a new GetHubRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetHubRequest);
+
+                    /** GetHubRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetHubRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetHubRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetHubRequest): google.cloud.networkconnectivity.v1beta.GetHubRequest;
+
+                    /**
+                     * Encodes the specified GetHubRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetHubRequest.verify|verify} messages.
+                     * @param message GetHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetHubRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetHubRequest.verify|verify} messages.
+                     * @param message GetHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetHubRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetHubRequest;
+
+                    /**
+                     * Decodes a GetHubRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetHubRequest;
+
+                    /**
+                     * Verifies a GetHubRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetHubRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetHubRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetHubRequest;
+
+                    /**
+                     * Creates a plain object from a GetHubRequest message. Also converts values to other types if specified.
+                     * @param message GetHubRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetHubRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetHubRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetHubRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateHubRequest. */
+                interface ICreateHubRequest {
+
+                    /** CreateHubRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateHubRequest hubId */
+                    hubId?: (string|null);
+
+                    /** CreateHubRequest hub */
+                    hub?: (google.cloud.networkconnectivity.v1beta.IHub|null);
+
+                    /** CreateHubRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateHubRequest. */
+                class CreateHubRequest implements ICreateHubRequest {
+
+                    /**
+                     * Constructs a new CreateHubRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ICreateHubRequest);
+
+                    /** CreateHubRequest parent. */
+                    public parent: string;
+
+                    /** CreateHubRequest hubId. */
+                    public hubId: string;
+
+                    /** CreateHubRequest hub. */
+                    public hub?: (google.cloud.networkconnectivity.v1beta.IHub|null);
+
+                    /** CreateHubRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateHubRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateHubRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ICreateHubRequest): google.cloud.networkconnectivity.v1beta.CreateHubRequest;
+
+                    /**
+                     * Encodes the specified CreateHubRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateHubRequest.verify|verify} messages.
+                     * @param message CreateHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ICreateHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateHubRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateHubRequest.verify|verify} messages.
+                     * @param message CreateHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ICreateHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateHubRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.CreateHubRequest;
+
+                    /**
+                     * Decodes a CreateHubRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.CreateHubRequest;
+
+                    /**
+                     * Verifies a CreateHubRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateHubRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateHubRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.CreateHubRequest;
+
+                    /**
+                     * Creates a plain object from a CreateHubRequest message. Also converts values to other types if specified.
+                     * @param message CreateHubRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.CreateHubRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateHubRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateHubRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateHubRequest. */
+                interface IUpdateHubRequest {
+
+                    /** UpdateHubRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateHubRequest hub */
+                    hub?: (google.cloud.networkconnectivity.v1beta.IHub|null);
+
+                    /** UpdateHubRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateHubRequest. */
+                class UpdateHubRequest implements IUpdateHubRequest {
+
+                    /**
+                     * Constructs a new UpdateHubRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IUpdateHubRequest);
+
+                    /** UpdateHubRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateHubRequest hub. */
+                    public hub?: (google.cloud.networkconnectivity.v1beta.IHub|null);
+
+                    /** UpdateHubRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateHubRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateHubRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IUpdateHubRequest): google.cloud.networkconnectivity.v1beta.UpdateHubRequest;
+
+                    /**
+                     * Encodes the specified UpdateHubRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateHubRequest.verify|verify} messages.
+                     * @param message UpdateHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IUpdateHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateHubRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateHubRequest.verify|verify} messages.
+                     * @param message UpdateHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IUpdateHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateHubRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.UpdateHubRequest;
+
+                    /**
+                     * Decodes an UpdateHubRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.UpdateHubRequest;
+
+                    /**
+                     * Verifies an UpdateHubRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateHubRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateHubRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.UpdateHubRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateHubRequest message. Also converts values to other types if specified.
+                     * @param message UpdateHubRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.UpdateHubRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateHubRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateHubRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteHubRequest. */
+                interface IDeleteHubRequest {
+
+                    /** DeleteHubRequest name */
+                    name?: (string|null);
+
+                    /** DeleteHubRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteHubRequest. */
+                class DeleteHubRequest implements IDeleteHubRequest {
+
+                    /**
+                     * Constructs a new DeleteHubRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IDeleteHubRequest);
+
+                    /** DeleteHubRequest name. */
+                    public name: string;
+
+                    /** DeleteHubRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteHubRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteHubRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IDeleteHubRequest): google.cloud.networkconnectivity.v1beta.DeleteHubRequest;
+
+                    /**
+                     * Encodes the specified DeleteHubRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteHubRequest.verify|verify} messages.
+                     * @param message DeleteHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IDeleteHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteHubRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteHubRequest.verify|verify} messages.
+                     * @param message DeleteHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IDeleteHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteHubRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.DeleteHubRequest;
+
+                    /**
+                     * Decodes a DeleteHubRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.DeleteHubRequest;
+
+                    /**
+                     * Verifies a DeleteHubRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteHubRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteHubRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.DeleteHubRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteHubRequest message. Also converts values to other types if specified.
+                     * @param message DeleteHubRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.DeleteHubRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteHubRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteHubRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListHubSpokesRequest. */
+                interface IListHubSpokesRequest {
+
+                    /** ListHubSpokesRequest name */
+                    name?: (string|null);
+
+                    /** ListHubSpokesRequest spokeLocations */
+                    spokeLocations?: (string[]|null);
+
+                    /** ListHubSpokesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListHubSpokesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListHubSpokesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListHubSpokesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListHubSpokesRequest view */
+                    view?: (google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest.SpokeView|keyof typeof google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest.SpokeView|null);
+                }
+
+                /** Represents a ListHubSpokesRequest. */
+                class ListHubSpokesRequest implements IListHubSpokesRequest {
+
+                    /**
+                     * Constructs a new ListHubSpokesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListHubSpokesRequest);
+
+                    /** ListHubSpokesRequest name. */
+                    public name: string;
+
+                    /** ListHubSpokesRequest spokeLocations. */
+                    public spokeLocations: string[];
+
+                    /** ListHubSpokesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListHubSpokesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListHubSpokesRequest filter. */
+                    public filter: string;
+
+                    /** ListHubSpokesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListHubSpokesRequest view. */
+                    public view: (google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest.SpokeView|keyof typeof google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest.SpokeView);
+
+                    /**
+                     * Creates a new ListHubSpokesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListHubSpokesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListHubSpokesRequest): google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest;
+
+                    /**
+                     * Encodes the specified ListHubSpokesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest.verify|verify} messages.
+                     * @param message ListHubSpokesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListHubSpokesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListHubSpokesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest.verify|verify} messages.
+                     * @param message ListHubSpokesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListHubSpokesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListHubSpokesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListHubSpokesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest;
+
+                    /**
+                     * Decodes a ListHubSpokesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListHubSpokesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest;
+
+                    /**
+                     * Verifies a ListHubSpokesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListHubSpokesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListHubSpokesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest;
+
+                    /**
+                     * Creates a plain object from a ListHubSpokesRequest message. Also converts values to other types if specified.
+                     * @param message ListHubSpokesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListHubSpokesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListHubSpokesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ListHubSpokesRequest {
+
+                    /** SpokeView enum. */
+                    enum SpokeView {
+                        SPOKE_VIEW_UNSPECIFIED = 0,
+                        BASIC = 1,
+                        DETAILED = 2
+                    }
+                }
+
+                /** Properties of a ListHubSpokesResponse. */
+                interface IListHubSpokesResponse {
+
+                    /** ListHubSpokesResponse spokes */
+                    spokes?: (google.cloud.networkconnectivity.v1beta.ISpoke[]|null);
+
+                    /** ListHubSpokesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListHubSpokesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListHubSpokesResponse. */
+                class ListHubSpokesResponse implements IListHubSpokesResponse {
+
+                    /**
+                     * Constructs a new ListHubSpokesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListHubSpokesResponse);
+
+                    /** ListHubSpokesResponse spokes. */
+                    public spokes: google.cloud.networkconnectivity.v1beta.ISpoke[];
+
+                    /** ListHubSpokesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListHubSpokesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListHubSpokesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListHubSpokesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListHubSpokesResponse): google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse;
+
+                    /**
+                     * Encodes the specified ListHubSpokesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse.verify|verify} messages.
+                     * @param message ListHubSpokesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListHubSpokesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListHubSpokesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse.verify|verify} messages.
+                     * @param message ListHubSpokesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListHubSpokesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListHubSpokesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListHubSpokesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse;
+
+                    /**
+                     * Decodes a ListHubSpokesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListHubSpokesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse;
+
+                    /**
+                     * Verifies a ListHubSpokesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListHubSpokesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListHubSpokesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse;
+
+                    /**
+                     * Creates a plain object from a ListHubSpokesResponse message. Also converts values to other types if specified.
+                     * @param message ListHubSpokesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListHubSpokesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListHubSpokesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryHubStatusRequest. */
+                interface IQueryHubStatusRequest {
+
+                    /** QueryHubStatusRequest name */
+                    name?: (string|null);
+
+                    /** QueryHubStatusRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** QueryHubStatusRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** QueryHubStatusRequest filter */
+                    filter?: (string|null);
+
+                    /** QueryHubStatusRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** QueryHubStatusRequest groupBy */
+                    groupBy?: (string|null);
+                }
+
+                /** Represents a QueryHubStatusRequest. */
+                class QueryHubStatusRequest implements IQueryHubStatusRequest {
+
+                    /**
+                     * Constructs a new QueryHubStatusRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IQueryHubStatusRequest);
+
+                    /** QueryHubStatusRequest name. */
+                    public name: string;
+
+                    /** QueryHubStatusRequest pageSize. */
+                    public pageSize: number;
+
+                    /** QueryHubStatusRequest pageToken. */
+                    public pageToken: string;
+
+                    /** QueryHubStatusRequest filter. */
+                    public filter: string;
+
+                    /** QueryHubStatusRequest orderBy. */
+                    public orderBy: string;
+
+                    /** QueryHubStatusRequest groupBy. */
+                    public groupBy: string;
+
+                    /**
+                     * Creates a new QueryHubStatusRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryHubStatusRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IQueryHubStatusRequest): google.cloud.networkconnectivity.v1beta.QueryHubStatusRequest;
+
+                    /**
+                     * Encodes the specified QueryHubStatusRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.QueryHubStatusRequest.verify|verify} messages.
+                     * @param message QueryHubStatusRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IQueryHubStatusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryHubStatusRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.QueryHubStatusRequest.verify|verify} messages.
+                     * @param message QueryHubStatusRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IQueryHubStatusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryHubStatusRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryHubStatusRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.QueryHubStatusRequest;
+
+                    /**
+                     * Decodes a QueryHubStatusRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryHubStatusRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.QueryHubStatusRequest;
+
+                    /**
+                     * Verifies a QueryHubStatusRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryHubStatusRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryHubStatusRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.QueryHubStatusRequest;
+
+                    /**
+                     * Creates a plain object from a QueryHubStatusRequest message. Also converts values to other types if specified.
+                     * @param message QueryHubStatusRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.QueryHubStatusRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryHubStatusRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryHubStatusRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryHubStatusResponse. */
+                interface IQueryHubStatusResponse {
+
+                    /** QueryHubStatusResponse hubStatusEntries */
+                    hubStatusEntries?: (google.cloud.networkconnectivity.v1beta.IHubStatusEntry[]|null);
+
+                    /** QueryHubStatusResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a QueryHubStatusResponse. */
+                class QueryHubStatusResponse implements IQueryHubStatusResponse {
+
+                    /**
+                     * Constructs a new QueryHubStatusResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IQueryHubStatusResponse);
+
+                    /** QueryHubStatusResponse hubStatusEntries. */
+                    public hubStatusEntries: google.cloud.networkconnectivity.v1beta.IHubStatusEntry[];
+
+                    /** QueryHubStatusResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new QueryHubStatusResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryHubStatusResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IQueryHubStatusResponse): google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse;
+
+                    /**
+                     * Encodes the specified QueryHubStatusResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse.verify|verify} messages.
+                     * @param message QueryHubStatusResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IQueryHubStatusResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryHubStatusResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse.verify|verify} messages.
+                     * @param message QueryHubStatusResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IQueryHubStatusResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryHubStatusResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryHubStatusResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse;
+
+                    /**
+                     * Decodes a QueryHubStatusResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryHubStatusResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse;
+
+                    /**
+                     * Verifies a QueryHubStatusResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryHubStatusResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryHubStatusResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse;
+
+                    /**
+                     * Creates a plain object from a QueryHubStatusResponse message. Also converts values to other types if specified.
+                     * @param message QueryHubStatusResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryHubStatusResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryHubStatusResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a HubStatusEntry. */
+                interface IHubStatusEntry {
+
+                    /** HubStatusEntry count */
+                    count?: (number|null);
+
+                    /** HubStatusEntry groupBy */
+                    groupBy?: (string|null);
+
+                    /** HubStatusEntry pscPropagationStatus */
+                    pscPropagationStatus?: (google.cloud.networkconnectivity.v1beta.IPscPropagationStatus|null);
+                }
+
+                /** Represents a HubStatusEntry. */
+                class HubStatusEntry implements IHubStatusEntry {
+
+                    /**
+                     * Constructs a new HubStatusEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IHubStatusEntry);
+
+                    /** HubStatusEntry count. */
+                    public count: number;
+
+                    /** HubStatusEntry groupBy. */
+                    public groupBy: string;
+
+                    /** HubStatusEntry pscPropagationStatus. */
+                    public pscPropagationStatus?: (google.cloud.networkconnectivity.v1beta.IPscPropagationStatus|null);
+
+                    /**
+                     * Creates a new HubStatusEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HubStatusEntry instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IHubStatusEntry): google.cloud.networkconnectivity.v1beta.HubStatusEntry;
+
+                    /**
+                     * Encodes the specified HubStatusEntry message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.HubStatusEntry.verify|verify} messages.
+                     * @param message HubStatusEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IHubStatusEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HubStatusEntry message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.HubStatusEntry.verify|verify} messages.
+                     * @param message HubStatusEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IHubStatusEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HubStatusEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HubStatusEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.HubStatusEntry;
+
+                    /**
+                     * Decodes a HubStatusEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HubStatusEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.HubStatusEntry;
+
+                    /**
+                     * Verifies a HubStatusEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HubStatusEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HubStatusEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.HubStatusEntry;
+
+                    /**
+                     * Creates a plain object from a HubStatusEntry message. Also converts values to other types if specified.
+                     * @param message HubStatusEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.HubStatusEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HubStatusEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HubStatusEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PscPropagationStatus. */
+                interface IPscPropagationStatus {
+
+                    /** PscPropagationStatus sourceSpoke */
+                    sourceSpoke?: (string|null);
+
+                    /** PscPropagationStatus sourceGroup */
+                    sourceGroup?: (string|null);
+
+                    /** PscPropagationStatus sourceForwardingRule */
+                    sourceForwardingRule?: (string|null);
+
+                    /** PscPropagationStatus targetSpoke */
+                    targetSpoke?: (string|null);
+
+                    /** PscPropagationStatus targetGroup */
+                    targetGroup?: (string|null);
+
+                    /** PscPropagationStatus code */
+                    code?: (google.cloud.networkconnectivity.v1beta.PscPropagationStatus.Code|keyof typeof google.cloud.networkconnectivity.v1beta.PscPropagationStatus.Code|null);
+
+                    /** PscPropagationStatus message */
+                    message?: (string|null);
+                }
+
+                /** Represents a PscPropagationStatus. */
+                class PscPropagationStatus implements IPscPropagationStatus {
+
+                    /**
+                     * Constructs a new PscPropagationStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IPscPropagationStatus);
+
+                    /** PscPropagationStatus sourceSpoke. */
+                    public sourceSpoke: string;
+
+                    /** PscPropagationStatus sourceGroup. */
+                    public sourceGroup: string;
+
+                    /** PscPropagationStatus sourceForwardingRule. */
+                    public sourceForwardingRule: string;
+
+                    /** PscPropagationStatus targetSpoke. */
+                    public targetSpoke: string;
+
+                    /** PscPropagationStatus targetGroup. */
+                    public targetGroup: string;
+
+                    /** PscPropagationStatus code. */
+                    public code: (google.cloud.networkconnectivity.v1beta.PscPropagationStatus.Code|keyof typeof google.cloud.networkconnectivity.v1beta.PscPropagationStatus.Code);
+
+                    /** PscPropagationStatus message. */
+                    public message: string;
+
+                    /**
+                     * Creates a new PscPropagationStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PscPropagationStatus instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IPscPropagationStatus): google.cloud.networkconnectivity.v1beta.PscPropagationStatus;
+
+                    /**
+                     * Encodes the specified PscPropagationStatus message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PscPropagationStatus.verify|verify} messages.
+                     * @param message PscPropagationStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IPscPropagationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PscPropagationStatus message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PscPropagationStatus.verify|verify} messages.
+                     * @param message PscPropagationStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IPscPropagationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PscPropagationStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PscPropagationStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.PscPropagationStatus;
+
+                    /**
+                     * Decodes a PscPropagationStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PscPropagationStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.PscPropagationStatus;
+
+                    /**
+                     * Verifies a PscPropagationStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PscPropagationStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PscPropagationStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.PscPropagationStatus;
+
+                    /**
+                     * Creates a plain object from a PscPropagationStatus message. Also converts values to other types if specified.
+                     * @param message PscPropagationStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.PscPropagationStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PscPropagationStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PscPropagationStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PscPropagationStatus {
+
+                    /** Code enum. */
+                    enum Code {
+                        CODE_UNSPECIFIED = 0,
+                        READY = 1,
+                        PROPAGATING = 2,
+                        ERROR_PRODUCER_PROPAGATED_CONNECTION_LIMIT_EXCEEDED = 3,
+                        ERROR_PRODUCER_NAT_IP_SPACE_EXHAUSTED = 4,
+                        ERROR_PRODUCER_QUOTA_EXCEEDED = 5,
+                        ERROR_CONSUMER_QUOTA_EXCEEDED = 6
+                    }
+                }
+
+                /** Properties of a ListSpokesRequest. */
+                interface IListSpokesRequest {
+
+                    /** ListSpokesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSpokesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSpokesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSpokesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListSpokesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListSpokesRequest. */
+                class ListSpokesRequest implements IListSpokesRequest {
+
+                    /**
+                     * Constructs a new ListSpokesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListSpokesRequest);
+
+                    /** ListSpokesRequest parent. */
+                    public parent: string;
+
+                    /** ListSpokesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSpokesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSpokesRequest filter. */
+                    public filter: string;
+
+                    /** ListSpokesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListSpokesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSpokesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListSpokesRequest): google.cloud.networkconnectivity.v1beta.ListSpokesRequest;
+
+                    /**
+                     * Encodes the specified ListSpokesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListSpokesRequest.verify|verify} messages.
+                     * @param message ListSpokesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListSpokesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSpokesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListSpokesRequest.verify|verify} messages.
+                     * @param message ListSpokesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListSpokesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSpokesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSpokesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListSpokesRequest;
+
+                    /**
+                     * Decodes a ListSpokesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSpokesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListSpokesRequest;
+
+                    /**
+                     * Verifies a ListSpokesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSpokesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSpokesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListSpokesRequest;
+
+                    /**
+                     * Creates a plain object from a ListSpokesRequest message. Also converts values to other types if specified.
+                     * @param message ListSpokesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListSpokesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSpokesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSpokesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSpokesResponse. */
+                interface IListSpokesResponse {
+
+                    /** ListSpokesResponse spokes */
+                    spokes?: (google.cloud.networkconnectivity.v1beta.ISpoke[]|null);
+
+                    /** ListSpokesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSpokesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListSpokesResponse. */
+                class ListSpokesResponse implements IListSpokesResponse {
+
+                    /**
+                     * Constructs a new ListSpokesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListSpokesResponse);
+
+                    /** ListSpokesResponse spokes. */
+                    public spokes: google.cloud.networkconnectivity.v1beta.ISpoke[];
+
+                    /** ListSpokesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSpokesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListSpokesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSpokesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListSpokesResponse): google.cloud.networkconnectivity.v1beta.ListSpokesResponse;
+
+                    /**
+                     * Encodes the specified ListSpokesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListSpokesResponse.verify|verify} messages.
+                     * @param message ListSpokesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListSpokesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSpokesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListSpokesResponse.verify|verify} messages.
+                     * @param message ListSpokesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListSpokesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSpokesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSpokesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListSpokesResponse;
+
+                    /**
+                     * Decodes a ListSpokesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSpokesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListSpokesResponse;
+
+                    /**
+                     * Verifies a ListSpokesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSpokesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSpokesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListSpokesResponse;
+
+                    /**
+                     * Creates a plain object from a ListSpokesResponse message. Also converts values to other types if specified.
+                     * @param message ListSpokesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListSpokesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSpokesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSpokesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSpokeRequest. */
+                interface IGetSpokeRequest {
+
+                    /** GetSpokeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSpokeRequest. */
+                class GetSpokeRequest implements IGetSpokeRequest {
+
+                    /**
+                     * Constructs a new GetSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetSpokeRequest);
+
+                    /** GetSpokeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetSpokeRequest): google.cloud.networkconnectivity.v1beta.GetSpokeRequest;
+
+                    /**
+                     * Encodes the specified GetSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetSpokeRequest.verify|verify} messages.
+                     * @param message GetSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetSpokeRequest.verify|verify} messages.
+                     * @param message GetSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetSpokeRequest;
+
+                    /**
+                     * Decodes a GetSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetSpokeRequest;
+
+                    /**
+                     * Verifies a GetSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetSpokeRequest;
+
+                    /**
+                     * Creates a plain object from a GetSpokeRequest message. Also converts values to other types if specified.
+                     * @param message GetSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSpokeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSpokeRequest. */
+                interface ICreateSpokeRequest {
+
+                    /** CreateSpokeRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSpokeRequest spokeId */
+                    spokeId?: (string|null);
+
+                    /** CreateSpokeRequest spoke */
+                    spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+
+                    /** CreateSpokeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateSpokeRequest. */
+                class CreateSpokeRequest implements ICreateSpokeRequest {
+
+                    /**
+                     * Constructs a new CreateSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ICreateSpokeRequest);
+
+                    /** CreateSpokeRequest parent. */
+                    public parent: string;
+
+                    /** CreateSpokeRequest spokeId. */
+                    public spokeId: string;
+
+                    /** CreateSpokeRequest spoke. */
+                    public spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+
+                    /** CreateSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ICreateSpokeRequest): google.cloud.networkconnectivity.v1beta.CreateSpokeRequest;
+
+                    /**
+                     * Encodes the specified CreateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateSpokeRequest.verify|verify} messages.
+                     * @param message CreateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ICreateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateSpokeRequest.verify|verify} messages.
+                     * @param message CreateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ICreateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.CreateSpokeRequest;
+
+                    /**
+                     * Decodes a CreateSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.CreateSpokeRequest;
+
+                    /**
+                     * Verifies a CreateSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.CreateSpokeRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSpokeRequest message. Also converts values to other types if specified.
+                     * @param message CreateSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.CreateSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSpokeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSpokeRequest. */
+                interface IUpdateSpokeRequest {
+
+                    /** UpdateSpokeRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSpokeRequest spoke */
+                    spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+
+                    /** UpdateSpokeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateSpokeRequest. */
+                class UpdateSpokeRequest implements IUpdateSpokeRequest {
+
+                    /**
+                     * Constructs a new UpdateSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IUpdateSpokeRequest);
+
+                    /** UpdateSpokeRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSpokeRequest spoke. */
+                    public spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+
+                    /** UpdateSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IUpdateSpokeRequest): google.cloud.networkconnectivity.v1beta.UpdateSpokeRequest;
+
+                    /**
+                     * Encodes the specified UpdateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateSpokeRequest.verify|verify} messages.
+                     * @param message UpdateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IUpdateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateSpokeRequest.verify|verify} messages.
+                     * @param message UpdateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IUpdateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.UpdateSpokeRequest;
+
+                    /**
+                     * Decodes an UpdateSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.UpdateSpokeRequest;
+
+                    /**
+                     * Verifies an UpdateSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.UpdateSpokeRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSpokeRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.UpdateSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSpokeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSpokeRequest. */
+                interface IDeleteSpokeRequest {
+
+                    /** DeleteSpokeRequest name */
+                    name?: (string|null);
+
+                    /** DeleteSpokeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteSpokeRequest. */
+                class DeleteSpokeRequest implements IDeleteSpokeRequest {
+
+                    /**
+                     * Constructs a new DeleteSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IDeleteSpokeRequest);
+
+                    /** DeleteSpokeRequest name. */
+                    public name: string;
+
+                    /** DeleteSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IDeleteSpokeRequest): google.cloud.networkconnectivity.v1beta.DeleteSpokeRequest;
+
+                    /**
+                     * Encodes the specified DeleteSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteSpokeRequest.verify|verify} messages.
+                     * @param message DeleteSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IDeleteSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteSpokeRequest.verify|verify} messages.
+                     * @param message DeleteSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IDeleteSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.DeleteSpokeRequest;
+
+                    /**
+                     * Decodes a DeleteSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.DeleteSpokeRequest;
+
+                    /**
+                     * Verifies a DeleteSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.DeleteSpokeRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSpokeRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.DeleteSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSpokeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AcceptHubSpokeRequest. */
+                interface IAcceptHubSpokeRequest {
+
+                    /** AcceptHubSpokeRequest name */
+                    name?: (string|null);
+
+                    /** AcceptHubSpokeRequest spokeUri */
+                    spokeUri?: (string|null);
+
+                    /** AcceptHubSpokeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an AcceptHubSpokeRequest. */
+                class AcceptHubSpokeRequest implements IAcceptHubSpokeRequest {
+
+                    /**
+                     * Constructs a new AcceptHubSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeRequest);
+
+                    /** AcceptHubSpokeRequest name. */
+                    public name: string;
+
+                    /** AcceptHubSpokeRequest spokeUri. */
+                    public spokeUri: string;
+
+                    /** AcceptHubSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new AcceptHubSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcceptHubSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeRequest): google.cloud.networkconnectivity.v1beta.AcceptHubSpokeRequest;
+
+                    /**
+                     * Encodes the specified AcceptHubSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AcceptHubSpokeRequest.verify|verify} messages.
+                     * @param message AcceptHubSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcceptHubSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AcceptHubSpokeRequest.verify|verify} messages.
+                     * @param message AcceptHubSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcceptHubSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcceptHubSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.AcceptHubSpokeRequest;
+
+                    /**
+                     * Decodes an AcceptHubSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcceptHubSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.AcceptHubSpokeRequest;
+
+                    /**
+                     * Verifies an AcceptHubSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcceptHubSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcceptHubSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.AcceptHubSpokeRequest;
+
+                    /**
+                     * Creates a plain object from an AcceptHubSpokeRequest message. Also converts values to other types if specified.
+                     * @param message AcceptHubSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.AcceptHubSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcceptHubSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcceptHubSpokeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AcceptHubSpokeResponse. */
+                interface IAcceptHubSpokeResponse {
+
+                    /** AcceptHubSpokeResponse spoke */
+                    spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+                }
+
+                /** Represents an AcceptHubSpokeResponse. */
+                class AcceptHubSpokeResponse implements IAcceptHubSpokeResponse {
+
+                    /**
+                     * Constructs a new AcceptHubSpokeResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeResponse);
+
+                    /** AcceptHubSpokeResponse spoke. */
+                    public spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+
+                    /**
+                     * Creates a new AcceptHubSpokeResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcceptHubSpokeResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeResponse): google.cloud.networkconnectivity.v1beta.AcceptHubSpokeResponse;
+
+                    /**
+                     * Encodes the specified AcceptHubSpokeResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AcceptHubSpokeResponse.verify|verify} messages.
+                     * @param message AcceptHubSpokeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcceptHubSpokeResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AcceptHubSpokeResponse.verify|verify} messages.
+                     * @param message AcceptHubSpokeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IAcceptHubSpokeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcceptHubSpokeResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcceptHubSpokeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.AcceptHubSpokeResponse;
+
+                    /**
+                     * Decodes an AcceptHubSpokeResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcceptHubSpokeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.AcceptHubSpokeResponse;
+
+                    /**
+                     * Verifies an AcceptHubSpokeResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcceptHubSpokeResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcceptHubSpokeResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.AcceptHubSpokeResponse;
+
+                    /**
+                     * Creates a plain object from an AcceptHubSpokeResponse message. Also converts values to other types if specified.
+                     * @param message AcceptHubSpokeResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.AcceptHubSpokeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcceptHubSpokeResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcceptHubSpokeResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RejectHubSpokeRequest. */
+                interface IRejectHubSpokeRequest {
+
+                    /** RejectHubSpokeRequest name */
+                    name?: (string|null);
+
+                    /** RejectHubSpokeRequest spokeUri */
+                    spokeUri?: (string|null);
+
+                    /** RejectHubSpokeRequest requestId */
+                    requestId?: (string|null);
+
+                    /** RejectHubSpokeRequest details */
+                    details?: (string|null);
+                }
+
+                /** Represents a RejectHubSpokeRequest. */
+                class RejectHubSpokeRequest implements IRejectHubSpokeRequest {
+
+                    /**
+                     * Constructs a new RejectHubSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeRequest);
+
+                    /** RejectHubSpokeRequest name. */
+                    public name: string;
+
+                    /** RejectHubSpokeRequest spokeUri. */
+                    public spokeUri: string;
+
+                    /** RejectHubSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /** RejectHubSpokeRequest details. */
+                    public details: string;
+
+                    /**
+                     * Creates a new RejectHubSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RejectHubSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeRequest): google.cloud.networkconnectivity.v1beta.RejectHubSpokeRequest;
+
+                    /**
+                     * Encodes the specified RejectHubSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RejectHubSpokeRequest.verify|verify} messages.
+                     * @param message RejectHubSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RejectHubSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RejectHubSpokeRequest.verify|verify} messages.
+                     * @param message RejectHubSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RejectHubSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RejectHubSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.RejectHubSpokeRequest;
+
+                    /**
+                     * Decodes a RejectHubSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RejectHubSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.RejectHubSpokeRequest;
+
+                    /**
+                     * Verifies a RejectHubSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RejectHubSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RejectHubSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.RejectHubSpokeRequest;
+
+                    /**
+                     * Creates a plain object from a RejectHubSpokeRequest message. Also converts values to other types if specified.
+                     * @param message RejectHubSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.RejectHubSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RejectHubSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RejectHubSpokeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RejectHubSpokeResponse. */
+                interface IRejectHubSpokeResponse {
+
+                    /** RejectHubSpokeResponse spoke */
+                    spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+                }
+
+                /** Represents a RejectHubSpokeResponse. */
+                class RejectHubSpokeResponse implements IRejectHubSpokeResponse {
+
+                    /**
+                     * Constructs a new RejectHubSpokeResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeResponse);
+
+                    /** RejectHubSpokeResponse spoke. */
+                    public spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+
+                    /**
+                     * Creates a new RejectHubSpokeResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RejectHubSpokeResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeResponse): google.cloud.networkconnectivity.v1beta.RejectHubSpokeResponse;
+
+                    /**
+                     * Encodes the specified RejectHubSpokeResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RejectHubSpokeResponse.verify|verify} messages.
+                     * @param message RejectHubSpokeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RejectHubSpokeResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RejectHubSpokeResponse.verify|verify} messages.
+                     * @param message RejectHubSpokeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IRejectHubSpokeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RejectHubSpokeResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RejectHubSpokeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.RejectHubSpokeResponse;
+
+                    /**
+                     * Decodes a RejectHubSpokeResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RejectHubSpokeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.RejectHubSpokeResponse;
+
+                    /**
+                     * Verifies a RejectHubSpokeResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RejectHubSpokeResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RejectHubSpokeResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.RejectHubSpokeResponse;
+
+                    /**
+                     * Creates a plain object from a RejectHubSpokeResponse message. Also converts values to other types if specified.
+                     * @param message RejectHubSpokeResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.RejectHubSpokeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RejectHubSpokeResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RejectHubSpokeResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AcceptSpokeUpdateRequest. */
+                interface IAcceptSpokeUpdateRequest {
+
+                    /** AcceptSpokeUpdateRequest name */
+                    name?: (string|null);
+
+                    /** AcceptSpokeUpdateRequest spokeUri */
+                    spokeUri?: (string|null);
+
+                    /** AcceptSpokeUpdateRequest spokeEtag */
+                    spokeEtag?: (string|null);
+
+                    /** AcceptSpokeUpdateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an AcceptSpokeUpdateRequest. */
+                class AcceptSpokeUpdateRequest implements IAcceptSpokeUpdateRequest {
+
+                    /**
+                     * Constructs a new AcceptSpokeUpdateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateRequest);
+
+                    /** AcceptSpokeUpdateRequest name. */
+                    public name: string;
+
+                    /** AcceptSpokeUpdateRequest spokeUri. */
+                    public spokeUri: string;
+
+                    /** AcceptSpokeUpdateRequest spokeEtag. */
+                    public spokeEtag: string;
+
+                    /** AcceptSpokeUpdateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new AcceptSpokeUpdateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcceptSpokeUpdateRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateRequest): google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateRequest;
+
+                    /**
+                     * Encodes the specified AcceptSpokeUpdateRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateRequest.verify|verify} messages.
+                     * @param message AcceptSpokeUpdateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcceptSpokeUpdateRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateRequest.verify|verify} messages.
+                     * @param message AcceptSpokeUpdateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcceptSpokeUpdateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcceptSpokeUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateRequest;
+
+                    /**
+                     * Decodes an AcceptSpokeUpdateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcceptSpokeUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateRequest;
+
+                    /**
+                     * Verifies an AcceptSpokeUpdateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcceptSpokeUpdateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcceptSpokeUpdateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateRequest;
+
+                    /**
+                     * Creates a plain object from an AcceptSpokeUpdateRequest message. Also converts values to other types if specified.
+                     * @param message AcceptSpokeUpdateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcceptSpokeUpdateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcceptSpokeUpdateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AcceptSpokeUpdateResponse. */
+                interface IAcceptSpokeUpdateResponse {
+
+                    /** AcceptSpokeUpdateResponse spoke */
+                    spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+                }
+
+                /** Represents an AcceptSpokeUpdateResponse. */
+                class AcceptSpokeUpdateResponse implements IAcceptSpokeUpdateResponse {
+
+                    /**
+                     * Constructs a new AcceptSpokeUpdateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateResponse);
+
+                    /** AcceptSpokeUpdateResponse spoke. */
+                    public spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+
+                    /**
+                     * Creates a new AcceptSpokeUpdateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcceptSpokeUpdateResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateResponse): google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateResponse;
+
+                    /**
+                     * Encodes the specified AcceptSpokeUpdateResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateResponse.verify|verify} messages.
+                     * @param message AcceptSpokeUpdateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcceptSpokeUpdateResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateResponse.verify|verify} messages.
+                     * @param message AcceptSpokeUpdateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IAcceptSpokeUpdateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcceptSpokeUpdateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcceptSpokeUpdateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateResponse;
+
+                    /**
+                     * Decodes an AcceptSpokeUpdateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcceptSpokeUpdateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateResponse;
+
+                    /**
+                     * Verifies an AcceptSpokeUpdateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcceptSpokeUpdateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcceptSpokeUpdateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateResponse;
+
+                    /**
+                     * Creates a plain object from an AcceptSpokeUpdateResponse message. Also converts values to other types if specified.
+                     * @param message AcceptSpokeUpdateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.AcceptSpokeUpdateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcceptSpokeUpdateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcceptSpokeUpdateResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RejectSpokeUpdateRequest. */
+                interface IRejectSpokeUpdateRequest {
+
+                    /** RejectSpokeUpdateRequest name */
+                    name?: (string|null);
+
+                    /** RejectSpokeUpdateRequest spokeUri */
+                    spokeUri?: (string|null);
+
+                    /** RejectSpokeUpdateRequest spokeEtag */
+                    spokeEtag?: (string|null);
+
+                    /** RejectSpokeUpdateRequest details */
+                    details?: (string|null);
+
+                    /** RejectSpokeUpdateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a RejectSpokeUpdateRequest. */
+                class RejectSpokeUpdateRequest implements IRejectSpokeUpdateRequest {
+
+                    /**
+                     * Constructs a new RejectSpokeUpdateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateRequest);
+
+                    /** RejectSpokeUpdateRequest name. */
+                    public name: string;
+
+                    /** RejectSpokeUpdateRequest spokeUri. */
+                    public spokeUri: string;
+
+                    /** RejectSpokeUpdateRequest spokeEtag. */
+                    public spokeEtag: string;
+
+                    /** RejectSpokeUpdateRequest details. */
+                    public details: string;
+
+                    /** RejectSpokeUpdateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new RejectSpokeUpdateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RejectSpokeUpdateRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateRequest): google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateRequest;
+
+                    /**
+                     * Encodes the specified RejectSpokeUpdateRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateRequest.verify|verify} messages.
+                     * @param message RejectSpokeUpdateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RejectSpokeUpdateRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateRequest.verify|verify} messages.
+                     * @param message RejectSpokeUpdateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RejectSpokeUpdateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RejectSpokeUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateRequest;
+
+                    /**
+                     * Decodes a RejectSpokeUpdateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RejectSpokeUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateRequest;
+
+                    /**
+                     * Verifies a RejectSpokeUpdateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RejectSpokeUpdateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RejectSpokeUpdateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateRequest;
+
+                    /**
+                     * Creates a plain object from a RejectSpokeUpdateRequest message. Also converts values to other types if specified.
+                     * @param message RejectSpokeUpdateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RejectSpokeUpdateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RejectSpokeUpdateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RejectSpokeUpdateResponse. */
+                interface IRejectSpokeUpdateResponse {
+
+                    /** RejectSpokeUpdateResponse spoke */
+                    spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+                }
+
+                /** Represents a RejectSpokeUpdateResponse. */
+                class RejectSpokeUpdateResponse implements IRejectSpokeUpdateResponse {
+
+                    /**
+                     * Constructs a new RejectSpokeUpdateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateResponse);
+
+                    /** RejectSpokeUpdateResponse spoke. */
+                    public spoke?: (google.cloud.networkconnectivity.v1beta.ISpoke|null);
+
+                    /**
+                     * Creates a new RejectSpokeUpdateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RejectSpokeUpdateResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateResponse): google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateResponse;
+
+                    /**
+                     * Encodes the specified RejectSpokeUpdateResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateResponse.verify|verify} messages.
+                     * @param message RejectSpokeUpdateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RejectSpokeUpdateResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateResponse.verify|verify} messages.
+                     * @param message RejectSpokeUpdateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IRejectSpokeUpdateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RejectSpokeUpdateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RejectSpokeUpdateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateResponse;
+
+                    /**
+                     * Decodes a RejectSpokeUpdateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RejectSpokeUpdateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateResponse;
+
+                    /**
+                     * Verifies a RejectSpokeUpdateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RejectSpokeUpdateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RejectSpokeUpdateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateResponse;
+
+                    /**
+                     * Creates a plain object from a RejectSpokeUpdateResponse message. Also converts values to other types if specified.
+                     * @param message RejectSpokeUpdateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.RejectSpokeUpdateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RejectSpokeUpdateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RejectSpokeUpdateResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRouteTableRequest. */
+                interface IGetRouteTableRequest {
+
+                    /** GetRouteTableRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRouteTableRequest. */
+                class GetRouteTableRequest implements IGetRouteTableRequest {
+
+                    /**
+                     * Constructs a new GetRouteTableRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetRouteTableRequest);
+
+                    /** GetRouteTableRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRouteTableRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRouteTableRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetRouteTableRequest): google.cloud.networkconnectivity.v1beta.GetRouteTableRequest;
+
+                    /**
+                     * Encodes the specified GetRouteTableRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetRouteTableRequest.verify|verify} messages.
+                     * @param message GetRouteTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetRouteTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRouteTableRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetRouteTableRequest.verify|verify} messages.
+                     * @param message GetRouteTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetRouteTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRouteTableRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRouteTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetRouteTableRequest;
+
+                    /**
+                     * Decodes a GetRouteTableRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRouteTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetRouteTableRequest;
+
+                    /**
+                     * Verifies a GetRouteTableRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRouteTableRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRouteTableRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetRouteTableRequest;
+
+                    /**
+                     * Creates a plain object from a GetRouteTableRequest message. Also converts values to other types if specified.
+                     * @param message GetRouteTableRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetRouteTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRouteTableRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRouteTableRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRouteRequest. */
+                interface IGetRouteRequest {
+
+                    /** GetRouteRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRouteRequest. */
+                class GetRouteRequest implements IGetRouteRequest {
+
+                    /**
+                     * Constructs a new GetRouteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetRouteRequest);
+
+                    /** GetRouteRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRouteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRouteRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetRouteRequest): google.cloud.networkconnectivity.v1beta.GetRouteRequest;
+
+                    /**
+                     * Encodes the specified GetRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetRouteRequest.verify|verify} messages.
+                     * @param message GetRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetRouteRequest.verify|verify} messages.
+                     * @param message GetRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRouteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetRouteRequest;
+
+                    /**
+                     * Decodes a GetRouteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetRouteRequest;
+
+                    /**
+                     * Verifies a GetRouteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRouteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRouteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetRouteRequest;
+
+                    /**
+                     * Creates a plain object from a GetRouteRequest message. Also converts values to other types if specified.
+                     * @param message GetRouteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetRouteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRouteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRouteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRoutesRequest. */
+                interface IListRoutesRequest {
+
+                    /** ListRoutesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRoutesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRoutesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRoutesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRoutesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRoutesRequest. */
+                class ListRoutesRequest implements IListRoutesRequest {
+
+                    /**
+                     * Constructs a new ListRoutesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListRoutesRequest);
+
+                    /** ListRoutesRequest parent. */
+                    public parent: string;
+
+                    /** ListRoutesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRoutesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRoutesRequest filter. */
+                    public filter: string;
+
+                    /** ListRoutesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRoutesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRoutesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListRoutesRequest): google.cloud.networkconnectivity.v1beta.ListRoutesRequest;
+
+                    /**
+                     * Encodes the specified ListRoutesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRoutesRequest.verify|verify} messages.
+                     * @param message ListRoutesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListRoutesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRoutesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRoutesRequest.verify|verify} messages.
+                     * @param message ListRoutesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListRoutesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRoutesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRoutesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListRoutesRequest;
+
+                    /**
+                     * Decodes a ListRoutesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRoutesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListRoutesRequest;
+
+                    /**
+                     * Verifies a ListRoutesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRoutesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRoutesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListRoutesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRoutesRequest message. Also converts values to other types if specified.
+                     * @param message ListRoutesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListRoutesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRoutesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRoutesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRoutesResponse. */
+                interface IListRoutesResponse {
+
+                    /** ListRoutesResponse routes */
+                    routes?: (google.cloud.networkconnectivity.v1beta.IRoute[]|null);
+
+                    /** ListRoutesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRoutesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRoutesResponse. */
+                class ListRoutesResponse implements IListRoutesResponse {
+
+                    /**
+                     * Constructs a new ListRoutesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListRoutesResponse);
+
+                    /** ListRoutesResponse routes. */
+                    public routes: google.cloud.networkconnectivity.v1beta.IRoute[];
+
+                    /** ListRoutesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRoutesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRoutesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRoutesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListRoutesResponse): google.cloud.networkconnectivity.v1beta.ListRoutesResponse;
+
+                    /**
+                     * Encodes the specified ListRoutesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRoutesResponse.verify|verify} messages.
+                     * @param message ListRoutesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListRoutesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRoutesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRoutesResponse.verify|verify} messages.
+                     * @param message ListRoutesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListRoutesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRoutesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRoutesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListRoutesResponse;
+
+                    /**
+                     * Decodes a ListRoutesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRoutesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListRoutesResponse;
+
+                    /**
+                     * Verifies a ListRoutesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRoutesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRoutesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListRoutesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRoutesResponse message. Also converts values to other types if specified.
+                     * @param message ListRoutesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListRoutesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRoutesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRoutesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRouteTablesRequest. */
+                interface IListRouteTablesRequest {
+
+                    /** ListRouteTablesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRouteTablesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRouteTablesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRouteTablesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRouteTablesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRouteTablesRequest. */
+                class ListRouteTablesRequest implements IListRouteTablesRequest {
+
+                    /**
+                     * Constructs a new ListRouteTablesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListRouteTablesRequest);
+
+                    /** ListRouteTablesRequest parent. */
+                    public parent: string;
+
+                    /** ListRouteTablesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRouteTablesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRouteTablesRequest filter. */
+                    public filter: string;
+
+                    /** ListRouteTablesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRouteTablesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRouteTablesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListRouteTablesRequest): google.cloud.networkconnectivity.v1beta.ListRouteTablesRequest;
+
+                    /**
+                     * Encodes the specified ListRouteTablesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRouteTablesRequest.verify|verify} messages.
+                     * @param message ListRouteTablesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListRouteTablesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRouteTablesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRouteTablesRequest.verify|verify} messages.
+                     * @param message ListRouteTablesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListRouteTablesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRouteTablesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRouteTablesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListRouteTablesRequest;
+
+                    /**
+                     * Decodes a ListRouteTablesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRouteTablesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListRouteTablesRequest;
+
+                    /**
+                     * Verifies a ListRouteTablesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRouteTablesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRouteTablesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListRouteTablesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRouteTablesRequest message. Also converts values to other types if specified.
+                     * @param message ListRouteTablesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListRouteTablesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRouteTablesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRouteTablesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRouteTablesResponse. */
+                interface IListRouteTablesResponse {
+
+                    /** ListRouteTablesResponse routeTables */
+                    routeTables?: (google.cloud.networkconnectivity.v1beta.IRouteTable[]|null);
+
+                    /** ListRouteTablesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRouteTablesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRouteTablesResponse. */
+                class ListRouteTablesResponse implements IListRouteTablesResponse {
+
+                    /**
+                     * Constructs a new ListRouteTablesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListRouteTablesResponse);
+
+                    /** ListRouteTablesResponse routeTables. */
+                    public routeTables: google.cloud.networkconnectivity.v1beta.IRouteTable[];
+
+                    /** ListRouteTablesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRouteTablesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRouteTablesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRouteTablesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListRouteTablesResponse): google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse;
+
+                    /**
+                     * Encodes the specified ListRouteTablesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse.verify|verify} messages.
+                     * @param message ListRouteTablesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListRouteTablesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRouteTablesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse.verify|verify} messages.
+                     * @param message ListRouteTablesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListRouteTablesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRouteTablesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRouteTablesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse;
+
+                    /**
+                     * Decodes a ListRouteTablesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRouteTablesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse;
+
+                    /**
+                     * Verifies a ListRouteTablesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRouteTablesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRouteTablesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRouteTablesResponse message. Also converts values to other types if specified.
+                     * @param message ListRouteTablesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRouteTablesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRouteTablesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGroupsRequest. */
+                interface IListGroupsRequest {
+
+                    /** ListGroupsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGroupsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGroupsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGroupsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListGroupsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListGroupsRequest. */
+                class ListGroupsRequest implements IListGroupsRequest {
+
+                    /**
+                     * Constructs a new ListGroupsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListGroupsRequest);
+
+                    /** ListGroupsRequest parent. */
+                    public parent: string;
+
+                    /** ListGroupsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGroupsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGroupsRequest filter. */
+                    public filter: string;
+
+                    /** ListGroupsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListGroupsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGroupsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListGroupsRequest): google.cloud.networkconnectivity.v1beta.ListGroupsRequest;
+
+                    /**
+                     * Encodes the specified ListGroupsRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListGroupsRequest.verify|verify} messages.
+                     * @param message ListGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListGroupsRequest.verify|verify} messages.
+                     * @param message ListGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGroupsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListGroupsRequest;
+
+                    /**
+                     * Decodes a ListGroupsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListGroupsRequest;
+
+                    /**
+                     * Verifies a ListGroupsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGroupsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListGroupsRequest;
+
+                    /**
+                     * Creates a plain object from a ListGroupsRequest message. Also converts values to other types if specified.
+                     * @param message ListGroupsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGroupsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGroupsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGroupsResponse. */
+                interface IListGroupsResponse {
+
+                    /** ListGroupsResponse groups */
+                    groups?: (google.cloud.networkconnectivity.v1beta.IGroup[]|null);
+
+                    /** ListGroupsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGroupsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGroupsResponse. */
+                class ListGroupsResponse implements IListGroupsResponse {
+
+                    /**
+                     * Constructs a new ListGroupsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListGroupsResponse);
+
+                    /** ListGroupsResponse groups. */
+                    public groups: google.cloud.networkconnectivity.v1beta.IGroup[];
+
+                    /** ListGroupsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGroupsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGroupsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGroupsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListGroupsResponse): google.cloud.networkconnectivity.v1beta.ListGroupsResponse;
+
+                    /**
+                     * Encodes the specified ListGroupsResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListGroupsResponse.verify|verify} messages.
+                     * @param message ListGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListGroupsResponse.verify|verify} messages.
+                     * @param message ListGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGroupsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListGroupsResponse;
+
+                    /**
+                     * Decodes a ListGroupsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListGroupsResponse;
+
+                    /**
+                     * Verifies a ListGroupsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGroupsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListGroupsResponse;
+
+                    /**
+                     * Creates a plain object from a ListGroupsResponse message. Also converts values to other types if specified.
+                     * @param message ListGroupsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGroupsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGroupsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LinkedVpnTunnels. */
+                interface ILinkedVpnTunnels {
+
+                    /** LinkedVpnTunnels uris */
+                    uris?: (string[]|null);
+
+                    /** LinkedVpnTunnels siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+
+                    /** LinkedVpnTunnels vpcNetwork */
+                    vpcNetwork?: (string|null);
+
+                    /** LinkedVpnTunnels includeImportRanges */
+                    includeImportRanges?: (string[]|null);
+                }
+
+                /** Represents a LinkedVpnTunnels. */
+                class LinkedVpnTunnels implements ILinkedVpnTunnels {
+
+                    /**
+                     * Constructs a new LinkedVpnTunnels.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ILinkedVpnTunnels);
+
+                    /** LinkedVpnTunnels uris. */
+                    public uris: string[];
+
+                    /** LinkedVpnTunnels siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /** LinkedVpnTunnels vpcNetwork. */
+                    public vpcNetwork: string;
+
+                    /** LinkedVpnTunnels includeImportRanges. */
+                    public includeImportRanges: string[];
+
+                    /**
+                     * Creates a new LinkedVpnTunnels instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkedVpnTunnels instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ILinkedVpnTunnels): google.cloud.networkconnectivity.v1beta.LinkedVpnTunnels;
+
+                    /**
+                     * Encodes the specified LinkedVpnTunnels message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedVpnTunnels.verify|verify} messages.
+                     * @param message LinkedVpnTunnels message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ILinkedVpnTunnels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkedVpnTunnels message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedVpnTunnels.verify|verify} messages.
+                     * @param message LinkedVpnTunnels message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ILinkedVpnTunnels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkedVpnTunnels message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkedVpnTunnels
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.LinkedVpnTunnels;
+
+                    /**
+                     * Decodes a LinkedVpnTunnels message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkedVpnTunnels
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.LinkedVpnTunnels;
+
+                    /**
+                     * Verifies a LinkedVpnTunnels message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkedVpnTunnels message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkedVpnTunnels
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.LinkedVpnTunnels;
+
+                    /**
+                     * Creates a plain object from a LinkedVpnTunnels message. Also converts values to other types if specified.
+                     * @param message LinkedVpnTunnels
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.LinkedVpnTunnels, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkedVpnTunnels to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LinkedVpnTunnels
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LinkedInterconnectAttachments. */
+                interface ILinkedInterconnectAttachments {
+
+                    /** LinkedInterconnectAttachments uris */
+                    uris?: (string[]|null);
+
+                    /** LinkedInterconnectAttachments siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+
+                    /** LinkedInterconnectAttachments vpcNetwork */
+                    vpcNetwork?: (string|null);
+
+                    /** LinkedInterconnectAttachments includeImportRanges */
+                    includeImportRanges?: (string[]|null);
+                }
+
+                /** Represents a LinkedInterconnectAttachments. */
+                class LinkedInterconnectAttachments implements ILinkedInterconnectAttachments {
+
+                    /**
+                     * Constructs a new LinkedInterconnectAttachments.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ILinkedInterconnectAttachments);
+
+                    /** LinkedInterconnectAttachments uris. */
+                    public uris: string[];
+
+                    /** LinkedInterconnectAttachments siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /** LinkedInterconnectAttachments vpcNetwork. */
+                    public vpcNetwork: string;
+
+                    /** LinkedInterconnectAttachments includeImportRanges. */
+                    public includeImportRanges: string[];
+
+                    /**
+                     * Creates a new LinkedInterconnectAttachments instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkedInterconnectAttachments instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ILinkedInterconnectAttachments): google.cloud.networkconnectivity.v1beta.LinkedInterconnectAttachments;
+
+                    /**
+                     * Encodes the specified LinkedInterconnectAttachments message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedInterconnectAttachments.verify|verify} messages.
+                     * @param message LinkedInterconnectAttachments message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ILinkedInterconnectAttachments, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkedInterconnectAttachments message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedInterconnectAttachments.verify|verify} messages.
+                     * @param message LinkedInterconnectAttachments message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ILinkedInterconnectAttachments, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkedInterconnectAttachments message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkedInterconnectAttachments
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.LinkedInterconnectAttachments;
+
+                    /**
+                     * Decodes a LinkedInterconnectAttachments message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkedInterconnectAttachments
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.LinkedInterconnectAttachments;
+
+                    /**
+                     * Verifies a LinkedInterconnectAttachments message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkedInterconnectAttachments message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkedInterconnectAttachments
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.LinkedInterconnectAttachments;
+
+                    /**
+                     * Creates a plain object from a LinkedInterconnectAttachments message. Also converts values to other types if specified.
+                     * @param message LinkedInterconnectAttachments
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.LinkedInterconnectAttachments, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkedInterconnectAttachments to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LinkedInterconnectAttachments
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LinkedRouterApplianceInstances. */
+                interface ILinkedRouterApplianceInstances {
+
+                    /** LinkedRouterApplianceInstances instances */
+                    instances?: (google.cloud.networkconnectivity.v1beta.IRouterApplianceInstance[]|null);
+
+                    /** LinkedRouterApplianceInstances siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+
+                    /** LinkedRouterApplianceInstances vpcNetwork */
+                    vpcNetwork?: (string|null);
+
+                    /** LinkedRouterApplianceInstances includeImportRanges */
+                    includeImportRanges?: (string[]|null);
+                }
+
+                /** Represents a LinkedRouterApplianceInstances. */
+                class LinkedRouterApplianceInstances implements ILinkedRouterApplianceInstances {
+
+                    /**
+                     * Constructs a new LinkedRouterApplianceInstances.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ILinkedRouterApplianceInstances);
+
+                    /** LinkedRouterApplianceInstances instances. */
+                    public instances: google.cloud.networkconnectivity.v1beta.IRouterApplianceInstance[];
+
+                    /** LinkedRouterApplianceInstances siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /** LinkedRouterApplianceInstances vpcNetwork. */
+                    public vpcNetwork: string;
+
+                    /** LinkedRouterApplianceInstances includeImportRanges. */
+                    public includeImportRanges: string[];
+
+                    /**
+                     * Creates a new LinkedRouterApplianceInstances instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkedRouterApplianceInstances instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ILinkedRouterApplianceInstances): google.cloud.networkconnectivity.v1beta.LinkedRouterApplianceInstances;
+
+                    /**
+                     * Encodes the specified LinkedRouterApplianceInstances message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedRouterApplianceInstances.verify|verify} messages.
+                     * @param message LinkedRouterApplianceInstances message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ILinkedRouterApplianceInstances, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkedRouterApplianceInstances message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedRouterApplianceInstances.verify|verify} messages.
+                     * @param message LinkedRouterApplianceInstances message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ILinkedRouterApplianceInstances, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkedRouterApplianceInstances message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkedRouterApplianceInstances
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.LinkedRouterApplianceInstances;
+
+                    /**
+                     * Decodes a LinkedRouterApplianceInstances message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkedRouterApplianceInstances
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.LinkedRouterApplianceInstances;
+
+                    /**
+                     * Verifies a LinkedRouterApplianceInstances message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkedRouterApplianceInstances message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkedRouterApplianceInstances
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.LinkedRouterApplianceInstances;
+
+                    /**
+                     * Creates a plain object from a LinkedRouterApplianceInstances message. Also converts values to other types if specified.
+                     * @param message LinkedRouterApplianceInstances
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.LinkedRouterApplianceInstances, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkedRouterApplianceInstances to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LinkedRouterApplianceInstances
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LinkedVpcNetwork. */
+                interface ILinkedVpcNetwork {
+
+                    /** LinkedVpcNetwork uri */
+                    uri?: (string|null);
+
+                    /** LinkedVpcNetwork excludeExportRanges */
+                    excludeExportRanges?: (string[]|null);
+
+                    /** LinkedVpcNetwork includeExportRanges */
+                    includeExportRanges?: (string[]|null);
+
+                    /** LinkedVpcNetwork proposedIncludeExportRanges */
+                    proposedIncludeExportRanges?: (string[]|null);
+
+                    /** LinkedVpcNetwork proposedExcludeExportRanges */
+                    proposedExcludeExportRanges?: (string[]|null);
+
+                    /** LinkedVpcNetwork producerVpcSpokes */
+                    producerVpcSpokes?: (string[]|null);
+                }
+
+                /** Represents a LinkedVpcNetwork. */
+                class LinkedVpcNetwork implements ILinkedVpcNetwork {
+
+                    /**
+                     * Constructs a new LinkedVpcNetwork.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ILinkedVpcNetwork);
+
+                    /** LinkedVpcNetwork uri. */
+                    public uri: string;
+
+                    /** LinkedVpcNetwork excludeExportRanges. */
+                    public excludeExportRanges: string[];
+
+                    /** LinkedVpcNetwork includeExportRanges. */
+                    public includeExportRanges: string[];
+
+                    /** LinkedVpcNetwork proposedIncludeExportRanges. */
+                    public proposedIncludeExportRanges: string[];
+
+                    /** LinkedVpcNetwork proposedExcludeExportRanges. */
+                    public proposedExcludeExportRanges: string[];
+
+                    /** LinkedVpcNetwork producerVpcSpokes. */
+                    public producerVpcSpokes: string[];
+
+                    /**
+                     * Creates a new LinkedVpcNetwork instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkedVpcNetwork instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ILinkedVpcNetwork): google.cloud.networkconnectivity.v1beta.LinkedVpcNetwork;
+
+                    /**
+                     * Encodes the specified LinkedVpcNetwork message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedVpcNetwork.verify|verify} messages.
+                     * @param message LinkedVpcNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ILinkedVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkedVpcNetwork message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedVpcNetwork.verify|verify} messages.
+                     * @param message LinkedVpcNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ILinkedVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkedVpcNetwork message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkedVpcNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.LinkedVpcNetwork;
+
+                    /**
+                     * Decodes a LinkedVpcNetwork message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkedVpcNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.LinkedVpcNetwork;
+
+                    /**
+                     * Verifies a LinkedVpcNetwork message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkedVpcNetwork message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkedVpcNetwork
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.LinkedVpcNetwork;
+
+                    /**
+                     * Creates a plain object from a LinkedVpcNetwork message. Also converts values to other types if specified.
+                     * @param message LinkedVpcNetwork
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.LinkedVpcNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkedVpcNetwork to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LinkedVpcNetwork
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Gateway. */
+                interface IGateway {
+
+                    /** Gateway ipRangeReservations */
+                    ipRangeReservations?: (google.cloud.networkconnectivity.v1beta.Gateway.IIpRangeReservation[]|null);
+
+                    /** Gateway capacity */
+                    capacity?: (google.cloud.networkconnectivity.v1beta.Gateway.GatewayCapacity|keyof typeof google.cloud.networkconnectivity.v1beta.Gateway.GatewayCapacity|null);
+
+                    /** Gateway cloudRouters */
+                    cloudRouters?: (string[]|null);
+
+                    /** Gateway sacAttachment */
+                    sacAttachment?: (string|null);
+                }
+
+                /** Represents a Gateway. */
+                class Gateway implements IGateway {
+
+                    /**
+                     * Constructs a new Gateway.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGateway);
+
+                    /** Gateway ipRangeReservations. */
+                    public ipRangeReservations: google.cloud.networkconnectivity.v1beta.Gateway.IIpRangeReservation[];
+
+                    /** Gateway capacity. */
+                    public capacity: (google.cloud.networkconnectivity.v1beta.Gateway.GatewayCapacity|keyof typeof google.cloud.networkconnectivity.v1beta.Gateway.GatewayCapacity);
+
+                    /** Gateway cloudRouters. */
+                    public cloudRouters: string[];
+
+                    /** Gateway sacAttachment. */
+                    public sacAttachment: string;
+
+                    /**
+                     * Creates a new Gateway instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Gateway instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGateway): google.cloud.networkconnectivity.v1beta.Gateway;
+
+                    /**
+                     * Encodes the specified Gateway message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Gateway.verify|verify} messages.
+                     * @param message Gateway message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGateway, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Gateway message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Gateway.verify|verify} messages.
+                     * @param message Gateway message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGateway, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Gateway message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Gateway
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Gateway;
+
+                    /**
+                     * Decodes a Gateway message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Gateway
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Gateway;
+
+                    /**
+                     * Verifies a Gateway message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Gateway message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Gateway
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Gateway;
+
+                    /**
+                     * Creates a plain object from a Gateway message. Also converts values to other types if specified.
+                     * @param message Gateway
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.Gateway, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Gateway to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Gateway
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Gateway {
+
+                    /** Properties of an IpRangeReservation. */
+                    interface IIpRangeReservation {
+
+                        /** IpRangeReservation ipRange */
+                        ipRange?: (string|null);
+                    }
+
+                    /** Represents an IpRangeReservation. */
+                    class IpRangeReservation implements IIpRangeReservation {
+
+                        /**
+                         * Constructs a new IpRangeReservation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.Gateway.IIpRangeReservation);
+
+                        /** IpRangeReservation ipRange. */
+                        public ipRange: string;
+
+                        /**
+                         * Creates a new IpRangeReservation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IpRangeReservation instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.Gateway.IIpRangeReservation): google.cloud.networkconnectivity.v1beta.Gateway.IpRangeReservation;
+
+                        /**
+                         * Encodes the specified IpRangeReservation message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Gateway.IpRangeReservation.verify|verify} messages.
+                         * @param message IpRangeReservation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.Gateway.IIpRangeReservation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IpRangeReservation message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Gateway.IpRangeReservation.verify|verify} messages.
+                         * @param message IpRangeReservation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.Gateway.IIpRangeReservation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IpRangeReservation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IpRangeReservation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Gateway.IpRangeReservation;
+
+                        /**
+                         * Decodes an IpRangeReservation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IpRangeReservation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Gateway.IpRangeReservation;
+
+                        /**
+                         * Verifies an IpRangeReservation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IpRangeReservation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IpRangeReservation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Gateway.IpRangeReservation;
+
+                        /**
+                         * Creates a plain object from an IpRangeReservation message. Also converts values to other types if specified.
+                         * @param message IpRangeReservation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.Gateway.IpRangeReservation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IpRangeReservation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IpRangeReservation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** GatewayCapacity enum. */
+                    enum GatewayCapacity {
+                        GATEWAY_CAPACITY_UNSPECIFIED = 0,
+                        CAPACITY_1_GBPS = 5,
+                        CAPACITY_10_GBPS = 1,
+                        CAPACITY_100_GBPS = 4
+                    }
+                }
+
+                /** Properties of a GatewayAdvertisedRoute. */
+                interface IGatewayAdvertisedRoute {
+
+                    /** GatewayAdvertisedRoute name */
+                    name?: (string|null);
+
+                    /** GatewayAdvertisedRoute createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GatewayAdvertisedRoute updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GatewayAdvertisedRoute labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** GatewayAdvertisedRoute description */
+                    description?: (string|null);
+
+                    /** GatewayAdvertisedRoute uniqueId */
+                    uniqueId?: (string|null);
+
+                    /** GatewayAdvertisedRoute state */
+                    state?: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State|null);
+
+                    /** GatewayAdvertisedRoute ipRange */
+                    ipRange?: (string|null);
+
+                    /** GatewayAdvertisedRoute priority */
+                    priority?: (number|null);
+
+                    /** GatewayAdvertisedRoute recipient */
+                    recipient?: (google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute.Recipient|keyof typeof google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute.Recipient|null);
+                }
+
+                /** Represents a GatewayAdvertisedRoute. */
+                class GatewayAdvertisedRoute implements IGatewayAdvertisedRoute {
+
+                    /**
+                     * Constructs a new GatewayAdvertisedRoute.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute);
+
+                    /** GatewayAdvertisedRoute name. */
+                    public name: string;
+
+                    /** GatewayAdvertisedRoute createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GatewayAdvertisedRoute updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GatewayAdvertisedRoute labels. */
+                    public labels: { [k: string]: string };
+
+                    /** GatewayAdvertisedRoute description. */
+                    public description: string;
+
+                    /** GatewayAdvertisedRoute uniqueId. */
+                    public uniqueId: string;
+
+                    /** GatewayAdvertisedRoute state. */
+                    public state: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State);
+
+                    /** GatewayAdvertisedRoute ipRange. */
+                    public ipRange: string;
+
+                    /** GatewayAdvertisedRoute priority. */
+                    public priority?: (number|null);
+
+                    /** GatewayAdvertisedRoute recipient. */
+                    public recipient: (google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute.Recipient|keyof typeof google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute.Recipient);
+
+                    /**
+                     * Creates a new GatewayAdvertisedRoute instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GatewayAdvertisedRoute instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute): google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute;
+
+                    /**
+                     * Encodes the specified GatewayAdvertisedRoute message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute.verify|verify} messages.
+                     * @param message GatewayAdvertisedRoute message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GatewayAdvertisedRoute message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute.verify|verify} messages.
+                     * @param message GatewayAdvertisedRoute message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GatewayAdvertisedRoute message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GatewayAdvertisedRoute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute;
+
+                    /**
+                     * Decodes a GatewayAdvertisedRoute message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GatewayAdvertisedRoute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute;
+
+                    /**
+                     * Verifies a GatewayAdvertisedRoute message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GatewayAdvertisedRoute message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GatewayAdvertisedRoute
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute;
+
+                    /**
+                     * Creates a plain object from a GatewayAdvertisedRoute message. Also converts values to other types if specified.
+                     * @param message GatewayAdvertisedRoute
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GatewayAdvertisedRoute to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GatewayAdvertisedRoute
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GatewayAdvertisedRoute {
+
+                    /** Recipient enum. */
+                    enum Recipient {
+                        RECIPIENT_UNSPECIFIED = 0,
+                        ADVERTISE_TO_HUB = 1
+                    }
+                }
+
+                /** Properties of a CreateGatewayAdvertisedRouteRequest. */
+                interface ICreateGatewayAdvertisedRouteRequest {
+
+                    /** CreateGatewayAdvertisedRouteRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateGatewayAdvertisedRouteRequest gatewayAdvertisedRouteId */
+                    gatewayAdvertisedRouteId?: (string|null);
+
+                    /** CreateGatewayAdvertisedRouteRequest gatewayAdvertisedRoute */
+                    gatewayAdvertisedRoute?: (google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute|null);
+
+                    /** CreateGatewayAdvertisedRouteRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateGatewayAdvertisedRouteRequest. */
+                class CreateGatewayAdvertisedRouteRequest implements ICreateGatewayAdvertisedRouteRequest {
+
+                    /**
+                     * Constructs a new CreateGatewayAdvertisedRouteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ICreateGatewayAdvertisedRouteRequest);
+
+                    /** CreateGatewayAdvertisedRouteRequest parent. */
+                    public parent: string;
+
+                    /** CreateGatewayAdvertisedRouteRequest gatewayAdvertisedRouteId. */
+                    public gatewayAdvertisedRouteId: string;
+
+                    /** CreateGatewayAdvertisedRouteRequest gatewayAdvertisedRoute. */
+                    public gatewayAdvertisedRoute?: (google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute|null);
+
+                    /** CreateGatewayAdvertisedRouteRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateGatewayAdvertisedRouteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateGatewayAdvertisedRouteRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ICreateGatewayAdvertisedRouteRequest): google.cloud.networkconnectivity.v1beta.CreateGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Encodes the specified CreateGatewayAdvertisedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateGatewayAdvertisedRouteRequest.verify|verify} messages.
+                     * @param message CreateGatewayAdvertisedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ICreateGatewayAdvertisedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateGatewayAdvertisedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateGatewayAdvertisedRouteRequest.verify|verify} messages.
+                     * @param message CreateGatewayAdvertisedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ICreateGatewayAdvertisedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateGatewayAdvertisedRouteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateGatewayAdvertisedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.CreateGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Decodes a CreateGatewayAdvertisedRouteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateGatewayAdvertisedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.CreateGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Verifies a CreateGatewayAdvertisedRouteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateGatewayAdvertisedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateGatewayAdvertisedRouteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.CreateGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Creates a plain object from a CreateGatewayAdvertisedRouteRequest message. Also converts values to other types if specified.
+                     * @param message CreateGatewayAdvertisedRouteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.CreateGatewayAdvertisedRouteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateGatewayAdvertisedRouteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateGatewayAdvertisedRouteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetGatewayAdvertisedRouteRequest. */
+                interface IGetGatewayAdvertisedRouteRequest {
+
+                    /** GetGatewayAdvertisedRouteRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGatewayAdvertisedRouteRequest. */
+                class GetGatewayAdvertisedRouteRequest implements IGetGatewayAdvertisedRouteRequest {
+
+                    /**
+                     * Constructs a new GetGatewayAdvertisedRouteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetGatewayAdvertisedRouteRequest);
+
+                    /** GetGatewayAdvertisedRouteRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGatewayAdvertisedRouteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGatewayAdvertisedRouteRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetGatewayAdvertisedRouteRequest): google.cloud.networkconnectivity.v1beta.GetGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Encodes the specified GetGatewayAdvertisedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetGatewayAdvertisedRouteRequest.verify|verify} messages.
+                     * @param message GetGatewayAdvertisedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetGatewayAdvertisedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGatewayAdvertisedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetGatewayAdvertisedRouteRequest.verify|verify} messages.
+                     * @param message GetGatewayAdvertisedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetGatewayAdvertisedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGatewayAdvertisedRouteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGatewayAdvertisedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Decodes a GetGatewayAdvertisedRouteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGatewayAdvertisedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Verifies a GetGatewayAdvertisedRouteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGatewayAdvertisedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGatewayAdvertisedRouteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Creates a plain object from a GetGatewayAdvertisedRouteRequest message. Also converts values to other types if specified.
+                     * @param message GetGatewayAdvertisedRouteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetGatewayAdvertisedRouteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGatewayAdvertisedRouteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetGatewayAdvertisedRouteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGatewayAdvertisedRoutesRequest. */
+                interface IListGatewayAdvertisedRoutesRequest {
+
+                    /** ListGatewayAdvertisedRoutesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGatewayAdvertisedRoutesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGatewayAdvertisedRoutesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGatewayAdvertisedRoutesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListGatewayAdvertisedRoutesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListGatewayAdvertisedRoutesRequest. */
+                class ListGatewayAdvertisedRoutesRequest implements IListGatewayAdvertisedRoutesRequest {
+
+                    /**
+                     * Constructs a new ListGatewayAdvertisedRoutesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesRequest);
+
+                    /** ListGatewayAdvertisedRoutesRequest parent. */
+                    public parent: string;
+
+                    /** ListGatewayAdvertisedRoutesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGatewayAdvertisedRoutesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGatewayAdvertisedRoutesRequest filter. */
+                    public filter: string;
+
+                    /** ListGatewayAdvertisedRoutesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListGatewayAdvertisedRoutesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGatewayAdvertisedRoutesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesRequest): google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesRequest;
+
+                    /**
+                     * Encodes the specified ListGatewayAdvertisedRoutesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesRequest.verify|verify} messages.
+                     * @param message ListGatewayAdvertisedRoutesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGatewayAdvertisedRoutesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesRequest.verify|verify} messages.
+                     * @param message ListGatewayAdvertisedRoutesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGatewayAdvertisedRoutesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGatewayAdvertisedRoutesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesRequest;
+
+                    /**
+                     * Decodes a ListGatewayAdvertisedRoutesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGatewayAdvertisedRoutesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesRequest;
+
+                    /**
+                     * Verifies a ListGatewayAdvertisedRoutesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGatewayAdvertisedRoutesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGatewayAdvertisedRoutesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesRequest;
+
+                    /**
+                     * Creates a plain object from a ListGatewayAdvertisedRoutesRequest message. Also converts values to other types if specified.
+                     * @param message ListGatewayAdvertisedRoutesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGatewayAdvertisedRoutesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGatewayAdvertisedRoutesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGatewayAdvertisedRoutesResponse. */
+                interface IListGatewayAdvertisedRoutesResponse {
+
+                    /** ListGatewayAdvertisedRoutesResponse gatewayAdvertisedRoutes */
+                    gatewayAdvertisedRoutes?: (google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute[]|null);
+
+                    /** ListGatewayAdvertisedRoutesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGatewayAdvertisedRoutesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGatewayAdvertisedRoutesResponse. */
+                class ListGatewayAdvertisedRoutesResponse implements IListGatewayAdvertisedRoutesResponse {
+
+                    /**
+                     * Constructs a new ListGatewayAdvertisedRoutesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesResponse);
+
+                    /** ListGatewayAdvertisedRoutesResponse gatewayAdvertisedRoutes. */
+                    public gatewayAdvertisedRoutes: google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute[];
+
+                    /** ListGatewayAdvertisedRoutesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGatewayAdvertisedRoutesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGatewayAdvertisedRoutesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGatewayAdvertisedRoutesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesResponse): google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse;
+
+                    /**
+                     * Encodes the specified ListGatewayAdvertisedRoutesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse.verify|verify} messages.
+                     * @param message ListGatewayAdvertisedRoutesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGatewayAdvertisedRoutesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse.verify|verify} messages.
+                     * @param message ListGatewayAdvertisedRoutesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListGatewayAdvertisedRoutesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGatewayAdvertisedRoutesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGatewayAdvertisedRoutesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse;
+
+                    /**
+                     * Decodes a ListGatewayAdvertisedRoutesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGatewayAdvertisedRoutesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse;
+
+                    /**
+                     * Verifies a ListGatewayAdvertisedRoutesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGatewayAdvertisedRoutesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGatewayAdvertisedRoutesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse;
+
+                    /**
+                     * Creates a plain object from a ListGatewayAdvertisedRoutesResponse message. Also converts values to other types if specified.
+                     * @param message ListGatewayAdvertisedRoutesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGatewayAdvertisedRoutesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGatewayAdvertisedRoutesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateGatewayAdvertisedRouteRequest. */
+                interface IUpdateGatewayAdvertisedRouteRequest {
+
+                    /** UpdateGatewayAdvertisedRouteRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateGatewayAdvertisedRouteRequest gatewayAdvertisedRoute */
+                    gatewayAdvertisedRoute?: (google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute|null);
+
+                    /** UpdateGatewayAdvertisedRouteRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateGatewayAdvertisedRouteRequest. */
+                class UpdateGatewayAdvertisedRouteRequest implements IUpdateGatewayAdvertisedRouteRequest {
+
+                    /**
+                     * Constructs a new UpdateGatewayAdvertisedRouteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IUpdateGatewayAdvertisedRouteRequest);
+
+                    /** UpdateGatewayAdvertisedRouteRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateGatewayAdvertisedRouteRequest gatewayAdvertisedRoute. */
+                    public gatewayAdvertisedRoute?: (google.cloud.networkconnectivity.v1beta.IGatewayAdvertisedRoute|null);
+
+                    /** UpdateGatewayAdvertisedRouteRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateGatewayAdvertisedRouteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateGatewayAdvertisedRouteRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IUpdateGatewayAdvertisedRouteRequest): google.cloud.networkconnectivity.v1beta.UpdateGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Encodes the specified UpdateGatewayAdvertisedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateGatewayAdvertisedRouteRequest.verify|verify} messages.
+                     * @param message UpdateGatewayAdvertisedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IUpdateGatewayAdvertisedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateGatewayAdvertisedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateGatewayAdvertisedRouteRequest.verify|verify} messages.
+                     * @param message UpdateGatewayAdvertisedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IUpdateGatewayAdvertisedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateGatewayAdvertisedRouteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateGatewayAdvertisedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.UpdateGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Decodes an UpdateGatewayAdvertisedRouteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateGatewayAdvertisedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.UpdateGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Verifies an UpdateGatewayAdvertisedRouteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateGatewayAdvertisedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateGatewayAdvertisedRouteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.UpdateGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateGatewayAdvertisedRouteRequest message. Also converts values to other types if specified.
+                     * @param message UpdateGatewayAdvertisedRouteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.UpdateGatewayAdvertisedRouteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateGatewayAdvertisedRouteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateGatewayAdvertisedRouteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteGatewayAdvertisedRouteRequest. */
+                interface IDeleteGatewayAdvertisedRouteRequest {
+
+                    /** DeleteGatewayAdvertisedRouteRequest name */
+                    name?: (string|null);
+
+                    /** DeleteGatewayAdvertisedRouteRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteGatewayAdvertisedRouteRequest. */
+                class DeleteGatewayAdvertisedRouteRequest implements IDeleteGatewayAdvertisedRouteRequest {
+
+                    /**
+                     * Constructs a new DeleteGatewayAdvertisedRouteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IDeleteGatewayAdvertisedRouteRequest);
+
+                    /** DeleteGatewayAdvertisedRouteRequest name. */
+                    public name: string;
+
+                    /** DeleteGatewayAdvertisedRouteRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteGatewayAdvertisedRouteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteGatewayAdvertisedRouteRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IDeleteGatewayAdvertisedRouteRequest): google.cloud.networkconnectivity.v1beta.DeleteGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Encodes the specified DeleteGatewayAdvertisedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteGatewayAdvertisedRouteRequest.verify|verify} messages.
+                     * @param message DeleteGatewayAdvertisedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IDeleteGatewayAdvertisedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteGatewayAdvertisedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteGatewayAdvertisedRouteRequest.verify|verify} messages.
+                     * @param message DeleteGatewayAdvertisedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IDeleteGatewayAdvertisedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteGatewayAdvertisedRouteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteGatewayAdvertisedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.DeleteGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Decodes a DeleteGatewayAdvertisedRouteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteGatewayAdvertisedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.DeleteGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Verifies a DeleteGatewayAdvertisedRouteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteGatewayAdvertisedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteGatewayAdvertisedRouteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.DeleteGatewayAdvertisedRouteRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteGatewayAdvertisedRouteRequest message. Also converts values to other types if specified.
+                     * @param message DeleteGatewayAdvertisedRouteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.DeleteGatewayAdvertisedRouteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteGatewayAdvertisedRouteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteGatewayAdvertisedRouteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LinkedProducerVpcNetwork. */
+                interface ILinkedProducerVpcNetwork {
+
+                    /** LinkedProducerVpcNetwork network */
+                    network?: (string|null);
+
+                    /** LinkedProducerVpcNetwork serviceConsumerVpcSpoke */
+                    serviceConsumerVpcSpoke?: (string|null);
+
+                    /** LinkedProducerVpcNetwork peering */
+                    peering?: (string|null);
+
+                    /** LinkedProducerVpcNetwork producerNetwork */
+                    producerNetwork?: (string|null);
+
+                    /** LinkedProducerVpcNetwork excludeExportRanges */
+                    excludeExportRanges?: (string[]|null);
+
+                    /** LinkedProducerVpcNetwork includeExportRanges */
+                    includeExportRanges?: (string[]|null);
+
+                    /** LinkedProducerVpcNetwork proposedIncludeExportRanges */
+                    proposedIncludeExportRanges?: (string[]|null);
+
+                    /** LinkedProducerVpcNetwork proposedExcludeExportRanges */
+                    proposedExcludeExportRanges?: (string[]|null);
+                }
+
+                /** Represents a LinkedProducerVpcNetwork. */
+                class LinkedProducerVpcNetwork implements ILinkedProducerVpcNetwork {
+
+                    /**
+                     * Constructs a new LinkedProducerVpcNetwork.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ILinkedProducerVpcNetwork);
+
+                    /** LinkedProducerVpcNetwork network. */
+                    public network: string;
+
+                    /** LinkedProducerVpcNetwork serviceConsumerVpcSpoke. */
+                    public serviceConsumerVpcSpoke: string;
+
+                    /** LinkedProducerVpcNetwork peering. */
+                    public peering: string;
+
+                    /** LinkedProducerVpcNetwork producerNetwork. */
+                    public producerNetwork: string;
+
+                    /** LinkedProducerVpcNetwork excludeExportRanges. */
+                    public excludeExportRanges: string[];
+
+                    /** LinkedProducerVpcNetwork includeExportRanges. */
+                    public includeExportRanges: string[];
+
+                    /** LinkedProducerVpcNetwork proposedIncludeExportRanges. */
+                    public proposedIncludeExportRanges: string[];
+
+                    /** LinkedProducerVpcNetwork proposedExcludeExportRanges. */
+                    public proposedExcludeExportRanges: string[];
+
+                    /**
+                     * Creates a new LinkedProducerVpcNetwork instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkedProducerVpcNetwork instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ILinkedProducerVpcNetwork): google.cloud.networkconnectivity.v1beta.LinkedProducerVpcNetwork;
+
+                    /**
+                     * Encodes the specified LinkedProducerVpcNetwork message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedProducerVpcNetwork.verify|verify} messages.
+                     * @param message LinkedProducerVpcNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ILinkedProducerVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkedProducerVpcNetwork message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LinkedProducerVpcNetwork.verify|verify} messages.
+                     * @param message LinkedProducerVpcNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ILinkedProducerVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkedProducerVpcNetwork message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkedProducerVpcNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.LinkedProducerVpcNetwork;
+
+                    /**
+                     * Decodes a LinkedProducerVpcNetwork message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkedProducerVpcNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.LinkedProducerVpcNetwork;
+
+                    /**
+                     * Verifies a LinkedProducerVpcNetwork message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkedProducerVpcNetwork message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkedProducerVpcNetwork
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.LinkedProducerVpcNetwork;
+
+                    /**
+                     * Creates a plain object from a LinkedProducerVpcNetwork message. Also converts values to other types if specified.
+                     * @param message LinkedProducerVpcNetwork
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.LinkedProducerVpcNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkedProducerVpcNetwork to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LinkedProducerVpcNetwork
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RouterApplianceInstance. */
+                interface IRouterApplianceInstance {
+
+                    /** RouterApplianceInstance virtualMachine */
+                    virtualMachine?: (string|null);
+
+                    /** RouterApplianceInstance ipAddress */
+                    ipAddress?: (string|null);
+                }
+
+                /** Represents a RouterApplianceInstance. */
+                class RouterApplianceInstance implements IRouterApplianceInstance {
+
+                    /**
+                     * Constructs a new RouterApplianceInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IRouterApplianceInstance);
+
+                    /** RouterApplianceInstance virtualMachine. */
+                    public virtualMachine: string;
+
+                    /** RouterApplianceInstance ipAddress. */
+                    public ipAddress: string;
+
+                    /**
+                     * Creates a new RouterApplianceInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RouterApplianceInstance instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IRouterApplianceInstance): google.cloud.networkconnectivity.v1beta.RouterApplianceInstance;
+
+                    /**
+                     * Encodes the specified RouterApplianceInstance message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RouterApplianceInstance.verify|verify} messages.
+                     * @param message RouterApplianceInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IRouterApplianceInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RouterApplianceInstance message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RouterApplianceInstance.verify|verify} messages.
+                     * @param message RouterApplianceInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IRouterApplianceInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RouterApplianceInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RouterApplianceInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.RouterApplianceInstance;
+
+                    /**
+                     * Decodes a RouterApplianceInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RouterApplianceInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.RouterApplianceInstance;
+
+                    /**
+                     * Verifies a RouterApplianceInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RouterApplianceInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RouterApplianceInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.RouterApplianceInstance;
+
+                    /**
+                     * Creates a plain object from a RouterApplianceInstance message. Also converts values to other types if specified.
+                     * @param message RouterApplianceInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.RouterApplianceInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RouterApplianceInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RouterApplianceInstance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LocationMetadata. */
+                interface ILocationMetadata {
+
+                    /** LocationMetadata locationFeatures */
+                    locationFeatures?: (google.cloud.networkconnectivity.v1beta.LocationFeature[]|null);
+                }
+
+                /** Represents a LocationMetadata. */
+                class LocationMetadata implements ILocationMetadata {
+
+                    /**
+                     * Constructs a new LocationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ILocationMetadata);
+
+                    /** LocationMetadata locationFeatures. */
+                    public locationFeatures: google.cloud.networkconnectivity.v1beta.LocationFeature[];
+
+                    /**
+                     * Creates a new LocationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LocationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ILocationMetadata): google.cloud.networkconnectivity.v1beta.LocationMetadata;
+
+                    /**
+                     * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.LocationMetadata;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.LocationMetadata;
+
+                    /**
+                     * Verifies a LocationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LocationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.LocationMetadata;
+
+                    /**
+                     * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                     * @param message LocationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.LocationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LocationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LocationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NextHopVpcNetwork. */
+                interface INextHopVpcNetwork {
+
+                    /** NextHopVpcNetwork uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a NextHopVpcNetwork. */
+                class NextHopVpcNetwork implements INextHopVpcNetwork {
+
+                    /**
+                     * Constructs a new NextHopVpcNetwork.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.INextHopVpcNetwork);
+
+                    /** NextHopVpcNetwork uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new NextHopVpcNetwork instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NextHopVpcNetwork instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.INextHopVpcNetwork): google.cloud.networkconnectivity.v1beta.NextHopVpcNetwork;
+
+                    /**
+                     * Encodes the specified NextHopVpcNetwork message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopVpcNetwork.verify|verify} messages.
+                     * @param message NextHopVpcNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.INextHopVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NextHopVpcNetwork message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopVpcNetwork.verify|verify} messages.
+                     * @param message NextHopVpcNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.INextHopVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NextHopVpcNetwork message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NextHopVpcNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.NextHopVpcNetwork;
+
+                    /**
+                     * Decodes a NextHopVpcNetwork message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NextHopVpcNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.NextHopVpcNetwork;
+
+                    /**
+                     * Verifies a NextHopVpcNetwork message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NextHopVpcNetwork message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NextHopVpcNetwork
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.NextHopVpcNetwork;
+
+                    /**
+                     * Creates a plain object from a NextHopVpcNetwork message. Also converts values to other types if specified.
+                     * @param message NextHopVpcNetwork
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.NextHopVpcNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NextHopVpcNetwork to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NextHopVpcNetwork
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NextHopVPNTunnel. */
+                interface INextHopVPNTunnel {
+
+                    /** NextHopVPNTunnel uri */
+                    uri?: (string|null);
+
+                    /** NextHopVPNTunnel vpcNetwork */
+                    vpcNetwork?: (string|null);
+
+                    /** NextHopVPNTunnel siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+                }
+
+                /** Represents a NextHopVPNTunnel. */
+                class NextHopVPNTunnel implements INextHopVPNTunnel {
+
+                    /**
+                     * Constructs a new NextHopVPNTunnel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.INextHopVPNTunnel);
+
+                    /** NextHopVPNTunnel uri. */
+                    public uri: string;
+
+                    /** NextHopVPNTunnel vpcNetwork. */
+                    public vpcNetwork: string;
+
+                    /** NextHopVPNTunnel siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /**
+                     * Creates a new NextHopVPNTunnel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NextHopVPNTunnel instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.INextHopVPNTunnel): google.cloud.networkconnectivity.v1beta.NextHopVPNTunnel;
+
+                    /**
+                     * Encodes the specified NextHopVPNTunnel message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopVPNTunnel.verify|verify} messages.
+                     * @param message NextHopVPNTunnel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.INextHopVPNTunnel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NextHopVPNTunnel message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopVPNTunnel.verify|verify} messages.
+                     * @param message NextHopVPNTunnel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.INextHopVPNTunnel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NextHopVPNTunnel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NextHopVPNTunnel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.NextHopVPNTunnel;
+
+                    /**
+                     * Decodes a NextHopVPNTunnel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NextHopVPNTunnel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.NextHopVPNTunnel;
+
+                    /**
+                     * Verifies a NextHopVPNTunnel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NextHopVPNTunnel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NextHopVPNTunnel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.NextHopVPNTunnel;
+
+                    /**
+                     * Creates a plain object from a NextHopVPNTunnel message. Also converts values to other types if specified.
+                     * @param message NextHopVPNTunnel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.NextHopVPNTunnel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NextHopVPNTunnel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NextHopVPNTunnel
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NextHopRouterApplianceInstance. */
+                interface INextHopRouterApplianceInstance {
+
+                    /** NextHopRouterApplianceInstance uri */
+                    uri?: (string|null);
+
+                    /** NextHopRouterApplianceInstance vpcNetwork */
+                    vpcNetwork?: (string|null);
+
+                    /** NextHopRouterApplianceInstance siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+                }
+
+                /** Represents a NextHopRouterApplianceInstance. */
+                class NextHopRouterApplianceInstance implements INextHopRouterApplianceInstance {
+
+                    /**
+                     * Constructs a new NextHopRouterApplianceInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.INextHopRouterApplianceInstance);
+
+                    /** NextHopRouterApplianceInstance uri. */
+                    public uri: string;
+
+                    /** NextHopRouterApplianceInstance vpcNetwork. */
+                    public vpcNetwork: string;
+
+                    /** NextHopRouterApplianceInstance siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /**
+                     * Creates a new NextHopRouterApplianceInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NextHopRouterApplianceInstance instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.INextHopRouterApplianceInstance): google.cloud.networkconnectivity.v1beta.NextHopRouterApplianceInstance;
+
+                    /**
+                     * Encodes the specified NextHopRouterApplianceInstance message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopRouterApplianceInstance.verify|verify} messages.
+                     * @param message NextHopRouterApplianceInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.INextHopRouterApplianceInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NextHopRouterApplianceInstance message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopRouterApplianceInstance.verify|verify} messages.
+                     * @param message NextHopRouterApplianceInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.INextHopRouterApplianceInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NextHopRouterApplianceInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NextHopRouterApplianceInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.NextHopRouterApplianceInstance;
+
+                    /**
+                     * Decodes a NextHopRouterApplianceInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NextHopRouterApplianceInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.NextHopRouterApplianceInstance;
+
+                    /**
+                     * Verifies a NextHopRouterApplianceInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NextHopRouterApplianceInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NextHopRouterApplianceInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.NextHopRouterApplianceInstance;
+
+                    /**
+                     * Creates a plain object from a NextHopRouterApplianceInstance message. Also converts values to other types if specified.
+                     * @param message NextHopRouterApplianceInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.NextHopRouterApplianceInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NextHopRouterApplianceInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NextHopRouterApplianceInstance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NextHopInterconnectAttachment. */
+                interface INextHopInterconnectAttachment {
+
+                    /** NextHopInterconnectAttachment uri */
+                    uri?: (string|null);
+
+                    /** NextHopInterconnectAttachment vpcNetwork */
+                    vpcNetwork?: (string|null);
+
+                    /** NextHopInterconnectAttachment siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+                }
+
+                /** Represents a NextHopInterconnectAttachment. */
+                class NextHopInterconnectAttachment implements INextHopInterconnectAttachment {
+
+                    /**
+                     * Constructs a new NextHopInterconnectAttachment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.INextHopInterconnectAttachment);
+
+                    /** NextHopInterconnectAttachment uri. */
+                    public uri: string;
+
+                    /** NextHopInterconnectAttachment vpcNetwork. */
+                    public vpcNetwork: string;
+
+                    /** NextHopInterconnectAttachment siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /**
+                     * Creates a new NextHopInterconnectAttachment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NextHopInterconnectAttachment instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.INextHopInterconnectAttachment): google.cloud.networkconnectivity.v1beta.NextHopInterconnectAttachment;
+
+                    /**
+                     * Encodes the specified NextHopInterconnectAttachment message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopInterconnectAttachment.verify|verify} messages.
+                     * @param message NextHopInterconnectAttachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.INextHopInterconnectAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NextHopInterconnectAttachment message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopInterconnectAttachment.verify|verify} messages.
+                     * @param message NextHopInterconnectAttachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.INextHopInterconnectAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NextHopInterconnectAttachment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NextHopInterconnectAttachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.NextHopInterconnectAttachment;
+
+                    /**
+                     * Decodes a NextHopInterconnectAttachment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NextHopInterconnectAttachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.NextHopInterconnectAttachment;
+
+                    /**
+                     * Verifies a NextHopInterconnectAttachment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NextHopInterconnectAttachment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NextHopInterconnectAttachment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.NextHopInterconnectAttachment;
+
+                    /**
+                     * Creates a plain object from a NextHopInterconnectAttachment message. Also converts values to other types if specified.
+                     * @param message NextHopInterconnectAttachment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.NextHopInterconnectAttachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NextHopInterconnectAttachment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NextHopInterconnectAttachment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NextHopSpoke. */
+                interface INextHopSpoke {
+
+                    /** NextHopSpoke uri */
+                    uri?: (string|null);
+
+                    /** NextHopSpoke siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+                }
+
+                /** Represents a NextHopSpoke. */
+                class NextHopSpoke implements INextHopSpoke {
+
+                    /**
+                     * Constructs a new NextHopSpoke.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.INextHopSpoke);
+
+                    /** NextHopSpoke uri. */
+                    public uri: string;
+
+                    /** NextHopSpoke siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /**
+                     * Creates a new NextHopSpoke instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NextHopSpoke instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.INextHopSpoke): google.cloud.networkconnectivity.v1beta.NextHopSpoke;
+
+                    /**
+                     * Encodes the specified NextHopSpoke message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopSpoke.verify|verify} messages.
+                     * @param message NextHopSpoke message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.INextHopSpoke, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NextHopSpoke message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.NextHopSpoke.verify|verify} messages.
+                     * @param message NextHopSpoke message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.INextHopSpoke, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NextHopSpoke message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NextHopSpoke
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.NextHopSpoke;
+
+                    /**
+                     * Decodes a NextHopSpoke message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NextHopSpoke
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.NextHopSpoke;
+
+                    /**
+                     * Verifies a NextHopSpoke message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NextHopSpoke message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NextHopSpoke
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.NextHopSpoke;
+
+                    /**
+                     * Creates a plain object from a NextHopSpoke message. Also converts values to other types if specified.
+                     * @param message NextHopSpoke
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.NextHopSpoke, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NextHopSpoke to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NextHopSpoke
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SpokeSummary. */
+                interface ISpokeSummary {
+
+                    /** SpokeSummary spokeTypeCounts */
+                    spokeTypeCounts?: (google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeTypeCount[]|null);
+
+                    /** SpokeSummary spokeStateCounts */
+                    spokeStateCounts?: (google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateCount[]|null);
+
+                    /** SpokeSummary spokeStateReasonCounts */
+                    spokeStateReasonCounts?: (google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateReasonCount[]|null);
+                }
+
+                /** Represents a SpokeSummary. */
+                class SpokeSummary implements ISpokeSummary {
+
+                    /**
+                     * Constructs a new SpokeSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ISpokeSummary);
+
+                    /** SpokeSummary spokeTypeCounts. */
+                    public spokeTypeCounts: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeTypeCount[];
+
+                    /** SpokeSummary spokeStateCounts. */
+                    public spokeStateCounts: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateCount[];
+
+                    /** SpokeSummary spokeStateReasonCounts. */
+                    public spokeStateReasonCounts: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateReasonCount[];
+
+                    /**
+                     * Creates a new SpokeSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpokeSummary instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ISpokeSummary): google.cloud.networkconnectivity.v1beta.SpokeSummary;
+
+                    /**
+                     * Encodes the specified SpokeSummary message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.SpokeSummary.verify|verify} messages.
+                     * @param message SpokeSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ISpokeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpokeSummary message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.SpokeSummary.verify|verify} messages.
+                     * @param message SpokeSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ISpokeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpokeSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpokeSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.SpokeSummary;
+
+                    /**
+                     * Decodes a SpokeSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpokeSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.SpokeSummary;
+
+                    /**
+                     * Verifies a SpokeSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpokeSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpokeSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.SpokeSummary;
+
+                    /**
+                     * Creates a plain object from a SpokeSummary message. Also converts values to other types if specified.
+                     * @param message SpokeSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.SpokeSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpokeSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpokeSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SpokeSummary {
+
+                    /** Properties of a SpokeTypeCount. */
+                    interface ISpokeTypeCount {
+
+                        /** SpokeTypeCount spokeType */
+                        spokeType?: (google.cloud.networkconnectivity.v1beta.SpokeType|keyof typeof google.cloud.networkconnectivity.v1beta.SpokeType|null);
+
+                        /** SpokeTypeCount count */
+                        count?: (number|Long|string|null);
+                    }
+
+                    /** Represents a SpokeTypeCount. */
+                    class SpokeTypeCount implements ISpokeTypeCount {
+
+                        /**
+                         * Constructs a new SpokeTypeCount.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeTypeCount);
+
+                        /** SpokeTypeCount spokeType. */
+                        public spokeType: (google.cloud.networkconnectivity.v1beta.SpokeType|keyof typeof google.cloud.networkconnectivity.v1beta.SpokeType);
+
+                        /** SpokeTypeCount count. */
+                        public count: (number|Long|string);
+
+                        /**
+                         * Creates a new SpokeTypeCount instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SpokeTypeCount instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeTypeCount): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeTypeCount;
+
+                        /**
+                         * Encodes the specified SpokeTypeCount message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeTypeCount.verify|verify} messages.
+                         * @param message SpokeTypeCount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeTypeCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SpokeTypeCount message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeTypeCount.verify|verify} messages.
+                         * @param message SpokeTypeCount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeTypeCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SpokeTypeCount message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SpokeTypeCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeTypeCount;
+
+                        /**
+                         * Decodes a SpokeTypeCount message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SpokeTypeCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeTypeCount;
+
+                        /**
+                         * Verifies a SpokeTypeCount message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SpokeTypeCount message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SpokeTypeCount
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeTypeCount;
+
+                        /**
+                         * Creates a plain object from a SpokeTypeCount message. Also converts values to other types if specified.
+                         * @param message SpokeTypeCount
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeTypeCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SpokeTypeCount to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SpokeTypeCount
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SpokeStateCount. */
+                    interface ISpokeStateCount {
+
+                        /** SpokeStateCount state */
+                        state?: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State|null);
+
+                        /** SpokeStateCount count */
+                        count?: (number|Long|string|null);
+                    }
+
+                    /** Represents a SpokeStateCount. */
+                    class SpokeStateCount implements ISpokeStateCount {
+
+                        /**
+                         * Constructs a new SpokeStateCount.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateCount);
+
+                        /** SpokeStateCount state. */
+                        public state: (google.cloud.networkconnectivity.v1beta.State|keyof typeof google.cloud.networkconnectivity.v1beta.State);
+
+                        /** SpokeStateCount count. */
+                        public count: (number|Long|string);
+
+                        /**
+                         * Creates a new SpokeStateCount instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SpokeStateCount instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateCount): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateCount;
+
+                        /**
+                         * Encodes the specified SpokeStateCount message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateCount.verify|verify} messages.
+                         * @param message SpokeStateCount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SpokeStateCount message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateCount.verify|verify} messages.
+                         * @param message SpokeStateCount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SpokeStateCount message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SpokeStateCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateCount;
+
+                        /**
+                         * Decodes a SpokeStateCount message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SpokeStateCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateCount;
+
+                        /**
+                         * Verifies a SpokeStateCount message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SpokeStateCount message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SpokeStateCount
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateCount;
+
+                        /**
+                         * Creates a plain object from a SpokeStateCount message. Also converts values to other types if specified.
+                         * @param message SpokeStateCount
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SpokeStateCount to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SpokeStateCount
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SpokeStateReasonCount. */
+                    interface ISpokeStateReasonCount {
+
+                        /** SpokeStateReasonCount stateReasonCode */
+                        stateReasonCode?: (google.cloud.networkconnectivity.v1beta.Spoke.StateReason.Code|keyof typeof google.cloud.networkconnectivity.v1beta.Spoke.StateReason.Code|null);
+
+                        /** SpokeStateReasonCount count */
+                        count?: (number|Long|string|null);
+                    }
+
+                    /** Represents a SpokeStateReasonCount. */
+                    class SpokeStateReasonCount implements ISpokeStateReasonCount {
+
+                        /**
+                         * Constructs a new SpokeStateReasonCount.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateReasonCount);
+
+                        /** SpokeStateReasonCount stateReasonCode. */
+                        public stateReasonCode: (google.cloud.networkconnectivity.v1beta.Spoke.StateReason.Code|keyof typeof google.cloud.networkconnectivity.v1beta.Spoke.StateReason.Code);
+
+                        /** SpokeStateReasonCount count. */
+                        public count: (number|Long|string);
+
+                        /**
+                         * Creates a new SpokeStateReasonCount instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SpokeStateReasonCount instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateReasonCount): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateReasonCount;
+
+                        /**
+                         * Encodes the specified SpokeStateReasonCount message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateReasonCount.verify|verify} messages.
+                         * @param message SpokeStateReasonCount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateReasonCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SpokeStateReasonCount message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateReasonCount.verify|verify} messages.
+                         * @param message SpokeStateReasonCount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.SpokeSummary.ISpokeStateReasonCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SpokeStateReasonCount message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SpokeStateReasonCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateReasonCount;
+
+                        /**
+                         * Decodes a SpokeStateReasonCount message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SpokeStateReasonCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateReasonCount;
+
+                        /**
+                         * Verifies a SpokeStateReasonCount message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SpokeStateReasonCount message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SpokeStateReasonCount
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateReasonCount;
+
+                        /**
+                         * Creates a plain object from a SpokeStateReasonCount message. Also converts values to other types if specified.
+                         * @param message SpokeStateReasonCount
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.SpokeSummary.SpokeStateReasonCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SpokeStateReasonCount to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SpokeStateReasonCount
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a GetGroupRequest. */
+                interface IGetGroupRequest {
+
+                    /** GetGroupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGroupRequest. */
+                class GetGroupRequest implements IGetGroupRequest {
+
+                    /**
+                     * Constructs a new GetGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetGroupRequest);
+
+                    /** GetGroupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetGroupRequest): google.cloud.networkconnectivity.v1beta.GetGroupRequest;
+
+                    /**
+                     * Encodes the specified GetGroupRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetGroupRequest.verify|verify} messages.
+                     * @param message GetGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetGroupRequest.verify|verify} messages.
+                     * @param message GetGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetGroupRequest;
+
+                    /**
+                     * Decodes a GetGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetGroupRequest;
+
+                    /**
+                     * Verifies a GetGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetGroupRequest;
+
+                    /**
+                     * Creates a plain object from a GetGroupRequest message. Also converts values to other types if specified.
+                     * @param message GetGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateGroupRequest. */
+                interface IUpdateGroupRequest {
+
+                    /** UpdateGroupRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateGroupRequest group */
+                    group?: (google.cloud.networkconnectivity.v1beta.IGroup|null);
+
+                    /** UpdateGroupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateGroupRequest. */
+                class UpdateGroupRequest implements IUpdateGroupRequest {
+
+                    /**
+                     * Constructs a new UpdateGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IUpdateGroupRequest);
+
+                    /** UpdateGroupRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateGroupRequest group. */
+                    public group?: (google.cloud.networkconnectivity.v1beta.IGroup|null);
+
+                    /** UpdateGroupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IUpdateGroupRequest): google.cloud.networkconnectivity.v1beta.UpdateGroupRequest;
+
+                    /**
+                     * Encodes the specified UpdateGroupRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateGroupRequest.verify|verify} messages.
+                     * @param message UpdateGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IUpdateGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateGroupRequest.verify|verify} messages.
+                     * @param message UpdateGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IUpdateGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.UpdateGroupRequest;
+
+                    /**
+                     * Decodes an UpdateGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.UpdateGroupRequest;
+
+                    /**
+                     * Verifies an UpdateGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.UpdateGroupRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateGroupRequest message. Also converts values to other types if specified.
+                     * @param message UpdateGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.UpdateGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a PolicyBasedRoutingService */
+                class PolicyBasedRoutingService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new PolicyBasedRoutingService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new PolicyBasedRoutingService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PolicyBasedRoutingService;
+
+                    /**
+                     * Calls ListPolicyBasedRoutes.
+                     * @param request ListPolicyBasedRoutesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPolicyBasedRoutesResponse
+                     */
+                    public listPolicyBasedRoutes(request: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesRequest, callback: google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.ListPolicyBasedRoutesCallback): void;
+
+                    /**
+                     * Calls ListPolicyBasedRoutes.
+                     * @param request ListPolicyBasedRoutesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPolicyBasedRoutes(request: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesRequest): Promise<google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse>;
+
+                    /**
+                     * Calls GetPolicyBasedRoute.
+                     * @param request GetPolicyBasedRouteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PolicyBasedRoute
+                     */
+                    public getPolicyBasedRoute(request: google.cloud.networkconnectivity.v1beta.IGetPolicyBasedRouteRequest, callback: google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.GetPolicyBasedRouteCallback): void;
+
+                    /**
+                     * Calls GetPolicyBasedRoute.
+                     * @param request GetPolicyBasedRouteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPolicyBasedRoute(request: google.cloud.networkconnectivity.v1beta.IGetPolicyBasedRouteRequest): Promise<google.cloud.networkconnectivity.v1beta.PolicyBasedRoute>;
+
+                    /**
+                     * Calls CreatePolicyBasedRoute.
+                     * @param request CreatePolicyBasedRouteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createPolicyBasedRoute(request: google.cloud.networkconnectivity.v1beta.ICreatePolicyBasedRouteRequest, callback: google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.CreatePolicyBasedRouteCallback): void;
+
+                    /**
+                     * Calls CreatePolicyBasedRoute.
+                     * @param request CreatePolicyBasedRouteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPolicyBasedRoute(request: google.cloud.networkconnectivity.v1beta.ICreatePolicyBasedRouteRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeletePolicyBasedRoute.
+                     * @param request DeletePolicyBasedRouteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deletePolicyBasedRoute(request: google.cloud.networkconnectivity.v1beta.IDeletePolicyBasedRouteRequest, callback: google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.DeletePolicyBasedRouteCallback): void;
+
+                    /**
+                     * Calls DeletePolicyBasedRoute.
+                     * @param request DeletePolicyBasedRouteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deletePolicyBasedRoute(request: google.cloud.networkconnectivity.v1beta.IDeletePolicyBasedRouteRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace PolicyBasedRoutingService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService|listPolicyBasedRoutes}.
+                     * @param error Error, if any
+                     * @param [response] ListPolicyBasedRoutesResponse
+                     */
+                    type ListPolicyBasedRoutesCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService|getPolicyBasedRoute}.
+                     * @param error Error, if any
+                     * @param [response] PolicyBasedRoute
+                     */
+                    type GetPolicyBasedRouteCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService|createPolicyBasedRoute}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreatePolicyBasedRouteCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService|deletePolicyBasedRoute}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeletePolicyBasedRouteCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a PolicyBasedRoute. */
+                interface IPolicyBasedRoute {
+
+                    /** PolicyBasedRoute virtualMachine */
+                    virtualMachine?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IVirtualMachine|null);
+
+                    /** PolicyBasedRoute interconnectAttachment */
+                    interconnectAttachment?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IInterconnectAttachment|null);
+
+                    /** PolicyBasedRoute nextHopIlbIp */
+                    nextHopIlbIp?: (string|null);
+
+                    /** PolicyBasedRoute nextHopOtherRoutes */
+                    nextHopOtherRoutes?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.OtherRoutes|keyof typeof google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.OtherRoutes|null);
+
+                    /** PolicyBasedRoute name */
+                    name?: (string|null);
+
+                    /** PolicyBasedRoute createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PolicyBasedRoute updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PolicyBasedRoute labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** PolicyBasedRoute description */
+                    description?: (string|null);
+
+                    /** PolicyBasedRoute network */
+                    network?: (string|null);
+
+                    /** PolicyBasedRoute filter */
+                    filter?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IFilter|null);
+
+                    /** PolicyBasedRoute priority */
+                    priority?: (number|null);
+
+                    /** PolicyBasedRoute warnings */
+                    warnings?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IWarnings[]|null);
+
+                    /** PolicyBasedRoute selfLink */
+                    selfLink?: (string|null);
+
+                    /** PolicyBasedRoute kind */
+                    kind?: (string|null);
+                }
+
+                /** Represents a PolicyBasedRoute. */
+                class PolicyBasedRoute implements IPolicyBasedRoute {
+
+                    /**
+                     * Constructs a new PolicyBasedRoute.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IPolicyBasedRoute);
+
+                    /** PolicyBasedRoute virtualMachine. */
+                    public virtualMachine?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IVirtualMachine|null);
+
+                    /** PolicyBasedRoute interconnectAttachment. */
+                    public interconnectAttachment?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IInterconnectAttachment|null);
+
+                    /** PolicyBasedRoute nextHopIlbIp. */
+                    public nextHopIlbIp?: (string|null);
+
+                    /** PolicyBasedRoute nextHopOtherRoutes. */
+                    public nextHopOtherRoutes?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.OtherRoutes|keyof typeof google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.OtherRoutes|null);
+
+                    /** PolicyBasedRoute name. */
+                    public name: string;
+
+                    /** PolicyBasedRoute createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PolicyBasedRoute updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PolicyBasedRoute labels. */
+                    public labels: { [k: string]: string };
+
+                    /** PolicyBasedRoute description. */
+                    public description: string;
+
+                    /** PolicyBasedRoute network. */
+                    public network: string;
+
+                    /** PolicyBasedRoute filter. */
+                    public filter?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IFilter|null);
+
+                    /** PolicyBasedRoute priority. */
+                    public priority: number;
+
+                    /** PolicyBasedRoute warnings. */
+                    public warnings: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IWarnings[];
+
+                    /** PolicyBasedRoute selfLink. */
+                    public selfLink: string;
+
+                    /** PolicyBasedRoute kind. */
+                    public kind: string;
+
+                    /** PolicyBasedRoute target. */
+                    public target?: ("virtualMachine"|"interconnectAttachment");
+
+                    /** PolicyBasedRoute nextHop. */
+                    public nextHop?: ("nextHopIlbIp"|"nextHopOtherRoutes");
+
+                    /**
+                     * Creates a new PolicyBasedRoute instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolicyBasedRoute instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IPolicyBasedRoute): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute;
+
+                    /**
+                     * Encodes the specified PolicyBasedRoute message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.verify|verify} messages.
+                     * @param message PolicyBasedRoute message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IPolicyBasedRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolicyBasedRoute message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.verify|verify} messages.
+                     * @param message PolicyBasedRoute message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IPolicyBasedRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolicyBasedRoute message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolicyBasedRoute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute;
+
+                    /**
+                     * Decodes a PolicyBasedRoute message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolicyBasedRoute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute;
+
+                    /**
+                     * Verifies a PolicyBasedRoute message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolicyBasedRoute message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolicyBasedRoute
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute;
+
+                    /**
+                     * Creates a plain object from a PolicyBasedRoute message. Also converts values to other types if specified.
+                     * @param message PolicyBasedRoute
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolicyBasedRoute to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PolicyBasedRoute
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PolicyBasedRoute {
+
+                    /** Properties of a VirtualMachine. */
+                    interface IVirtualMachine {
+
+                        /** VirtualMachine tags */
+                        tags?: (string[]|null);
+                    }
+
+                    /** Represents a VirtualMachine. */
+                    class VirtualMachine implements IVirtualMachine {
+
+                        /**
+                         * Constructs a new VirtualMachine.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IVirtualMachine);
+
+                        /** VirtualMachine tags. */
+                        public tags: string[];
+
+                        /**
+                         * Creates a new VirtualMachine instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VirtualMachine instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IVirtualMachine): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.VirtualMachine;
+
+                        /**
+                         * Encodes the specified VirtualMachine message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.VirtualMachine.verify|verify} messages.
+                         * @param message VirtualMachine message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IVirtualMachine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VirtualMachine message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.VirtualMachine.verify|verify} messages.
+                         * @param message VirtualMachine message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IVirtualMachine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VirtualMachine message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VirtualMachine
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.VirtualMachine;
+
+                        /**
+                         * Decodes a VirtualMachine message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VirtualMachine
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.VirtualMachine;
+
+                        /**
+                         * Verifies a VirtualMachine message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VirtualMachine message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VirtualMachine
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.VirtualMachine;
+
+                        /**
+                         * Creates a plain object from a VirtualMachine message. Also converts values to other types if specified.
+                         * @param message VirtualMachine
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.VirtualMachine, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VirtualMachine to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VirtualMachine
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InterconnectAttachment. */
+                    interface IInterconnectAttachment {
+
+                        /** InterconnectAttachment region */
+                        region?: (string|null);
+                    }
+
+                    /** Represents an InterconnectAttachment. */
+                    class InterconnectAttachment implements IInterconnectAttachment {
+
+                        /**
+                         * Constructs a new InterconnectAttachment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IInterconnectAttachment);
+
+                        /** InterconnectAttachment region. */
+                        public region: string;
+
+                        /**
+                         * Creates a new InterconnectAttachment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InterconnectAttachment instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IInterconnectAttachment): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.InterconnectAttachment;
+
+                        /**
+                         * Encodes the specified InterconnectAttachment message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.InterconnectAttachment.verify|verify} messages.
+                         * @param message InterconnectAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IInterconnectAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InterconnectAttachment message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.InterconnectAttachment.verify|verify} messages.
+                         * @param message InterconnectAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IInterconnectAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InterconnectAttachment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InterconnectAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.InterconnectAttachment;
+
+                        /**
+                         * Decodes an InterconnectAttachment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InterconnectAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.InterconnectAttachment;
+
+                        /**
+                         * Verifies an InterconnectAttachment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InterconnectAttachment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InterconnectAttachment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.InterconnectAttachment;
+
+                        /**
+                         * Creates a plain object from an InterconnectAttachment message. Also converts values to other types if specified.
+                         * @param message InterconnectAttachment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.InterconnectAttachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InterconnectAttachment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InterconnectAttachment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Filter. */
+                    interface IFilter {
+
+                        /** Filter ipProtocol */
+                        ipProtocol?: (string|null);
+
+                        /** Filter srcRange */
+                        srcRange?: (string|null);
+
+                        /** Filter destRange */
+                        destRange?: (string|null);
+
+                        /** Filter protocolVersion */
+                        protocolVersion?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter.ProtocolVersion|keyof typeof google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter.ProtocolVersion|null);
+                    }
+
+                    /** Represents a Filter. */
+                    class Filter implements IFilter {
+
+                        /**
+                         * Constructs a new Filter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IFilter);
+
+                        /** Filter ipProtocol. */
+                        public ipProtocol: string;
+
+                        /** Filter srcRange. */
+                        public srcRange: string;
+
+                        /** Filter destRange. */
+                        public destRange: string;
+
+                        /** Filter protocolVersion. */
+                        public protocolVersion: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter.ProtocolVersion|keyof typeof google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter.ProtocolVersion);
+
+                        /**
+                         * Creates a new Filter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Filter instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IFilter): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter;
+
+                        /**
+                         * Encodes the specified Filter message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter.verify|verify} messages.
+                         * @param message Filter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter.verify|verify} messages.
+                         * @param message Filter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter;
+
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter;
+
+                        /**
+                         * Verifies a Filter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Filter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter;
+
+                        /**
+                         * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                         * @param message Filter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Filter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Filter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Filter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Filter {
+
+                        /** ProtocolVersion enum. */
+                        enum ProtocolVersion {
+                            PROTOCOL_VERSION_UNSPECIFIED = 0,
+                            IPV4 = 1,
+                            IPV6 = 2
+                        }
+                    }
+
+                    /** Properties of a Warnings. */
+                    interface IWarnings {
+
+                        /** Warnings code */
+                        code?: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings.Code|keyof typeof google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings.Code|null);
+
+                        /** Warnings data */
+                        data?: ({ [k: string]: string }|null);
+
+                        /** Warnings warningMessage */
+                        warningMessage?: (string|null);
+                    }
+
+                    /** Represents a Warnings. */
+                    class Warnings implements IWarnings {
+
+                        /**
+                         * Constructs a new Warnings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IWarnings);
+
+                        /** Warnings code. */
+                        public code: (google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings.Code|keyof typeof google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings.Code);
+
+                        /** Warnings data. */
+                        public data: { [k: string]: string };
+
+                        /** Warnings warningMessage. */
+                        public warningMessage: string;
+
+                        /**
+                         * Creates a new Warnings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Warnings instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IWarnings): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings;
+
+                        /**
+                         * Encodes the specified Warnings message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings.verify|verify} messages.
+                         * @param message Warnings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IWarnings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Warnings message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings.verify|verify} messages.
+                         * @param message Warnings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.IWarnings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Warnings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Warnings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings;
+
+                        /**
+                         * Decodes a Warnings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Warnings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings;
+
+                        /**
+                         * Verifies a Warnings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Warnings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Warnings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings;
+
+                        /**
+                         * Creates a plain object from a Warnings message. Also converts values to other types if specified.
+                         * @param message Warnings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.PolicyBasedRoute.Warnings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Warnings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Warnings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Warnings {
+
+                        /** Code enum. */
+                        enum Code {
+                            WARNING_UNSPECIFIED = 0,
+                            RESOURCE_NOT_ACTIVE = 1,
+                            RESOURCE_BEING_MODIFIED = 2
+                        }
+                    }
+
+                    /** OtherRoutes enum. */
+                    enum OtherRoutes {
+                        OTHER_ROUTES_UNSPECIFIED = 0,
+                        DEFAULT_ROUTING = 1
+                    }
+                }
+
+                /** Properties of a ListPolicyBasedRoutesRequest. */
+                interface IListPolicyBasedRoutesRequest {
+
+                    /** ListPolicyBasedRoutesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPolicyBasedRoutesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPolicyBasedRoutesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListPolicyBasedRoutesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListPolicyBasedRoutesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListPolicyBasedRoutesRequest. */
+                class ListPolicyBasedRoutesRequest implements IListPolicyBasedRoutesRequest {
+
+                    /**
+                     * Constructs a new ListPolicyBasedRoutesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesRequest);
+
+                    /** ListPolicyBasedRoutesRequest parent. */
+                    public parent: string;
+
+                    /** ListPolicyBasedRoutesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPolicyBasedRoutesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListPolicyBasedRoutesRequest filter. */
+                    public filter: string;
+
+                    /** ListPolicyBasedRoutesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListPolicyBasedRoutesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPolicyBasedRoutesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesRequest): google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesRequest;
+
+                    /**
+                     * Encodes the specified ListPolicyBasedRoutesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesRequest.verify|verify} messages.
+                     * @param message ListPolicyBasedRoutesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPolicyBasedRoutesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesRequest.verify|verify} messages.
+                     * @param message ListPolicyBasedRoutesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPolicyBasedRoutesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPolicyBasedRoutesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesRequest;
+
+                    /**
+                     * Decodes a ListPolicyBasedRoutesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPolicyBasedRoutesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesRequest;
+
+                    /**
+                     * Verifies a ListPolicyBasedRoutesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPolicyBasedRoutesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPolicyBasedRoutesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesRequest;
+
+                    /**
+                     * Creates a plain object from a ListPolicyBasedRoutesRequest message. Also converts values to other types if specified.
+                     * @param message ListPolicyBasedRoutesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPolicyBasedRoutesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPolicyBasedRoutesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPolicyBasedRoutesResponse. */
+                interface IListPolicyBasedRoutesResponse {
+
+                    /** ListPolicyBasedRoutesResponse policyBasedRoutes */
+                    policyBasedRoutes?: (google.cloud.networkconnectivity.v1beta.IPolicyBasedRoute[]|null);
+
+                    /** ListPolicyBasedRoutesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListPolicyBasedRoutesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListPolicyBasedRoutesResponse. */
+                class ListPolicyBasedRoutesResponse implements IListPolicyBasedRoutesResponse {
+
+                    /**
+                     * Constructs a new ListPolicyBasedRoutesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesResponse);
+
+                    /** ListPolicyBasedRoutesResponse policyBasedRoutes. */
+                    public policyBasedRoutes: google.cloud.networkconnectivity.v1beta.IPolicyBasedRoute[];
+
+                    /** ListPolicyBasedRoutesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListPolicyBasedRoutesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListPolicyBasedRoutesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPolicyBasedRoutesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesResponse): google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse;
+
+                    /**
+                     * Encodes the specified ListPolicyBasedRoutesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse.verify|verify} messages.
+                     * @param message ListPolicyBasedRoutesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPolicyBasedRoutesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse.verify|verify} messages.
+                     * @param message ListPolicyBasedRoutesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListPolicyBasedRoutesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPolicyBasedRoutesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPolicyBasedRoutesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse;
+
+                    /**
+                     * Decodes a ListPolicyBasedRoutesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPolicyBasedRoutesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse;
+
+                    /**
+                     * Verifies a ListPolicyBasedRoutesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPolicyBasedRoutesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPolicyBasedRoutesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse;
+
+                    /**
+                     * Creates a plain object from a ListPolicyBasedRoutesResponse message. Also converts values to other types if specified.
+                     * @param message ListPolicyBasedRoutesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPolicyBasedRoutesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPolicyBasedRoutesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPolicyBasedRouteRequest. */
+                interface IGetPolicyBasedRouteRequest {
+
+                    /** GetPolicyBasedRouteRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPolicyBasedRouteRequest. */
+                class GetPolicyBasedRouteRequest implements IGetPolicyBasedRouteRequest {
+
+                    /**
+                     * Constructs a new GetPolicyBasedRouteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetPolicyBasedRouteRequest);
+
+                    /** GetPolicyBasedRouteRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPolicyBasedRouteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPolicyBasedRouteRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetPolicyBasedRouteRequest): google.cloud.networkconnectivity.v1beta.GetPolicyBasedRouteRequest;
+
+                    /**
+                     * Encodes the specified GetPolicyBasedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetPolicyBasedRouteRequest.verify|verify} messages.
+                     * @param message GetPolicyBasedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetPolicyBasedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPolicyBasedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetPolicyBasedRouteRequest.verify|verify} messages.
+                     * @param message GetPolicyBasedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetPolicyBasedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPolicyBasedRouteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPolicyBasedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetPolicyBasedRouteRequest;
+
+                    /**
+                     * Decodes a GetPolicyBasedRouteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPolicyBasedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetPolicyBasedRouteRequest;
+
+                    /**
+                     * Verifies a GetPolicyBasedRouteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPolicyBasedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPolicyBasedRouteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetPolicyBasedRouteRequest;
+
+                    /**
+                     * Creates a plain object from a GetPolicyBasedRouteRequest message. Also converts values to other types if specified.
+                     * @param message GetPolicyBasedRouteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetPolicyBasedRouteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPolicyBasedRouteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPolicyBasedRouteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreatePolicyBasedRouteRequest. */
+                interface ICreatePolicyBasedRouteRequest {
+
+                    /** CreatePolicyBasedRouteRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePolicyBasedRouteRequest policyBasedRouteId */
+                    policyBasedRouteId?: (string|null);
+
+                    /** CreatePolicyBasedRouteRequest policyBasedRoute */
+                    policyBasedRoute?: (google.cloud.networkconnectivity.v1beta.IPolicyBasedRoute|null);
+
+                    /** CreatePolicyBasedRouteRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreatePolicyBasedRouteRequest. */
+                class CreatePolicyBasedRouteRequest implements ICreatePolicyBasedRouteRequest {
+
+                    /**
+                     * Constructs a new CreatePolicyBasedRouteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ICreatePolicyBasedRouteRequest);
+
+                    /** CreatePolicyBasedRouteRequest parent. */
+                    public parent: string;
+
+                    /** CreatePolicyBasedRouteRequest policyBasedRouteId. */
+                    public policyBasedRouteId: string;
+
+                    /** CreatePolicyBasedRouteRequest policyBasedRoute. */
+                    public policyBasedRoute?: (google.cloud.networkconnectivity.v1beta.IPolicyBasedRoute|null);
+
+                    /** CreatePolicyBasedRouteRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreatePolicyBasedRouteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePolicyBasedRouteRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ICreatePolicyBasedRouteRequest): google.cloud.networkconnectivity.v1beta.CreatePolicyBasedRouteRequest;
+
+                    /**
+                     * Encodes the specified CreatePolicyBasedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreatePolicyBasedRouteRequest.verify|verify} messages.
+                     * @param message CreatePolicyBasedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ICreatePolicyBasedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePolicyBasedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreatePolicyBasedRouteRequest.verify|verify} messages.
+                     * @param message CreatePolicyBasedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ICreatePolicyBasedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePolicyBasedRouteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePolicyBasedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.CreatePolicyBasedRouteRequest;
+
+                    /**
+                     * Decodes a CreatePolicyBasedRouteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePolicyBasedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.CreatePolicyBasedRouteRequest;
+
+                    /**
+                     * Verifies a CreatePolicyBasedRouteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePolicyBasedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePolicyBasedRouteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.CreatePolicyBasedRouteRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePolicyBasedRouteRequest message. Also converts values to other types if specified.
+                     * @param message CreatePolicyBasedRouteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.CreatePolicyBasedRouteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePolicyBasedRouteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePolicyBasedRouteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeletePolicyBasedRouteRequest. */
+                interface IDeletePolicyBasedRouteRequest {
+
+                    /** DeletePolicyBasedRouteRequest name */
+                    name?: (string|null);
+
+                    /** DeletePolicyBasedRouteRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeletePolicyBasedRouteRequest. */
+                class DeletePolicyBasedRouteRequest implements IDeletePolicyBasedRouteRequest {
+
+                    /**
+                     * Constructs a new DeletePolicyBasedRouteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IDeletePolicyBasedRouteRequest);
+
+                    /** DeletePolicyBasedRouteRequest name. */
+                    public name: string;
+
+                    /** DeletePolicyBasedRouteRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeletePolicyBasedRouteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePolicyBasedRouteRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IDeletePolicyBasedRouteRequest): google.cloud.networkconnectivity.v1beta.DeletePolicyBasedRouteRequest;
+
+                    /**
+                     * Encodes the specified DeletePolicyBasedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeletePolicyBasedRouteRequest.verify|verify} messages.
+                     * @param message DeletePolicyBasedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IDeletePolicyBasedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePolicyBasedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeletePolicyBasedRouteRequest.verify|verify} messages.
+                     * @param message DeletePolicyBasedRouteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IDeletePolicyBasedRouteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePolicyBasedRouteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePolicyBasedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.DeletePolicyBasedRouteRequest;
+
+                    /**
+                     * Decodes a DeletePolicyBasedRouteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePolicyBasedRouteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.DeletePolicyBasedRouteRequest;
+
+                    /**
+                     * Verifies a DeletePolicyBasedRouteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePolicyBasedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePolicyBasedRouteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.DeletePolicyBasedRouteRequest;
+
+                    /**
+                     * Creates a plain object from a DeletePolicyBasedRouteRequest message. Also converts values to other types if specified.
+                     * @param message DeletePolicyBasedRouteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.DeletePolicyBasedRouteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePolicyBasedRouteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeletePolicyBasedRouteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a TransportManager */
+                class TransportManager extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new TransportManager service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new TransportManager service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): TransportManager;
+
+                    /**
+                     * Calls ListRemoteTransportProfiles.
+                     * @param request ListRemoteTransportProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRemoteTransportProfilesResponse
+                     */
+                    public listRemoteTransportProfiles(request: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.ListRemoteTransportProfilesCallback): void;
+
+                    /**
+                     * Calls ListRemoteTransportProfiles.
+                     * @param request ListRemoteTransportProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRemoteTransportProfiles(request: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesRequest): Promise<google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse>;
+
+                    /**
+                     * Calls GetRemoteTransportProfile.
+                     * @param request GetRemoteTransportProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RemoteTransportProfile
+                     */
+                    public getRemoteTransportProfile(request: google.cloud.networkconnectivity.v1beta.IGetRemoteTransportProfileRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.GetRemoteTransportProfileCallback): void;
+
+                    /**
+                     * Calls GetRemoteTransportProfile.
+                     * @param request GetRemoteTransportProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRemoteTransportProfile(request: google.cloud.networkconnectivity.v1beta.IGetRemoteTransportProfileRequest): Promise<google.cloud.networkconnectivity.v1beta.RemoteTransportProfile>;
+
+                    /**
+                     * Calls ListTransports.
+                     * @param request ListTransportsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTransportsResponse
+                     */
+                    public listTransports(request: google.cloud.networkconnectivity.v1beta.IListTransportsRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.ListTransportsCallback): void;
+
+                    /**
+                     * Calls ListTransports.
+                     * @param request ListTransportsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTransports(request: google.cloud.networkconnectivity.v1beta.IListTransportsRequest): Promise<google.cloud.networkconnectivity.v1beta.ListTransportsResponse>;
+
+                    /**
+                     * Calls GetTransport.
+                     * @param request GetTransportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Transport
+                     */
+                    public getTransport(request: google.cloud.networkconnectivity.v1beta.IGetTransportRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.GetTransportCallback): void;
+
+                    /**
+                     * Calls GetTransport.
+                     * @param request GetTransportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getTransport(request: google.cloud.networkconnectivity.v1beta.IGetTransportRequest): Promise<google.cloud.networkconnectivity.v1beta.Transport>;
+
+                    /**
+                     * Calls GetStatus.
+                     * @param request GetStatusRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GetStatusResponse
+                     */
+                    public getStatus(request: google.cloud.networkconnectivity.v1beta.IGetStatusRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.GetStatusCallback): void;
+
+                    /**
+                     * Calls GetStatus.
+                     * @param request GetStatusRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getStatus(request: google.cloud.networkconnectivity.v1beta.IGetStatusRequest): Promise<google.cloud.networkconnectivity.v1beta.GetStatusResponse>;
+
+                    /**
+                     * Calls CreateTransport.
+                     * @param request CreateTransportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createTransport(request: google.cloud.networkconnectivity.v1beta.ICreateTransportRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.CreateTransportCallback): void;
+
+                    /**
+                     * Calls CreateTransport.
+                     * @param request CreateTransportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createTransport(request: google.cloud.networkconnectivity.v1beta.ICreateTransportRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateTransport.
+                     * @param request UpdateTransportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateTransport(request: google.cloud.networkconnectivity.v1beta.IUpdateTransportRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.UpdateTransportCallback): void;
+
+                    /**
+                     * Calls UpdateTransport.
+                     * @param request UpdateTransportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateTransport(request: google.cloud.networkconnectivity.v1beta.IUpdateTransportRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteTransport.
+                     * @param request DeleteTransportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteTransport(request: google.cloud.networkconnectivity.v1beta.IDeleteTransportRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.DeleteTransportCallback): void;
+
+                    /**
+                     * Calls DeleteTransport.
+                     * @param request DeleteTransportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTransport(request: google.cloud.networkconnectivity.v1beta.IDeleteTransportRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace TransportManager {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|listRemoteTransportProfiles}.
+                     * @param error Error, if any
+                     * @param [response] ListRemoteTransportProfilesResponse
+                     */
+                    type ListRemoteTransportProfilesCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|getRemoteTransportProfile}.
+                     * @param error Error, if any
+                     * @param [response] RemoteTransportProfile
+                     */
+                    type GetRemoteTransportProfileCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.RemoteTransportProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|listTransports}.
+                     * @param error Error, if any
+                     * @param [response] ListTransportsResponse
+                     */
+                    type ListTransportsCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ListTransportsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|getTransport}.
+                     * @param error Error, if any
+                     * @param [response] Transport
+                     */
+                    type GetTransportCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.Transport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|getStatus}.
+                     * @param error Error, if any
+                     * @param [response] GetStatusResponse
+                     */
+                    type GetStatusCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.GetStatusResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|createTransport}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateTransportCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|updateTransport}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateTransportCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|deleteTransport}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteTransportCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a RemoteTransportProfile. */
+                interface IRemoteTransportProfile {
+
+                    /** RemoteTransportProfile name */
+                    name?: (string|null);
+
+                    /** RemoteTransportProfile labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** RemoteTransportProfile description */
+                    description?: (string|null);
+
+                    /** RemoteTransportProfile provider */
+                    provider?: (string|null);
+
+                    /** RemoteTransportProfile providerSite */
+                    providerSite?: (string|null);
+
+                    /** RemoteTransportProfile supportedBandwidths */
+                    supportedBandwidths?: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.Bandwidth[]|null);
+
+                    /** RemoteTransportProfile sla */
+                    sla?: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ServiceLevelAvailability|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ServiceLevelAvailability|null);
+
+                    /** RemoteTransportProfile flow */
+                    flow?: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.KeyProvisioningFlow|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.KeyProvisioningFlow|null);
+
+                    /** RemoteTransportProfile orderState */
+                    orderState?: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.State|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.State|null);
+
+                    /** RemoteTransportProfile displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a RemoteTransportProfile. */
+                class RemoteTransportProfile implements IRemoteTransportProfile {
+
+                    /**
+                     * Constructs a new RemoteTransportProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile);
+
+                    /** RemoteTransportProfile name. */
+                    public name: string;
+
+                    /** RemoteTransportProfile labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RemoteTransportProfile description. */
+                    public description: string;
+
+                    /** RemoteTransportProfile provider. */
+                    public provider: string;
+
+                    /** RemoteTransportProfile providerSite. */
+                    public providerSite: string;
+
+                    /** RemoteTransportProfile supportedBandwidths. */
+                    public supportedBandwidths: google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.Bandwidth[];
+
+                    /** RemoteTransportProfile sla. */
+                    public sla: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ServiceLevelAvailability|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ServiceLevelAvailability);
+
+                    /** RemoteTransportProfile flow. */
+                    public flow: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.KeyProvisioningFlow|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.KeyProvisioningFlow);
+
+                    /** RemoteTransportProfile orderState. */
+                    public orderState: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.State|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.State);
+
+                    /** RemoteTransportProfile displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new RemoteTransportProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoteTransportProfile instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile): google.cloud.networkconnectivity.v1beta.RemoteTransportProfile;
+
+                    /**
+                     * Encodes the specified RemoteTransportProfile message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.verify|verify} messages.
+                     * @param message RemoteTransportProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoteTransportProfile message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.verify|verify} messages.
+                     * @param message RemoteTransportProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoteTransportProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoteTransportProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.RemoteTransportProfile;
+
+                    /**
+                     * Decodes a RemoteTransportProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoteTransportProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.RemoteTransportProfile;
+
+                    /**
+                     * Verifies a RemoteTransportProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoteTransportProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoteTransportProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.RemoteTransportProfile;
+
+                    /**
+                     * Creates a plain object from a RemoteTransportProfile message. Also converts values to other types if specified.
+                     * @param message RemoteTransportProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.RemoteTransportProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoteTransportProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoteTransportProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RemoteTransportProfile {
+
+                    /** Bandwidth enum. */
+                    enum Bandwidth {
+                        BANDWIDTH_UNSPECIFIED = 0,
+                        BPS_50M = 1,
+                        BPS_100M = 2,
+                        BPS_200M = 3,
+                        BPS_300M = 4,
+                        BPS_400M = 5,
+                        BPS_500M = 6,
+                        BPS_1G = 7,
+                        BPS_2G = 8,
+                        BPS_5G = 9,
+                        BPS_10G = 10,
+                        BPS_20G = 11,
+                        BPS_50G = 12,
+                        BPS_100G = 13
+                    }
+
+                    /** ServiceLevelAvailability enum. */
+                    enum ServiceLevelAvailability {
+                        SERVICE_LEVEL_AVAILABILITY_UNSPECIFIED = 0,
+                        HIGH = 1,
+                        MAXIMUM = 2
+                    }
+
+                    /** KeyProvisioningFlow enum. */
+                    enum KeyProvisioningFlow {
+                        KEY_PROVISIONING_FLOW_UNSPECIFIED = 0,
+                        INPUT_ONLY = 1,
+                        OUTPUT_ONLY = 2,
+                        INPUT_OR_OUTPUT = 3
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CLOSED = 1,
+                        OPEN = 2
+                    }
+                }
+
+                /** Properties of a ListRemoteTransportProfilesRequest. */
+                interface IListRemoteTransportProfilesRequest {
+
+                    /** ListRemoteTransportProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRemoteTransportProfilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRemoteTransportProfilesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRemoteTransportProfilesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRemoteTransportProfilesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRemoteTransportProfilesRequest. */
+                class ListRemoteTransportProfilesRequest implements IListRemoteTransportProfilesRequest {
+
+                    /**
+                     * Constructs a new ListRemoteTransportProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesRequest);
+
+                    /** ListRemoteTransportProfilesRequest parent. */
+                    public parent: string;
+
+                    /** ListRemoteTransportProfilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRemoteTransportProfilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRemoteTransportProfilesRequest filter. */
+                    public filter: string;
+
+                    /** ListRemoteTransportProfilesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRemoteTransportProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRemoteTransportProfilesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesRequest): google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesRequest;
+
+                    /**
+                     * Encodes the specified ListRemoteTransportProfilesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesRequest.verify|verify} messages.
+                     * @param message ListRemoteTransportProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRemoteTransportProfilesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesRequest.verify|verify} messages.
+                     * @param message ListRemoteTransportProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRemoteTransportProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRemoteTransportProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesRequest;
+
+                    /**
+                     * Decodes a ListRemoteTransportProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRemoteTransportProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesRequest;
+
+                    /**
+                     * Verifies a ListRemoteTransportProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRemoteTransportProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRemoteTransportProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRemoteTransportProfilesRequest message. Also converts values to other types if specified.
+                     * @param message ListRemoteTransportProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRemoteTransportProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRemoteTransportProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRemoteTransportProfilesResponse. */
+                interface IListRemoteTransportProfilesResponse {
+
+                    /** ListRemoteTransportProfilesResponse remoteTransportProfiles */
+                    remoteTransportProfiles?: (google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile[]|null);
+
+                    /** ListRemoteTransportProfilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRemoteTransportProfilesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRemoteTransportProfilesResponse. */
+                class ListRemoteTransportProfilesResponse implements IListRemoteTransportProfilesResponse {
+
+                    /**
+                     * Constructs a new ListRemoteTransportProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesResponse);
+
+                    /** ListRemoteTransportProfilesResponse remoteTransportProfiles. */
+                    public remoteTransportProfiles: google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile[];
+
+                    /** ListRemoteTransportProfilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRemoteTransportProfilesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRemoteTransportProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRemoteTransportProfilesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesResponse): google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse;
+
+                    /**
+                     * Encodes the specified ListRemoteTransportProfilesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse.verify|verify} messages.
+                     * @param message ListRemoteTransportProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRemoteTransportProfilesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse.verify|verify} messages.
+                     * @param message ListRemoteTransportProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRemoteTransportProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRemoteTransportProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse;
+
+                    /**
+                     * Decodes a ListRemoteTransportProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRemoteTransportProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse;
+
+                    /**
+                     * Verifies a ListRemoteTransportProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRemoteTransportProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRemoteTransportProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRemoteTransportProfilesResponse message. Also converts values to other types if specified.
+                     * @param message ListRemoteTransportProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRemoteTransportProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRemoteTransportProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRemoteTransportProfileRequest. */
+                interface IGetRemoteTransportProfileRequest {
+
+                    /** GetRemoteTransportProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRemoteTransportProfileRequest. */
+                class GetRemoteTransportProfileRequest implements IGetRemoteTransportProfileRequest {
+
+                    /**
+                     * Constructs a new GetRemoteTransportProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetRemoteTransportProfileRequest);
+
+                    /** GetRemoteTransportProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRemoteTransportProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRemoteTransportProfileRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetRemoteTransportProfileRequest): google.cloud.networkconnectivity.v1beta.GetRemoteTransportProfileRequest;
+
+                    /**
+                     * Encodes the specified GetRemoteTransportProfileRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetRemoteTransportProfileRequest.verify|verify} messages.
+                     * @param message GetRemoteTransportProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetRemoteTransportProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRemoteTransportProfileRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetRemoteTransportProfileRequest.verify|verify} messages.
+                     * @param message GetRemoteTransportProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetRemoteTransportProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRemoteTransportProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRemoteTransportProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetRemoteTransportProfileRequest;
+
+                    /**
+                     * Decodes a GetRemoteTransportProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRemoteTransportProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetRemoteTransportProfileRequest;
+
+                    /**
+                     * Verifies a GetRemoteTransportProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRemoteTransportProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRemoteTransportProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetRemoteTransportProfileRequest;
+
+                    /**
+                     * Creates a plain object from a GetRemoteTransportProfileRequest message. Also converts values to other types if specified.
+                     * @param message GetRemoteTransportProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetRemoteTransportProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRemoteTransportProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRemoteTransportProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Transport. */
+                interface ITransport {
+
+                    /** Transport name */
+                    name?: (string|null);
+
+                    /** Transport createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Transport updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Transport labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Transport description */
+                    description?: (string|null);
+
+                    /** Transport remoteProfile */
+                    remoteProfile?: (string|null);
+
+                    /** Transport providedActivationKey */
+                    providedActivationKey?: (string|null);
+
+                    /** Transport generatedActivationKey */
+                    generatedActivationKey?: (string|null);
+
+                    /** Transport bandwidth */
+                    bandwidth?: (google.cloud.networkconnectivity.v1beta.Transport.Bandwidth|keyof typeof google.cloud.networkconnectivity.v1beta.Transport.Bandwidth|null);
+
+                    /** Transport stackType */
+                    stackType?: (google.cloud.networkconnectivity.v1beta.Transport.StackType|keyof typeof google.cloud.networkconnectivity.v1beta.Transport.StackType|null);
+
+                    /** Transport state */
+                    state?: (google.cloud.networkconnectivity.v1beta.Transport.State|keyof typeof google.cloud.networkconnectivity.v1beta.Transport.State|null);
+
+                    /** Transport mtuLimit */
+                    mtuLimit?: (number|null);
+
+                    /** Transport adminEnabled */
+                    adminEnabled?: (boolean|null);
+
+                    /** Transport network */
+                    network?: (string|null);
+
+                    /** Transport advertisedRoutes */
+                    advertisedRoutes?: (string[]|null);
+
+                    /** Transport remoteAccountId */
+                    remoteAccountId?: (string|null);
+
+                    /** Transport peeringNetwork */
+                    peeringNetwork?: (string|null);
+                }
+
+                /** Represents a Transport. */
+                class Transport implements ITransport {
+
+                    /**
+                     * Constructs a new Transport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ITransport);
+
+                    /** Transport name. */
+                    public name: string;
+
+                    /** Transport createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Transport updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Transport labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Transport description. */
+                    public description: string;
+
+                    /** Transport remoteProfile. */
+                    public remoteProfile: string;
+
+                    /** Transport providedActivationKey. */
+                    public providedActivationKey: string;
+
+                    /** Transport generatedActivationKey. */
+                    public generatedActivationKey: string;
+
+                    /** Transport bandwidth. */
+                    public bandwidth: (google.cloud.networkconnectivity.v1beta.Transport.Bandwidth|keyof typeof google.cloud.networkconnectivity.v1beta.Transport.Bandwidth);
+
+                    /** Transport stackType. */
+                    public stackType: (google.cloud.networkconnectivity.v1beta.Transport.StackType|keyof typeof google.cloud.networkconnectivity.v1beta.Transport.StackType);
+
+                    /** Transport state. */
+                    public state: (google.cloud.networkconnectivity.v1beta.Transport.State|keyof typeof google.cloud.networkconnectivity.v1beta.Transport.State);
+
+                    /** Transport mtuLimit. */
+                    public mtuLimit: number;
+
+                    /** Transport adminEnabled. */
+                    public adminEnabled: boolean;
+
+                    /** Transport network. */
+                    public network: string;
+
+                    /** Transport advertisedRoutes. */
+                    public advertisedRoutes: string[];
+
+                    /** Transport remoteAccountId. */
+                    public remoteAccountId: string;
+
+                    /** Transport peeringNetwork. */
+                    public peeringNetwork: string;
+
+                    /**
+                     * Creates a new Transport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Transport instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ITransport): google.cloud.networkconnectivity.v1beta.Transport;
+
+                    /**
+                     * Encodes the specified Transport message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Transport.verify|verify} messages.
+                     * @param message Transport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ITransport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Transport message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Transport.verify|verify} messages.
+                     * @param message Transport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ITransport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Transport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Transport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Transport;
+
+                    /**
+                     * Decodes a Transport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Transport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Transport;
+
+                    /**
+                     * Verifies a Transport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Transport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Transport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Transport;
+
+                    /**
+                     * Creates a plain object from a Transport message. Also converts values to other types if specified.
+                     * @param message Transport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.Transport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Transport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Transport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Transport {
+
+                    /** Bandwidth enum. */
+                    enum Bandwidth {
+                        BANDWIDTH_UNSPECIFIED = 0,
+                        BPS_50M = 1,
+                        BPS_100M = 2,
+                        BPS_200M = 3,
+                        BPS_300M = 4,
+                        BPS_400M = 5,
+                        BPS_500M = 6,
+                        BPS_1G = 7,
+                        BPS_2G = 8,
+                        BPS_5G = 9,
+                        BPS_10G = 10,
+                        BPS_20G = 11,
+                        BPS_50G = 12,
+                        BPS_100G = 13
+                    }
+
+                    /** StackType enum. */
+                    enum StackType {
+                        STACK_TYPE_UNSPECIFIED = 0,
+                        IPV4_ONLY = 1,
+                        IPV4_IPV6 = 2
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        PENDING_CONFIG = 2,
+                        PENDING_KEY = 3,
+                        ACTIVE = 4,
+                        DELETING = 5,
+                        DEPROVISIONED = 6
+                    }
+                }
+
+                /** Properties of a ListTransportsRequest. */
+                interface IListTransportsRequest {
+
+                    /** ListTransportsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTransportsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListTransportsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListTransportsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListTransportsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListTransportsRequest. */
+                class ListTransportsRequest implements IListTransportsRequest {
+
+                    /**
+                     * Constructs a new ListTransportsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListTransportsRequest);
+
+                    /** ListTransportsRequest parent. */
+                    public parent: string;
+
+                    /** ListTransportsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListTransportsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListTransportsRequest filter. */
+                    public filter: string;
+
+                    /** ListTransportsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListTransportsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTransportsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListTransportsRequest): google.cloud.networkconnectivity.v1beta.ListTransportsRequest;
+
+                    /**
+                     * Encodes the specified ListTransportsRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListTransportsRequest.verify|verify} messages.
+                     * @param message ListTransportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListTransportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTransportsRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListTransportsRequest.verify|verify} messages.
+                     * @param message ListTransportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListTransportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTransportsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTransportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListTransportsRequest;
+
+                    /**
+                     * Decodes a ListTransportsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTransportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListTransportsRequest;
+
+                    /**
+                     * Verifies a ListTransportsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTransportsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTransportsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListTransportsRequest;
+
+                    /**
+                     * Creates a plain object from a ListTransportsRequest message. Also converts values to other types if specified.
+                     * @param message ListTransportsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListTransportsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTransportsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTransportsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTransportsResponse. */
+                interface IListTransportsResponse {
+
+                    /** ListTransportsResponse transports */
+                    transports?: (google.cloud.networkconnectivity.v1beta.ITransport[]|null);
+
+                    /** ListTransportsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListTransportsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListTransportsResponse. */
+                class ListTransportsResponse implements IListTransportsResponse {
+
+                    /**
+                     * Constructs a new ListTransportsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IListTransportsResponse);
+
+                    /** ListTransportsResponse transports. */
+                    public transports: google.cloud.networkconnectivity.v1beta.ITransport[];
+
+                    /** ListTransportsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListTransportsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListTransportsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTransportsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IListTransportsResponse): google.cloud.networkconnectivity.v1beta.ListTransportsResponse;
+
+                    /**
+                     * Encodes the specified ListTransportsResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListTransportsResponse.verify|verify} messages.
+                     * @param message ListTransportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IListTransportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTransportsResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ListTransportsResponse.verify|verify} messages.
+                     * @param message ListTransportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IListTransportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTransportsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTransportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ListTransportsResponse;
+
+                    /**
+                     * Decodes a ListTransportsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTransportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ListTransportsResponse;
+
+                    /**
+                     * Verifies a ListTransportsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTransportsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTransportsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ListTransportsResponse;
+
+                    /**
+                     * Creates a plain object from a ListTransportsResponse message. Also converts values to other types if specified.
+                     * @param message ListTransportsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ListTransportsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTransportsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTransportsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetTransportRequest. */
+                interface IGetTransportRequest {
+
+                    /** GetTransportRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetTransportRequest. */
+                class GetTransportRequest implements IGetTransportRequest {
+
+                    /**
+                     * Constructs a new GetTransportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetTransportRequest);
+
+                    /** GetTransportRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetTransportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetTransportRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetTransportRequest): google.cloud.networkconnectivity.v1beta.GetTransportRequest;
+
+                    /**
+                     * Encodes the specified GetTransportRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetTransportRequest.verify|verify} messages.
+                     * @param message GetTransportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetTransportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetTransportRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetTransportRequest.verify|verify} messages.
+                     * @param message GetTransportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetTransportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetTransportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetTransportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetTransportRequest;
+
+                    /**
+                     * Decodes a GetTransportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetTransportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetTransportRequest;
+
+                    /**
+                     * Verifies a GetTransportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetTransportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetTransportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetTransportRequest;
+
+                    /**
+                     * Creates a plain object from a GetTransportRequest message. Also converts values to other types if specified.
+                     * @param message GetTransportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetTransportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetTransportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetTransportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetStatusRequest. */
+                interface IGetStatusRequest {
+
+                    /** GetStatusRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetStatusRequest. */
+                class GetStatusRequest implements IGetStatusRequest {
+
+                    /**
+                     * Constructs a new GetStatusRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetStatusRequest);
+
+                    /** GetStatusRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetStatusRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetStatusRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetStatusRequest): google.cloud.networkconnectivity.v1beta.GetStatusRequest;
+
+                    /**
+                     * Encodes the specified GetStatusRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetStatusRequest.verify|verify} messages.
+                     * @param message GetStatusRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetStatusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetStatusRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetStatusRequest.verify|verify} messages.
+                     * @param message GetStatusRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetStatusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetStatusRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetStatusRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetStatusRequest;
+
+                    /**
+                     * Decodes a GetStatusRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetStatusRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetStatusRequest;
+
+                    /**
+                     * Verifies a GetStatusRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetStatusRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetStatusRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetStatusRequest;
+
+                    /**
+                     * Creates a plain object from a GetStatusRequest message. Also converts values to other types if specified.
+                     * @param message GetStatusRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetStatusRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetStatusRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetStatusRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetStatusResponse. */
+                interface IGetStatusResponse {
+
+                    /** GetStatusResponse overallStatus */
+                    overallStatus?: (google.cloud.networkconnectivity.v1beta.GetStatusResponse.OverallStatus|keyof typeof google.cloud.networkconnectivity.v1beta.GetStatusResponse.OverallStatus|null);
+
+                    /** GetStatusResponse operationalStatus */
+                    operationalStatus?: (google.cloud.networkconnectivity.v1beta.GetStatusResponse.OperationalStatus|keyof typeof google.cloud.networkconnectivity.v1beta.GetStatusResponse.OperationalStatus|null);
+
+                    /** GetStatusResponse connectivityStatus */
+                    connectivityStatus?: (google.cloud.networkconnectivity.v1beta.GetStatusResponse.ConnectivityStatus|keyof typeof google.cloud.networkconnectivity.v1beta.GetStatusResponse.ConnectivityStatus|null);
+
+                    /** GetStatusResponse macSecStatus */
+                    macSecStatus?: (google.cloud.networkconnectivity.v1beta.GetStatusResponse.MacSecStatus|keyof typeof google.cloud.networkconnectivity.v1beta.GetStatusResponse.MacSecStatus|null);
+                }
+
+                /** Represents a GetStatusResponse. */
+                class GetStatusResponse implements IGetStatusResponse {
+
+                    /**
+                     * Constructs a new GetStatusResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IGetStatusResponse);
+
+                    /** GetStatusResponse overallStatus. */
+                    public overallStatus: (google.cloud.networkconnectivity.v1beta.GetStatusResponse.OverallStatus|keyof typeof google.cloud.networkconnectivity.v1beta.GetStatusResponse.OverallStatus);
+
+                    /** GetStatusResponse operationalStatus. */
+                    public operationalStatus: (google.cloud.networkconnectivity.v1beta.GetStatusResponse.OperationalStatus|keyof typeof google.cloud.networkconnectivity.v1beta.GetStatusResponse.OperationalStatus);
+
+                    /** GetStatusResponse connectivityStatus. */
+                    public connectivityStatus: (google.cloud.networkconnectivity.v1beta.GetStatusResponse.ConnectivityStatus|keyof typeof google.cloud.networkconnectivity.v1beta.GetStatusResponse.ConnectivityStatus);
+
+                    /** GetStatusResponse macSecStatus. */
+                    public macSecStatus: (google.cloud.networkconnectivity.v1beta.GetStatusResponse.MacSecStatus|keyof typeof google.cloud.networkconnectivity.v1beta.GetStatusResponse.MacSecStatus);
+
+                    /**
+                     * Creates a new GetStatusResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetStatusResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IGetStatusResponse): google.cloud.networkconnectivity.v1beta.GetStatusResponse;
+
+                    /**
+                     * Encodes the specified GetStatusResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetStatusResponse.verify|verify} messages.
+                     * @param message GetStatusResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IGetStatusResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetStatusResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.GetStatusResponse.verify|verify} messages.
+                     * @param message GetStatusResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IGetStatusResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetStatusResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetStatusResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.GetStatusResponse;
+
+                    /**
+                     * Decodes a GetStatusResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetStatusResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.GetStatusResponse;
+
+                    /**
+                     * Verifies a GetStatusResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetStatusResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetStatusResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.GetStatusResponse;
+
+                    /**
+                     * Creates a plain object from a GetStatusResponse message. Also converts values to other types if specified.
+                     * @param message GetStatusResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.GetStatusResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetStatusResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetStatusResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GetStatusResponse {
+
+                    /** OverallStatus enum. */
+                    enum OverallStatus {
+                        OVERALL_STATUS_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        PENDING_KEY = 2,
+                        CONFIGURING = 3,
+                        DISCONNECTED = 4,
+                        DOWN = 5
+                    }
+
+                    /** OperationalStatus enum. */
+                    enum OperationalStatus {
+                        OPERATIONAL_STATUS_UNSPECIFIED = 0,
+                        OPERATIONAL_STATUS_ACTIVE = 1,
+                        OPERATIONAL_STATUS_DOWN = 2
+                    }
+
+                    /** ConnectivityStatus enum. */
+                    enum ConnectivityStatus {
+                        CONNECTIVITY_STATUS_UNSPECIFIED = 0,
+                        CONNECTIVITY_STATUS_CONNECTED = 1,
+                        CONNECTIVITY_STATUS_DISCONNECTED = 2
+                    }
+
+                    /** MacSecStatus enum. */
+                    enum MacSecStatus {
+                        MAC_SEC_STATUS_UNSPECIFIED = 0,
+                        MAC_SEC_STATUS_ACTIVE_FAIL_CLOSED = 1,
+                        MAC_SEC_STATUS_ACTIVE_FAIL_OPEN = 2,
+                        MAC_SEC_STATUS_NOT_CONFIGURED = 3
+                    }
+                }
+
+                /** Properties of a CreateTransportRequest. */
+                interface ICreateTransportRequest {
+
+                    /** CreateTransportRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateTransportRequest transportId */
+                    transportId?: (string|null);
+
+                    /** CreateTransportRequest transport */
+                    transport?: (google.cloud.networkconnectivity.v1beta.ITransport|null);
+
+                    /** CreateTransportRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateTransportRequest. */
+                class CreateTransportRequest implements ICreateTransportRequest {
+
+                    /**
+                     * Constructs a new CreateTransportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.ICreateTransportRequest);
+
+                    /** CreateTransportRequest parent. */
+                    public parent: string;
+
+                    /** CreateTransportRequest transportId. */
+                    public transportId: string;
+
+                    /** CreateTransportRequest transport. */
+                    public transport?: (google.cloud.networkconnectivity.v1beta.ITransport|null);
+
+                    /** CreateTransportRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateTransportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTransportRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.ICreateTransportRequest): google.cloud.networkconnectivity.v1beta.CreateTransportRequest;
+
+                    /**
+                     * Encodes the specified CreateTransportRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateTransportRequest.verify|verify} messages.
+                     * @param message CreateTransportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.ICreateTransportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTransportRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.CreateTransportRequest.verify|verify} messages.
+                     * @param message CreateTransportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.ICreateTransportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTransportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTransportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.CreateTransportRequest;
+
+                    /**
+                     * Decodes a CreateTransportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTransportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.CreateTransportRequest;
+
+                    /**
+                     * Verifies a CreateTransportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTransportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTransportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.CreateTransportRequest;
+
+                    /**
+                     * Creates a plain object from a CreateTransportRequest message. Also converts values to other types if specified.
+                     * @param message CreateTransportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.CreateTransportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTransportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateTransportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateTransportRequest. */
+                interface IUpdateTransportRequest {
+
+                    /** UpdateTransportRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateTransportRequest transport */
+                    transport?: (google.cloud.networkconnectivity.v1beta.ITransport|null);
+
+                    /** UpdateTransportRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateTransportRequest. */
+                class UpdateTransportRequest implements IUpdateTransportRequest {
+
+                    /**
+                     * Constructs a new UpdateTransportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IUpdateTransportRequest);
+
+                    /** UpdateTransportRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateTransportRequest transport. */
+                    public transport?: (google.cloud.networkconnectivity.v1beta.ITransport|null);
+
+                    /** UpdateTransportRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateTransportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateTransportRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IUpdateTransportRequest): google.cloud.networkconnectivity.v1beta.UpdateTransportRequest;
+
+                    /**
+                     * Encodes the specified UpdateTransportRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateTransportRequest.verify|verify} messages.
+                     * @param message UpdateTransportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IUpdateTransportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateTransportRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.UpdateTransportRequest.verify|verify} messages.
+                     * @param message UpdateTransportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IUpdateTransportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateTransportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateTransportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.UpdateTransportRequest;
+
+                    /**
+                     * Decodes an UpdateTransportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateTransportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.UpdateTransportRequest;
+
+                    /**
+                     * Verifies an UpdateTransportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateTransportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateTransportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.UpdateTransportRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateTransportRequest message. Also converts values to other types if specified.
+                     * @param message UpdateTransportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.UpdateTransportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateTransportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateTransportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteTransportRequest. */
+                interface IDeleteTransportRequest {
+
+                    /** DeleteTransportRequest name */
+                    name?: (string|null);
+
+                    /** DeleteTransportRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteTransportRequest. */
+                class DeleteTransportRequest implements IDeleteTransportRequest {
+
+                    /**
+                     * Constructs a new DeleteTransportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IDeleteTransportRequest);
+
+                    /** DeleteTransportRequest name. */
+                    public name: string;
+
+                    /** DeleteTransportRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteTransportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTransportRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IDeleteTransportRequest): google.cloud.networkconnectivity.v1beta.DeleteTransportRequest;
+
+                    /**
+                     * Encodes the specified DeleteTransportRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteTransportRequest.verify|verify} messages.
+                     * @param message DeleteTransportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IDeleteTransportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTransportRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.DeleteTransportRequest.verify|verify} messages.
+                     * @param message DeleteTransportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IDeleteTransportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTransportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTransportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.DeleteTransportRequest;
+
+                    /**
+                     * Decodes a DeleteTransportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTransportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.DeleteTransportRequest;
+
+                    /**
+                     * Verifies a DeleteTransportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTransportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTransportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.DeleteTransportRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTransportRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTransportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.DeleteTransportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTransportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteTransportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
         }
     }
 
