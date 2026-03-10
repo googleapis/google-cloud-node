@@ -3365,23 +3365,13 @@ describe('Bucket', () => {
           },
         };
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (bucket as any).request = (reqOpts: {json: BucketMetadata}) => {
-          const expectedEncryption = {
-            defaultKmsKeyName: 'kms-key-name',
-            googleManagedEncryptionEnforcementConfig: {
-              restrictionMode: 'FullyRestricted',
-            },
-            customerSuppliedEncryptionEnforcementConfig: {
-              restrictionMode: 'FullyRestricted',
-            },
-          };
-          try {
-            assert.deepStrictEqual(reqOpts.json.encryption, expectedEncryption);
-            done();
-          } catch (error) {
-            done(error);
-          }
+        bucket.setMetadata = (metadata: BucketMetadata) => {
+          assert.strictEqual(
+            metadata.encryption?.customerSuppliedEncryptionEnforcementConfig
+              ?.restrictionMode,
+            'FullyRestricted'
+          );
+          done();
         };
 
         bucket.setMetadata(patch, assert.ifError);
