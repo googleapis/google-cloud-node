@@ -33,6 +33,11 @@ jobs:
         run: where cp
         shell: cmd
       - run: node --version
+      - name: Force NPM to use Git Bash
+        run: |
+          npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
+          pnpm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
+        shell: cmd
       - run: bash ci/run_conditional_tests.sh
         name: Run windows unit tests
         shell: bash
