@@ -44343,6 +44343,7 @@
                          * @memberof google.cloud.geminidataanalytics.v1beta
                          * @interface IQueryDataContext
                          * @property {google.cloud.geminidataanalytics.v1beta.IDatasourceReferences|null} [datasourceReferences] QueryDataContext datasourceReferences
+                         * @property {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters|null} [parameterizedSecureViewParameters] QueryDataContext parameterizedSecureViewParameters
                          */
     
                         /**
@@ -44367,6 +44368,14 @@
                          * @instance
                          */
                         QueryDataContext.prototype.datasourceReferences = null;
+    
+                        /**
+                         * QueryDataContext parameterizedSecureViewParameters.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters|null|undefined} parameterizedSecureViewParameters
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryDataContext
+                         * @instance
+                         */
+                        QueryDataContext.prototype.parameterizedSecureViewParameters = null;
     
                         /**
                          * Creates a new QueryDataContext instance using the specified properties.
@@ -44394,6 +44403,8 @@
                                 writer = $Writer.create();
                             if (message.datasourceReferences != null && Object.hasOwnProperty.call(message, "datasourceReferences"))
                                 $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.encode(message.datasourceReferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.parameterizedSecureViewParameters != null && Object.hasOwnProperty.call(message, "parameterizedSecureViewParameters"))
+                                $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.encode(message.parameterizedSecureViewParameters, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -44432,6 +44443,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.datasourceReferences = $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.parameterizedSecureViewParameters = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -44474,6 +44489,11 @@
                                 if (error)
                                     return "datasourceReferences." + error;
                             }
+                            if (message.parameterizedSecureViewParameters != null && message.hasOwnProperty("parameterizedSecureViewParameters")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.verify(message.parameterizedSecureViewParameters);
+                                if (error)
+                                    return "parameterizedSecureViewParameters." + error;
+                            }
                             return null;
                         };
     
@@ -44494,6 +44514,11 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.QueryDataContext.datasourceReferences: object expected");
                                 message.datasourceReferences = $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.fromObject(object.datasourceReferences);
                             }
+                            if (object.parameterizedSecureViewParameters != null) {
+                                if (typeof object.parameterizedSecureViewParameters !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.QueryDataContext.parameterizedSecureViewParameters: object expected");
+                                message.parameterizedSecureViewParameters = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.fromObject(object.parameterizedSecureViewParameters);
+                            }
                             return message;
                         };
     
@@ -44510,10 +44535,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.datasourceReferences = null;
+                                object.parameterizedSecureViewParameters = null;
+                            }
                             if (message.datasourceReferences != null && message.hasOwnProperty("datasourceReferences"))
                                 object.datasourceReferences = $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.toObject(message.datasourceReferences, options);
+                            if (message.parameterizedSecureViewParameters != null && message.hasOwnProperty("parameterizedSecureViewParameters"))
+                                object.parameterizedSecureViewParameters = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.toObject(message.parameterizedSecureViewParameters, options);
                             return object;
                         };
     
@@ -44544,6 +44573,246 @@
                         };
     
                         return QueryDataContext;
+                    })();
+    
+                    v1beta.ParameterizedSecureViewParameters = (function() {
+    
+                        /**
+                         * Properties of a ParameterizedSecureViewParameters.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IParameterizedSecureViewParameters
+                         * @property {Object.<string,string>|null} [parameters] ParameterizedSecureViewParameters parameters
+                         */
+    
+                        /**
+                         * Constructs a new ParameterizedSecureViewParameters.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a ParameterizedSecureViewParameters.
+                         * @implements IParameterizedSecureViewParameters
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters=} [properties] Properties to set
+                         */
+                        function ParameterizedSecureViewParameters(properties) {
+                            this.parameters = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ParameterizedSecureViewParameters parameters.
+                         * @member {Object.<string,string>} parameters
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @instance
+                         */
+                        ParameterizedSecureViewParameters.prototype.parameters = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ParameterizedSecureViewParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters instance
+                         */
+                        ParameterizedSecureViewParameters.create = function create(properties) {
+                            return new ParameterizedSecureViewParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ParameterizedSecureViewParameters message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters} message ParameterizedSecureViewParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ParameterizedSecureViewParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                for (var keys = Object.keys(message.parameters), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.parameters[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ParameterizedSecureViewParameters message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters} message ParameterizedSecureViewParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ParameterizedSecureViewParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ParameterizedSecureViewParameters.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.parameters === $util.emptyObject)
+                                            message.parameters = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.parameters[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ParameterizedSecureViewParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ParameterizedSecureViewParameters message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ParameterizedSecureViewParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                if (!$util.isObject(message.parameters))
+                                    return "parameters: object expected";
+                                var key = Object.keys(message.parameters);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.parameters[key[i]]))
+                                        return "parameters: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ParameterizedSecureViewParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters
+                         */
+                        ParameterizedSecureViewParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters();
+                            if (object.parameters) {
+                                if (typeof object.parameters !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.parameters: object expected");
+                                message.parameters = {};
+                                for (var keys = Object.keys(object.parameters), i = 0; i < keys.length; ++i)
+                                    message.parameters[keys[i]] = String(object.parameters[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ParameterizedSecureViewParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} message ParameterizedSecureViewParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ParameterizedSecureViewParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.parameters = {};
+                            var keys2;
+                            if (message.parameters && (keys2 = Object.keys(message.parameters)).length) {
+                                object.parameters = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.parameters[keys2[j]] = message.parameters[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ParameterizedSecureViewParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ParameterizedSecureViewParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ParameterizedSecureViewParameters
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ParameterizedSecureViewParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters";
+                        };
+    
+                        return ParameterizedSecureViewParameters;
                     })();
     
                     v1beta.QueryDataResponse = (function() {
@@ -46654,6 +46923,7 @@
                          * @property {string|null} [project] ChatRequest project
                          * @property {string|null} [parent] ChatRequest parent
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IMessage>|null} [messages] ChatRequest messages
+                         * @property {google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode|null} [thinkingMode] ChatRequest thinkingMode
                          */
     
                         /**
@@ -46728,6 +46998,14 @@
                          */
                         ChatRequest.prototype.messages = $util.emptyArray;
     
+                        /**
+                         * ChatRequest thinkingMode.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode} thinkingMode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
+                         * @instance
+                         */
+                        ChatRequest.prototype.thinkingMode = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -46773,6 +47051,8 @@
                                     $root.google.cloud.geminidataanalytics.v1beta.Message.encode(message.messages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.parent);
+                            if (message.thinkingMode != null && Object.hasOwnProperty.call(message, "thinkingMode"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.thinkingMode);
                             if (message.inlineContext != null && Object.hasOwnProperty.call(message, "inlineContext"))
                                 $root.google.cloud.geminidataanalytics.v1beta.Context.encode(message.inlineContext, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             if (message.conversationReference != null && Object.hasOwnProperty.call(message, "conversationReference"))
@@ -46845,6 +47125,10 @@
                                         if (!(message.messages && message.messages.length))
                                             message.messages = [];
                                         message.messages.push($root.google.cloud.geminidataanalytics.v1beta.Message.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.thinkingMode = reader.int32();
                                         break;
                                     }
                                 default:
@@ -46936,6 +47220,15 @@
                                         return "messages." + error;
                                 }
                             }
+                            if (message.thinkingMode != null && message.hasOwnProperty("thinkingMode"))
+                                switch (message.thinkingMode) {
+                                default:
+                                    return "thinkingMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -46985,6 +47278,26 @@
                                     message.messages[i] = $root.google.cloud.geminidataanalytics.v1beta.Message.fromObject(object.messages[i]);
                                 }
                             }
+                            switch (object.thinkingMode) {
+                            default:
+                                if (typeof object.thinkingMode === "number") {
+                                    message.thinkingMode = object.thinkingMode;
+                                    break;
+                                }
+                                break;
+                            case "THINKING_MODE_UNSPECIFIED":
+                            case 0:
+                                message.thinkingMode = 0;
+                                break;
+                            case "FAST":
+                            case 1:
+                                message.thinkingMode = 1;
+                                break;
+                            case "THINKING":
+                            case 2:
+                                message.thinkingMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -47006,6 +47319,7 @@
                             if (options.defaults) {
                                 object.project = "";
                                 object.parent = "";
+                                object.thinkingMode = options.enums === String ? "THINKING_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.project != null && message.hasOwnProperty("project"))
                                 object.project = message.project;
@@ -47016,6 +47330,8 @@
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.thinkingMode != null && message.hasOwnProperty("thinkingMode"))
+                                object.thinkingMode = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode[message.thinkingMode] === undefined ? message.thinkingMode : $root.google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode[message.thinkingMode] : message.thinkingMode;
                             if (message.inlineContext != null && message.hasOwnProperty("inlineContext")) {
                                 object.inlineContext = $root.google.cloud.geminidataanalytics.v1beta.Context.toObject(message.inlineContext, options);
                                 if (options.oneofs)
@@ -47064,6 +47380,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ChatRequest";
                         };
+    
+                        /**
+                         * ThinkingMode enum.
+                         * @name google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode
+                         * @enum {number}
+                         * @property {number} THINKING_MODE_UNSPECIFIED=0 THINKING_MODE_UNSPECIFIED value
+                         * @property {number} FAST=1 FAST value
+                         * @property {number} THINKING=2 THINKING value
+                         */
+                        ChatRequest.ThinkingMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "THINKING_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FAST"] = 1;
+                            values[valuesById[2] = "THINKING"] = 2;
+                            return values;
+                        })();
     
                         return ChatRequest;
                     })();
