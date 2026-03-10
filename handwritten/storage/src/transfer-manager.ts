@@ -810,8 +810,7 @@ export class TransferManager {
     );
     let partNumber = 1;
     let promises: Promise<void>[] = [];
-    const validation =
-      options.validation === undefined ? 'crc32c' : options.validation;
+    const validation = options.validation ?? 'crc32c';
     try {
       if (options.uploadId === undefined) {
         await mpuHelper.initiateUpload(options.headers);
