@@ -16,8 +16,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - uses: pnpm/action-setup@v4
-        with:
-          version: ^10.0.0
       - run: node --version
       - run: pnpm install
       - run: ci/run_conditional_tests.sh
