@@ -1,0 +1,641 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.networkconnectivity.v1beta",
+  "libraryPackage": "@google-cloud/networkconnectivity",
+  "services": {
+    "DataTransferService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataTransferServiceClient",
+          "rpcs": {
+            "GetMulticloudDataTransferConfig": {
+              "methods": [
+                "getMulticloudDataTransferConfig"
+              ]
+            },
+            "GetDestination": {
+              "methods": [
+                "getDestination"
+              ]
+            },
+            "GetMulticloudDataTransferSupportedService": {
+              "methods": [
+                "getMulticloudDataTransferSupportedService"
+              ]
+            },
+            "CreateMulticloudDataTransferConfig": {
+              "methods": [
+                "createMulticloudDataTransferConfig"
+              ]
+            },
+            "UpdateMulticloudDataTransferConfig": {
+              "methods": [
+                "updateMulticloudDataTransferConfig"
+              ]
+            },
+            "DeleteMulticloudDataTransferConfig": {
+              "methods": [
+                "deleteMulticloudDataTransferConfig"
+              ]
+            },
+            "CreateDestination": {
+              "methods": [
+                "createDestination"
+              ]
+            },
+            "UpdateDestination": {
+              "methods": [
+                "updateDestination"
+              ]
+            },
+            "DeleteDestination": {
+              "methods": [
+                "deleteDestination"
+              ]
+            },
+            "ListMulticloudDataTransferConfigs": {
+              "methods": [
+                "listMulticloudDataTransferConfigs",
+                "listMulticloudDataTransferConfigsStream",
+                "listMulticloudDataTransferConfigsAsync"
+              ]
+            },
+            "ListDestinations": {
+              "methods": [
+                "listDestinations",
+                "listDestinationsStream",
+                "listDestinationsAsync"
+              ]
+            },
+            "ListMulticloudDataTransferSupportedServices": {
+              "methods": [
+                "listMulticloudDataTransferSupportedServices",
+                "listMulticloudDataTransferSupportedServicesStream",
+                "listMulticloudDataTransferSupportedServicesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataTransferServiceClient",
+          "rpcs": {
+            "GetMulticloudDataTransferConfig": {
+              "methods": [
+                "getMulticloudDataTransferConfig"
+              ]
+            },
+            "GetDestination": {
+              "methods": [
+                "getDestination"
+              ]
+            },
+            "GetMulticloudDataTransferSupportedService": {
+              "methods": [
+                "getMulticloudDataTransferSupportedService"
+              ]
+            },
+            "CreateMulticloudDataTransferConfig": {
+              "methods": [
+                "createMulticloudDataTransferConfig"
+              ]
+            },
+            "UpdateMulticloudDataTransferConfig": {
+              "methods": [
+                "updateMulticloudDataTransferConfig"
+              ]
+            },
+            "DeleteMulticloudDataTransferConfig": {
+              "methods": [
+                "deleteMulticloudDataTransferConfig"
+              ]
+            },
+            "CreateDestination": {
+              "methods": [
+                "createDestination"
+              ]
+            },
+            "UpdateDestination": {
+              "methods": [
+                "updateDestination"
+              ]
+            },
+            "DeleteDestination": {
+              "methods": [
+                "deleteDestination"
+              ]
+            },
+            "ListMulticloudDataTransferConfigs": {
+              "methods": [
+                "listMulticloudDataTransferConfigs",
+                "listMulticloudDataTransferConfigsStream",
+                "listMulticloudDataTransferConfigsAsync"
+              ]
+            },
+            "ListDestinations": {
+              "methods": [
+                "listDestinations",
+                "listDestinationsStream",
+                "listDestinationsAsync"
+              ]
+            },
+            "ListMulticloudDataTransferSupportedServices": {
+              "methods": [
+                "listMulticloudDataTransferSupportedServices",
+                "listMulticloudDataTransferSupportedServicesStream",
+                "listMulticloudDataTransferSupportedServicesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "HubService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "HubServiceClient",
+          "rpcs": {
+            "GetHub": {
+              "methods": [
+                "getHub"
+              ]
+            },
+            "GetSpoke": {
+              "methods": [
+                "getSpoke"
+              ]
+            },
+            "GetRouteTable": {
+              "methods": [
+                "getRouteTable"
+              ]
+            },
+            "GetRoute": {
+              "methods": [
+                "getRoute"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
+            "GetGatewayAdvertisedRoute": {
+              "methods": [
+                "getGatewayAdvertisedRoute"
+              ]
+            },
+            "CreateHub": {
+              "methods": [
+                "createHub"
+              ]
+            },
+            "UpdateHub": {
+              "methods": [
+                "updateHub"
+              ]
+            },
+            "DeleteHub": {
+              "methods": [
+                "deleteHub"
+              ]
+            },
+            "CreateSpoke": {
+              "methods": [
+                "createSpoke"
+              ]
+            },
+            "UpdateSpoke": {
+              "methods": [
+                "updateSpoke"
+              ]
+            },
+            "RejectHubSpoke": {
+              "methods": [
+                "rejectHubSpoke"
+              ]
+            },
+            "AcceptHubSpoke": {
+              "methods": [
+                "acceptHubSpoke"
+              ]
+            },
+            "AcceptSpokeUpdate": {
+              "methods": [
+                "acceptSpokeUpdate"
+              ]
+            },
+            "RejectSpokeUpdate": {
+              "methods": [
+                "rejectSpokeUpdate"
+              ]
+            },
+            "DeleteSpoke": {
+              "methods": [
+                "deleteSpoke"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            },
+            "CreateGatewayAdvertisedRoute": {
+              "methods": [
+                "createGatewayAdvertisedRoute"
+              ]
+            },
+            "UpdateGatewayAdvertisedRoute": {
+              "methods": [
+                "updateGatewayAdvertisedRoute"
+              ]
+            },
+            "DeleteGatewayAdvertisedRoute": {
+              "methods": [
+                "deleteGatewayAdvertisedRoute"
+              ]
+            },
+            "ListHubs": {
+              "methods": [
+                "listHubs",
+                "listHubsStream",
+                "listHubsAsync"
+              ]
+            },
+            "ListHubSpokes": {
+              "methods": [
+                "listHubSpokes",
+                "listHubSpokesStream",
+                "listHubSpokesAsync"
+              ]
+            },
+            "QueryHubStatus": {
+              "methods": [
+                "queryHubStatus",
+                "queryHubStatusStream",
+                "queryHubStatusAsync"
+              ]
+            },
+            "ListSpokes": {
+              "methods": [
+                "listSpokes",
+                "listSpokesStream",
+                "listSpokesAsync"
+              ]
+            },
+            "ListRoutes": {
+              "methods": [
+                "listRoutes",
+                "listRoutesStream",
+                "listRoutesAsync"
+              ]
+            },
+            "ListRouteTables": {
+              "methods": [
+                "listRouteTables",
+                "listRouteTablesStream",
+                "listRouteTablesAsync"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "listGroups",
+                "listGroupsStream",
+                "listGroupsAsync"
+              ]
+            },
+            "ListGatewayAdvertisedRoutes": {
+              "methods": [
+                "listGatewayAdvertisedRoutes",
+                "listGatewayAdvertisedRoutesStream",
+                "listGatewayAdvertisedRoutesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "HubServiceClient",
+          "rpcs": {
+            "GetHub": {
+              "methods": [
+                "getHub"
+              ]
+            },
+            "GetSpoke": {
+              "methods": [
+                "getSpoke"
+              ]
+            },
+            "GetRouteTable": {
+              "methods": [
+                "getRouteTable"
+              ]
+            },
+            "GetRoute": {
+              "methods": [
+                "getRoute"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
+            "GetGatewayAdvertisedRoute": {
+              "methods": [
+                "getGatewayAdvertisedRoute"
+              ]
+            },
+            "CreateHub": {
+              "methods": [
+                "createHub"
+              ]
+            },
+            "UpdateHub": {
+              "methods": [
+                "updateHub"
+              ]
+            },
+            "DeleteHub": {
+              "methods": [
+                "deleteHub"
+              ]
+            },
+            "CreateSpoke": {
+              "methods": [
+                "createSpoke"
+              ]
+            },
+            "UpdateSpoke": {
+              "methods": [
+                "updateSpoke"
+              ]
+            },
+            "RejectHubSpoke": {
+              "methods": [
+                "rejectHubSpoke"
+              ]
+            },
+            "AcceptHubSpoke": {
+              "methods": [
+                "acceptHubSpoke"
+              ]
+            },
+            "AcceptSpokeUpdate": {
+              "methods": [
+                "acceptSpokeUpdate"
+              ]
+            },
+            "RejectSpokeUpdate": {
+              "methods": [
+                "rejectSpokeUpdate"
+              ]
+            },
+            "DeleteSpoke": {
+              "methods": [
+                "deleteSpoke"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            },
+            "CreateGatewayAdvertisedRoute": {
+              "methods": [
+                "createGatewayAdvertisedRoute"
+              ]
+            },
+            "UpdateGatewayAdvertisedRoute": {
+              "methods": [
+                "updateGatewayAdvertisedRoute"
+              ]
+            },
+            "DeleteGatewayAdvertisedRoute": {
+              "methods": [
+                "deleteGatewayAdvertisedRoute"
+              ]
+            },
+            "ListHubs": {
+              "methods": [
+                "listHubs",
+                "listHubsStream",
+                "listHubsAsync"
+              ]
+            },
+            "ListHubSpokes": {
+              "methods": [
+                "listHubSpokes",
+                "listHubSpokesStream",
+                "listHubSpokesAsync"
+              ]
+            },
+            "QueryHubStatus": {
+              "methods": [
+                "queryHubStatus",
+                "queryHubStatusStream",
+                "queryHubStatusAsync"
+              ]
+            },
+            "ListSpokes": {
+              "methods": [
+                "listSpokes",
+                "listSpokesStream",
+                "listSpokesAsync"
+              ]
+            },
+            "ListRoutes": {
+              "methods": [
+                "listRoutes",
+                "listRoutesStream",
+                "listRoutesAsync"
+              ]
+            },
+            "ListRouteTables": {
+              "methods": [
+                "listRouteTables",
+                "listRouteTablesStream",
+                "listRouteTablesAsync"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "listGroups",
+                "listGroupsStream",
+                "listGroupsAsync"
+              ]
+            },
+            "ListGatewayAdvertisedRoutes": {
+              "methods": [
+                "listGatewayAdvertisedRoutes",
+                "listGatewayAdvertisedRoutesStream",
+                "listGatewayAdvertisedRoutesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyBasedRoutingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PolicyBasedRoutingServiceClient",
+          "rpcs": {
+            "GetPolicyBasedRoute": {
+              "methods": [
+                "getPolicyBasedRoute"
+              ]
+            },
+            "CreatePolicyBasedRoute": {
+              "methods": [
+                "createPolicyBasedRoute"
+              ]
+            },
+            "DeletePolicyBasedRoute": {
+              "methods": [
+                "deletePolicyBasedRoute"
+              ]
+            },
+            "ListPolicyBasedRoutes": {
+              "methods": [
+                "listPolicyBasedRoutes",
+                "listPolicyBasedRoutesStream",
+                "listPolicyBasedRoutesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PolicyBasedRoutingServiceClient",
+          "rpcs": {
+            "GetPolicyBasedRoute": {
+              "methods": [
+                "getPolicyBasedRoute"
+              ]
+            },
+            "CreatePolicyBasedRoute": {
+              "methods": [
+                "createPolicyBasedRoute"
+              ]
+            },
+            "DeletePolicyBasedRoute": {
+              "methods": [
+                "deletePolicyBasedRoute"
+              ]
+            },
+            "ListPolicyBasedRoutes": {
+              "methods": [
+                "listPolicyBasedRoutes",
+                "listPolicyBasedRoutesStream",
+                "listPolicyBasedRoutesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TransportManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TransportManagerClient",
+          "rpcs": {
+            "GetRemoteTransportProfile": {
+              "methods": [
+                "getRemoteTransportProfile"
+              ]
+            },
+            "GetTransport": {
+              "methods": [
+                "getTransport"
+              ]
+            },
+            "GetStatus": {
+              "methods": [
+                "getStatus"
+              ]
+            },
+            "CreateTransport": {
+              "methods": [
+                "createTransport"
+              ]
+            },
+            "UpdateTransport": {
+              "methods": [
+                "updateTransport"
+              ]
+            },
+            "DeleteTransport": {
+              "methods": [
+                "deleteTransport"
+              ]
+            },
+            "ListRemoteTransportProfiles": {
+              "methods": [
+                "listRemoteTransportProfiles",
+                "listRemoteTransportProfilesStream",
+                "listRemoteTransportProfilesAsync"
+              ]
+            },
+            "ListTransports": {
+              "methods": [
+                "listTransports",
+                "listTransportsStream",
+                "listTransportsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TransportManagerClient",
+          "rpcs": {
+            "GetRemoteTransportProfile": {
+              "methods": [
+                "getRemoteTransportProfile"
+              ]
+            },
+            "GetTransport": {
+              "methods": [
+                "getTransport"
+              ]
+            },
+            "GetStatus": {
+              "methods": [
+                "getStatus"
+              ]
+            },
+            "CreateTransport": {
+              "methods": [
+                "createTransport"
+              ]
+            },
+            "UpdateTransport": {
+              "methods": [
+                "updateTransport"
+              ]
+            },
+            "DeleteTransport": {
+              "methods": [
+                "deleteTransport"
+              ]
+            },
+            "ListRemoteTransportProfiles": {
+              "methods": [
+                "listRemoteTransportProfiles",
+                "listRemoteTransportProfilesStream",
+                "listRemoteTransportProfilesAsync"
+              ]
+            },
+            "ListTransports": {
+              "methods": [
+                "listTransports",
+                "listTransportsStream",
+                "listTransportsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
