@@ -11,6 +11,13 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 300
+      - name: Update Windows path to use Linux/MacOS compatible binaries from Git Bash
+        run: echo "C:\Program Files\Git\usr\bin" >> $GITHUB_PATH
+        shell: bash
+      - name: Check which cp is being used
+        run: where cp
+        run: echo %PATH%
+        shell: cmd
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v6
         with:
