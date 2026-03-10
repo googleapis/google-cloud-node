@@ -18,26 +18,8 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: ^10.0.0
-      - name: Cache turbo build setup
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
       - uses: oven-sh/setup-bun@v2
-      - name: Update Windows path to use Linux/MacOS compatible binaries from Git Bash
-        run: echo "C:\Program Files\Git\usr\bin" >> $GITHUB_PATH
-        shell: bash
-      - name: Check which cp is being used
-        run: where cp
-        shell: cmd
       - run: node --version
-      - name: Force NPM to use Git Bash
-        run: |
-          npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
-          pnpm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
-        shell: cmd
       - run: bash ci/run_conditional_tests.sh
         name: Run windows unit tests
         shell: bash
@@ -45,5 +27,3 @@ jobs:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
           TURBO_TELEMETRY_DISABLED: 1
-          SHELL: C:\Program Files\Git\bin\bash.exe
-          npm_config_script_shell: "C:\\Program Files\\Git\\bin\\bash.exe"

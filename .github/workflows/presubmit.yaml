@@ -18,13 +18,6 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: ^10.0.0
-      - name: Cache turbo build setup
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
       - uses: oven-sh/setup-bun@v2
       - run: node --version
       - run: ci/run_conditional_tests.sh
@@ -32,3 +25,4 @@ jobs:
         env:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
+          TURBO_TELEMETRY_DISABLED: 1
