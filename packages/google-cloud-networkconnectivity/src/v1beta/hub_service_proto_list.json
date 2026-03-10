@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/networkconnectivity/v1beta/common.proto",
+  "../../protos/google/cloud/networkconnectivity/v1beta/data_transfer.proto",
+  "../../protos/google/cloud/networkconnectivity/v1beta/hub.proto",
+  "../../protos/google/cloud/networkconnectivity/v1beta/policy_based_routing.proto",
+  "../../protos/google/cloud/networkconnectivity/v1beta/transport_manager.proto"
+]

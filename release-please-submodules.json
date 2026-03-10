@@ -2,6 +2,9 @@
   "commit-batch-size": 1,
   "include-component-in-tag": true,
   "packages": {
+    "core/projectify": {
+      "component": "projectify"
+    },
     "handwritten/bigquery": {
       "component": "bigquery"
     },
@@ -14,11 +17,11 @@
     "handwritten/datastore": {
       "component": "datastore"
     },
-    "handwritten/firestore": {
-      "component": "firestore"
-    },
     "handwritten/error-reporting": {
       "component": "error-reporting"
+    },
+    "handwritten/firestore": {
+      "component": "firestore"
     },
     "handwritten/logging-bunyan": {
       "component": "logging-bunyan"
