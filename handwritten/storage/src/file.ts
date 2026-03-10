@@ -1311,7 +1311,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (options.contexts) {
       try {
-        validateContexts({contexts: options.contexts});
+        validateContexts(options.contexts);
       } catch (err) {
         if (callback) {
           return (callback as CopyCallback)(err as Error, null, null);
@@ -4156,7 +4156,7 @@ class File extends ServiceObject<File, FileMetadata> {
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
 
     try {
-      validateContexts(options.metadata);
+      validateContexts(options.metadata?.contexts);
     } catch (err) {
       if (callback) return callback(err as Error);
       return Promise.reject(err);
@@ -4266,7 +4266,7 @@ class File extends ServiceObject<File, FileMetadata> {
         : cb;
 
     try {
-      validateContexts(metadata);
+      validateContexts(metadata.contexts);
     } catch (err) {
       if (cb) return cb(err as Error);
       return Promise.reject(err);

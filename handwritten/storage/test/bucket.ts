@@ -2020,7 +2020,7 @@ describe('Bucket', () => {
     });
 
     it('should filter by absence of key/value pair (NOT)', done => {
-      const filter = 'NOT contexts."status"="active"';
+      const filter = '-contexts."status"="active"';
       bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.filter, filter);
         done();
@@ -2040,7 +2040,7 @@ describe('Bucket', () => {
     });
 
     it('should filter by absence of key regardless of value (Non-existence)', done => {
-      const filter = 'NOT contexts."status":*';
+      const filter = '-contexts."status":*';
       bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.filter, filter);
         done();

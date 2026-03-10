@@ -1637,7 +1637,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
     if (options.contexts) {
       try {
-        validateContexts({contexts: options.contexts});
+        validateContexts(options.contexts);
       } catch (err) {
         if (callback) {
           return (callback as CombineCallback)(err as Error, null, null);

@@ -280,13 +280,12 @@ export class PassThroughShim extends PassThrough {
  * Double quotes (") are forbidden in context keys and values as they
  * interfere with GCS filter string syntax.
  *
- * @param {FileMetadata} [metadata] The metadata object to validate.
+ * @param {FileMetadata['contexts']} contexts The contexts object to validate.
  * @returns {void} Throws an error if validation fails.
  */
-export function validateContexts(metadata?: FileMetadata): void {
-  const custom = metadata?.contexts?.custom;
+export function validateContexts(contexts?: FileMetadata['contexts']): void {
+  const custom = contexts?.custom;
   if (!custom) return;
-
   for (const [key, context] of Object.entries(custom)) {
     if (key.includes('"')) {
       throw new Error(
