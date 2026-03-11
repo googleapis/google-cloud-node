@@ -105,6 +105,8 @@ for subdir in ${subdirs[@]}; do
         ret=$?
         set -e
 
+        echo "turbo testing complete with code ${ret}"
+
         if [ ${ret} -ne 0 ]; then
             RETVAL=${ret}
             break
@@ -173,6 +175,7 @@ for subdir in ${subdirs[@]}; do
             ret=$?
             set -e
             if [ ${ret} -ne 0 ]; then
+                echo "test failed in ${d} with code ${ret}"
                 RETVAL=${ret}
                 # Since there are so many APIs, we should exit early if there's an error
                 break
