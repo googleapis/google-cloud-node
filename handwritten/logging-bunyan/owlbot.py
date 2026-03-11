@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_mono_repo_library(relative_dir="handwritten/logging-bunyan", source_location='build/src')
-s.move(templates, relative_dir="handwritten/logging-bunyan", excludes=[
+s.move(templates, destination="handwritten/logging-bunyan", excludes=[
     ".github/auto-label.yaml",
     ".github/release-please.yml",
     ".github/CODEOWNERS",
