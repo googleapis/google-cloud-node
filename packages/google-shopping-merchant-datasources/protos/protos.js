@@ -3298,6 +3298,12 @@
                                         case 4:
                                         case 5:
                                         case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
                                             break;
                                         }
                                     if (message.state != null && message.hasOwnProperty("state"))
@@ -3358,6 +3364,30 @@
                                     case "YOUTUBE_SHOPPING":
                                     case 6:
                                         message.destination = 6;
+                                        break;
+                                    case "YOUTUBE_SHOPPING_CHECKOUT":
+                                    case 7:
+                                        message.destination = 7;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 8:
+                                        message.destination = 8;
+                                        break;
+                                    case "FREE_VEHICLE_LISTINGS":
+                                    case 9:
+                                        message.destination = 9;
+                                        break;
+                                    case "VEHICLE_ADS":
+                                    case 10:
+                                        message.destination = 10;
+                                        break;
+                                    case "CLOUD_RETAIL":
+                                    case 11:
+                                        message.destination = 11;
+                                        break;
+                                    case "LOCAL_CLOUD_RETAIL":
+                                    case 12:
+                                        message.destination = 12;
                                         break;
                                     }
                                     switch (object.state) {
@@ -10277,6 +10307,12 @@
                                         case 4:
                                         case 5:
                                         case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
                                             break;
                                         }
                                     if (message.state != null && message.hasOwnProperty("state"))
@@ -10337,6 +10373,30 @@
                                     case "YOUTUBE_SHOPPING":
                                     case 6:
                                         message.destination = 6;
+                                        break;
+                                    case "YOUTUBE_SHOPPING_CHECKOUT":
+                                    case 7:
+                                        message.destination = 7;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 8:
+                                        message.destination = 8;
+                                        break;
+                                    case "FREE_VEHICLE_LISTINGS":
+                                    case 9:
+                                        message.destination = 9;
+                                        break;
+                                    case "VEHICLE_ADS":
+                                    case 10:
+                                        message.destination = 10;
+                                        break;
+                                    case "CLOUD_RETAIL":
+                                    case 11:
+                                        message.destination = 11;
+                                        break;
+                                    case "LOCAL_CLOUD_RETAIL":
+                                    case 12:
+                                        message.destination = 12;
                                         break;
                                     }
                                     switch (object.state) {
@@ -15062,6 +15122,12 @@
                      * @property {number} FREE_LISTINGS=4 FREE_LISTINGS value
                      * @property {number} FREE_LOCAL_LISTINGS=5 FREE_LOCAL_LISTINGS value
                      * @property {number} YOUTUBE_SHOPPING=6 YOUTUBE_SHOPPING value
+                     * @property {number} YOUTUBE_SHOPPING_CHECKOUT=7 YOUTUBE_SHOPPING_CHECKOUT value
+                     * @property {number} YOUTUBE_AFFILIATE=8 YOUTUBE_AFFILIATE value
+                     * @property {number} FREE_VEHICLE_LISTINGS=9 FREE_VEHICLE_LISTINGS value
+                     * @property {number} VEHICLE_ADS=10 VEHICLE_ADS value
+                     * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
+                     * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
                      */
                     Destination.DestinationEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -15072,6 +15138,12 @@
                         values[valuesById[4] = "FREE_LISTINGS"] = 4;
                         values[valuesById[5] = "FREE_LOCAL_LISTINGS"] = 5;
                         values[valuesById[6] = "YOUTUBE_SHOPPING"] = 6;
+                        values[valuesById[7] = "YOUTUBE_SHOPPING_CHECKOUT"] = 7;
+                        values[valuesById[8] = "YOUTUBE_AFFILIATE"] = 8;
+                        values[valuesById[9] = "FREE_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[10] = "VEHICLE_ADS"] = 10;
+                        values[valuesById[11] = "CLOUD_RETAIL"] = 11;
+                        values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
                         return values;
                     })();
     
@@ -15266,11 +15338,16 @@
                      * @property {number} LOCAL_INVENTORY_ADS=5 LOCAL_INVENTORY_ADS value
                      * @property {number} VEHICLE_INVENTORY_ADS=6 VEHICLE_INVENTORY_ADS value
                      * @property {number} FREE_LISTINGS=7 FREE_LISTINGS value
+                     * @property {number} FREE_LISTINGS_UCP_CHECKOUT=19 FREE_LISTINGS_UCP_CHECKOUT value
                      * @property {number} FREE_LOCAL_LISTINGS=8 FREE_LOCAL_LISTINGS value
                      * @property {number} FREE_LOCAL_VEHICLE_LISTINGS=9 FREE_LOCAL_VEHICLE_LISTINGS value
+                     * @property {number} YOUTUBE_AFFILIATE=18 YOUTUBE_AFFILIATE value
                      * @property {number} YOUTUBE_SHOPPING=10 YOUTUBE_SHOPPING value
                      * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
                      * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
+                     * @property {number} PRODUCT_REVIEWS=15 PRODUCT_REVIEWS value
+                     * @property {number} MERCHANT_REVIEWS=16 MERCHANT_REVIEWS value
+                     * @property {number} YOUTUBE_CHECKOUT=17 YOUTUBE_CHECKOUT value
                      */
                     ReportingContext.ReportingContextEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -15284,11 +15361,16 @@
                         values[valuesById[5] = "LOCAL_INVENTORY_ADS"] = 5;
                         values[valuesById[6] = "VEHICLE_INVENTORY_ADS"] = 6;
                         values[valuesById[7] = "FREE_LISTINGS"] = 7;
+                        values[valuesById[19] = "FREE_LISTINGS_UCP_CHECKOUT"] = 19;
                         values[valuesById[8] = "FREE_LOCAL_LISTINGS"] = 8;
                         values[valuesById[9] = "FREE_LOCAL_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[18] = "YOUTUBE_AFFILIATE"] = 18;
                         values[valuesById[10] = "YOUTUBE_SHOPPING"] = 10;
                         values[valuesById[11] = "CLOUD_RETAIL"] = 11;
                         values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
+                        values[valuesById[15] = "PRODUCT_REVIEWS"] = 15;
+                        values[valuesById[16] = "MERCHANT_REVIEWS"] = 16;
+                        values[valuesById[17] = "YOUTUBE_CHECKOUT"] = 17;
                         return values;
                     })();
     
