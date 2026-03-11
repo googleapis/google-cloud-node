@@ -76,7 +76,6 @@ fi
 
 subdirs=(
     core
-    containers
     handwritten
 )
 
