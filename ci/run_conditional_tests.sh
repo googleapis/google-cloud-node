@@ -19,9 +19,6 @@
 # with a non-zero
 set -eo pipefail
 
-# This is an arbitrary change in our CI folder to force a global re-run of all unit tests
-# on top of the parent PR. This will be deleted.
-
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 
 # Exit early if owl-bot-staging directory exists. The PR is not ready to merge.
@@ -64,11 +61,11 @@ set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
 else
-    echo "skipping trigger of tests for now: tracking in #7540"
-    # echo "change detected in ci, we should test everything"
-    # echo "result of git diff ${GIT_DIFF_ARG} ci:"
-    # git diff ${GIT_DIFF_ARG} ci
-    # GIT_DIFF_ARG=""
+    # echo "skipping trigger of tests for now: tracking in #7540"
+    echo "change detected in ci, we should test everything"
+    echo "result of git diff ${GIT_DIFF_ARG} ci:"
+    git diff ${GIT_DIFF_ARG} ci
+    GIT_DIFF_ARG=""
 fi
 
 # Now we have a fixed list, but we can change it to autodetect if
