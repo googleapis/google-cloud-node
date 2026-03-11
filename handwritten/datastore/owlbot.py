@@ -32,14 +32,14 @@ if staging.is_dir():
     for version in ['v1']:
         library = staging / version
         _tracked_paths.add(library)
-        s.copy([library], relative_dir="handwritten/datastore", excludes=[
+        s.copy([library], destination="handwritten/datastore", excludes=[
             'package.json', 'README.md', 'src/index.ts', 'src/v1/index.ts'])
 
     # Copy the admin library.
     for version in ['v1']:
         library = staging / 'admin' / version
         _tracked_paths.add(library)
-        s.copy([library], relative_dir="handwritten/datastore", excludes=[
+        s.copy([library], destination="handwritten/datastore", excludes=[
             'package.json', 'README.md', 'src/index.ts', 'src/v1/index.ts', 'tsconfig.json', 'tslint.json',
               'system-test/fixtures/sample/src/index.ts', 'system-test/fixtures/sample/src/index.js',
               '.jsdoc.js', 'webpack.config.js'])
@@ -55,6 +55,6 @@ if staging.is_dir():
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_mono_repo_library(source_location="build/src")
-s.copy(templates, relative_dir="handwritten/datastore")
+s.copy(templates, destination="handwritten/datastore")
 
 node.postprocess_gapic_library_hermetic(relative_dir="handwritten/datastore")

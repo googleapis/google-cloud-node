@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_mono_repo_library(relative_dir="handwritten/logging-winston")
-s.copy(templates, excludes=[
+s.copy(templates, destination="handwritten/logging-winston", excludes=[
     ".github/auto-label.yaml",
     ".github/release-please.yml",
     ".github/CODEOWNERS",
