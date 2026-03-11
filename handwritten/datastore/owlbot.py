@@ -54,7 +54,7 @@ if staging.is_dir():
     shutil.rmtree(staging)
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_mono_repo_library(source_location="build/src")
+templates = common_templates.node_mono_repo_library(relative_dir="handwritten/datastore", source_location="build/src")
 s.copy(templates, destination="handwritten/datastore")
 
 node.postprocess_gapic_library_hermetic(relative_dir="handwritten/datastore")
