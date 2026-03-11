@@ -74,11 +74,13 @@ export {PublicDelegatedPrefixesClient} from './public_delegated_prefixes_client'
 export {RegionAutoscalersClient} from './region_autoscalers_client';
 export {RegionBackendServicesClient} from './region_backend_services_client';
 export {RegionCommitmentsClient} from './region_commitments_client';
+export {RegionCompositeHealthChecksClient} from './region_composite_health_checks_client';
 export {RegionDisksClient} from './region_disks_client';
 export {RegionDiskTypesClient} from './region_disk_types_client';
 export {RegionHealthAggregationPoliciesClient} from './region_health_aggregation_policies_client';
 export {RegionHealthChecksClient} from './region_health_checks_client';
 export {RegionHealthCheckServicesClient} from './region_health_check_services_client';
+export {RegionHealthSourcesClient} from './region_health_sources_client';
 export {RegionInstanceGroupManagersClient} from './region_instance_group_managers_client';
 export {RegionInstanceGroupsClient} from './region_instance_groups_client';
 export {RegionInstancesClient} from './region_instances_client';

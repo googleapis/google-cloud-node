@@ -7401,6 +7401,13 @@
                 "testIamPermissions"
               ]
             },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -7436,6 +7443,13 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
               ]
             },
             "List": {
@@ -8822,6 +8836,13 @@
                 "testIamPermissions"
               ]
             },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -8852,6 +8873,13 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
               ]
             },
             "List": {
@@ -9967,6 +9995,11 @@
                 "get"
               ]
             },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
             "Update": {
               "methods": [
                 "update"
@@ -9987,6 +10020,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
               ]
             },
             "Update": {
@@ -10018,6 +10056,11 @@
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
               ]
             },
             "PerformMaintenance": {
@@ -10060,6 +10103,11 @@
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
               ]
             },
             "PerformMaintenance": {

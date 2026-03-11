@@ -414,6 +414,150 @@ describe('v1.ReservationSlotsClient', () => {
         });
     });
 
+    describe('getVersion', () => {
+        it('invokes getVersion without error', async () => {
+            const client = new reservationslotsModule.v1.ReservationSlotsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetVersionReservationSlotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['reservationSlot']);
+            request.reservationSlot = defaultValue4;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&parent_name=${defaultValue3 ?? '' }&reservation_slot=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.getVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVersion(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVersion without error using callback', async () => {
+            const client = new reservationslotsModule.v1.ReservationSlotsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetVersionReservationSlotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['reservationSlot']);
+            request.reservationSlot = defaultValue4;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&parent_name=${defaultValue3 ?? '' }&reservation_slot=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.getVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVersion with error', async () => {
+            const client = new reservationslotsModule.v1.ReservationSlotsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetVersionReservationSlotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['reservationSlot']);
+            request.reservationSlot = defaultValue4;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&parent_name=${defaultValue3 ?? '' }&reservation_slot=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVersion with closed client', async () => {
+            const client = new reservationslotsModule.v1.ReservationSlotsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetVersionReservationSlotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetVersionReservationSlotRequest', ['reservationSlot']);
+            request.reservationSlot = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVersion(request), expectedError);
+        });
+    });
+
     describe('update', () => {
         it('invokes update without error', async () => {
             const client = new reservationslotsModule.v1.ReservationSlotsClient({
