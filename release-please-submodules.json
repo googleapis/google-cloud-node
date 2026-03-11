@@ -1,15 +1,15 @@
 {
-  "release-type": "node",
-  "separate-pull-requests": true,
   "commit-batch-size": 1,
   "include-component-in-tag": true,
-  "tag-separator": "-",
   "packages": {
-    "handwritten/logging-winston": {
-      "component": "logging-winston"
+    "core/projectify": {
+      "component": "projectify"
     },
     "handwritten/bigquery": {
       "component": "bigquery"
+    },
+    "handwritten/bigquery-storage": {
+      "component": "bigquery-storage"
     },
     "handwritten/cloud-profiler": {
       "component": "cloud-profiler"
@@ -17,13 +17,34 @@
     "handwritten/datastore": {
       "component": "datastore"
     },
+    "handwritten/error-reporting": {
+      "component": "error-reporting"
+    },
+    "handwritten/firestore": {
+      "component": "firestore"
+    },
+    "handwritten/logging": {
+      "component": "logging"
+    },
     "handwritten/logging-bunyan": {
       "component": "logging-bunyan"
+    },
+    "handwritten/logging-winston": {
+      "component": "logging-winston"
+    },
+    "handwritten/spanner": {
+      "component": "spanner"
+    },
+    "handwritten/storage": {
+      "component": "storage"
     }
   },
   "plugins": [
     {
       "type": "sentence-case"
     }
-  ]
+  ],
+  "release-type": "node",
+  "separate-pull-requests": true,
+  "tag-separator": "-"
 }

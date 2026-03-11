@@ -34,6 +34,12 @@ function main(name) {
    *  `projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}`
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The current etag of the DataObject.
+   *  If an etag is provided and does not match the current etag of the
+   *  DataObject, deletion will be blocked and an ABORTED error will be returned.
+   */
+  // const etag = 'abc123'
 
   // Imports the Vectorsearch library
   const {DataObjectServiceClient} = require('@google-cloud/vectorsearch').v1beta;

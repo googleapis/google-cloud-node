@@ -30,10 +30,13 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
+option csharp_namespace = "Google.Cloud.VectorSearch.V1Beta";
 option go_package = "cloud.google.com/go/vectorsearch/apiv1beta/vectorsearchpb;vectorsearchpb";
 option java_multiple_files = true;
 option java_outer_classname = "VectorSearchServiceProto";
 option java_package = "com.google.cloud.vectorsearch.v1beta";
+option php_namespace = "Google\\Cloud\\VectorSearch\\V1beta";
+option ruby_package = "Google::Cloud::VectorSearch::V1beta";
 
 // VectorSearchService provides methods for managing Collection resources, and
 // Collection Index resources. The primary resources offered by this service are
@@ -412,6 +415,19 @@ message Index {
     singular: "index"
   };
 
+  // The infrastructure type of the index.
+  oneof infra_type {
+    // Optional. Dedicated infrastructure for the index.
+    DedicatedInfrastructure dedicated_infrastructure = 11
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // The type of the index.
+  oneof index_type {
+    // Optional. Dense ScaNN index.
+    DenseScannIndex dense_scann = 12 [(google.api.field_behavior) = OPTIONAL];
+  }
+
   // Identifier. name of resource
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
@@ -434,8 +450,7 @@ message Index {
 
   // Optional. Distance metric used for indexing. If not specified, will default
   // to DOT_PRODUCT.
-  google.cloud.vectorsearch.v1beta.DistanceMetric distance_metric = 4
-      [(google.api.field_behavior) = OPTIONAL];
+  DistanceMetric distance_metric = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. The collection schema field to index.
   string index_field = 5 [(google.api.field_behavior) = REQUIRED];
@@ -634,17 +649,19 @@ message ImportDataObjectsRequest {
 // Metadata for
 // [VectorSearchService.ImportDataObjects][google.cloud.vectorsearch.v1beta.VectorSearchService.ImportDataObjects].
 message ImportDataObjectsMetadata {
-  // The time the operation was created.
-  google.protobuf.Timestamp create_time = 1;
+  // Output only. The time the operation was created.
+  google.protobuf.Timestamp create_time = 1
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The time the operation was last updated.
-  google.protobuf.Timestamp update_time = 2;
+  // Output only. The time the operation was last updated.
+  google.protobuf.Timestamp update_time = 2
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Number of DataObjects that were processed successfully.
-  int64 success_count = 3;
+  // Output only. Number of DataObjects that were processed successfully.
+  int64 success_count = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Number of DataObjects that failed during processing.
-  int64 failure_count = 4;
+  // Output only. Number of DataObjects that failed during processing.
+  int64 failure_count = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Response for
@@ -660,7 +677,6 @@ message ExportDataObjectsRequest {
   // Google Cloud Storage configuration for the export.
   message GcsExportDestination {
     // Options for the format of the exported Data Objects.
-    // New formats may be added in the future.
     enum Format {
       // Unspecified format.
       FORMAT_UNSPECIFIED = 0;
@@ -696,12 +712,66 @@ message ExportDataObjectsRequest {
 
 // Metadata for the ExportDataObjects LRO.
 message ExportDataObjectsMetadata {
-  // The time the operation was created.
-  google.protobuf.Timestamp create_time = 1;
+  // Output only. The time the operation was created.
+  google.protobuf.Timestamp create_time = 1
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The time the operation finished.
-  google.protobuf.Timestamp finish_time = 2;
+  // Output only. The time the operation finished.
+  google.protobuf.Timestamp finish_time = 2
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Response for the ExportDataObjects LRO.
 message ExportDataObjectsResponse {}
+
+// Represents dedicated infrastructure for the index.
+message DedicatedInfrastructure {
+  // Specification for autoscaling.
+  message AutoscalingSpec {
+    // Optional. The minimum number of replicas. If not set or set to `0`,
+    // defaults to `2`. Must be >= `2` and <= `1000`.
+    int32 min_replica_count = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The maximum number of replicas. If not set or set to `0`,
+    // defaults to the greater of `min_replica_count` and `5`. Must be >=
+    // `min_replica_count` and <= `1000`.
+    int32 max_replica_count = 2 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Mode of the dedicated infrastructure.
+  enum Mode {
+    // Default will use `PERFORMANCE_OPTIMIZED`.
+    MODE_UNSPECIFIED = 0;
+
+    // This is storage optimized variation.
+    STORAGE_OPTIMIZED = 1;
+
+    // This is Performance optimized on E2 or equivalent family.
+    PERFORMANCE_OPTIMIZED = 2;
+  }
+
+  // Optional. Mode of the dedicated infrastructure.
+  optional Mode mode = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Autoscaling specification.
+  AutoscalingSpec autoscaling_spec = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Dense ScaNN index configuration.
+message DenseScannIndex {
+  // Feature norm type for ScaNN index.
+  enum FeatureNormType {
+    // Unspecified feature norm type.
+    FEATURE_NORM_TYPE_UNSPECIFIED = 0;
+
+    // No norm applied.
+    NONE = 1;
+
+    // Unit L2 norm.
+    UNIT_L2_NORM = 2;
+  }
+
+  // Optional. Feature norm type.
+  FeatureNormType feature_norm_type = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}

@@ -534,6 +534,138 @@ describe('v1beta.InstanceGroupManagersClient', () => {
         });
     });
 
+    describe('configureAcceleratorTopologies', () => {
+        it('invokes configureAcceleratorTopologies without error', async () => {
+            const client = new instancegroupmanagersModule.v1beta.InstanceGroupManagersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['instanceGroupManager']);
+            request.instanceGroupManager = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&instance_group_manager=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.configureAcceleratorTopologies = stubSimpleCall(expectedResponse);
+            const [response] = await client.configureAcceleratorTopologies(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.configureAcceleratorTopologies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.configureAcceleratorTopologies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes configureAcceleratorTopologies without error using callback', async () => {
+            const client = new instancegroupmanagersModule.v1beta.InstanceGroupManagersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['instanceGroupManager']);
+            request.instanceGroupManager = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&instance_group_manager=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.configureAcceleratorTopologies = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.configureAcceleratorTopologies(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.configureAcceleratorTopologies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.configureAcceleratorTopologies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes configureAcceleratorTopologies with error', async () => {
+            const client = new instancegroupmanagersModule.v1beta.InstanceGroupManagersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['instanceGroupManager']);
+            request.instanceGroupManager = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&instance_group_manager=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.configureAcceleratorTopologies = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.configureAcceleratorTopologies(request), expectedError);
+            const actualRequest = (client.innerApiCalls.configureAcceleratorTopologies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.configureAcceleratorTopologies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes configureAcceleratorTopologies with closed client', async () => {
+            const client = new instancegroupmanagersModule.v1beta.InstanceGroupManagersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ConfigureAcceleratorTopologiesInstanceGroupManagerRequest', ['instanceGroupManager']);
+            request.instanceGroupManager = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.configureAcceleratorTopologies(request), expectedError);
+        });
+    });
+
     describe('createInstances', () => {
         it('invokes createInstances without error', async () => {
             const client = new instancegroupmanagersModule.v1beta.InstanceGroupManagersClient({

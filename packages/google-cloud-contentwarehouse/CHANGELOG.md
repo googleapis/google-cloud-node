@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.3.0...contentwarehouse-v2.4.0) (2026-03-04)
+
+
+### Features
+
+* [contentwarehouse] Added a field for enabling image and table annotation for layout parser processor ([#7319](https://github.com/googleapis/google-cloud-node/issues/7319)) ([7eb5628](https://github.com/googleapis/google-cloud-node/commit/7eb5628e05f7592c7c3857035f82e9f44d8d4ef4))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.2.0...contentwarehouse-v2.3.0) (2025-10-13)
 
 

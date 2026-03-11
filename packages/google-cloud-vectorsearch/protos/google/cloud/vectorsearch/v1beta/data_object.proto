@@ -21,10 +21,13 @@ import "google/api/resource.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
+option csharp_namespace = "Google.Cloud.VectorSearch.V1Beta";
 option go_package = "cloud.google.com/go/vectorsearch/apiv1beta/vectorsearchpb;vectorsearchpb";
 option java_multiple_files = true;
 option java_outer_classname = "DataObjectProto";
 option java_package = "com.google.cloud.vectorsearch.v1beta";
+option php_namespace = "Google\\Cloud\\VectorSearch\\V1beta";
+option ruby_package = "Google::Cloud::VectorSearch::V1beta";
 
 // A dataObject resource in Vector Search.
 message DataObject {
@@ -44,8 +47,7 @@ message DataObject {
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // Output only. The id of the dataObject.
-  string data_object_id = 2
-      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
+  string data_object_id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Timestamp the dataObject was created at.
   google.protobuf.Timestamp create_time = 4
@@ -60,6 +62,9 @@ message DataObject {
 
   // Optional. The vectors of the dataObject.
   map<string, Vector> vectors = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The etag of the dataObject.
+  string etag = 8 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // A vector which can be either dense or sparse.
@@ -73,7 +78,7 @@ message Vector {
     SparseVector sparse = 3;
   }
 
-  // The values of the vector.
+  // Deprecated: Use `dense` or `sparse` instead.
   repeated float values = 1 [deprecated = true];
 }
 

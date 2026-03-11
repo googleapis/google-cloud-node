@@ -1,0 +1,59 @@
+{
+  "tests": [
+    {
+      "description": "query: StartAfter with document snapshot",
+      "comment": "Cursor methods are allowed to use document snapshots with start_after. It should result in the document's data in the query.",
+      "query": {
+        "collPath": "projects/projectID/databases/(default)/documents/C",
+        "clauses": [
+          {
+            "orderBy": {
+              "path": {
+                "field": [
+                  "a"
+                ]
+              },
+              "direction": "asc"
+            }
+          },
+          {
+            "startAt": {
+              "jsonValues": [
+                "{\"a\": \"b\"}"
+              ]
+            }
+          }
+        ],
+        "query": {
+          "from": [
+            {
+              "collectionId": "C"
+            }
+          ],
+          "orderBy": [
+            {
+              "field": {
+                "fieldPath": "a"
+              },
+              "direction": "ASCENDING"
+            }
+          ],
+          "startAt": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "a": {
+                      "stringValue": "b"
+                    }
+                  }
+                }
+              }
+            ],
+            "before": true
+          }
+        }
+      }
+    }
+  ]
+}

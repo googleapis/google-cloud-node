@@ -6481,6 +6481,98 @@
         }
       }
     },
+    "RegionHealthAggregationPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionHealthAggregationPoliciesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionHealthAggregationPoliciesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "RegionHealthChecks": {
       "clients": {
         "grpc": {
@@ -6594,6 +6686,11 @@
                 "patch"
               ]
             },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -6624,6 +6721,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "List": {
@@ -8374,6 +8476,54 @@
                 "aggregatedList",
                 "aggregatedListStream",
                 "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ReservationSlots": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReservationSlotsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReservationSlotsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
               ]
             },
             "List": {

@@ -390,7 +390,7 @@
     "distribution_name": "@google-cloud/bigtable",
     "api_id": "bigtable.googleapis.com",
     "requires_billing": true,
-    "codeowner_team": "@googleapis/api-bigtable @googleapis/api-bigtable-partners",
+    "codeowner_team": "@googleapis/bigtable-team @googleapis/cloud-sdk-nodejs-team",
     "api_shortname": "bigtable",
     "library_type": "GAPIC_COMBO",
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-bigtable",
@@ -778,23 +778,6 @@
     "support_documentation": "https://cloud.google.com/dataproc-metastore/docs/getting-support"
   },
   {
-    "name": "datastore",
-    "name_pretty": "Datastore",
-    "product_documentation": "https://cloud.google.com/datastore/docs",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datastore/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559768",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-datastore",
-    "distribution_name": "@google-cloud/datastore",
-    "api_id": "datastore.googleapis.com",
-    "codeowner_team": "@googleapis/cloud-native-db-dpes @googleapis/api-datastore-sdk",
-    "api_shortname": "datastore",
-    "library_type": "GAPIC_COMBO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-datastore",
-    "support_documentation": "https://cloud.google.com/datastore/docs/getting-support"
-  },
-  {
     "name": "datastream",
     "name_pretty": "Datastream",
     "product_documentation": "https://cloud.google.com/datastream/",
@@ -993,23 +976,6 @@
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-domains",
     "support_documentation": "https://cloud.google.com/domains/docs/getting-support"
-  },
-  {
-    "name": "error-reporting",
-    "name_pretty": "Error Reporting",
-    "product_documentation": "https://cloud.google.com/error-reporting",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/error-reporting/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559780",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-error-reporting",
-    "distribution_name": "@google-cloud/error-reporting",
-    "api_id": "clouderrorreporting.googleapis.com",
-    "codeowner_team": "@googleapis/yoshi-nodejs",
-    "api_shortname": "error-reporting",
-    "library_type": "REST",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-error-reporting",
-    "support_documentation": "https://cloud.google.com/error-reporting/docs/getting-support"
   },
   {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/essential-contacts/latest",
@@ -1987,7 +1953,7 @@
     "name": "pubsub",
     "name_pretty": "Pub/Sub",
     "api_id": "pubsub.googleapis.com",
-    "codeowner_team": "@googleapis/api-pubsub",
+    "codeowner_team": "@googleapis/pubsub-team @googleapis/cloud-sdk-nodejs-team",
     "api_shortname": "pubsub",
     "library_type": "GAPIC_COMBO",
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-pubsub",
@@ -2777,7 +2743,7 @@
     "api_shortname": "workflowexecutions",
     "library_type": "GAPIC_AUTO",
     "codeowner_team": "@googleapis/aap-dpes",
-    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workflows-executions",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workflows",
     "support_documentation": "https://cloud.google.com/workflows/docs/getting-support"
   },
   {
@@ -3245,6 +3211,24 @@
     "api_shortname": "gdchardwaremanagement",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gdchardwaremanagement",
     "support_documentation": "https://cloud.google.com/distributed-cloud/edge/latest/docs/getting-support"
+  },
+  {
+    "name": "ces",
+    "name_pretty": "Gemini Enterprise for Customer Experience API",
+    "product_documentation": "https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/ces/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/ces",
+    "api_id": "ces.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "ces",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-ces",
+    "support_documentation": "https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps/docs/getting-support"
   },
   {
     "name": "generativelanguage",
@@ -3965,5 +3949,41 @@
     "api_shortname": "vectorsearch",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vectorsearch",
     "support_documentation": "https://docs.cloud.google.com/vertex-ai/docs/getting-support"
+  },
+  {
+    "name": "visionai",
+    "name_pretty": "Vision AI API",
+    "product_documentation": "https://cloud.google.com/vision-ai/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/visionai/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/visionai",
+    "api_id": "visionai.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "visionai",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-visionai",
+    "support_documentation": "https://cloud.google.com/vision-ai/docs/getting-support"
+  },
+  {
+    "name": "workloadmanager",
+    "name_pretty": "Workload Manager API",
+    "product_documentation": "https://docs.cloud.google.com/workload-manager/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/workloadmanager/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/workloadmanager",
+    "api_id": "workloadmanager.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "workloadmanager",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workloadmanager",
+    "support_documentation": "https://docs.cloud.google.com/workload-manager/docs/getting-support"
   }
 ]

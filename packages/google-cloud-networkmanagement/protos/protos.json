@@ -474,6 +474,8 @@
                             "gkeMaster",
                             "gkePod",
                             "ipMasqueradingSkipped",
+                            "gkeNetworkPolicy",
+                            "gkeNetworkPolicySkipped",
                             "cloudSqlInstance",
                             "redisInstance",
                             "redisCluster",
@@ -484,7 +486,8 @@
                             "proxyConnection",
                             "loadBalancerBackendInfo",
                             "storageBucket",
-                            "serverlessNeg"
+                            "serverlessNeg",
+                            "ngfwPacketInspection"
                           ]
                         }
                       },
@@ -596,6 +599,14 @@
                           "type": "IpMasqueradingSkippedInfo",
                           "id": 38
                         },
+                        "gkeNetworkPolicy": {
+                          "type": "GkeNetworkPolicyInfo",
+                          "id": 39
+                        },
+                        "gkeNetworkPolicySkipped": {
+                          "type": "GkeNetworkPolicySkippedInfo",
+                          "id": 40
+                        },
                         "cloudSqlInstance": {
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
@@ -639,6 +650,10 @@
                         "serverlessNeg": {
                           "type": "ServerlessNegInfo",
                           "id": 29
+                        },
+                        "ngfwPacketInspection": {
+                          "type": "NgfwPacketInspectionInfo",
+                          "id": 42
                         }
                       },
                       "nested": {
@@ -682,10 +697,16 @@
                             "ARRIVE_AT_VPN_TUNNEL": 13,
                             "ARRIVE_AT_INTERCONNECT_ATTACHMENT": 37,
                             "ARRIVE_AT_VPC_CONNECTOR": 24,
+                            "ARRIVE_AT_GKE_POD": 44,
                             "DIRECT_VPC_EGRESS_CONNECTION": 35,
                             "SERVERLESS_EXTERNAL_CONNECTION": 36,
+                            "NGFW_PACKET_INSPECTION": 47,
                             "NAT": 14,
                             "SKIP_GKE_POD_IP_MASQUERADING": 40,
+                            "SKIP_GKE_INGRESS_NETWORK_POLICY": 41,
+                            "SKIP_GKE_EGRESS_NETWORK_POLICY": 42,
+                            "APPLY_INGRESS_GKE_NETWORK_POLICY": 45,
+                            "APPLY_EGRESS_GKE_NETWORK_POLICY": 46,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
                             "DROP": 17,
@@ -1731,7 +1752,9 @@
                             "L2_INTERCONNECT_DESTINATION_IP_MISMATCH": 102,
                             "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED": 104,
                             "HYBRID_SUBNET_REGION_MISMATCH": 105,
-                            "HYBRID_SUBNET_NO_ROUTE": 106
+                            "HYBRID_SUBNET_NO_ROUTE": 106,
+                            "GKE_NETWORK_POLICY": 108,
+                            "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION": 110
                           }
                         }
                       }
@@ -1801,6 +1824,46 @@
                             "NO_MASQUERADING_FOR_IPV6": 5,
                             "POD_USES_NODE_NETWORK_NAMESPACE": 6,
                             "NO_MASQUERADING_FOR_RETURN_PACKET": 7
+                          }
+                        }
+                      }
+                    },
+                    "GkeNetworkPolicyInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "direction": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "action": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GkeNetworkPolicySkippedInfo": {
+                      "fields": {
+                        "reason": {
+                          "type": "Reason",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "NETWORK_POLICY_DISABLED": 1,
+                            "INGRESS_SOURCE_ON_SAME_NODE": 2,
+                            "EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD": 3,
+                            "NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC": 4,
+                            "NETWORK_POLICY_ANALYSIS_UNSUPPORTED": 100
                           }
                         }
                       }
@@ -2226,6 +2289,14 @@
                     "ServerlessNegInfo": {
                       "fields": {
                         "negUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "NgfwPacketInspectionInfo": {
+                      "fields": {
+                        "securityProfileGroupUri": {
                           "type": "string",
                           "id": 1
                         }
@@ -3880,6 +3951,8 @@
                             "gkeMaster",
                             "gkePod",
                             "ipMasqueradingSkipped",
+                            "gkeNetworkPolicy",
+                            "gkeNetworkPolicySkipped",
                             "cloudSqlInstance",
                             "redisInstance",
                             "redisCluster",
@@ -3890,7 +3963,8 @@
                             "proxyConnection",
                             "loadBalancerBackendInfo",
                             "storageBucket",
-                            "serverlessNeg"
+                            "serverlessNeg",
+                            "ngfwPacketInspection"
                           ]
                         }
                       },
@@ -4002,6 +4076,14 @@
                           "type": "IpMasqueradingSkippedInfo",
                           "id": 38
                         },
+                        "gkeNetworkPolicy": {
+                          "type": "GkeNetworkPolicyInfo",
+                          "id": 39
+                        },
+                        "gkeNetworkPolicySkipped": {
+                          "type": "GkeNetworkPolicySkippedInfo",
+                          "id": 40
+                        },
                         "cloudSqlInstance": {
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
@@ -4045,6 +4127,10 @@
                         "serverlessNeg": {
                           "type": "ServerlessNegInfo",
                           "id": 29
+                        },
+                        "ngfwPacketInspection": {
+                          "type": "NgfwPacketInspectionInfo",
+                          "id": 42
                         }
                       },
                       "nested": {
@@ -4088,10 +4174,16 @@
                             "ARRIVE_AT_VPN_TUNNEL": 13,
                             "ARRIVE_AT_INTERCONNECT_ATTACHMENT": 37,
                             "ARRIVE_AT_VPC_CONNECTOR": 24,
+                            "ARRIVE_AT_GKE_POD": 44,
                             "DIRECT_VPC_EGRESS_CONNECTION": 35,
                             "SERVERLESS_EXTERNAL_CONNECTION": 36,
+                            "NGFW_PACKET_INSPECTION": 47,
                             "NAT": 14,
                             "SKIP_GKE_POD_IP_MASQUERADING": 40,
+                            "SKIP_GKE_INGRESS_NETWORK_POLICY": 41,
+                            "SKIP_GKE_EGRESS_NETWORK_POLICY": 42,
+                            "APPLY_INGRESS_GKE_NETWORK_POLICY": 45,
+                            "APPLY_EGRESS_GKE_NETWORK_POLICY": 46,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
                             "DROP": 17,
@@ -5137,7 +5229,9 @@
                             "L2_INTERCONNECT_DESTINATION_IP_MISMATCH": 102,
                             "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED": 104,
                             "HYBRID_SUBNET_REGION_MISMATCH": 105,
-                            "HYBRID_SUBNET_NO_ROUTE": 106
+                            "HYBRID_SUBNET_NO_ROUTE": 106,
+                            "GKE_NETWORK_POLICY": 108,
+                            "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION": 110
                           }
                         }
                       }
@@ -5207,6 +5301,46 @@
                             "NO_MASQUERADING_FOR_IPV6": 5,
                             "POD_USES_NODE_NETWORK_NAMESPACE": 6,
                             "NO_MASQUERADING_FOR_RETURN_PACKET": 7
+                          }
+                        }
+                      }
+                    },
+                    "GkeNetworkPolicyInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "direction": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "action": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GkeNetworkPolicySkippedInfo": {
+                      "fields": {
+                        "reason": {
+                          "type": "Reason",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "NETWORK_POLICY_DISABLED": 1,
+                            "INGRESS_SOURCE_ON_SAME_NODE": 2,
+                            "EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD": 3,
+                            "NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC": 4,
+                            "NETWORK_POLICY_ANALYSIS_UNSUPPORTED": 100
                           }
                         }
                       }
@@ -5632,6 +5766,14 @@
                     "ServerlessNegInfo": {
                       "fields": {
                         "negUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "NgfwPacketInspectionInfo": {
+                      "fields": {
+                        "securityProfileGroupUri": {
                           "type": "string",
                           "id": 1
                         }

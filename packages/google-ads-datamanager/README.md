@@ -61,7 +61,25 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | ingest events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/ingestion_service.ingest_events.js) |
 | remove audience members | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/ingestion_service.remove_audience_members.js) |
 | retrieve request status | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/ingestion_service.retrieve_request_status.js) |
+| retrieve insights | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/marketing_data_insights_service.retrieve_insights.js) |
+| create partner link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/partner_link_service.create_partner_link.js) |
+| delete partner link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/partner_link_service.delete_partner_link.js) |
+| search partner links | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/partner_link_service.search_partner_links.js) |
 | ads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/snippet_metadata_google.ads.datamanager.v1.json) |
+| create user list direct license | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_direct_license_service.create_user_list_direct_license.js) |
+| get user list direct license | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_direct_license_service.get_user_list_direct_license.js) |
+| list user list direct licenses | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_direct_license_service.list_user_list_direct_licenses.js) |
+| update user list direct license | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_direct_license_service.update_user_list_direct_license.js) |
+| create user list global license | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_global_license_service.create_user_list_global_license.js) |
+| get user list global license | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_global_license_service.get_user_list_global_license.js) |
+| list user list global license customer infos | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_global_license_service.list_user_list_global_license_customer_infos.js) |
+| list user list global licenses | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_global_license_service.list_user_list_global_licenses.js) |
+| update user list global license | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_global_license_service.update_user_list_global_license.js) |
+| create user list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_service.create_user_list.js) |
+| delete user list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_service.delete_user_list.js) |
+| get user list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_service.get_user_list.js) |
+| list user lists | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_service.list_user_lists.js) |
+| update user list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-datamanager/samples/generated/v1/user_list_service.update_user_list.js) |
 
 
 ## Supported Node.js Versions

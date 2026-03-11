@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v5.0.0...workflows-v5.1.0) (2026-03-02)
+
+
+### Features
+
+* Expand workflows to receive both workflows and executions ([#7271](https://github.com/googleapis/google-cloud-node/issues/7271)) ([faf79df](https://github.com/googleapis/google-cloud-node/commit/faf79df319ddd7d732413aa0b745160bfb815198))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v4.4.0...workflows-v5.0.0) (2025-10-13)
 
 

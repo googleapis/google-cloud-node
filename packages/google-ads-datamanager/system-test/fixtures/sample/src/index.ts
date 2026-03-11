@@ -16,10 +16,25 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {IngestionServiceClient} from '@google-ads/datamanager';
+import {IngestionServiceClient, MarketingDataInsightsServiceClient, PartnerLinkServiceClient, UserListDirectLicenseServiceClient, UserListGlobalLicenseServiceClient, UserListServiceClient} from '@google-ads/datamanager';
 
 // check that the client class type name can be used
 function doStuffWithIngestionServiceClient(client: IngestionServiceClient) {
+  client.close();
+}
+function doStuffWithMarketingDataInsightsServiceClient(client: MarketingDataInsightsServiceClient) {
+  client.close();
+}
+function doStuffWithPartnerLinkServiceClient(client: PartnerLinkServiceClient) {
+  client.close();
+}
+function doStuffWithUserListDirectLicenseServiceClient(client: UserListDirectLicenseServiceClient) {
+  client.close();
+}
+function doStuffWithUserListGlobalLicenseServiceClient(client: UserListGlobalLicenseServiceClient) {
+  client.close();
+}
+function doStuffWithUserListServiceClient(client: UserListServiceClient) {
   client.close();
 }
 
@@ -27,6 +42,21 @@ function main() {
   // check that the client instance can be created
   const ingestionServiceClient = new IngestionServiceClient();
   doStuffWithIngestionServiceClient(ingestionServiceClient);
+  // check that the client instance can be created
+  const marketingDataInsightsServiceClient = new MarketingDataInsightsServiceClient();
+  doStuffWithMarketingDataInsightsServiceClient(marketingDataInsightsServiceClient);
+  // check that the client instance can be created
+  const partnerLinkServiceClient = new PartnerLinkServiceClient();
+  doStuffWithPartnerLinkServiceClient(partnerLinkServiceClient);
+  // check that the client instance can be created
+  const userListDirectLicenseServiceClient = new UserListDirectLicenseServiceClient();
+  doStuffWithUserListDirectLicenseServiceClient(userListDirectLicenseServiceClient);
+  // check that the client instance can be created
+  const userListGlobalLicenseServiceClient = new UserListGlobalLicenseServiceClient();
+  doStuffWithUserListGlobalLicenseServiceClient(userListGlobalLicenseServiceClient);
+  // check that the client instance can be created
+  const userListServiceClient = new UserListServiceClient();
+  doStuffWithUserListServiceClient(userListServiceClient);
 }
 
 main();
