@@ -18,10 +18,13 @@ jobs:
       - uses: pnpm/action-setup@v4
       - run: node --version
       - run: pnpm install
-      - run: bash ci/run_conditional_tests.sh
-        name: Run windows unit tests
+      - run: pnpm --filter "{packages/**}" --filter "!gapic-node-processing" --filter "!@google-cloud/typeless-sample-bot" run test
+        name: Run package/* unit tests (with exclusions for Windows compatibility)
+      - run: pnpm --filter "{containers/**}" run test
+        name: Run containers/* unit tests
+      - run: ci/run_conditional_tests.sh
+        name: Run core, handwritten, and .github/scripts tests
         shell: bash
         env:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
-          TURBO_TELEMETRY_DISABLED: 1

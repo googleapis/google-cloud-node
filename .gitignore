@@ -2,7 +2,6 @@
 **/node_modules
 .coverage
 .nyc_output
-.turbo
 docs/json
 packages/google-cloud/README.md
 packages/*/AUTHORS
