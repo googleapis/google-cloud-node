@@ -1405,12 +1405,14 @@
                          * @property {number} SUBSCRIPTION_PERIOD_UNSPECIFIED=0 SUBSCRIPTION_PERIOD_UNSPECIFIED value
                          * @property {number} MONTH=1 MONTH value
                          * @property {number} YEAR=2 YEAR value
+                         * @property {number} WEEK=3 WEEK value
                          */
                         v1.SubscriptionPeriod = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SUBSCRIPTION_PERIOD_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "MONTH"] = 1;
                             values[valuesById[2] = "YEAR"] = 2;
+                            values[valuesById[3] = "WEEK"] = 3;
                             return values;
                         })();
     
@@ -1868,6 +1870,9 @@
                              * @property {google.shopping.merchant.products.v1.IShippingDimension|null} [shippingHeight] ProductAttributes shippingHeight
                              * @property {number|Long|null} [maxHandlingTime] ProductAttributes maxHandlingTime
                              * @property {number|Long|null} [minHandlingTime] ProductAttributes minHandlingTime
+                             * @property {Array.<google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig>|null} [shippingHandlingBusinessDays] ProductAttributes shippingHandlingBusinessDays
+                             * @property {Array.<google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig>|null} [shippingTransitBusinessDays] ProductAttributes shippingTransitBusinessDays
+                             * @property {Array.<google.shopping.merchant.products.v1.IHandlingCutoffTime>|null} [handlingCutoffTimes] ProductAttributes handlingCutoffTimes
                              * @property {string|null} [shippingLabel] ProductAttributes shippingLabel
                              * @property {string|null} [transitTimeLabel] ProductAttributes transitTimeLabel
                              * @property {string|null} [size] ProductAttributes size
@@ -1931,6 +1936,9 @@
                                 this.shipping = [];
                                 this.carrierShipping = [];
                                 this.freeShippingThreshold = [];
+                                this.shippingHandlingBusinessDays = [];
+                                this.shippingTransitBusinessDays = [];
+                                this.handlingCutoffTimes = [];
                                 this.sizeTypes = [];
                                 this.adsLabels = [];
                                 this.productDetails = [];
@@ -2333,6 +2341,30 @@
                              * @instance
                              */
                             ProductAttributes.prototype.minHandlingTime = null;
+    
+                            /**
+                             * ProductAttributes shippingHandlingBusinessDays.
+                             * @member {Array.<google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig>} shippingHandlingBusinessDays
+                             * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                             * @instance
+                             */
+                            ProductAttributes.prototype.shippingHandlingBusinessDays = $util.emptyArray;
+    
+                            /**
+                             * ProductAttributes shippingTransitBusinessDays.
+                             * @member {Array.<google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig>} shippingTransitBusinessDays
+                             * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                             * @instance
+                             */
+                            ProductAttributes.prototype.shippingTransitBusinessDays = $util.emptyArray;
+    
+                            /**
+                             * ProductAttributes handlingCutoffTimes.
+                             * @member {Array.<google.shopping.merchant.products.v1.IHandlingCutoffTime>} handlingCutoffTimes
+                             * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                             * @instance
+                             */
+                            ProductAttributes.prototype.handlingCutoffTimes = $util.emptyArray;
     
                             /**
                              * ProductAttributes shippingLabel.
@@ -3239,9 +3271,18 @@
                                 if (message.gtins != null && message.gtins.length)
                                     for (var i = 0; i < message.gtins.length; ++i)
                                         writer.uint32(/* id 140, wireType 2 =*/1122).string(message.gtins[i]);
+                                if (message.handlingCutoffTimes != null && message.handlingCutoffTimes.length)
+                                    for (var i = 0; i < message.handlingCutoffTimes.length; ++i)
+                                        $root.google.shopping.merchant.products.v1.HandlingCutoffTime.encode(message.handlingCutoffTimes[i], writer.uint32(/* id 141, wireType 2 =*/1130).fork()).ldelim();
                                 if (message.carrierShipping != null && message.carrierShipping.length)
                                     for (var i = 0; i < message.carrierShipping.length; ++i)
                                         $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.encode(message.carrierShipping[i], writer.uint32(/* id 142, wireType 2 =*/1138).fork()).ldelim();
+                                if (message.shippingHandlingBusinessDays != null && message.shippingHandlingBusinessDays.length)
+                                    for (var i = 0; i < message.shippingHandlingBusinessDays.length; ++i)
+                                        $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.encode(message.shippingHandlingBusinessDays[i], writer.uint32(/* id 143, wireType 2 =*/1146).fork()).ldelim();
+                                if (message.shippingTransitBusinessDays != null && message.shippingTransitBusinessDays.length)
+                                    for (var i = 0; i < message.shippingTransitBusinessDays.length; ++i)
+                                        $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.encode(message.shippingTransitBusinessDays[i], writer.uint32(/* id 144, wireType 2 =*/1154).fork()).ldelim();
                                 return writer;
                             };
     
@@ -3482,6 +3523,24 @@
                                         }
                                     case 45: {
                                             message.minHandlingTime = reader.int64();
+                                            break;
+                                        }
+                                    case 143: {
+                                            if (!(message.shippingHandlingBusinessDays && message.shippingHandlingBusinessDays.length))
+                                                message.shippingHandlingBusinessDays = [];
+                                            message.shippingHandlingBusinessDays.push($root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 144: {
+                                            if (!(message.shippingTransitBusinessDays && message.shippingTransitBusinessDays.length))
+                                                message.shippingTransitBusinessDays = [];
+                                            message.shippingTransitBusinessDays.push($root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 141: {
+                                            if (!(message.handlingCutoffTimes && message.handlingCutoffTimes.length))
+                                                message.handlingCutoffTimes = [];
+                                            message.handlingCutoffTimes.push($root.google.shopping.merchant.products.v1.HandlingCutoffTime.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     case 46: {
@@ -4035,6 +4094,33 @@
                                     if (!$util.isInteger(message.minHandlingTime) && !(message.minHandlingTime && $util.isInteger(message.minHandlingTime.low) && $util.isInteger(message.minHandlingTime.high)))
                                         return "minHandlingTime: integer|Long expected";
                                 }
+                                if (message.shippingHandlingBusinessDays != null && message.hasOwnProperty("shippingHandlingBusinessDays")) {
+                                    if (!Array.isArray(message.shippingHandlingBusinessDays))
+                                        return "shippingHandlingBusinessDays: array expected";
+                                    for (var i = 0; i < message.shippingHandlingBusinessDays.length; ++i) {
+                                        var error = $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.verify(message.shippingHandlingBusinessDays[i]);
+                                        if (error)
+                                            return "shippingHandlingBusinessDays." + error;
+                                    }
+                                }
+                                if (message.shippingTransitBusinessDays != null && message.hasOwnProperty("shippingTransitBusinessDays")) {
+                                    if (!Array.isArray(message.shippingTransitBusinessDays))
+                                        return "shippingTransitBusinessDays: array expected";
+                                    for (var i = 0; i < message.shippingTransitBusinessDays.length; ++i) {
+                                        var error = $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.verify(message.shippingTransitBusinessDays[i]);
+                                        if (error)
+                                            return "shippingTransitBusinessDays." + error;
+                                    }
+                                }
+                                if (message.handlingCutoffTimes != null && message.hasOwnProperty("handlingCutoffTimes")) {
+                                    if (!Array.isArray(message.handlingCutoffTimes))
+                                        return "handlingCutoffTimes: array expected";
+                                    for (var i = 0; i < message.handlingCutoffTimes.length; ++i) {
+                                        var error = $root.google.shopping.merchant.products.v1.HandlingCutoffTime.verify(message.handlingCutoffTimes[i]);
+                                        if (error)
+                                            return "handlingCutoffTimes." + error;
+                                    }
+                                }
                                 if (message.shippingLabel != null && message.hasOwnProperty("shippingLabel")) {
                                     properties._shippingLabel = 1;
                                     if (!$util.isString(message.shippingLabel))
@@ -4310,6 +4396,12 @@
                                         case 4:
                                         case 5:
                                         case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
                                             break;
                                         }
                                 }
@@ -4327,6 +4419,12 @@
                                         case 4:
                                         case 5:
                                         case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
                                             break;
                                         }
                                 }
@@ -4750,6 +4848,36 @@
                                         message.minHandlingTime = object.minHandlingTime;
                                     else if (typeof object.minHandlingTime === "object")
                                         message.minHandlingTime = new $util.LongBits(object.minHandlingTime.low >>> 0, object.minHandlingTime.high >>> 0).toNumber();
+                                if (object.shippingHandlingBusinessDays) {
+                                    if (!Array.isArray(object.shippingHandlingBusinessDays))
+                                        throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.shippingHandlingBusinessDays: array expected");
+                                    message.shippingHandlingBusinessDays = [];
+                                    for (var i = 0; i < object.shippingHandlingBusinessDays.length; ++i) {
+                                        if (typeof object.shippingHandlingBusinessDays[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.shippingHandlingBusinessDays: object expected");
+                                        message.shippingHandlingBusinessDays[i] = $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.fromObject(object.shippingHandlingBusinessDays[i]);
+                                    }
+                                }
+                                if (object.shippingTransitBusinessDays) {
+                                    if (!Array.isArray(object.shippingTransitBusinessDays))
+                                        throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.shippingTransitBusinessDays: array expected");
+                                    message.shippingTransitBusinessDays = [];
+                                    for (var i = 0; i < object.shippingTransitBusinessDays.length; ++i) {
+                                        if (typeof object.shippingTransitBusinessDays[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.shippingTransitBusinessDays: object expected");
+                                        message.shippingTransitBusinessDays[i] = $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.fromObject(object.shippingTransitBusinessDays[i]);
+                                    }
+                                }
+                                if (object.handlingCutoffTimes) {
+                                    if (!Array.isArray(object.handlingCutoffTimes))
+                                        throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.handlingCutoffTimes: array expected");
+                                    message.handlingCutoffTimes = [];
+                                    for (var i = 0; i < object.handlingCutoffTimes.length; ++i) {
+                                        if (typeof object.handlingCutoffTimes[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.handlingCutoffTimes: object expected");
+                                        message.handlingCutoffTimes[i] = $root.google.shopping.merchant.products.v1.HandlingCutoffTime.fromObject(object.handlingCutoffTimes[i]);
+                                    }
+                                }
                                 if (object.shippingLabel != null)
                                     message.shippingLabel = String(object.shippingLabel);
                                 if (object.transitTimeLabel != null)
@@ -5208,6 +5336,30 @@
                                         case 6:
                                             message.includedDestinations[i] = 6;
                                             break;
+                                        case "YOUTUBE_SHOPPING_CHECKOUT":
+                                        case 7:
+                                            message.includedDestinations[i] = 7;
+                                            break;
+                                        case "YOUTUBE_AFFILIATE":
+                                        case 8:
+                                            message.includedDestinations[i] = 8;
+                                            break;
+                                        case "FREE_VEHICLE_LISTINGS":
+                                        case 9:
+                                            message.includedDestinations[i] = 9;
+                                            break;
+                                        case "VEHICLE_ADS":
+                                        case 10:
+                                            message.includedDestinations[i] = 10;
+                                            break;
+                                        case "CLOUD_RETAIL":
+                                        case 11:
+                                            message.includedDestinations[i] = 11;
+                                            break;
+                                        case "LOCAL_CLOUD_RETAIL":
+                                        case 12:
+                                            message.includedDestinations[i] = 12;
+                                            break;
                                         }
                                 }
                                 if (object.excludedDestinations) {
@@ -5248,6 +5400,30 @@
                                         case "YOUTUBE_SHOPPING":
                                         case 6:
                                             message.excludedDestinations[i] = 6;
+                                            break;
+                                        case "YOUTUBE_SHOPPING_CHECKOUT":
+                                        case 7:
+                                            message.excludedDestinations[i] = 7;
+                                            break;
+                                        case "YOUTUBE_AFFILIATE":
+                                        case 8:
+                                            message.excludedDestinations[i] = 8;
+                                            break;
+                                        case "FREE_VEHICLE_LISTINGS":
+                                        case 9:
+                                            message.excludedDestinations[i] = 9;
+                                            break;
+                                        case "VEHICLE_ADS":
+                                        case 10:
+                                            message.excludedDestinations[i] = 10;
+                                            break;
+                                        case "CLOUD_RETAIL":
+                                        case 11:
+                                            message.excludedDestinations[i] = 11;
+                                            break;
+                                        case "LOCAL_CLOUD_RETAIL":
+                                        case 12:
+                                            message.excludedDestinations[i] = 12;
                                             break;
                                         }
                                 }
@@ -5370,7 +5546,10 @@
                                     object.loyaltyPrograms = [];
                                     object.sustainabilityIncentives = [];
                                     object.gtins = [];
+                                    object.handlingCutoffTimes = [];
                                     object.carrierShipping = [];
+                                    object.shippingHandlingBusinessDays = [];
+                                    object.shippingTransitBusinessDays = [];
                                 }
                                 if (options.defaults) {
                                     object.expirationDate = null;
@@ -5802,10 +5981,25 @@
                                     for (var j = 0; j < message.gtins.length; ++j)
                                         object.gtins[j] = message.gtins[j];
                                 }
+                                if (message.handlingCutoffTimes && message.handlingCutoffTimes.length) {
+                                    object.handlingCutoffTimes = [];
+                                    for (var j = 0; j < message.handlingCutoffTimes.length; ++j)
+                                        object.handlingCutoffTimes[j] = $root.google.shopping.merchant.products.v1.HandlingCutoffTime.toObject(message.handlingCutoffTimes[j], options);
+                                }
                                 if (message.carrierShipping && message.carrierShipping.length) {
                                     object.carrierShipping = [];
                                     for (var j = 0; j < message.carrierShipping.length; ++j)
                                         object.carrierShipping[j] = $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.toObject(message.carrierShipping[j], options);
+                                }
+                                if (message.shippingHandlingBusinessDays && message.shippingHandlingBusinessDays.length) {
+                                    object.shippingHandlingBusinessDays = [];
+                                    for (var j = 0; j < message.shippingHandlingBusinessDays.length; ++j)
+                                        object.shippingHandlingBusinessDays[j] = $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.toObject(message.shippingHandlingBusinessDays[j], options);
+                                }
+                                if (message.shippingTransitBusinessDays && message.shippingTransitBusinessDays.length) {
+                                    object.shippingTransitBusinessDays = [];
+                                    for (var j = 0; j < message.shippingTransitBusinessDays.length; ++j)
+                                        object.shippingTransitBusinessDays[j] = $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.toObject(message.shippingTransitBusinessDays[j], options);
                                 }
                                 return object;
                             };
@@ -5835,6 +6029,257 @@
                                 }
                                 return typeUrlPrefix + "/google.shopping.merchant.products.v1.ProductAttributes";
                             };
+    
+                            ProductAttributes.ShippingBusinessDaysConfig = (function() {
+    
+                                /**
+                                 * Properties of a ShippingBusinessDaysConfig.
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                                 * @interface IShippingBusinessDaysConfig
+                                 * @property {string|null} [country] ShippingBusinessDaysConfig country
+                                 * @property {string|null} [businessDays] ShippingBusinessDaysConfig businessDays
+                                 */
+    
+                                /**
+                                 * Constructs a new ShippingBusinessDaysConfig.
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                                 * @classdesc Represents a ShippingBusinessDaysConfig.
+                                 * @implements IShippingBusinessDaysConfig
+                                 * @constructor
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig=} [properties] Properties to set
+                                 */
+                                function ShippingBusinessDaysConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ShippingBusinessDaysConfig country.
+                                 * @member {string|null|undefined} country
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @instance
+                                 */
+                                ShippingBusinessDaysConfig.prototype.country = null;
+    
+                                /**
+                                 * ShippingBusinessDaysConfig businessDays.
+                                 * @member {string|null|undefined} businessDays
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @instance
+                                 */
+                                ShippingBusinessDaysConfig.prototype.businessDays = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(ShippingBusinessDaysConfig.prototype, "_country", {
+                                    get: $util.oneOfGetter($oneOfFields = ["country"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(ShippingBusinessDaysConfig.prototype, "_businessDays", {
+                                    get: $util.oneOfGetter($oneOfFields = ["businessDays"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new ShippingBusinessDaysConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @static
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig} ShippingBusinessDaysConfig instance
+                                 */
+                                ShippingBusinessDaysConfig.create = function create(properties) {
+                                    return new ShippingBusinessDaysConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ShippingBusinessDaysConfig message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @static
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig} message ShippingBusinessDaysConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ShippingBusinessDaysConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.country != null && Object.hasOwnProperty.call(message, "country"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.country);
+                                    if (message.businessDays != null && Object.hasOwnProperty.call(message, "businessDays"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.businessDays);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ShippingBusinessDaysConfig message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @static
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig} message ShippingBusinessDaysConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ShippingBusinessDaysConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ShippingBusinessDaysConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig} ShippingBusinessDaysConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ShippingBusinessDaysConfig.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.country = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.businessDays = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ShippingBusinessDaysConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig} ShippingBusinessDaysConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ShippingBusinessDaysConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ShippingBusinessDaysConfig message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ShippingBusinessDaysConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.country != null && message.hasOwnProperty("country")) {
+                                        properties._country = 1;
+                                        if (!$util.isString(message.country))
+                                            return "country: string expected";
+                                    }
+                                    if (message.businessDays != null && message.hasOwnProperty("businessDays")) {
+                                        properties._businessDays = 1;
+                                        if (!$util.isString(message.businessDays))
+                                            return "businessDays: string expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ShippingBusinessDaysConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig} ShippingBusinessDaysConfig
+                                 */
+                                ShippingBusinessDaysConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig();
+                                    if (object.country != null)
+                                        message.country = String(object.country);
+                                    if (object.businessDays != null)
+                                        message.businessDays = String(object.businessDays);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ShippingBusinessDaysConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @static
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig} message ShippingBusinessDaysConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ShippingBusinessDaysConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.country != null && message.hasOwnProperty("country")) {
+                                        object.country = message.country;
+                                        if (options.oneofs)
+                                            object._country = "country";
+                                    }
+                                    if (message.businessDays != null && message.hasOwnProperty("businessDays")) {
+                                        object.businessDays = message.businessDays;
+                                        if (options.oneofs)
+                                            object._businessDays = "businessDays";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ShippingBusinessDaysConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ShippingBusinessDaysConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ShippingBusinessDaysConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ShippingBusinessDaysConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig";
+                                };
+    
+                                return ShippingBusinessDaysConfig;
+                            })();
     
                             ProductAttributes.CarrierShipping = (function() {
     
@@ -8267,6 +8712,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 3:
                                         break;
                                     }
                                 if (message.periodLength != null && message.hasOwnProperty("periodLength"))
@@ -8310,6 +8756,10 @@
                                 case "YEAR":
                                 case 2:
                                     message.period = 2;
+                                    break;
+                                case "WEEK":
+                                case 3:
+                                    message.period = 3;
                                     break;
                                 }
                                 if (object.periodLength != null)
@@ -9467,6 +9917,8 @@
                              * @property {number|Long|null} [maxHandlingTime] Shipping maxHandlingTime
                              * @property {number|Long|null} [minTransitTime] Shipping minTransitTime
                              * @property {number|Long|null} [maxTransitTime] Shipping maxTransitTime
+                             * @property {string|null} [handlingCutoffTime] Shipping handlingCutoffTime
+                             * @property {string|null} [handlingCutoffTimezone] Shipping handlingCutoffTimezone
                              */
     
                             /**
@@ -9572,6 +10024,22 @@
                              */
                             Shipping.prototype.maxTransitTime = null;
     
+                            /**
+                             * Shipping handlingCutoffTime.
+                             * @member {string|null|undefined} handlingCutoffTime
+                             * @memberof google.shopping.merchant.products.v1.Shipping
+                             * @instance
+                             */
+                            Shipping.prototype.handlingCutoffTime = null;
+    
+                            /**
+                             * Shipping handlingCutoffTimezone.
+                             * @member {string|null|undefined} handlingCutoffTimezone
+                             * @memberof google.shopping.merchant.products.v1.Shipping
+                             * @instance
+                             */
+                            Shipping.prototype.handlingCutoffTimezone = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -9596,6 +10064,18 @@
                             // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Shipping.prototype, "_maxTransitTime", {
                                 get: $util.oneOfGetter($oneOfFields = ["maxTransitTime"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Shipping.prototype, "_handlingCutoffTime", {
+                                get: $util.oneOfGetter($oneOfFields = ["handlingCutoffTime"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Shipping.prototype, "_handlingCutoffTimezone", {
+                                get: $util.oneOfGetter($oneOfFields = ["handlingCutoffTimezone"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -9645,6 +10125,10 @@
                                     writer.uint32(/* id 10, wireType 0 =*/80).int64(message.minTransitTime);
                                 if (message.maxTransitTime != null && Object.hasOwnProperty.call(message, "maxTransitTime"))
                                     writer.uint32(/* id 11, wireType 0 =*/88).int64(message.maxTransitTime);
+                                if (message.handlingCutoffTime != null && Object.hasOwnProperty.call(message, "handlingCutoffTime"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.handlingCutoffTime);
+                                if (message.handlingCutoffTimezone != null && Object.hasOwnProperty.call(message, "handlingCutoffTimezone"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.handlingCutoffTimezone);
                                 return writer;
                             };
     
@@ -9723,6 +10207,14 @@
                                         }
                                     case 11: {
                                             message.maxTransitTime = reader.int64();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.handlingCutoffTime = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.handlingCutoffTimezone = reader.string();
                                             break;
                                         }
                                     default:
@@ -9804,6 +10296,16 @@
                                     if (!$util.isInteger(message.maxTransitTime) && !(message.maxTransitTime && $util.isInteger(message.maxTransitTime.low) && $util.isInteger(message.maxTransitTime.high)))
                                         return "maxTransitTime: integer|Long expected";
                                 }
+                                if (message.handlingCutoffTime != null && message.hasOwnProperty("handlingCutoffTime")) {
+                                    properties._handlingCutoffTime = 1;
+                                    if (!$util.isString(message.handlingCutoffTime))
+                                        return "handlingCutoffTime: string expected";
+                                }
+                                if (message.handlingCutoffTimezone != null && message.hasOwnProperty("handlingCutoffTimezone")) {
+                                    properties._handlingCutoffTimezone = 1;
+                                    if (!$util.isString(message.handlingCutoffTimezone))
+                                        return "handlingCutoffTimezone: string expected";
+                                }
                                 return null;
                             };
     
@@ -9879,6 +10381,10 @@
                                         message.maxTransitTime = object.maxTransitTime;
                                     else if (typeof object.maxTransitTime === "object")
                                         message.maxTransitTime = new $util.LongBits(object.maxTransitTime.low >>> 0, object.maxTransitTime.high >>> 0).toNumber();
+                                if (object.handlingCutoffTime != null)
+                                    message.handlingCutoffTime = String(object.handlingCutoffTime);
+                                if (object.handlingCutoffTimezone != null)
+                                    message.handlingCutoffTimezone = String(object.handlingCutoffTimezone);
                                 return message;
                             };
     
@@ -9956,6 +10462,16 @@
                                         object.maxTransitTime = options.longs === String ? $util.Long.prototype.toString.call(message.maxTransitTime) : options.longs === Number ? new $util.LongBits(message.maxTransitTime.low >>> 0, message.maxTransitTime.high >>> 0).toNumber() : message.maxTransitTime;
                                     if (options.oneofs)
                                         object._maxTransitTime = "maxTransitTime";
+                                }
+                                if (message.handlingCutoffTime != null && message.hasOwnProperty("handlingCutoffTime")) {
+                                    object.handlingCutoffTime = message.handlingCutoffTime;
+                                    if (options.oneofs)
+                                        object._handlingCutoffTime = "handlingCutoffTime";
+                                }
+                                if (message.handlingCutoffTimezone != null && message.hasOwnProperty("handlingCutoffTimezone")) {
+                                    object.handlingCutoffTimezone = message.handlingCutoffTimezone;
+                                    if (options.oneofs)
+                                        object._handlingCutoffTimezone = "handlingCutoffTimezone";
                                 }
                                 return object;
                             };
@@ -12459,11 +12975,16 @@
                                         case 5:
                                         case 6:
                                         case 7:
+                                        case 19:
                                         case 8:
                                         case 9:
+                                        case 18:
                                         case 10:
                                         case 11:
                                         case 12:
+                                        case 15:
+                                        case 16:
+                                        case 17:
                                             break;
                                         }
                                     if (message.approvedCountries != null && message.hasOwnProperty("approvedCountries")) {
@@ -12549,6 +13070,10 @@
                                     case 7:
                                         message.reportingContext = 7;
                                         break;
+                                    case "FREE_LISTINGS_UCP_CHECKOUT":
+                                    case 19:
+                                        message.reportingContext = 19;
+                                        break;
                                     case "FREE_LOCAL_LISTINGS":
                                     case 8:
                                         message.reportingContext = 8;
@@ -12556,6 +13081,10 @@
                                     case "FREE_LOCAL_VEHICLE_LISTINGS":
                                     case 9:
                                         message.reportingContext = 9;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 18:
+                                        message.reportingContext = 18;
                                         break;
                                     case "YOUTUBE_SHOPPING":
                                     case 10:
@@ -12568,6 +13097,18 @@
                                     case "LOCAL_CLOUD_RETAIL":
                                     case 12:
                                         message.reportingContext = 12;
+                                        break;
+                                    case "PRODUCT_REVIEWS":
+                                    case 15:
+                                        message.reportingContext = 15;
+                                        break;
+                                    case "MERCHANT_REVIEWS":
+                                    case 16:
+                                        message.reportingContext = 16;
+                                        break;
+                                    case "YOUTUBE_CHECKOUT":
+                                    case 17:
+                                        message.reportingContext = 17;
                                         break;
                                     }
                                     if (object.approvedCountries) {
@@ -12953,11 +13494,16 @@
                                         case 5:
                                         case 6:
                                         case 7:
+                                        case 19:
                                         case 8:
                                         case 9:
+                                        case 18:
                                         case 10:
                                         case 11:
                                         case 12:
+                                        case 15:
+                                        case 16:
+                                        case 17:
                                             break;
                                         }
                                     if (message.description != null && message.hasOwnProperty("description"))
@@ -13068,6 +13614,10 @@
                                     case 7:
                                         message.reportingContext = 7;
                                         break;
+                                    case "FREE_LISTINGS_UCP_CHECKOUT":
+                                    case 19:
+                                        message.reportingContext = 19;
+                                        break;
                                     case "FREE_LOCAL_LISTINGS":
                                     case 8:
                                         message.reportingContext = 8;
@@ -13075,6 +13625,10 @@
                                     case "FREE_LOCAL_VEHICLE_LISTINGS":
                                     case 9:
                                         message.reportingContext = 9;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 18:
+                                        message.reportingContext = 18;
                                         break;
                                     case "YOUTUBE_SHOPPING":
                                     case 10:
@@ -13087,6 +13641,18 @@
                                     case "LOCAL_CLOUD_RETAIL":
                                     case 12:
                                         message.reportingContext = 12;
+                                        break;
+                                    case "PRODUCT_REVIEWS":
+                                    case 15:
+                                        message.reportingContext = 15;
+                                        break;
+                                    case "MERCHANT_REVIEWS":
+                                    case 16:
+                                        message.reportingContext = 16;
+                                        break;
+                                    case "YOUTUBE_CHECKOUT":
+                                    case 17:
+                                        message.reportingContext = 17;
                                         break;
                                     }
                                     if (object.description != null)
@@ -14295,6 +14861,323 @@
                             };
     
                             return AutomatedDiscounts;
+                        })();
+    
+                        v1.HandlingCutoffTime = (function() {
+    
+                            /**
+                             * Properties of a HandlingCutoffTime.
+                             * @memberof google.shopping.merchant.products.v1
+                             * @interface IHandlingCutoffTime
+                             * @property {string|null} [country] HandlingCutoffTime country
+                             * @property {string|null} [cutoffTime] HandlingCutoffTime cutoffTime
+                             * @property {string|null} [cutoffTimezone] HandlingCutoffTime cutoffTimezone
+                             * @property {boolean|null} [disableDeliveryAfterCutoff] HandlingCutoffTime disableDeliveryAfterCutoff
+                             */
+    
+                            /**
+                             * Constructs a new HandlingCutoffTime.
+                             * @memberof google.shopping.merchant.products.v1
+                             * @classdesc Represents a HandlingCutoffTime.
+                             * @implements IHandlingCutoffTime
+                             * @constructor
+                             * @param {google.shopping.merchant.products.v1.IHandlingCutoffTime=} [properties] Properties to set
+                             */
+                            function HandlingCutoffTime(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * HandlingCutoffTime country.
+                             * @member {string|null|undefined} country
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @instance
+                             */
+                            HandlingCutoffTime.prototype.country = null;
+    
+                            /**
+                             * HandlingCutoffTime cutoffTime.
+                             * @member {string|null|undefined} cutoffTime
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @instance
+                             */
+                            HandlingCutoffTime.prototype.cutoffTime = null;
+    
+                            /**
+                             * HandlingCutoffTime cutoffTimezone.
+                             * @member {string|null|undefined} cutoffTimezone
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @instance
+                             */
+                            HandlingCutoffTime.prototype.cutoffTimezone = null;
+    
+                            /**
+                             * HandlingCutoffTime disableDeliveryAfterCutoff.
+                             * @member {boolean|null|undefined} disableDeliveryAfterCutoff
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @instance
+                             */
+                            HandlingCutoffTime.prototype.disableDeliveryAfterCutoff = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(HandlingCutoffTime.prototype, "_country", {
+                                get: $util.oneOfGetter($oneOfFields = ["country"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(HandlingCutoffTime.prototype, "_cutoffTime", {
+                                get: $util.oneOfGetter($oneOfFields = ["cutoffTime"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(HandlingCutoffTime.prototype, "_cutoffTimezone", {
+                                get: $util.oneOfGetter($oneOfFields = ["cutoffTimezone"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(HandlingCutoffTime.prototype, "_disableDeliveryAfterCutoff", {
+                                get: $util.oneOfGetter($oneOfFields = ["disableDeliveryAfterCutoff"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new HandlingCutoffTime instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @static
+                             * @param {google.shopping.merchant.products.v1.IHandlingCutoffTime=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.products.v1.HandlingCutoffTime} HandlingCutoffTime instance
+                             */
+                            HandlingCutoffTime.create = function create(properties) {
+                                return new HandlingCutoffTime(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified HandlingCutoffTime message. Does not implicitly {@link google.shopping.merchant.products.v1.HandlingCutoffTime.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @static
+                             * @param {google.shopping.merchant.products.v1.IHandlingCutoffTime} message HandlingCutoffTime message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HandlingCutoffTime.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.country != null && Object.hasOwnProperty.call(message, "country"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.country);
+                                if (message.cutoffTime != null && Object.hasOwnProperty.call(message, "cutoffTime"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.cutoffTime);
+                                if (message.cutoffTimezone != null && Object.hasOwnProperty.call(message, "cutoffTimezone"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.cutoffTimezone);
+                                if (message.disableDeliveryAfterCutoff != null && Object.hasOwnProperty.call(message, "disableDeliveryAfterCutoff"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.disableDeliveryAfterCutoff);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified HandlingCutoffTime message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.HandlingCutoffTime.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @static
+                             * @param {google.shopping.merchant.products.v1.IHandlingCutoffTime} message HandlingCutoffTime message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HandlingCutoffTime.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a HandlingCutoffTime message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.products.v1.HandlingCutoffTime} HandlingCutoffTime
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HandlingCutoffTime.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.products.v1.HandlingCutoffTime();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.country = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.cutoffTime = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.cutoffTimezone = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.disableDeliveryAfterCutoff = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a HandlingCutoffTime message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.products.v1.HandlingCutoffTime} HandlingCutoffTime
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HandlingCutoffTime.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a HandlingCutoffTime message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            HandlingCutoffTime.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.country != null && message.hasOwnProperty("country")) {
+                                    properties._country = 1;
+                                    if (!$util.isString(message.country))
+                                        return "country: string expected";
+                                }
+                                if (message.cutoffTime != null && message.hasOwnProperty("cutoffTime")) {
+                                    properties._cutoffTime = 1;
+                                    if (!$util.isString(message.cutoffTime))
+                                        return "cutoffTime: string expected";
+                                }
+                                if (message.cutoffTimezone != null && message.hasOwnProperty("cutoffTimezone")) {
+                                    properties._cutoffTimezone = 1;
+                                    if (!$util.isString(message.cutoffTimezone))
+                                        return "cutoffTimezone: string expected";
+                                }
+                                if (message.disableDeliveryAfterCutoff != null && message.hasOwnProperty("disableDeliveryAfterCutoff")) {
+                                    properties._disableDeliveryAfterCutoff = 1;
+                                    if (typeof message.disableDeliveryAfterCutoff !== "boolean")
+                                        return "disableDeliveryAfterCutoff: boolean expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a HandlingCutoffTime message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.products.v1.HandlingCutoffTime} HandlingCutoffTime
+                             */
+                            HandlingCutoffTime.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.products.v1.HandlingCutoffTime)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.products.v1.HandlingCutoffTime();
+                                if (object.country != null)
+                                    message.country = String(object.country);
+                                if (object.cutoffTime != null)
+                                    message.cutoffTime = String(object.cutoffTime);
+                                if (object.cutoffTimezone != null)
+                                    message.cutoffTimezone = String(object.cutoffTimezone);
+                                if (object.disableDeliveryAfterCutoff != null)
+                                    message.disableDeliveryAfterCutoff = Boolean(object.disableDeliveryAfterCutoff);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a HandlingCutoffTime message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @static
+                             * @param {google.shopping.merchant.products.v1.HandlingCutoffTime} message HandlingCutoffTime
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            HandlingCutoffTime.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.country != null && message.hasOwnProperty("country")) {
+                                    object.country = message.country;
+                                    if (options.oneofs)
+                                        object._country = "country";
+                                }
+                                if (message.cutoffTime != null && message.hasOwnProperty("cutoffTime")) {
+                                    object.cutoffTime = message.cutoffTime;
+                                    if (options.oneofs)
+                                        object._cutoffTime = "cutoffTime";
+                                }
+                                if (message.cutoffTimezone != null && message.hasOwnProperty("cutoffTimezone")) {
+                                    object.cutoffTimezone = message.cutoffTimezone;
+                                    if (options.oneofs)
+                                        object._cutoffTimezone = "cutoffTimezone";
+                                }
+                                if (message.disableDeliveryAfterCutoff != null && message.hasOwnProperty("disableDeliveryAfterCutoff")) {
+                                    object.disableDeliveryAfterCutoff = message.disableDeliveryAfterCutoff;
+                                    if (options.oneofs)
+                                        object._disableDeliveryAfterCutoff = "disableDeliveryAfterCutoff";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this HandlingCutoffTime to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            HandlingCutoffTime.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HandlingCutoffTime
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.products.v1.HandlingCutoffTime
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HandlingCutoffTime.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.products.v1.HandlingCutoffTime";
+                            };
+    
+                            return HandlingCutoffTime;
                         })();
     
                         v1.ProductsService = (function() {
@@ -25886,11 +26769,16 @@
                                         case 5:
                                         case 6:
                                         case 7:
+                                        case 19:
                                         case 8:
                                         case 9:
+                                        case 18:
                                         case 10:
                                         case 11:
                                         case 12:
+                                        case 15:
+                                        case 16:
+                                        case 17:
                                             break;
                                         }
                                     if (message.approvedCountries != null && message.hasOwnProperty("approvedCountries")) {
@@ -25976,6 +26864,10 @@
                                     case 7:
                                         message.reportingContext = 7;
                                         break;
+                                    case "FREE_LISTINGS_UCP_CHECKOUT":
+                                    case 19:
+                                        message.reportingContext = 19;
+                                        break;
                                     case "FREE_LOCAL_LISTINGS":
                                     case 8:
                                         message.reportingContext = 8;
@@ -25983,6 +26875,10 @@
                                     case "FREE_LOCAL_VEHICLE_LISTINGS":
                                     case 9:
                                         message.reportingContext = 9;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 18:
+                                        message.reportingContext = 18;
                                         break;
                                     case "YOUTUBE_SHOPPING":
                                     case 10:
@@ -25995,6 +26891,18 @@
                                     case "LOCAL_CLOUD_RETAIL":
                                     case 12:
                                         message.reportingContext = 12;
+                                        break;
+                                    case "PRODUCT_REVIEWS":
+                                    case 15:
+                                        message.reportingContext = 15;
+                                        break;
+                                    case "MERCHANT_REVIEWS":
+                                    case 16:
+                                        message.reportingContext = 16;
+                                        break;
+                                    case "YOUTUBE_CHECKOUT":
+                                    case 17:
+                                        message.reportingContext = 17;
                                         break;
                                     }
                                     if (object.approvedCountries) {
@@ -26380,11 +27288,16 @@
                                         case 5:
                                         case 6:
                                         case 7:
+                                        case 19:
                                         case 8:
                                         case 9:
+                                        case 18:
                                         case 10:
                                         case 11:
                                         case 12:
+                                        case 15:
+                                        case 16:
+                                        case 17:
                                             break;
                                         }
                                     if (message.description != null && message.hasOwnProperty("description"))
@@ -26495,6 +27408,10 @@
                                     case 7:
                                         message.reportingContext = 7;
                                         break;
+                                    case "FREE_LISTINGS_UCP_CHECKOUT":
+                                    case 19:
+                                        message.reportingContext = 19;
+                                        break;
                                     case "FREE_LOCAL_LISTINGS":
                                     case 8:
                                         message.reportingContext = 8;
@@ -26502,6 +27419,10 @@
                                     case "FREE_LOCAL_VEHICLE_LISTINGS":
                                     case 9:
                                         message.reportingContext = 9;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 18:
+                                        message.reportingContext = 18;
                                         break;
                                     case "YOUTUBE_SHOPPING":
                                     case 10:
@@ -26514,6 +27435,18 @@
                                     case "LOCAL_CLOUD_RETAIL":
                                     case 12:
                                         message.reportingContext = 12;
+                                        break;
+                                    case "PRODUCT_REVIEWS":
+                                    case 15:
+                                        message.reportingContext = 15;
+                                        break;
+                                    case "MERCHANT_REVIEWS":
+                                    case 16:
+                                        message.reportingContext = 16;
+                                        break;
+                                    case "YOUTUBE_CHECKOUT":
+                                    case 17:
+                                        message.reportingContext = 17;
                                         break;
                                     }
                                     if (object.description != null)
@@ -30105,6 +31038,12 @@
                      * @property {number} FREE_LISTINGS=4 FREE_LISTINGS value
                      * @property {number} FREE_LOCAL_LISTINGS=5 FREE_LOCAL_LISTINGS value
                      * @property {number} YOUTUBE_SHOPPING=6 YOUTUBE_SHOPPING value
+                     * @property {number} YOUTUBE_SHOPPING_CHECKOUT=7 YOUTUBE_SHOPPING_CHECKOUT value
+                     * @property {number} YOUTUBE_AFFILIATE=8 YOUTUBE_AFFILIATE value
+                     * @property {number} FREE_VEHICLE_LISTINGS=9 FREE_VEHICLE_LISTINGS value
+                     * @property {number} VEHICLE_ADS=10 VEHICLE_ADS value
+                     * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
+                     * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
                      */
                     Destination.DestinationEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -30115,6 +31054,12 @@
                         values[valuesById[4] = "FREE_LISTINGS"] = 4;
                         values[valuesById[5] = "FREE_LOCAL_LISTINGS"] = 5;
                         values[valuesById[6] = "YOUTUBE_SHOPPING"] = 6;
+                        values[valuesById[7] = "YOUTUBE_SHOPPING_CHECKOUT"] = 7;
+                        values[valuesById[8] = "YOUTUBE_AFFILIATE"] = 8;
+                        values[valuesById[9] = "FREE_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[10] = "VEHICLE_ADS"] = 10;
+                        values[valuesById[11] = "CLOUD_RETAIL"] = 11;
+                        values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
                         return values;
                     })();
     
@@ -30309,11 +31254,16 @@
                      * @property {number} LOCAL_INVENTORY_ADS=5 LOCAL_INVENTORY_ADS value
                      * @property {number} VEHICLE_INVENTORY_ADS=6 VEHICLE_INVENTORY_ADS value
                      * @property {number} FREE_LISTINGS=7 FREE_LISTINGS value
+                     * @property {number} FREE_LISTINGS_UCP_CHECKOUT=19 FREE_LISTINGS_UCP_CHECKOUT value
                      * @property {number} FREE_LOCAL_LISTINGS=8 FREE_LOCAL_LISTINGS value
                      * @property {number} FREE_LOCAL_VEHICLE_LISTINGS=9 FREE_LOCAL_VEHICLE_LISTINGS value
+                     * @property {number} YOUTUBE_AFFILIATE=18 YOUTUBE_AFFILIATE value
                      * @property {number} YOUTUBE_SHOPPING=10 YOUTUBE_SHOPPING value
                      * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
                      * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
+                     * @property {number} PRODUCT_REVIEWS=15 PRODUCT_REVIEWS value
+                     * @property {number} MERCHANT_REVIEWS=16 MERCHANT_REVIEWS value
+                     * @property {number} YOUTUBE_CHECKOUT=17 YOUTUBE_CHECKOUT value
                      */
                     ReportingContext.ReportingContextEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -30327,11 +31277,16 @@
                         values[valuesById[5] = "LOCAL_INVENTORY_ADS"] = 5;
                         values[valuesById[6] = "VEHICLE_INVENTORY_ADS"] = 6;
                         values[valuesById[7] = "FREE_LISTINGS"] = 7;
+                        values[valuesById[19] = "FREE_LISTINGS_UCP_CHECKOUT"] = 19;
                         values[valuesById[8] = "FREE_LOCAL_LISTINGS"] = 8;
                         values[valuesById[9] = "FREE_LOCAL_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[18] = "YOUTUBE_AFFILIATE"] = 18;
                         values[valuesById[10] = "YOUTUBE_SHOPPING"] = 10;
                         values[valuesById[11] = "CLOUD_RETAIL"] = 11;
                         values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
+                        values[valuesById[15] = "PRODUCT_REVIEWS"] = 15;
+                        values[valuesById[16] = "MERCHANT_REVIEWS"] = 16;
+                        values[valuesById[17] = "YOUTUBE_CHECKOUT"] = 17;
                         return values;
                     })();
     

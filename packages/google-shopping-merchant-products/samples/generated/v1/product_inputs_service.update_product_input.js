@@ -30,7 +30,8 @@ function main(productInput, dataSource) {
    */
   /**
    *  Required. The product input resource to update. Information you submit will
-   *  be applied to the processed product as well.
+   *  be applied to the processed product as well. The `name` field within this
+   *  resource identifies the product input to be updated.
    */
   // const productInput = {}
   /**
