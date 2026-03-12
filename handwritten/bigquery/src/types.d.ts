@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Discovery Revision: 20260211
+ * Discovery Revision: 20260224
  */
 
 /**
@@ -1262,6 +1262,21 @@ declare namespace bigquery {
      * Output only. Number of deleted Rows. populated by DML DELETE, MERGE and TRUNCATE statements.
      */
     deletedRowCount?: string;
+    /**
+     * Output only. DML mode used.
+     */
+    dmlMode?:
+      | 'DML_MODE_UNSPECIFIED'
+      | 'COARSE_GRAINED_DML'
+      | 'FINE_GRAINED_DML';
+    /**
+     * Output only. Reason for disabling fine-grained DML if applicable.
+     */
+    fineGrainedDmlUnusedReason?:
+      | 'FINE_GRAINED_DML_UNUSED_REASON_UNSPECIFIED'
+      | 'MAX_PARTITION_SIZE_EXCEEDED'
+      | 'TABLE_NOT_ENROLLED'
+      | 'DML_IN_MULTI_STATEMENT_TRANSACTION';
     /**
      * Output only. Number of inserted Rows. Populated by DML INSERT and MERGE statements
      */
@@ -3199,6 +3214,10 @@ declare namespace bigquery {
      */
     queryPlan?: Array<IExplainQueryStage>;
     /**
+     * Output only. Referenced property graphs for the job. Queries that reference more than 50 property graphs will not have a complete list.
+     */
+    referencedPropertyGraphs?: Array<IPropertyGraphReference>;
+    /**
      * Output only. Referenced routines for the job.
      */
     referencedRoutines?: Array<IRoutineReference>;
@@ -3998,6 +4017,24 @@ declare namespace bigquery {
      * Required. ID of the project. Can be either the numeric ID or the assigned ID of the project.
      */
     projectId?: string;
+  };
+
+  /**
+   * Id path of a property graph.
+   */
+  type IPropertyGraphReference = {
+    /**
+     * Required. The ID of the dataset containing this property graph.
+     */
+    datasetId?: string;
+    /**
+     * Required. The ID of the project containing this property graph.
+     */
+    projectId?: string;
+    /**
+     * Required. The ID of the property graph. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 256 characters.
+     */
+    propertyGraphId?: string;
   };
 
   /**
