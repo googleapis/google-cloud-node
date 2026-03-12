@@ -38,18 +38,16 @@ node.fix_hermetic(relative_dir="handwritten/logging-winston")
 
 # add shared environment variables to test configs
 s.move(
-    ".kokoro/common_env_vars.cfg",
-    ".kokoro/common.cfg",
+    "handwritten/logging-winston/.kokoro/common_env_vars.cfg",
+    "handwritten/logging-winston/.kokoro/common.cfg",
     merge=lambda src, dst, _, : f"{dst}\n{src}",
-    relative_dir="handwritten/logging-winston"
 )
 for path, subdirs, files in os.walk(f".kokoro/continuous"):
     for name in files:
         if name == "common.cfg":
             file_path = os.path.join(path, name)
             s.move(
-                ".kokoro/common_env_vars.cfg",
+                "handwritten/logging-winston/.kokoro/common_env_vars.cfg",
                 file_path,
                 merge=lambda src, dst, _, : f"{dst}\n{src}",
-                relative_dir="handwritten/logging-winston"
             )
