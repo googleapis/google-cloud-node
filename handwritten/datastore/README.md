@@ -2,10 +2,10 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Datastore: Node.js Client](https://github.com/googleapis/nodejs-datastore)
+# [Google Cloud Datastore: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/datastore)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/datastore.svg)](https://www.npmjs.org/package/@google-cloud/datastore)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/datastore.svg)](https://www.npmjs.com/package/@google-cloud/datastore)
 
 
 
@@ -14,11 +14,11 @@ Cloud Datastore Client Library for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-datastore/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/datastore/CHANGELOG.md).
 
 * [Google Cloud Datastore Node.js Client API Reference][client-docs]
 * [Google Cloud Datastore Documentation][product-docs]
-* [github.com/googleapis/nodejs-datastore](https://github.com/googleapis/nodejs-datastore)
+* [github.com/googleapis/google-cloud-node/handwritten/datastore](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/datastore)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,72 +53,28 @@ npm install @google-cloud/datastore
 ```
 
 
-### Using the client library
-
-```javascript
-// Imports the Google Cloud client library
-const {Datastore} = require('@google-cloud/datastore');
-
-// Creates a client
-const datastore = new Datastore();
-
-async function quickstart() {
-  // The kind for the new entity
-  const kind = 'Task';
-
-  // The name/ID for the new entity
-  const name = 'sampletask1';
-
-  // The Cloud Datastore key for the new entity
-  const taskKey = datastore.key([kind, name]);
-
-  // Prepares the new entity
-  const task = {
-    key: taskKey,
-    data: {
-      description: 'Buy milk',
-    },
-  };
-
-  // Saves the entity
-  await datastore.save(task);
-  console.log(`Saved ${task.key.name}: ${task.data.description}`);
-}
-quickstart();
-
-```
-### Troubleshooting
-#### Emulator returning `DEADLINE_EXCEEDED`, `java.lang.OutOfMemoryError`
-*Reference Issue: [#95](https://github.com/googleapis/nodejs-datastore/issues/95)*
-
-When using the emulator, you may experience errors such as "DEADLINE_EXCEEDED" within your application, corresponding to an error in the emulator: "java.lang.OutOfMemoryError". These errors are unique to the emulator environment and will not persist in production.
-
-A workaround is available, provided by [@ohmpatel1997](https://github.com/ohmpatel1997) [here](https://github.com/googleapis/nodejs-datastore/issues/95#issuecomment-554387312).
 
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-datastore/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/datastore/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Concepts | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/concepts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/concepts.js,samples/README.md) |
-| Error | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/error.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/error.js,samples/README.md) |
-| Export | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/export.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/export.js,samples/README.md) |
-| Import | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/import.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/import.js,samples/README.md) |
-| Indexes.get | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/indexes.get.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/indexes.get.js,samples/README.md) |
-| Indexes.list | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/indexes.list.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/indexes.list.js,samples/README.md) |
-| Create a union between two filters | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/queryFilterOr.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/queryFilterOr.js,samples/README.md) |
-| Run query explain (regular query) | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/queryProfileExplain.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/queryProfileExplain.js,samples/README.md) |
-| Run query explain (aggregate query) | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/queryProfileExplainAggregation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/queryProfileExplainAggregation.js,samples/README.md) |
-| Run query explain analyze (regular query) | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/queryProfileExplainAnalyze.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/queryProfileExplainAnalyze.js,samples/README.md) |
-| Run query explain analyze (aggregate query) | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/queryProfileExplainAnalyzeAggregation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/queryProfileExplainAnalyzeAggregation.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Add Task | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.add.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.add.js,samples/README.md) |
-| Delete Task | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.delete.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.delete.js,samples/README.md) |
-| Legacy Samples | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.js,samples/README.md) |
-| List Tasks | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.list.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.list.js,samples/README.md) |
-| Update Task | [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.markdone.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.markdone.js,samples/README.md) |
+| Datastore.allocate_ids | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore.allocate_ids.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore.allocate_ids.js,handwritten/datastore/samples/README.md) |
+| Datastore.begin_transaction | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore.begin_transaction.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore.begin_transaction.js,handwritten/datastore/samples/README.md) |
+| Datastore.commit | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore.commit.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore.commit.js,handwritten/datastore/samples/README.md) |
+| Datastore.lookup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore.lookup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore.lookup.js,handwritten/datastore/samples/README.md) |
+| Datastore.reserve_ids | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore.reserve_ids.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore.reserve_ids.js,handwritten/datastore/samples/README.md) |
+| Datastore.rollback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore.rollback.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore.rollback.js,handwritten/datastore/samples/README.md) |
+| Datastore.run_aggregation_query | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore.run_aggregation_query.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore.run_aggregation_query.js,handwritten/datastore/samples/README.md) |
+| Datastore.run_query | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore.run_query.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore.run_query.js,handwritten/datastore/samples/README.md) |
+| Datastore_admin.create_index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore_admin.create_index.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore_admin.create_index.js,handwritten/datastore/samples/README.md) |
+| Datastore_admin.delete_index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore_admin.delete_index.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore_admin.delete_index.js,handwritten/datastore/samples/README.md) |
+| Datastore_admin.export_entities | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore_admin.export_entities.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore_admin.export_entities.js,handwritten/datastore/samples/README.md) |
+| Datastore_admin.get_index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore_admin.get_index.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore_admin.get_index.js,handwritten/datastore/samples/README.md) |
+| Datastore_admin.import_entities | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore_admin.import_entities.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore_admin.import_entities.js,handwritten/datastore/samples/README.md) |
+| Datastore_admin.list_indexes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/datastore/samples/generated/v1/datastore_admin.list_indexes.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/datastore/samples/generated/v1/datastore_admin.list_indexes.js,handwritten/datastore/samples/README.md) |
 
 
 
@@ -168,7 +124,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-datastore/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -180,7 +136,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-datastore/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/datastore/latest
 [product-docs]: https://cloud.google.com/datastore/docs

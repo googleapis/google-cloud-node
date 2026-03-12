@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Discovery Revision: 20260118
+ * Discovery Revision: 20260211
  */
 
 /**
@@ -892,7 +892,7 @@ declare namespace bigquery {
   };
 
   /**
-   * Data policy option. For more information, see [Mask data by applying data policies to a column](https://cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column/).
+   * Data policy option. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column).
    */
   type IDataPolicyOption = {
     /**
@@ -2164,6 +2164,22 @@ declare namespace bigquery {
       | 'DISABLED_REASON_UNSPECIFIED'
       | 'OTHER'
       | 'UNSUPPORTED_OPERATOR';
+    /**
+     * Output only. Additional human-readable clarification, if available, for DisabledReason.
+     */
+    disabledReasonDetails?: string;
+    /**
+     * Output only. The time at which the first incremental result was written. If the query needed to restart internally, this only describes the final attempt.
+     */
+    firstIncrementalRowTime?: string;
+    /**
+     * Output only. Number of rows that were in the latest result set before query completion.
+     */
+    incrementalRowCount?: string;
+    /**
+     * Output only. The time at which the last incremental result was written. Does not include the final result written after query completion.
+     */
+    lastIncrementalRowTime?: string;
     /**
      * Output only. The time at which the result table's contents were modified. May be absent if no results have been written or the query has completed.
      */
