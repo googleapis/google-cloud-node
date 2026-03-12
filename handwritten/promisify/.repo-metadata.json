@@ -1,5 +1,5 @@
 {
-  "repo": "googleapis/nodejs-promisify",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/promisify",
   "language": "nodejs",
   "release_level": "stable",

@@ -35,6 +35,7 @@
     "handwritten/logging-winston": {
       "component": "logging-winston"
     },
+    "handwritten/promisify": {},
     "handwritten/spanner": {
       "component": "spanner"
     },

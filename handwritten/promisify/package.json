@@ -4,7 +4,11 @@
   "description": "A simple utility for promisifying functions and classes.",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
-  "repository": "googleapis/nodejs-promisify",
+  "repository": {
+    "type": "git",
+    "directory": "handwritten/promisify",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "scripts": {
     "test": "c8 mocha build/test",
     "lint": "gts check",
@@ -48,5 +52,6 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/promisify"
 }
