@@ -28,7 +28,8 @@ s.copy(templates, destination="handwritten/logging-winston", excludes=[
     ".github/CODEOWNERS",
     ".github/sync-repo-settings.yaml",
     ".github/workflows/ci.yaml",
-    ".kokoro"
+    ".kokoro",
+    "README.md"
 ]) 
 node.fix_hermetic(relative_dir="handwritten/logging-winston")
 
