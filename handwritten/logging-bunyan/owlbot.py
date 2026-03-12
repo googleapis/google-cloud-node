@@ -28,6 +28,7 @@ s.move(templates, destination="handwritten/logging-bunyan", excludes=[
     ".github/release-please.yml",
     ".github/CODEOWNERS",
     ".github/sync-repo-settings.yaml",
+    "README.md"
 ])
 node.fix_hermetic(relative_dir="handwritten/logging-bunyan")
 
