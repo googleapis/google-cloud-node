@@ -2,6 +2,9 @@
   "commit-batch-size": 1,
   "include-component-in-tag": true,
   "packages": {
+    "core/paginator": {
+      "component": "paginator"
+    },
     "core/projectify": {
       "component": "projectify"
     },
@@ -22,6 +25,9 @@
     },
     "handwritten/firestore": {
       "component": "firestore"
+    },
+    "handwritten/logging": {
+      "component": "logging"
     },
     "handwritten/logging-bunyan": {
       "component": "logging-bunyan"

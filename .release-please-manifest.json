@@ -1,4 +1,5 @@
 {
+  "core/paginator": "6.0.0",
   "core/projectify": "5.0.0",
   "handwritten/bigquery": "8.2.0",
   "handwritten/bigquery-storage": "5.1.0",
@@ -6,6 +7,7 @@
   "handwritten/datastore": "10.1.0",
   "handwritten/error-reporting": "3.0.5",
   "handwritten/firestore": "8.3.0",
+  "handwritten/logging": "11.2.1",
   "handwritten/logging-bunyan": "5.1.1",
   "handwritten/logging-winston": "6.0.1",
   "handwritten/spanner": "8.6.0",
