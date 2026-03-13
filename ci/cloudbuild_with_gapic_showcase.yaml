@@ -28,10 +28,24 @@ logsBucket: 'gs://${_LOGS_BUCKET}/logs/google-cloud-node/${_BUILD_TYPE}/${COMMIT
 timeout: 32400s
 
 steps:
+  - id: 'Clone Showcase'
+    name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/googleapis/gapic-showcase.git']
+
+  - id: 'Build Showcase'
+    name: 'golang:1.25'
+    entrypoint: 'go'
+    args: ['install', './cmd/gapic-showcase']
+    dir: 'gapic-showcase'
+    env:
+      - 'GOPATH=/workspace'
+      - 'GOCACHE=/workspace/.cache/go-build'
+    waitFor: ['Clone Showcase']
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Pull Image for Cache'
     entrypoint: 'bash'
     args: ['-c', 'docker pull gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION} || exit 0']
+    waitFor: ['Build Showcase']
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build Test Image'
@@ -59,9 +73,21 @@ steps:
 
   - name: gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}
     id: "run-tests"
-    timeout: 32400s
-    entrypoint: "ci/run_conditional_tests.sh"
-    waitFor: ['Push Test Image']
+    timeout: 32400s    
+    entrypoint: "bash"
+    args:
+      - '-c'
+      - |
+        echo "Starting gapic-showcase server in background..."
+        /workspace/bin/gapic-showcase run &        
+        echo "Waiting for server at localhost:7469..."
+        until bash -c "exec 3<>/dev/tcp/localhost/7469" 2>/dev/null; do
+          echo "Waiting for server..."
+          sleep 1
+        done
+        echo "Server is ready!"
+        echo "Running conditional tests: ci/run_conditional_tests.sh"
+        ci/run_conditional_tests.sh
     env:
     - 'BUILD_TYPE=${_BUILD_TYPE}'
     - 'TEST_TYPE=${_TEST_TYPE}'
@@ -71,6 +97,7 @@ steps:
     - 'REPO_NAME=${_REPO_NAME}'
     - 'COMMIT_SHA=$COMMIT_SHA'
     - 'IS_CORE=${_IS_CORE}'
+    waitFor: ['Push Test Image']
 
 images:
   - 'gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}'

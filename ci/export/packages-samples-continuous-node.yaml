@@ -1,0 +1,16 @@
+createTime: '2026-03-13T22:11:17.006408870Z'
+description: Continuous build with node 18
+filename: ci/cloudbuild.yaml
+github:
+  name: google-cloud-node
+  owner: googleapis
+  push:
+    branch: ^main$
+id: 10408494-15c9-4499-a8ab-55fa0240f61b
+name: packages-samples-continuous-node
+resourceName: projects/long-door-651/locations/global/triggers/10408494-15c9-4499-a8ab-55fa0240f61b
+serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
+substitutions:
+  _BUILD_TYPE: continuous
+  _LOGS_BUCKET: cloud-node-public-logs
+  _TEST_TYPE: samples

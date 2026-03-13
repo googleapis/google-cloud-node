@@ -27,17 +27,17 @@
     "lint": "gts check",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "samples-test": "",
-    "system-test": "",
+    "samples-test": "echo 'no test'",
+    "system-test": "echo 'no test'",
     "test": "c8 mocha build/test",
-    "prelint": ""
+    "prelint": "echo 'no lint'"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.10",
     "@types/npm-packlist": "^7.0.3",
+    "@types/npmcli__arborist": "^5.0.0",
     "@types/once": "^1.4.5",
-    "@types/rimraf": "^4.0.5",
     "@types/tar": "^6.1.13",
     "@types/tmp": "^0.2.6",
     "c8": "^10.1.3",

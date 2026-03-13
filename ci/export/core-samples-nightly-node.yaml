@@ -1,0 +1,20 @@
+createTime: '2025-10-20T21:38:10.237057452Z'
+description: Nightly build with node 18
+gitFileSource:
+  path: ci/cloudbuild.yaml
+  repoType: GITHUB
+  revision: refs/heads/main
+  uri: https://github.com/googleapis/google-cloud-node
+id: 24cf75bd-a428-4f4f-9afa-ffc797c70e22
+name: core-samples-nightly-node
+resourceName: projects/long-door-651/locations/global/triggers/24cf75bd-a428-4f4f-9afa-ffc797c70e22
+serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
+sourceToBuild:
+  ref: refs/heads/main
+  repoType: GITHUB
+  uri: https://github.com/googleapis/google-cloud-node
+substitutions:
+  _BUILD_TYPE: nightly
+  _IS_CORE: 'true'
+  _LOGS_BUCKET: cloud-node-public-logs
+  _TEST_TYPE: samples

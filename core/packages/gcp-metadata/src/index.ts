@@ -357,57 +357,68 @@ export async function isAvailable() {
     // runtime environment. We use the same promise for each of these calls
     // to reduce the network load.
     if (cachedIsAvailableResponse === undefined) {
-      cachedIsAvailableResponse = metadataAccessor(
-        'instance',
-        undefined,
-        detectGCPAvailableRetries(),
-        // If the default HOST_ADDRESS has been overridden, we should not
-        // make an effort to try SECONDARY_HOST_ADDRESS (as we are likely in
-        // a non-GCP environment):
-        !(process.env.GCE_METADATA_IP || process.env.GCE_METADATA_HOST),
-      );
+      cachedIsAvailableResponse = (async () => {
+        try {
+          await metadataAccessor(
+            'instance',
+            undefined,
+            detectGCPAvailableRetries(),
+            // If the default HOST_ADDRESS has been overridden, we should not
+            // make an effort to try SECONDARY_HOST_ADDRESS (as we are likely in
+            // a non-GCP environment):
+            !(process.env.GCE_METADATA_IP || process.env.GCE_METADATA_HOST),
+          );
+          return true;
+        } catch (e) {
+          const err = e as GaxiosError & {type: string};
+          if (process.env.DEBUG_AUTH) {
+            console.info(err);
+          }
+
+          if (err.type === 'request-timeout') {
+            // If running in a GCP environment, metadata endpoint should return
+            // within ms.
+            return false;
+          }
+          if (err.response && err.response.status === 404) {
+            return false;
+          } else {
+            const codes =
+              e instanceof Error && e.name === 'AggregateError'
+                ? (e as any).errors.map((error: any) =>
+                    error.code ? error.code.toString() : 'UNKNOWN',
+                  )
+                : [err.code ? err.code.toString() : 'UNKNOWN'];
+
+            const isExpected = codes.every((code: string) =>
+              [
+                'EHOSTDOWN',
+                'EHOSTUNREACH',
+                'ENETUNREACH',
+                'ENOENT',
+                'ENOTFOUND',
+                'ECONNREFUSED',
+              ].includes(code),
+            );
+
+            if (!isExpected) {
+              const code = err.code ? err.code.toString() : 'UNKNOWN';
+              process.emitWarning(
+                `received unexpected error = ${err.message} code = ${code}`,
+                'MetadataLookupWarning',
+              );
+            }
+
+            // Failure to resolve the metadata service means that it is not available.
+            return false;
+          }
+        }
+      })();
     }
-    await cachedIsAvailableResponse;
-    return true;
+    return await cachedIsAvailableResponse;
   } catch (e) {
-    const err = e as GaxiosError & {type: string};
-    if (process.env.DEBUG_AUTH) {
-      console.info(err);
-    }
-
-    if (err.type === 'request-timeout') {
-      // If running in a GCP environment, metadata endpoint should return
-      // within ms.
-      return false;
-    }
-    if (err.response && err.response.status === 404) {
-      return false;
-    } else {
-      if (
-        !(err.response && err.response.status === 404) &&
-        // A warning is emitted if we see an unexpected err.code, or err.code
-        // is not populated:
-        (!err.code ||
-          ![
-            'EHOSTDOWN',
-            'EHOSTUNREACH',
-            'ENETUNREACH',
-            'ENOENT',
-            'ENOTFOUND',
-            'ECONNREFUSED',
-          ].includes(err.code.toString()))
-      ) {
-        let code = 'UNKNOWN';
-        if (err.code) code = err.code.toString();
-        process.emitWarning(
-          `received unexpected error = ${err.message} code = ${code}`,
-          'MetadataLookupWarning',
-        );
-      }
-
-      // Failure to resolve the metadata service means that it is not available.
-      return false;
-    }
+    // This block should technically not be reached because the async IIFE catches its own errors
+    return false;
   }
 }
 

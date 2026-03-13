@@ -1,4 +1,5 @@
 {
+  // This file is handwritten since this library is also handwritten
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "lib": [

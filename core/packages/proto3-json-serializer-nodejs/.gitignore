@@ -10,3 +10,5 @@ coverage
 .DS_Store
 __pycache__
 .tgz
+tsconfig.tsbuildinfo
+pnpm-lock.yaml

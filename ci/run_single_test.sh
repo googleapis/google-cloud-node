@@ -46,6 +46,26 @@ pnpm install --ignore-scripts --engine-strict --prod; pnpm install
 
 retval=0
 
+if [ "${RUN_INTERDEPENDENT_TESTS}" = "true" ]; then
+    case ${TEST_TYPE} in
+    lint)
+        # Skip interdependent tests for lint
+        ;;
+    samples)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "samples-test"
+        ;;
+    system)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "system-test"
+        ;;
+    units)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "test"
+        ;;
+    *)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "${TEST_TYPE}"
+        ;;
+    esac
+fi
+
 set +e
 case ${TEST_TYPE} in
 lint)
@@ -68,6 +88,21 @@ units)
 *)
     ;;
 esac
+
+if [ ${retval} -ne 0 ] && [ "${MOCHA_REPORTER}" == "xunit" ]; then
+    echo "Tests failed. Rerunning with spec reporter for better visibility:"
+    case ${TEST_TYPE} in
+    samples)
+        MOCHA_REPORTER=spec pnpm samples-test
+        ;;
+    system)
+        MOCHA_REPORTER=spec pnpm system-test
+        ;;
+    units)
+        MOCHA_REPORTER=spec pnpm test
+        ;;
+    esac
+fi
 set -e
 
 exit ${retval}
