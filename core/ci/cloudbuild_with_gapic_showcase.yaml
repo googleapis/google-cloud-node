@@ -1,0 +1,102 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+options:
+  dynamic_substitutions: true
+  machineType: 'E2_HIGHCPU_32'
+  diskSizeGb: '100'
+
+substitutions:
+  _BUILD_TYPE: "presubmit"
+  _TEST_TYPE: "system"
+  _NODE_VERSION: "18"
+  _REPO_OWNER: "googleapis"
+  _REPO_NAME: "google-cloud-node-core"
+
+logsBucket: 'gs://${_LOGS_BUCKET}/logs/google-cloud-node-core/${_BUILD_TYPE}/${COMMIT_SHA}/${TRIGGER_NAME}'
+timeout: 32400s
+
+steps:
+  - id: 'Clone Showcase'
+    name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/googleapis/gapic-showcase.git']
+
+  - id: 'Build Showcase'
+    name: 'golang:1.25'
+    entrypoint: 'go'
+    args: ['install', './cmd/gapic-showcase']
+    dir: 'gapic-showcase'
+    env:
+      - 'GOPATH=/workspace'
+      - 'GOCACHE=/workspace/.cache/go-build'
+    waitFor: ['Clone Showcase']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Pull Image for Cache'
+    entrypoint: 'bash'
+    args: ['-c', 'docker pull gcr.io/${PROJECT_ID}/google-cloud-node-core-${_NODE_VERSION} || exit 0']
+    waitFor: ['Build Showcase']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build Test Image'
+    args: [
+      'build',
+      '-t', 'gcr.io/${PROJECT_ID}/google-cloud-node-core-${_NODE_VERSION}',
+      '--cache-from', 'gcr.io/${PROJECT_ID}/google-cloud-node-core-${_NODE_VERSION}',
+      '-f', 'ci/Dockerfile',
+      '--build-arg', 'NODE_VERSION=${_NODE_VERSION}',
+      '.'
+    ]
+    waitFor: ['Pull Image for Cache']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push Test Image'
+    args: ['push', 'gcr.io/${PROJECT_ID}/google-cloud-node-core-${_NODE_VERSION}']
+    waitFor: ['Build Test Image']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: "bash"
+    args: ["ci/deletecloudbuild.sh"]
+    env:
+    - 'REF_NAME=${REF_NAME}'
+    waitFor: ['Push Test Image']
+
+  - name: gcr.io/${PROJECT_ID}/google-cloud-node-core-${_NODE_VERSION}
+    id: "run-tests"
+    timeout: 32400s    
+    entrypoint: "bash"
+    args:
+      - '-c'
+      - |
+        echo "Starting gapic-showcase server in background..."
+        /workspace/bin/gapic-showcase run &        
+        echo "Waiting for server at localhost:7469..."
+        until bash -c "exec 3<>/dev/tcp/localhost/7469" 2>/dev/null; do
+          echo "Waiting for server..."
+          sleep 1
+        done
+        echo "Server is ready!"
+        echo "Running conditional tests: ci/run_conditional_tests.sh"
+        ci/run_conditional_tests.sh
+    env:
+    - 'BUILD_TYPE=${_BUILD_TYPE}'
+    - 'TEST_TYPE=${_TEST_TYPE}'
+    - 'BUILD_ID=$BUILD_ID'
+    - 'PROJECT_ID=$PROJECT_ID'
+    - 'REPO_OWNER=${_REPO_OWNER}'
+    - 'REPO_NAME=${_REPO_NAME}'
+    - 'COMMIT_SHA=$COMMIT_SHA'
+    waitFor: ['Push Test Image']
+
+images:
+  - 'gcr.io/${PROJECT_ID}/google-cloud-node-core-${_NODE_VERSION}'

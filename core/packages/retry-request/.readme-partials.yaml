@@ -1,0 +1,4 @@
+introduction: |-
+    **_THIS REPOSITORY AND PACKAGE WILL BE DEPRECATED IN 2025. RELEVANT FUNCTIONALITIES HAVE BEEN MOVED TO [GOOGLEAPIS/GAXIOS](https://github.com/googleapis/gaxios)_**
+
+    Retry a request with built-in exponential backoff.

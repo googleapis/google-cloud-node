@@ -1,0 +1,197 @@
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+name: continuous
+jobs:
+  units:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ^10.0.0
+      - run: node --version
+      - run: ci/run_conditional_tests.sh
+        name: Run unit tests
+        env:
+          BUILD_TYPE: continuous
+          TEST_TYPE: units
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: node --version
+      - run: ci/run_conditional_tests.sh
+        env:
+          MOCHA_THROW_DEPRECATION: false
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 300 # Fetch all history for comparison
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: npm install
+      - run: ci/run_conditional_tests.sh
+        name: Run lint
+        env:
+          BUILD_TYPE: continuous
+          TEST_TYPE: lint
+  generator-test:
+    runs-on: ubuntu-latest
+    container: gcr.io/gapic-images/googleapis:20250404
+    # Dockerfile for this image: https://github.com/googleapis/googleapis-discovery/blob/master/Dockerfile
+    # If you update its version, please also update it below in
+    # 'Cache Bazel files' - unfortunately it cannot accept variables at this
+    # time.
+
+    steps:
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      with:
+        fetch-depth: 0 # Fetch all history for comparison on push events
+
+    - name: Mark repo as safe for git
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+    - name: Check for changes in generator
+      id: generator-changes
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          git fetch origin ${{ github.base_ref }} --depth=1
+          if git diff --name-only origin/${{ github.base_ref }}...${{ github.sha }} | grep -q "^generator/"; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+        else
+          if git diff --name-only HEAD~1 HEAD | grep -q "^generator/"; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+        fi
+
+    - name: Cache Bazel files
+      if: steps.generator-changes.outputs.changes == 'true'
+      id: cache-bazel
+      uses: actions/cache@v5
+      with:
+        path: ~/.cache/bazel
+        key: ${{ runner.os }}-googleapis-20250422-${{ secrets.CACHE_VERSION }}
+
+    - name: Setup Node.js
+      if: steps.generator-changes.outputs.changes == 'true'
+      uses: actions/setup-node@v6
+      with:
+        node-version: 18.x
+
+    - name: Install Node dependencies with npm
+      if: steps.generator-changes.outputs.changes == 'true'
+      run: npm install
+      
+    - name: Run bazel build
+      if: steps.generator-changes.outputs.changes == 'true'
+      working-directory: ./generator/gapic-generator-typescript
+      run: bazelisk build --noremote_accept_cached '//...'
+
+    - name: Run bazel test
+      if: steps.generator-changes.outputs.changes == 'true'
+      working-directory: ./generator/gapic-generator-typescript
+      run: bazelisk test --test_output=errors --noremote_accept_cached //...
+
+    - name: Verify error conformance
+      if: steps.generator-changes.outputs.changes == 'true'
+      working-directory: ./generator/gapic-generator-typescript
+      run: |
+        curl -sSL https://github.com/googleapis/gapic-config-validator/releases/download/v0.6.0/gapic-config-validator-0.6.0-linux-amd64.tar.gz > config-validator.tar.gz
+        tar xzf config-validator.tar.gz --no-same-owner
+        chmod +x gapic-error-conformance
+        chmod +x bazel-bin/protoc_plugin_/protoc_plugin
+        ./gapic-error-conformance -plugin="bazel-bin/protoc_plugin_/protoc_plugin"
+
+    - name: Prepare baseline artifacts
+      if: steps.generator-changes.outputs.changes == 'true'
+      working-directory: ./generator/gapic-generator-typescript
+      run: |
+        mkdir -p ~/artifacts
+        cp bazel-testlogs/unit_tests/test.outputs/outputs.zip ~/artifacts/
+        bazelisk run -- @pnpm//:pnpm --dir $PWD install
+        tar cfz ~/artifacts/node_modules.tar.gz node_modules
+
+    - name: Save artifacts
+      if: steps.generator-changes.outputs.changes == 'true'
+      uses: actions/upload-artifact@v5
+      with:
+        name: artifacts
+        path: ~/artifacts
+
+    - name: Test generated libraries
+      if: steps.generator-changes.outputs.changes == 'true'
+      run: |
+        set -ex
+        unzip ~/artifacts/outputs.zip -d library
+        for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
+          echo "--- Testing library $lib ---"
+          cd library/.test-out-$lib
+          npm install
+          npm test
+          npm run fix
+          rm -rf build
+          npm run compile
+          npm run system-test
+          npm run docs
+          cd ../..
+        done
+
+    - name: Test generated ESM libraries
+      if: steps.generator-changes.outputs.changes == 'true'
+      run: |
+        set -ex
+        for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
+          echo "--- Testing ESM library $lib ---"
+          cd library/.test-out-$lib-esm
+          npm install
+          npm test
+          npm run fix
+          rm -rf build
+          npm run compile
+          npm run system-test
+          cd ../..
+        done
+
+    - name: Test combined library (Speech)
+      if: steps.generator-changes.outputs.changes == 'true'
+      env:
+        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
+      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs v1 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
+
+    - name: Run tests for combined library (Speech)
+      if: steps.generator-changes.outputs.changes == 'true'
+      run: |
+        set -ex
+        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
+        npm install
+        npm test
+        npm run system-test
+
+    - name: Test combined library (Tasks)
+      if: steps.generator-changes.outputs.changes == 'true'
+      env:
+        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
+      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs v2 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
+
+    - name: Run tests for combined library (Tasks)
+      if: steps.generator-changes.outputs.changes == 'true'
+      run: |
+        set -ex
+        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
+        npm install
+        npm test
+        npm run system-test
+  
