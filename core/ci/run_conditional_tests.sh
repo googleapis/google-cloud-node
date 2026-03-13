@@ -75,6 +75,8 @@ subdirs=(
     .github/scripts
     packages
     generator
+    core/packages
+    core/dev-packages
 )
 
 RETVAL=0

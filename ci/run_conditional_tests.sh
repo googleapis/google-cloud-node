@@ -77,6 +77,8 @@ subdirs=(
     packages
     handwritten
     .github/scripts
+    core/packages
+    core/dev-packages
 )
 
 RETVAL=0
@@ -147,6 +149,11 @@ for subdir in ${subdirs[@]}; do
         fi
         if [ "${should_test}" = true ]; then
             echo "running test in ${d}"
+            if [[ "${d}" == core/packages/* ]]; then
+                export RUN_INTERDEPENDENT_TESTS=true
+            else
+                export RUN_INTERDEPENDENT_TESTS=false
+            fi
             pushd ${d}
             # Temporarily allow failure.
             set +e
