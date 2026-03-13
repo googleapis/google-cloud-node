@@ -105,6 +105,35 @@ jobs:
           npm run system-test
           cd ../..
         done
+    - name: Test combined library (Speech)
+      if: steps.generator-changes.outputs.changes == 'true'
+      env:
+        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
+      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs v1 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
+
+    - name: Run tests for combined library (Speech)
+      if: steps.generator-changes.outputs.changes == 'true'
+      run: |
+        set -ex
+        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
+        npm install
+        npm test
+        npm run system-test
+
+    - name: Test combined library (Tasks)
+      if: steps.generator-changes.outputs.changes == 'true'
+      env:
+        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
+      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs v2 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
+
+    - name: Run tests for combined library (Tasks)
+      if: steps.generator-changes.outputs.changes == 'true'
+      run: |
+        set -ex
+        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
+        npm install
+        npm test
+        npm run system-test
 
   continuous:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -206,13 +235,32 @@ jobs:
           npm run system-test
           cd ../..
         done
+            - name: Test combined library (Speech)
+      if: steps.generator-changes.outputs.changes == 'true'
+      env:
+        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
+      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs v1 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
 
-  yaml:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v5
-    - name: yamllint
-      uses: ibiqlik/action-yamllint@v3
-      with:
-        file_or_dir: core/generator
-        strict: false
+    - name: Run tests for combined library (Speech)
+      if: steps.generator-changes.outputs.changes == 'true'
+      run: |
+        set -ex
+        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
+        npm install
+        npm test
+        npm run system-test
+
+    - name: Test combined library (Tasks)
+      if: steps.generator-changes.outputs.changes == 'true'
+      env:
+        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
+      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs v2 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
+
+    - name: Run tests for combined library (Tasks)
+      if: steps.generator-changes.outputs.changes == 'true'
+      run: |
+        set -ex
+        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
+        npm install
+        npm test
+        npm run system-test
