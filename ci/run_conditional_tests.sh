@@ -71,8 +71,8 @@ fi
 # Now we have a fixed list, but we can change it to autodetect if
 # necessary.
 #
-# Note the package and .github/scripts tests are executed in parallel
-# using turbo.
+# Note the packages and containers tests are executed in parallel
+# using PNPM workspaces.
 
 subdirs=(
     core
