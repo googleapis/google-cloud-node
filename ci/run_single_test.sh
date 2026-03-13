@@ -47,6 +47,8 @@ pnpm install --ignore-scripts --engine-strict --prod; pnpm install
 retval=0
 
 if [ "${RUN_INTERDEPENDENT_TESTS}" = "true" ]; then
+    echo "INTERDEPENDENT TESTS? ${RUN_INTERDEPENDENT_TESTS}"
+    echo "TEST TYPE? ${TEST_TYPE}"
     case ${TEST_TYPE} in
     lint)
         # Skip interdependent tests for lint
