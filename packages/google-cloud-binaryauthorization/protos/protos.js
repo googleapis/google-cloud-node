@@ -32638,6 +32638,7 @@
                  * @interface IFileLocation
                  * @property {string|null} [filePath] FileLocation filePath
                  * @property {grafeas.v1.ILayerDetails|null} [layerDetails] FileLocation layerDetails
+                 * @property {number|null} [lineNumber] FileLocation lineNumber
                  */
     
                 /**
@@ -32672,6 +32673,14 @@
                 FileLocation.prototype.layerDetails = null;
     
                 /**
+                 * FileLocation lineNumber.
+                 * @member {number} lineNumber
+                 * @memberof grafeas.v1.FileLocation
+                 * @instance
+                 */
+                FileLocation.prototype.lineNumber = 0;
+    
+                /**
                  * Creates a new FileLocation instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.FileLocation
@@ -32699,6 +32708,8 @@
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePath);
                     if (message.layerDetails != null && Object.hasOwnProperty.call(message, "layerDetails"))
                         $root.grafeas.v1.LayerDetails.encode(message.layerDetails, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.lineNumber != null && Object.hasOwnProperty.call(message, "lineNumber"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.lineNumber);
                     return writer;
                 };
     
@@ -32741,6 +32752,10 @@
                             }
                         case 2: {
                                 message.layerDetails = $root.grafeas.v1.LayerDetails.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.lineNumber = reader.int32();
                                 break;
                             }
                         default:
@@ -32786,6 +32801,9 @@
                         if (error)
                             return "layerDetails." + error;
                     }
+                    if (message.lineNumber != null && message.hasOwnProperty("lineNumber"))
+                        if (!$util.isInteger(message.lineNumber))
+                            return "lineNumber: integer expected";
                     return null;
                 };
     
@@ -32808,6 +32826,8 @@
                             throw TypeError(".grafeas.v1.FileLocation.layerDetails: object expected");
                         message.layerDetails = $root.grafeas.v1.LayerDetails.fromObject(object.layerDetails);
                     }
+                    if (object.lineNumber != null)
+                        message.lineNumber = object.lineNumber | 0;
                     return message;
                 };
     
@@ -32827,11 +32847,14 @@
                     if (options.defaults) {
                         object.filePath = "";
                         object.layerDetails = null;
+                        object.lineNumber = 0;
                     }
                     if (message.filePath != null && message.hasOwnProperty("filePath"))
                         object.filePath = message.filePath;
                     if (message.layerDetails != null && message.hasOwnProperty("layerDetails"))
                         object.layerDetails = $root.grafeas.v1.LayerDetails.toObject(message.layerDetails, options);
+                    if (message.lineNumber != null && message.hasOwnProperty("lineNumber"))
+                        object.lineNumber = message.lineNumber;
                     return object;
                 };
     
