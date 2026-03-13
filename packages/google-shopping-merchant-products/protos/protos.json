@@ -239,7 +239,8 @@
                           "values": {
                             "SUBSCRIPTION_PERIOD_UNSPECIFIED": 0,
                             "MONTH": 1,
-                            "YEAR": 2
+                            "YEAR": 2,
+                            "WEEK": 3
                           }
                         },
                         "AgeGroup": {
@@ -954,6 +955,21 @@
                                 "proto3_optional": true
                               }
                             },
+                            "shippingHandlingBusinessDays": {
+                              "rule": "repeated",
+                              "type": "ShippingBusinessDaysConfig",
+                              "id": 143
+                            },
+                            "shippingTransitBusinessDays": {
+                              "rule": "repeated",
+                              "type": "ShippingBusinessDaysConfig",
+                              "id": 144
+                            },
+                            "handlingCutoffTimes": {
+                              "rule": "repeated",
+                              "type": "HandlingCutoffTime",
+                              "id": 141
+                            },
                             "shippingLabel": {
                               "type": "string",
                               "id": 46,
@@ -1233,6 +1249,36 @@
                             }
                           },
                           "nested": {
+                            "ShippingBusinessDaysConfig": {
+                              "oneofs": {
+                                "_country": {
+                                  "oneof": [
+                                    "country"
+                                  ]
+                                },
+                                "_businessDays": {
+                                  "oneof": [
+                                    "businessDays"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "country": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "businessDays": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
                             "CarrierShipping": {
                               "oneofs": {
                                 "_country": {
@@ -1692,6 +1738,16 @@
                               "oneof": [
                                 "maxTransitTime"
                               ]
+                            },
+                            "_handlingCutoffTime": {
+                              "oneof": [
+                                "handlingCutoffTime"
+                              ]
+                            },
+                            "_handlingCutoffTimezone": {
+                              "oneof": [
+                                "handlingCutoffTimezone"
+                              ]
                             }
                           },
                           "fields": {
@@ -1747,6 +1803,20 @@
                             "maxTransitTime": {
                               "type": "int64",
                               "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "handlingCutoffTime": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "handlingCutoffTimezone": {
+                              "type": "string",
+                              "id": 13,
                               "options": {
                                 "proto3_optional": true
                               }
@@ -2186,6 +2256,60 @@
                             "gadPrice": {
                               "type": "google.shopping.type.Price",
                               "id": 3
+                            }
+                          }
+                        },
+                        "HandlingCutoffTime": {
+                          "oneofs": {
+                            "_country": {
+                              "oneof": [
+                                "country"
+                              ]
+                            },
+                            "_cutoffTime": {
+                              "oneof": [
+                                "cutoffTime"
+                              ]
+                            },
+                            "_cutoffTimezone": {
+                              "oneof": [
+                                "cutoffTimezone"
+                              ]
+                            },
+                            "_disableDeliveryAfterCutoff": {
+                              "oneof": [
+                                "disableDeliveryAfterCutoff"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "country": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "cutoffTime": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "cutoffTimezone": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "disableDeliveryAfterCutoff": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           }
                         },
@@ -4488,7 +4612,13 @@
                         "LOCAL_INVENTORY_ADS": 3,
                         "FREE_LISTINGS": 4,
                         "FREE_LOCAL_LISTINGS": 5,
-                        "YOUTUBE_SHOPPING": 6
+                        "YOUTUBE_SHOPPING": 6,
+                        "YOUTUBE_SHOPPING_CHECKOUT": 7,
+                        "YOUTUBE_AFFILIATE": 8,
+                        "FREE_VEHICLE_LISTINGS": 9,
+                        "VEHICLE_ADS": 10,
+                        "CLOUD_RETAIL": 11,
+                        "LOCAL_CLOUD_RETAIL": 12
                       }
                     }
                   }
@@ -4513,11 +4643,16 @@
                         "LOCAL_INVENTORY_ADS": 5,
                         "VEHICLE_INVENTORY_ADS": 6,
                         "FREE_LISTINGS": 7,
+                        "FREE_LISTINGS_UCP_CHECKOUT": 19,
                         "FREE_LOCAL_LISTINGS": 8,
                         "FREE_LOCAL_VEHICLE_LISTINGS": 9,
+                        "YOUTUBE_AFFILIATE": 18,
                         "YOUTUBE_SHOPPING": 10,
                         "CLOUD_RETAIL": 11,
-                        "LOCAL_CLOUD_RETAIL": 12
+                        "LOCAL_CLOUD_RETAIL": 12,
+                        "PRODUCT_REVIEWS": 15,
+                        "MERCHANT_REVIEWS": 16,
+                        "YOUTUBE_CHECKOUT": 17
                       }
                     }
                   }
