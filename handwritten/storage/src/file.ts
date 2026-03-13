@@ -1556,6 +1556,13 @@ class File extends ServiceObject<File, FileMetadata> {
       }
     };
 
+    const cleanupRawResponse = (rawResponseStream: Readable) => {
+      rawResponseStream.destroy();
+      if (request?.agent) {
+        request.agent.destroy();
+      }
+    };
+
     // We listen to the response event from the request stream so that we
     // can...
     //
@@ -1581,6 +1588,11 @@ class File extends ServiceObject<File, FileMetadata> {
       }
 
       request = (rawResponseStream as r.Response).request;
+      if (throughStream.destroyed) {
+        cleanupRawResponse(rawResponseStream as Readable);
+        return;
+      }
+
       const headers = (rawResponseStream as ResponseBody).toJSON().headers;
       const isCompressed = headers['content-encoding'] === 'gzip';
       const hashes: {crc32c?: string; md5?: string} = {};
@@ -1635,12 +1647,23 @@ class File extends ServiceObject<File, FileMetadata> {
         transformStreams.push(zlib.createGunzip());
       }
 
-      pipeline(
-        rawResponseStream as Readable,
-        ...(transformStreams as [Transform]),
-        throughStream,
-        onComplete,
-      );
+      try {
+        pipeline(
+          rawResponseStream as Readable,
+          ...(transformStreams as [Transform]),
+          throughStream,
+          onComplete,
+        );
+      } catch (err) {
+        if (
+          throughStream.destroyed &&
+          (err as NodeJS.ErrnoException).code === 'ERR_STREAM_UNABLE_TO_PIPE'
+        ) {
+          cleanupRawResponse(rawResponseStream as Readable);
+          return;
+        }
+        throw err;
+      }
     };
 
     // Authenticate the request, then pipe the remote API request to the stream

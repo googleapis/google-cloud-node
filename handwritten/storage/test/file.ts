@@ -31,6 +31,7 @@ import {
   Transform,
   pipeline,
 } from 'stream';
+import * as streamModule from 'stream';
 import assert from 'assert';
 import * as crypto from 'crypto';
 import duplexify from 'duplexify';
@@ -976,6 +977,46 @@ describe('File', () => {
       });
     }
 
+    function getFileWithStreamOverride(streamOverride: Partial<typeof streamModule>) {
+      return proxyquire('../src/file.js', {
+        './nodejs-common': {
+          ServiceObject: FakeServiceObject,
+          util: fakeUtil,
+        },
+        '@google-cloud/promisify': fakePromisify,
+        fs: fakeFs,
+        '../src/resumable-upload': fakeResumableUpload,
+        os: fakeOs,
+        './signer': fakeSigner,
+        zlib: fakeZlib,
+        stream: {
+          ...streamModule,
+          ...streamOverride,
+        },
+      }).File;
+    }
+
+    function createPipelineThatThrowsOnDestroyedDestination() {
+      return sinon.spy(
+        (
+          source: Readable,
+          ...pipelineArgs: Array<
+            Transform | Stream | ((err: NodeJS.ErrnoException | null) => void)
+          >
+        ) => {
+          const destination = pipelineArgs[pipelineArgs.length - 2] as Duplex;
+          if (destination.destroyed) {
+            const err = new Error(
+              'Cannot pipe to a closed or destroyed stream'
+            ) as NodeJS.ErrnoException;
+            err.code = 'ERR_STREAM_UNABLE_TO_PIPE';
+            throw err;
+          }
+          return (pipeline as any)(source, ...pipelineArgs);
+        }
+      );
+    }
+
     beforeEach(() => {
       handleRespOverride = (
         err: Error,
@@ -1163,6 +1204,63 @@ describe('File', () => {
         };
 
         file.createReadStream().resume();
+      });
+
+      it('should not throw ERR_STREAM_UNABLE_TO_PIPE if the returned stream is destroyed before the response is piped', done => {
+        const pipelineOverride =
+          createPipelineThatThrowsOnDestroyedDestination();
+        const LocalFile = getFileWithStreamOverride({
+          pipeline: pipelineOverride as unknown as typeof pipeline,
+        });
+        const localFile = new LocalFile(BUCKET, FILE_NAME);
+        const rawResponseStream = new PassThrough();
+        const agentDestroy = sinon.spy();
+        Object.assign(rawResponseStream, {
+          request: {
+            agent: {
+              destroy: agentDestroy,
+            },
+          },
+          toJSON() {
+            return {headers: {}};
+          },
+        });
+
+        handleRespOverride = (
+          err: Error,
+          res: {},
+          body: {},
+          callback: Function
+        ) => {
+          setImmediate(() => {
+            callback(null, null, rawResponseStream);
+          });
+        };
+
+        localFile.requestStream = () => {
+          const requestStream = new PassThrough();
+          setImmediate(() => {
+            requestStream.emit('response', {});
+          });
+          return requestStream;
+        };
+
+        const readStream = localFile.createReadStream({validation: false});
+
+        readStream.on('response', () => {
+          readStream.destroy();
+        });
+
+        readStream.resume();
+
+        readStream.on('close', () => {
+          setImmediate(() => {
+            assert.strictEqual(rawResponseStream.destroyed, true);
+            assert.strictEqual(agentDestroy.calledOnce, true);
+            assert.strictEqual(pipelineOverride.threw(), false);
+            done();
+          });
+        });
       });
 
       describe('errors', () => {
