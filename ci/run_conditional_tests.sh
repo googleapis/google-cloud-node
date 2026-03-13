@@ -100,6 +100,10 @@ for subdir in ${subdirs[@]}; do
             echo "Skipping ${d} (explicitly ignored in ignore.json)"
             continue
         fi
+        if [ ! -f "${d}/package.json" ]; then
+            echo "Skipping ${d} (no package.json found)"
+            continue
+        fi
         if [[ ("${subdir}" == "handwritten" || "${subdir}" == "core") && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
             echo "Skipping ${TEST_TYPE} test for handwritten and core packages: ${d}"
             continue
