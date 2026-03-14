@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.6.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.5.0...documentai-v9.6.0) (2026-03-14)
+
+
+### Features
+
+* [documentai] Added a field for enabling image and table annotation for layout parser processor ([#7318](https://github.com/googleapis/google-cloud-node/issues/7318)) ([bdd6c7a](https://github.com/googleapis/google-cloud-node/commit/bdd6c7ac2f1e00c2e175a894c4f20e1b4364881d))
+
 ## [9.5.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.4.0...documentai-v9.5.0) (2025-10-13)
 
 

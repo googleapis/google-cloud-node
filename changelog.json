@@ -5,6 +5,183 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "7340b3f0ee9b8c0a4446d85cdbbadd9cdfa2db33",
+          "message": "[navconnect] add Navigation Connect API",
+          "issues": [
+            "7530"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "2631c982494178df2d58913b686d05d752ee9e15",
+          "message": "Add initial files for google.maps.navconnect.v1",
+          "issues": [
+            "7529"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/navconnect",
+      "id": "bf92ff19-b2f4-457c-aaaa-20c197d6d1d0",
+      "createTime": "2026-03-14T21:08:06.653Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "345bf5dc9d48027193f2af5951ca61d5b2936f4f",
+          "message": "[ces] update public libraries for CES v1beta",
+          "issues": [
+            "7356"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "47059e5c-eae9-4bcc-b79d-980ebb84e108",
+      "createTime": "2026-03-14T21:08:06.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "[vectorsearch] Removed field DenseScannParams from SearchHint",
+          "issues": [
+            "7312"
+          ],
+          "breakingChangeNote": "[vectorsearch] Removed field DenseScannParams from SearchHint ([#7312](https://github.com/googleapis/google-cloud-node/issues/7312))"
+        },
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "Removed obsolete message `VertexRanker`",
+          "issues": [],
+          "breakingChangeNote": "Removed obsolete message `VertexRanker`"
+        },
+        {
+          "type": "feat",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "Added index and search configuration management",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "[vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`",
+          "issues": [],
+          "breakingChangeNote": "[vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`"
+        },
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "Removed obsolete message `VertexRanker`",
+          "issues": [],
+          "breakingChangeNote": "Removed obsolete message `VertexRanker`"
+        },
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "[vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`",
+          "issues": [],
+          "breakingChangeNote": "[vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "ac505b80-0390-454f-af8e-7400cb47e0e4",
+      "createTime": "2026-03-14T21:08:06.569Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ceeb607df31c504456590a8253d165b71348d5dc",
+          "message": "[hypercomputecluster] add v1 version",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/hypercomputecluster",
+      "id": "cb0b207a-b6ce-4d65-8069-75bd075bff12",
+      "createTime": "2026-03-14T21:08:06.503Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fdecca62c8a8138bea15df300063a9bdda83880f",
+          "message": "[gdchardwaremanagement] Add `OFFLINE` state to Zone resources",
+          "issues": [
+            "7513"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "fa7009fd-f078-44e4-91c8-b5f58ac6cdd8",
+      "createTime": "2026-03-14T21:08:06.450Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bdd6c7ac2f1e00c2e175a894c4f20e1b4364881d",
+          "message": "[documentai] Added a field for enabling image and table annotation for layout parser processor",
+          "issues": [
+            "7318"
+          ]
+        }
+      ],
+      "version": "9.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "2b2afa1c-a8d9-4859-84a4-c98998fec837",
+      "createTime": "2026-03-14T21:08:06.415Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dc04e0c2073ff7155b0f55342d8e9954c30cd173",
+          "message": "[compute] Update Compute Engine v1 API to revision 20260213",
+          "issues": [
+            "7320"
+          ]
+        }
+      ],
+      "version": "6.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "0b4094d9-4000-406c-bc17-1f8d5969c70e",
+      "createTime": "2026-03-14T21:08:06.361Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a74e547ff722d19a3e50adf06bef03f46231daef",
+          "message": "[alloydb] Add a new field to support Dataplex integration configuration",
+          "issues": [
+            "7322"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "cd21d114-0388-4663-b80a-32f804b02a5e",
+      "createTime": "2026-03-14T21:08:06.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "7eb5628e05f7592c7c3857035f82e9f44d8d4ef4",
           "message": "[contentwarehouse] Added a field for enabling image and table annotation for layout parser processor",
           "issues": [
@@ -68702,5 +68879,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-03-04T19:33:12.038Z"
+  "updateTime": "2026-03-14T21:08:06.653Z"
 }
