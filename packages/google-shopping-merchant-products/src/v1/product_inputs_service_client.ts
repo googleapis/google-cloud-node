@@ -335,11 +335,11 @@ export class ProductInputsServiceClient {
   // -------------------
 /**
  * [Uploads a product input to your Merchant Center
- * account](/merchant/api/guides/products/overview#upload-product-input). You
+ * account](/merchant/api/guides/products/add-manage#add_a_product). You
  * must have a products [data
- * source](/merchant/api/guides/data-sources/overview) to be able to insert a
- * product. The unique identifier of the data source is passed as a query
- * parameter in the request URL.
+ * source](/merchant/api/guides/data-sources/api-sources#create-primary-data-source)
+ * to be able to insert a product. The unique identifier of the data source is
+ * passed as a query parameter in the request URL.
  *
  * If a product input with the same contentLanguage, offerId, and dataSource
  * already exists, then the product input inserted by this method replaces
@@ -359,8 +359,8 @@ export class ProductInputsServiceClient {
  *   Required. The primary or supplemental product data source name. If the
  *   product already exists and data source provided is different, then the
  *   product will be moved to a new data source. For more information, see
- *   [Overview of Data sources
- *   sub-API](/merchant/api/guides/data-sources/overview).
+ *   [Create a primary data
+ *   source](/merchant/api/guides/data-sources/api-sources#create-primary-data-source).
  *
  *   Only API data sources are supported.
  *
@@ -455,6 +455,8 @@ export class ProductInputsServiceClient {
   }
 /**
  * Updates the existing product input in your Merchant Center account.
+ * The name of the product input to update is taken from the `name` field
+ * within the `ProductInput` resource.
  *
  * After inserting, updating, or deleting a product input, it may take several
  * minutes before the processed product can be retrieved.
@@ -463,7 +465,8 @@ export class ProductInputsServiceClient {
  *   The request object that will be sent.
  * @param {google.shopping.merchant.products.v1.ProductInput} request.productInput
  *   Required. The product input resource to update. Information you submit will
- *   be applied to the processed product as well.
+ *   be applied to the processed product as well. The `name` field within this
+ *   resource identifies the product input to be updated.
  * @param {google.protobuf.FieldMask} [request.updateMask]
  *   Optional. The list of product attributes to be updated.
  *
@@ -584,12 +587,44 @@ export class ProductInputsServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. The name of the product input resource to delete.
- *   Format: `accounts/{account}/productInputs/{product}`
- *   where the last section `product` consists of:
- *   `content_language~feed_label~offer_id`
- *   example for product name is
- *   `accounts/123/productInputs/en~US~sku123`.
+ *   Required. The name of the product input to delete.
+ *   Format: `accounts/{account}/productInputs/{productInput}`
+ *
+ *   The {productInput} segment is a unique identifier for the product.
+ *   This identifier must be unique within a merchant account and generally
+ *   follows the structure: `content_language~feed_label~offer_id`. Example:
+ *   `en~US~sku123` For legacy local products, the structure is:
+ *   `local~content_language~feed_label~offer_id`. Example: `local~en~US~sku123`
+ *
+ *   The format of the {productInput} segment in the URL is automatically
+ *   detected by the server, supporting two options:
+ *
+ *   1.  **Encoded Format**: The `{productInput}` segment is an unpadded
+ *   base64url
+ *       encoded string (RFC 4648 Section 5). The decoded string must result
+ *       in the `content_language~feed_label~offer_id` structure. This encoding
+ *       MUST be used if any part of the product identifier (like `offer_id`)
+ *       contains characters such as `/`, `%`, or `~`.
+ *       *   Example: To represent the product ID `en~US~sku/123`, the
+ *           `{productInput}` segment must be the base64url encoding of this
+ *           string, which is `ZW5-VVMtc2t1LzEyMw`. The full resource name
+ *           for the product would be
+ *           `accounts/123/productInputs/ZW5-VVMtc2t1LzEyMw`.
+ *
+ *   2.  **Plain Format**: The `{productInput}` segment is the tilde-separated
+ *   string
+ *       `content_language~feed_label~offer_id`. This format is suitable only
+ *       when `content_language`, `feed_label`, and `offer_id` do not contain
+ *       URL-problematic characters like `/`, `%`, or `~`.
+ *
+ *   We recommend using the **Encoded Format** for all product IDs to ensure
+ *   correct parsing, especially those containing special characters. The
+ *   presence of tilde (`~`) characters in the `{productInput}` segment is used
+ *   to differentiate between the two formats.
+ *
+ *   Note: For calls to the v1beta version, the plain format is
+ *       `channel~content_language~feed_label~offer_id`, for example:
+ *       `accounts/123/productinputs/online~en~US~sku123`.
  * @param {string} request.dataSource
  *   Required. The primary or supplemental data source from which the product
  *   input should be deleted. Format:
