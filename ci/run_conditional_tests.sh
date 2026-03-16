@@ -96,7 +96,7 @@ windows_exempt_tests="core/ core/packages core/dev-packages .github/scripts/fixt
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
-        if [ -f "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null; then
+        if [ -f "ignore.json" ] && [ -s "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null 2>&1; then
             echo "Skipping ${d} (explicitly ignored in ignore.json)"
             continue
         fi

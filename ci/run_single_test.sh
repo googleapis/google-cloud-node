@@ -88,6 +88,21 @@ units)
 *)
     ;;
 esac
+
+if [ ${retval} -ne 0 ] && [ "${MOCHA_REPORTER}" == "xunit" ]; then
+    echo "Tests failed. Rerunning with spec reporter for better visibility:"
+    case ${TEST_TYPE} in
+    samples)
+        MOCHA_REPORTER=spec pnpm samples-test
+        ;;
+    system)
+        MOCHA_REPORTER=spec pnpm system-test
+        ;;
+    units)
+        MOCHA_REPORTER=spec pnpm test
+        ;;
+    esac
+fi
 set -e
 
 exit ${retval}
