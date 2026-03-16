@@ -603,16 +603,23 @@ export class TransferManager {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
+      const hasIllegalDrive = /^[a-zA-Z]:/.test(file.name);
+      if (hasIllegalDrive) {
+        const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
+        skippedResult.skipped = true;
+        skippedResult.reason = SkipReason.ILLEGAL_CHARACTER;
+        skippedResult.fileName = file.name;
+        finalResults[i] = skippedResult;
+        continue;
+      }
+
       const normalizedGcsName = file.name
         .replace(/\\/g, '/')
         .replace(/^\/+/, '');
 
-      let dest: string;
-      if (options.stripPrefix) {
-        dest = normalizedGcsName.replace(regex, '');
-      } else {
-        dest = normalizedGcsName;
-      }
+      const dest = options.stripPrefix
+        ? normalizedGcsName.replace(regex, '')
+        : normalizedGcsName;
 
       const resolvedPath = path.resolve(baseDestination, dest);
       const relativeFromBase = path.relative(baseDestination, resolvedPath);
@@ -620,19 +627,13 @@ export class TransferManager {
       const isOutside =
         path.isAbsolute(relativeFromBase) ||
         relativeFromBase.split(path.sep).includes('..');
-      const hasIllegalDrive = /^[a-zA-Z]:/.test(file.name);
 
-      if (isOutside || hasIllegalDrive) {
-        const reason = isOutside
-          ? SkipReason.PATH_TRAVERSAL
-          : SkipReason.ILLEGAL_CHARACTER;
-
+      if (isOutside) {
         const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
         skippedResult.skipped = true;
-        skippedResult.reason = reason;
+        skippedResult.reason = SkipReason.PATH_TRAVERSAL;
         skippedResult.fileName = file.name;
         skippedResult.localPath = resolvedPath;
-
         finalResults[i] = skippedResult;
         continue;
       }
