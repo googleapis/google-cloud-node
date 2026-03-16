@@ -17,7 +17,7 @@ ARG FLAKYBOT_VERSION=1.1.0
 
 FROM node:${NODE_VERSION}-slim as build
 
-RUN apt-get update && apt-get install -y curl tar python3
+RUN apt-get update && apt-get install -y curl tar python3 jq
 
 # Install gcloud
 RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
@@ -34,16 +34,17 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
     && chmod +x /bin/flakybot
 
 ENV PNPM_VERSION=7.32.2
-RUN curl https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
+RUN npm install -g pnpm@${PNPM_VERSION}
 
 FROM node:${NODE_VERSION}-slim
 
 COPY --from=build /usr/local/gcloud /usr/local/gcloud
 COPY --from=build /bin/flakybot /bin/flakybot
-COPY --from=build /root/.local/share/pnpm /root/.local/share/pnpm
 
-RUN apt-get update && apt-get install -y git bash python3 \
+RUN apt-get update && apt-get install -y git bash python3 jq \
   && ln -s /usr/bin/python3 /usr/bin/python
 
-ENV PNPM_HOME=/root/.local/share/pnpm
-ENV PATH=$PNPM_HOME:/bin/flakybot:/usr/local/gcloud/google-cloud-sdk/bin:$PATH
+ENV PNPM_VERSION=7.32.2
+RUN npm install -g pnpm@${PNPM_VERSION}
+
+ENV PATH=/usr/local/gcloud/google-cloud-sdk/bin:$PATH

@@ -70,7 +70,6 @@ steps:
     - 'REPO_OWNER=${_REPO_OWNER}'
     - 'REPO_NAME=${_REPO_NAME}'
     - 'COMMIT_SHA=$COMMIT_SHA'
-    - 'PATH=/usr/local/gcloud/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 
 images:
   - 'gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}'
