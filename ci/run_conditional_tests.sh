@@ -170,7 +170,7 @@ for subdir in ${subdirs[@]}; do
             if [ ${ret} -ne 0 ]; then
                 RETVAL=${ret}
                 # Since there are so many APIs, we should exit early if there's an error
-                break
+                exit ${RETVAL}
             fi
             popd
         fi
