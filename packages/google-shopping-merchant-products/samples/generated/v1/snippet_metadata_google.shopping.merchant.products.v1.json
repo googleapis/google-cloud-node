@@ -15,7 +15,7 @@
       "regionTag": "merchantapi_v1_generated_ProductInputsService_InsertProductInput_async",
       "title": "ProductInputsService insertProductInput Sample",
       "origin": "API_DEFINITION",
-      "description": " [Uploads a product input to your Merchant Center account](/merchant/api/guides/products/overview#upload-product-input). You must have a products [data source](/merchant/api/guides/data-sources/overview) to be able to insert a product. The unique identifier of the data source is passed as a query parameter in the request URL. If a product input with the same contentLanguage, offerId, and dataSource already exists, then the product input inserted by this method replaces that entry. After inserting, updating, or deleting a product input, it may take several minutes before the processed product can be retrieved.",
+      "description": " [Uploads a product input to your Merchant Center account](/merchant/api/guides/products/add-manage#add_a_product). You must have a products [data source](/merchant/api/guides/data-sources/api-sources#create-primary-data-source) to be able to insert a product. The unique identifier of the data source is passed as a query parameter in the request URL. If a product input with the same contentLanguage, offerId, and dataSource already exists, then the product input inserted by this method replaces that entry. After inserting, updating, or deleting a product input, it may take several minutes before the processed product can be retrieved.",
       "canonical": true,
       "file": "product_inputs_service.insert_product_input.js",
       "language": "JAVASCRIPT",
@@ -63,14 +63,14 @@
       "regionTag": "merchantapi_v1_generated_ProductInputsService_UpdateProductInput_async",
       "title": "ProductInputsService updateProductInput Sample",
       "origin": "API_DEFINITION",
-      "description": " Updates the existing product input in your Merchant Center account. After inserting, updating, or deleting a product input, it may take several minutes before the processed product can be retrieved.",
+      "description": " Updates the existing product input in your Merchant Center account. The name of the product input to update is taken from the `name` field within the `ProductInput` resource. After inserting, updating, or deleting a product input, it may take several minutes before the processed product can be retrieved.",
       "canonical": true,
       "file": "product_inputs_service.update_product_input.js",
       "language": "JAVASCRIPT",
       "segments": [
         {
           "start": 25,
-          "end": 76,
+          "end": 77,
           "type": "FULL"
         }
       ],
@@ -118,7 +118,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 92,
           "type": "FULL"
         }
       ],
@@ -162,7 +162,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 62,
+          "end": 82,
           "type": "FULL"
         }
       ],
