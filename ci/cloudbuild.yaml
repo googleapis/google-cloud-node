@@ -14,6 +14,8 @@
 
 options:
   dynamic_substitutions: true
+  machineType: 'E2_HIGHCPU_32'
+  diskSizeGb: '100'
 
 substitutions:
   _BUILD_TYPE: "presubmit"
@@ -26,17 +28,17 @@ logsBucket: 'gs://${_LOGS_BUCKET}/logs/google-cloud-node/${_BUILD_TYPE}/${COMMIT
 timeout: 32400s
 
 steps:
-  - name: 'gcr.io/kaniko-project/executor:v1.24.0'
-    args: [
-      '--log-format=text',
-      '--context=dir:///workspace/testing',
-      '--build-arg=NODE_VERSION=${_NODE_VERSION}',
-      '--dockerfile=ci/Dockerfile',
-      '--cache=true',
-      '--destination=gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}',
-      '--push-retry=3',
-      '--image-fs-extract-retry=3'
-    ]
+  # - name: 'gcr.io/kaniko-project/executor:v1.24.0'
+  #   args: [
+  #     '--log-format=text',
+  #     '--context=dir:///workspace/testing',
+  #     '--build-arg=NODE_VERSION=${_NODE_VERSION}',
+  #     '--dockerfile=ci/Dockerfile',
+  #     '--cache=true',
+  #     '--destination=gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}',
+  #     '--push-retry=3',
+  #     '--image-fs-extract-retry=3'
+  #   ]
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: "bash"
     args: ["ci/deletecloudbuild.sh"]
@@ -54,3 +56,4 @@ steps:
     - 'REPO_OWNER=${_REPO_OWNER}'
     - 'REPO_NAME=${_REPO_NAME}'
     - 'COMMIT_SHA=$COMMIT_SHA'
+    - 'PATH=/usr/local/gcloud/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
