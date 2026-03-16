@@ -13,3 +13,4 @@
 /handwritten/firestore @googleapis/firestore-team
 /handwritten/spanner @googleapis/spanner-team
 /handwritten/bigquery-storage @googleapis/bigquery-team
+/handwritten/pubsub @googleapis/pubsub-team
