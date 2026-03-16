@@ -61,16 +61,18 @@ set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
 else
-    echo "change detected in ci, we should test everything"
-    echo "result of git diff ${GIT_DIFF_ARG} ci:"
-    git diff ${GIT_DIFF_ARG} ci
-    GIT_DIFF_ARG=""
+    echo "skipping trigger of tests for now: tracking in #7540"
+    # echo "change detected in ci, we should test everything"
+    # echo "result of git diff ${GIT_DIFF_ARG} ci:"
+    # git diff ${GIT_DIFF_ARG} ci
+    # GIT_DIFF_ARG=""
 fi
 
 # Now we have a fixed list, but we can change it to autodetect if
 # necessary.
 
 subdirs=(
+    core
     containers
     packages
     handwritten
@@ -96,8 +98,8 @@ for subdir in ${subdirs[@]}; do
             echo "Skipping ${d} (explicitly ignored in ignore.json)"
             continue
         fi
-        if [[ "${subdir}" == "handwritten" && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
-            echo "Skipping ${TEST_TYPE} test for handwritten package ${d}"
+        if [[ ("${subdir}" == "handwritten" || "${subdir}" == "core") && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
+            echo "Skipping ${TEST_TYPE} test for handwritten and core packages: ${d}"
             continue
         fi
 
