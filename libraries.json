@@ -978,23 +978,6 @@
     "support_documentation": "https://cloud.google.com/domains/docs/getting-support"
   },
   {
-    "name": "error-reporting",
-    "name_pretty": "Error Reporting",
-    "product_documentation": "https://cloud.google.com/error-reporting",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/error-reporting/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559780",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-error-reporting",
-    "distribution_name": "@google-cloud/error-reporting",
-    "api_id": "clouderrorreporting.googleapis.com",
-    "codeowner_team": "@googleapis/yoshi-nodejs",
-    "api_shortname": "error-reporting",
-    "library_type": "REST",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-error-reporting",
-    "support_documentation": "https://cloud.google.com/error-reporting/docs/getting-support"
-  },
-  {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/essential-contacts/latest",
     "product_documentation": "https://cloud.google.com/resource-manager/docs/managing-notification-contacts/",
     "name": "essentialcontacts",
@@ -1416,24 +1399,6 @@
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-video-livestream",
     "support_documentation": "https://cloud.google.com/livestream/docs/getting-support"
-  },
-  {
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/logging/latest",
-    "product_documentation": "https://cloud.google.com/logging/docs",
-    "name": "logging",
-    "codeowner_team": "@googleapis/yoshi-nodejs",
-    "release_level": "stable",
-    "language": "nodejs",
-    "api_id": "logging.googleapis.com",
-    "distribution_name": "@google-cloud/logging",
-    "repo": "googleapis/nodejs-logging",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
-    "name_pretty": "Logging",
-    "default_version": "v2",
-    "api_shortname": "logging",
-    "library_type": "GAPIC_COMBO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-logging",
-    "support_documentation": "https://cloud.google.com/logging/docs/getting-support"
   },
   {
     "name": "logging-winston",
