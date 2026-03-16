@@ -1,0 +1,26 @@
+introduction: |-
+        [Cloud Pub/Sub](https://cloud.google.com/pubsub/docs) is a fully-managed real-time messaging service that allows
+        you to send and receive messages between independent applications.
+
+        This document contains links to an [API reference](https://cloud.google.com/nodejs/docs/reference/pubsub/latest/overview), samples,
+        and other resources useful to developing Node.js applications.
+        For additional help developing Pub/Sub applications, in Node.js and other languages, see our
+        [Pub/Sub quickstart](https://cloud.google.com/pubsub/docs/quickstart-client-libraries),
+        [publisher](https://cloud.google.com/pubsub/docs/publisher), and [subscriber](https://cloud.google.com/pubsub/docs/subscriber)
+        guides.
+body: |-
+        ## Running gRPC C++ bindings
+
+        For some workflows and environments it might make sense to use the C++ gRPC implementation,
+        instead of the default one (see: [#770](https://github.com/googleapis/nodejs-pubsub/issues/770)):
+
+        To configure `@google-cloud/pubsub` to use an alternative `grpc` transport:
+
+        1. `npm install grpc`, adding `grpc` as a dependency.
+        1. instantiate `@google-cloud/pubsub` with `grpc`:
+
+           ```js
+           const {PubSub} = require('@google-cloud/pubsub');
+           const grpc = require('grpc');
+           const pubsub = new PubSub({grpc});
+           ```
