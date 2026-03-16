@@ -51,6 +51,7 @@ export type QueryResultsOptions = {
   job?: Job;
   wrapIntegers?: boolean | IntegerTypeCastOptions;
   parseJSON?: boolean;
+  returnRawRows?: boolean;
 } & PagedRequest<bigquery.jobs.IGetQueryResultsParams> & {
     /**
      * internal properties
@@ -633,7 +634,9 @@ class Job extends Operation {
           });
           delete nextQuery.startIndex;
         }
-        delete resp.rows;
+        if (!options.returnRawRows) {
+          delete resp.rows;
+        }
         callback!(null, rows, nextQuery, resp);
       },
     );

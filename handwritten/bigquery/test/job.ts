@@ -447,6 +447,54 @@ describe('BigQuery/Job', () => {
       );
     });
 
+    it('should delete resp.rows if returnRawRows is false', done => {
+      const options: QueryResultsOptions = {};
+
+      const rawRows = [{f: [{v: 'hi'}]}];
+      const resp = {
+        jobComplete: true,
+        rows: rawRows,
+        schema: {
+          fields: [{name: 'name', type: 'STRING'}],
+        },
+      };
+
+      job.bigQuery.request = (reqOpts: {}, callback: Function) => {
+        callback(null, resp);
+      };
+
+      job.getQueryResults(options, (err: Error, rows: {}, nextQuery: {}, response: any) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response.rows, undefined);
+        done();
+      });
+    });
+
+    it('should not delete resp.rows if returnRawRows is true', done => {
+      const options: QueryResultsOptions = {
+        returnRawRows: true,
+      };
+
+      const rawRows = [{f: [{v: 'hi'}]}];
+      const resp = {
+        jobComplete: true,
+        rows: rawRows,
+        schema: {
+          fields: [{name: 'name', type: 'STRING'}],
+        },
+      };
+
+      job.bigQuery.request = (reqOpts: {}, callback: Function) => {
+        callback(null, resp);
+      };
+
+      job.getQueryResults(options, (err: Error, rows: {}, nextQuery: {}, response: any) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response.rows, rawRows);
+        done();
+      });
+    });
+
     it('should populate nextQuery when more results exist', done => {
       job.getQueryResults(
         options,

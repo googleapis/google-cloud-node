@@ -2273,7 +2273,9 @@ export class BigQuery extends Service {
               parseJSON: options.parseJSON,
               listParams,
             });
-            delete res.rows;
+            if (!options.returnRawRows) {
+              delete res.rows;
+            }
           } catch (e) {
             (callback as SimpleQueryRowsCallback)(e as Error, null, job);
             return;
