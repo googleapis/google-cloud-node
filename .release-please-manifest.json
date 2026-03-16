@@ -10,6 +10,7 @@
   "handwritten/logging": "11.2.1",
   "handwritten/logging-bunyan": "5.1.1",
   "handwritten/logging-winston": "6.0.1",
+  "handwritten/pubsub": "5.3.0",
   "handwritten/spanner": "8.6.0",
   "handwritten/storage": "7.19.0",
   "packages/gapic-node-processing": "0.1.7",
