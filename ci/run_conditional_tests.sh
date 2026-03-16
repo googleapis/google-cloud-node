@@ -77,6 +77,8 @@ subdirs=(
     packages
     handwritten
     .github/scripts
+    core/packages
+    core/dev-packages
 )
 
 RETVAL=0
@@ -96,6 +98,10 @@ for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
         if [ -f "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null; then
             echo "Skipping ${d} (explicitly ignored in ignore.json)"
+            continue
+        fi
+        if [ ! -f "${d}/package.json" ]; then
+            echo "Skipping ${d} (no package.json found)"
             continue
         fi
         if [[ ("${subdir}" == "handwritten" || "${subdir}" == "core") && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
@@ -147,6 +153,11 @@ for subdir in ${subdirs[@]}; do
         fi
         if [ "${should_test}" = true ]; then
             echo "running test in ${d}"
+            if [[ "${d}" == core/packages/* ]]; then
+                export RUN_INTERDEPENDENT_TESTS=true
+            else
+                export RUN_INTERDEPENDENT_TESTS=false
+            fi
             pushd ${d}
             # Temporarily allow failure.
             set +e
