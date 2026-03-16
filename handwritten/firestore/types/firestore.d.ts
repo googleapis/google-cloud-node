@@ -11282,8 +11282,6 @@ declare namespace FirebaseFirestore {
       timezone?: string | Expression,
     ): FunctionExpression;
 
-
-
     /**
      * @beta
      * Creates an expression that returns the data type of the data in the specified field.
