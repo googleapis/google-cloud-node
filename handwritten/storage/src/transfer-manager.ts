@@ -572,12 +572,11 @@ export class TransferManager {
     const limit = pLimit(
       options.concurrencyLimit || DEFAULT_PARALLEL_DOWNLOAD_LIMIT,
     );
-    const promises: Promise<DownloadResponse>[] = [];
-    const skippedFiles: DownloadResponseWithStatus[] = [];
+    const promises: Promise<void>[] = [];
     let files: File[] = [];
 
     const baseDestination = path.resolve(
-      options.prefix || options.passthroughOptions?.destination || '.'
+      options.passthroughOptions?.destination || options.prefix || '.'
     );
 
     if (!Array.isArray(filesOrFolder)) {
@@ -599,30 +598,28 @@ export class TransferManager {
       : EMPTY_REGEX;
     const regex = new RegExp(stripRegexString, 'g');
 
-    for (const file of files) {
-      const passThroughOptionsCopy = {
-        ...options.passthroughOptions,
-        [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_MANY,
-      };
+    const finalResults: DownloadResponseWithStatus[] = new Array(files.length);
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
 
       const normalizedGcsName = file.name
-        .replace(/\\/g, path.sep)
-        .replace(/\//g, path.sep);
+        .replace(/\\/g, '/')
+        .replace(/^\/+/, '');
 
       let dest: string;
       if (options.stripPrefix) {
         dest = normalizedGcsName.replace(regex, '');
       } else {
-        dest = path.join(
-          options.prefix || '',
-          passThroughOptionsCopy.destination || '',
-          normalizedGcsName
-        );
+        dest = normalizedGcsName;
       }
 
       const resolvedPath = path.resolve(baseDestination, dest);
-      const relativePath = path.relative(baseDestination, resolvedPath);
-      const isOutside = relativePath.split(path.sep).includes('..');
+      const relativeFromBase = path.relative(baseDestination, resolvedPath);
+
+      const isOutside =
+        path.isAbsolute(relativeFromBase) ||
+        relativeFromBase.split(path.sep).includes('..');
       const hasIllegalDrive = /^[a-zA-Z]:/.test(file.name);
 
       if (isOutside || hasIllegalDrive) {
@@ -635,49 +632,60 @@ export class TransferManager {
         skippedResult.reason = reason;
         skippedResult.fileName = file.name;
         skippedResult.localPath = resolvedPath;
-        skippedResult.message = `File ${file.name} was skipped due to path validation failure.`;
 
-        skippedFiles.push(skippedResult);
+        finalResults[i] = skippedResult;
         continue;
       }
-      passThroughOptionsCopy.destination = dest;
 
-      if (
-        options.skipIfExists &&
-        existsSync(passThroughOptionsCopy.destination || '')
-      ) {
+      if (options.skipIfExists && existsSync(resolvedPath)) {
         continue;
       }
+
+      const passThroughOptionsCopy = {
+        ...options.passthroughOptions,
+        destination: resolvedPath,
+        [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_MANY,
+      };
 
       promises.push(
         limit(async () => {
           try {
-            const destination = passThroughOptionsCopy.destination;
-            if (
-              destination &&
-              (destination.endsWith(path.sep) || destination.endsWith('/'))
-            ) {
+            const destination = passThroughOptionsCopy.destination!;
+
+            if (destination.endsWith(path.sep) || destination.endsWith('/')) {
               await fsp.mkdir(destination, {recursive: true});
-              return [Buffer.alloc(0)] as DownloadResponse;
+              const dirResp = [Buffer.alloc(0)] as DownloadResponseWithStatus;
+              dirResp.skipped = false;
+              dirResp.fileName = file.name;
+              dirResp.localPath = destination;
+              finalResults[i] = dirResp;
+              return;
             }
+
+            await fsp.mkdir(path.dirname(destination), {recursive: true});
+
             const resp = (await file.download(
               passThroughOptionsCopy
             )) as DownloadResponseWithStatus;
             resp.skipped = false;
             resp.fileName = file.name;
-            return resp;
+            resp.localPath = destination;
+            finalResults[i] = resp;
           } catch (err) {
             const errorResp = [Buffer.alloc(0)] as DownloadResponseWithStatus;
             errorResp.skipped = true;
             errorResp.reason = SkipReason.DOWNLOAD_ERROR;
+            errorResp.fileName = file.name;
+            errorResp.localPath = resolvedPath;
             errorResp.error = err as Error;
-            return errorResp;
+            finalResults[i] = errorResp;
           }
         })
       );
     }
-    const results = await Promise.all(promises);
-    return [...skippedFiles, ...results];
+
+    await Promise.all(promises);
+    return finalResults;
   }
 
   /**

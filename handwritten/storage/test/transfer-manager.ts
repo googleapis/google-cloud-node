@@ -325,7 +325,7 @@ describe('Transfer Manager', () => {
       const file = 'first.txt';
       const filesOrFolder = [folder, path.join(folder, file)];
       const expectedFilePath = path.join(prefix, folder, file);
-      const expectedDir = path.join(prefix, folder);
+      const expectedDir = path.resolve(prefix, folder);
       const mkdirSpy = sandbox.spy(fsp, 'mkdir');
       const download = (optionsOrCb?: DownloadOptions | DownloadCallback) => {
         if (typeof optionsOrCb === 'function') {
@@ -345,9 +345,7 @@ describe('Transfer Manager', () => {
         prefix: prefix,
       });
       assert.strictEqual(
-        mkdirSpy.calledOnceWith(expectedDir, {
-          recursive: true,
-        }),
+        mkdirSpy.calledWith(expectedDir, {recursive: true}),
         true
       );
     });
@@ -411,7 +409,10 @@ describe('Transfer Manager', () => {
       const prefix = './downloads';
       const filename = '/tmp/shady.txt';
       const file = new File(bucket, filename);
-      const expectedDestination = path.join(prefix, filename);
+      const expectedDestination = path.resolve(
+        prefix,
+        filename.replace(/^\/+/, '')
+      );
 
       const downloadStub = sandbox
         .stub(file, 'download')
@@ -432,7 +433,10 @@ describe('Transfer Manager', () => {
     it('jails absolute-looking Unix paths (e.g. /etc/passwd) into the target directory instead of skipping', async () => {
       const prefix = 'downloads';
       const filename = '/etc/passwd';
-      const expectedDestination = path.join(prefix, filename);
+      const expectedDestination = path.resolve(
+        prefix,
+        filename.replace(/^\/+/, '')
+      );
 
       const file = new File(bucket, filename);
       const downloadStub = sandbox
