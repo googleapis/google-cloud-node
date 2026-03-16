@@ -1,5 +1,6 @@
 #!/bin/bash
-# Copyright 2022 Google LLC
+
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,25 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -eo pipefail
 
-# samples test
-if [ ${TEST_NAME} == "samples" ] && [ -f samples/package.json ]; then
-    # Currently this is run by root and we need `--unsafe-perm` option.
-    npm install --unsafe-perm
-
-    # Install and link samples
-    pushd samples/
-    npm link ../
-    npm install
-    popd
-
-    npm run samples-test
+if [[ -z "$CREDENTIALS" ]]; then
+  # if CREDENTIALS are explicitly set, assume we're testing locally
+  # and don't set NPM_CONFIG_PREFIX.
+  export NPM_CONFIG_PREFIX=${HOME}/.npm-global
+  export PATH="$PATH:${NPM_CONFIG_PREFIX}/bin"
+  cd $(dirname $0)/../..
 fi
 
-# system test
-if [ ${TEST_NAME} == "system" ]; then
-    # Currently this is run by root and we need `--unsafe-perm` option.
-    npm install --unsafe-perm
-    npm run system-test
-fi
+npm install
+npm install --no-save @google-cloud/cloud-rad@^0.4.0
+# publish docs to devsite
+npx @google-cloud/cloud-rad . cloud-rad
