@@ -383,21 +383,26 @@ export async function isAvailable() {
           if (err.response && err.response.status === 404) {
             return false;
           } else {
-            const code = err.code ? err.code.toString() : 'UNKNOWN';
-            const isAggregateError =
-              e instanceof Error && e.name === 'AggregateError';
-            if (
-              !isAggregateError &&
-              (!err.code ||
-                ![
-                  'EHOSTDOWN',
-                  'EHOSTUNREACH',
-                  'ENETUNREACH',
-                  'ENOENT',
-                  'ENOTFOUND',
-                  'ECONNREFUSED',
-                ].includes(code))
-            ) {
+            const codes =
+              e instanceof Error && e.name === 'AggregateError'
+                ? (e as any).errors.map((error: any) =>
+                    error.code ? error.code.toString() : 'UNKNOWN',
+                  )
+                : [err.code ? err.code.toString() : 'UNKNOWN'];
+
+            const isExpected = codes.every((code: string) =>
+              [
+                'EHOSTDOWN',
+                'EHOSTUNREACH',
+                'ENETUNREACH',
+                'ENOENT',
+                'ENOTFOUND',
+                'ECONNREFUSED',
+              ].includes(code),
+            );
+
+            if (!isExpected) {
+              const code = err.code ? err.code.toString() : 'UNKNOWN';
               process.emitWarning(
                 `received unexpected error = ${err.message} code = ${code}`,
                 'MetadataLookupWarning',
