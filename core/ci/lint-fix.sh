@@ -1,5 +1,6 @@
 #!/bin/bash
-# Copyright 2022 Google LLC
+#
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,21 +14,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A script for importing Cloud Build build triggers.
-
-# `-e` enables the script to automatically fail when a command fails
-# `-o pipefail` sets the exit code to the rightmost comment to exit
-# with a non-zero
 set -eo pipefail
 
-echo "change directory to the project root"
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
-pushd ${PROJECT_ROOT}
-pwd
 
-echo "importing Cloud Build triggers"
+subdirs=(
+    dev-packages
+    .github/scripts
+    packages
+    generator
+)
 
-for file in ci/export/*.yaml; do
-    echo "importing trigger from $file"
-    gcloud beta builds triggers import --source "$file"
+for subdir in ${subdirs[@]}; do
+    for d in `ls -d ${PROJECT_ROOT}/${subdir}/*/ 2>/dev/null`; do
+        if [ -f "${d}package.json" ]; then
+            if grep -q '"fix"' "${d}package.json"; then
+                echo "running lint fix in ${d}"
+                pushd ${d}
+                rm -rf node_modules
+                rm -rf build
+                npm install --ignore-scripts --engine-strict; npm install
+                npm run fix
+                popd
+            fi
+        fi
+    done
 done

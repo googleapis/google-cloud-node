@@ -26,8 +26,17 @@ pushd ${PROJECT_ROOT}
 pwd
 
 echo "importing Cloud Build triggers"
-
-for file in ci/export/*.yaml; do
-    echo "importing trigger from $file"
-    gcloud beta builds triggers import --source "$file"
-done
+echo "importing presubmit build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-system-presubmit-node.yaml"
+echo "importing continuous build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-system-continuous-node.yaml"
+echo "importing nightly build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-system-nightly-node.yaml"
+echo "importing presubmit build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-samples-presubmit-node.yaml"
+echo "importing continuous build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-samples-continuous-node.yaml"
+echo "importing nightly build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-samples-nightly-node.yaml"
+echo "importing presubmit build for node with credentials"
+gcloud beta builds triggers import --source "ci/export/gcnc-samples-presubmit-node-with-credentials.yaml"
