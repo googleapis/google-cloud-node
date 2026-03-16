@@ -1,0 +1,11 @@
+{
+  "name": "mock-package",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "mocha build/test/unit/*.js",
+    "compile": "mkdir -p build && cp -r test build/"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.5"
+  }
+}
