@@ -55,10 +55,10 @@ function main(name, destinationFolderId) {
   // const requestId = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callRenameFolder() {
     // Construct request
@@ -68,7 +68,7 @@ function main(name, destinationFolderId) {
     };
 
     // Run request
-    const [operation] = await controlClient.renameFolder(request);
+    const [operation] = await storageControlClient.renameFolder(request);
     const [response] = await operation.promise();
     console.log(response);
   }
