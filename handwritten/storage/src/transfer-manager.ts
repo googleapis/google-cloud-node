@@ -576,7 +576,7 @@ export class TransferManager {
     let files: File[] = [];
 
     const baseDestination = path.resolve(
-      options.passthroughOptions?.destination || options.prefix || '.'
+      options.passthroughOptions?.destination || '.'
     );
 
     if (!Array.isArray(filesOrFolder)) {
@@ -613,9 +613,7 @@ export class TransferManager {
         continue;
       }
 
-      const normalizedGcsName = file.name
-        .replace(/\\/g, '/')
-        .replace(/^\/+/, '');
+      const normalizedGcsName = file.name.replace(/^[\\/]+/, '');
 
       const dest = options.stripPrefix
         ? normalizedGcsName.replace(regex, '')
@@ -626,7 +624,7 @@ export class TransferManager {
 
       const isOutside =
         path.isAbsolute(relativeFromBase) ||
-        relativeFromBase.split(path.sep).includes('..');
+        relativeFromBase.split(/[\\/]/).includes('..');
 
       if (isOutside) {
         const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
@@ -642,14 +640,14 @@ export class TransferManager {
         continue;
       }
 
-      const passThroughOptionsCopy = {
-        ...options.passthroughOptions,
-        destination: resolvedPath,
-        [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_MANY,
-      };
-
       promises.push(
         limit(async () => {
+          const passThroughOptionsCopy = {
+            ...options.passthroughOptions,
+            destination: resolvedPath,
+            [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_MANY,
+          };
+
           try {
             const destination = passThroughOptionsCopy.destination!;
 
@@ -668,10 +666,13 @@ export class TransferManager {
             const resp = (await file.download(
               passThroughOptionsCopy
             )) as DownloadResponseWithStatus;
-            resp.skipped = false;
-            resp.fileName = file.name;
-            resp.localPath = destination;
-            finalResults[i] = resp;
+
+            finalResults[i] = {
+              ...resp,
+              skipped: false,
+              fileName: file.name,
+              localPath: destination,
+            } as DownloadResponse;
           } catch (err) {
             const errorResp = [Buffer.alloc(0)] as DownloadResponseWithStatus;
             errorResp.skipped = true;
