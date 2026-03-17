@@ -134,6 +134,8 @@ for subdir in ${subdirs[@]}; do
                 elif [[ "${d}" == core/packages/* ]] && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "samples" ]]; then
                     echo "run samples tests for core/packages in ${d}"
                     should_test=true
+                elif [[ "${d}" == core/packages/* ]]; then
+                    echo "skipping core package ${d} in non-core trigger"
                 elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                     echo "change detected in ${d} for ${TEST_TYPE} test"
                     should_test=true
@@ -151,6 +153,8 @@ for subdir in ${subdirs[@]}; do
                 echo "run system tests for core/packages in ${d}"
                 export RUN_INTERDEPENDENT_TESTS=true
                 should_test=true
+            elif [[ "${d}" == core/packages/* ]]; then
+                echo "skipping core package ${d} in non-core trigger"
             elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                 echo "run ${TEST_TYPE} test for ${d}"
                 should_test=true
