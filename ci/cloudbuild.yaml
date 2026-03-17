@@ -70,6 +70,7 @@ steps:
     - 'REPO_OWNER=${_REPO_OWNER}'
     - 'REPO_NAME=${_REPO_NAME}'
     - 'COMMIT_SHA=$COMMIT_SHA'
+    - 'IS_CORE=${_IS_CORE}'
 
 images:
   - 'gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}'

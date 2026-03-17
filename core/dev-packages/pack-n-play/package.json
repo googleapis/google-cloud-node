@@ -27,10 +27,10 @@
     "lint": "gts check",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "samples-test": "",
-    "system-test": "",
+    "samples-test": "echo 'no test'",
+    "system-test": "echo 'no test'",
     "test": "c8 mocha build/test",
-    "prelint": ""
+    "prelint": "echo 'no lint'"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
