@@ -96,7 +96,6 @@ steps:
     - 'REPO_OWNER=${_REPO_OWNER}'
     - 'REPO_NAME=${_REPO_NAME}'
     - 'COMMIT_SHA=$COMMIT_SHA'
-    - 'CORE_PACKAGES=true'
     waitFor: ['Push Test Image']
 
 images:

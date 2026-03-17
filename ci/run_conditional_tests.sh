@@ -85,14 +85,14 @@ RETVAL=0
 # These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo). 
 # When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
 
-tests_with_credentials="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
+tests_with_credentials="core/packages/google-auth-library-nodejs packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
 
 # Some packages are only used by our bots and automation. These packages do not need to run on Windows and
 # often employ platform specific code like file system interaction. Some packages may also fail
 # on Windows due to incompatible npm scripts.
 # 
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
-windows_exempt_tests="core/ core/packages core/dev-packages .github/scripts/fixtures/ .github/scripts/tests/ packages/gapic-node-processing/ packages/typeless-sample-bot/"
+windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ packages/gapic-node-processing/ packages/typeless-sample-bot/"
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
@@ -127,9 +127,12 @@ for subdir in ${subdirs[@]}; do
             if [[ "${changed}" -eq 0 ]]; then
                 echo "no change detected in ${d}, skipping"
             else
-                if [[ "${d}" == core/packages/* ]] && [[ "${CORE_PACKAGES}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
+                if [[ "${d}" == core/packages/* ]] && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
                     echo "run system tests for core/packages in ${d}"
                     export RUN_INTERDEPENDENT_TESTS=true
+                    should_test=true
+                elif [[ "${d}" == core/packages/* ]] && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "samples" ]]; then
+                    echo "run samples tests for core/packages in ${d}"
                     should_test=true
                 elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                     echo "change detected in ${d} for ${TEST_TYPE} test"
@@ -144,7 +147,7 @@ for subdir in ${subdirs[@]}; do
             fi
         else
             # If GIT_DIFF_ARG is empty, run all the tests.
-            if [[ "${d}" == core/packages/* ]] && [[ "${CORE_PACKAGES}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
+            if [[ "${d}" == core/packages/* ]] && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
                 echo "run system tests for core/packages in ${d}"
                 export RUN_INTERDEPENDENT_TESTS=true
                 should_test=true
