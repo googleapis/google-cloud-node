@@ -304,6 +304,10 @@ export interface RestoreOptions {
   generation: string;
   projection?: 'full' | 'noAcl';
 }
+export interface EncryptionEnforcementConfig {
+  restrictionMode?: 'NotRestricted' | 'FullyRestricted';
+  readonly effectiveTime?: string;
+}
 export interface BucketMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   autoclass?: {
@@ -323,6 +327,9 @@ export interface BucketMetadata extends BaseMetadata {
   defaultObjectAcl?: AclMetadata[];
   encryption?: {
     defaultKmsKeyName?: string;
+    googleManagedEncryptionEnforcementConfig?: EncryptionEnforcementConfig;
+    customerManagedEncryptionEnforcementConfig?: EncryptionEnforcementConfig;
+    customerSuppliedEncryptionEnforcementConfig?: EncryptionEnforcementConfig;
   } | null;
   hierarchicalNamespace?: {
     enabled?: boolean;
@@ -1196,6 +1203,25 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        * bucket.setMetadata({
        *   encryption: {
        *     defaultKmsKeyName: 'projects/grape-spaceship-123/...'
+       *   }
+       * }, function(err, apiResponse) {});
+       *
+       * //-
+       * // Enforce CMEK-only encryption for new objects.
+       * // This blocks Google-Managed and Customer-Supplied keys.
+       * //-
+       * bucket.setMetadata({
+       *   encryption: {
+       *     defaultKmsKeyName: 'projects/grape-spaceship-123/...',
+       *     googleManagedEncryptionEnforcementConfig: {
+       *       restrictionMode: 'FullyRestricted'
+       *     },
+       *     customerSuppliedEncryptionEnforcementConfig: {
+       *       restrictionMode: 'FullyRestricted'
+       *     },
+       *     customerManagedEncryptionEnforcementConfig: {
+       *       restrictionMode: 'NotRestricted'
+       *     }
        *   }
        * }, function(err, apiResponse) {});
        *

@@ -226,7 +226,8 @@
     "packages/google-cloud-workflows": {},
     "packages/google-cloud-visionai": {},
     "packages/google-cloud-workloadmanager": {},
-    "packages/google-cloud-ces": {}
+    "packages/google-cloud-ces": {},
+    "packages/google-maps-navconnect": {}
   },
   "plugins": [
     {

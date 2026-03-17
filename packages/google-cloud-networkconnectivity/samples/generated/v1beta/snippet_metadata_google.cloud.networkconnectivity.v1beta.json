@@ -1,0 +1,2555 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-networkconnectivity",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.networkconnectivity.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_ListMulticloudDataTransferConfigs_async",
+      "title": "DataTransferService listMulticloudDataTransferConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the `MulticloudDataTransferConfig` resources in a specified project and location.",
+      "canonical": true,
+      "file": "data_transfer_service.list_multicloud_data_transfer_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMulticloudDataTransferConfigs",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.ListMulticloudDataTransferConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferConfigsResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ListMulticloudDataTransferConfigs",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.ListMulticloudDataTransferConfigs",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_GetMulticloudDataTransferConfig_async",
+      "title": "DataTransferService getMulticloudDataTransferConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a `MulticloudDataTransferConfig` resource.",
+      "canonical": true,
+      "file": "data_transfer_service.get_multicloud_data_transfer_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMulticloudDataTransferConfig",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.GetMulticloudDataTransferConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "GetMulticloudDataTransferConfig",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.GetMulticloudDataTransferConfig",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_CreateMulticloudDataTransferConfig_async",
+      "title": "DataTransferService createMulticloudDataTransferConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a `MulticloudDataTransferConfig` resource in a specified project and location.",
+      "canonical": true,
+      "file": "data_transfer_service.create_multicloud_data_transfer_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMulticloudDataTransferConfig",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.CreateMulticloudDataTransferConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "multicloud_data_transfer_config_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "multicloud_data_transfer_config",
+            "type": ".google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "CreateMulticloudDataTransferConfig",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.CreateMulticloudDataTransferConfig",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_UpdateMulticloudDataTransferConfig_async",
+      "title": "DataTransferService updateMulticloudDataTransferConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a `MulticloudDataTransferConfig` resource in a specified project and location.",
+      "canonical": true,
+      "file": "data_transfer_service.update_multicloud_data_transfer_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMulticloudDataTransferConfig",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.UpdateMulticloudDataTransferConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "multicloud_data_transfer_config",
+            "type": ".google.cloud.networkconnectivity.v1beta.MulticloudDataTransferConfig"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateMulticloudDataTransferConfig",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.UpdateMulticloudDataTransferConfig",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_DeleteMulticloudDataTransferConfig_async",
+      "title": "DataTransferService deleteMulticloudDataTransferConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a `MulticloudDataTransferConfig` resource.",
+      "canonical": true,
+      "file": "data_transfer_service.delete_multicloud_data_transfer_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMulticloudDataTransferConfig",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.DeleteMulticloudDataTransferConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteMulticloudDataTransferConfig",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.DeleteMulticloudDataTransferConfig",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_ListDestinations_async",
+      "title": "DataTransferService listDestinations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the `Destination` resources in a specified project and location.",
+      "canonical": true,
+      "file": "data_transfer_service.list_destinations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDestinations",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.ListDestinations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListDestinationsResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ListDestinations",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.ListDestinations",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_GetDestination_async",
+      "title": "DataTransferService getDestination Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a `Destination` resource.",
+      "canonical": true,
+      "file": "data_transfer_service.get_destination.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDestination",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.GetDestination",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.Destination",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "GetDestination",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.GetDestination",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_CreateDestination_async",
+      "title": "DataTransferService createDestination Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a `Destination` resource in a specified project and location.",
+      "canonical": true,
+      "file": "data_transfer_service.create_destination.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDestination",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.CreateDestination",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "destination_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "destination",
+            "type": ".google.cloud.networkconnectivity.v1beta.Destination"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDestination",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.CreateDestination",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_UpdateDestination_async",
+      "title": "DataTransferService updateDestination Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a `Destination` resource in a specified project and location.",
+      "canonical": true,
+      "file": "data_transfer_service.update_destination.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDestination",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.UpdateDestination",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "destination",
+            "type": ".google.cloud.networkconnectivity.v1beta.Destination"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDestination",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.UpdateDestination",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_DeleteDestination_async",
+      "title": "DataTransferService deleteDestination Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a `Destination` resource.",
+      "canonical": true,
+      "file": "data_transfer_service.delete_destination.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDestination",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.DeleteDestination",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDestination",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.DeleteDestination",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_GetMulticloudDataTransferSupportedService_async",
+      "title": "DataTransferService getMulticloudDataTransferSupportedService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a service that is supported for Data Transfer Essentials.",
+      "canonical": true,
+      "file": "data_transfer_service.get_multicloud_data_transfer_supported_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMulticloudDataTransferSupportedService",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.GetMulticloudDataTransferSupportedService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.MulticloudDataTransferSupportedService",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "GetMulticloudDataTransferSupportedService",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.GetMulticloudDataTransferSupportedService",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_DataTransferService_ListMulticloudDataTransferSupportedServices_async",
+      "title": "DataTransferService listMulticloudDataTransferSupportedServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the services in the project for a region that are supported for Data Transfer Essentials.",
+      "canonical": true,
+      "file": "data_transfer_service.list_multicloud_data_transfer_supported_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMulticloudDataTransferSupportedServices",
+        "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.ListMulticloudDataTransferSupportedServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListMulticloudDataTransferSupportedServicesResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ListMulticloudDataTransferSupportedServices",
+          "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService.ListMulticloudDataTransferSupportedServices",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_ListHubs_async",
+      "title": "DataTransferService listHubs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the Network Connectivity Center hubs associated with a given project.",
+      "canonical": true,
+      "file": "hub_service.list_hubs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListHubs",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListHubs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListHubsResponse",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "ListHubs",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListHubs",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_GetHub_async",
+      "title": "DataTransferService getHub Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details about a Network Connectivity Center hub.",
+      "canonical": true,
+      "file": "hub_service.get_hub.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetHub",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetHub",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.Hub",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "GetHub",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetHub",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_CreateHub_async",
+      "title": "DataTransferService createHub Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Network Connectivity Center hub in the specified project.",
+      "canonical": true,
+      "file": "hub_service.create_hub.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateHub",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.CreateHub",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "hub_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "hub",
+            "type": ".google.cloud.networkconnectivity.v1beta.Hub"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "CreateHub",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.CreateHub",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_UpdateHub_async",
+      "title": "DataTransferService updateHub Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the description and/or labels of a Network Connectivity Center hub.",
+      "canonical": true,
+      "file": "hub_service.update_hub.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateHub",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.UpdateHub",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "hub",
+            "type": ".google.cloud.networkconnectivity.v1beta.Hub"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateHub",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.UpdateHub",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_DeleteHub_async",
+      "title": "DataTransferService deleteHub Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Network Connectivity Center hub.",
+      "canonical": true,
+      "file": "hub_service.delete_hub.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteHub",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.DeleteHub",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteHub",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.DeleteHub",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_ListHubSpokes_async",
+      "title": "DataTransferService listHubSpokes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the Network Connectivity Center spokes associated with a specified hub and location. The list includes both spokes that are attached to the hub and spokes that have been proposed but not yet accepted.",
+      "canonical": true,
+      "file": "hub_service.list_hub_spokes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 88,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListHubSpokes",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListHubSpokes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "spoke_locations",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.networkconnectivity.v1beta.ListHubSpokesRequest.SpokeView"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListHubSpokesResponse",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "ListHubSpokes",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListHubSpokes",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_QueryHubStatus_async",
+      "title": "DataTransferService queryHubStatus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Query the Private Service Connect propagation status of a Network Connectivity Center hub.",
+      "canonical": true,
+      "file": "hub_service.query_hub_status.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 99,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryHubStatus",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.QueryHubStatus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "group_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.QueryHubStatusResponse",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "QueryHubStatus",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.QueryHubStatus",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_ListSpokes_async",
+      "title": "DataTransferService listSpokes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the Network Connectivity Center spokes in a specified project and location.",
+      "canonical": true,
+      "file": "hub_service.list_spokes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSpokes",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListSpokes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListSpokesResponse",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "ListSpokes",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListSpokes",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_GetSpoke_async",
+      "title": "DataTransferService getSpoke Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details about a Network Connectivity Center spoke.",
+      "canonical": true,
+      "file": "hub_service.get_spoke.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSpoke",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetSpoke",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.Spoke",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "GetSpoke",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetSpoke",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_CreateSpoke_async",
+      "title": "DataTransferService createSpoke Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Network Connectivity Center spoke.",
+      "canonical": true,
+      "file": "hub_service.create_spoke.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSpoke",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.CreateSpoke",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "spoke_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "spoke",
+            "type": ".google.cloud.networkconnectivity.v1beta.Spoke"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "CreateSpoke",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.CreateSpoke",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_UpdateSpoke_async",
+      "title": "DataTransferService updateSpoke Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a Network Connectivity Center spoke.",
+      "canonical": true,
+      "file": "hub_service.update_spoke.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSpoke",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.UpdateSpoke",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "spoke",
+            "type": ".google.cloud.networkconnectivity.v1beta.Spoke"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSpoke",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.UpdateSpoke",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_RejectHubSpoke_async",
+      "title": "DataTransferService rejectHubSpoke Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rejects a Network Connectivity Center spoke from being attached to a hub. If the spoke was previously in the `ACTIVE` state, it transitions to the `INACTIVE` state and is no longer able to connect to other spokes that are attached to the hub.",
+      "canonical": true,
+      "file": "hub_service.reject_hub_spoke.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RejectHubSpoke",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.RejectHubSpoke",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "spoke_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "details",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "RejectHubSpoke",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.RejectHubSpoke",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_AcceptHubSpoke_async",
+      "title": "DataTransferService acceptHubSpoke Sample",
+      "origin": "API_DEFINITION",
+      "description": " Accepts a proposal to attach a Network Connectivity Center spoke to a hub.",
+      "canonical": true,
+      "file": "hub_service.accept_hub_spoke.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AcceptHubSpoke",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.AcceptHubSpoke",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "spoke_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "AcceptHubSpoke",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.AcceptHubSpoke",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_AcceptSpokeUpdate_async",
+      "title": "DataTransferService acceptSpokeUpdate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Accepts a proposal to update a Network Connectivity Center spoke in a hub.",
+      "canonical": true,
+      "file": "hub_service.accept_spoke_update.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AcceptSpokeUpdate",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.AcceptSpokeUpdate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "spoke_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "spoke_etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "AcceptSpokeUpdate",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.AcceptSpokeUpdate",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_RejectSpokeUpdate_async",
+      "title": "DataTransferService rejectSpokeUpdate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rejects a proposal to update a Network Connectivity Center spoke in a hub.",
+      "canonical": true,
+      "file": "hub_service.reject_spoke_update.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RejectSpokeUpdate",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.RejectSpokeUpdate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "spoke_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "spoke_etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "details",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "RejectSpokeUpdate",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.RejectSpokeUpdate",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_DeleteSpoke_async",
+      "title": "DataTransferService deleteSpoke Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Network Connectivity Center spoke.",
+      "canonical": true,
+      "file": "hub_service.delete_spoke.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSpoke",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.DeleteSpoke",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteSpoke",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.DeleteSpoke",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_GetRouteTable_async",
+      "title": "DataTransferService getRouteTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details about a Network Connectivity Center route table.",
+      "canonical": true,
+      "file": "hub_service.get_route_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRouteTable",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetRouteTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.RouteTable",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "GetRouteTable",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetRouteTable",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_GetRoute_async",
+      "title": "DataTransferService getRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details about the specified route.",
+      "canonical": true,
+      "file": "hub_service.get_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRoute",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.Route",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "GetRoute",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetRoute",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_ListRoutes_async",
+      "title": "DataTransferService listRoutes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists routes in a given route table.",
+      "canonical": true,
+      "file": "hub_service.list_routes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRoutes",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListRoutes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListRoutesResponse",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "ListRoutes",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListRoutes",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_ListRouteTables_async",
+      "title": "DataTransferService listRouteTables Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists route tables in a given hub.",
+      "canonical": true,
+      "file": "hub_service.list_route_tables.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRouteTables",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListRouteTables",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListRouteTablesResponse",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "ListRouteTables",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListRouteTables",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_GetGroup_async",
+      "title": "DataTransferService getGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details about a Network Connectivity Center group.",
+      "canonical": true,
+      "file": "hub_service.get_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGroup",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.Group",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "GetGroup",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetGroup",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_ListGroups_async",
+      "title": "DataTransferService listGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists groups in a given hub.",
+      "canonical": true,
+      "file": "hub_service.list_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGroups",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListGroupsResponse",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "ListGroups",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListGroups",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_UpdateGroup_async",
+      "title": "DataTransferService updateGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a Network Connectivity Center group.",
+      "canonical": true,
+      "file": "hub_service.update_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGroup",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.UpdateGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "group",
+            "type": ".google.cloud.networkconnectivity.v1beta.Group"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateGroup",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.UpdateGroup",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_CreateGatewayAdvertisedRoute_async",
+      "title": "DataTransferService createGatewayAdvertisedRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a GatewayAdvertisedRoute",
+      "canonical": true,
+      "file": "hub_service.create_gateway_advertised_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateGatewayAdvertisedRoute",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.CreateGatewayAdvertisedRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gateway_advertised_route_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gateway_advertised_route",
+            "type": ".google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "CreateGatewayAdvertisedRoute",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.CreateGatewayAdvertisedRoute",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_GetGatewayAdvertisedRoute_async",
+      "title": "DataTransferService getGatewayAdvertisedRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a GatewayAdvertisedRoute",
+      "canonical": true,
+      "file": "hub_service.get_gateway_advertised_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGatewayAdvertisedRoute",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetGatewayAdvertisedRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "GetGatewayAdvertisedRoute",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.GetGatewayAdvertisedRoute",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_ListGatewayAdvertisedRoutes_async",
+      "title": "DataTransferService listGatewayAdvertisedRoutes Sample",
+      "origin": "API_DEFINITION",
+      "description": " List GatewayAdvertisedRoutes",
+      "canonical": true,
+      "file": "hub_service.list_gateway_advertised_routes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGatewayAdvertisedRoutes",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListGatewayAdvertisedRoutes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListGatewayAdvertisedRoutesResponse",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "ListGatewayAdvertisedRoutes",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.ListGatewayAdvertisedRoutes",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_UpdateGatewayAdvertisedRoute_async",
+      "title": "DataTransferService updateGatewayAdvertisedRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a GatewayAdvertisedRoute",
+      "canonical": true,
+      "file": "hub_service.update_gateway_advertised_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGatewayAdvertisedRoute",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.UpdateGatewayAdvertisedRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "gateway_advertised_route",
+            "type": ".google.cloud.networkconnectivity.v1beta.GatewayAdvertisedRoute"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateGatewayAdvertisedRoute",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.UpdateGatewayAdvertisedRoute",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_HubService_DeleteGatewayAdvertisedRoute_async",
+      "title": "DataTransferService deleteGatewayAdvertisedRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a GatewayAdvertisedRoute",
+      "canonical": true,
+      "file": "hub_service.delete_gateway_advertised_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteGatewayAdvertisedRoute",
+        "fullName": "google.cloud.networkconnectivity.v1beta.HubService.DeleteGatewayAdvertisedRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HubServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteGatewayAdvertisedRoute",
+          "fullName": "google.cloud.networkconnectivity.v1beta.HubService.DeleteGatewayAdvertisedRoute",
+          "service": {
+            "shortName": "HubService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_PolicyBasedRoutingService_ListPolicyBasedRoutes_async",
+      "title": "DataTransferService listPolicyBasedRoutes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists policy-based routes in a given project and location.",
+      "canonical": true,
+      "file": "policy_based_routing_service.list_policy_based_routes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPolicyBasedRoutes",
+        "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.ListPolicyBasedRoutes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListPolicyBasedRoutesResponse",
+        "client": {
+          "shortName": "PolicyBasedRoutingServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingServiceClient"
+        },
+        "method": {
+          "shortName": "ListPolicyBasedRoutes",
+          "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.ListPolicyBasedRoutes",
+          "service": {
+            "shortName": "PolicyBasedRoutingService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_PolicyBasedRoutingService_GetPolicyBasedRoute_async",
+      "title": "DataTransferService getPolicyBasedRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single policy-based route.",
+      "canonical": true,
+      "file": "policy_based_routing_service.get_policy_based_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPolicyBasedRoute",
+        "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.GetPolicyBasedRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.PolicyBasedRoute",
+        "client": {
+          "shortName": "PolicyBasedRoutingServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingServiceClient"
+        },
+        "method": {
+          "shortName": "GetPolicyBasedRoute",
+          "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.GetPolicyBasedRoute",
+          "service": {
+            "shortName": "PolicyBasedRoutingService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_PolicyBasedRoutingService_CreatePolicyBasedRoute_async",
+      "title": "DataTransferService createPolicyBasedRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new policy-based route in a given project and location.",
+      "canonical": true,
+      "file": "policy_based_routing_service.create_policy_based_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePolicyBasedRoute",
+        "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.CreatePolicyBasedRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy_based_route_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy_based_route",
+            "type": ".google.cloud.networkconnectivity.v1beta.PolicyBasedRoute"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "PolicyBasedRoutingServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingServiceClient"
+        },
+        "method": {
+          "shortName": "CreatePolicyBasedRoute",
+          "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.CreatePolicyBasedRoute",
+          "service": {
+            "shortName": "PolicyBasedRoutingService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_async",
+      "title": "DataTransferService deletePolicyBasedRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single policy-based route.",
+      "canonical": true,
+      "file": "policy_based_routing_service.delete_policy_based_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePolicyBasedRoute",
+        "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.DeletePolicyBasedRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "PolicyBasedRoutingServiceClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingServiceClient"
+        },
+        "method": {
+          "shortName": "DeletePolicyBasedRoute",
+          "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.DeletePolicyBasedRoute",
+          "service": {
+            "shortName": "PolicyBasedRoutingService",
+            "fullName": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_TransportManager_ListRemoteTransportProfiles_async",
+      "title": "DataTransferService listRemoteTransportProfiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists RemoteTransportProfiles in a given project and location.",
+      "canonical": true,
+      "file": "transport_manager.list_remote_transport_profiles.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRemoteTransportProfiles",
+        "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.ListRemoteTransportProfiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListRemoteTransportProfilesResponse",
+        "client": {
+          "shortName": "TransportManagerClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManagerClient"
+        },
+        "method": {
+          "shortName": "ListRemoteTransportProfiles",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.ListRemoteTransportProfiles",
+          "service": {
+            "shortName": "TransportManager",
+            "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_TransportManager_GetRemoteTransportProfile_async",
+      "title": "DataTransferService getRemoteTransportProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single RemoteTransportProfile.",
+      "canonical": true,
+      "file": "transport_manager.get_remote_transport_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRemoteTransportProfile",
+        "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.GetRemoteTransportProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.RemoteTransportProfile",
+        "client": {
+          "shortName": "TransportManagerClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManagerClient"
+        },
+        "method": {
+          "shortName": "GetRemoteTransportProfile",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.GetRemoteTransportProfile",
+          "service": {
+            "shortName": "TransportManager",
+            "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_TransportManager_ListTransports_async",
+      "title": "DataTransferService listTransports Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Transports in a given project and location.",
+      "canonical": true,
+      "file": "transport_manager.list_transports.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTransports",
+        "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.ListTransports",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.ListTransportsResponse",
+        "client": {
+          "shortName": "TransportManagerClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManagerClient"
+        },
+        "method": {
+          "shortName": "ListTransports",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.ListTransports",
+          "service": {
+            "shortName": "TransportManager",
+            "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_TransportManager_GetTransport_async",
+      "title": "DataTransferService getTransport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Transport.",
+      "canonical": true,
+      "file": "transport_manager.get_transport.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTransport",
+        "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.GetTransport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.Transport",
+        "client": {
+          "shortName": "TransportManagerClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManagerClient"
+        },
+        "method": {
+          "shortName": "GetTransport",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.GetTransport",
+          "service": {
+            "shortName": "TransportManager",
+            "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_TransportManager_GetStatus_async",
+      "title": "DataTransferService getStatus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the operational status of a single Transport.",
+      "canonical": true,
+      "file": "transport_manager.get_status.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetStatus",
+        "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.GetStatus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networkconnectivity.v1beta.GetStatusResponse",
+        "client": {
+          "shortName": "TransportManagerClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManagerClient"
+        },
+        "method": {
+          "shortName": "GetStatus",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.GetStatus",
+          "service": {
+            "shortName": "TransportManager",
+            "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_TransportManager_CreateTransport_async",
+      "title": "DataTransferService createTransport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Transport in a given project and location.",
+      "canonical": true,
+      "file": "transport_manager.create_transport.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTransport",
+        "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.CreateTransport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "transport_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "transport",
+            "type": ".google.cloud.networkconnectivity.v1beta.Transport"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "TransportManagerClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManagerClient"
+        },
+        "method": {
+          "shortName": "CreateTransport",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.CreateTransport",
+          "service": {
+            "shortName": "TransportManager",
+            "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_TransportManager_UpdateTransport_async",
+      "title": "DataTransferService updateTransport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Transport.",
+      "canonical": true,
+      "file": "transport_manager.update_transport.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTransport",
+        "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.UpdateTransport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "transport",
+            "type": ".google.cloud.networkconnectivity.v1beta.Transport"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "TransportManagerClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateTransport",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.UpdateTransport",
+          "service": {
+            "shortName": "TransportManager",
+            "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networkconnectivity_v1beta_generated_TransportManager_DeleteTransport_async",
+      "title": "DataTransferService deleteTransport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Transport.",
+      "canonical": true,
+      "file": "transport_manager.delete_transport.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTransport",
+        "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.DeleteTransport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "TransportManagerClient",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteTransport",
+          "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager.DeleteTransport",
+          "service": {
+            "shortName": "TransportManager",
+            "fullName": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      }
+    }
+  ]
+}

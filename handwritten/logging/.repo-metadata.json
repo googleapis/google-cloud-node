@@ -1,0 +1,16 @@
+{
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/logging/latest",
+  "product_documentation": "https://cloud.google.com/logging/docs",
+  "name": "logging",
+  "codeowner_team": "@googleapis/yoshi-nodejs",
+  "release_level": "stable",
+  "language": "nodejs",
+  "api_id": "logging.googleapis.com",
+  "distribution_name": "@google-cloud/logging",
+  "repo": "googleapis/google-cloud-node",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
+  "name_pretty": "Cloud Logging",
+  "default_version": "v2",
+  "api_shortname": "logging",
+  "library_type": "GAPIC_COMBO"
+}
