@@ -127,14 +127,19 @@ for subdir in ${subdirs[@]}; do
             if [[ "${changed}" -eq 0 ]]; then
                 echo "no change detected in ${d}, skipping"
             else
-                if [[ "${d}" == core/packages/* ]] && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
+                if ([[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]) && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
                     echo "run system tests for core/packages in ${d}"
                     export RUN_INTERDEPENDENT_TESTS=true
                     should_test=true
-                elif [[ "${d}" == core/packages/* ]] && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "samples" ]]; then
-                    echo "run samples tests for core/packages in ${d}"
-                    should_test=true
-                elif [[ "${d}" == core/packages/* ]]; then
+                elif ([[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]) && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "samples" ]]; then
+                    if [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                        echo "run samples tests with credentials for core/packages in ${d}"
+                        should_test=true
+                    elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                        echo "run samples tests for core/packages in ${d}"
+                        should_test=true
+                    fi
+                elif [[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]; then
                     echo "skipping core package ${d} in non-core trigger"
                 elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                     echo "change detected in ${d} for ${TEST_TYPE} test"
@@ -149,12 +154,20 @@ for subdir in ${subdirs[@]}; do
             fi
         else
             # If GIT_DIFF_ARG is empty, run all the tests.
-            if [[ "${d}" == core/packages/* ]] && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
+            if ([[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]) && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
                 echo "run system tests for core/packages in ${d}"
                 export RUN_INTERDEPENDENT_TESTS=true
                 should_test=true
-            elif [[ "${d}" == core/packages/* ]]; then
-                echo "skipping core package ${d} in non-core trigger"
+            elif ([[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]) && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "samples" ]]; then
+                if [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                    echo "run samples tests with credentials for core/packages in ${d}"
+                    should_test=true
+                elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                    echo "run samples tests for core/packages in ${d}"
+                    should_test=true
+                fi
+            # elif [[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]; then
+            #     echo "skipping core package ${d} in non-core trigger"
             elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                 echo "run ${TEST_TYPE} test for ${d}"
                 should_test=true
