@@ -1,0 +1,18 @@
+{
+  "type":"record",
+  "name":"Province",
+  "namespace":"utilities",
+  "doc":"A list of provinces in Canada.",
+  "fields":[
+    {
+      "name":"name",
+      "type":"string",
+      "doc":"The common name of the province."
+    },
+    {
+      "name":"post_abbr",
+      "type":"string",
+      "doc":"The postal code abbreviation of the province."
+    }
+  ]
+}
