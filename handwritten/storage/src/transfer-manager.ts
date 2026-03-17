@@ -613,11 +613,11 @@ export class TransferManager {
         continue;
       }
 
-      const normalizedGcsName = file.name.replace(/^[\\/]+/, '');
+      const fileName = options.stripPrefix
+        ? file.name.replace(regex, '')
+        : file.name;
 
-      const dest = options.stripPrefix
-        ? normalizedGcsName.replace(regex, '')
-        : normalizedGcsName;
+      const dest = fileName.replace(/^[\\/]+/, '');
 
       const resolvedPath = path.resolve(baseDestination, dest);
       const relativeFromBase = path.relative(baseDestination, resolvedPath);
