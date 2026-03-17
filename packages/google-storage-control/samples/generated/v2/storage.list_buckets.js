@@ -62,10 +62,10 @@ function main(parent) {
   // const returnPartialSuccess = true
 
   // Imports the Storage library
-  const {StorageClient} = require('@google-cloud/storage').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const storageClient = new StorageClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callListBuckets() {
     // Construct request
@@ -74,7 +74,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = storageClient.listBucketsAsync(request);
+    const iterable = storageControlClient.listBucketsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
