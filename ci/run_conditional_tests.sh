@@ -85,7 +85,7 @@ RETVAL=0
 # These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo). 
 # When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
 
-tests_with_credentials="core/packages/google-auth-library-nodejs packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
+tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
 
 # Some packages are only used by our bots and automation. These packages do not need to run on Windows and
 # often employ platform specific code like file system interaction. Some packages may also fail
