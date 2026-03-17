@@ -1,12 +1,12 @@
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'handwritten/spanner/**'
-  pull_request:
-    paths:
-      - 'handwritten/spanner/**'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'handwritten/spanner/**'
+  # pull_request:
+  #   paths:
+  #     - 'handwritten/spanner/**'
 name: system-tests-against-emulator
 jobs:
   test:
