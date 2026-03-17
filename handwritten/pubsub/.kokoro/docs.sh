@@ -1,17 +1,25 @@
-# Copyright 2026 Google LLC
+#!/bin/bash
+
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-docker:
-  image: gcr.io/cloud-devrel-public-resources/owlbot-nodejs-mono-repo:latest
-  digest: sha256:f70290d6665747e11cdf9630141b0d01caec8223d6a26eda0484786f5ba15167
-# created: 2026-03-16T16:18:29.328142363Z
+
+set -eo pipefail
+
+export NPM_CONFIG_PREFIX=${HOME}/.npm-global
+
+cd $(dirname $0)/..
+
+npm install
+
+npm run docs-test
