@@ -492,6 +492,7 @@ describe('Transfer Manager', () => {
     });
 
     it('should account for every input file (Parity Check)', async () => {
+      const isWindows = process.platform === 'win32';
       const destination = '/local/target';
       const fileNames = [
         'data/file.txt', // Normal (Download)
@@ -501,7 +502,7 @@ describe('Transfer Manager', () => {
         '/local/usr/a.txt', // Path matches prefix (Download)
         'dir/./file.txt', // Dot segment (Download)
         'windows\\file.txt', // Windows separator (Download)
-        'data\\..\\sibling.txt', // Windows traversal (Download)
+        'data\\..\\sibling.txt', // Windows traversal (Download) | LINUX: Skip (traversal)
         '..\\escape.txt', // Windows escape (Skip - Path Traversal '..')
         'C:\\system\\win32', // Windows Drive (Skip - Illegal Char ':')
         'C:\\local\\target\\a.txt', // Windows Absolute (Skip - Illegal Char ':')
@@ -531,8 +532,9 @@ describe('Transfer Manager', () => {
       const downloads = result.filter(r => !r.skipped);
       const skips = result.filter(r => r.skipped);
 
-      const expectedDownloads = 12;
-      const expectedSkips = 5;
+      const expectedDownloads = isWindows ? 13 : 12;
+      const expectedSkips = isWindows ? 4 : 5;
+      const expectedTraversalSkips = isWindows ? 2 : 3;
 
       assert.strictEqual(
         downloads.length,
@@ -549,7 +551,7 @@ describe('Transfer Manager', () => {
       const traversalSkips = skips.filter(
         f => f.reason === SkipReason.PATH_TRAVERSAL
       );
-      assert.strictEqual(traversalSkips.length, 3);
+      assert.strictEqual(traversalSkips.length, expectedTraversalSkips);
 
       const illegalCharSkips = skips.filter(
         f => f.reason === SkipReason.ILLEGAL_CHARACTER
