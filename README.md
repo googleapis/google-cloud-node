@@ -1,5 +1,5 @@
 # Google Cloud Node.js Client Libraries
-
+ 
 > Node.js idiomatic client libraries for [Google Cloud Platform](https://cloud.google.com/) services.
 
 * [Node.js on Google Cloud][gcloud-homepage]
