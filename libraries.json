@@ -1923,25 +1923,6 @@
     "support_documentation": "https://cloud.google.com/policy-intelligence/docs/getting-support"
   },
   {
-    "distribution_name": "@google-cloud/pubsub",
-    "release_level": "stable",
-    "product_documentation": "https://cloud.google.com/pubsub/docs/",
-    "repo": "googleapis/nodejs-pubsub",
-    "default_version": "v1",
-    "language": "nodejs",
-    "requires_billing": true,
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559741",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/pubsub/latest",
-    "name": "pubsub",
-    "name_pretty": "Pub/Sub",
-    "api_id": "pubsub.googleapis.com",
-    "codeowner_team": "@googleapis/pubsub-team @googleapis/cloud-sdk-nodejs-team",
-    "api_shortname": "pubsub",
-    "library_type": "GAPIC_COMBO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-pubsub",
-    "support_documentation": "https://cloud.google.com/pubsub/docs/getting-support"
-  },
-  {
     "name": "publicca",
     "name_pretty": "Public Certificate Authority",
     "product_documentation": "cloud.google.com/certificate-manager/docs/public-ca/",
