@@ -1,0 +1,31 @@
+{
+  "name": "showcase-server",
+  "version": "0.1.0",
+  "description": "",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "files": [
+    "build/src"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [],
+  "scripts": {
+    "compile": "tsc",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint",
+    "start": "node build/src/index.js"
+  },
+  "dependencies": {
+    "download": "^8.0.0",
+    "execa": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/download": "^8.0.1",
+    "@types/node": "^18.11.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+     "node": ">=18"
+  }
+}

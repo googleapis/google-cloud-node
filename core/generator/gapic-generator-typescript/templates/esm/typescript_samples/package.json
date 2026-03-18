@@ -1,0 +1,3 @@
+{
+    "_comment": "This fake package.json is not a part of the template, but it allows the templater import namer.js in the ESM context."
+}
