@@ -26,6 +26,7 @@ function main() {
   const cmekServiceClient = new dataplex.CmekServiceClient();
   const contentServiceClient = new dataplex.ContentServiceClient();
   const dataplexServiceClient = new dataplex.DataplexServiceClient();
+  const dataProductServiceClient = new dataplex.DataProductServiceClient();
   const dataScanServiceClient = new dataplex.DataScanServiceClient();
   const dataTaxonomyServiceClient = new dataplex.DataTaxonomyServiceClient();
   const metadataServiceClient = new dataplex.MetadataServiceClient();

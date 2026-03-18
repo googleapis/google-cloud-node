@@ -5863,6 +5863,9 @@ export class InstancesClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
+ * @param {boolean} request.discardLocalSsd
+ *   Whether to discard local SSDs from the instance during restart
+ *   default value is false.
  * @param {string} request.instance
  *   Name of the instance resource to update.
  * @param {google.cloud.compute.v1beta.Instance} request.instanceResource

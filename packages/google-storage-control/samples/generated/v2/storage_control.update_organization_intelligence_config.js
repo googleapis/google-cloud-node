@@ -45,10 +45,10 @@ function main(intelligenceConfig, updateMask) {
   // const requestId = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callUpdateOrganizationIntelligenceConfig() {
     // Construct request
@@ -58,7 +58,7 @@ function main(intelligenceConfig, updateMask) {
     };
 
     // Run request
-    const response = await controlClient.updateOrganizationIntelligenceConfig(request);
+    const response = await storageControlClient.updateOrganizationIntelligenceConfig(request);
     console.log(response);
   }
 
