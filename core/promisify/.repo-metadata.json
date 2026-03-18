@@ -1,0 +1,12 @@
+{
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/promisify",
+  "language": "nodejs",
+  "release_level": "stable",
+  "client_documentation": "https://googleapis.dev/nodejs/promisify/latest",
+  "name_pretty": "Google Cloud Common Promisify",
+  "name": "promisify",
+  "api_shortname": "promisify",
+  "library_type": "OTHER",
+  "codeowner_team": "@googleapis/jsteam-handwritten-libraries"
+}
