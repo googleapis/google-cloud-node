@@ -96,9 +96,9 @@ function createWorker() {
     argv: process.argv.slice(2),
   });
 
-  w.on('message', data => {
+  w.on('message', async data => {
     log('Successfully completed iteration.', argv.debug as boolean);
-    recordResult(data);
+    await recordResult(data);
     if (iterationsRemaining > 0) {
       createWorker();
     }

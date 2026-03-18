@@ -188,4 +188,4 @@ async function performReadTest(): Promise<TestResult> {
   return result;
 }
 
-main();
+void main();

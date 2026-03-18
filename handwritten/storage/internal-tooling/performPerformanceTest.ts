@@ -214,4 +214,4 @@ async function performWriteReadTest(): Promise<TestResult[]> {
   return results;
 }
 
-main();
+void main();
