@@ -1,0 +1,19 @@
+createTime: '2025-09-18T18:59:42.228485468Z'
+description: Presubmit build with node 18
+filename: ci/cloudbuild_with_gapic_showcase.yaml
+github:
+  name: google-cloud-node
+  owner: googleapis
+  pullRequest:
+    branch: ^main$
+    commentControl: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
+id: fde91b53-a2f5-4b0b-b1ae-b8c193c8365e
+includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
+name: core-system-presubmit-node
+resourceName: projects/long-door-651/locations/global/triggers/fde91b53-a2f5-4b0b-b1ae-b8c193c8365e
+serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
+substitutions:
+  _BUILD_TYPE: presubmit
+  _IS_CORE: 'true'
+  _LOGS_BUCKET: cloud-node-public-logs
+  _TEST_TYPE: system
