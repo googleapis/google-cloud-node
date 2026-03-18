@@ -40,10 +40,10 @@ function main(resource) {
   // const options = {}
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callGetIamPolicy() {
     // Construct request
@@ -52,7 +52,7 @@ function main(resource) {
     };
 
     // Run request
-    const response = await controlClient.getIamPolicy(request);
+    const response = await storageControlClient.getIamPolicy(request);
     console.log(response);
   }
 

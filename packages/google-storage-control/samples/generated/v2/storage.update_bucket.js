@@ -66,10 +66,10 @@ function main(bucket, updateMask) {
   // const updateMask = {}
 
   // Imports the Storage library
-  const {StorageClient} = require('@google-cloud/storage').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const storageClient = new StorageClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callUpdateBucket() {
     // Construct request
@@ -79,7 +79,7 @@ function main(bucket, updateMask) {
     };
 
     // Run request
-    const response = await storageClient.updateBucket(request);
+    const response = await storageControlClient.updateBucket(request);
     console.log(response);
   }
 

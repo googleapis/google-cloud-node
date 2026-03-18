@@ -23,8 +23,6 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as contentserviceModule from '../src';
 
-import {PassThrough} from 'stream';
-
 import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
@@ -48,35 +46,6 @@ function generateSampleMessage<T extends object>(instance: T) {
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
     return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
-}
-
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
-}
-
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
-    }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
-    });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
@@ -256,1011 +225,6 @@ describe('v1.ContentServiceClient', () => {
             });
             const result = await promise;
             assert.strictEqual(result, fakeProjectId);
-        });
-    });
-
-    describe('createContent', () => {
-        it('invokes createContent without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.CreateContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.Content()
-            );
-            client.innerApiCalls.createContent = stubSimpleCall(expectedResponse);
-            const [response] = await client.createContent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createContent without error using callback', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.CreateContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.Content()
-            );
-            client.innerApiCalls.createContent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createContent(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IContent|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createContent with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.CreateContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createContent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.createContent(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createContent with closed client', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.CreateContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.createContent(request), expectedError);
-        });
-    });
-
-    describe('updateContent', () => {
-        it('invokes updateContent without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.UpdateContentRequest()
-            );
-            request.content ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateContentRequest', ['content', 'name']);
-            request.content.name = defaultValue1;
-            const expectedHeaderRequestParams = `content.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.Content()
-            );
-            client.innerApiCalls.updateContent = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateContent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateContent without error using callback', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.UpdateContentRequest()
-            );
-            request.content ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateContentRequest', ['content', 'name']);
-            request.content.name = defaultValue1;
-            const expectedHeaderRequestParams = `content.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.Content()
-            );
-            client.innerApiCalls.updateContent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateContent(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IContent|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateContent with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.UpdateContentRequest()
-            );
-            request.content ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateContentRequest', ['content', 'name']);
-            request.content.name = defaultValue1;
-            const expectedHeaderRequestParams = `content.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateContent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateContent(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateContent with closed client', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.UpdateContentRequest()
-            );
-            request.content ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateContentRequest', ['content', 'name']);
-            request.content.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.updateContent(request), expectedError);
-        });
-    });
-
-    describe('deleteContent', () => {
-        it('invokes deleteContent without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.DeleteContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteContentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteContent = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteContent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteContent without error using callback', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.DeleteContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteContentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteContent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteContent(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteContent with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.DeleteContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteContentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteContent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.deleteContent(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteContent with closed client', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.DeleteContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteContentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.deleteContent(request), expectedError);
-        });
-    });
-
-    describe('getContent', () => {
-        it('invokes getContent without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.GetContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.GetContentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.Content()
-            );
-            client.innerApiCalls.getContent = stubSimpleCall(expectedResponse);
-            const [response] = await client.getContent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getContent without error using callback', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.GetContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.GetContentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.Content()
-            );
-            client.innerApiCalls.getContent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getContent(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IContent|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getContent with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.GetContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.GetContentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getContent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getContent(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getContent with closed client', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.GetContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.GetContentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getContent(request), expectedError);
-        });
-    });
-
-    describe('getIamPolicy', () => {
-        it('invokes getIamPolicy without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.GetIamPolicyRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.iam.v1.Policy()
-            );
-            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-            const [response] = await client.getIamPolicy(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getIamPolicy without error using callback', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.GetIamPolicyRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.iam.v1.Policy()
-            );
-            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getIamPolicy(
-                    request,
-                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getIamPolicy with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.GetIamPolicyRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getIamPolicy(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getIamPolicy with closed client', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.GetIamPolicyRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getIamPolicy(request), expectedError);
-        });
-    });
-
-    describe('setIamPolicy', () => {
-        it('invokes setIamPolicy without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.SetIamPolicyRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.iam.v1.Policy()
-            );
-            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-            const [response] = await client.setIamPolicy(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes setIamPolicy without error using callback', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.SetIamPolicyRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.iam.v1.Policy()
-            );
-            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.setIamPolicy(
-                    request,
-                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes setIamPolicy with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.SetIamPolicyRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.setIamPolicy(request), expectedError);
-            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes setIamPolicy with closed client', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.SetIamPolicyRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.setIamPolicy(request), expectedError);
-        });
-    });
-
-    describe('testIamPermissions', () => {
-        it('invokes testIamPermissions without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
-            const [response] = await client.testIamPermissions(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes testIamPermissions without error using callback', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.testIamPermissions(
-                    request,
-                    (err?: Error|null, result?: protos.google.iam.v1.ITestIamPermissionsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes testIamPermissions with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.testIamPermissions(request), expectedError);
-            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes testIamPermissions with closed client', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
-            request.resource = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.testIamPermissions(request), expectedError);
-        });
-    });
-
-    describe('listContent', () => {
-        it('invokes listContent without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.ListContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.ListContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-            ];
-            client.innerApiCalls.listContent = stubSimpleCall(expectedResponse);
-            const [response] = await client.listContent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listContent without error using callback', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.ListContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.ListContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-            ];
-            client.innerApiCalls.listContent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listContent(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IContent[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listContent with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.ListContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.ListContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listContent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listContent(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listContent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listContent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listContentStream without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.ListContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.ListContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-            ];
-            client.descriptors.page.listContent.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listContentStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.dataplex.v1.Content[] = [];
-                stream.on('data', (response: protos.google.cloud.dataplex.v1.Content) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listContent.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listContent, request));
-            assert(
-                (client.descriptors.page.listContent.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listContentStream with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.ListContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.ListContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listContent.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listContentStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.dataplex.v1.Content[] = [];
-                stream.on('data', (response: protos.google.cloud.dataplex.v1.Content) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listContent.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listContent, request));
-            assert(
-                (client.descriptors.page.listContent.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listContent without error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.ListContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.ListContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-              generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
-            ];
-            client.descriptors.page.listContent.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.dataplex.v1.IContent[] = [];
-            const iterable = client.listContentAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listContent.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listContent.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listContent with error', async () => {
-            const client = new contentserviceModule.v1.ContentServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.dataplex.v1.ListContentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.dataplex.v1.ListContentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listContent.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listContentAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.dataplex.v1.IContent[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listContent.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listContent.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
         });
     });
     describe('getLocation', () => {
@@ -1849,6 +813,60 @@ describe('v1.ContentServiceClient', () => {
             });
         });
 
+        describe('dataAsset', async () => {
+            const fakePath = "/rendered/path/dataAsset";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_product: "dataProductValue",
+                data_asset: "dataAssetValue",
+            };
+            const client = new contentserviceModule.v1.ContentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataAssetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataAssetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataAssetPath', () => {
+                const result = client.dataAssetPath("projectValue", "locationValue", "dataProductValue", "dataAssetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataAssetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataAssetName', () => {
+                const result = client.matchProjectFromDataAssetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataAssetName', () => {
+                const result = client.matchLocationFromDataAssetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataProductFromDataAssetName', () => {
+                const result = client.matchDataProductFromDataAssetName(fakePath);
+                assert.strictEqual(result, "dataProductValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataAssetFromDataAssetName', () => {
+                const result = client.matchDataAssetFromDataAssetName(fakePath);
+                assert.strictEqual(result, "dataAssetValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('dataAttribute', async () => {
             const fakePath = "/rendered/path/dataAttribute";
             const expectedParameters = {
@@ -1945,6 +963,52 @@ describe('v1.ContentServiceClient', () => {
                 const result = client.matchDataAttributeBindingIdFromDataAttributeBindingName(fakePath);
                 assert.strictEqual(result, "dataAttributeBindingIdValue");
                 assert((client.pathTemplates.dataAttributeBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataProduct', async () => {
+            const fakePath = "/rendered/path/dataProduct";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_product: "dataProductValue",
+            };
+            const client = new contentserviceModule.v1.ContentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataProductPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataProductPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataProductPath', () => {
+                const result = client.dataProductPath("projectValue", "locationValue", "dataProductValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataProductPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataProductName', () => {
+                const result = client.matchProjectFromDataProductName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataProductName', () => {
+                const result = client.matchLocationFromDataProductName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataProductFromDataProductName', () => {
+                const result = client.matchDataProductFromDataProductName(fakePath);
+                assert.strictEqual(result, "dataProductValue");
+                assert((client.pathTemplates.dataProductPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -2715,6 +1779,52 @@ describe('v1.ContentServiceClient', () => {
                 const result = client.matchLakeFromLakeName(fakePath);
                 assert.strictEqual(result, "lakeValue");
                 assert((client.pathTemplates.lakePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('metadataFeed', async () => {
+            const fakePath = "/rendered/path/metadataFeed";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                metadata_feed: "metadataFeedValue",
+            };
+            const client = new contentserviceModule.v1.ContentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.metadataFeedPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.metadataFeedPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('metadataFeedPath', () => {
+                const result = client.metadataFeedPath("projectValue", "locationValue", "metadataFeedValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.metadataFeedPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMetadataFeedName', () => {
+                const result = client.matchProjectFromMetadataFeedName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.metadataFeedPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMetadataFeedName', () => {
+                const result = client.matchLocationFromMetadataFeedName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.metadataFeedPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMetadataFeedFromMetadataFeedName', () => {
+                const result = client.matchMetadataFeedFromMetadataFeedName(fakePath);
+                assert.strictEqual(result, "metadataFeedValue");
+                assert((client.pathTemplates.metadataFeedPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

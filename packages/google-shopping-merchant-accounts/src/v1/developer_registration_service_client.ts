@@ -403,15 +403,16 @@ export class DeveloperRegistrationServiceClient {
  *   merchant account that the GCP will be registered with. Format:
  *   `accounts/{account}/developerRegistration`
  * @param {string} request.developerEmail
- *   Immutable. If the developer email provided is associated with a user in the
- *   merchant account provided, the user will be updated to have "API developer"
- *   access type and the email preference corresponding to that user will be
- *   updated to have the new "API notifications" preference. If the developer
- *   email provided is not associated with any user we will just add it as a
- *   contact. The email preference corresponding to that contact will have the
- *   new "API notifications" preference. Make sure the email used is associated
- *   with a Google Account (Google Workspace account or Gmail account)
- *   and is not a service account as service accounts can't receive emails.
+ *   Immutable. Optional field. Developer role can be also added by using
+ *   `users.update` method. If the developer email provided is associated with a
+ *   user in the provided merchant account, the user will be updated to have
+ *   `API_DEVELOPER` `access_rights` and the email preference corresponding to
+ *   that user will be updated to have the new API notifications preference. If
+ *   the developer email provided is not associated with any user, it is added
+ *   as a contact. The email preference corresponding to that contact will have
+ *   the new API notifications preference. Make sure the email used is
+ *   associated with a Google Account and is not a service account as service
+ *   accounts can't receive emails.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

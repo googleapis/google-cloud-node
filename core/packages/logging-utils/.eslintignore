@@ -1,0 +1,9 @@
+**/node_modules
+**/coverage
+test/fixtures
+build/
+docs/
+protos/
+samples/generated/
+samples/typescript/**
+samples/system-test/**

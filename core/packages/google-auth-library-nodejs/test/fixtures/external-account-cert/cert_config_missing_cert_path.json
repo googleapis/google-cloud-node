@@ -1,0 +1,7 @@
+{
+  "cert_configs": {
+    "workload": {
+      "key_path": "./test/fixtures/external-account-cert/leaf.key"
+    }
+  }
+}
