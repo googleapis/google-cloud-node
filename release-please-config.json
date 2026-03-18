@@ -227,7 +227,13 @@
     "packages/google-cloud-visionai": {},
     "packages/google-cloud-workloadmanager": {},
     "packages/google-cloud-ces": {},
-    "packages/google-maps-navconnect": {}
+    "packages/google-maps-navconnect": {},
+    "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech": {},
+    "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs/speech-v1-nodejs": {},
+    "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs/speech-v1p1beta1-nodejs": {},
+    "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs/speech-v2-nodejs": {},
+    "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs/tasks-v2-nodejs": {},
+    "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs/tasks-v2beta2-nodejs": {}
   },
   "plugins": [
     {

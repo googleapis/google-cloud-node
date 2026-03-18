@@ -1,0 +1,3257 @@
+{
+  "nested": {
+    "google": {
+      "nested": {
+        "showcase": {
+          "nested": {
+            "v1beta1": {
+              "options": {
+                "go_package": "github.com/googleapis/gapic-showcase/server/genproto",
+                "java_package": "com.google.showcase.v1beta1",
+                "java_multiple_files": true
+              },
+              "nested": {
+                "Echo": {
+                  "options": {
+                    "(google.api.default_host)": "localhost:7469"
+                  },
+                  "methods": {
+                    "Echo": {
+                      "requestType": "EchoRequest",
+                      "responseType": "EchoResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/echo:echo",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/echo:echo",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "Expand": {
+                      "requestType": "ExpandRequest",
+                      "responseType": "EchoResponse",
+                      "responseStream": true,
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/echo:expand",
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "content,error"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/echo:expand",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "content,error"
+                        }
+                      ]
+                    },
+                    "Collect": {
+                      "requestType": "EchoRequest",
+                      "requestStream": true,
+                      "responseType": "EchoResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/echo:collect",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/echo:collect",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "Chat": {
+                      "requestType": "EchoRequest",
+                      "requestStream": true,
+                      "responseType": "EchoResponse",
+                      "responseStream": true
+                    },
+                    "PagedExpand": {
+                      "requestType": "PagedExpandRequest",
+                      "responseType": "PagedExpandResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/echo:pagedExpand",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/echo:pagedExpand",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "Wait": {
+                      "requestType": "WaitRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/echo:wait",
+                        "(google.api.http).body": "*",
+                        "(google.longrunning.operation_info).response_type": "WaitResponse",
+                        "(google.longrunning.operation_info).metadata_type": "WaitMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/echo:wait",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "WaitResponse",
+                            "metadata_type": "WaitMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "Block": {
+                      "requestType": "BlockRequest",
+                      "responseType": "BlockResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/echo:block",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/echo:block",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "EchoRequest": {
+                  "oneofs": {
+                    "response": {
+                      "oneof": [
+                        "content",
+                        "error"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "content": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "error": {
+                      "type": "google.rpc.Status",
+                      "id": 2
+                    }
+                  }
+                },
+                "EchoResponse": {
+                  "fields": {
+                    "content": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "ExpandRequest": {
+                  "fields": {
+                    "content": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "error": {
+                      "type": "google.rpc.Status",
+                      "id": 2
+                    }
+                  }
+                },
+                "PagedExpandRequest": {
+                  "fields": {
+                    "content": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "PagedExpandResponse": {
+                  "fields": {
+                    "responses": {
+                      "rule": "repeated",
+                      "type": "EchoResponse",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "WaitRequest": {
+                  "oneofs": {
+                    "end": {
+                      "oneof": [
+                        "endTime",
+                        "ttl"
+                      ]
+                    },
+                    "response": {
+                      "oneof": [
+                        "error",
+                        "success"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "endTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1
+                    },
+                    "ttl": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    },
+                    "error": {
+                      "type": "google.rpc.Status",
+                      "id": 2
+                    },
+                    "success": {
+                      "type": "WaitResponse",
+                      "id": 3
+                    }
+                  }
+                },
+                "WaitResponse": {
+                  "fields": {
+                    "content": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "WaitMetadata": {
+                  "fields": {
+                    "endTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1
+                    }
+                  }
+                },
+                "BlockRequest": {
+                  "oneofs": {
+                    "response": {
+                      "oneof": [
+                        "error",
+                        "success"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "responseDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 1
+                    },
+                    "error": {
+                      "type": "google.rpc.Status",
+                      "id": 2
+                    },
+                    "success": {
+                      "type": "BlockResponse",
+                      "id": 3
+                    }
+                  }
+                },
+                "BlockResponse": {
+                  "fields": {
+                    "content": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "Identity": {
+                  "options": {
+                    "(google.api.default_host)": "localhost:7469"
+                  },
+                  "methods": {
+                    "CreateUser": {
+                      "requestType": "CreateUserRequest",
+                      "responseType": "User",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/users",
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "user.display_name,user.email,user.age,user.nickname,user.enable_notifications,user.height_feet"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/users",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "user.display_name,user.email"
+                        },
+                        {
+                          "(google.api.method_signature)": "user.display_name,user.email,user.age,user.nickname,user.enable_notifications,user.height_feet"
+                        }
+                      ]
+                    },
+                    "GetUser": {
+                      "requestType": "GetUserRequest",
+                      "responseType": "User",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/{name=users/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/{name=users/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "UpdateUser": {
+                      "requestType": "UpdateUserRequest",
+                      "responseType": "User",
+                      "options": {
+                        "(google.api.http).patch": "/v1beta1/{user.name=users/*}",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v1beta1/{user.name=users/*}",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "DeleteUser": {
+                      "requestType": "DeleteUserRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1beta1/{name=users/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1beta1/{name=users/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "ListUsers": {
+                      "requestType": "ListUsersRequest",
+                      "responseType": "ListUsersResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/users"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/users"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "User": {
+                  "options": {
+                    "(google.api.resource).type": "showcase.googleapis.com/User",
+                    "(google.api.resource).pattern": "users/{user_id}"
+                  },
+                  "oneofs": {
+                    "_age": {
+                      "oneof": [
+                        "age"
+                      ]
+                    },
+                    "_heightFeet": {
+                      "oneof": [
+                        "heightFeet"
+                      ]
+                    },
+                    "_nickname": {
+                      "oneof": [
+                        "nickname"
+                      ]
+                    },
+                    "_enableNotifications": {
+                      "oneof": [
+                        "enableNotifications"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "email": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "createTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "age": {
+                      "type": "int32",
+                      "id": 6,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "heightFeet": {
+                      "type": "double",
+                      "id": 7,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "nickname": {
+                      "type": "string",
+                      "id": 8,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "enableNotifications": {
+                      "type": "bool",
+                      "id": 9,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  }
+                },
+                "CreateUserRequest": {
+                  "fields": {
+                    "user": {
+                      "type": "User",
+                      "id": 1
+                    }
+                  }
+                },
+                "GetUserRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/User",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "UpdateUserRequest": {
+                  "fields": {
+                    "user": {
+                      "type": "User",
+                      "id": 1
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2
+                    }
+                  }
+                },
+                "DeleteUserRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/User",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "ListUsersRequest": {
+                  "fields": {
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "ListUsersResponse": {
+                  "fields": {
+                    "users": {
+                      "rule": "repeated",
+                      "type": "User",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "Messaging": {
+                  "options": {
+                    "(google.api.default_host)": "localhost:7469"
+                  },
+                  "methods": {
+                    "CreateRoom": {
+                      "requestType": "CreateRoomRequest",
+                      "responseType": "Room",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/rooms",
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "room.display_name,room.description"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/rooms",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "room.display_name,room.description"
+                        }
+                      ]
+                    },
+                    "GetRoom": {
+                      "requestType": "GetRoomRequest",
+                      "responseType": "Room",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/{name=rooms/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/{name=rooms/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "UpdateRoom": {
+                      "requestType": "UpdateRoomRequest",
+                      "responseType": "Room",
+                      "options": {
+                        "(google.api.http).patch": "/v1beta1/{room.name=rooms/*}",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v1beta1/{room.name=rooms/*}",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "DeleteRoom": {
+                      "requestType": "DeleteRoomRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1beta1/{name=rooms/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1beta1/{name=rooms/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "ListRooms": {
+                      "requestType": "ListRoomsRequest",
+                      "responseType": "ListRoomsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/rooms"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/rooms"
+                          }
+                        }
+                      ]
+                    },
+                    "CreateBlurb": {
+                      "requestType": "CreateBlurbRequest",
+                      "responseType": "Blurb",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/{parent=rooms/*}/blurbs",
+                        "(google.api.http).body": "*",
+                        "(google.api.http).additional_bindings.post": "/v1beta1/{parent=users/*/profile}/blurbs",
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "parent,blurb.user,blurb.image"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/{parent=rooms/*}/blurbs",
+                            "body": "*",
+                            "additional_bindings": {
+                              "post": "/v1beta1/{parent=users/*/profile}/blurbs",
+                              "body": "*"
+                            }
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,blurb.user,blurb.text"
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,blurb.user,blurb.image"
+                        }
+                      ]
+                    },
+                    "GetBlurb": {
+                      "requestType": "GetBlurbRequest",
+                      "responseType": "Blurb",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/{name=rooms/*/blurbs/*}",
+                        "(google.api.http).additional_bindings.get": "/v1beta1/{name=users/*/profile/blurbs/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/{name=rooms/*/blurbs/*}",
+                            "additional_bindings": {
+                              "get": "/v1beta1/{name=users/*/profile/blurbs/*}"
+                            }
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "UpdateBlurb": {
+                      "requestType": "UpdateBlurbRequest",
+                      "responseType": "Blurb",
+                      "options": {
+                        "(google.api.http).patch": "/v1beta1/{blurb.name=rooms/*/blurbs/*}",
+                        "(google.api.http).body": "*",
+                        "(google.api.http).additional_bindings.patch": "/v1beta1/{blurb.name=users/*/profile/blurbs/*}",
+                        "(google.api.http).additional_bindings.body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v1beta1/{blurb.name=rooms/*/blurbs/*}",
+                            "body": "*",
+                            "additional_bindings": {
+                              "patch": "/v1beta1/{blurb.name=users/*/profile/blurbs/*}",
+                              "body": "*"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "DeleteBlurb": {
+                      "requestType": "DeleteBlurbRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1beta1/{name=rooms/*/blurbs/*}",
+                        "(google.api.http).additional_bindings.delete": "/v1beta1/{name=users/*/profile/blurbs/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1beta1/{name=rooms/*/blurbs/*}",
+                            "additional_bindings": {
+                              "delete": "/v1beta1/{name=users/*/profile/blurbs/*}"
+                            }
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "ListBlurbs": {
+                      "requestType": "ListBlurbsRequest",
+                      "responseType": "ListBlurbsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/{parent=rooms/*}/blurbs",
+                        "(google.api.http).additional_bindings.get": "/v1beta1/{parent=users/*/profile}/blurbs",
+                        "(google.api.method_signature)": "parent"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/{parent=rooms/*}/blurbs",
+                            "additional_bindings": {
+                              "get": "/v1beta1/{parent=users/*/profile}/blurbs"
+                            }
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
+                    },
+                    "SearchBlurbs": {
+                      "requestType": "SearchBlurbsRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/{parent=rooms/-}/blurbs:search",
+                        "(google.api.http).body": "*",
+                        "(google.api.http).additional_bindings.post": "/v1beta1/{parent=users/-/profile}/blurbs:search",
+                        "(google.longrunning.operation_info).response_type": "SearchBlurbsResponse",
+                        "(google.longrunning.operation_info).metadata_type": "SearchBlurbsMetadata",
+                        "(google.api.method_signature)": "query"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/{parent=rooms/-}/blurbs:search",
+                            "body": "*",
+                            "additional_bindings": {
+                              "post": "/v1beta1/{parent=users/-/profile}/blurbs:search"
+                            }
+                          }
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "SearchBlurbsResponse",
+                            "metadata_type": "SearchBlurbsMetadata"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "query"
+                        }
+                      ]
+                    },
+                    "StreamBlurbs": {
+                      "requestType": "StreamBlurbsRequest",
+                      "responseType": "StreamBlurbsResponse",
+                      "responseStream": true,
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/{name=rooms/*}/blurbs:stream",
+                        "(google.api.http).body": "*",
+                        "(google.api.http).additional_bindings.post": "/v1beta1/{name=users/*/profile}/blurbs:stream",
+                        "(google.api.http).additional_bindings.body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/{name=rooms/*}/blurbs:stream",
+                            "body": "*",
+                            "additional_bindings": {
+                              "post": "/v1beta1/{name=users/*/profile}/blurbs:stream",
+                              "body": "*"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "SendBlurbs": {
+                      "requestType": "CreateBlurbRequest",
+                      "requestStream": true,
+                      "responseType": "SendBlurbsResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/{parent=rooms/*}/blurbs:send",
+                        "(google.api.http).body": "*",
+                        "(google.api.http).additional_bindings.post": "/v1beta1/{parent=users/*/profile}/blurbs:send",
+                        "(google.api.http).additional_bindings.body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/{parent=rooms/*}/blurbs:send",
+                            "body": "*",
+                            "additional_bindings": {
+                              "post": "/v1beta1/{parent=users/*/profile}/blurbs:send",
+                              "body": "*"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "Connect": {
+                      "requestType": "ConnectRequest",
+                      "requestStream": true,
+                      "responseType": "StreamBlurbsResponse",
+                      "responseStream": true
+                    }
+                  }
+                },
+                "Room": {
+                  "options": {
+                    "(google.api.resource).type": "showcase.googleapis.com/Room",
+                    "(google.api.resource).pattern": "rooms/{room_id}"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "createTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "CreateRoomRequest": {
+                  "fields": {
+                    "room": {
+                      "type": "Room",
+                      "id": 1
+                    }
+                  }
+                },
+                "GetRoomRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Room",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "UpdateRoomRequest": {
+                  "fields": {
+                    "room": {
+                      "type": "Room",
+                      "id": 1
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2
+                    }
+                  }
+                },
+                "DeleteRoomRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Room",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "ListRoomsRequest": {
+                  "fields": {
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "ListRoomsResponse": {
+                  "fields": {
+                    "rooms": {
+                      "rule": "repeated",
+                      "type": "Room",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "Blurb": {
+                  "options": {
+                    "(google.api.resource).type": "showcase.googleapis.com/Blurb",
+                    "(google.api.resource).pattern": "user/{user_id}/profile/blurbs/legacy/{legacy_user_id}~{blurb_id}"
+                  },
+                  "oneofs": {
+                    "content": {
+                      "oneof": [
+                        "text",
+                        "image"
+                      ]
+                    },
+                    "legacyId": {
+                      "oneof": [
+                        "legacyRoomId",
+                        "legacyUserId"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "user": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/User",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "text": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "image": {
+                      "type": "bytes",
+                      "id": 4
+                    },
+                    "createTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "legacyRoomId": {
+                      "type": "string",
+                      "id": 7
+                    },
+                    "legacyUserId": {
+                      "type": "string",
+                      "id": 8
+                    }
+                  }
+                },
+                "CreateBlurbRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).child_type": "showcase.googleapis.com/Blurb",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "blurb": {
+                      "type": "Blurb",
+                      "id": 2
+                    }
+                  }
+                },
+                "GetBlurbRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Blurb",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "UpdateBlurbRequest": {
+                  "fields": {
+                    "blurb": {
+                      "type": "Blurb",
+                      "id": 1
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2
+                    }
+                  }
+                },
+                "DeleteBlurbRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Blurb",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "ListBlurbsRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).child_type": "showcase.googleapis.com/Blurb",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "ListBlurbsResponse": {
+                  "fields": {
+                    "blurbs": {
+                      "rule": "repeated",
+                      "type": "Blurb",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "SearchBlurbsRequest": {
+                  "fields": {
+                    "query": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "parent": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.resource_reference).child_type": "showcase.googleapis.com/Blurb"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  }
+                },
+                "SearchBlurbsMetadata": {
+                  "fields": {
+                    "retryInfo": {
+                      "type": "google.rpc.RetryInfo",
+                      "id": 1
+                    }
+                  }
+                },
+                "SearchBlurbsResponse": {
+                  "fields": {
+                    "blurbs": {
+                      "rule": "repeated",
+                      "type": "Blurb",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "StreamBlurbsRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).child_type": "showcase.googleapis.com/Blurb",
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "expireTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "StreamBlurbsResponse": {
+                  "fields": {
+                    "blurb": {
+                      "type": "Blurb",
+                      "id": 1
+                    },
+                    "action": {
+                      "type": "Action",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Action": {
+                      "values": {
+                        "ACTION_UNSPECIFIED": 0,
+                        "CREATE": 1,
+                        "UPDATE": 2,
+                        "DELETE": 3
+                      }
+                    }
+                  }
+                },
+                "SendBlurbsResponse": {
+                  "fields": {
+                    "names": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "ConnectRequest": {
+                  "oneofs": {
+                    "request": {
+                      "oneof": [
+                        "config",
+                        "blurb"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "config": {
+                      "type": "ConnectConfig",
+                      "id": 1
+                    },
+                    "blurb": {
+                      "type": "Blurb",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "ConnectConfig": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).child_type": "showcase.googleapis.com/Blurb"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Testing": {
+                  "options": {
+                    "(google.api.default_host)": "localhost:7469"
+                  },
+                  "methods": {
+                    "CreateSession": {
+                      "requestType": "CreateSessionRequest",
+                      "responseType": "Session",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/sessions",
+                        "(google.api.http).body": "session"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/sessions",
+                            "body": "session"
+                          }
+                        }
+                      ]
+                    },
+                    "GetSession": {
+                      "requestType": "GetSessionRequest",
+                      "responseType": "Session",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/{name=sessions/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/{name=sessions/*}"
+                          }
+                        }
+                      ]
+                    },
+                    "ListSessions": {
+                      "requestType": "ListSessionsRequest",
+                      "responseType": "ListSessionsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/sessions"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/sessions"
+                          }
+                        }
+                      ]
+                    },
+                    "DeleteSession": {
+                      "requestType": "DeleteSessionRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1beta1/{name=sessions/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1beta1/{name=sessions/*}"
+                          }
+                        }
+                      ]
+                    },
+                    "ReportSession": {
+                      "requestType": "ReportSessionRequest",
+                      "responseType": "ReportSessionResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/{name=sessions/*}:report"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/{name=sessions/*}:report"
+                          }
+                        }
+                      ]
+                    },
+                    "ListTests": {
+                      "requestType": "ListTestsRequest",
+                      "responseType": "ListTestsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/{parent=sessions/*}/tests"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/{parent=sessions/*}/tests"
+                          }
+                        }
+                      ]
+                    },
+                    "DeleteTest": {
+                      "requestType": "DeleteTestRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1beta1/{name=sessions/*/tests/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1beta1/{name=sessions/*/tests/*}"
+                          }
+                        }
+                      ]
+                    },
+                    "VerifyTest": {
+                      "requestType": "VerifyTestRequest",
+                      "responseType": "VerifyTestResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1beta1/{name=sessions/*/tests/*}:check"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1beta1/{name=sessions/*/tests/*}:check"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "Session": {
+                  "options": {
+                    "(google.api.resource).type": "showcase.googleapis.com/Session",
+                    "(google.api.resource).pattern": "sessions/{session}"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "version": {
+                      "type": "Version",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Version": {
+                      "values": {
+                        "VERSION_UNSPECIFIED": 0,
+                        "V1_LATEST": 1,
+                        "V1_0": 2
+                      }
+                    }
+                  }
+                },
+                "CreateSessionRequest": {
+                  "fields": {
+                    "session": {
+                      "type": "Session",
+                      "id": 1
+                    }
+                  }
+                },
+                "GetSessionRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Session"
+                      }
+                    }
+                  }
+                },
+                "ListSessionsRequest": {
+                  "fields": {
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "ListSessionsResponse": {
+                  "fields": {
+                    "sessions": {
+                      "rule": "repeated",
+                      "type": "Session",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "DeleteSessionRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Session"
+                      }
+                    }
+                  }
+                },
+                "ReportSessionRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Session"
+                      }
+                    }
+                  }
+                },
+                "ReportSessionResponse": {
+                  "fields": {
+                    "result": {
+                      "type": "Result",
+                      "id": 1
+                    },
+                    "testRuns": {
+                      "rule": "repeated",
+                      "type": "TestRun",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Result": {
+                      "values": {
+                        "RESULT_UNSPECIFIED": 0,
+                        "PASSED": 1,
+                        "FAILED": 2,
+                        "INCOMPLETE": 3
+                      }
+                    }
+                  }
+                },
+                "Test": {
+                  "options": {
+                    "(google.api.resource).type": "showcase.googleapis.com/Test",
+                    "(google.api.resource).pattern": "sessions/{session}/tests/{test}"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "expectationLevel": {
+                      "type": "ExpectationLevel",
+                      "id": 2
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "blueprints": {
+                      "rule": "repeated",
+                      "type": "Blueprint",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "ExpectationLevel": {
+                      "values": {
+                        "EXPECTATION_LEVEL_UNSPECIFIED": 0,
+                        "REQUIRED": 1,
+                        "RECOMMENDED": 2,
+                        "OPTIONAL": 3
+                      }
+                    },
+                    "Blueprint": {
+                      "options": {
+                        "(google.api.resource).type": "showcase.googleapis.com/Blueprint",
+                        "(google.api.resource).pattern": "sessions/{session}/tests/{test}/blueprints/{blueprint}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "request": {
+                          "type": "Invocation",
+                          "id": 3
+                        },
+                        "additionalRequests": {
+                          "rule": "repeated",
+                          "type": "Invocation",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Invocation": {
+                          "fields": {
+                            "method": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "serializedRequest": {
+                              "type": "bytes",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Issue": {
+                  "fields": {
+                    "type": {
+                      "type": "Type",
+                      "id": 1
+                    },
+                    "severity": {
+                      "type": "Severity",
+                      "id": 2
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Type": {
+                      "values": {
+                        "TYPE_UNSPECIFIED": 0,
+                        "SKIPPED": 1,
+                        "PENDING": 2,
+                        "INCORRECT_CONFIRMATION": 3
+                      }
+                    },
+                    "Severity": {
+                      "values": {
+                        "SEVERITY_UNSPECIFIED": 0,
+                        "ERROR": 1,
+                        "WARNING": 2
+                      }
+                    }
+                  }
+                },
+                "ListTestsRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Session"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "ListTestsResponse": {
+                  "fields": {
+                    "tests": {
+                      "rule": "repeated",
+                      "type": "Test",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "TestRun": {
+                  "fields": {
+                    "test": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Test"
+                      }
+                    },
+                    "issue": {
+                      "type": "Issue",
+                      "id": 2
+                    }
+                  }
+                },
+                "DeleteTestRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Test"
+                      }
+                    }
+                  }
+                },
+                "VerifyTestRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "showcase.googleapis.com/Test"
+                      }
+                    },
+                    "answer": {
+                      "type": "bytes",
+                      "id": 2
+                    },
+                    "answers": {
+                      "rule": "repeated",
+                      "type": "bytes",
+                      "id": 3
+                    }
+                  }
+                },
+                "VerifyTestResponse": {
+                  "fields": {
+                    "issue": {
+                      "type": "Issue",
+                      "id": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "ResourceProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "protobuf": {
+          "options": {
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "DescriptorProtos",
+            "csharp_namespace": "Google.Protobuf.Reflection",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED"
+          },
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "publicDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weakDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "messageType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "sourceCodeInfo": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nestedType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extensionRange": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneofDecl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ExtensionRangeOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "typeName": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                },
+                "proto3Optional": {
+                  "type": "bool",
+                  "id": 17
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "outputType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "clientStreaming": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "serverStreaming": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "javaPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "javaOuterClassname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "javaMultipleFiles": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenerateEqualsAndHash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "javaStringCheckUtf8": {
+                  "type": "bool",
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "optimizeFor": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "goPackage": {
+                  "type": "string",
+                  "id": 11
+                },
+                "ccGenericServices": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenericServices": {
+                  "type": "bool",
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "pyGenericServices": {
+                  "type": "bool",
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "phpGenericServices": {
+                  "type": "bool",
+                  "id": 42,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "ccEnableArenas": {
+                  "type": "bool",
+                  "id": 31,
+                  "options": {
+                    "default": true
+                  }
+                },
+                "objcClassPrefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharpNamespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "swiftPrefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "phpClassPrefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "phpNamespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "phpMetadataNamespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "rubyPackage": {
+                  "type": "string",
+                  "id": 45
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "messageSetWireFormat": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "noStandardDescriptorAccessor": {
+                  "type": "bool",
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "mapEntry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  8,
+                  8
+                ],
+                [
+                  9,
+                  9
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "unverifiedLazy": {
+                  "type": "bool",
+                  "id": 15,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allowAlias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotencyLevel": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifierValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positiveIntValue": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negativeIntValue": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "doubleValue": {
+                  "type": "double",
+                  "id": 6
+                },
+                "stringValue": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregateValue": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "namePart": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "isExtension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leadingComments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailingComments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leadingDetachedComments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "sourceFile": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            }
+          }
+        },
+        "longrunning": {
+          "options": {
+            "cc_enable_arenas": true,
+            "csharp_namespace": "Google.LongRunning",
+            "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
+            "java_multiple_files": true,
+            "java_outer_classname": "OperationsProto",
+            "java_package": "com.google.longrunning",
+            "php_namespace": "Google\\LongRunning"
+          },
+          "nested": {
+            "operationInfo": {
+              "type": "google.longrunning.OperationInfo",
+              "id": 1049,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Operations": {
+              "options": {
+                "(google.api.default_host)": "longrunning.googleapis.com"
+              },
+              "methods": {
+                "ListOperations": {
+                  "requestType": "ListOperationsRequest",
+                  "responseType": "ListOperationsResponse",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations}",
+                    "(google.api.method_signature)": "name,filter"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
+                },
+                "GetOperation": {
+                  "requestType": "GetOperationRequest",
+                  "responseType": "Operation",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "DeleteOperation": {
+                  "requestType": "DeleteOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).delete": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "CancelOperation": {
+                  "requestType": "CancelOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).post": "/v1/{name=operations/**}:cancel",
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "WaitOperation": {
+                  "requestType": "WaitOperationRequest",
+                  "responseType": "Operation"
+                }
+              }
+            },
+            "Operation": {
+              "oneofs": {
+                "result": {
+                  "oneof": [
+                    "error",
+                    "response"
+                  ]
+                }
+              },
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadata": {
+                  "type": "google.protobuf.Any",
+                  "id": 2
+                },
+                "done": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "error": {
+                  "type": "google.rpc.Status",
+                  "id": 4
+                },
+                "response": {
+                  "type": "google.protobuf.Any",
+                  "id": 5
+                }
+              }
+            },
+            "GetOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ListOperationsRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "filter": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pageSize": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "pageToken": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "ListOperationsResponse": {
+              "fields": {
+                "operations": {
+                  "rule": "repeated",
+                  "type": "Operation",
+                  "id": 1
+                },
+                "nextPageToken": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "CancelOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeleteOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "WaitOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "timeout": {
+                  "type": "google.protobuf.Duration",
+                  "id": 2
+                }
+              }
+            },
+            "OperationInfo": {
+              "fields": {
+                "responseType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadataType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/errdetails;errdetails",
+            "java_multiple_files": true,
+            "java_outer_classname": "ErrorDetailsProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
+            },
+            "RetryInfo": {
+              "fields": {
+                "retryDelay": {
+                  "type": "google.protobuf.Duration",
+                  "id": 1
+                }
+              }
+            },
+            "DebugInfo": {
+              "fields": {
+                "stackEntries": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "detail": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "QuotaFailure": {
+              "fields": {
+                "violations": {
+                  "rule": "repeated",
+                  "type": "Violation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Violation": {
+                  "fields": {
+                    "subject": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ErrorInfo": {
+              "fields": {
+                "reason": {
+                  "type": "string",
+                  "id": 1
+                },
+                "domain": {
+                  "type": "string",
+                  "id": 2
+                },
+                "metadata": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "PreconditionFailure": {
+              "fields": {
+                "violations": {
+                  "rule": "repeated",
+                  "type": "Violation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Violation": {
+                  "fields": {
+                    "type": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "subject": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                }
+              }
+            },
+            "BadRequest": {
+              "fields": {
+                "fieldViolations": {
+                  "rule": "repeated",
+                  "type": "FieldViolation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "FieldViolation": {
+                  "fields": {
+                    "field": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "RequestInfo": {
+              "fields": {
+                "requestId": {
+                  "type": "string",
+                  "id": 1
+                },
+                "servingData": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "ResourceInfo": {
+              "fields": {
+                "resourceType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "resourceName": {
+                  "type": "string",
+                  "id": 2
+                },
+                "owner": {
+                  "type": "string",
+                  "id": 3
+                },
+                "description": {
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            },
+            "Help": {
+              "fields": {
+                "links": {
+                  "rule": "repeated",
+                  "type": "Link",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Link": {
+                  "fields": {
+                    "description": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "url": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "LocalizedMessage": {
+              "fields": {
+                "locale": {
+                  "type": "string",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

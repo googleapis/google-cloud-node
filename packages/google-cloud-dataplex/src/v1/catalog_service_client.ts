@@ -197,11 +197,17 @@ export class CatalogServiceClient {
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
       ),
+      dataAssetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}'
+      ),
       dataAttributePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
       ),
       dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+      ),
+      dataProductPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataProducts/{data_product}'
       ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}'
@@ -251,6 +257,9 @@ export class CatalogServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      metadataFeedPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}'
+      ),
       metadataJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
       ),
@@ -292,7 +301,11 @@ export class CatalogServiceClient {
       searchEntries:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'results'),
       listMetadataJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'metadataJobs')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'metadataJobs'),
+      lookupEntryLinks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entryLinks'),
+      listMetadataFeeds:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'metadataFeeds')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -355,6 +368,18 @@ export class CatalogServiceClient {
       '.google.cloud.dataplex.v1.MetadataJob') as gax.protobuf.Type;
     const createMetadataJobMetadata = protoFilesRoot.lookup(
       '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+    const createMetadataFeedResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.MetadataFeed') as gax.protobuf.Type;
+    const createMetadataFeedMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteMetadataFeedResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteMetadataFeedMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateMetadataFeedResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.MetadataFeed') as gax.protobuf.Type;
+    const updateMetadataFeedMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEntryType: new this._gaxModule.LongrunningDescriptor(
@@ -396,7 +421,19 @@ export class CatalogServiceClient {
       createMetadataJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createMetadataJobResponse.decode.bind(createMetadataJobResponse),
-        createMetadataJobMetadata.decode.bind(createMetadataJobMetadata))
+        createMetadataJobMetadata.decode.bind(createMetadataJobMetadata)),
+      createMetadataFeed: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createMetadataFeedResponse.decode.bind(createMetadataFeedResponse),
+        createMetadataFeedMetadata.decode.bind(createMetadataFeedMetadata)),
+      deleteMetadataFeed: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteMetadataFeedResponse.decode.bind(deleteMetadataFeedResponse),
+        deleteMetadataFeedMetadata.decode.bind(deleteMetadataFeedMetadata)),
+      updateMetadataFeed: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateMetadataFeedResponse.decode.bind(updateMetadataFeedResponse),
+        updateMetadataFeedMetadata.decode.bind(updateMetadataFeedMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -442,7 +479,7 @@ export class CatalogServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const catalogServiceStubMethods =
-        ['createEntryType', 'updateEntryType', 'deleteEntryType', 'listEntryTypes', 'getEntryType', 'createAspectType', 'updateAspectType', 'deleteAspectType', 'listAspectTypes', 'getAspectType', 'createEntryGroup', 'updateEntryGroup', 'deleteEntryGroup', 'listEntryGroups', 'getEntryGroup', 'createEntry', 'updateEntry', 'deleteEntry', 'listEntries', 'getEntry', 'lookupEntry', 'searchEntries', 'createMetadataJob', 'getMetadataJob', 'listMetadataJobs', 'cancelMetadataJob', 'createEntryLink', 'deleteEntryLink', 'getEntryLink'];
+        ['createEntryType', 'updateEntryType', 'deleteEntryType', 'listEntryTypes', 'getEntryType', 'createAspectType', 'updateAspectType', 'deleteAspectType', 'listAspectTypes', 'getAspectType', 'createEntryGroup', 'updateEntryGroup', 'deleteEntryGroup', 'listEntryGroups', 'getEntryGroup', 'createEntry', 'updateEntry', 'deleteEntry', 'listEntries', 'getEntry', 'lookupEntry', 'searchEntries', 'createMetadataJob', 'getMetadataJob', 'listMetadataJobs', 'cancelMetadataJob', 'createEntryLink', 'updateEntryLink', 'deleteEntryLink', 'lookupEntryLinks', 'lookupContext', 'getEntryLink', 'createMetadataFeed', 'getMetadataFeed', 'listMetadataFeeds', 'deleteMetadataFeed', 'updateMetadataFeed'];
     for (const methodName of catalogServiceStubMethods) {
       const callPromise = this.catalogServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -524,7 +561,10 @@ export class CatalogServiceClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/dataplex.read-write',
+      'https://www.googleapis.com/auth/dataplex.readonly'
     ];
   }
 
@@ -1172,11 +1212,6 @@ export class CatalogServiceClient {
   }
 /**
  * Gets an Entry.
- * Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
- * Metastore metadata that is stored in Dataplex Universal Catalog is
- * changing. For more information, see [Changes to metadata stored in
- * Dataplex Universal
- * Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1281,11 +1316,6 @@ export class CatalogServiceClient {
   }
 /**
  * Looks up an entry by name using the permission on the source system.
- * Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
- * Metastore metadata that is stored in Dataplex Universal Catalog is
- * changing. For more information, see [Changes to metadata stored in
- * Dataplex Universal
- * Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1691,6 +1721,110 @@ export class CatalogServiceClient {
       });
   }
 /**
+ * Updates an Entry Link.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataplex.v1.EntryLink} request.entryLink
+ *   Required. Entry Link resource.
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true and the entry link doesn't exist, the service will
+ *   create it.
+ * @param {string[]} [request.aspectKeys]
+ *   Optional. The map keys of the Aspects which the service should modify.
+ *   It should be the aspect type reference in the format
+ *   `{project_id_or_number}.{location_id}.{aspect_type_id}`.
+ *
+ *   If this field is left empty, the service treats it as specifying
+ *   exactly those Aspects present in the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_entry_link.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryLink_async
+ */
+  updateEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|undefined, {}|undefined
+      ]>;
+  updateEntryLink(
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEntryLink(
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entry_link.name': request.entryLink!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateEntryLink request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEntryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateEntryLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateEntryLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Deletes an Entry Link.
  *
  * @param {Object} request
@@ -1786,6 +1920,110 @@ export class CatalogServiceClient {
       });
   }
 /**
+ * Looks up LLM Context for the specified resources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed in the
+ *   following form: `projects/{project}/locations/{location}`.
+ * @param {string[]} request.resources
+ *   Required. The entry names to lookup context for. The request should have
+ *   max 10 of those.
+ *
+ *   ## Examples:
+ *
+ *   projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}
+ * @param {number[]} [request.options]
+ *   Optional. Allows to configure the context.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.LookupContextResponse|LookupContextResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.lookup_context.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_LookupContext_async
+ */
+  lookupContext(
+      request?: protos.google.cloud.dataplex.v1.ILookupContextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.ILookupContextResponse,
+        protos.google.cloud.dataplex.v1.ILookupContextRequest|undefined, {}|undefined
+      ]>;
+  lookupContext(
+      request: protos.google.cloud.dataplex.v1.ILookupContextRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.ILookupContextResponse,
+          protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupContext(
+      request: protos.google.cloud.dataplex.v1.ILookupContextRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.ILookupContextResponse,
+          protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupContext(
+      request?: protos.google.cloud.dataplex.v1.ILookupContextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.ILookupContextResponse,
+          protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.ILookupContextResponse,
+          protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.ILookupContextResponse,
+        protos.google.cloud.dataplex.v1.ILookupContextRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('lookupContext request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.ILookupContextResponse,
+        protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupContext response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.lookupContext(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.ILookupContextResponse,
+        protos.google.cloud.dataplex.v1.ILookupContextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('lookupContext response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Gets an Entry Link.
  *
  * @param {Object} request
@@ -1871,6 +2109,101 @@ export class CatalogServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getEntryLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets a MetadataFeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the metadata feed, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}/MetadataFeeds/{metadata_feed_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.MetadataFeed|MetadataFeed}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.get_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_GetMetadataFeed_async
+ */
+  getMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataFeed,
+        protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|undefined, {}|undefined
+      ]>;
+  getMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IMetadataFeed,
+          protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IMetadataFeed,
+          protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IMetadataFeed,
+          protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IMetadataFeed,
+          protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataFeed,
+        protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getMetadataFeed request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IMetadataFeed,
+        protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetadataFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getMetadataFeed(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IMetadataFeed,
+        protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMetadataFeed response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -3017,6 +3350,343 @@ export class CatalogServiceClient {
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMetadataJob, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.MetadataJob, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
+/**
+ * Creates a MetadataFeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {google.cloud.dataplex.v1.MetadataFeed} request.metadataFeed
+ *   Required. The metadata job resource.
+ * @param {string} [request.metadataFeedId]
+ *   Optional. The metadata job ID. If not provided, a unique ID is generated
+ *   with the prefix `metadata-job-`.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. The service validates the request without performing any
+ *   mutations. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataFeed_async
+ */
+  createMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.ICreateMetadataFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.ICreateMetadataFeedRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.ICreateMetadataFeedRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.ICreateMetadataFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMetadataFeed response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMetadataFeed request %j', request);
+    return this.innerApiCalls.createMetadataFeed(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createMetadataFeed response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createMetadataFeed()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataFeed_async
+ */
+  async checkCreateMetadataFeedProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.MetadataFeed, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+    this._log.info('createMetadataFeed long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMetadataFeed, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.MetadataFeed, protos.google.cloud.dataplex.v1.OperationMetadata>;
+  }
+/**
+ * Deletes a MetadataFeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the metadata feed, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}/MetadataFeeds/{metadata_feed_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteMetadataFeed_async
+ */
+  deleteMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IDeleteMetadataFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IDeleteMetadataFeedRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IDeleteMetadataFeedRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IDeleteMetadataFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteMetadataFeed response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteMetadataFeed request %j', request);
+    return this.innerApiCalls.deleteMetadataFeed(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteMetadataFeed response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteMetadataFeed()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteMetadataFeed_async
+ */
+  async checkDeleteMetadataFeedProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+    this._log.info('deleteMetadataFeed long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMetadataFeed, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
+  }
+/**
+ * Updates a MetadataFeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataplex.v1.MetadataFeed} request.metadataFeed
+ *   Required. Update description.
+ *   Only fields specified in `update_mask` are updated.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Mask of fields to update.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Only validate the request, but do not perform mutations.
+ *   The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateMetadataFeed_async
+ */
+  updateMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IUpdateMetadataFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IUpdateMetadataFeedRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IUpdateMetadataFeedRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IUpdateMetadataFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'metadata_feed.name': request.metadataFeed!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateMetadataFeed response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateMetadataFeed request %j', request);
+    return this.innerApiCalls.updateMetadataFeed(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateMetadataFeed response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateMetadataFeed()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateMetadataFeed_async
+ */
+  async checkUpdateMetadataFeedProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.MetadataFeed, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+    this._log.info('updateMetadataFeed long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMetadataFeed, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.MetadataFeed, protos.google.cloud.dataplex.v1.OperationMetadata>;
+  }
  /**
  * Lists EntryType resources in a project and location.
  *
@@ -3748,11 +4418,6 @@ export class CatalogServiceClient {
   }
  /**
  * Lists Entries within an EntryGroup.
- * Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
- * Metastore metadata that is stored in Dataplex Universal Catalog is
- * changing. For more information, see [Changes to metadata stored in
- * Dataplex Universal
- * Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -4543,6 +5208,493 @@ export class CatalogServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataJob>;
   }
+ /**
+ * Looks up Entry Links referencing the specified Entry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed to
+ *   Format: `projects/{project_id_or_number}/locations/{location_id}`.
+ * @param {string} request.entry
+ *   Required. The resource name of the referred Entry.
+ *   Format:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`.
+ *   Entry Links which references this entry will be returned in the response.
+ * @param {google.cloud.dataplex.v1.LookupEntryLinksRequest.EntryMode} request.entryMode
+ *   Mode of entry reference.
+ * @param {string[]} request.entryLinkTypes
+ *   Entry link types to filter the response by. If empty, all entry link types
+ *   will be returned. At most 10 entry link types can be specified.
+ * @param {number} request.pageSize
+ *   Maximum number of EntryLinks to return. The service may return fewer
+ *   than this value. If unspecified, at most 10 EntryLinks will be returned.
+ *   The maximum value is 10; values above 10 will be coerced to 10.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `LookupEntryLinks` call. Provide this
+ *   to retrieve the subsequent page. When paginating, all other parameters that
+ *   are provided to the `LookupEntryLinks` request must match the call that
+ *   provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `lookupEntryLinksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  lookupEntryLinks(
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink[],
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest|null,
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse
+      ]>;
+  lookupEntryLinks(
+      request: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryLink>): void;
+  lookupEntryLinks(
+      request: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryLink>): void;
+  lookupEntryLinks(
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryLink>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryLink>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink[],
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest|null,
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IEntryLink>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('lookupEntryLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('lookupEntryLinks request %j', request);
+    return this.innerApiCalls
+      .lookupEntryLinks(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IEntryLink[],
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest|null,
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse
+      ]) => {
+        this._log.info('lookupEntryLinks values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `lookupEntryLinks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed to
+ *   Format: `projects/{project_id_or_number}/locations/{location_id}`.
+ * @param {string} request.entry
+ *   Required. The resource name of the referred Entry.
+ *   Format:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`.
+ *   Entry Links which references this entry will be returned in the response.
+ * @param {google.cloud.dataplex.v1.LookupEntryLinksRequest.EntryMode} request.entryMode
+ *   Mode of entry reference.
+ * @param {string[]} request.entryLinkTypes
+ *   Entry link types to filter the response by. If empty, all entry link types
+ *   will be returned. At most 10 entry link types can be specified.
+ * @param {number} request.pageSize
+ *   Maximum number of EntryLinks to return. The service may return fewer
+ *   than this value. If unspecified, at most 10 EntryLinks will be returned.
+ *   The maximum value is 10; values above 10 will be coerced to 10.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `LookupEntryLinks` call. Provide this
+ *   to retrieve the subsequent page. When paginating, all other parameters that
+ *   are provided to the `LookupEntryLinks` request must match the call that
+ *   provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `lookupEntryLinksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  lookupEntryLinksStream(
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['lookupEntryLinks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('lookupEntryLinks stream %j', request);
+    return this.descriptors.page.lookupEntryLinks.createStream(
+      this.innerApiCalls.lookupEntryLinks as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `lookupEntryLinks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed to
+ *   Format: `projects/{project_id_or_number}/locations/{location_id}`.
+ * @param {string} request.entry
+ *   Required. The resource name of the referred Entry.
+ *   Format:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`.
+ *   Entry Links which references this entry will be returned in the response.
+ * @param {google.cloud.dataplex.v1.LookupEntryLinksRequest.EntryMode} request.entryMode
+ *   Mode of entry reference.
+ * @param {string[]} request.entryLinkTypes
+ *   Entry link types to filter the response by. If empty, all entry link types
+ *   will be returned. At most 10 entry link types can be specified.
+ * @param {number} request.pageSize
+ *   Maximum number of EntryLinks to return. The service may return fewer
+ *   than this value. If unspecified, at most 10 EntryLinks will be returned.
+ *   The maximum value is 10; values above 10 will be coerced to 10.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `LookupEntryLinks` call. Provide this
+ *   to retrieve the subsequent page. When paginating, all other parameters that
+ *   are provided to the `LookupEntryLinks` request must match the call that
+ *   provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.lookup_entry_links.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_LookupEntryLinks_async
+ */
+  lookupEntryLinksAsync(
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IEntryLink>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['lookupEntryLinks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('lookupEntryLinks iterate %j', request);
+    return this.descriptors.page.lookupEntryLinks.asyncIterate(
+      this.innerApiCalls['lookupEntryLinks'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntryLink>;
+  }
+ /**
+ * Retrieve a list of MetadataFeeds.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of metadata feeds to return. The service
+ *   might return fewer feeds than this value. If unspecified, at most 10 feeds
+ *   are returned. The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListMetadataFeeds` call.
+ *   Provide this token to retrieve the subsequent page of results. When
+ *   paginating, all other parameters that are provided to the
+ *   `ListMetadataFeeds` request must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * `labels.key1 = "value1"`
+ *   * `labels:key1`
+ *   * `name = "value"`
+ *
+ *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to sort the results by, either `name` or `create_time`.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.MetadataFeed|MetadataFeed}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listMetadataFeedsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listMetadataFeeds(
+      request?: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataFeed[],
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest|null,
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse
+      ]>;
+  listMetadataFeeds(
+      request: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataFeed>): void;
+  listMetadataFeeds(
+      request: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataFeed>): void;
+  listMetadataFeeds(
+      request?: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataFeed>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataFeed>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataFeed[],
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest|null,
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IMetadataFeed>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMetadataFeeds values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMetadataFeeds request %j', request);
+    return this.innerApiCalls
+      .listMetadataFeeds(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IMetadataFeed[],
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest|null,
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse
+      ]) => {
+        this._log.info('listMetadataFeeds values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listMetadataFeeds`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of metadata feeds to return. The service
+ *   might return fewer feeds than this value. If unspecified, at most 10 feeds
+ *   are returned. The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListMetadataFeeds` call.
+ *   Provide this token to retrieve the subsequent page of results. When
+ *   paginating, all other parameters that are provided to the
+ *   `ListMetadataFeeds` request must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * `labels.key1 = "value1"`
+ *   * `labels:key1`
+ *   * `name = "value"`
+ *
+ *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to sort the results by, either `name` or `create_time`.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.MetadataFeed|MetadataFeed} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listMetadataFeedsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listMetadataFeedsStream(
+      request?: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listMetadataFeeds'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listMetadataFeeds stream %j', request);
+    return this.descriptors.page.listMetadataFeeds.createStream(
+      this.innerApiCalls.listMetadataFeeds as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listMetadataFeeds`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of metadata feeds to return. The service
+ *   might return fewer feeds than this value. If unspecified, at most 10 feeds
+ *   are returned. The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListMetadataFeeds` call.
+ *   Provide this token to retrieve the subsequent page of results. When
+ *   paginating, all other parameters that are provided to the
+ *   `ListMetadataFeeds` request must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * `labels.key1 = "value1"`
+ *   * `labels:key1`
+ *   * `name = "value"`
+ *
+ *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to sort the results by, either `name` or `create_time`.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.MetadataFeed|MetadataFeed}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.list_metadata_feeds.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_ListMetadataFeeds_async
+ */
+  listMetadataFeedsAsync(
+      request?: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataFeed>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listMetadataFeeds'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listMetadataFeeds iterate %j', request);
+    return this.descriptors.page.listMetadataFeeds.asyncIterate(
+      this.innerApiCalls['listMetadataFeeds'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataFeed>;
+  }
 /**
    * Gets information about a location.
    *
@@ -5036,6 +6188,68 @@ export class CatalogServiceClient {
   }
 
   /**
+   * Return a fully-qualified dataAsset resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_product
+   * @param {string} data_asset
+   * @returns {string} Resource name string.
+   */
+  dataAssetPath(project:string,location:string,dataProduct:string,dataAsset:string) {
+    return this.pathTemplates.dataAssetPathTemplate.render({
+      project: project,
+      location: location,
+      data_product: dataProduct,
+      data_asset: dataAsset,
+    });
+  }
+
+  /**
+   * Parse the project from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).project;
+  }
+
+  /**
+   * Parse the location from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).location;
+  }
+
+  /**
+   * Parse the data_product from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the data_product.
+   */
+  matchDataProductFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_product;
+  }
+
+  /**
+   * Parse the data_asset from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the data_asset.
+   */
+  matchDataAssetFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_asset;
+  }
+
+  /**
    * Return a fully-qualified dataAttribute resource name string.
    *
    * @param {string} project
@@ -5144,6 +6358,55 @@ export class CatalogServiceClient {
    */
   matchDataAttributeBindingIdFromDataAttributeBindingName(dataAttributeBindingName: string) {
     return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).data_attribute_binding_id;
+  }
+
+  /**
+   * Return a fully-qualified dataProduct resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_product
+   * @returns {string} Resource name string.
+   */
+  dataProductPath(project:string,location:string,dataProduct:string) {
+    return this.pathTemplates.dataProductPathTemplate.render({
+      project: project,
+      location: location,
+      data_product: dataProduct,
+    });
+  }
+
+  /**
+   * Parse the project from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).project;
+  }
+
+  /**
+   * Parse the location from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).location;
+  }
+
+  /**
+   * Parse the data_product from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the data_product.
+   */
+  matchDataProductFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).data_product;
   }
 
   /**
@@ -6045,6 +7308,55 @@ export class CatalogServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified metadataFeed resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_feed
+   * @returns {string} Resource name string.
+   */
+  metadataFeedPath(project:string,location:string,metadataFeed:string) {
+    return this.pathTemplates.metadataFeedPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_feed: metadataFeed,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).project;
+  }
+
+  /**
+   * Parse the location from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).location;
+  }
+
+  /**
+   * Parse the metadata_feed from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the metadata_feed.
+   */
+  matchMetadataFeedFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).metadata_feed;
   }
 
   /**
