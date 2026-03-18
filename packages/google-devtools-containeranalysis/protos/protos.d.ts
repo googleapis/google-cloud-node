@@ -877,6 +877,9 @@ export namespace grafeas {
 
             /** FileLocation layerDetails */
             layerDetails?: (grafeas.v1.ILayerDetails|null);
+
+            /** FileLocation lineNumber */
+            lineNumber?: (number|null);
         }
 
         /** Represents a FileLocation. */
@@ -893,6 +896,9 @@ export namespace grafeas {
 
             /** FileLocation layerDetails. */
             public layerDetails?: (grafeas.v1.ILayerDetails|null);
+
+            /** FileLocation lineNumber. */
+            public lineNumber: number;
 
             /**
              * Creates a new FileLocation instance using the specified properties.

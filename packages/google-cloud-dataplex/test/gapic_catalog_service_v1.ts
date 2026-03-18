@@ -1467,6 +1467,118 @@ describe('v1.CatalogServiceClient', () => {
         });
     });
 
+    describe('updateEntryLink', () => {
+        it('invokes updateEntryLink without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateEntryLinkRequest()
+            );
+            request.entryLink ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateEntryLinkRequest', ['entryLink', 'name']);
+            request.entryLink.name = defaultValue1;
+            const expectedHeaderRequestParams = `entry_link.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.EntryLink()
+            );
+            client.innerApiCalls.updateEntryLink = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateEntryLink(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEntryLink without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateEntryLinkRequest()
+            );
+            request.entryLink ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateEntryLinkRequest', ['entryLink', 'name']);
+            request.entryLink.name = defaultValue1;
+            const expectedHeaderRequestParams = `entry_link.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.EntryLink()
+            );
+            client.innerApiCalls.updateEntryLink = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateEntryLink(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IEntryLink|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEntryLink with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateEntryLinkRequest()
+            );
+            request.entryLink ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateEntryLinkRequest', ['entryLink', 'name']);
+            request.entryLink.name = defaultValue1;
+            const expectedHeaderRequestParams = `entry_link.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEntryLink = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateEntryLink(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEntryLink with closed client', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateEntryLinkRequest()
+            );
+            request.entryLink ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateEntryLinkRequest', ['entryLink', 'name']);
+            request.entryLink.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateEntryLink(request), expectedError);
+        });
+    });
+
     describe('deleteEntryLink', () => {
         it('invokes deleteEntryLink without error', async () => {
             const client = new catalogserviceModule.v1.CatalogServiceClient({
@@ -1575,6 +1687,114 @@ describe('v1.CatalogServiceClient', () => {
         });
     });
 
+    describe('lookupContext', () => {
+        it('invokes lookupContext without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupContextRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupContextRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupContextResponse()
+            );
+            client.innerApiCalls.lookupContext = stubSimpleCall(expectedResponse);
+            const [response] = await client.lookupContext(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.lookupContext as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.lookupContext as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes lookupContext without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupContextRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupContextRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupContextResponse()
+            );
+            client.innerApiCalls.lookupContext = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.lookupContext(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.ILookupContextResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.lookupContext as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.lookupContext as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes lookupContext with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupContextRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupContextRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.lookupContext = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.lookupContext(request), expectedError);
+            const actualRequest = (client.innerApiCalls.lookupContext as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.lookupContext as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes lookupContext with closed client', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupContextRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupContextRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.lookupContext(request), expectedError);
+        });
+    });
+
     describe('getEntryLink', () => {
         it('invokes getEntryLink without error', async () => {
             const client = new catalogserviceModule.v1.CatalogServiceClient({
@@ -1680,6 +1900,114 @@ describe('v1.CatalogServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.getEntryLink(request), expectedError);
+        });
+    });
+
+    describe('getMetadataFeed', () => {
+        it('invokes getMetadataFeed without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetMetadataFeedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.MetadataFeed()
+            );
+            client.innerApiCalls.getMetadataFeed = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMetadataFeed(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMetadataFeed without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetMetadataFeedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.MetadataFeed()
+            );
+            client.innerApiCalls.getMetadataFeed = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMetadataFeed(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IMetadataFeed|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMetadataFeed with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetMetadataFeedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMetadataFeed = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMetadataFeed(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMetadataFeed with closed client', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetMetadataFeedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMetadataFeed(request), expectedError);
         });
     });
 
@@ -3235,6 +3563,472 @@ describe('v1.CatalogServiceClient', () => {
         });
     });
 
+    describe('createMetadataFeed', () => {
+        it('invokes createMetadataFeed without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateMetadataFeedRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createMetadataFeed = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createMetadataFeed(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMetadataFeed without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateMetadataFeedRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createMetadataFeed = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createMetadataFeed(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMetadataFeed with call error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateMetadataFeedRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMetadataFeed = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createMetadataFeed(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMetadataFeed with LRO error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateMetadataFeedRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMetadataFeed = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createMetadataFeed(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateMetadataFeedProgress without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateMetadataFeedProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateMetadataFeedProgress with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateMetadataFeedProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteMetadataFeed', () => {
+        it('invokes deleteMetadataFeed without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteMetadataFeedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteMetadataFeed = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteMetadataFeed(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMetadataFeed without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteMetadataFeedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteMetadataFeed = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteMetadataFeed(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMetadataFeed with call error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteMetadataFeedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteMetadataFeed = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteMetadataFeed(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMetadataFeed with LRO error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteMetadataFeedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteMetadataFeedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteMetadataFeed = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteMetadataFeed(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteMetadataFeedProgress without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteMetadataFeedProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteMetadataFeedProgress with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteMetadataFeedProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateMetadataFeed', () => {
+        it('invokes updateMetadataFeed without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateMetadataFeedRequest()
+            );
+            request.metadataFeed ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateMetadataFeedRequest', ['metadataFeed', 'name']);
+            request.metadataFeed.name = defaultValue1;
+            const expectedHeaderRequestParams = `metadata_feed.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateMetadataFeed = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateMetadataFeed(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMetadataFeed without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateMetadataFeedRequest()
+            );
+            request.metadataFeed ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateMetadataFeedRequest', ['metadataFeed', 'name']);
+            request.metadataFeed.name = defaultValue1;
+            const expectedHeaderRequestParams = `metadata_feed.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateMetadataFeed = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateMetadataFeed(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMetadataFeed with call error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateMetadataFeedRequest()
+            );
+            request.metadataFeed ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateMetadataFeedRequest', ['metadataFeed', 'name']);
+            request.metadataFeed.name = defaultValue1;
+            const expectedHeaderRequestParams = `metadata_feed.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMetadataFeed = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateMetadataFeed(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMetadataFeed with LRO error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateMetadataFeedRequest()
+            );
+            request.metadataFeed ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateMetadataFeedRequest', ['metadataFeed', 'name']);
+            request.metadataFeed.name = defaultValue1;
+            const expectedHeaderRequestParams = `metadata_feed.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMetadataFeed = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateMetadataFeed(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMetadataFeed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMetadataFeed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateMetadataFeedProgress without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateMetadataFeedProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateMetadataFeedProgress with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateMetadataFeedProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('listEntryTypes', () => {
         it('invokes listEntryTypes without error', async () => {
             const client = new catalogserviceModule.v1.CatalogServiceClient({
@@ -4704,6 +5498,496 @@ describe('v1.CatalogServiceClient', () => {
             );
         });
     });
+
+    describe('lookupEntryLinks', () => {
+        it('invokes lookupEntryLinks without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupEntryLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupEntryLinksRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+            ];
+            client.innerApiCalls.lookupEntryLinks = stubSimpleCall(expectedResponse);
+            const [response] = await client.lookupEntryLinks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.lookupEntryLinks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.lookupEntryLinks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes lookupEntryLinks without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupEntryLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupEntryLinksRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+            ];
+            client.innerApiCalls.lookupEntryLinks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.lookupEntryLinks(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IEntryLink[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.lookupEntryLinks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.lookupEntryLinks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes lookupEntryLinks with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupEntryLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupEntryLinksRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.lookupEntryLinks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.lookupEntryLinks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.lookupEntryLinks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.lookupEntryLinks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes lookupEntryLinksStream without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupEntryLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupEntryLinksRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+            ];
+            client.descriptors.page.lookupEntryLinks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.lookupEntryLinksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.EntryLink[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.EntryLink) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.lookupEntryLinks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.lookupEntryLinks, request));
+            assert(
+                (client.descriptors.page.lookupEntryLinks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes lookupEntryLinksStream with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupEntryLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupEntryLinksRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.lookupEntryLinks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.lookupEntryLinksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.EntryLink[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.EntryLink) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.lookupEntryLinks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.lookupEntryLinks, request));
+            assert(
+                (client.descriptors.page.lookupEntryLinks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with lookupEntryLinks without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupEntryLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupEntryLinksRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.EntryLink()),
+            ];
+            client.descriptors.page.lookupEntryLinks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.IEntryLink[] = [];
+            const iterable = client.lookupEntryLinksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.lookupEntryLinks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.lookupEntryLinks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with lookupEntryLinks with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.LookupEntryLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.LookupEntryLinksRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.lookupEntryLinks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.lookupEntryLinksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.IEntryLink[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.lookupEntryLinks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.lookupEntryLinks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listMetadataFeeds', () => {
+        it('invokes listMetadataFeeds without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListMetadataFeedsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListMetadataFeedsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+            ];
+            client.innerApiCalls.listMetadataFeeds = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMetadataFeeds(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMetadataFeeds as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMetadataFeeds as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMetadataFeeds without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListMetadataFeedsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListMetadataFeedsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+            ];
+            client.innerApiCalls.listMetadataFeeds = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMetadataFeeds(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IMetadataFeed[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMetadataFeeds as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMetadataFeeds as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMetadataFeeds with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListMetadataFeedsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListMetadataFeedsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMetadataFeeds = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMetadataFeeds(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMetadataFeeds as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMetadataFeeds as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMetadataFeedsStream without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListMetadataFeedsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListMetadataFeedsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+            ];
+            client.descriptors.page.listMetadataFeeds.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMetadataFeedsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.MetadataFeed[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.MetadataFeed) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMetadataFeeds.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMetadataFeeds, request));
+            assert(
+                (client.descriptors.page.listMetadataFeeds.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listMetadataFeedsStream with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListMetadataFeedsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListMetadataFeedsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMetadataFeeds.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMetadataFeedsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.MetadataFeed[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.MetadataFeed) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMetadataFeeds.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMetadataFeeds, request));
+            assert(
+                (client.descriptors.page.listMetadataFeeds.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listMetadataFeeds without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListMetadataFeedsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListMetadataFeedsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.MetadataFeed()),
+            ];
+            client.descriptors.page.listMetadataFeeds.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.IMetadataFeed[] = [];
+            const iterable = client.listMetadataFeedsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMetadataFeeds.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMetadataFeeds.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listMetadataFeeds with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListMetadataFeedsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListMetadataFeedsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMetadataFeeds.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMetadataFeedsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.IMetadataFeed[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMetadataFeeds.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMetadataFeeds.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
             const client = new catalogserviceModule.v1.CatalogServiceClient({
@@ -5290,6 +6574,60 @@ describe('v1.CatalogServiceClient', () => {
             });
         });
 
+        describe('dataAsset', async () => {
+            const fakePath = "/rendered/path/dataAsset";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_product: "dataProductValue",
+                data_asset: "dataAssetValue",
+            };
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataAssetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataAssetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataAssetPath', () => {
+                const result = client.dataAssetPath("projectValue", "locationValue", "dataProductValue", "dataAssetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataAssetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataAssetName', () => {
+                const result = client.matchProjectFromDataAssetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataAssetName', () => {
+                const result = client.matchLocationFromDataAssetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataProductFromDataAssetName', () => {
+                const result = client.matchDataProductFromDataAssetName(fakePath);
+                assert.strictEqual(result, "dataProductValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataAssetFromDataAssetName', () => {
+                const result = client.matchDataAssetFromDataAssetName(fakePath);
+                assert.strictEqual(result, "dataAssetValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('dataAttribute', async () => {
             const fakePath = "/rendered/path/dataAttribute";
             const expectedParameters = {
@@ -5386,6 +6724,52 @@ describe('v1.CatalogServiceClient', () => {
                 const result = client.matchDataAttributeBindingIdFromDataAttributeBindingName(fakePath);
                 assert.strictEqual(result, "dataAttributeBindingIdValue");
                 assert((client.pathTemplates.dataAttributeBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataProduct', async () => {
+            const fakePath = "/rendered/path/dataProduct";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_product: "dataProductValue",
+            };
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataProductPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataProductPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataProductPath', () => {
+                const result = client.dataProductPath("projectValue", "locationValue", "dataProductValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataProductPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataProductName', () => {
+                const result = client.matchProjectFromDataProductName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataProductName', () => {
+                const result = client.matchLocationFromDataProductName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataProductFromDataProductName', () => {
+                const result = client.matchDataProductFromDataProductName(fakePath);
+                assert.strictEqual(result, "dataProductValue");
+                assert((client.pathTemplates.dataProductPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -6194,6 +7578,52 @@ describe('v1.CatalogServiceClient', () => {
                 const result = client.matchLocationFromLocationName(fakePath);
                 assert.strictEqual(result, "locationValue");
                 assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('metadataFeed', async () => {
+            const fakePath = "/rendered/path/metadataFeed";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                metadata_feed: "metadataFeedValue",
+            };
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.metadataFeedPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.metadataFeedPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('metadataFeedPath', () => {
+                const result = client.metadataFeedPath("projectValue", "locationValue", "metadataFeedValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.metadataFeedPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMetadataFeedName', () => {
+                const result = client.matchProjectFromMetadataFeedName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.metadataFeedPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMetadataFeedName', () => {
+                const result = client.matchLocationFromMetadataFeedName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.metadataFeedPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMetadataFeedFromMetadataFeedName', () => {
+                const result = client.matchMetadataFeedFromMetadataFeedName(fakePath);
+                assert.strictEqual(result, "metadataFeedValue");
+                assert((client.pathTemplates.metadataFeedPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
