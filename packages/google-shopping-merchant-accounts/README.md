@@ -68,6 +68,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | propose account service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.propose_account_service.js) |
 | reject account service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.reject_account_service.js) |
 | create and configure account | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.create_and_configure_account.js) |
+| create test account | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.create_test_account.js) |
 | delete account | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.delete_account.js) |
 | get account | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.get_account.js) |
 | list accounts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.list_accounts.js) |

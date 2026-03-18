@@ -5023,7 +5023,395 @@
                         }
                       }
                     },
+                    "AggregatedListRegionCompositeHealthChecksRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        },
+                        "_serviceProjectNumber": {
+                          "oneof": [
+                            "serviceProjectNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProjectNumber": {
+                          "type": "int64",
+                          "id": 316757497,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "AggregatedListRegionHealthAggregationPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        },
+                        "_serviceProjectNumber": {
+                          "oneof": [
+                            "serviceProjectNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProjectNumber": {
+                          "type": "int64",
+                          "id": 316757497,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AggregatedListRegionHealthCheckServicesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        },
+                        "_serviceProjectNumber": {
+                          "oneof": [
+                            "serviceProjectNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProjectNumber": {
+                          "type": "int64",
+                          "id": 316757497,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AggregatedListRegionHealthSourcesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        },
+                        "_serviceProjectNumber": {
+                          "oneof": [
+                            "serviceProjectNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProjectNumber": {
+                          "type": "int64",
+                          "id": 316757497,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AggregatedListRegionNotificationEndpointsRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -13662,6 +14050,307 @@
                         }
                       }
                     },
+                    "CompositeHealthCheck": {
+                      "oneofs": {
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_fingerprint": {
+                          "oneof": [
+                            "fingerprint"
+                          ]
+                        },
+                        "_healthDestination": {
+                          "oneof": [
+                            "healthDestination"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "fingerprint": {
+                          "type": "string",
+                          "id": 234678500,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthDestination": {
+                          "type": "string",
+                          "id": 311098027,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthSources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 397879509
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CompositeHealthCheckAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "CompositeHealthChecksScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CompositeHealthCheckList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "CompositeHealthCheck",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CompositeHealthChecksScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "compositeHealthChecks": {
+                          "rule": "repeated",
+                          "type": "CompositeHealthCheck",
+                          "id": 517891062
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ConfidentialInstanceConfig": {
                       "oneofs": {
                         "_confidentialInstanceType": {
@@ -16432,6 +17121,47 @@
                         }
                       }
                     },
+                    "DeleteRegionCompositeHealthCheckRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "compositeHealthCheck": {
+                          "type": "string",
+                          "id": 466984989,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "DeleteRegionDiskRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -16567,6 +17297,47 @@
                         "healthCheckService": {
                           "type": "string",
                           "id": 408374747,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRegionHealthSourceRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthSource": {
+                          "type": "string",
+                          "id": 376521566,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -26998,6 +27769,31 @@
                         }
                       }
                     },
+                    "GetRegionCompositeHealthCheckRequest": {
+                      "fields": {
+                        "compositeHealthCheck": {
+                          "type": "string",
+                          "id": 466984989,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetRegionDiskRequest": {
                       "fields": {
                         "disk": {
@@ -27103,6 +27899,31 @@
                         "healthCheckService": {
                           "type": "string",
                           "id": 408374747,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetRegionHealthSourceRequest": {
+                      "fields": {
+                        "healthSource": {
+                          "type": "string",
+                          "id": 376521566,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -28535,6 +29356,148 @@
                           "id": 367020684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetVersionOperationMetadata": {
+                      "oneofs": {
+                        "_inlineSbomInfo": {
+                          "oneof": [
+                            "inlineSbomInfo"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inlineSbomInfo": {
+                          "type": "GetVersionOperationMetadataSbomInfo",
+                          "id": 7079706,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "GetVersionOperationMetadataSbomInfo": {
+                      "fields": {
+                        "currentComponentVersions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 273325091
+                        },
+                        "targetComponentVersions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 345997579
+                        }
+                      }
+                    },
+                    "GetVersionReservationSlotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSlot": {
+                          "type": "string",
+                          "id": 277470865,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reservationSlotsGetVersionRequestResource": {
+                          "type": "ReservationSlotsGetVersionRequest",
+                          "id": 335316011,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
+                    "GetVersionReservationSubBlockRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 22750491,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reservationSubBlocksGetVersionRequestResource": {
+                          "type": "ReservationSubBlocksGetVersionRequest",
+                          "id": 223034677,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
                           }
                         }
                       }
@@ -30325,6 +31288,82 @@
                         }
                       }
                     },
+                    "HealthCheckServiceAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "HealthCheckServicesScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "HealthCheckServiceReference": {
                       "oneofs": {
                         "_healthCheckService": {
@@ -30404,6 +31443,29 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "HealthCheckServicesScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "HealthCheckService",
+                          "id": 164412965
                         },
                         "warning": {
                           "type": "Warning",
@@ -30503,6 +31565,327 @@
                           "rule": "repeated",
                           "type": "HealthCheck",
                           "id": 448370606
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "HealthSource": {
+                      "oneofs": {
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_fingerprint": {
+                          "oneof": [
+                            "fingerprint"
+                          ]
+                        },
+                        "_healthAggregationPolicy": {
+                          "oneof": [
+                            "healthAggregationPolicy"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        },
+                        "_sourceType": {
+                          "oneof": [
+                            "sourceType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "fingerprint": {
+                          "type": "string",
+                          "id": 234678500,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthAggregationPolicy": {
+                          "type": "string",
+                          "id": 240314354,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceType": {
+                          "type": "string",
+                          "id": 452245726,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 125606840
+                        }
+                      },
+                      "nested": {
+                        "SourceType": {
+                          "values": {
+                            "UNDEFINED_SOURCE_TYPE": 0,
+                            "BACKEND_SERVICE": 285792202
+                          }
+                        }
+                      }
+                    },
+                    "HealthSourceAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "HealthSourcesScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "HealthSourceList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "HealthSource",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "HealthSourcesScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthSources": {
+                          "rule": "repeated",
+                          "type": "HealthSource",
+                          "id": 397879509
                         },
                         "warning": {
                           "type": "Warning",
@@ -33792,6 +35175,47 @@
                         }
                       }
                     },
+                    "InsertRegionCompositeHealthCheckRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "compositeHealthCheckResource": {
+                          "type": "CompositeHealthCheck",
+                          "id": 132195824,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "InsertRegionDiskRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -33939,6 +35363,47 @@
                         "healthCheckServiceResource": {
                           "type": "HealthCheckService",
                           "id": 477367794,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InsertRegionHealthSourceRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthSourceResource": {
+                          "type": "HealthSource",
+                          "id": 357735375,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -36574,6 +38039,11 @@
                             "targetSize"
                           ]
                         },
+                        "_targetSizePolicy": {
+                          "oneof": [
+                            "targetSizePolicy"
+                          ]
+                        },
                         "_targetStoppedSize": {
                           "oneof": [
                             "targetStoppedSize"
@@ -36775,6 +38245,13 @@
                         "targetSize": {
                           "type": "int32",
                           "id": 62880239,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetSizePolicy": {
+                          "type": "InstanceGroupManagerTargetSizePolicy",
+                          "id": 128773506,
                           "options": {
                             "proto3_optional": true
                           }
@@ -37627,6 +39104,11 @@
                             "autoscaler"
                           ]
                         },
+                        "_bulkInstanceOperation": {
+                          "oneof": [
+                            "bulkInstanceOperation"
+                          ]
+                        },
                         "_isStable": {
                           "oneof": [
                             "isStable"
@@ -37651,9 +39133,21 @@
                             "proto3_optional": true
                           }
                         },
+                        "appliedAcceleratorTopologies": {
+                          "rule": "repeated",
+                          "type": "InstanceGroupManagerStatusAcceleratorTopology",
+                          "id": 481392547
+                        },
                         "autoscaler": {
                           "type": "string",
                           "id": 517258967,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "bulkInstanceOperation": {
+                          "type": "InstanceGroupManagerStatusBulkInstanceOperation",
+                          "id": 501667466,
                           "options": {
                             "proto3_optional": true
                           }
@@ -37675,6 +39169,91 @@
                         "versionTarget": {
                           "type": "InstanceGroupManagerStatusVersionTarget",
                           "id": 289386200,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerStatusAcceleratorTopology": {
+                      "oneofs": {
+                        "_acceleratorTopology": {
+                          "oneof": [
+                            "acceleratorTopology"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        },
+                        "_stateDetails": {
+                          "oneof": [
+                            "stateDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "acceleratorTopology": {
+                          "type": "string",
+                          "id": 389323203,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "string",
+                          "id": 109757585,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "stateDetails": {
+                          "type": "InstanceGroupManagerStatusAcceleratorTopologyAcceleratorTopologyStateDetails",
+                          "id": 95566996,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNDEFINED_STATE": 0,
+                            "ACTIVATING": 378825968,
+                            "ACTIVE": 314733318,
+                            "DEACTIVATING": 57182257,
+                            "FAILED": 455706685,
+                            "INCOMPLETE": 11941214,
+                            "REACTIVATING": 253727587
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerStatusAcceleratorTopologyAcceleratorTopologyStateDetails": {
+                      "oneofs": {
+                        "_error": {
+                          "oneof": [
+                            "error"
+                          ]
+                        },
+                        "_timestamp": {
+                          "oneof": [
+                            "timestamp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "error": {
+                          "type": "Error",
+                          "id": 96784904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "id": 55126294,
                           "options": {
                             "proto3_optional": true
                           }
@@ -37705,6 +39284,66 @@
                         "effective": {
                           "type": "bool",
                           "id": 141961639,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerStatusBulkInstanceOperation": {
+                      "oneofs": {
+                        "_inProgress": {
+                          "oneof": [
+                            "inProgress"
+                          ]
+                        },
+                        "_lastProgressCheck": {
+                          "oneof": [
+                            "lastProgressCheck"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inProgress": {
+                          "type": "bool",
+                          "id": 320200711,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "lastProgressCheck": {
+                          "type": "InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck",
+                          "id": 208638271,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck": {
+                      "oneofs": {
+                        "_error": {
+                          "oneof": [
+                            "error"
+                          ]
+                        },
+                        "_timestamp": {
+                          "oneof": [
+                            "timestamp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "error": {
+                          "type": "Error",
+                          "id": 96784904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "id": 55126294,
                           "options": {
                             "proto3_optional": true
                           }
@@ -37773,6 +39412,34 @@
                           "id": 433209149,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerTargetSizePolicy": {
+                      "oneofs": {
+                        "_mode": {
+                          "oneof": [
+                            "mode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mode": {
+                          "type": "string",
+                          "id": 3357091,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "UNDEFINED_MODE": 0,
+                            "BULK": 2050322,
+                            "INDIVIDUAL": 438800025,
+                            "UNSPECIFIED_MODE": 53715403
                           }
                         }
                       }
@@ -51524,6 +53191,86 @@
                         }
                       }
                     },
+                    "ListRegionCompositeHealthChecksRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListRegionDiskTypesRequest": {
                       "oneofs": {
                         "_filter": {
@@ -51845,6 +53592,86 @@
                       }
                     },
                     "ListRegionHealthChecksRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListRegionHealthSourcesRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -63124,6 +64951,82 @@
                         }
                       }
                     },
+                    "NotificationEndpointAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "NotificationEndpointsScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "NotificationEndpointGrpcSettings": {
                       "oneofs": {
                         "_authority": {
@@ -63261,6 +65164,29 @@
                         }
                       }
                     },
+                    "NotificationEndpointsScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "NotificationEndpoint",
+                          "id": 164412965
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "Operation": {
                       "oneofs": {
                         "_clientOperationId": {
@@ -63286,6 +65212,11 @@
                         "_error": {
                           "oneof": [
                             "error"
+                          ]
+                        },
+                        "_getVersionOperationMetadata": {
+                          "oneof": [
+                            "getVersionOperationMetadata"
                           ]
                         },
                         "_httpErrorMessage": {
@@ -63421,6 +65352,13 @@
                         "error": {
                           "type": "Error",
                           "id": 96784904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "getVersionOperationMetadata": {
+                          "type": "GetVersionOperationMetadata",
+                          "id": 173230167,
                           "options": {
                             "proto3_optional": true
                           }
@@ -65968,6 +67906,54 @@
                         }
                       }
                     },
+                    "PatchRegionCompositeHealthCheckRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "compositeHealthCheck": {
+                          "type": "string",
+                          "id": 466984989,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "compositeHealthCheckResource": {
+                          "type": "CompositeHealthCheck",
+                          "id": 132195824,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "PatchRegionHealthAggregationPolicyRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -66083,6 +68069,54 @@
                         "healthCheckServiceResource": {
                           "type": "HealthCheckService",
                           "id": 477367794,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PatchRegionHealthSourceRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthSource": {
+                          "type": "string",
+                          "id": 376521566,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "healthSourceResource": {
+                          "type": "HealthSource",
+                          "id": 357735375,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -73792,6 +75826,25 @@
                         }
                       }
                     },
+                    "ReservationSlotsGetVersionRequest": {
+                      "fields": {
+                        "sbomSelections": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 69155705
+                        }
+                      },
+                      "nested": {
+                        "SbomSelections": {
+                          "values": {
+                            "UNDEFINED_SBOM_SELECTIONS": 0,
+                            "SBOM_SELECTION_CURRENT": 423856692,
+                            "SBOM_SELECTION_TARGET": 152837462,
+                            "SBOM_SELECTION_UNSPECIFIED": 379615858
+                          }
+                        }
+                      }
+                    },
                     "ReservationSlotsListResponse": {
                       "oneofs": {
                         "_id": {
@@ -74192,6 +76245,25 @@
                           "id": 195806222,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReservationSubBlocksGetVersionRequest": {
+                      "fields": {
+                        "sbomSelections": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 69155705
+                        }
+                      },
+                      "nested": {
+                        "SbomSelections": {
+                          "values": {
+                            "UNDEFINED_SBOM_SELECTIONS": 0,
+                            "SBOM_SELECTION_CURRENT": 423856692,
+                            "SBOM_SELECTION_TARGET": 152837462,
+                            "SBOM_SELECTION_UNSPECIFIED": 379615858
                           }
                         }
                       }
@@ -75731,6 +77803,11 @@
                             "acceleratorTopology"
                           ]
                         },
+                        "_acceleratorTopologyMode": {
+                          "oneof": [
+                            "acceleratorTopologyMode"
+                          ]
+                        },
                         "_maxTopologyDistance": {
                           "oneof": [
                             "maxTopologyDistance"
@@ -75746,6 +77823,13 @@
                         "acceleratorTopology": {
                           "type": "string",
                           "id": 389323203,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "acceleratorTopologyMode": {
+                          "type": "string",
+                          "id": 284293791,
                           "options": {
                             "proto3_optional": true
                           }
@@ -75766,6 +77850,13 @@
                         }
                       },
                       "nested": {
+                        "AcceleratorTopologyMode": {
+                          "values": {
+                            "UNDEFINED_ACCELERATOR_TOPOLOGY_MODE": 0,
+                            "AUTO_CONNECT": 491872826,
+                            "PROVISION_ONLY": 399134966
+                          }
+                        },
                         "MaxTopologyDistance": {
                           "values": {
                             "UNDEFINED_MAX_TOPOLOGY_DISTANCE": 0,
@@ -81721,6 +83812,11 @@
                             "endpoint"
                           ]
                         },
+                        "_endpointWithId": {
+                          "oneof": [
+                            "endpointWithId"
+                          ]
+                        },
                         "_propagatedConnectionCount": {
                           "oneof": [
                             "propagatedConnectionCount"
@@ -81748,6 +83844,13 @@
                         "endpoint": {
                           "type": "string",
                           "id": 130489749,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "endpointWithId": {
+                          "type": "string",
+                          "id": 444867210,
                           "options": {
                             "proto3_optional": true
                           }
@@ -81800,6 +83903,11 @@
                             "connectionLimit"
                           ]
                         },
+                        "_endpointUrl": {
+                          "oneof": [
+                            "endpointUrl"
+                          ]
+                        },
                         "_networkUrl": {
                           "oneof": [
                             "networkUrl"
@@ -81815,6 +83923,13 @@
                         "connectionLimit": {
                           "type": "uint32",
                           "id": 131403546,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "endpointUrl": {
+                          "type": "string",
+                          "id": 223428549,
                           "options": {
                             "proto3_optional": true
                           }
@@ -94561,6 +96676,38 @@
                         }
                       }
                     },
+                    "TestIamPermissionsRegionCompositeHealthCheckRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "TestIamPermissionsRegionDiskRequest": {
                       "fields": {
                         "project": {
@@ -94658,6 +96805,38 @@
                       }
                     },
                     "TestIamPermissionsRegionHealthCheckServiceRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsRegionHealthSourceRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -95910,6 +98089,11 @@
                     },
                     "UpdateInstanceRequest": {
                       "oneofs": {
+                        "_discardLocalSsd": {
+                          "oneof": [
+                            "discardLocalSsd"
+                          ]
+                        },
                         "_minimalAction": {
                           "oneof": [
                             "minimalAction"
@@ -95927,6 +98111,13 @@
                         }
                       },
                       "fields": {
+                        "discardLocalSsd": {
+                          "type": "bool",
+                          "id": 319517903,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "instance": {
                           "type": "string",
                           "id": 18257045,
@@ -111703,6 +113894,158 @@
                         }
                       }
                     },
+                    "RegionCompositeHealthChecks": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListRegionCompositeHealthChecksRequest",
+                          "responseType": "CompositeHealthCheckAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/aggregated/compositeHealthChecks",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/aggregated/compositeHealthChecks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Delete": {
+                          "requestType": "DeleteRegionCompositeHealthCheckRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks/{composite_health_check}",
+                            "(google.api.method_signature)": "project,region,composite_health_check",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks/{composite_health_check}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,composite_health_check"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRegionCompositeHealthCheckRequest",
+                          "responseType": "CompositeHealthCheck",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks/{composite_health_check}",
+                            "(google.api.method_signature)": "project,region,composite_health_check"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks/{composite_health_check}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,composite_health_check"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertRegionCompositeHealthCheckRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "composite_health_check_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks",
+                            "(google.api.method_signature)": "project,region,composite_health_check_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "composite_health_check_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,composite_health_check_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRegionCompositeHealthChecksRequest",
+                          "responseType": "CompositeHealthCheckList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchRegionCompositeHealthCheckRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "composite_health_check_resource",
+                            "(google.api.http).patch": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks/{composite_health_check}",
+                            "(google.api.method_signature)": "project,region,composite_health_check,composite_health_check_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "composite_health_check_resource",
+                                "patch": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks/{composite_health_check}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,composite_health_check,composite_health_check_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRegionCompositeHealthCheckRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/compositeHealthChecks/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "RegionDiskTypes": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -112291,6 +114634,24 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListRegionHealthCheckServicesRequest",
+                          "responseType": "HealthCheckServiceAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/aggregated/healthCheckServices",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/aggregated/healthCheckServices"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
                         "Delete": {
                           "requestType": "DeleteRegionHealthCheckServiceRequest",
                           "responseType": "Operation",
@@ -112572,6 +114933,158 @@
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RegionHealthSources": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListRegionHealthSourcesRequest",
+                          "responseType": "HealthSourceAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/aggregated/healthSources",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/aggregated/healthSources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Delete": {
+                          "requestType": "DeleteRegionHealthSourceRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/v1/projects/{project}/regions/{region}/healthSources/{health_source}",
+                            "(google.api.method_signature)": "project,region,health_source",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/v1/projects/{project}/regions/{region}/healthSources/{health_source}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,health_source"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRegionHealthSourceRequest",
+                          "responseType": "HealthSource",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/healthSources/{health_source}",
+                            "(google.api.method_signature)": "project,region,health_source"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/healthSources/{health_source}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,health_source"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertRegionHealthSourceRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "health_source_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/healthSources",
+                            "(google.api.method_signature)": "project,region,health_source_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "health_source_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/healthSources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,health_source_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRegionHealthSourcesRequest",
+                          "responseType": "HealthSourceList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/healthSources",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/healthSources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchRegionHealthSourceRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "health_source_resource",
+                            "(google.api.http).patch": "/compute/v1/projects/{project}/regions/{region}/healthSources/{health_source}",
+                            "(google.api.method_signature)": "project,region,health_source,health_source_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "health_source_resource",
+                                "patch": "/compute/v1/projects/{project}/regions/{region}/healthSources/{health_source}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,health_source,health_source_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRegionHealthSourceRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/healthSources/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/healthSources/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
                             }
                           ]
                         }
@@ -114031,6 +116544,24 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListRegionNotificationEndpointsRequest",
+                          "responseType": "NotificationEndpointAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/aggregated/notificationEndpoints",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/aggregated/notificationEndpoints"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
                         "Delete": {
                           "requestType": "DeleteRegionNotificationEndpointRequest",
                           "responseType": "Operation",
@@ -115411,6 +117942,30 @@
                             }
                           ]
                         },
+                        "GetVersion": {
+                          "requestType": "GetVersionReservationSlotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "reservation_slots_get_version_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*/reservationSubBlocks/*}/reservationSlots/{reservation_slot}/getVersion",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_slot,reservation_slots_get_version_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "reservation_slots_get_version_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*/reservationSubBlocks/*}/reservationSlots/{reservation_slot}/getVersion"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_slot,reservation_slots_get_version_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
                         "List": {
                           "requestType": "ListReservationSlotsRequest",
                           "responseType": "ReservationSlotsListResponse",
@@ -115494,6 +118049,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,parent_resource,resource"
+                            }
+                          ]
+                        },
+                        "GetVersion": {
+                          "requestType": "GetVersionReservationSubBlockRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "reservation_sub_blocks_get_version_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*}/reservationSubBlocks/{reservation_sub_block}/getVersion",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block,reservation_sub_blocks_get_version_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "reservation_sub_blocks_get_version_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*}/reservationSubBlocks/{reservation_sub_block}/getVersion"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block,reservation_sub_blocks_get_version_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
                             }
                           ]
                         },
@@ -125809,6 +128388,103 @@
                         }
                       }
                     },
+                    "AggregatedListRegionHealthCheckServicesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        },
+                        "_serviceProjectNumber": {
+                          "oneof": [
+                            "serviceProjectNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProjectNumber": {
+                          "type": "int64",
+                          "id": 316757497,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "AggregatedListRegionHealthSourcesRequest": {
                       "oneofs": {
                         "_filter": {
@@ -125907,6 +128583,103 @@
                       }
                     },
                     "AggregatedListRegionNetworkPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        },
+                        "_serviceProjectNumber": {
+                          "oneof": [
+                            "serviceProjectNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProjectNumber": {
+                          "type": "int64",
+                          "id": 316757497,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AggregatedListRegionNotificationEndpointsRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -132233,6 +135006,11 @@
                     },
                     "BackendServiceDynamicForwarding": {
                       "oneofs": {
+                        "_forwardProxy": {
+                          "oneof": [
+                            "forwardProxy"
+                          ]
+                        },
                         "_ipPortSelection": {
                           "oneof": [
                             "ipPortSelection"
@@ -132240,11 +135018,57 @@
                         }
                       },
                       "fields": {
+                        "forwardProxy": {
+                          "type": "BackendServiceDynamicForwardingForwardProxy",
+                          "id": 483776628,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "ipPortSelection": {
                           "type": "BackendServiceDynamicForwardingIpPortSelection",
                           "id": 527934822,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "BackendServiceDynamicForwardingForwardProxy": {
+                      "oneofs": {
+                        "_enabled": {
+                          "oneof": [
+                            "enabled"
+                          ]
+                        },
+                        "_proxyMode": {
+                          "oneof": [
+                            "proxyMode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1018689,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "proxyMode": {
+                          "type": "string",
+                          "id": 286358740,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProxyMode": {
+                          "values": {
+                            "UNDEFINED_PROXY_MODE": 0,
+                            "CLOUD_RUN": 214253889,
+                            "DIRECT_FORWARDING": 492448019
                           }
                         }
                       }
@@ -152559,6 +155383,148 @@
                         }
                       }
                     },
+                    "GetVersionOperationMetadata": {
+                      "oneofs": {
+                        "_inlineSbomInfo": {
+                          "oneof": [
+                            "inlineSbomInfo"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inlineSbomInfo": {
+                          "type": "GetVersionOperationMetadataSbomInfo",
+                          "id": 7079706,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "GetVersionOperationMetadataSbomInfo": {
+                      "fields": {
+                        "currentComponentVersions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 273325091
+                        },
+                        "targetComponentVersions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 345997579
+                        }
+                      }
+                    },
+                    "GetVersionReservationSlotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSlot": {
+                          "type": "string",
+                          "id": 277470865,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reservationSlotsGetVersionRequestResource": {
+                          "type": "ReservationSlotsGetVersionRequest",
+                          "id": 335316011,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
+                    "GetVersionReservationSubBlockRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 22750491,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reservationSubBlocksGetVersionRequestResource": {
+                          "type": "ReservationSubBlocksGetVersionRequest",
+                          "id": 223034677,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "GetVpnGatewayRequest": {
                       "fields": {
                         "project": {
@@ -153366,6 +156332,11 @@
                         }
                       },
                       "fields": {
+                        "locationRolloutStatus": {
+                          "keyType": "string",
+                          "type": "GlobalVmExtensionPolicyRolloutOperationRolloutStatusRolloutMetadataLocationRolloutStatus",
+                          "id": 278036490
+                        },
                         "rollout": {
                           "type": "string",
                           "id": 303366577,
@@ -153399,6 +156370,36 @@
                             "STATE_PROCESSING": 74195873,
                             "STATE_UNKNOWN": 230861404,
                             "STATE_UNSPECIFIED": 470755401
+                          }
+                        }
+                      }
+                    },
+                    "GlobalVmExtensionPolicyRolloutOperationRolloutStatusRolloutMetadataLocationRolloutStatus": {
+                      "oneofs": {
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "state": {
+                          "type": "string",
+                          "id": 109757585,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNDEFINED_STATE": 0,
+                            "LOCATION_ROLLOUT_STATE_COMPLETED": 134765221,
+                            "LOCATION_ROLLOUT_STATE_FAILED": 53286403,
+                            "LOCATION_ROLLOUT_STATE_NOT_STARTED": 471817423,
+                            "LOCATION_ROLLOUT_STATE_SKIPPED": 54074890,
+                            "LOCATION_ROLLOUT_STATE_UNSPECIFIED": 242367761
                           }
                         }
                       }
@@ -154862,6 +157863,82 @@
                         }
                       }
                     },
+                    "HealthCheckServiceAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "HealthCheckServicesScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "HealthCheckServiceReference": {
                       "oneofs": {
                         "_healthCheckService": {
@@ -154941,6 +158018,29 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "HealthCheckServicesScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "HealthCheckService",
+                          "id": 164412965
                         },
                         "warning": {
                           "type": "Warning",
@@ -163433,6 +166533,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "appliedAcceleratorTopologies": {
+                          "rule": "repeated",
+                          "type": "InstanceGroupManagerStatusAcceleratorTopology",
+                          "id": 481392547
+                        },
                         "autoscaler": {
                           "type": "string",
                           "id": 517258967,
@@ -163471,6 +166576,91 @@
                         "versionTarget": {
                           "type": "InstanceGroupManagerStatusVersionTarget",
                           "id": 289386200,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerStatusAcceleratorTopology": {
+                      "oneofs": {
+                        "_acceleratorTopology": {
+                          "oneof": [
+                            "acceleratorTopology"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        },
+                        "_stateDetails": {
+                          "oneof": [
+                            "stateDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "acceleratorTopology": {
+                          "type": "string",
+                          "id": 389323203,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "string",
+                          "id": 109757585,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "stateDetails": {
+                          "type": "InstanceGroupManagerStatusAcceleratorTopologyAcceleratorTopologyStateDetails",
+                          "id": 95566996,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNDEFINED_STATE": 0,
+                            "ACTIVATING": 378825968,
+                            "ACTIVE": 314733318,
+                            "DEACTIVATING": 57182257,
+                            "FAILED": 455706685,
+                            "INCOMPLETE": 11941214,
+                            "REACTIVATING": 253727587
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerStatusAcceleratorTopologyAcceleratorTopologyStateDetails": {
+                      "oneofs": {
+                        "_error": {
+                          "oneof": [
+                            "error"
+                          ]
+                        },
+                        "_timestamp": {
+                          "oneof": [
+                            "timestamp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "error": {
+                          "type": "Error",
+                          "id": 96784904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "id": 55126294,
                           "options": {
                             "proto3_optional": true
                           }
@@ -192994,6 +196184,82 @@
                         }
                       }
                     },
+                    "NotificationEndpointAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "NotificationEndpointsScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "NotificationEndpointGrpcSettings": {
                       "oneofs": {
                         "_authority": {
@@ -193131,6 +196397,29 @@
                         }
                       }
                     },
+                    "NotificationEndpointsScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "NotificationEndpoint",
+                          "id": 164412965
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "Operation": {
                       "oneofs": {
                         "_clientOperationId": {
@@ -193156,6 +196445,11 @@
                         "_error": {
                           "oneof": [
                             "error"
+                          ]
+                        },
+                        "_getVersionOperationMetadata": {
+                          "oneof": [
+                            "getVersionOperationMetadata"
                           ]
                         },
                         "_httpErrorMessage": {
@@ -193291,6 +196585,13 @@
                         "error": {
                           "type": "Error",
                           "id": 96784904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "getVersionOperationMetadata": {
+                          "type": "GetVersionOperationMetadata",
+                          "id": 173230167,
                           "options": {
                             "proto3_optional": true
                           }
@@ -204680,6 +207981,25 @@
                         }
                       }
                     },
+                    "ReservationSlotsGetVersionRequest": {
+                      "fields": {
+                        "sbomSelections": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 69155705
+                        }
+                      },
+                      "nested": {
+                        "SbomSelections": {
+                          "values": {
+                            "UNDEFINED_SBOM_SELECTIONS": 0,
+                            "SBOM_SELECTION_CURRENT": 423856692,
+                            "SBOM_SELECTION_TARGET": 152837462,
+                            "SBOM_SELECTION_UNSPECIFIED": 379615858
+                          }
+                        }
+                      }
+                    },
                     "ReservationSlotsListResponse": {
                       "oneofs": {
                         "_id": {
@@ -205080,6 +208400,25 @@
                           "id": 195806222,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReservationSubBlocksGetVersionRequest": {
+                      "fields": {
+                        "sbomSelections": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 69155705
+                        }
+                      },
+                      "nested": {
+                        "SbomSelections": {
+                          "values": {
+                            "UNDEFINED_SBOM_SELECTIONS": 0,
+                            "SBOM_SELECTION_CURRENT": 423856692,
+                            "SBOM_SELECTION_TARGET": 152837462,
+                            "SBOM_SELECTION_UNSPECIFIED": 379615858
                           }
                         }
                       }
@@ -230588,6 +233927,11 @@
                     },
                     "UpdateInstanceRequest": {
                       "oneofs": {
+                        "_discardLocalSsd": {
+                          "oneof": [
+                            "discardLocalSsd"
+                          ]
+                        },
                         "_minimalAction": {
                           "oneof": [
                             "minimalAction"
@@ -230605,6 +233949,13 @@
                         }
                       },
                       "fields": {
+                        "discardLocalSsd": {
+                          "type": "bool",
+                          "id": 319517903,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "instance": {
                           "type": "string",
                           "id": 18257045,
@@ -248978,6 +252329,24 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListRegionHealthCheckServicesRequest",
+                          "responseType": "HealthCheckServiceAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/aggregated/healthCheckServices",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/aggregated/healthCheckServices"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
                         "Delete": {
                           "requestType": "DeleteRegionHealthCheckServiceRequest",
                           "responseType": "Operation",
@@ -251688,6 +255057,24 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListRegionNotificationEndpointsRequest",
+                          "responseType": "NotificationEndpointAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/aggregated/notificationEndpoints",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/aggregated/notificationEndpoints"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
                         "Delete": {
                           "requestType": "DeleteRegionNotificationEndpointRequest",
                           "responseType": "Operation",
@@ -253434,6 +256821,30 @@
                             }
                           ]
                         },
+                        "GetVersion": {
+                          "requestType": "GetVersionReservationSlotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "reservation_slots_get_version_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*/reservationSubBlocks/*}/reservationSlots/{reservation_slot}/getVersion",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_slot,reservation_slots_get_version_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "reservation_slots_get_version_request_resource",
+                                "post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*/reservationSubBlocks/*}/reservationSlots/{reservation_slot}/getVersion"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_slot,reservation_slots_get_version_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
                         "List": {
                           "requestType": "ListReservationSlotsRequest",
                           "responseType": "ReservationSlotsListResponse",
@@ -253517,6 +256928,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,parent_resource,resource"
+                            }
+                          ]
+                        },
+                        "GetVersion": {
+                          "requestType": "GetVersionReservationSubBlockRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "reservation_sub_blocks_get_version_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*}/reservationSubBlocks/{reservation_sub_block}/getVersion",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block,reservation_sub_blocks_get_version_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "reservation_sub_blocks_get_version_request_resource",
+                                "post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*}/reservationSubBlocks/{reservation_sub_block}/getVersion"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block,reservation_sub_blocks_get_version_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
                             }
                           ]
                         },

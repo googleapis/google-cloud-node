@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/ces",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Gemini Enterprise for Customer Experience API client for Node.js",
   "repository": {
     "type": "git",
