@@ -2381,6 +2381,261 @@
                         return ExcludeByHotword;
                     })();
     
+                    v2.ExcludeByImageFindings = (function() {
+    
+                        /**
+                         * Properties of an ExcludeByImageFindings.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IExcludeByImageFindings
+                         * @property {Array.<google.privacy.dlp.v2.IInfoType>|null} [infoTypes] ExcludeByImageFindings infoTypes
+                         * @property {google.privacy.dlp.v2.IImageContainmentType|null} [imageContainmentType] ExcludeByImageFindings imageContainmentType
+                         */
+    
+                        /**
+                         * Constructs a new ExcludeByImageFindings.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an ExcludeByImageFindings.
+                         * @implements IExcludeByImageFindings
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IExcludeByImageFindings=} [properties] Properties to set
+                         */
+                        function ExcludeByImageFindings(properties) {
+                            this.infoTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExcludeByImageFindings infoTypes.
+                         * @member {Array.<google.privacy.dlp.v2.IInfoType>} infoTypes
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @instance
+                         */
+                        ExcludeByImageFindings.prototype.infoTypes = $util.emptyArray;
+    
+                        /**
+                         * ExcludeByImageFindings imageContainmentType.
+                         * @member {google.privacy.dlp.v2.IImageContainmentType|null|undefined} imageContainmentType
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @instance
+                         */
+                        ExcludeByImageFindings.prototype.imageContainmentType = null;
+    
+                        /**
+                         * Creates a new ExcludeByImageFindings instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IExcludeByImageFindings=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.ExcludeByImageFindings} ExcludeByImageFindings instance
+                         */
+                        ExcludeByImageFindings.create = function create(properties) {
+                            return new ExcludeByImageFindings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExcludeByImageFindings message. Does not implicitly {@link google.privacy.dlp.v2.ExcludeByImageFindings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IExcludeByImageFindings} message ExcludeByImageFindings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExcludeByImageFindings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.infoTypes != null && message.infoTypes.length)
+                                for (var i = 0; i < message.infoTypes.length; ++i)
+                                    $root.google.privacy.dlp.v2.InfoType.encode(message.infoTypes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.imageContainmentType != null && Object.hasOwnProperty.call(message, "imageContainmentType"))
+                                $root.google.privacy.dlp.v2.ImageContainmentType.encode(message.imageContainmentType, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExcludeByImageFindings message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ExcludeByImageFindings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IExcludeByImageFindings} message ExcludeByImageFindings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExcludeByImageFindings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExcludeByImageFindings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.ExcludeByImageFindings} ExcludeByImageFindings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExcludeByImageFindings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ExcludeByImageFindings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.infoTypes && message.infoTypes.length))
+                                            message.infoTypes = [];
+                                        message.infoTypes.push($root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExcludeByImageFindings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.ExcludeByImageFindings} ExcludeByImageFindings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExcludeByImageFindings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExcludeByImageFindings message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExcludeByImageFindings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.infoTypes != null && message.hasOwnProperty("infoTypes")) {
+                                if (!Array.isArray(message.infoTypes))
+                                    return "infoTypes: array expected";
+                                for (var i = 0; i < message.infoTypes.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.InfoType.verify(message.infoTypes[i]);
+                                    if (error)
+                                        return "infoTypes." + error;
+                                }
+                            }
+                            if (message.imageContainmentType != null && message.hasOwnProperty("imageContainmentType")) {
+                                var error = $root.google.privacy.dlp.v2.ImageContainmentType.verify(message.imageContainmentType);
+                                if (error)
+                                    return "imageContainmentType." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExcludeByImageFindings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.ExcludeByImageFindings} ExcludeByImageFindings
+                         */
+                        ExcludeByImageFindings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.ExcludeByImageFindings)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.ExcludeByImageFindings();
+                            if (object.infoTypes) {
+                                if (!Array.isArray(object.infoTypes))
+                                    throw TypeError(".google.privacy.dlp.v2.ExcludeByImageFindings.infoTypes: array expected");
+                                message.infoTypes = [];
+                                for (var i = 0; i < object.infoTypes.length; ++i) {
+                                    if (typeof object.infoTypes[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.ExcludeByImageFindings.infoTypes: object expected");
+                                    message.infoTypes[i] = $root.google.privacy.dlp.v2.InfoType.fromObject(object.infoTypes[i]);
+                                }
+                            }
+                            if (object.imageContainmentType != null) {
+                                if (typeof object.imageContainmentType !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ExcludeByImageFindings.imageContainmentType: object expected");
+                                message.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.fromObject(object.imageContainmentType);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExcludeByImageFindings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.ExcludeByImageFindings} message ExcludeByImageFindings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExcludeByImageFindings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.infoTypes = [];
+                            if (options.defaults)
+                                object.imageContainmentType = null;
+                            if (message.infoTypes && message.infoTypes.length) {
+                                object.infoTypes = [];
+                                for (var j = 0; j < message.infoTypes.length; ++j)
+                                    object.infoTypes[j] = $root.google.privacy.dlp.v2.InfoType.toObject(message.infoTypes[j], options);
+                            }
+                            if (message.imageContainmentType != null && message.hasOwnProperty("imageContainmentType"))
+                                object.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.toObject(message.imageContainmentType, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExcludeByImageFindings to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExcludeByImageFindings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExcludeByImageFindings
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExcludeByImageFindings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.ExcludeByImageFindings";
+                        };
+    
+                        return ExcludeByImageFindings;
+                    })();
+    
                     v2.ExclusionRule = (function() {
     
                         /**
@@ -2391,6 +2646,7 @@
                          * @property {google.privacy.dlp.v2.CustomInfoType.IRegex|null} [regex] ExclusionRule regex
                          * @property {google.privacy.dlp.v2.IExcludeInfoTypes|null} [excludeInfoTypes] ExclusionRule excludeInfoTypes
                          * @property {google.privacy.dlp.v2.IExcludeByHotword|null} [excludeByHotword] ExclusionRule excludeByHotword
+                         * @property {google.privacy.dlp.v2.IExcludeByImageFindings|null} [excludeByImageFindings] ExclusionRule excludeByImageFindings
                          * @property {google.privacy.dlp.v2.MatchingType|null} [matchingType] ExclusionRule matchingType
                          */
     
@@ -2442,6 +2698,14 @@
                         ExclusionRule.prototype.excludeByHotword = null;
     
                         /**
+                         * ExclusionRule excludeByImageFindings.
+                         * @member {google.privacy.dlp.v2.IExcludeByImageFindings|null|undefined} excludeByImageFindings
+                         * @memberof google.privacy.dlp.v2.ExclusionRule
+                         * @instance
+                         */
+                        ExclusionRule.prototype.excludeByImageFindings = null;
+    
+                        /**
                          * ExclusionRule matchingType.
                          * @member {google.privacy.dlp.v2.MatchingType} matchingType
                          * @memberof google.privacy.dlp.v2.ExclusionRule
@@ -2454,12 +2718,12 @@
     
                         /**
                          * ExclusionRule type.
-                         * @member {"dictionary"|"regex"|"excludeInfoTypes"|"excludeByHotword"|undefined} type
+                         * @member {"dictionary"|"regex"|"excludeInfoTypes"|"excludeByHotword"|"excludeByImageFindings"|undefined} type
                          * @memberof google.privacy.dlp.v2.ExclusionRule
                          * @instance
                          */
                         Object.defineProperty(ExclusionRule.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["dictionary", "regex", "excludeInfoTypes", "excludeByHotword"]),
+                            get: $util.oneOfGetter($oneOfFields = ["dictionary", "regex", "excludeInfoTypes", "excludeByHotword", "excludeByImageFindings"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2497,6 +2761,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.matchingType);
                             if (message.excludeByHotword != null && Object.hasOwnProperty.call(message, "excludeByHotword"))
                                 $root.google.privacy.dlp.v2.ExcludeByHotword.encode(message.excludeByHotword, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.excludeByImageFindings != null && Object.hasOwnProperty.call(message, "excludeByImageFindings"))
+                                $root.google.privacy.dlp.v2.ExcludeByImageFindings.encode(message.excludeByImageFindings, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -2547,6 +2813,10 @@
                                     }
                                 case 5: {
                                         message.excludeByHotword = $root.google.privacy.dlp.v2.ExcludeByHotword.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.excludeByImageFindings = $root.google.privacy.dlp.v2.ExcludeByImageFindings.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 4: {
@@ -2627,6 +2897,16 @@
                                         return "excludeByHotword." + error;
                                 }
                             }
+                            if (message.excludeByImageFindings != null && message.hasOwnProperty("excludeByImageFindings")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.ExcludeByImageFindings.verify(message.excludeByImageFindings);
+                                    if (error)
+                                        return "excludeByImageFindings." + error;
+                                }
+                            }
                             if (message.matchingType != null && message.hasOwnProperty("matchingType"))
                                 switch (message.matchingType) {
                                 default:
@@ -2635,6 +2915,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -2672,6 +2953,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.ExclusionRule.excludeByHotword: object expected");
                                 message.excludeByHotword = $root.google.privacy.dlp.v2.ExcludeByHotword.fromObject(object.excludeByHotword);
                             }
+                            if (object.excludeByImageFindings != null) {
+                                if (typeof object.excludeByImageFindings !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ExclusionRule.excludeByImageFindings: object expected");
+                                message.excludeByImageFindings = $root.google.privacy.dlp.v2.ExcludeByImageFindings.fromObject(object.excludeByImageFindings);
+                            }
                             switch (object.matchingType) {
                             default:
                                 if (typeof object.matchingType === "number") {
@@ -2694,6 +2980,10 @@
                             case "MATCHING_TYPE_INVERSE_MATCH":
                             case 3:
                                 message.matchingType = 3;
+                                break;
+                            case "MATCHING_TYPE_RULE_SPECIFIC":
+                            case 4:
+                                message.matchingType = 4;
                                 break;
                             }
                             return message;
@@ -2736,6 +3026,11 @@
                                 if (options.oneofs)
                                     object.type = "excludeByHotword";
                             }
+                            if (message.excludeByImageFindings != null && message.hasOwnProperty("excludeByImageFindings")) {
+                                object.excludeByImageFindings = $root.google.privacy.dlp.v2.ExcludeByImageFindings.toObject(message.excludeByImageFindings, options);
+                                if (options.oneofs)
+                                    object.type = "excludeByImageFindings";
+                            }
                             return object;
                         };
     
@@ -2768,6 +3063,964 @@
                         return ExclusionRule;
                     })();
     
+                    v2.AdjustByMatchingInfoTypes = (function() {
+    
+                        /**
+                         * Properties of an AdjustByMatchingInfoTypes.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IAdjustByMatchingInfoTypes
+                         * @property {Array.<google.privacy.dlp.v2.IInfoType>|null} [infoTypes] AdjustByMatchingInfoTypes infoTypes
+                         * @property {google.privacy.dlp.v2.Likelihood|null} [minLikelihood] AdjustByMatchingInfoTypes minLikelihood
+                         * @property {google.privacy.dlp.v2.MatchingType|null} [matchingType] AdjustByMatchingInfoTypes matchingType
+                         */
+    
+                        /**
+                         * Constructs a new AdjustByMatchingInfoTypes.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an AdjustByMatchingInfoTypes.
+                         * @implements IAdjustByMatchingInfoTypes
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes=} [properties] Properties to set
+                         */
+                        function AdjustByMatchingInfoTypes(properties) {
+                            this.infoTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdjustByMatchingInfoTypes infoTypes.
+                         * @member {Array.<google.privacy.dlp.v2.IInfoType>} infoTypes
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @instance
+                         */
+                        AdjustByMatchingInfoTypes.prototype.infoTypes = $util.emptyArray;
+    
+                        /**
+                         * AdjustByMatchingInfoTypes minLikelihood.
+                         * @member {google.privacy.dlp.v2.Likelihood} minLikelihood
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @instance
+                         */
+                        AdjustByMatchingInfoTypes.prototype.minLikelihood = 0;
+    
+                        /**
+                         * AdjustByMatchingInfoTypes matchingType.
+                         * @member {google.privacy.dlp.v2.MatchingType} matchingType
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @instance
+                         */
+                        AdjustByMatchingInfoTypes.prototype.matchingType = 0;
+    
+                        /**
+                         * Creates a new AdjustByMatchingInfoTypes instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} AdjustByMatchingInfoTypes instance
+                         */
+                        AdjustByMatchingInfoTypes.create = function create(properties) {
+                            return new AdjustByMatchingInfoTypes(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustByMatchingInfoTypes message. Does not implicitly {@link google.privacy.dlp.v2.AdjustByMatchingInfoTypes.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes} message AdjustByMatchingInfoTypes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustByMatchingInfoTypes.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.infoTypes != null && message.infoTypes.length)
+                                for (var i = 0; i < message.infoTypes.length; ++i)
+                                    $root.google.privacy.dlp.v2.InfoType.encode(message.infoTypes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.minLikelihood != null && Object.hasOwnProperty.call(message, "minLikelihood"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minLikelihood);
+                            if (message.matchingType != null && Object.hasOwnProperty.call(message, "matchingType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchingType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustByMatchingInfoTypes message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AdjustByMatchingInfoTypes.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes} message AdjustByMatchingInfoTypes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustByMatchingInfoTypes.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdjustByMatchingInfoTypes message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} AdjustByMatchingInfoTypes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustByMatchingInfoTypes.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.infoTypes && message.infoTypes.length))
+                                            message.infoTypes = [];
+                                        message.infoTypes.push($root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.minLikelihood = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchingType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdjustByMatchingInfoTypes message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} AdjustByMatchingInfoTypes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustByMatchingInfoTypes.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdjustByMatchingInfoTypes message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdjustByMatchingInfoTypes.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.infoTypes != null && message.hasOwnProperty("infoTypes")) {
+                                if (!Array.isArray(message.infoTypes))
+                                    return "infoTypes: array expected";
+                                for (var i = 0; i < message.infoTypes.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.InfoType.verify(message.infoTypes[i]);
+                                    if (error)
+                                        return "infoTypes." + error;
+                                }
+                            }
+                            if (message.minLikelihood != null && message.hasOwnProperty("minLikelihood"))
+                                switch (message.minLikelihood) {
+                                default:
+                                    return "minLikelihood: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.matchingType != null && message.hasOwnProperty("matchingType"))
+                                switch (message.matchingType) {
+                                default:
+                                    return "matchingType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdjustByMatchingInfoTypes message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} AdjustByMatchingInfoTypes
+                         */
+                        AdjustByMatchingInfoTypes.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes();
+                            if (object.infoTypes) {
+                                if (!Array.isArray(object.infoTypes))
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustByMatchingInfoTypes.infoTypes: array expected");
+                                message.infoTypes = [];
+                                for (var i = 0; i < object.infoTypes.length; ++i) {
+                                    if (typeof object.infoTypes[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.AdjustByMatchingInfoTypes.infoTypes: object expected");
+                                    message.infoTypes[i] = $root.google.privacy.dlp.v2.InfoType.fromObject(object.infoTypes[i]);
+                                }
+                            }
+                            switch (object.minLikelihood) {
+                            default:
+                                if (typeof object.minLikelihood === "number") {
+                                    message.minLikelihood = object.minLikelihood;
+                                    break;
+                                }
+                                break;
+                            case "LIKELIHOOD_UNSPECIFIED":
+                            case 0:
+                                message.minLikelihood = 0;
+                                break;
+                            case "VERY_UNLIKELY":
+                            case 1:
+                                message.minLikelihood = 1;
+                                break;
+                            case "UNLIKELY":
+                            case 2:
+                                message.minLikelihood = 2;
+                                break;
+                            case "POSSIBLE":
+                            case 3:
+                                message.minLikelihood = 3;
+                                break;
+                            case "LIKELY":
+                            case 4:
+                                message.minLikelihood = 4;
+                                break;
+                            case "VERY_LIKELY":
+                            case 5:
+                                message.minLikelihood = 5;
+                                break;
+                            }
+                            switch (object.matchingType) {
+                            default:
+                                if (typeof object.matchingType === "number") {
+                                    message.matchingType = object.matchingType;
+                                    break;
+                                }
+                                break;
+                            case "MATCHING_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.matchingType = 0;
+                                break;
+                            case "MATCHING_TYPE_FULL_MATCH":
+                            case 1:
+                                message.matchingType = 1;
+                                break;
+                            case "MATCHING_TYPE_PARTIAL_MATCH":
+                            case 2:
+                                message.matchingType = 2;
+                                break;
+                            case "MATCHING_TYPE_INVERSE_MATCH":
+                            case 3:
+                                message.matchingType = 3;
+                                break;
+                            case "MATCHING_TYPE_RULE_SPECIFIC":
+                            case 4:
+                                message.matchingType = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdjustByMatchingInfoTypes message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} message AdjustByMatchingInfoTypes
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdjustByMatchingInfoTypes.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.infoTypes = [];
+                            if (options.defaults) {
+                                object.minLikelihood = options.enums === String ? "LIKELIHOOD_UNSPECIFIED" : 0;
+                                object.matchingType = options.enums === String ? "MATCHING_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.infoTypes && message.infoTypes.length) {
+                                object.infoTypes = [];
+                                for (var j = 0; j < message.infoTypes.length; ++j)
+                                    object.infoTypes[j] = $root.google.privacy.dlp.v2.InfoType.toObject(message.infoTypes[j], options);
+                            }
+                            if (message.minLikelihood != null && message.hasOwnProperty("minLikelihood"))
+                                object.minLikelihood = options.enums === String ? $root.google.privacy.dlp.v2.Likelihood[message.minLikelihood] === undefined ? message.minLikelihood : $root.google.privacy.dlp.v2.Likelihood[message.minLikelihood] : message.minLikelihood;
+                            if (message.matchingType != null && message.hasOwnProperty("matchingType"))
+                                object.matchingType = options.enums === String ? $root.google.privacy.dlp.v2.MatchingType[message.matchingType] === undefined ? message.matchingType : $root.google.privacy.dlp.v2.MatchingType[message.matchingType] : message.matchingType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdjustByMatchingInfoTypes to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdjustByMatchingInfoTypes.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdjustByMatchingInfoTypes
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdjustByMatchingInfoTypes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.AdjustByMatchingInfoTypes";
+                        };
+    
+                        return AdjustByMatchingInfoTypes;
+                    })();
+    
+                    v2.AdjustByImageFindings = (function() {
+    
+                        /**
+                         * Properties of an AdjustByImageFindings.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IAdjustByImageFindings
+                         * @property {Array.<google.privacy.dlp.v2.IInfoType>|null} [infoTypes] AdjustByImageFindings infoTypes
+                         * @property {google.privacy.dlp.v2.Likelihood|null} [minLikelihood] AdjustByImageFindings minLikelihood
+                         * @property {google.privacy.dlp.v2.IImageContainmentType|null} [imageContainmentType] AdjustByImageFindings imageContainmentType
+                         */
+    
+                        /**
+                         * Constructs a new AdjustByImageFindings.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an AdjustByImageFindings.
+                         * @implements IAdjustByImageFindings
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IAdjustByImageFindings=} [properties] Properties to set
+                         */
+                        function AdjustByImageFindings(properties) {
+                            this.infoTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdjustByImageFindings infoTypes.
+                         * @member {Array.<google.privacy.dlp.v2.IInfoType>} infoTypes
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @instance
+                         */
+                        AdjustByImageFindings.prototype.infoTypes = $util.emptyArray;
+    
+                        /**
+                         * AdjustByImageFindings minLikelihood.
+                         * @member {google.privacy.dlp.v2.Likelihood} minLikelihood
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @instance
+                         */
+                        AdjustByImageFindings.prototype.minLikelihood = 0;
+    
+                        /**
+                         * AdjustByImageFindings imageContainmentType.
+                         * @member {google.privacy.dlp.v2.IImageContainmentType|null|undefined} imageContainmentType
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @instance
+                         */
+                        AdjustByImageFindings.prototype.imageContainmentType = null;
+    
+                        /**
+                         * Creates a new AdjustByImageFindings instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByImageFindings=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.AdjustByImageFindings} AdjustByImageFindings instance
+                         */
+                        AdjustByImageFindings.create = function create(properties) {
+                            return new AdjustByImageFindings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustByImageFindings message. Does not implicitly {@link google.privacy.dlp.v2.AdjustByImageFindings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByImageFindings} message AdjustByImageFindings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustByImageFindings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.infoTypes != null && message.infoTypes.length)
+                                for (var i = 0; i < message.infoTypes.length; ++i)
+                                    $root.google.privacy.dlp.v2.InfoType.encode(message.infoTypes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.minLikelihood != null && Object.hasOwnProperty.call(message, "minLikelihood"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minLikelihood);
+                            if (message.imageContainmentType != null && Object.hasOwnProperty.call(message, "imageContainmentType"))
+                                $root.google.privacy.dlp.v2.ImageContainmentType.encode(message.imageContainmentType, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustByImageFindings message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AdjustByImageFindings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByImageFindings} message AdjustByImageFindings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustByImageFindings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdjustByImageFindings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.AdjustByImageFindings} AdjustByImageFindings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustByImageFindings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AdjustByImageFindings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.infoTypes && message.infoTypes.length))
+                                            message.infoTypes = [];
+                                        message.infoTypes.push($root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.minLikelihood = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdjustByImageFindings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.AdjustByImageFindings} AdjustByImageFindings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustByImageFindings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdjustByImageFindings message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdjustByImageFindings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.infoTypes != null && message.hasOwnProperty("infoTypes")) {
+                                if (!Array.isArray(message.infoTypes))
+                                    return "infoTypes: array expected";
+                                for (var i = 0; i < message.infoTypes.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.InfoType.verify(message.infoTypes[i]);
+                                    if (error)
+                                        return "infoTypes." + error;
+                                }
+                            }
+                            if (message.minLikelihood != null && message.hasOwnProperty("minLikelihood"))
+                                switch (message.minLikelihood) {
+                                default:
+                                    return "minLikelihood: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.imageContainmentType != null && message.hasOwnProperty("imageContainmentType")) {
+                                var error = $root.google.privacy.dlp.v2.ImageContainmentType.verify(message.imageContainmentType);
+                                if (error)
+                                    return "imageContainmentType." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdjustByImageFindings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.AdjustByImageFindings} AdjustByImageFindings
+                         */
+                        AdjustByImageFindings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.AdjustByImageFindings)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.AdjustByImageFindings();
+                            if (object.infoTypes) {
+                                if (!Array.isArray(object.infoTypes))
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustByImageFindings.infoTypes: array expected");
+                                message.infoTypes = [];
+                                for (var i = 0; i < object.infoTypes.length; ++i) {
+                                    if (typeof object.infoTypes[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.AdjustByImageFindings.infoTypes: object expected");
+                                    message.infoTypes[i] = $root.google.privacy.dlp.v2.InfoType.fromObject(object.infoTypes[i]);
+                                }
+                            }
+                            switch (object.minLikelihood) {
+                            default:
+                                if (typeof object.minLikelihood === "number") {
+                                    message.minLikelihood = object.minLikelihood;
+                                    break;
+                                }
+                                break;
+                            case "LIKELIHOOD_UNSPECIFIED":
+                            case 0:
+                                message.minLikelihood = 0;
+                                break;
+                            case "VERY_UNLIKELY":
+                            case 1:
+                                message.minLikelihood = 1;
+                                break;
+                            case "UNLIKELY":
+                            case 2:
+                                message.minLikelihood = 2;
+                                break;
+                            case "POSSIBLE":
+                            case 3:
+                                message.minLikelihood = 3;
+                                break;
+                            case "LIKELY":
+                            case 4:
+                                message.minLikelihood = 4;
+                                break;
+                            case "VERY_LIKELY":
+                            case 5:
+                                message.minLikelihood = 5;
+                                break;
+                            }
+                            if (object.imageContainmentType != null) {
+                                if (typeof object.imageContainmentType !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustByImageFindings.imageContainmentType: object expected");
+                                message.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.fromObject(object.imageContainmentType);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdjustByImageFindings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.AdjustByImageFindings} message AdjustByImageFindings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdjustByImageFindings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.infoTypes = [];
+                            if (options.defaults) {
+                                object.minLikelihood = options.enums === String ? "LIKELIHOOD_UNSPECIFIED" : 0;
+                                object.imageContainmentType = null;
+                            }
+                            if (message.infoTypes && message.infoTypes.length) {
+                                object.infoTypes = [];
+                                for (var j = 0; j < message.infoTypes.length; ++j)
+                                    object.infoTypes[j] = $root.google.privacy.dlp.v2.InfoType.toObject(message.infoTypes[j], options);
+                            }
+                            if (message.minLikelihood != null && message.hasOwnProperty("minLikelihood"))
+                                object.minLikelihood = options.enums === String ? $root.google.privacy.dlp.v2.Likelihood[message.minLikelihood] === undefined ? message.minLikelihood : $root.google.privacy.dlp.v2.Likelihood[message.minLikelihood] : message.minLikelihood;
+                            if (message.imageContainmentType != null && message.hasOwnProperty("imageContainmentType"))
+                                object.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.toObject(message.imageContainmentType, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdjustByImageFindings to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdjustByImageFindings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdjustByImageFindings
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdjustByImageFindings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.AdjustByImageFindings";
+                        };
+    
+                        return AdjustByImageFindings;
+                    })();
+    
+                    v2.AdjustmentRule = (function() {
+    
+                        /**
+                         * Properties of an AdjustmentRule.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IAdjustmentRule
+                         * @property {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes|null} [adjustByMatchingInfoTypes] AdjustmentRule adjustByMatchingInfoTypes
+                         * @property {google.privacy.dlp.v2.IAdjustByImageFindings|null} [adjustByImageFindings] AdjustmentRule adjustByImageFindings
+                         * @property {google.privacy.dlp.v2.CustomInfoType.DetectionRule.ILikelihoodAdjustment|null} [likelihoodAdjustment] AdjustmentRule likelihoodAdjustment
+                         */
+    
+                        /**
+                         * Constructs a new AdjustmentRule.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an AdjustmentRule.
+                         * @implements IAdjustmentRule
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IAdjustmentRule=} [properties] Properties to set
+                         */
+                        function AdjustmentRule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdjustmentRule adjustByMatchingInfoTypes.
+                         * @member {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes|null|undefined} adjustByMatchingInfoTypes
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         */
+                        AdjustmentRule.prototype.adjustByMatchingInfoTypes = null;
+    
+                        /**
+                         * AdjustmentRule adjustByImageFindings.
+                         * @member {google.privacy.dlp.v2.IAdjustByImageFindings|null|undefined} adjustByImageFindings
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         */
+                        AdjustmentRule.prototype.adjustByImageFindings = null;
+    
+                        /**
+                         * AdjustmentRule likelihoodAdjustment.
+                         * @member {google.privacy.dlp.v2.CustomInfoType.DetectionRule.ILikelihoodAdjustment|null|undefined} likelihoodAdjustment
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         */
+                        AdjustmentRule.prototype.likelihoodAdjustment = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AdjustmentRule conditions.
+                         * @member {"adjustByMatchingInfoTypes"|"adjustByImageFindings"|undefined} conditions
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         */
+                        Object.defineProperty(AdjustmentRule.prototype, "conditions", {
+                            get: $util.oneOfGetter($oneOfFields = ["adjustByMatchingInfoTypes", "adjustByImageFindings"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AdjustmentRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustmentRule=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.AdjustmentRule} AdjustmentRule instance
+                         */
+                        AdjustmentRule.create = function create(properties) {
+                            return new AdjustmentRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustmentRule message. Does not implicitly {@link google.privacy.dlp.v2.AdjustmentRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustmentRule} message AdjustmentRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustmentRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adjustByMatchingInfoTypes != null && Object.hasOwnProperty.call(message, "adjustByMatchingInfoTypes"))
+                                $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.encode(message.adjustByMatchingInfoTypes, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.likelihoodAdjustment != null && Object.hasOwnProperty.call(message, "likelihoodAdjustment"))
+                                $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.encode(message.likelihoodAdjustment, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.adjustByImageFindings != null && Object.hasOwnProperty.call(message, "adjustByImageFindings"))
+                                $root.google.privacy.dlp.v2.AdjustByImageFindings.encode(message.adjustByImageFindings, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustmentRule message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AdjustmentRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustmentRule} message AdjustmentRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustmentRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdjustmentRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.AdjustmentRule} AdjustmentRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustmentRule.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AdjustmentRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.adjustByMatchingInfoTypes = $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.adjustByImageFindings = $root.google.privacy.dlp.v2.AdjustByImageFindings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.likelihoodAdjustment = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdjustmentRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.AdjustmentRule} AdjustmentRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustmentRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdjustmentRule message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdjustmentRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.adjustByMatchingInfoTypes != null && message.hasOwnProperty("adjustByMatchingInfoTypes")) {
+                                properties.conditions = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.verify(message.adjustByMatchingInfoTypes);
+                                    if (error)
+                                        return "adjustByMatchingInfoTypes." + error;
+                                }
+                            }
+                            if (message.adjustByImageFindings != null && message.hasOwnProperty("adjustByImageFindings")) {
+                                if (properties.conditions === 1)
+                                    return "conditions: multiple values";
+                                properties.conditions = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.AdjustByImageFindings.verify(message.adjustByImageFindings);
+                                    if (error)
+                                        return "adjustByImageFindings." + error;
+                                }
+                            }
+                            if (message.likelihoodAdjustment != null && message.hasOwnProperty("likelihoodAdjustment")) {
+                                var error = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.verify(message.likelihoodAdjustment);
+                                if (error)
+                                    return "likelihoodAdjustment." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdjustmentRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.AdjustmentRule} AdjustmentRule
+                         */
+                        AdjustmentRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.AdjustmentRule)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.AdjustmentRule();
+                            if (object.adjustByMatchingInfoTypes != null) {
+                                if (typeof object.adjustByMatchingInfoTypes !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustmentRule.adjustByMatchingInfoTypes: object expected");
+                                message.adjustByMatchingInfoTypes = $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.fromObject(object.adjustByMatchingInfoTypes);
+                            }
+                            if (object.adjustByImageFindings != null) {
+                                if (typeof object.adjustByImageFindings !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustmentRule.adjustByImageFindings: object expected");
+                                message.adjustByImageFindings = $root.google.privacy.dlp.v2.AdjustByImageFindings.fromObject(object.adjustByImageFindings);
+                            }
+                            if (object.likelihoodAdjustment != null) {
+                                if (typeof object.likelihoodAdjustment !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustmentRule.likelihoodAdjustment: object expected");
+                                message.likelihoodAdjustment = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.fromObject(object.likelihoodAdjustment);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdjustmentRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {google.privacy.dlp.v2.AdjustmentRule} message AdjustmentRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdjustmentRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.likelihoodAdjustment = null;
+                            if (message.adjustByMatchingInfoTypes != null && message.hasOwnProperty("adjustByMatchingInfoTypes")) {
+                                object.adjustByMatchingInfoTypes = $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.toObject(message.adjustByMatchingInfoTypes, options);
+                                if (options.oneofs)
+                                    object.conditions = "adjustByMatchingInfoTypes";
+                            }
+                            if (message.likelihoodAdjustment != null && message.hasOwnProperty("likelihoodAdjustment"))
+                                object.likelihoodAdjustment = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.toObject(message.likelihoodAdjustment, options);
+                            if (message.adjustByImageFindings != null && message.hasOwnProperty("adjustByImageFindings")) {
+                                object.adjustByImageFindings = $root.google.privacy.dlp.v2.AdjustByImageFindings.toObject(message.adjustByImageFindings, options);
+                                if (options.oneofs)
+                                    object.conditions = "adjustByImageFindings";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdjustmentRule to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdjustmentRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdjustmentRule
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdjustmentRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.AdjustmentRule";
+                        };
+    
+                        return AdjustmentRule;
+                    })();
+    
                     v2.InspectionRule = (function() {
     
                         /**
@@ -2776,6 +4029,7 @@
                          * @interface IInspectionRule
                          * @property {google.privacy.dlp.v2.CustomInfoType.DetectionRule.IHotwordRule|null} [hotwordRule] InspectionRule hotwordRule
                          * @property {google.privacy.dlp.v2.IExclusionRule|null} [exclusionRule] InspectionRule exclusionRule
+                         * @property {google.privacy.dlp.v2.IAdjustmentRule|null} [adjustmentRule] InspectionRule adjustmentRule
                          */
     
                         /**
@@ -2809,17 +4063,25 @@
                          */
                         InspectionRule.prototype.exclusionRule = null;
     
+                        /**
+                         * InspectionRule adjustmentRule.
+                         * @member {google.privacy.dlp.v2.IAdjustmentRule|null|undefined} adjustmentRule
+                         * @memberof google.privacy.dlp.v2.InspectionRule
+                         * @instance
+                         */
+                        InspectionRule.prototype.adjustmentRule = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * InspectionRule type.
-                         * @member {"hotwordRule"|"exclusionRule"|undefined} type
+                         * @member {"hotwordRule"|"exclusionRule"|"adjustmentRule"|undefined} type
                          * @memberof google.privacy.dlp.v2.InspectionRule
                          * @instance
                          */
                         Object.defineProperty(InspectionRule.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["hotwordRule", "exclusionRule"]),
+                            get: $util.oneOfGetter($oneOfFields = ["hotwordRule", "exclusionRule", "adjustmentRule"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2851,6 +4113,8 @@
                                 $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.HotwordRule.encode(message.hotwordRule, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.exclusionRule != null && Object.hasOwnProperty.call(message, "exclusionRule"))
                                 $root.google.privacy.dlp.v2.ExclusionRule.encode(message.exclusionRule, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.adjustmentRule != null && Object.hasOwnProperty.call(message, "adjustmentRule"))
+                                $root.google.privacy.dlp.v2.AdjustmentRule.encode(message.adjustmentRule, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -2893,6 +4157,10 @@
                                     }
                                 case 2: {
                                         message.exclusionRule = $root.google.privacy.dlp.v2.ExclusionRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.adjustmentRule = $root.google.privacy.dlp.v2.AdjustmentRule.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -2949,6 +4217,16 @@
                                         return "exclusionRule." + error;
                                 }
                             }
+                            if (message.adjustmentRule != null && message.hasOwnProperty("adjustmentRule")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.AdjustmentRule.verify(message.adjustmentRule);
+                                    if (error)
+                                        return "adjustmentRule." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2973,6 +4251,11 @@
                                 if (typeof object.exclusionRule !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.InspectionRule.exclusionRule: object expected");
                                 message.exclusionRule = $root.google.privacy.dlp.v2.ExclusionRule.fromObject(object.exclusionRule);
+                            }
+                            if (object.adjustmentRule != null) {
+                                if (typeof object.adjustmentRule !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.InspectionRule.adjustmentRule: object expected");
+                                message.adjustmentRule = $root.google.privacy.dlp.v2.AdjustmentRule.fromObject(object.adjustmentRule);
                             }
                             return message;
                         };
@@ -2999,6 +4282,11 @@
                                 object.exclusionRule = $root.google.privacy.dlp.v2.ExclusionRule.toObject(message.exclusionRule, options);
                                 if (options.oneofs)
                                     object.type = "exclusionRule";
+                            }
+                            if (message.adjustmentRule != null && message.hasOwnProperty("adjustmentRule")) {
+                                object.adjustmentRule = $root.google.privacy.dlp.v2.AdjustmentRule.toObject(message.adjustmentRule, options);
+                                if (options.oneofs)
+                                    object.type = "adjustmentRule";
                             }
                             return object;
                         };
@@ -7387,6 +8675,7 @@
                          * @interface IMetadataLocation
                          * @property {google.privacy.dlp.v2.MetadataType|null} [type] MetadataLocation type
                          * @property {google.privacy.dlp.v2.IStorageMetadataLabel|null} [storageLabel] MetadataLocation storageLabel
+                         * @property {google.privacy.dlp.v2.IKeyValueMetadataLabel|null} [keyValueMetadataLabel] MetadataLocation keyValueMetadataLabel
                          */
     
                         /**
@@ -7420,17 +8709,25 @@
                          */
                         MetadataLocation.prototype.storageLabel = null;
     
+                        /**
+                         * MetadataLocation keyValueMetadataLabel.
+                         * @member {google.privacy.dlp.v2.IKeyValueMetadataLabel|null|undefined} keyValueMetadataLabel
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @instance
+                         */
+                        MetadataLocation.prototype.keyValueMetadataLabel = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * MetadataLocation label.
-                         * @member {"storageLabel"|undefined} label
+                         * @member {"storageLabel"|"keyValueMetadataLabel"|undefined} label
                          * @memberof google.privacy.dlp.v2.MetadataLocation
                          * @instance
                          */
                         Object.defineProperty(MetadataLocation.prototype, "label", {
-                            get: $util.oneOfGetter($oneOfFields = ["storageLabel"]),
+                            get: $util.oneOfGetter($oneOfFields = ["storageLabel", "keyValueMetadataLabel"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -7462,6 +8759,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
                             if (message.storageLabel != null && Object.hasOwnProperty.call(message, "storageLabel"))
                                 $root.google.privacy.dlp.v2.StorageMetadataLabel.encode(message.storageLabel, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.keyValueMetadataLabel != null && Object.hasOwnProperty.call(message, "keyValueMetadataLabel"))
+                                $root.google.privacy.dlp.v2.KeyValueMetadataLabel.encode(message.keyValueMetadataLabel, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -7506,6 +8805,10 @@
                                         message.storageLabel = $root.google.privacy.dlp.v2.StorageMetadataLabel.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 4: {
+                                        message.keyValueMetadataLabel = $root.google.privacy.dlp.v2.KeyValueMetadataLabel.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7548,6 +8851,7 @@
                                     return "type: enum value expected";
                                 case 0:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.storageLabel != null && message.hasOwnProperty("storageLabel")) {
@@ -7556,6 +8860,16 @@
                                     var error = $root.google.privacy.dlp.v2.StorageMetadataLabel.verify(message.storageLabel);
                                     if (error)
                                         return "storageLabel." + error;
+                                }
+                            }
+                            if (message.keyValueMetadataLabel != null && message.hasOwnProperty("keyValueMetadataLabel")) {
+                                if (properties.label === 1)
+                                    return "label: multiple values";
+                                properties.label = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.KeyValueMetadataLabel.verify(message.keyValueMetadataLabel);
+                                    if (error)
+                                        return "keyValueMetadataLabel." + error;
                                 }
                             }
                             return null;
@@ -7588,11 +8902,20 @@
                             case 2:
                                 message.type = 2;
                                 break;
+                            case "CONTENT_METADATA":
+                            case 3:
+                                message.type = 3;
+                                break;
                             }
                             if (object.storageLabel != null) {
                                 if (typeof object.storageLabel !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.MetadataLocation.storageLabel: object expected");
                                 message.storageLabel = $root.google.privacy.dlp.v2.StorageMetadataLabel.fromObject(object.storageLabel);
+                            }
+                            if (object.keyValueMetadataLabel != null) {
+                                if (typeof object.keyValueMetadataLabel !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.MetadataLocation.keyValueMetadataLabel: object expected");
+                                message.keyValueMetadataLabel = $root.google.privacy.dlp.v2.KeyValueMetadataLabel.fromObject(object.keyValueMetadataLabel);
                             }
                             return message;
                         };
@@ -7618,6 +8941,11 @@
                                 object.storageLabel = $root.google.privacy.dlp.v2.StorageMetadataLabel.toObject(message.storageLabel, options);
                                 if (options.oneofs)
                                     object.label = "storageLabel";
+                            }
+                            if (message.keyValueMetadataLabel != null && message.hasOwnProperty("keyValueMetadataLabel")) {
+                                object.keyValueMetadataLabel = $root.google.privacy.dlp.v2.KeyValueMetadataLabel.toObject(message.keyValueMetadataLabel, options);
+                                if (options.oneofs)
+                                    object.label = "keyValueMetadataLabel";
                             }
                             return object;
                         };
@@ -7854,6 +9182,211 @@
                         };
     
                         return StorageMetadataLabel;
+                    })();
+    
+                    v2.KeyValueMetadataLabel = (function() {
+    
+                        /**
+                         * Properties of a KeyValueMetadataLabel.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IKeyValueMetadataLabel
+                         * @property {string|null} [key] KeyValueMetadataLabel key
+                         */
+    
+                        /**
+                         * Constructs a new KeyValueMetadataLabel.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a KeyValueMetadataLabel.
+                         * @implements IKeyValueMetadataLabel
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataLabel=} [properties] Properties to set
+                         */
+                        function KeyValueMetadataLabel(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KeyValueMetadataLabel key.
+                         * @member {string} key
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @instance
+                         */
+                        KeyValueMetadataLabel.prototype.key = "";
+    
+                        /**
+                         * Creates a new KeyValueMetadataLabel instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataLabel=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataLabel} KeyValueMetadataLabel instance
+                         */
+                        KeyValueMetadataLabel.create = function create(properties) {
+                            return new KeyValueMetadataLabel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KeyValueMetadataLabel message. Does not implicitly {@link google.privacy.dlp.v2.KeyValueMetadataLabel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataLabel} message KeyValueMetadataLabel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KeyValueMetadataLabel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KeyValueMetadataLabel message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.KeyValueMetadataLabel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataLabel} message KeyValueMetadataLabel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KeyValueMetadataLabel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KeyValueMetadataLabel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataLabel} KeyValueMetadataLabel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KeyValueMetadataLabel.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.KeyValueMetadataLabel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.key = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KeyValueMetadataLabel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataLabel} KeyValueMetadataLabel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KeyValueMetadataLabel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KeyValueMetadataLabel message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KeyValueMetadataLabel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KeyValueMetadataLabel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataLabel} KeyValueMetadataLabel
+                         */
+                        KeyValueMetadataLabel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.KeyValueMetadataLabel)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.KeyValueMetadataLabel();
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KeyValueMetadataLabel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.KeyValueMetadataLabel} message KeyValueMetadataLabel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KeyValueMetadataLabel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.key = "";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KeyValueMetadataLabel to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KeyValueMetadataLabel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for KeyValueMetadataLabel
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        KeyValueMetadataLabel.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.KeyValueMetadataLabel";
+                        };
+    
+                        return KeyValueMetadataLabel;
                     })();
     
                     v2.DocumentLocation = (function() {
@@ -15951,6 +17484,7 @@
                          * @property {Array.<google.privacy.dlp.v2.IInfoTypeCategory>|null} [categories] InfoTypeDescription categories
                          * @property {google.privacy.dlp.v2.ISensitivityScore|null} [sensitivityScore] InfoTypeDescription sensitivityScore
                          * @property {Array.<string>|null} [specificInfoTypes] InfoTypeDescription specificInfoTypes
+                         * @property {google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus|null} [launchStatus] InfoTypeDescription launchStatus
                          */
     
                         /**
@@ -16053,6 +17587,14 @@
                         InfoTypeDescription.prototype.specificInfoTypes = $util.emptyArray;
     
                         /**
+                         * InfoTypeDescription launchStatus.
+                         * @member {google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus} launchStatus
+                         * @memberof google.privacy.dlp.v2.InfoTypeDescription
+                         * @instance
+                         */
+                        InfoTypeDescription.prototype.launchStatus = 0;
+    
+                        /**
                          * Creates a new InfoTypeDescription instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.InfoTypeDescription
@@ -16103,6 +17645,8 @@
                             if (message.specificInfoTypes != null && message.specificInfoTypes.length)
                                 for (var i = 0; i < message.specificInfoTypes.length; ++i)
                                     writer.uint32(/* id 12, wireType 2 =*/98).string(message.specificInfoTypes[i]);
+                            if (message.launchStatus != null && Object.hasOwnProperty.call(message, "launchStatus"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.launchStatus);
                             return writer;
                         };
     
@@ -16190,6 +17734,10 @@
                                         if (!(message.specificInfoTypes && message.specificInfoTypes.length))
                                             message.specificInfoTypes = [];
                                         message.specificInfoTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.launchStatus = reader.int32();
                                         break;
                                     }
                                 default:
@@ -16287,6 +17835,16 @@
                                     if (!$util.isString(message.specificInfoTypes[i]))
                                         return "specificInfoTypes: string[] expected";
                             }
+                            if (message.launchStatus != null && message.hasOwnProperty("launchStatus"))
+                                switch (message.launchStatus) {
+                                default:
+                                    return "launchStatus: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -16372,6 +17930,30 @@
                                 for (var i = 0; i < object.specificInfoTypes.length; ++i)
                                     message.specificInfoTypes[i] = String(object.specificInfoTypes[i]);
                             }
+                            switch (object.launchStatus) {
+                            default:
+                                if (typeof object.launchStatus === "number") {
+                                    message.launchStatus = object.launchStatus;
+                                    break;
+                                }
+                                break;
+                            case "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED":
+                            case 0:
+                                message.launchStatus = 0;
+                                break;
+                            case "GENERAL_AVAILABILITY":
+                            case 1:
+                                message.launchStatus = 1;
+                                break;
+                            case "PUBLIC_PREVIEW":
+                            case 2:
+                                message.launchStatus = 2;
+                                break;
+                            case "PRIVATE_PREVIEW":
+                            case 3:
+                                message.launchStatus = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -16401,6 +17983,7 @@
                                 object.locationSupport = null;
                                 object.example = "";
                                 object.sensitivityScore = null;
+                                object.launchStatus = options.enums === String ? "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -16434,6 +18017,8 @@
                                 for (var j = 0; j < message.specificInfoTypes.length; ++j)
                                     object.specificInfoTypes[j] = message.specificInfoTypes[j];
                             }
+                            if (message.launchStatus != null && message.hasOwnProperty("launchStatus"))
+                                object.launchStatus = options.enums === String ? $root.google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus[message.launchStatus] === undefined ? message.launchStatus : $root.google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus[message.launchStatus] : message.launchStatus;
                             return object;
                         };
     
@@ -16462,6 +18047,24 @@
                             }
                             return typeUrlPrefix + "/google.privacy.dlp.v2.InfoTypeDescription";
                         };
+    
+                        /**
+                         * InfoTypeLaunchStatus enum.
+                         * @name google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus
+                         * @enum {number}
+                         * @property {number} INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED=0 INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED value
+                         * @property {number} GENERAL_AVAILABILITY=1 GENERAL_AVAILABILITY value
+                         * @property {number} PUBLIC_PREVIEW=2 PUBLIC_PREVIEW value
+                         * @property {number} PRIVATE_PREVIEW=3 PRIVATE_PREVIEW value
+                         */
+                        InfoTypeDescription.InfoTypeLaunchStatus = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GENERAL_AVAILABILITY"] = 1;
+                            values[valuesById[2] = "PUBLIC_PREVIEW"] = 2;
+                            values[valuesById[3] = "PRIVATE_PREVIEW"] = 3;
+                            return values;
+                        })();
     
                         return InfoTypeDescription;
                     })();
@@ -80038,6 +81641,7 @@
                      * @property {number} MATCHING_TYPE_FULL_MATCH=1 MATCHING_TYPE_FULL_MATCH value
                      * @property {number} MATCHING_TYPE_PARTIAL_MATCH=2 MATCHING_TYPE_PARTIAL_MATCH value
                      * @property {number} MATCHING_TYPE_INVERSE_MATCH=3 MATCHING_TYPE_INVERSE_MATCH value
+                     * @property {number} MATCHING_TYPE_RULE_SPECIFIC=4 MATCHING_TYPE_RULE_SPECIFIC value
                      */
                     v2.MatchingType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -80045,7 +81649,838 @@
                         values[valuesById[1] = "MATCHING_TYPE_FULL_MATCH"] = 1;
                         values[valuesById[2] = "MATCHING_TYPE_PARTIAL_MATCH"] = 2;
                         values[valuesById[3] = "MATCHING_TYPE_INVERSE_MATCH"] = 3;
+                        values[valuesById[4] = "MATCHING_TYPE_RULE_SPECIFIC"] = 4;
                         return values;
+                    })();
+    
+                    v2.ImageContainmentType = (function() {
+    
+                        /**
+                         * Properties of an ImageContainmentType.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IImageContainmentType
+                         * @property {google.privacy.dlp.v2.IEncloses|null} [encloses] ImageContainmentType encloses
+                         * @property {google.privacy.dlp.v2.IFullyInside|null} [fullyInside] ImageContainmentType fullyInside
+                         * @property {google.privacy.dlp.v2.IOverlap|null} [overlaps] ImageContainmentType overlaps
+                         */
+    
+                        /**
+                         * Constructs a new ImageContainmentType.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an ImageContainmentType.
+                         * @implements IImageContainmentType
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IImageContainmentType=} [properties] Properties to set
+                         */
+                        function ImageContainmentType(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImageContainmentType encloses.
+                         * @member {google.privacy.dlp.v2.IEncloses|null|undefined} encloses
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         */
+                        ImageContainmentType.prototype.encloses = null;
+    
+                        /**
+                         * ImageContainmentType fullyInside.
+                         * @member {google.privacy.dlp.v2.IFullyInside|null|undefined} fullyInside
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         */
+                        ImageContainmentType.prototype.fullyInside = null;
+    
+                        /**
+                         * ImageContainmentType overlaps.
+                         * @member {google.privacy.dlp.v2.IOverlap|null|undefined} overlaps
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         */
+                        ImageContainmentType.prototype.overlaps = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ImageContainmentType type.
+                         * @member {"encloses"|"fullyInside"|"overlaps"|undefined} type
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         */
+                        Object.defineProperty(ImageContainmentType.prototype, "type", {
+                            get: $util.oneOfGetter($oneOfFields = ["encloses", "fullyInside", "overlaps"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImageContainmentType instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {google.privacy.dlp.v2.IImageContainmentType=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.ImageContainmentType} ImageContainmentType instance
+                         */
+                        ImageContainmentType.create = function create(properties) {
+                            return new ImageContainmentType(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImageContainmentType message. Does not implicitly {@link google.privacy.dlp.v2.ImageContainmentType.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {google.privacy.dlp.v2.IImageContainmentType} message ImageContainmentType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageContainmentType.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.encloses != null && Object.hasOwnProperty.call(message, "encloses"))
+                                $root.google.privacy.dlp.v2.Encloses.encode(message.encloses, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.fullyInside != null && Object.hasOwnProperty.call(message, "fullyInside"))
+                                $root.google.privacy.dlp.v2.FullyInside.encode(message.fullyInside, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.overlaps != null && Object.hasOwnProperty.call(message, "overlaps"))
+                                $root.google.privacy.dlp.v2.Overlap.encode(message.overlaps, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImageContainmentType message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ImageContainmentType.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {google.privacy.dlp.v2.IImageContainmentType} message ImageContainmentType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageContainmentType.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImageContainmentType message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.ImageContainmentType} ImageContainmentType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageContainmentType.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ImageContainmentType();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.encloses = $root.google.privacy.dlp.v2.Encloses.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fullyInside = $root.google.privacy.dlp.v2.FullyInside.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.overlaps = $root.google.privacy.dlp.v2.Overlap.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImageContainmentType message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.ImageContainmentType} ImageContainmentType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageContainmentType.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImageContainmentType message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImageContainmentType.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.encloses != null && message.hasOwnProperty("encloses")) {
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.Encloses.verify(message.encloses);
+                                    if (error)
+                                        return "encloses." + error;
+                                }
+                            }
+                            if (message.fullyInside != null && message.hasOwnProperty("fullyInside")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.FullyInside.verify(message.fullyInside);
+                                    if (error)
+                                        return "fullyInside." + error;
+                                }
+                            }
+                            if (message.overlaps != null && message.hasOwnProperty("overlaps")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.Overlap.verify(message.overlaps);
+                                    if (error)
+                                        return "overlaps." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImageContainmentType message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.ImageContainmentType} ImageContainmentType
+                         */
+                        ImageContainmentType.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.ImageContainmentType)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.ImageContainmentType();
+                            if (object.encloses != null) {
+                                if (typeof object.encloses !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ImageContainmentType.encloses: object expected");
+                                message.encloses = $root.google.privacy.dlp.v2.Encloses.fromObject(object.encloses);
+                            }
+                            if (object.fullyInside != null) {
+                                if (typeof object.fullyInside !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ImageContainmentType.fullyInside: object expected");
+                                message.fullyInside = $root.google.privacy.dlp.v2.FullyInside.fromObject(object.fullyInside);
+                            }
+                            if (object.overlaps != null) {
+                                if (typeof object.overlaps !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ImageContainmentType.overlaps: object expected");
+                                message.overlaps = $root.google.privacy.dlp.v2.Overlap.fromObject(object.overlaps);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImageContainmentType message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {google.privacy.dlp.v2.ImageContainmentType} message ImageContainmentType
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImageContainmentType.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.encloses != null && message.hasOwnProperty("encloses")) {
+                                object.encloses = $root.google.privacy.dlp.v2.Encloses.toObject(message.encloses, options);
+                                if (options.oneofs)
+                                    object.type = "encloses";
+                            }
+                            if (message.fullyInside != null && message.hasOwnProperty("fullyInside")) {
+                                object.fullyInside = $root.google.privacy.dlp.v2.FullyInside.toObject(message.fullyInside, options);
+                                if (options.oneofs)
+                                    object.type = "fullyInside";
+                            }
+                            if (message.overlaps != null && message.hasOwnProperty("overlaps")) {
+                                object.overlaps = $root.google.privacy.dlp.v2.Overlap.toObject(message.overlaps, options);
+                                if (options.oneofs)
+                                    object.type = "overlaps";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImageContainmentType to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImageContainmentType.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImageContainmentType
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImageContainmentType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.ImageContainmentType";
+                        };
+    
+                        return ImageContainmentType;
+                    })();
+    
+                    v2.Overlap = (function() {
+    
+                        /**
+                         * Properties of an Overlap.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IOverlap
+                         */
+    
+                        /**
+                         * Constructs a new Overlap.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an Overlap.
+                         * @implements IOverlap
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IOverlap=} [properties] Properties to set
+                         */
+                        function Overlap(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new Overlap instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {google.privacy.dlp.v2.IOverlap=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.Overlap} Overlap instance
+                         */
+                        Overlap.create = function create(properties) {
+                            return new Overlap(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Overlap message. Does not implicitly {@link google.privacy.dlp.v2.Overlap.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {google.privacy.dlp.v2.IOverlap} message Overlap message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Overlap.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Overlap message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Overlap.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {google.privacy.dlp.v2.IOverlap} message Overlap message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Overlap.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Overlap message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.Overlap} Overlap
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Overlap.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Overlap();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Overlap message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.Overlap} Overlap
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Overlap.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Overlap message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Overlap.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Overlap message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.Overlap} Overlap
+                         */
+                        Overlap.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.Overlap)
+                                return object;
+                            return new $root.google.privacy.dlp.v2.Overlap();
+                        };
+    
+                        /**
+                         * Creates a plain object from an Overlap message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {google.privacy.dlp.v2.Overlap} message Overlap
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Overlap.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this Overlap to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Overlap.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Overlap
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Overlap.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.Overlap";
+                        };
+    
+                        return Overlap;
+                    })();
+    
+                    v2.Encloses = (function() {
+    
+                        /**
+                         * Properties of an Encloses.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IEncloses
+                         */
+    
+                        /**
+                         * Constructs a new Encloses.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an Encloses.
+                         * @implements IEncloses
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IEncloses=} [properties] Properties to set
+                         */
+                        function Encloses(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new Encloses instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {google.privacy.dlp.v2.IEncloses=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.Encloses} Encloses instance
+                         */
+                        Encloses.create = function create(properties) {
+                            return new Encloses(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Encloses message. Does not implicitly {@link google.privacy.dlp.v2.Encloses.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {google.privacy.dlp.v2.IEncloses} message Encloses message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Encloses.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Encloses message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Encloses.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {google.privacy.dlp.v2.IEncloses} message Encloses message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Encloses.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Encloses message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.Encloses} Encloses
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Encloses.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Encloses();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Encloses message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.Encloses} Encloses
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Encloses.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Encloses message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Encloses.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Encloses message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.Encloses} Encloses
+                         */
+                        Encloses.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.Encloses)
+                                return object;
+                            return new $root.google.privacy.dlp.v2.Encloses();
+                        };
+    
+                        /**
+                         * Creates a plain object from an Encloses message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {google.privacy.dlp.v2.Encloses} message Encloses
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Encloses.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this Encloses to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Encloses.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Encloses
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Encloses.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.Encloses";
+                        };
+    
+                        return Encloses;
+                    })();
+    
+                    v2.FullyInside = (function() {
+    
+                        /**
+                         * Properties of a FullyInside.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IFullyInside
+                         */
+    
+                        /**
+                         * Constructs a new FullyInside.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a FullyInside.
+                         * @implements IFullyInside
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IFullyInside=} [properties] Properties to set
+                         */
+                        function FullyInside(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new FullyInside instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {google.privacy.dlp.v2.IFullyInside=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.FullyInside} FullyInside instance
+                         */
+                        FullyInside.create = function create(properties) {
+                            return new FullyInside(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FullyInside message. Does not implicitly {@link google.privacy.dlp.v2.FullyInside.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {google.privacy.dlp.v2.IFullyInside} message FullyInside message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FullyInside.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FullyInside message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FullyInside.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {google.privacy.dlp.v2.IFullyInside} message FullyInside message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FullyInside.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FullyInside message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.FullyInside} FullyInside
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FullyInside.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FullyInside();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FullyInside message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.FullyInside} FullyInside
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FullyInside.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FullyInside message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FullyInside.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FullyInside message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.FullyInside} FullyInside
+                         */
+                        FullyInside.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.FullyInside)
+                                return object;
+                            return new $root.google.privacy.dlp.v2.FullyInside();
+                        };
+    
+                        /**
+                         * Creates a plain object from a FullyInside message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {google.privacy.dlp.v2.FullyInside} message FullyInside
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FullyInside.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this FullyInside to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FullyInside.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FullyInside
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FullyInside.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.FullyInside";
+                        };
+    
+                        return FullyInside;
                     })();
     
                     /**
@@ -80070,11 +82505,13 @@
                      * @enum {number}
                      * @property {number} METADATATYPE_UNSPECIFIED=0 METADATATYPE_UNSPECIFIED value
                      * @property {number} STORAGE_METADATA=2 STORAGE_METADATA value
+                     * @property {number} CONTENT_METADATA=3 CONTENT_METADATA value
                      */
                     v2.MetadataType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "METADATATYPE_UNSPECIFIED"] = 0;
                         values[valuesById[2] = "STORAGE_METADATA"] = 2;
+                        values[valuesById[3] = "CONTENT_METADATA"] = 3;
                         return values;
                     })();
     
@@ -96694,6 +99131,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 7:
                                     case 3:
                                     case 4:
                                     case 5:
@@ -96758,6 +99196,10 @@
                                     case "TEXT_EMBEDDING":
                                     case 2:
                                         message.signals[i] = 2;
+                                        break;
+                                    case "EMBEDDING":
+                                    case 7:
+                                        message.signals[i] = 7;
                                         break;
                                     case "VERTEX_PLUGIN":
                                     case 3:
@@ -96856,6 +99298,7 @@
                          * @property {number} SIGNAL_UNSPECIFIED=0 SIGNAL_UNSPECIFIED value
                          * @property {number} MODEL=1 MODEL value
                          * @property {number} TEXT_EMBEDDING=2 TEXT_EMBEDDING value
+                         * @property {number} EMBEDDING=7 EMBEDDING value
                          * @property {number} VERTEX_PLUGIN=3 VERTEX_PLUGIN value
                          * @property {number} VECTOR_PLUGIN=4 VECTOR_PLUGIN value
                          * @property {number} SOURCE_CODE=5 SOURCE_CODE value
@@ -96866,6 +99309,7 @@
                             values[valuesById[0] = "SIGNAL_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "MODEL"] = 1;
                             values[valuesById[2] = "TEXT_EMBEDDING"] = 2;
+                            values[valuesById[7] = "EMBEDDING"] = 7;
                             values[valuesById[3] = "VERTEX_PLUGIN"] = 3;
                             values[valuesById[4] = "VECTOR_PLUGIN"] = 4;
                             values[valuesById[5] = "SOURCE_CODE"] = 5;
@@ -97660,6 +100104,7 @@
                          * @property {google.privacy.dlp.v2.CustomInfoType.IRegex|null} [regex] CustomInfoType regex
                          * @property {google.privacy.dlp.v2.CustomInfoType.ISurrogateType|null} [surrogateType] CustomInfoType surrogateType
                          * @property {google.privacy.dlp.v2.IStoredType|null} [storedType] CustomInfoType storedType
+                         * @property {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression|null} [metadataKeyValueExpression] CustomInfoType metadataKeyValueExpression
                          * @property {Array.<google.privacy.dlp.v2.CustomInfoType.IDetectionRule>|null} [detectionRules] CustomInfoType detectionRules
                          * @property {google.privacy.dlp.v2.CustomInfoType.ExclusionType|null} [exclusionType] CustomInfoType exclusionType
                          * @property {google.privacy.dlp.v2.ISensitivityScore|null} [sensitivityScore] CustomInfoType sensitivityScore
@@ -97730,6 +100175,14 @@
                         CustomInfoType.prototype.storedType = null;
     
                         /**
+                         * CustomInfoType metadataKeyValueExpression.
+                         * @member {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression|null|undefined} metadataKeyValueExpression
+                         * @memberof google.privacy.dlp.v2.CustomInfoType
+                         * @instance
+                         */
+                        CustomInfoType.prototype.metadataKeyValueExpression = null;
+    
+                        /**
                          * CustomInfoType detectionRules.
                          * @member {Array.<google.privacy.dlp.v2.CustomInfoType.IDetectionRule>} detectionRules
                          * @memberof google.privacy.dlp.v2.CustomInfoType
@@ -97758,12 +100211,12 @@
     
                         /**
                          * CustomInfoType type.
-                         * @member {"dictionary"|"regex"|"surrogateType"|"storedType"|undefined} type
+                         * @member {"dictionary"|"regex"|"surrogateType"|"storedType"|"metadataKeyValueExpression"|undefined} type
                          * @memberof google.privacy.dlp.v2.CustomInfoType
                          * @instance
                          */
                         Object.defineProperty(CustomInfoType.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["dictionary", "regex", "surrogateType", "storedType"]),
+                            get: $util.oneOfGetter($oneOfFields = ["dictionary", "regex", "surrogateType", "storedType", "metadataKeyValueExpression"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -97810,6 +100263,8 @@
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.exclusionType);
                             if (message.sensitivityScore != null && Object.hasOwnProperty.call(message, "sensitivityScore"))
                                 $root.google.privacy.dlp.v2.SensitivityScore.encode(message.sensitivityScore, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.metadataKeyValueExpression != null && Object.hasOwnProperty.call(message, "metadataKeyValueExpression"))
+                                $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.encode(message.metadataKeyValueExpression, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -97868,6 +100323,10 @@
                                     }
                                 case 5: {
                                         message.storedType = $root.google.privacy.dlp.v2.StoredType.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.metadataKeyValueExpression = $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -97975,6 +100434,16 @@
                                         return "storedType." + error;
                                 }
                             }
+                            if (message.metadataKeyValueExpression != null && message.hasOwnProperty("metadataKeyValueExpression")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.verify(message.metadataKeyValueExpression);
+                                    if (error)
+                                        return "metadataKeyValueExpression." + error;
+                                }
+                            }
                             if (message.detectionRules != null && message.hasOwnProperty("detectionRules")) {
                                 if (!Array.isArray(message.detectionRules))
                                     return "detectionRules: array expected";
@@ -98069,6 +100538,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.CustomInfoType.storedType: object expected");
                                 message.storedType = $root.google.privacy.dlp.v2.StoredType.fromObject(object.storedType);
                             }
+                            if (object.metadataKeyValueExpression != null) {
+                                if (typeof object.metadataKeyValueExpression !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.CustomInfoType.metadataKeyValueExpression: object expected");
+                                message.metadataKeyValueExpression = $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.fromObject(object.metadataKeyValueExpression);
+                            }
                             if (object.detectionRules) {
                                 if (!Array.isArray(object.detectionRules))
                                     throw TypeError(".google.privacy.dlp.v2.CustomInfoType.detectionRules: array expected");
@@ -98157,6 +100631,11 @@
                                 object.exclusionType = options.enums === String ? $root.google.privacy.dlp.v2.CustomInfoType.ExclusionType[message.exclusionType] === undefined ? message.exclusionType : $root.google.privacy.dlp.v2.CustomInfoType.ExclusionType[message.exclusionType] : message.exclusionType;
                             if (message.sensitivityScore != null && message.hasOwnProperty("sensitivityScore"))
                                 object.sensitivityScore = $root.google.privacy.dlp.v2.SensitivityScore.toObject(message.sensitivityScore, options);
+                            if (message.metadataKeyValueExpression != null && message.hasOwnProperty("metadataKeyValueExpression")) {
+                                object.metadataKeyValueExpression = $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.toObject(message.metadataKeyValueExpression, options);
+                                if (options.oneofs)
+                                    object.type = "metadataKeyValueExpression";
+                            }
                             return object;
                         };
     
@@ -99099,6 +101578,235 @@
                             };
     
                             return SurrogateType;
+                        })();
+    
+                        CustomInfoType.MetadataKeyValueExpression = (function() {
+    
+                            /**
+                             * Properties of a MetadataKeyValueExpression.
+                             * @memberof google.privacy.dlp.v2.CustomInfoType
+                             * @interface IMetadataKeyValueExpression
+                             * @property {string|null} [keyRegex] MetadataKeyValueExpression keyRegex
+                             * @property {string|null} [valueRegex] MetadataKeyValueExpression valueRegex
+                             */
+    
+                            /**
+                             * Constructs a new MetadataKeyValueExpression.
+                             * @memberof google.privacy.dlp.v2.CustomInfoType
+                             * @classdesc Represents a MetadataKeyValueExpression.
+                             * @implements IMetadataKeyValueExpression
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression=} [properties] Properties to set
+                             */
+                            function MetadataKeyValueExpression(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MetadataKeyValueExpression keyRegex.
+                             * @member {string} keyRegex
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @instance
+                             */
+                            MetadataKeyValueExpression.prototype.keyRegex = "";
+    
+                            /**
+                             * MetadataKeyValueExpression valueRegex.
+                             * @member {string} valueRegex
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @instance
+                             */
+                            MetadataKeyValueExpression.prototype.valueRegex = "";
+    
+                            /**
+                             * Creates a new MetadataKeyValueExpression instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} MetadataKeyValueExpression instance
+                             */
+                            MetadataKeyValueExpression.create = function create(properties) {
+                                return new MetadataKeyValueExpression(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MetadataKeyValueExpression message. Does not implicitly {@link google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression} message MetadataKeyValueExpression message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MetadataKeyValueExpression.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.keyRegex != null && Object.hasOwnProperty.call(message, "keyRegex"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.keyRegex);
+                                if (message.valueRegex != null && Object.hasOwnProperty.call(message, "valueRegex"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.valueRegex);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MetadataKeyValueExpression message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression} message MetadataKeyValueExpression message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MetadataKeyValueExpression.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MetadataKeyValueExpression message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} MetadataKeyValueExpression
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MetadataKeyValueExpression.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.keyRegex = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.valueRegex = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MetadataKeyValueExpression message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} MetadataKeyValueExpression
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MetadataKeyValueExpression.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MetadataKeyValueExpression message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MetadataKeyValueExpression.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.keyRegex != null && message.hasOwnProperty("keyRegex"))
+                                    if (!$util.isString(message.keyRegex))
+                                        return "keyRegex: string expected";
+                                if (message.valueRegex != null && message.hasOwnProperty("valueRegex"))
+                                    if (!$util.isString(message.valueRegex))
+                                        return "valueRegex: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MetadataKeyValueExpression message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} MetadataKeyValueExpression
+                             */
+                            MetadataKeyValueExpression.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression)
+                                    return object;
+                                var message = new $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression();
+                                if (object.keyRegex != null)
+                                    message.keyRegex = String(object.keyRegex);
+                                if (object.valueRegex != null)
+                                    message.valueRegex = String(object.valueRegex);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MetadataKeyValueExpression message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} message MetadataKeyValueExpression
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MetadataKeyValueExpression.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.keyRegex = "";
+                                    object.valueRegex = "";
+                                }
+                                if (message.keyRegex != null && message.hasOwnProperty("keyRegex"))
+                                    object.keyRegex = message.keyRegex;
+                                if (message.valueRegex != null && message.hasOwnProperty("valueRegex"))
+                                    object.valueRegex = message.valueRegex;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MetadataKeyValueExpression to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MetadataKeyValueExpression.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MetadataKeyValueExpression
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MetadataKeyValueExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression";
+                            };
+    
+                            return MetadataKeyValueExpression;
                         })();
     
                         CustomInfoType.DetectionRule = (function() {
