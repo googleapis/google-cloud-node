@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -209,7 +209,7 @@ export class SchemaServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
-      projectTopicPathTemplate: new this._gaxModule.PathTemplate(
+      projectTopicsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/topics/{topic}',
       ),
       schemaPathTemplate: new this._gaxModule.PathTemplate(
@@ -533,7 +533,23 @@ export class SchemaServiceClient {
           this._log.info('createSchema response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets a schema.
@@ -643,7 +659,23 @@ export class SchemaServiceClient {
           this._log.info('getSchema response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Commits a new schema revision to an existing schema.
@@ -752,7 +784,23 @@ export class SchemaServiceClient {
           this._log.info('commitSchema response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Creates a new schema revision that is a copy of the provided revision_id.
@@ -863,7 +911,23 @@ export class SchemaServiceClient {
           this._log.info('rollbackSchema response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes a specific schema revision.
@@ -980,7 +1044,23 @@ export class SchemaServiceClient {
           this._log.info('deleteSchemaRevision response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes a schema.
@@ -1087,7 +1167,23 @@ export class SchemaServiceClient {
           this._log.info('deleteSchema response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Validates a schema.
@@ -1196,7 +1292,23 @@ export class SchemaServiceClient {
           this._log.info('validateSchema response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Validates a message against a schema.
@@ -1313,7 +1425,23 @@ export class SchemaServiceClient {
           this._log.info('validateMessage response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -1938,40 +2066,40 @@ export class SchemaServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectTopic resource name string.
+   * Return a fully-qualified projectTopics resource name string.
    *
    * @param {string} project
    * @param {string} topic
    * @returns {string} Resource name string.
    */
-  projectTopicPath(project: string, topic: string) {
-    return this.pathTemplates.projectTopicPathTemplate.render({
+  projectTopicsPath(project: string, topic: string) {
+    return this.pathTemplates.projectTopicsPathTemplate.render({
       project: project,
       topic: topic,
     });
   }
 
   /**
-   * Parse the project from ProjectTopic resource.
+   * Parse the project from ProjectTopics resource.
    *
-   * @param {string} projectTopicName
-   *   A fully-qualified path representing project_topic resource.
+   * @param {string} projectTopicsName
+   *   A fully-qualified path representing project_topics resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectTopicName(projectTopicName: string) {
-    return this.pathTemplates.projectTopicPathTemplate.match(projectTopicName)
+  matchProjectFromProjectTopicsName(projectTopicsName: string) {
+    return this.pathTemplates.projectTopicsPathTemplate.match(projectTopicsName)
       .project;
   }
 
   /**
-   * Parse the topic from ProjectTopic resource.
+   * Parse the topic from ProjectTopics resource.
    *
-   * @param {string} projectTopicName
-   *   A fully-qualified path representing project_topic resource.
+   * @param {string} projectTopicsName
+   *   A fully-qualified path representing project_topics resource.
    * @returns {string} A string representing the topic.
    */
-  matchTopicFromProjectTopicName(projectTopicName: string) {
-    return this.pathTemplates.projectTopicPathTemplate.match(projectTopicName)
+  matchTopicFromProjectTopicsName(projectTopicsName: string) {
+    return this.pathTemplates.projectTopicsPathTemplate.match(projectTopicsName)
       .topic;
   }
 
