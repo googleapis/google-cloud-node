@@ -1,0 +1,11 @@
+node_modules
+build
+package-lock.json
+.vscode
+yarn.lock
+.coverage
+.nyc_output
+dist
+docs
+coverage
+__pycache__

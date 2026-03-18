@@ -60,10 +60,10 @@ function main(parent, folder, folderId) {
   // const requestId = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callCreateFolder() {
     // Construct request
@@ -74,7 +74,7 @@ function main(parent, folder, folderId) {
     };
 
     // Run request
-    const response = await controlClient.createFolder(request);
+    const response = await storageControlClient.createFolder(request);
     console.log(response);
   }
 

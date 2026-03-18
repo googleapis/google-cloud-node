@@ -1,0 +1,14 @@
+{
+  "name": "esm-package",
+  "version": "1.0.0",
+  "description": "Test a ESM package using pack-n-play",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/test.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "mocha": "^10.2.0",
+    "pack-n-play": "^2.0.0"
+  }
+}

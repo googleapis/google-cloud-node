@@ -1,0 +1,3 @@
+body: |-
+    It's unlikely you will need to install this package directly, as it will be
+    installed as a dependency when you install other `@google-cloud` packages.
