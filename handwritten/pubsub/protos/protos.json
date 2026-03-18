@@ -1059,11 +1059,57 @@
                     }
                   }
                 },
+                "AIInference": {
+                  "oneofs": {
+                    "inferenceMode": {
+                      "oneof": [
+                        "unstructuredInference"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "endpoint": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "unstructuredInference": {
+                      "type": "UnstructuredInference",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "serviceAccountEmail": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "UnstructuredInference": {
+                      "fields": {
+                        "parameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "MessageTransform": {
                   "oneofs": {
                     "transform": {
                       "oneof": [
-                        "javascriptUdf"
+                        "javascriptUdf",
+                        "aiInference"
                       ]
                     }
                   },
@@ -1071,6 +1117,13 @@
                     "javascriptUdf": {
                       "type": "JavaScriptUDF",
                       "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "aiInference": {
+                      "type": "AIInference",
+                      "id": 6,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
@@ -1104,7 +1157,7 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
+                        "(google.api.field_behavior)": "IDENTIFIER"
                       }
                     },
                     "labels": {
@@ -1765,7 +1818,7 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
+                        "(google.api.field_behavior)": "IDENTIFIER"
                       }
                     },
                     "topic": {
@@ -1793,6 +1846,13 @@
                     "cloudStorageConfig": {
                       "type": "CloudStorageConfig",
                       "id": 22,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "bigtableConfig": {
+                      "type": "BigtableConfig",
+                      "id": 27,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
@@ -2137,7 +2197,61 @@
                         "PERMISSION_DENIED": 2,
                         "NOT_FOUND": 3,
                         "SCHEMA_MISMATCH": 4,
-                        "IN_TRANSIT_LOCATION_RESTRICTION": 5
+                        "IN_TRANSIT_LOCATION_RESTRICTION": 5,
+                        "VERTEX_AI_LOCATION_RESTRICTION": 6
+                      }
+                    }
+                  }
+                },
+                "BigtableConfig": {
+                  "fields": {
+                    "table": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "appProfileId": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "serviceAccountEmail": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "writeMetadata": {
+                      "type": "bool",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "state": {
+                      "type": "State",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "ACTIVE": 1,
+                        "NOT_FOUND": 2,
+                        "APP_PROFILE_MISCONFIGURED": 3,
+                        "PERMISSION_DENIED": 4,
+                        "SCHEMA_MISMATCH": 5,
+                        "IN_TRANSIT_LOCATION_RESTRICTION": 6,
+                        "VERTEX_AI_LOCATION_RESTRICTION": 7
                       }
                     }
                   }
@@ -2259,7 +2373,8 @@
                         "PERMISSION_DENIED": 2,
                         "NOT_FOUND": 3,
                         "IN_TRANSIT_LOCATION_RESTRICTION": 4,
-                        "SCHEMA_MISMATCH": 5
+                        "SCHEMA_MISMATCH": 5,
+                        "VERTEX_AI_LOCATION_RESTRICTION": 6
                       }
                     }
                   }
@@ -5386,6 +5501,69 @@
                 "paths": {
                   "rule": "repeated",
                   "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
                   "id": 1
                 }
               }
