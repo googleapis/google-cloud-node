@@ -405,7 +405,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "labelId": {
                           "type": "int64",
@@ -683,6 +686,26 @@
                         "_customLabel_4": {
                           "oneof": [
                             "customLabel_4"
+                          ]
+                        },
+                        "_reviewCount": {
+                          "oneof": [
+                            "reviewCount"
+                          ]
+                        },
+                        "_minRating": {
+                          "oneof": [
+                            "minRating"
+                          ]
+                        },
+                        "_maxRating": {
+                          "oneof": [
+                            "maxRating"
+                          ]
+                        },
+                        "_rating": {
+                          "oneof": [
+                            "rating"
                           ]
                         }
                       },
@@ -987,6 +1010,34 @@
                         "headlineOfferSubscriptionCost": {
                           "type": "HeadlineOfferSubscriptionCost",
                           "id": 52
+                        },
+                        "reviewCount": {
+                          "type": "int64",
+                          "id": 54,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "minRating": {
+                          "type": "int64",
+                          "id": 55,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxRating": {
+                          "type": "int64",
+                          "id": 56,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rating": {
+                          "type": "double",
+                          "id": 57,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -1259,7 +1310,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "finalName": {
                           "type": "string",

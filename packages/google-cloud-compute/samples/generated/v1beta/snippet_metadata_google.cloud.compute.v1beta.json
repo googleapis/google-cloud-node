@@ -15413,8 +15413,8 @@
       "language": "JAVASCRIPT",
       "segments": [
         {
-          "start": 53,
-          "end": 99,
+          "start": 58,
+          "end": 104,
           "type": "FULL"
         }
       ],
@@ -15423,6 +15423,10 @@
         "fullName": "google.cloud.compute.v1beta.Instances.Update",
         "async": true,
         "parameters": [
+          {
+            "name": "discard_local_ssd",
+            "type": "TYPE_BOOL"
+          },
           {
             "name": "instance",
             "type": "TYPE_STRING"
@@ -32044,6 +32048,74 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_RegionHealthCheckServices_AggregatedList_async",
+      "title": "AcceleratorTypes aggregatedList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the list of all HealthCheckService resources, regional and global, available to the specified project. To prevent failure, it is recommended that you set the `returnPartialSuccess` parameter to `true`.",
+      "canonical": true,
+      "file": "region_health_check_services.aggregated_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 155,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AggregatedList",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthCheckServices.AggregatedList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "include_all_scopes",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "service_project_number",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.HealthCheckServiceAggregatedList",
+        "client": {
+          "shortName": "RegionHealthCheckServicesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthCheckServicesClient"
+        },
+        "method": {
+          "shortName": "AggregatedList",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthCheckServices.AggregatedList",
+          "service": {
+            "shortName": "RegionHealthCheckServices",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthCheckServices"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_RegionHealthCheckServices_Delete_async",
       "title": "AcceleratorTypes delete Sample",
       "origin": "API_DEFINITION",
@@ -38456,6 +38528,74 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_RegionNotificationEndpoints_AggregatedList_async",
+      "title": "AcceleratorTypes aggregatedList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the list of all NotificationEndpoint resources, regional and global, available to the specified project.",
+      "canonical": true,
+      "file": "region_notification_endpoints.aggregated_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 155,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AggregatedList",
+        "fullName": "google.cloud.compute.v1beta.RegionNotificationEndpoints.AggregatedList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "include_all_scopes",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "service_project_number",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.NotificationEndpointAggregatedList",
+        "client": {
+          "shortName": "RegionNotificationEndpointsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNotificationEndpointsClient"
+        },
+        "method": {
+          "shortName": "AggregatedList",
+          "fullName": "google.cloud.compute.v1beta.RegionNotificationEndpoints.AggregatedList",
+          "service": {
+            "shortName": "RegionNotificationEndpoints",
+            "fullName": "google.cloud.compute.v1beta.RegionNotificationEndpoints"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_RegionNotificationEndpoints_Delete_async",
       "title": "AcceleratorTypes delete Sample",
       "origin": "API_DEFINITION",
@@ -43380,6 +43520,66 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_ReservationSlots_GetVersion_async",
+      "title": "AcceleratorTypes getVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Allows customers to get SBOM versions of a reservation slot.",
+      "canonical": true,
+      "file": "reservation_slots.get_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetVersion",
+        "fullName": "google.cloud.compute.v1beta.ReservationSlots.GetVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_slot",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_slots_get_version_request_resource",
+            "type": ".google.cloud.compute.v1beta.ReservationSlotsGetVersionRequest"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "ReservationSlotsClient",
+          "fullName": "google.cloud.compute.v1beta.ReservationSlotsClient"
+        },
+        "method": {
+          "shortName": "GetVersion",
+          "fullName": "google.cloud.compute.v1beta.ReservationSlots.GetVersion",
+          "service": {
+            "shortName": "ReservationSlots",
+            "fullName": "google.cloud.compute.v1beta.ReservationSlots"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_ReservationSlots_List_async",
       "title": "AcceleratorTypes list Sample",
       "origin": "API_DEFINITION",
@@ -43612,6 +43812,66 @@
         "method": {
           "shortName": "GetIamPolicy",
           "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks.GetIamPolicy",
+          "service": {
+            "shortName": "ReservationSubBlocks",
+            "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_ReservationSubBlocks_GetVersion_async",
+      "title": "AcceleratorTypes getVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Allows customers to get SBOM versions of a reservation subBlock.",
+      "canonical": true,
+      "file": "reservation_sub_blocks.get_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetVersion",
+        "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks.GetVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_sub_block",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_sub_blocks_get_version_request_resource",
+            "type": ".google.cloud.compute.v1beta.ReservationSubBlocksGetVersionRequest"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "ReservationSubBlocksClient",
+          "fullName": "google.cloud.compute.v1beta.ReservationSubBlocksClient"
+        },
+        "method": {
+          "shortName": "GetVersion",
+          "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks.GetVersion",
           "service": {
             "shortName": "ReservationSubBlocks",
             "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks"

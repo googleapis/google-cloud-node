@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {BusinessGlossaryServiceClient, CatalogServiceClient, CmekServiceClient, ContentServiceClient, DataplexServiceClient, DataScanServiceClient, DataTaxonomyServiceClient, MetadataServiceClient} from '@google-cloud/dataplex';
+import {BusinessGlossaryServiceClient, CatalogServiceClient, CmekServiceClient, ContentServiceClient, DataplexServiceClient, DataProductServiceClient, DataScanServiceClient, DataTaxonomyServiceClient, MetadataServiceClient} from '@google-cloud/dataplex';
 
 // check that the client class type name can be used
 function doStuffWithBusinessGlossaryServiceClient(client: BusinessGlossaryServiceClient) {
@@ -32,6 +32,9 @@ function doStuffWithContentServiceClient(client: ContentServiceClient) {
   client.close();
 }
 function doStuffWithDataplexServiceClient(client: DataplexServiceClient) {
+  client.close();
+}
+function doStuffWithDataProductServiceClient(client: DataProductServiceClient) {
   client.close();
 }
 function doStuffWithDataScanServiceClient(client: DataScanServiceClient) {
@@ -60,6 +63,9 @@ function main() {
   // check that the client instance can be created
   const dataplexServiceClient = new DataplexServiceClient();
   doStuffWithDataplexServiceClient(dataplexServiceClient);
+  // check that the client instance can be created
+  const dataProductServiceClient = new DataProductServiceClient();
+  doStuffWithDataProductServiceClient(dataProductServiceClient);
   // check that the client instance can be created
   const dataScanServiceClient = new DataScanServiceClient();
   doStuffWithDataScanServiceClient(dataScanServiceClient);

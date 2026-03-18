@@ -412,6 +412,26 @@
                                 }
                               ]
                             },
+                            "CreateTestAccount": {
+                              "requestType": "CreateTestAccountRequest",
+                              "responseType": "Account",
+                              "options": {
+                                "(google.api.http).post": "/accounts/v1/{parent=accounts/*}:createTestAccount",
+                                "(google.api.http).body": "account",
+                                "(google.api.method_signature)": "parent,account"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/accounts/v1/{parent=accounts/*}:createTestAccount",
+                                    "body": "account"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,account"
+                                }
+                              ]
+                            },
                             "DeleteAccount": {
                               "requestType": "DeleteAccountRequest",
                               "responseType": "google.protobuf.Empty",
@@ -694,6 +714,25 @@
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "CreateTestAccountRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Account"
+                              }
+                            },
+                            "account": {
+                              "type": "Account",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }

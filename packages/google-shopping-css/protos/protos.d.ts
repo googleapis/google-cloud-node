@@ -1610,6 +1610,18 @@ export namespace google {
 
                     /** Attributes headlineOfferSubscriptionCost */
                     headlineOfferSubscriptionCost?: (google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null);
+
+                    /** Attributes reviewCount */
+                    reviewCount?: (number|Long|string|null);
+
+                    /** Attributes minRating */
+                    minRating?: (number|Long|string|null);
+
+                    /** Attributes maxRating */
+                    maxRating?: (number|Long|string|null);
+
+                    /** Attributes rating */
+                    rating?: (number|null);
                 }
 
                 /** Represents an Attributes. */
@@ -1770,6 +1782,18 @@ export namespace google {
 
                     /** Attributes headlineOfferSubscriptionCost. */
                     public headlineOfferSubscriptionCost?: (google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null);
+
+                    /** Attributes reviewCount. */
+                    public reviewCount?: (number|Long|string|null);
+
+                    /** Attributes minRating. */
+                    public minRating?: (number|Long|string|null);
+
+                    /** Attributes maxRating. */
+                    public maxRating?: (number|Long|string|null);
+
+                    /** Attributes rating. */
+                    public rating?: (number|null);
 
                     /**
                      * Creates a new Attributes instance using the specified properties.
