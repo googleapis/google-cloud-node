@@ -13,3 +13,4 @@ ignoreFiles:
   - "packages/*/__snapshots__/**/*.js"
   - "packages/typeless-sample-bot/test/fixtures/**/*.ts"
   - "packages/typeless-sample-bot/test/fixtures/**/*.js"
+ignoreLicenseYear: true

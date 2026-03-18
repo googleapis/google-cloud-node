@@ -1,0 +1,157 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.naming.v1beta1",
+  "libraryPackage": "naming",
+  "services": {
+    "Naming": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NamingClient",
+          "rpcs": {
+            "PaginatedMethodStream": {
+              "methods": [
+                "paginatedMethodStream"
+              ]
+            },
+            "PaginatedMethodAsync": {
+              "methods": [
+                "paginatedMethodAsync"
+              ]
+            },
+            "CheckLongRunningProgress": {
+              "methods": [
+                "checkLongRunningProgress"
+              ]
+            },
+            "Initialize": {
+              "methods": [
+                "initialize"
+              ]
+            },
+            "ServicePath": {
+              "methods": [
+                "servicePath"
+              ]
+            },
+            "ApiEndpoint": {
+              "methods": [
+                "apiEndpoint"
+              ]
+            },
+            "Port": {
+              "methods": [
+                "port"
+              ]
+            },
+            "Scopes": {
+              "methods": [
+                "scopes"
+              ]
+            },
+            "getProjectId": {
+              "methods": [
+                "getProjectId"
+              ]
+            },
+            "getReservedWord": {
+              "methods": [
+                "getReservedWord"
+              ]
+            },
+            "createABCDESomething": {
+              "methods": [
+                "createABCDESomething"
+              ]
+            },
+            "LongRunning": {
+              "methods": [
+                "longRunning"
+              ]
+            },
+            "PaginatedMethod": {
+              "methods": [
+                "paginatedMethod",
+                "paginatedMethodStream1",
+                "paginatedMethodAsync1"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NamingClient",
+          "rpcs": {
+            "PaginatedMethodStream": {
+              "methods": [
+                "paginatedMethodStream"
+              ]
+            },
+            "PaginatedMethodAsync": {
+              "methods": [
+                "paginatedMethodAsync"
+              ]
+            },
+            "CheckLongRunningProgress": {
+              "methods": [
+                "checkLongRunningProgress"
+              ]
+            },
+            "Initialize": {
+              "methods": [
+                "initialize"
+              ]
+            },
+            "ServicePath": {
+              "methods": [
+                "servicePath"
+              ]
+            },
+            "ApiEndpoint": {
+              "methods": [
+                "apiEndpoint"
+              ]
+            },
+            "Port": {
+              "methods": [
+                "port"
+              ]
+            },
+            "Scopes": {
+              "methods": [
+                "scopes"
+              ]
+            },
+            "getProjectId": {
+              "methods": [
+                "getProjectId"
+              ]
+            },
+            "getReservedWord": {
+              "methods": [
+                "getReservedWord"
+              ]
+            },
+            "createABCDESomething": {
+              "methods": [
+                "createABCDESomething"
+              ]
+            },
+            "LongRunning": {
+              "methods": [
+                "longRunning"
+              ]
+            },
+            "PaginatedMethod": {
+              "methods": [
+                "paginatedMethod",
+                "paginatedMethodStream1",
+                "paginatedMethodAsync1"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

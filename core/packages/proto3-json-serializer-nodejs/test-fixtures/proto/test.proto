@@ -1,0 +1,139 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+package test;
+
+message PrimitiveTypes {
+    int32 integer_field = 1;
+    uint32 unsigned_integer_field = 2;
+    fixed32 fixed_integer_field = 3;
+    string string_field = 4;
+    bool bool_field = 5;
+    int64 int64_field = 6;
+    uint64 uint64_field = 7;
+    double double_field = 8;
+}
+
+message MessageWithNestedMessage {
+    AnyContent inner_message = 1;
+}
+
+message MessageWithAny {
+    google.protobuf.Any any_field = 3;
+}
+
+message AnyContent {
+    string string_field = 1;
+}
+
+message MessageWithBytesField {
+    bytes bytes_field = 3;
+}
+
+message MessageWithMap {
+    map<string, MapValue> map_field = 3;
+    map<string, string> string_map_field = 4;
+    map<string, int64> long_map_field = 5;
+    map<string, Enum> enum_map_field = 6;
+}
+
+message MapValue {
+    string string_field = 1;
+}
+
+message MessageWithRepeated {
+    repeated string repeated_string = 3;
+    repeated RepeatedValue repeated_message = 4;
+    repeated string one_more_repeated_string = 5;
+    repeated int64 repeated_long = 6;
+    repeated Enum repeated_enum = 7;
+}
+
+message RepeatedValue {
+    string string_field = 1;
+}
+
+enum Enum {
+    UNKNOWN = 0;
+    KNOWN = 1;
+}
+
+message MessageWithEnum {
+    Enum enum_field = 3;
+}
+
+message MessageWithOneof {
+    oneof _oneof_field {
+        string string_field = 1;
+        int32 integer_field = 2;
+        AnyContent message_field = 3;
+    }
+}
+
+message MessageWithValue {
+    google.protobuf.Value value_field = 1;
+}
+
+message MessageWithStruct {
+    google.protobuf.Struct struct_field = 1;
+}
+
+message MessageWithListValue {
+    google.protobuf.ListValue list_value_field = 1;
+}
+
+message MessageWithNullValue {
+    google.protobuf.NullValue null_value_field = 1;
+}
+
+message MessageWithDuration {
+    google.protobuf.Duration duration_field = 1;
+}
+
+message MessageWithTimestamp {
+    google.protobuf.Timestamp timestamp_field = 1;
+}
+
+message MessageWithEmpty {
+    google.protobuf.Empty empty_field = 1;
+}
+
+message MessageWithWrappers {
+    google.protobuf.DoubleValue double_value_field = 1;
+    google.protobuf.FloatValue float_value_field = 2;
+    google.protobuf.Int64Value int64_value_field = 3;
+    google.protobuf.UInt64Value uint64_value_field = 4;
+    google.protobuf.Int32Value int32_value_field = 5;
+    google.protobuf.UInt32Value uint32_value_field = 6;
+    google.protobuf.BoolValue bool_value_field = 7;
+    google.protobuf.StringValue string_value_field = 8;
+    google.protobuf.BytesValue bytes_value_field = 9;
+    google.protobuf.DoubleValue nan_value_field = 10;
+    google.protobuf.DoubleValue infinity_value_field = 11;
+    google.protobuf.DoubleValue negative_infinity_value_field = 12;
+}
+
+message MessageWithFieldMask {
+    google.protobuf.FieldMask field_mask_field = 1;
+}

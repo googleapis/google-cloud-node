@@ -1,0 +1,1647 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-bigquery",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.bigquery.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "bigquery_v2_generated_DatasetService_GetDataset_async",
+      "title": "DatasetService getDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the dataset specified by datasetID.",
+      "canonical": true,
+      "file": "dataset_service.get_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataset",
+        "fullName": "google.cloud.bigquery.v2.DatasetService.GetDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_view",
+            "type": ".google.cloud.bigquery.v2.GetDatasetRequest.DatasetView"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Dataset",
+        "client": {
+          "shortName": "DatasetServiceClient",
+          "fullName": "google.cloud.bigquery.v2.DatasetServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataset",
+          "fullName": "google.cloud.bigquery.v2.DatasetService.GetDataset",
+          "service": {
+            "shortName": "DatasetService",
+            "fullName": "google.cloud.bigquery.v2.DatasetService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_DatasetService_InsertDataset_async",
+      "title": "DatasetService insertDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new empty dataset.",
+      "canonical": true,
+      "file": "dataset_service.insert_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertDataset",
+        "fullName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset",
+            "type": ".google.cloud.bigquery.v2.Dataset"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Dataset",
+        "client": {
+          "shortName": "DatasetServiceClient",
+          "fullName": "google.cloud.bigquery.v2.DatasetServiceClient"
+        },
+        "method": {
+          "shortName": "InsertDataset",
+          "fullName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+          "service": {
+            "shortName": "DatasetService",
+            "fullName": "google.cloud.bigquery.v2.DatasetService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_DatasetService_PatchDataset_async",
+      "title": "DatasetService patchDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports RFC5789 patch semantics.",
+      "canonical": true,
+      "file": "dataset_service.patch_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PatchDataset",
+        "fullName": "google.cloud.bigquery.v2.DatasetService.PatchDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset",
+            "type": ".google.cloud.bigquery.v2.Dataset"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Dataset",
+        "client": {
+          "shortName": "DatasetServiceClient",
+          "fullName": "google.cloud.bigquery.v2.DatasetServiceClient"
+        },
+        "method": {
+          "shortName": "PatchDataset",
+          "fullName": "google.cloud.bigquery.v2.DatasetService.PatchDataset",
+          "service": {
+            "shortName": "DatasetService",
+            "fullName": "google.cloud.bigquery.v2.DatasetService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_DatasetService_UpdateDataset_async",
+      "title": "DatasetService updateDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.",
+      "canonical": true,
+      "file": "dataset_service.update_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataset",
+        "fullName": "google.cloud.bigquery.v2.DatasetService.UpdateDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset",
+            "type": ".google.cloud.bigquery.v2.Dataset"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Dataset",
+        "client": {
+          "shortName": "DatasetServiceClient",
+          "fullName": "google.cloud.bigquery.v2.DatasetServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDataset",
+          "fullName": "google.cloud.bigquery.v2.DatasetService.UpdateDataset",
+          "service": {
+            "shortName": "DatasetService",
+            "fullName": "google.cloud.bigquery.v2.DatasetService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_DatasetService_DeleteDataset_async",
+      "title": "DatasetService deleteDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.",
+      "canonical": true,
+      "file": "dataset_service.delete_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataset",
+        "fullName": "google.cloud.bigquery.v2.DatasetService.DeleteDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "delete_contents",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DatasetServiceClient",
+          "fullName": "google.cloud.bigquery.v2.DatasetServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDataset",
+          "fullName": "google.cloud.bigquery.v2.DatasetService.DeleteDataset",
+          "service": {
+            "shortName": "DatasetService",
+            "fullName": "google.cloud.bigquery.v2.DatasetService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_DatasetService_ListDatasets_async",
+      "title": "DatasetService listDatasets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all datasets in the specified project to which the user has been granted the READER dataset role.",
+      "canonical": true,
+      "file": "dataset_service.list_datasets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDatasets",
+        "fullName": "google.cloud.bigquery.v2.DatasetService.ListDatasets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": ".google.protobuf.UInt32Value"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "all",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.DatasetList",
+        "client": {
+          "shortName": "DatasetServiceClient",
+          "fullName": "google.cloud.bigquery.v2.DatasetServiceClient"
+        },
+        "method": {
+          "shortName": "ListDatasets",
+          "fullName": "google.cloud.bigquery.v2.DatasetService.ListDatasets",
+          "service": {
+            "shortName": "DatasetService",
+            "fullName": "google.cloud.bigquery.v2.DatasetService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_DatasetService_UndeleteDataset_async",
+      "title": "DatasetService undeleteDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Undeletes a dataset which is within time travel window based on datasetId. If a time is specified, the dataset version deleted at that time is undeleted, else the last live version is undeleted.",
+      "canonical": true,
+      "file": "dataset_service.undelete_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UndeleteDataset",
+        "fullName": "google.cloud.bigquery.v2.DatasetService.UndeleteDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deletion_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Dataset",
+        "client": {
+          "shortName": "DatasetServiceClient",
+          "fullName": "google.cloud.bigquery.v2.DatasetServiceClient"
+        },
+        "method": {
+          "shortName": "UndeleteDataset",
+          "fullName": "google.cloud.bigquery.v2.DatasetService.UndeleteDataset",
+          "service": {
+            "shortName": "DatasetService",
+            "fullName": "google.cloud.bigquery.v2.DatasetService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_JobService_CancelJob_async",
+      "title": "DatasetService cancelJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.",
+      "canonical": true,
+      "file": "job_service.cancel_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelJob",
+        "fullName": "google.cloud.bigquery.v2.JobService.CancelJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.JobCancelResponse",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.bigquery.v2.JobServiceClient"
+        },
+        "method": {
+          "shortName": "CancelJob",
+          "fullName": "google.cloud.bigquery.v2.JobService.CancelJob",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.bigquery.v2.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_JobService_GetJob_async",
+      "title": "DatasetService getJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role.",
+      "canonical": true,
+      "file": "job_service.get_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetJob",
+        "fullName": "google.cloud.bigquery.v2.JobService.GetJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Job",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.bigquery.v2.JobServiceClient"
+        },
+        "method": {
+          "shortName": "GetJob",
+          "fullName": "google.cloud.bigquery.v2.JobService.GetJob",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.bigquery.v2.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_JobService_InsertJob_async",
+      "title": "DatasetService insertJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts a new asynchronous job. This API has two different kinds of endpoint URIs, as this method supports a variety of use cases. * The *Metadata* URI is used for most interactions, as it accepts the job   configuration directly. * The *Upload* URI is ONLY for the case when you're sending both a load job   configuration and a data stream together.  In this case, the Upload URI   accepts the job configuration and the data as two distinct multipart MIME   parts.",
+      "canonical": true,
+      "file": "job_service.insert_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertJob",
+        "fullName": "google.cloud.bigquery.v2.JobService.InsertJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job",
+            "type": ".google.cloud.bigquery.v2.Job"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Job",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.bigquery.v2.JobServiceClient"
+        },
+        "method": {
+          "shortName": "InsertJob",
+          "fullName": "google.cloud.bigquery.v2.JobService.InsertJob",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.bigquery.v2.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_JobService_DeleteJob_async",
+      "title": "DatasetService deleteJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Requests the deletion of the metadata of a job. This call returns when the job's metadata is deleted.",
+      "canonical": true,
+      "file": "job_service.delete_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteJob",
+        "fullName": "google.cloud.bigquery.v2.JobService.DeleteJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.bigquery.v2.JobServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteJob",
+          "fullName": "google.cloud.bigquery.v2.JobService.DeleteJob",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.bigquery.v2.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_JobService_ListJobs_async",
+      "title": "DatasetService listJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.",
+      "canonical": true,
+      "file": "job_service.list_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 91,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListJobs",
+        "fullName": "google.cloud.bigquery.v2.JobService.ListJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "all_users",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "max_results",
+            "type": ".google.protobuf.Int32Value"
+          },
+          {
+            "name": "min_creation_time",
+            "type": "TYPE_UINT64"
+          },
+          {
+            "name": "max_creation_time",
+            "type": ".google.protobuf.UInt64Value"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "projection",
+            "type": ".google.cloud.bigquery.v2.ListJobsRequest.Projection"
+          },
+          {
+            "name": "state_filter",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "parent_job_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.JobList",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.bigquery.v2.JobServiceClient"
+        },
+        "method": {
+          "shortName": "ListJobs",
+          "fullName": "google.cloud.bigquery.v2.JobService.ListJobs",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.bigquery.v2.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_JobService_GetQueryResults_async",
+      "title": "DatasetService getQueryResults Sample",
+      "origin": "API_DEFINITION",
+      "description": " RPC to get the results of a query job.",
+      "canonical": true,
+      "file": "job_service.get_query_results.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 101,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetQueryResults",
+        "fullName": "google.cloud.bigquery.v2.JobService.GetQueryResults",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "start_index",
+            "type": ".google.protobuf.UInt64Value"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": ".google.protobuf.UInt32Value"
+          },
+          {
+            "name": "timeout_ms",
+            "type": ".google.protobuf.UInt32Value"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "format_options",
+            "type": ".google.cloud.bigquery.v2.DataFormatOptions"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.GetQueryResultsResponse",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.bigquery.v2.JobServiceClient"
+        },
+        "method": {
+          "shortName": "GetQueryResults",
+          "fullName": "google.cloud.bigquery.v2.JobService.GetQueryResults",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.bigquery.v2.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_JobService_Query_async",
+      "title": "DatasetService query Sample",
+      "origin": "API_DEFINITION",
+      "description": " Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.",
+      "canonical": true,
+      "file": "job_service.query.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Query",
+        "fullName": "google.cloud.bigquery.v2.JobService.Query",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query_request",
+            "type": ".google.cloud.bigquery.v2.QueryRequest"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.QueryResponse",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.bigquery.v2.JobServiceClient"
+        },
+        "method": {
+          "shortName": "Query",
+          "fullName": "google.cloud.bigquery.v2.JobService.Query",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.bigquery.v2.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_ModelService_GetModel_async",
+      "title": "DatasetService getModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified model resource by model ID.",
+      "canonical": true,
+      "file": "model_service.get_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetModel",
+        "fullName": "google.cloud.bigquery.v2.ModelService.GetModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Model",
+        "client": {
+          "shortName": "ModelServiceClient",
+          "fullName": "google.cloud.bigquery.v2.ModelServiceClient"
+        },
+        "method": {
+          "shortName": "GetModel",
+          "fullName": "google.cloud.bigquery.v2.ModelService.GetModel",
+          "service": {
+            "shortName": "ModelService",
+            "fullName": "google.cloud.bigquery.v2.ModelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_ModelService_ListModels_async",
+      "title": "DatasetService listModels Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all models in the specified dataset. Requires the READER dataset role. After retrieving the list of models, you can get information about a particular model by calling the models.get method.",
+      "canonical": true,
+      "file": "model_service.list_models.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListModels",
+        "fullName": "google.cloud.bigquery.v2.ModelService.ListModels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": ".google.protobuf.UInt32Value"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.ListModelsResponse",
+        "client": {
+          "shortName": "ModelServiceClient",
+          "fullName": "google.cloud.bigquery.v2.ModelServiceClient"
+        },
+        "method": {
+          "shortName": "ListModels",
+          "fullName": "google.cloud.bigquery.v2.ModelService.ListModels",
+          "service": {
+            "shortName": "ModelService",
+            "fullName": "google.cloud.bigquery.v2.ModelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_ModelService_PatchModel_async",
+      "title": "DatasetService patchModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Patch specific fields in the specified model.",
+      "canonical": true,
+      "file": "model_service.patch_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PatchModel",
+        "fullName": "google.cloud.bigquery.v2.ModelService.PatchModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model",
+            "type": ".google.cloud.bigquery.v2.Model"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Model",
+        "client": {
+          "shortName": "ModelServiceClient",
+          "fullName": "google.cloud.bigquery.v2.ModelServiceClient"
+        },
+        "method": {
+          "shortName": "PatchModel",
+          "fullName": "google.cloud.bigquery.v2.ModelService.PatchModel",
+          "service": {
+            "shortName": "ModelService",
+            "fullName": "google.cloud.bigquery.v2.ModelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_ModelService_DeleteModel_async",
+      "title": "DatasetService deleteModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the model specified by modelId from the dataset.",
+      "canonical": true,
+      "file": "model_service.delete_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteModel",
+        "fullName": "google.cloud.bigquery.v2.ModelService.DeleteModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ModelServiceClient",
+          "fullName": "google.cloud.bigquery.v2.ModelServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteModel",
+          "fullName": "google.cloud.bigquery.v2.ModelService.DeleteModel",
+          "service": {
+            "shortName": "ModelService",
+            "fullName": "google.cloud.bigquery.v2.ModelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_ProjectService_GetServiceAccount_async",
+      "title": "DatasetService getServiceAccount Sample",
+      "origin": "API_DEFINITION",
+      "description": " RPC to get the service account for a project used for interactions with Google Cloud KMS",
+      "canonical": true,
+      "file": "project_service.get_service_account.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetServiceAccount",
+        "fullName": "google.cloud.bigquery.v2.ProjectService.GetServiceAccount",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.GetServiceAccountResponse",
+        "client": {
+          "shortName": "ProjectServiceClient",
+          "fullName": "google.cloud.bigquery.v2.ProjectServiceClient"
+        },
+        "method": {
+          "shortName": "GetServiceAccount",
+          "fullName": "google.cloud.bigquery.v2.ProjectService.GetServiceAccount",
+          "service": {
+            "shortName": "ProjectService",
+            "fullName": "google.cloud.bigquery.v2.ProjectService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_RoutineService_GetRoutine_async",
+      "title": "DatasetService getRoutine Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified routine resource by routine ID.",
+      "canonical": true,
+      "file": "routine_service.get_routine.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRoutine",
+        "fullName": "google.cloud.bigquery.v2.RoutineService.GetRoutine",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "routine_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Routine",
+        "client": {
+          "shortName": "RoutineServiceClient",
+          "fullName": "google.cloud.bigquery.v2.RoutineServiceClient"
+        },
+        "method": {
+          "shortName": "GetRoutine",
+          "fullName": "google.cloud.bigquery.v2.RoutineService.GetRoutine",
+          "service": {
+            "shortName": "RoutineService",
+            "fullName": "google.cloud.bigquery.v2.RoutineService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_RoutineService_InsertRoutine_async",
+      "title": "DatasetService insertRoutine Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new routine in the dataset.",
+      "canonical": true,
+      "file": "routine_service.insert_routine.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertRoutine",
+        "fullName": "google.cloud.bigquery.v2.RoutineService.InsertRoutine",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "routine",
+            "type": ".google.cloud.bigquery.v2.Routine"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Routine",
+        "client": {
+          "shortName": "RoutineServiceClient",
+          "fullName": "google.cloud.bigquery.v2.RoutineServiceClient"
+        },
+        "method": {
+          "shortName": "InsertRoutine",
+          "fullName": "google.cloud.bigquery.v2.RoutineService.InsertRoutine",
+          "service": {
+            "shortName": "RoutineService",
+            "fullName": "google.cloud.bigquery.v2.RoutineService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_RoutineService_UpdateRoutine_async",
+      "title": "DatasetService updateRoutine Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates information in an existing routine. The update method replaces the entire Routine resource.",
+      "canonical": true,
+      "file": "routine_service.update_routine.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateRoutine",
+        "fullName": "google.cloud.bigquery.v2.RoutineService.UpdateRoutine",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "routine_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "routine",
+            "type": ".google.cloud.bigquery.v2.Routine"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Routine",
+        "client": {
+          "shortName": "RoutineServiceClient",
+          "fullName": "google.cloud.bigquery.v2.RoutineServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateRoutine",
+          "fullName": "google.cloud.bigquery.v2.RoutineService.UpdateRoutine",
+          "service": {
+            "shortName": "RoutineService",
+            "fullName": "google.cloud.bigquery.v2.RoutineService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_RoutineService_PatchRoutine_async",
+      "title": "DatasetService patchRoutine Sample",
+      "origin": "API_DEFINITION",
+      "description": " Patches information in an existing routine. The patch method does a partial update to an existing Routine resource.",
+      "canonical": true,
+      "file": "routine_service.patch_routine.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PatchRoutine",
+        "fullName": "google.cloud.bigquery.v2.RoutineService.PatchRoutine",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "routine_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "routine",
+            "type": ".google.cloud.bigquery.v2.Routine"
+          },
+          {
+            "name": "field_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Routine",
+        "client": {
+          "shortName": "RoutineServiceClient",
+          "fullName": "google.cloud.bigquery.v2.RoutineServiceClient"
+        },
+        "method": {
+          "shortName": "PatchRoutine",
+          "fullName": "google.cloud.bigquery.v2.RoutineService.PatchRoutine",
+          "service": {
+            "shortName": "RoutineService",
+            "fullName": "google.cloud.bigquery.v2.RoutineService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_RoutineService_DeleteRoutine_async",
+      "title": "DatasetService deleteRoutine Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the routine specified by routineId from the dataset.",
+      "canonical": true,
+      "file": "routine_service.delete_routine.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteRoutine",
+        "fullName": "google.cloud.bigquery.v2.RoutineService.DeleteRoutine",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "routine_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "RoutineServiceClient",
+          "fullName": "google.cloud.bigquery.v2.RoutineServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteRoutine",
+          "fullName": "google.cloud.bigquery.v2.RoutineService.DeleteRoutine",
+          "service": {
+            "shortName": "RoutineService",
+            "fullName": "google.cloud.bigquery.v2.RoutineService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_RoutineService_ListRoutines_async",
+      "title": "DatasetService listRoutines Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all routines in the specified dataset. Requires the READER dataset role.",
+      "canonical": true,
+      "file": "routine_service.list_routines.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRoutines",
+        "fullName": "google.cloud.bigquery.v2.RoutineService.ListRoutines",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": ".google.protobuf.UInt32Value"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.ListRoutinesResponse",
+        "client": {
+          "shortName": "RoutineServiceClient",
+          "fullName": "google.cloud.bigquery.v2.RoutineServiceClient"
+        },
+        "method": {
+          "shortName": "ListRoutines",
+          "fullName": "google.cloud.bigquery.v2.RoutineService.ListRoutines",
+          "service": {
+            "shortName": "RoutineService",
+            "fullName": "google.cloud.bigquery.v2.RoutineService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_RowAccessPolicyService_ListRowAccessPolicies_async",
+      "title": "DatasetService listRowAccessPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all row access policies on the specified table.",
+      "canonical": true,
+      "file": "row_access_policy_service.list_row_access_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRowAccessPolicies",
+        "fullName": "google.cloud.bigquery.v2.RowAccessPolicyService.ListRowAccessPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.ListRowAccessPoliciesResponse",
+        "client": {
+          "shortName": "RowAccessPolicyServiceClient",
+          "fullName": "google.cloud.bigquery.v2.RowAccessPolicyServiceClient"
+        },
+        "method": {
+          "shortName": "ListRowAccessPolicies",
+          "fullName": "google.cloud.bigquery.v2.RowAccessPolicyService.ListRowAccessPolicies",
+          "service": {
+            "shortName": "RowAccessPolicyService",
+            "fullName": "google.cloud.bigquery.v2.RowAccessPolicyService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_TableService_GetTable_async",
+      "title": "DatasetService getTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.",
+      "canonical": true,
+      "file": "table_service.get_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTable",
+        "fullName": "google.cloud.bigquery.v2.TableService.GetTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "selected_fields",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.bigquery.v2.GetTableRequest.TableMetadataView"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Table",
+        "client": {
+          "shortName": "TableServiceClient",
+          "fullName": "google.cloud.bigquery.v2.TableServiceClient"
+        },
+        "method": {
+          "shortName": "GetTable",
+          "fullName": "google.cloud.bigquery.v2.TableService.GetTable",
+          "service": {
+            "shortName": "TableService",
+            "fullName": "google.cloud.bigquery.v2.TableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_TableService_InsertTable_async",
+      "title": "DatasetService insertTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new, empty table in the dataset.",
+      "canonical": true,
+      "file": "table_service.insert_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertTable",
+        "fullName": "google.cloud.bigquery.v2.TableService.InsertTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table",
+            "type": ".google.cloud.bigquery.v2.Table"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Table",
+        "client": {
+          "shortName": "TableServiceClient",
+          "fullName": "google.cloud.bigquery.v2.TableServiceClient"
+        },
+        "method": {
+          "shortName": "InsertTable",
+          "fullName": "google.cloud.bigquery.v2.TableService.InsertTable",
+          "service": {
+            "shortName": "TableService",
+            "fullName": "google.cloud.bigquery.v2.TableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_TableService_PatchTable_async",
+      "title": "DatasetService patchTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports RFC5789 patch semantics.",
+      "canonical": true,
+      "file": "table_service.patch_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PatchTable",
+        "fullName": "google.cloud.bigquery.v2.TableService.PatchTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table",
+            "type": ".google.cloud.bigquery.v2.Table"
+          },
+          {
+            "name": "autodetect_schema",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Table",
+        "client": {
+          "shortName": "TableServiceClient",
+          "fullName": "google.cloud.bigquery.v2.TableServiceClient"
+        },
+        "method": {
+          "shortName": "PatchTable",
+          "fullName": "google.cloud.bigquery.v2.TableService.PatchTable",
+          "service": {
+            "shortName": "TableService",
+            "fullName": "google.cloud.bigquery.v2.TableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_TableService_UpdateTable_async",
+      "title": "DatasetService updateTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates information in an existing table. The update method replaces the entire Table resource, whereas the patch method only replaces fields that are provided in the submitted Table resource.",
+      "canonical": true,
+      "file": "table_service.update_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTable",
+        "fullName": "google.cloud.bigquery.v2.TableService.UpdateTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table",
+            "type": ".google.cloud.bigquery.v2.Table"
+          },
+          {
+            "name": "autodetect_schema",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.Table",
+        "client": {
+          "shortName": "TableServiceClient",
+          "fullName": "google.cloud.bigquery.v2.TableServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateTable",
+          "fullName": "google.cloud.bigquery.v2.TableService.UpdateTable",
+          "service": {
+            "shortName": "TableService",
+            "fullName": "google.cloud.bigquery.v2.TableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_TableService_DeleteTable_async",
+      "title": "DatasetService deleteTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.",
+      "canonical": true,
+      "file": "table_service.delete_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTable",
+        "fullName": "google.cloud.bigquery.v2.TableService.DeleteTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "TableServiceClient",
+          "fullName": "google.cloud.bigquery.v2.TableServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteTable",
+          "fullName": "google.cloud.bigquery.v2.TableService.DeleteTable",
+          "service": {
+            "shortName": "TableService",
+            "fullName": "google.cloud.bigquery.v2.TableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquery_v2_generated_TableService_ListTables_async",
+      "title": "DatasetService listTables Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all tables in the specified dataset. Requires the READER dataset role.",
+      "canonical": true,
+      "file": "table_service.list_tables.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTables",
+        "fullName": "google.cloud.bigquery.v2.TableService.ListTables",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": ".google.protobuf.UInt32Value"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.v2.TableList",
+        "client": {
+          "shortName": "TableServiceClient",
+          "fullName": "google.cloud.bigquery.v2.TableServiceClient"
+        },
+        "method": {
+          "shortName": "ListTables",
+          "fullName": "google.cloud.bigquery.v2.TableService.ListTables",
+          "service": {
+            "shortName": "TableService",
+            "fullName": "google.cloud.bigquery.v2.TableService"
+          }
+        }
+      }
+    }
+  ]
+}
