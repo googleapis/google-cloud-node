@@ -1,0 +1,501 @@
+{#-
+
+Copyright 2019 Google LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-#}
+
+{% set markdownReferenceRegex = r/\[(.*?)\]\[(.*?)\]/g %}
+
+{%- macro printComments(method, service, generatedAsyncName) -%}
+  {{- printCommentsForMethod(method) }}
+  {{- printRequest(method) -}}
+  {{- printCommentsForParams(method) -}}
+  {{- printOptions() -}}
+  {{- printReturn(method, service, generatedAsyncName) }}
+{%- endmacro %}
+
+{%- macro printDecodeMethodComments(method, decodeMethodName) %}
+ * Check the status of the long running operation returned by `{{ method.name.toCamelCase() }}()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+{%- endmacro %}
+
+{%- macro printCommentsPageStream(method, generatedName) -%}
+  {{- printPageStreamHeader(method) -}}
+  {{- printRequest(method) -}}
+  {{- printCommentsForParams(method, "stream") -}}
+  {{- printOptions() -}}
+  {{- printReturnPageStream(method, generatedName) }}
+{%- endmacro -%}
+
+{%- macro printCommentsPageAsync(method, generatedName) -%}
+  {{- printPageAsyncHeader(method) -}}
+  {{- printRequest(method) -}}
+  {{- printCommentsForParams(method, "async") -}}
+  {{- printOptions() -}}
+  {{- printReturnPageAsync(method, generatedName) }}
+{%- endmacro -%}
+
+{%- macro printCommentsForService(service) -%}
+{%- set lines = service.comments -%}
+{% for line in lines %}
+{%- set trimmed = line.replace(r/\s+$/, '') -%}
+{%- if trimmed.length > 0 %}
+ * {{ trimmed.replaceAll('*/', '* /') | replace(markdownReferenceRegex, replaceMarkdownLink('$2', '$1')) | safe }}
+{%- else %}
+ *
+{%- endif %}
+{%- endfor %}
+{%- endmacro -%}
+
+{%- macro printCommentsForMethod(method) -%}
+{%- set lines = method.comments -%}
+{% for line in lines %}
+ *{{ line.replaceAll('*/', '* /').replace(r/\s+$/, '') | replace(markdownReferenceRegex, replaceMarkdownLink('$2', '$1')) | safe }}
+{%- endfor %}
+{%- endmacro -%}
+
+
+{%- macro printPageAsyncHeader(method) %}
+{%- if method.pagingMapResponseType -%}
+{{ printCommentsForMethod(method) }}
+{%- else %}
+ * Equivalent to `{{ method.name.toCamelCase() }}`, but returns an iterable object.
+ *
+{%- endif %}
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+{%- endmacro -%}
+
+{%- macro printPageStreamHeader(method) %}
+ * Equivalent to `{{ method.name.toCamelCase() }}`, but returns a NodeJS Stream object.
+{%- endmacro -%}
+
+{%- macro printRequest(method) %}
+{%- if not method.clientStreaming %}
+ * @param {Object} request
+ *   The request object that will be sent.
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro printCommentsForParams(method, asyncOrStream) -%}
+{% if not method.clientStreaming %}
+{%- set commentsMap = method.paramComment -%}
+{%- for oneComment in commentsMap -%}
+{%- set type = oneComment.paramType -%}
+{%- if type.startsWith('.') %}
+ {%- if method.maxResultsParameter 
+  and method.pagingResponseType 
+  and printRequestField(oneComment)=="request.maxResults"
+  and not asyncOrStream 
+  and (type == ".google.protobuf.UInt32Value" or type == ".google.protobuf.Int32Value")%}
+  * @param { {{- type.substring(1) -}}  | number } {{ printRequestField(oneComment) }}
+ {%- else %}
+ * @param { {{- type.substring(1) -}} } {{ printRequestField(oneComment) }}
+ {%- endif -%}
+{%- else %}
+ * @param { {{- convertParamType(oneComment.paramType) -}} } {{ printRequestField(oneComment) }}
+{%- endif -%}
+{%- set lines = oneComment.comments -%}
+{%- for line in lines %}
+{%- set trimmed = line.replace(r/\s+$/, '') -%}
+{%- if trimmed.length > 0 %}
+ *  {{ trimmed.replaceAll('*/', '* /') | replace(markdownReferenceRegex, replaceMarkdownLink('$2', '$1')) | safe }}
+{%- else %}
+ *
+{%- endif -%}
+{%- endfor -%}
+{%- endfor -%}
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro printOptions(type) %}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+{%- endmacro -%}
+
+{%- macro printReturn(method, service, generatedAsyncName) -%}
+{%- if method.longRunning %}
+{{- printReturnLROMethod(method) }}
+{%- elif method.serverStreaming and method.clientStreaming %}
+{{- printReturnBidiStreamingMethod(method) }}
+{%- elif method in service.paging %}
+{{- printReturnPagingServerMethod(method, generatedAsyncName) }}
+{%- elif method.serverStreaming %}
+{{- printReturnServerStreamingMethod(method) }}
+{%- elif method.clientStreaming %}
+{{- printReturnClientStreamingMethod(method) }}
+{%- else %}
+{{- printReturnSimpleMethod(method) }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro printReturnLROMethod(method) %}
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+{%- endmacro -%}
+
+{%- macro printReturnSimpleMethod(method) %}
+{%- if method.isDiregapicLRO %}
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+{%- else %}
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {{ typeLink(method.outputType) }}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro printReturnPagingServerMethod(method, generatedAsyncName) %}
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {{ typeLink(method.pagingResponseType) }}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `{{ generatedAsyncName }}()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+{%- endmacro -%}
+
+{%- macro printReturnServerStreamingMethod(method) %}
+ * @returns {Stream}
+ *   An object stream which emits {{ typeLink(method.outputType) }} on 'data' event.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+ *   for more details and examples.
+{%- endmacro -%}
+
+{%- macro printReturnClientStreamingMethod(method) %}
+ * @returns {Stream} - A writable stream which accepts objects representing
+ * {{ typeLink(method.inputType) }}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#client-streaming | documentation }
+ *   for more details and examples.
+{%- endmacro -%}
+
+{%- macro printReturnBidiStreamingMethod(method) %}
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {{ typeLink(method.inputType) }} for write() method, and
+ *   will emit objects representing {{ typeLink(method.outputType) }} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+{%- endmacro -%}
+
+{%- macro printReturnPageStream(method, generatedAsyncName) %}
+ * @returns {Stream}
+ *   An object stream which emits an object representing {{ typeLink(method.pagingResponseType) }} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `{{ generatedAsyncName }}()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+{%- endmacro -%}
+
+{%- macro printReturnPageAsync(method, generatedName) %}
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ {%- if method.pagingMapResponseType %}
+ *   as tuple [string, {{ typeLink(method.pagingMapResponseType) }}]. The API will be called under the hood as needed, once per the page,
+ {%- else %}
+ *   {{ typeLink(method.pagingResponseType) }}. The API will be called under the hood as needed, once per the page,
+ {%- endif %}
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+{%- endmacro -%}
+
+{%- macro printRequestField(oneComment) %}
+{%- if oneComment.fieldBehavior and oneComment.fieldBehavior === 1 -%}
+[request.{{ oneComment.paramName.toCamelCase() }}]
+{%- else -%}
+request.{{ oneComment.paramName.toCamelCase() }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro typeLink(type) -%}
+{%- set tsType = typescriptType(type) -%}
+{%- if tsType.length > 0 -%}
+{{ tsType }}
+{%- else -%}
+{%- if type.startsWith('.') -%}
+{@link protos{{ type }}|{{ toMessageName(type) }}}
+{%- else -%}
+{@link protos.{{ type }}|{{ toMessageName(type) }}}
+{%- endif -%}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro toMessageName(messageType) -%}
+{%- set arr = messageType.split('.') %}
+{{- arr[arr.length - 1] -}}
+{%- endmacro -%}
+
+{%- macro buildHeaderRequestParam(method) -%}
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+{#- if dynamic routing annotation exists and is non empty, then send dynamic routing header #}
+{%- if method.dynamicRoutingRequestParams.length > 0 %}
+    let routingParameter = {};
+{%- for paramArray in method.dynamicRoutingRequestParams %}
+  {%- for param in paramArray %}
+    {
+      const fieldValue = request.{{ param.fieldRetrieve.join('?.') }};
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('{{ param.messageRegex | safe }}'));
+        if (match) {
+          const parameterValue = match.groups?.['{{ param.fieldSend }}'] ?? fieldValue;
+          Object.assign(routingParameter, { {{ param.fieldSend }}: parameterValue });
+        }
+      }
+    }
+{%- endfor %}
+{%- endfor %}
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
+{%- elif method.headerRequestParams.length > 0 %}
+{#- either dynamic routing parameters are set, or implicit parameters, but not both #}
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+{%- for requestParam in method.headerRequestParams %}
+      '{{ requestParam.toSnakeCaseString(".") }}': request.{{ requestParam.toCamelCaseString("!.") }}{% if 'id' in requestParam.toCamelCaseString().toLowerCase() %}?.toString(){% endif %} ?? '',
+{%- endfor %}
+    });
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro initRequestWithHeaderParam(method, skipExpectedVariable='') -%}
+{# initializing request object for generated unit tests -#}
+            const request = generateSampleMessage(
+              new protos{{ method.inputInterface }}()
+            );
+{%- if method.headerRequestParams.length > 0 %}
+{#- generated request object for implicit routing headers -#}
+{%- set expectedRequestParamJoiner = joiner("&") -%}
+{%- set expectedRequestParams = "" -%}
+{%- set valueCounter = 0 -%}
+{%- for requestParam in method.headerRequestParams %}
+{%- set valueCounter = valueCounter + 1 -%}
+{%- set chain = "request" -%}
+{%- set originalName = "" -%}
+{%- set fieldsJoiner = joiner(", ") -%}
+{%- set fields = "" -%}
+{%- for field in requestParam.slice(0, -1) %}
+            {{ chain }}.{{ field.toCamelCase() }} ??= {};
+{%- set chain = chain + "." + field.toCamelCase() -%}
+{%- set originalName = originalName + field + "." -%}
+{%- set fields = fields + fieldsJoiner() + "'" + field.toCamelCase() + "'" -%}
+{%- endfor -%}
+{%- set lastFieldName = requestParam.slice(-1)[0].toCamelCase() -%}
+{%- set fields = fields + fieldsJoiner() + "'" + lastFieldName + "'" %}
+            const defaultValue{{ valueCounter }} =
+              getTypeDefaultValue('{{ method.inputInterface }}', [{{ fields | safe }}]);
+            {{ chain }}.{{ lastFieldName }} = defaultValue{{ valueCounter }};
+{%- set expectedRequestParams = expectedRequestParams + expectedRequestParamJoiner() +
+                                originalName + requestParam.slice(-1)[0] + "=" +
+                                  "${defaultValue" + valueCounter + " ?? '' }" -%}
+{%- endfor %}
+{%- if not skipExpectedVariable %}
+            const expectedHeaderRequestParams = `{{ expectedRequestParams | safe }}`;
+{%- endif %}
+{%- elif method.dynamicRoutingRequestParams.length > 0 %}
+{#- generated request object for dynamic routing headers -#}
+{#- for unit tests, only take the last template.
+    TODO: figure out how to generate expected value for multiple, possibly overlapping, templates
+-#}
+{%- set expectedKey = "" -%}
+{%- set expectedValue = "" -%}
+{%- for paramArray in method.dynamicRoutingRequestParams.slice(-1) %}
+{%- for param in paramArray %}
+{%- set chain = "request" -%}
+{%- for field in param.fieldRetrieve.slice(0, -1) %}
+            {{ chain }}.{{ field.toCamelCase() }} = {};
+{%- set chain = chain + "." + field.toCamelCase() -%}
+{%- endfor %}
+            {%- set expectedKey = param.fieldSend -%}
+            {%- if param.pathTemplate %}
+            // path template: {{ param.pathTemplate }}
+            {#- generate real-looking value for the field that would match the path template -#}
+            {%- set fieldValue = param.pathTemplate.replace(r/{\w+}/, '{name=*}').replace(r/{\w+=/, '').replace('}', '').replace(r/\*+/g, 'value') -%}
+            {%- set parameterValue = param.pathTemplate.replace(r/{\w+}/, '{name=*}').replace(r/.*{\w+=/, '').replace(r/}.*/, '').replace(r/\*+/g, 'value').replace(r/\//g, '%2F') -%}
+            {%- else %}
+            // path template is empty
+            {%- set fieldValue = 'value' -%}
+            {%- set parameterValue = 'value' -%}
+            {%- endif -%}
+            {%- set expectedValue = parameterValue %}
+            {{ chain }}.{{ param.fieldRetrieve.slice(-1)[0].toCamelCase() }} = '{{ fieldValue }}';
+{%- endfor %}
+{%- endfor %}
+{%- if not skipExpectedVariable %}
+            const expectedHeaderRequestParams = '{{ expectedKey }}={{ expectedValue }}';
+{%- endif %}
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro verifyUUID(method) -%}
+{%- for field in method.autoPopulatedFields %}    
+            assert.match((client.innerApiCalls.{{ method.name.toCamelCase(true) }} as SinonStub)
+                .getCall(0).args[0].{{field.toCamelCase()}}, /[a-z0-9-]{36}/)
+{%- endfor %}
+{%- endmacro -%}
+
+{%- macro verifyHeaderRequestParams(method) -%}
+{%- if method.headerRequestParams.length > 0 or method.dynamicRoutingRequestParams.length > 0 %}
+            const actualRequest = (client.innerApiCalls.{{ method.name.toCamelCase(true) }} as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.{{ method.name.toCamelCase(true) }} as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro initResponse(method) %}
+            const expectedResponse = generateSampleMessage(
+              new protos{{ method.outputInterface }}()
+            );
+{%- endmacro -%}
+
+{%- macro initPagingResponse(method) -%}
+{%- if method.pagingResponseType.includes('TYPE_STRING') -%}
+            const expectedResponse = [new String(), new String(), new String()];
+{%- elif method.pagingResponseType.includes('TYPE_BOOL') -%}
+            const expectedResponse = [new Boolean(), new Boolean(), new Boolean()];
+{%- elif method.pagingResponseType.includes('TYPE_BYTES') -%}
+            const expectedResponse = [Buffer.from(''), Buffer.from(''), Buffer.from('')];
+{%- elif method.pagingResponseType.includes('TYPE_') -%}
+            const expectedResponse = [new Number(), new Number(), new Number()];
+{%- else -%}
+            const expectedResponse = [
+              generateSampleMessage(new protos{{ method.pagingResponseType }}()),
+              generateSampleMessage(new protos{{ method.pagingResponseType }}()),
+              generateSampleMessage(new protos{{ method.pagingResponseType }}()),
+            ];
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro initPagingMapResponse(method) -%}
+            const expectedResponse = [
+              ['tuple_key_1', generateSampleMessage(new protos{{ method.pagingMapResponseType }}())],
+              ['tuple_key_2', generateSampleMessage(new protos{{ method.pagingMapResponseType }}())],
+              ['tuple_key_3', generateSampleMessage(new protos{{ method.pagingMapResponseType }}())],
+            ];
+{%- endmacro -%}
+
+{%- macro typescriptType(protobufType) -%}
+{%- if protobufType.includes('TYPE_BYTES') -%}
+{%- set type = 'Buffer' -%}
+{%- elif protobufType.includes('TYPE_BOOL') -%}
+{%- set type = 'boolean' -%}
+{%- elif protobufType.includes('TYPE_STRING') -%}
+{%- set type = 'string' -%}
+{%- elif protobufType.includes('TYPE_') -%}
+{#- any other type is essentially a number: int32, uint32, etc. -#}
+{%- set type = 'number' -%}
+{%- else -%}
+{%- set type = '' -%}
+{%- endif -%}
+{%- if protobufType.includes('[]') -%}
+{{ type }}[]
+{%- else -%}
+{{ type }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro toInterface(type) -%}
+{%- set tsType = typescriptType(type) -%}
+{%- if tsType.length > 0 -%}
+{{ tsType }}
+{%- else -%}
+{%- set index = type.lastIndexOf('.') -%}
+protos{{ type.substring(0, index + 1) + 'I' + type.substring(index + 1) }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro convertParamType(paramType) -%}
+          {{- typescriptType(paramType) -}}
+{%- endmacro -%}
+
+{%- macro promiseResponsePaging(method) -%}
+{%- set tsType = typescriptType(method.pagingResponseType) -%}
+{%- if tsType.length > 0 -%}
+{{ tsType }}
+{%- else -%}
+protos{{ method.pagingResponseType }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro initClientOptions(rest, gaxServerRetries=false) -%}
+            {
+{%- if rest %}
+              auth: googleAuth,
+{%- else %}
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+{%- endif %}
+              projectId: 'bogus',
+{%- if gaxServerRetries %}
+              gaxServerStreamingRetries: true
+{%- endif %}
+            }
+{%- endmacro -%}
+
+{%- macro toHttpRules(httpRules) -%}
+[
+{%- set httpJoiner = joiner() -%}
+{%- for httpRule in httpRules -%}
+  {{ httpJoiner() -}}
+  {
+    {%- for key, value in httpRule -%}
+      {%- if key === 'additional_bindings' -%}
+      {{ key }}: {{ toHttpRules(value) }},
+      {% else -%}
+      {{ key }}: '{{ value }}',
+      {%- endif -%}
+    {% endfor -%}
+  }
+{%- endfor -%}
+]
+{%- endmacro -%}
+
+{%- macro replaceMarkdownLink(type, typeName) -%}
+{%- set tsType = typescriptType(type) -%}
+{%- if tsType.length > 0 -%}
+{@link {{ type }}|{{ typeName }}}
+{%- else -%}
+{@link protos.{{ type }}|{{ typeName }}}
+{%- endif -%}
+{%- endmacro -%}

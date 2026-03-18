@@ -1,0 +1,34 @@
+// Copyright 2020 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package google;
+
+service DtsUpdateTest {
+  rpc Test(TestMessage) returns (TestMessage) {
+  }
+}
+
+enum TestEnum {
+  TEST_ENUM_UNSPECIFIED = 0;
+  SOME_VALUE = 1;
+}
+
+message TestMessage {
+  int64 long_field = 1;
+  bytes bytes_field = 2; 
+  TestEnum enum_field = 3;
+  TestEnum case = 4; // special name
+}
