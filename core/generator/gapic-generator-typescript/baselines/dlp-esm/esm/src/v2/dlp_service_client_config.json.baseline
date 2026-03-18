@@ -1,0 +1,150 @@
+{
+  "interfaces": {
+    "google.privacy.dlp.v2.DlpService": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "InspectContent": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RedactImage": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeidentifyContent": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ReidentifyContent": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListInfoTypes": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateInspectTemplate": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateInspectTemplate": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetInspectTemplate": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListInspectTemplates": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteInspectTemplate": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateDeidentifyTemplate": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateDeidentifyTemplate": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDeidentifyTemplate": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDeidentifyTemplates": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteDeidentifyTemplate": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateJobTrigger": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateJobTrigger": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetJobTrigger": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListJobTriggers": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteJobTrigger": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ActivateJobTrigger": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateDlpJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDlpJobs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDlpJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteDlpJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CancelDlpJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateStoredInfoType": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateStoredInfoType": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetStoredInfoType": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListStoredInfoTypes": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteStoredInfoType": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        }
+      }
+    }
+  }
+}

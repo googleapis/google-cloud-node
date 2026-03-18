@@ -1,0 +1,4 @@
+introduction: |-
+    **_THIS REPOSITORY AND PACKAGE WILL BE DEPRECATED IN JULY 2024. RELEVANT FUNCTIONALITIES HAVE BEEN MOVED TO [GOOGLEAPIS/GAXIOS](https://github.com/googleapis/gaxios)_**
+
+    Like request, but much smaller - and with less options. Uses node-fetch under the hood. Pop it in where you would use request. Improves load and parse time of modules.

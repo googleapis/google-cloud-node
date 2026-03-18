@@ -58,10 +58,10 @@ function main(name) {
   // const requestId = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callDeleteManagedFolder() {
     // Construct request
@@ -70,7 +70,7 @@ function main(name) {
     };
 
     // Run request
-    const response = await controlClient.deleteManagedFolder(request);
+    const response = await storageControlClient.deleteManagedFolder(request);
     console.log(response);
   }
 
