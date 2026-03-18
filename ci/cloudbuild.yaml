@@ -14,6 +14,8 @@
 
 options:
   dynamic_substitutions: true
+  machineType: 'E2_HIGHCPU_32'
+  diskSizeGb: '100'
 
 substitutions:
   _BUILD_TYPE: "presubmit"
@@ -26,26 +28,40 @@ logsBucket: 'gs://${_LOGS_BUCKET}/logs/google-cloud-node/${_BUILD_TYPE}/${COMMIT
 timeout: 32400s
 
 steps:
-  - name: 'gcr.io/kaniko-project/executor:v1.24.0'
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Pull Image for Cache'
+    entrypoint: 'bash'
+    args: ['-c', 'docker pull gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION} || exit 0']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build Test Image'
     args: [
-      '--log-format=text',
-      '--context=dir:///workspace/testing',
-      '--build-arg=NODE_VERSION=${_NODE_VERSION}',
-      '--dockerfile=ci/Dockerfile',
-      '--cache=true',
-      '--destination=gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}',
-      '--push-retry=3',
-      '--image-fs-extract-retry=3'
+      'build',
+      '-t', 'gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}',
+      '--cache-from', 'gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}',
+      '-f', 'ci/Dockerfile',
+      '--build-arg', 'NODE_VERSION=${_NODE_VERSION}',
+      '.'
     ]
+    waitFor: ['Pull Image for Cache']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push Test Image'
+    args: ['push', 'gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}']
+    waitFor: ['Build Test Image']
+
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: "bash"
     args: ["ci/deletecloudbuild.sh"]
     env:
     - 'REF_NAME=${REF_NAME}'
+    waitFor: ['Push Test Image']
+
   - name: gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}
     id: "run-tests"
     timeout: 32400s
     entrypoint: "ci/run_conditional_tests.sh"
+    waitFor: ['Push Test Image']
     env:
     - 'BUILD_TYPE=${_BUILD_TYPE}'
     - 'TEST_TYPE=${_TEST_TYPE}'
@@ -54,3 +70,7 @@ steps:
     - 'REPO_OWNER=${_REPO_OWNER}'
     - 'REPO_NAME=${_REPO_NAME}'
     - 'COMMIT_SHA=$COMMIT_SHA'
+    - 'IS_CORE=${_IS_CORE}'
+
+images:
+  - 'gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}'

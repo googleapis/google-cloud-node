@@ -1,0 +1,8 @@
+{
+  "extends": "gts/tsconfig-google.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "dom"],
+    "rootDir": "."
+  },
+  "include": ["src/*.*ts", "test/*.ts", "browser-test/*.ts", "system-test/*.ts"]
+}
