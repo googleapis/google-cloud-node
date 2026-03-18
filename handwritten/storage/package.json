@@ -7,7 +7,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-storage",
+  "repository": {
+    "type": "git",
+    "directory": "handwritten/storage",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "main": "./build/cjs/src/index.js",
   "types": "./build/cjs/src/index.d.ts",
   "type": "module",
@@ -120,5 +124,6 @@
     "tmp": "^0.2.3",
     "typescript": "^5.8.3",
     "yargs": "^17.7.2"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/storage"
 }

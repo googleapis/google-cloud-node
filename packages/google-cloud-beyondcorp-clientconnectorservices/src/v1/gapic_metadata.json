@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.beyondcorp.clientconnectorservices.v1",
+  "libraryPackage": "@google-cloud/clientconnectorservices",
+  "services": {
+    "ClientConnectorServicesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ClientConnectorServicesServiceClient",
+          "rpcs": {
+            "GetClientConnectorService": {
+              "methods": [
+                "getClientConnectorService"
+              ]
+            },
+            "CreateClientConnectorService": {
+              "methods": [
+                "createClientConnectorService"
+              ]
+            },
+            "UpdateClientConnectorService": {
+              "methods": [
+                "updateClientConnectorService"
+              ]
+            },
+            "DeleteClientConnectorService": {
+              "methods": [
+                "deleteClientConnectorService"
+              ]
+            },
+            "ListClientConnectorServices": {
+              "methods": [
+                "listClientConnectorServices",
+                "listClientConnectorServicesStream",
+                "listClientConnectorServicesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ClientConnectorServicesServiceClient",
+          "rpcs": {
+            "GetClientConnectorService": {
+              "methods": [
+                "getClientConnectorService"
+              ]
+            },
+            "CreateClientConnectorService": {
+              "methods": [
+                "createClientConnectorService"
+              ]
+            },
+            "UpdateClientConnectorService": {
+              "methods": [
+                "updateClientConnectorService"
+              ]
+            },
+            "DeleteClientConnectorService": {
+              "methods": [
+                "deleteClientConnectorService"
+              ]
+            },
+            "ListClientConnectorServices": {
+              "methods": [
+                "listClientConnectorServices",
+                "listClientConnectorServicesStream",
+                "listClientConnectorServicesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

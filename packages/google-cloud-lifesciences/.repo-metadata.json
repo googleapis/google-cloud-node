@@ -1,0 +1,16 @@
+{
+  "name": "lifesciences",
+  "name_pretty": "Cloud Life Sciences",
+  "product_documentation": "https://cloud.google.com/life-sciences/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/life-sciences/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/life-sciences",
+  "api_id": "lifesciences.googleapis.com",
+  "default_version": "v2beta",
+  "requires_billing": true,
+  "api_shortname": "lifesciences",
+  "library_type": "GAPIC_AUTO"
+}

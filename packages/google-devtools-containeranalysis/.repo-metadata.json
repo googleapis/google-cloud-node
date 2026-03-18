@@ -1,0 +1,17 @@
+{
+  "repo": "googleapis/google-cloud-node",
+  "default_version": "v1",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559742",
+  "language": "nodejs",
+  "api_id": "containeranalysis.googleapis.com",
+  "release_level": "stable",
+  "name": "containeranalysis",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/containeranalysis/latest",
+  "requires_billing": true,
+  "distribution_name": "@google-cloud/containeranalysis",
+  "name_pretty": "Google Container Analysis",
+  "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
+  "codeowner_team": "@googleapis/aap-dpes",
+  "api_shortname": "containeranalysis",
+  "library_type": "GAPIC_AUTO"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "bigquerymigration",
+  "name_pretty": "BigQuery Migration API",
+  "product_documentation": "https://cloud.google.com/bigquery/docs/migration-intro",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-migration/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/bigquery-migration",
+  "api_id": "bigquerymigration.googleapis.com",
+  "default_version": "v2",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}

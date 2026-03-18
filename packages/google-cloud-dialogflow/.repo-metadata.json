@@ -1,0 +1,17 @@
+{
+  "name": "dialogflow",
+  "name_pretty": "Dialogflow API",
+  "product_documentation": "https://cloud.google.com/dialogflow-enterprise/",
+  "client_documentation": "https://googleapis.dev/nodejs/dialogflow/latest",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5300385",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/dialogflow",
+  "api_id": "dialogflow.googleapis.com",
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis",
+  "default_version": "v2",
+  "api_shortname": "dialogflow",
+  "library_type": "GAPIC_AUTO"
+}

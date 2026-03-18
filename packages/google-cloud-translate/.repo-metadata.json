@@ -1,0 +1,17 @@
+{
+  "distribution_name": "@google-cloud/translate",
+  "release_level": "stable",
+  "product_documentation": "https://cloud.google.com/translate/docs/",
+  "repo": "googleapis/google-cloud-node",
+  "default_version": "v3",
+  "language": "nodejs",
+  "requires_billing": true,
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559749",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/translate/latest",
+  "name": "translate",
+  "name_pretty": "Cloud Translation",
+  "api_id": "translate.googleapis.com",
+  "codeowner_team": "@googleapis/ml-apis",
+  "api_shortname": "translate",
+  "library_type": "GAPIC_AUTO"
+}

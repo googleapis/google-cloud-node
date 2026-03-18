@@ -1,0 +1,4 @@
+introduction: |-
+        [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs) collects metrics, events, and metadata from
+        Google Cloud Platform, Amazon Web Services (AWS), hosted uptime probes, application instrumentation,
+        and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch and many others.

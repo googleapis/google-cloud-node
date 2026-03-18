@@ -148,7 +148,7 @@ export function convertObjKeysToSnakeCase(obj: object): object {
  * @param {boolean} includeTime flag to include hours, minutes, seconds in output.
  * @param {string} dateDelimiter delimiter between date components.
  * @param {string} timeDelimiter delimiter between time components.
- * @returns {string} UTC ISO format of provided date obect.
+ * @returns {string} UTC ISO format of provided date object.
  */
 export function formatAsUTCISO(
   dateTimeToFormat: Date,
@@ -252,7 +252,7 @@ export class PassThroughShim extends PassThrough {
       this.emit('writing');
       this.shouldEmitWriting = false;
     }
-    // Per the nodejs documention, callback must be invoked on the next tick
+    // Per the nodejs documentation, callback must be invoked on the next tick
     process.nextTick(() => {
       super._write(chunk, encoding, callback);
     });

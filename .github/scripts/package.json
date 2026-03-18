@@ -1,0 +1,23 @@
+{
+    "name": "tests",
+    "private": true,
+    "description": "tests for script",
+    "scripts": {
+        "test": "mocha tests/close-invalid-link.test.cjs && mocha tests/close-or-remove-response-label.test.cjs",
+        "samples-test": "echo 'no samples test!'",
+        "system-test": "echo 'no system test!'"
+    },
+    "author": "Google Inc.",
+    "license": "Apache-2.0",
+    "engines": {
+        "node": ">=14"
+    },
+    "dependencies": {
+        "js-yaml": "^4.1.0"
+    },
+    "devDependencies": {
+        "@octokit/rest": "^19.0.0",
+        "mocha": "^10.0.0",
+        "sinon": "^21.0.0"
+    }
+}

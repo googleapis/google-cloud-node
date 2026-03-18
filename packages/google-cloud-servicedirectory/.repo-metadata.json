@@ -1,0 +1,16 @@
+{
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/service-directory/latest",
+  "api_id": "servicedirectory.googleapis.com",
+  "distribution_name": "@google-cloud/service-directory",
+  "release_level": "stable",
+  "default_version": "v1",
+  "language": "nodejs",
+  "name_pretty": "Service Directory",
+  "repo": "googleapis/google-cloud-node",
+  "product_documentation": "",
+  "requires_billing": true,
+  "name": "servicedirectory",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "api_shortname": "servicedirectory",
+  "library_type": "GAPIC_AUTO"
+}

@@ -6,11 +6,11 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559782",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-storage",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/storage",
   "api_id": "storage-api.googleapis.com",
   "requires_billing": true,
-  "codeowner_team": "@googleapis/gcs-sdk-team",
+  "codeowner_team": "@googleapis/gcs-team",
   "api_shortname": "storage",
   "library_type": "GAPIC_MANUAL"
 }

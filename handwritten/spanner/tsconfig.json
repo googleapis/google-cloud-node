@@ -1,0 +1,29 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build",
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "include": [
+    "src/*.ts",
+    "src/**/*.ts",
+    "src/v1/*.d.ts",
+    "src/**/*.js",
+    "src/**/*.json",
+    "test/*.ts",
+    "test/**/*.ts",
+    "system-test/*.ts",
+    "benchmark/*.ts",
+    "observability-test/*.ts",
+    "src/**/*.json",
+    "system-test/*.ts",
+    "protos/protos.json",
+    "samples/**/*.d.ts"
+  ]
+}

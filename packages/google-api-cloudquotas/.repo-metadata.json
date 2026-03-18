@@ -1,0 +1,17 @@
+{
+  "name": "cloudquotas",
+  "name_pretty": "Cloud Quotas API",
+  "product_documentation": "https://cloud.google.com/docs/quota/api-overview",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudquotas/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/cloudquotas",
+  "api_id": "cloudquotas.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "cloudquotas"
+}
+

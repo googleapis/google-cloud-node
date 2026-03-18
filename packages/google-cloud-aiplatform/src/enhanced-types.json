@@ -1,0 +1,136 @@
+{
+  "v1beta1": {
+    "schema": {
+      "predict": {
+        "instance": [
+          "ImageClassificationPredictionInstance",
+          "ImageObjectDetectionPredictionInstance",
+          "ImageSegmentationPredictionInstance",
+          "TextClassificationPredictionInstance",
+          "TextExtractionPredictionInstance",
+          "TextSentimentPredictionInstance",
+          "VideoActionRecognitionPredictionInstance",
+          "VideoClassificationPredictionInstance",
+          "VideoObjectTrackingPredictionInstance"
+        ],
+        "params": [
+          "ImageClassificationPredictionParams",
+          "ImageObjectDetectionPredictionParams",
+          "ImageSegmentationPredictionParams",
+          "VideoActionRecognitionPredictionParams",
+          "VideoClassificationPredictionParams",
+          "VideoObjectTrackingPredictionParams"
+        ],
+        "prediction": [
+          "ClassificationPredictionResult",
+          "ImageObjectDetectionPredictionResult",
+          "ImageSegmentationPredictionResult",
+          "TabularClassificationPredictionResult",
+          "TabularRegressionPredictionResult",
+          "TextExtractionPredictionResult",
+          "TextSentimentPredictionResult",
+          "TimeSeriesForecastingPredictionResult",
+          "VideoActionRecognitionPredictionResult",
+          "VideoClassificationPredictionResult",
+          "VideoObjectTrackingPredictionResult"
+        ]
+      },
+      "trainingjob": {
+        "definition": [
+          "AutoMlForecasting",
+          "AutoMlForecastingInputs",
+          "AutoMlForecastingMetadata",
+          "AutoMlImageClassification",
+          "AutoMlImageClassificationInputs",
+          "AutoMlImageClassificationMetadata",
+          "AutoMlImageObjectDetection",
+          "AutoMlImageObjectDetectionInputs",
+          "AutoMlImageObjectDetectionMetadata",
+          "AutoMlImageSegmentation",
+          "AutoMlImageSegmentationInputs",
+          "AutoMlImageSegmentationMetadata",
+          "AutoMlTables",
+          "AutoMlTablesInputs",
+          "AutoMlTablesMetadata",
+          "AutoMlTextClassification",
+          "AutoMlTextClassificationInputs",
+          "AutoMlTextExtraction",
+          "AutoMlTextExtractionInputs",
+          "AutoMlTextSentiment",
+          "AutoMlTextSentimentInputs",
+          "AutoMlVideoActionRecognition",
+          "AutoMlVideoActionRecognitionInputs",
+          "AutoMlVideoClassification",
+          "AutoMlVideoClassificationInputs",
+          "AutoMlVideoObjectTracking",
+          "AutoMlVideoObjectTrackingInputs"
+        ]
+      }
+    }
+  },
+  "v1": {
+    "schema": {
+      "predict": {
+        "instance": [
+          "ImageClassificationPredictionInstance",
+          "ImageObjectDetectionPredictionInstance",
+          "ImageSegmentationPredictionInstance",
+          "TextClassificationPredictionInstance",
+          "TextExtractionPredictionInstance",
+          "TextSentimentPredictionInstance",
+          "VideoActionRecognitionPredictionInstance",
+          "VideoClassificationPredictionInstance",
+          "VideoObjectTrackingPredictionInstance"
+        ],
+        "params": [
+          "ImageClassificationPredictionParams",
+          "ImageObjectDetectionPredictionParams",
+          "ImageSegmentationPredictionParams",
+          "VideoActionRecognitionPredictionParams",
+          "VideoClassificationPredictionParams",
+          "VideoObjectTrackingPredictionParams"
+        ],
+        "prediction": [
+          "ClassificationPredictionResult",
+          "ImageObjectDetectionPredictionResult",
+          "ImageSegmentationPredictionResult",
+          "TabularClassificationPredictionResult",
+          "TabularRegressionPredictionResult",
+          "TextExtractionPredictionResult",
+          "TextSentimentPredictionResult",
+          "VideoActionRecognitionPredictionResult",
+          "VideoClassificationPredictionResult",
+          "VideoObjectTrackingPredictionResult"
+        ]
+      },
+      "trainingjob": {
+        "definition": [
+          "AutoMlImageClassification",
+          "AutoMlImageClassificationInputs",
+          "AutoMlImageClassificationMetadata",
+          "AutoMlImageObjectDetection",
+          "AutoMlImageObjectDetectionInputs",
+          "AutoMlImageObjectDetectionMetadata",
+          "AutoMlImageSegmentation",
+          "AutoMlImageSegmentationInputs",
+          "AutoMlImageSegmentationMetadata",
+          "AutoMlTables",
+          "AutoMlTablesInputs",
+          "AutoMlTablesMetadata",
+          "AutoMlTextClassification",
+          "AutoMlTextClassificationInputs",
+          "AutoMlTextExtraction",
+          "AutoMlTextExtractionInputs",
+          "AutoMlTextSentiment",
+          "AutoMlTextSentimentInputs",
+          "AutoMlVideoActionRecognition",
+          "AutoMlVideoActionRecognitionInputs",
+          "AutoMlVideoClassification",
+          "AutoMlVideoClassificationInputs",
+          "AutoMlVideoObjectTracking",
+          "AutoMlVideoObjectTrackingInputs"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "default_version": "v1",
+  "release_level": "stable",
+  "requires_billing": true,
+  "client_documentation": "https://googleapis.dev/nodejs/text-to-speech/latest",
+  "codeowner_team": "@googleapis/ml-apis",
+  "language": "nodejs",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5235428",
+  "product_documentation": "https://cloud.google.com/text-to-speech",
+  "name": "text-to-speech",
+  "distribution_name": "@google-cloud/text-to-speech",
+  "name_pretty": "Google Cloud Text-to-Speech",
+  "api_id": "texttospeech.googleapis.com",
+  "repo": "googleapis/google-cloud-node",
+  "api_shortname": "texttospeech",
+  "library_type": "GAPIC_AUTO"
+}

@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/capacityplanner/v1beta/allocation.proto",
+  "../../protos/google/cloud/capacityplanner/v1beta/capacity_planning_service.proto",
+  "../../protos/google/cloud/capacityplanner/v1beta/future_reservation.proto",
+  "../../protos/google/cloud/capacityplanner/v1beta/location.proto",
+  "../../protos/google/cloud/capacityplanner/v1beta/resource.proto",
+  "../../protos/google/cloud/capacityplanner/v1beta/usage_service.proto"
+]

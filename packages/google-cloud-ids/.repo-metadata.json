@@ -1,0 +1,16 @@
+{
+  "name": "ids",
+  "api_shortname": "ids",
+  "name_pretty": "Cloud IDS",
+  "product_documentation": "https://cloud.google.com/intrusion-detection-system/",
+  "client_documentation": "https://cloud.google.com/intrusion-detection-system",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/ids",
+  "api_id": "ids.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}

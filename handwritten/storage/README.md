@@ -5,7 +5,7 @@
 # [Google Cloud Storage: Node.js Client](https://github.com/googleapis/nodejs-storage)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/storage.svg)](https://www.npmjs.org/package/@google-cloud/storage)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/storage.svg)](https://www.npmjs.com/package/@google-cloud/storage)
 
 
 
@@ -34,14 +34,16 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 **Table of contents:**
 
 
-* [Quickstart](#quickstart)
-  * [Before you begin](#before-you-begin)
-  * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
-* [Versioning](#versioning)
-* [Contributing](#contributing)
-* [License](#license)
+- [Google Cloud Storage: Node.js Client](#google-cloud-storage-nodejs-client)
+  - [Quickstart](#quickstart)
+    - [Before you begin](#before-you-begin)
+    - [Installing the client library](#installing-the-client-library)
+    - [Using the client library](#using-the-client-library)
+  - [Samples](#samples)
+  - [Supported Node.js Versions](#supported-nodejs-versions)
+  - [Versioning](#versioning)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Quickstart
 

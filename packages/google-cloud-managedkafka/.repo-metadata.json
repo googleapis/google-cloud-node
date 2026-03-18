@@ -1,0 +1,17 @@
+{
+  "name": "managedkafka",
+  "name_pretty": "Managed Service for Apache Kafka API",
+  "product_documentation": "https://cloud.google.com/managed-kafka",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/managedkafka/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/managedkafka",
+  "api_id": "managedkafka.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "managedkafka"
+}
+

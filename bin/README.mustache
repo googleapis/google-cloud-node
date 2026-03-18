@@ -1,0 +1,112 @@
+# Google Cloud Node.js Client Libraries
+
+> Node.js idiomatic client libraries for [Google Cloud Platform](https://cloud.google.com/) services.
+
+* [Node.js on Google Cloud][gcloud-homepage]
+
+Libraries are available on GitHub and npm for developing Node.js
+applications that interact with individual Google Cloud services:
+
+| Repo | Release Level | Version |
+|------|----------|-----------------|
+{{libraries}}
+
+If the service is not listed above, [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client) interfaces
+with additional Google Cloud APIs using a legacy REST interface.
+
+_When building Node.js applications, preference should be given to the libraries listed in the table._
+
+## Enabling APIs
+
+Before you can interact with a given Google Cloud Service, you must enable its API.
+
+Links are available for enabling APIs in the table at the beginning of this document, and in
+each libraries README.md.
+
+## Authentication
+
+### Download your Service Account Credentials JSON file
+
+To use Application Default Credentials, You first need to download a set of JSON credentials for your project. Go to **APIs & Auth** > **Credentials** in the [Google Developers Console][devconsole] and select **Service account** from the **Add credentials** dropdown.
+
+> This file is your *only copy* of these credentials. It should never be
+> committed with your source code, and should be stored securely.
+
+Once downloaded, store the path to this file in the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
+
+### Other Authentication Methods
+
+Other authentication methods are outlined in the README for [google-auth-library-nodejs](https://github.com/googleapis/google-auth-library-nodejs),
+which is the authentication library used by all Google Cloud Node.js clients.
+
+## Example Applications
+
+- [nodejs-getting-started][nodejs-getting-started] - A sample and [tutorial][nodejs-getting-started-tutorial] that demonstrates how to build a complete web application using Cloud Datastore, Cloud Storage, and Cloud Pub/Sub and deploy it to Google App Engine or Google Compute Engine.
+- [gcloud-node-todos][gcloud-todos] - A TodoMVC backend using google-cloud-node and Datastore.
+- [gitnpm][gitnpm] - Easily lookup an npm package's GitHub repo using google-cloud-node and Google App Engine.
+- [gcloud-kvstore][gcloud-kvstore] - Use Datastore as a simple key-value store.
+- [hya-wave][hya-wave] - Cloud-based web sample editor. Part of the [hya-io][hya-io] family of products.
+- [gstore-node][gstore-node] - Google Datastore Entities Modeling library.
+- [gstore-api][gstore-api] - REST API builder for Google Datastore Entities.
+
+## Supported Node.js Versions
+
+Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Libraries are compatible with all current _active_ and _maintenance_ versions of
+Node.js.
+If you are using an end-of-life version of Node.js, we recommend that you update
+as soon as possible to an actively supported LTS version.
+
+Google's client libraries support legacy versions of Node.js runtimes on a
+best-efforts basis with the following warnings:
+
+* Legacy versions are not tested in continuous integration.
+* Some security patches and features cannot be backported.
+* Dependencies cannot be kept up-to-date.
+
+Client libraries targeting some end-of-life versions of Node.js are available, and
+can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
+The dist-tags follow the naming convention `legacy-(version)`.
+For example, `{{ metadata['lib_install_cmd'] }}@legacy-10` installs client libraries
+for versions compatible with Node.js 10.
+
+## Versioning
+
+Our libraries follow [Semantic Versioning][semver].
+
+Please note it is currently under active development. Any release versioned `0.x.y` is subject to backwards-incompatible changes at any time.
+
+**Stable**: Libraries defined at the Stable quality level are stable. The code surface will not change in backwards-incompatible ways unless absolutely necessary (e.g. because of critical security issues) or with an extensive deprecation period. Issues and requests against Stable libraries are addressed with the highest priority.
+
+**Preview**: Libraries defined at the preview quality level are still a work-in-progress and are more likely to get backwards-incompatible updates.
+
+## Contributing
+
+Contributions to this library are always welcome and highly encouraged.
+
+See [CONTRIBUTING][contributing] for more information on how to get started.
+
+## License
+
+Apache 2.0 - See [LICENSE][license] for more information.
+
+[stable-stability]: https://img.shields.io/badge/stability-stable-green
+[ga-description]: #ga
+[preview-stability]: https://img.shields.io/badge/stability-preview-orange
+[preview-description]: #preview
+[launch-stages]: https://cloud.google.com/products#section-22
+[gcloud-homepage]: https://cloud.google.com/nodejs/
+[nodejs-getting-started]: https://github.com/GoogleCloudPlatform/nodejs-getting-started
+[nodejs-getting-started-tutorial]: https://cloud.google.com/nodejs/getting-started/hello-world
+[gcloud-todos]: https://github.com/GoogleCloudPlatform/gcloud-node-todos
+[gitnpm]: https://github.com/stephenplusplus/gitnpm
+[gcloud-kvstore]: https://github.com/stephenplusplus/gcloud-kvstore
+[hya-wave]: https://wav.hya.io
+[hya-io]: https://hya.io
+[gstore-node]: https://github.com/sebelga/gstore-node
+[gstore-api]: https://github.com/sebelga/gstore-api
+[devconsole]: https://console.developer.google.com
+[googleapis]: https://github.com/google/google-api-nodejs-client
+[semver]: http://semver.org
+[contributing]: CONTRIBUTING.md
+[license]: LICENSE

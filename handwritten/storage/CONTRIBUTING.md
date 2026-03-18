@@ -2,10 +2,11 @@
 
 **Table of contents**
 
-* [Contributor License Agreements](#contributor-license-agreements)
-* [Contributing a patch](#contributing-a-patch)
-* [Running the tests](#running-the-tests)
-* [Releasing the library](#releasing-the-library)
+- [How to become a contributor and submit your own code](#how-to-become-a-contributor-and-submit-your-own-code)
+  - [Contributor License Agreements](#contributor-license-agreements)
+  - [Contributing A Patch](#contributing-a-patch)
+    - [Before you begin](#before-you-begin)
+  - [Running the tests](#running-the-tests)
 
 ## Contributor License Agreements
 

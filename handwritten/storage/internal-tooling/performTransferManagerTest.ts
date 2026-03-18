@@ -82,12 +82,12 @@ async function performTestCleanup(fileOrFiles: File[] | File | string[]) {
   const filesToDelete = Array.isArray(fileOrFiles)
     ? fileOrFiles
     : [fileOrFiles];
-  const promises = filesToDelete.map(async f => {
+  const promises = filesToDelete.map(f => {
     let fileToDelete = f;
     if (typeof f === 'string') {
       fileToDelete = bucket.file(f);
     }
-    await (fileToDelete as File).delete({ignoreNotFound: true});
+    (fileToDelete as File).delete({ignoreNotFound: true});
   });
   return Promise.all(promises);
 }
@@ -276,4 +276,4 @@ async function performChunkUploadDownloadTest(): Promise<TestResult[]> {
   return results;
 }
 
-void main();
+main();

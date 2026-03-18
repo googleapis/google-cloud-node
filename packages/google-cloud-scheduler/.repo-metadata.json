@@ -1,0 +1,17 @@
+{
+  "default_version": "v1",
+  "release_level": "stable",
+  "requires_billing": false,
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/scheduler/latest",
+  "codeowner_team": "@googleapis/aap-dpes",
+  "language": "nodejs",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5411429",
+  "product_documentation": "https://cloud.google.com/scheduler",
+  "name": "scheduler",
+  "distribution_name": "@google-cloud/scheduler",
+  "name_pretty": "Google Cloud Scheduler",
+  "api_id": "cloudscheduler.googleapis.com",
+  "repo": "googleapis/google-cloud-node",
+  "api_shortname": "cloudscheduler",
+  "library_type": "GAPIC_AUTO"
+}

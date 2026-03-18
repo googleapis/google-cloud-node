@@ -1,0 +1,92 @@
+#!/bin/bash
+#
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set -e
+
+export REGION_ID='uc'
+export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
+export NODE_OPTIONS=--max_old_space_size=4096
+
+if [ -z "${BUILD_TYPE}" ]; then
+    echo "missing BUILD_TYPE env var"
+    exit 1
+fi
+
+if [ -z "${TEST_TYPE}" ]; then
+    TEST_TYPE="units"
+fi
+
+d=$(pwd)
+PROJECT=$(basename ${d})
+
+if [ ${BUILD_TYPE} != "presubmit" ]; then
+    # Activate mocha config
+    export MOCHA_REPORTER_OUTPUT=${PROJECT}_sponge_log.xml
+    export MOCHA_REPORTER_SUITENAME=${PROJECT}
+    export MOCHA_REPORTER=xunit
+fi
+
+# Install dependencies
+echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
+pnpm install --ignore-scripts --engine-strict --prod; pnpm install
+
+
+retval=0
+
+if [ "${RUN_INTERDEPENDENT_TESTS}" = "true" ]; then
+    case ${TEST_TYPE} in
+    lint)
+        # Skip interdependent tests for lint
+        ;;
+    samples)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "samples-test"
+        ;;
+    system)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "system-test"
+        ;;
+    units)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "test"
+        ;;
+    *)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "${TEST_TYPE}"
+        ;;
+    esac
+fi
+
+set +e
+case ${TEST_TYPE} in
+lint)
+    pnpm prelint
+    pnpm lint
+    retval=$?
+    ;;
+samples)
+    pnpm samples-test
+    retval=$?
+    ;;
+system)
+    pnpm system-test
+    retval=$?
+    ;;
+units)
+    pnpm test
+    retval=$?
+    ;;
+*)
+    ;;
+esac
+
+exit ${retval}

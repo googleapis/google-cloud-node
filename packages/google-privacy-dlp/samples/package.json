@@ -1,0 +1,30 @@
+{
+  "name": "dlp-samples",
+  "description": "Code samples for Google Cloud Platform's Data Loss Prevention API",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "repository": "googleapis/nodejs-dlp",
+  "files": [
+    "*.js"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "mocha test/*.test.js --timeout=600000"
+  },
+  "dependencies": {
+    "@google-cloud/pubsub": "^5.0.0",
+    "@google-cloud/dlp": "^6.5.0",
+    "mime": "^4.0.0",
+    "yargs": "^17.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0",
+    "pixelmatch": "^7.0.0",
+    "pngjs": "^6.0.0",
+    "uuid": "^9.0.0"
+  }
+}

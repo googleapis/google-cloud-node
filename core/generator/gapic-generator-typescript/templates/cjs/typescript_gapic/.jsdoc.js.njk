@@ -1,0 +1,39 @@
+{% import "_license.njk" as license -%}
+{{license.license(commonParameters.copyrightYear)}}
+'use strict';
+
+module.exports = {
+  opts: {
+    readme: './README.md',
+    package: './package.json',
+    template: './node_modules/jsdoc-fresh',
+    recurse: true,
+    verbose: true,
+    destination: './docs/'
+  },
+  plugins: [
+    'plugins/markdown',
+    'jsdoc-region-tag'
+  ],
+  source: {
+    excludePattern: '(^|\\/|\\\\)[._]',
+    include: [
+      'build/src',
+      'protos'
+    ],
+    includePattern: '\\.js$'
+  },
+  templates: {
+    copyright: 'Copyright {{ commonParameters.copyrightYear }} Google LLC',
+    includeDate: false,
+    sourceFiles: false,
+    systemName: '{{ api.publishName }}',
+    theme: 'lumen',
+    default: {
+      outputSourceFiles: false
+    }
+  },
+  markdown: {
+    idInHeadings: true
+  }
+};

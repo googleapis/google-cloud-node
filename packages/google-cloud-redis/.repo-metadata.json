@@ -1,0 +1,16 @@
+{
+  "api_id": "redis.googleapis.com",
+  "name": "redis",
+  "language": "nodejs",
+  "product_documentation": "https://cloud.google.com/memorystore/docs/redis/",
+  "distribution_name": "@google-cloud/redis",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5169231",
+  "name_pretty": "Cloud Redis",
+  "default_version": "v1",
+  "release_level": "stable",
+  "repo": "googleapis/google-cloud-node",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/redis/latest",
+  "requires_billing": true,
+  "api_shortname": "redis",
+  "library_type": "GAPIC_AUTO"
+}

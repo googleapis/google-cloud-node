@@ -1,0 +1,17 @@
+{
+  "name": "migrationcenter",
+  "name_pretty": "Migration Center API",
+  "product_documentation": "https://cloud.google.com/migration-center/docs/migration-center-overview",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/migrationcenter/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/migrationcenter",
+  "api_id": "migrationcenter.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "migrationcenter"
+}
+

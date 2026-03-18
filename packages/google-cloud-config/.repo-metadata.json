@@ -1,0 +1,17 @@
+{
+  "name": "infra-manager",
+  "name_pretty": "Infrastructure Manager API",
+  "product_documentation": "https://cloud.google.com/infrastructure-manager/docs/overview",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/infra-manager/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/config",
+  "api_id": "config.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "config"
+}
+

@@ -1,0 +1,17 @@
+{
+  "name": "maintenance",
+  "name_pretty": "Maintenance API",
+  "product_documentation": "https://cloud.google.com/unified-maintenance/docs/overview",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/maintenance/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/maintenance-api",
+  "api_id": "maintenance.googleapis.com",
+  "default_version": "v1beta",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "maintenance"
+}
+

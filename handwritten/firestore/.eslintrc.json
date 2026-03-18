@@ -1,0 +1,73 @@
+{
+  "extends": "./node_modules/gts",
+  "overrides": [
+    {
+      "files": [
+        "dev/src/**/*.ts"
+      ],
+      "excludedFiles": [
+        "dev/src/v1/*.ts",
+        "dev/src/v1beta1/*.ts"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true,
+            "allowTypedFunctionExpressions": true
+          }
+        ],
+        "no-console": ["error", {"allow": ["error"]}],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            // Ignore args that are underscore only
+            "argsIgnorePattern": "^_$"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "dev/test/*.ts",
+        "dev/system-test/*.ts"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "no-restricted-properties": [
+          "error",
+          {
+            "object": "describe",
+            "property": "only"
+          },
+          {
+            "object": "it",
+            "property": "only"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            // Ignore args that are underscore only
+            "argsIgnorePattern": "^_$"
+          }
+        ],
+        "@typescript-eslint/no-floating-promises": "warn"
+      }
+    },
+    {
+      "files": [
+        "dev/src/v1/**/*.ts",
+        "dev/src/v1beta1/**/*.ts",
+        "dev/test/gapic_firestore_v1.ts",
+        "dev/test/gapic_firestore_admin_v1.ts",
+        "dev/test/gapic_firestore_admin_v1.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": ["off"],
+        "@typescript-eslint/no-floating-promises": ["off"]
+      }
+    }
+  ]
+}

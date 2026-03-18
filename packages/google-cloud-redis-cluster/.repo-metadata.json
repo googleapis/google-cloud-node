@@ -1,0 +1,17 @@
+{
+  "name": "redis",
+  "name_pretty": "Google Cloud Memorystore for Redis API",
+  "product_documentation": "https://cloud.google.com/redis/docs",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/redis/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/redis-cluster",
+  "api_id": "redis.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "redis"
+}
+

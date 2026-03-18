@@ -1,0 +1,17 @@
+{
+  "name": "parallelstore",
+  "name_pretty": "Parallelstore API",
+  "product_documentation": "http://cloud/parallelstore?hl=en",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/parallelstore/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/parallelstore",
+  "api_id": "parallelstore.googleapis.com",
+  "default_version": "v1beta",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "parallelstore"
+}
+

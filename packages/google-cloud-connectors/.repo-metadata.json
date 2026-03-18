@@ -1,0 +1,17 @@
+{
+  "name": "connectors",
+  "name_pretty": "Connectors API",
+  "product_documentation": "",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/connectors/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/connectors",
+  "api_id": "connectors.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "connectors"
+}
+

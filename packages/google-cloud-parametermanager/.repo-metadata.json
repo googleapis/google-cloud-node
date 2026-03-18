@@ -1,0 +1,17 @@
+{
+  "name": "parametermanager",
+  "name_pretty": "Parameter Manager API",
+  "product_documentation": "https://cloud.google.com/secret-manager/parameter-manager/docs/overview",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/parametermanager/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/parametermanager",
+  "api_id": "parametermanager.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "parametermanager"
+}
+

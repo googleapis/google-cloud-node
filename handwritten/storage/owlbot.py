@@ -14,28 +14,31 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
-s.copy(templates, excludes=['.jsdoc.js',
+templates = common_templates.node_mono_repo_library(relative_dir="handwriten/storage", source_location='build/src')
+s.copy(templates, destination="handwritten/storage", excludes=['.jsdoc.js',
                             '.github/release-please.yml',
                             '.github/sync-repo-settings.yaml',
+                            '.github/workflows/ci.yaml',
                             '.prettierrc.js',
                             '.mocharc.js',
-                            '.kokoro/continuous/node18/system-test.cfg',
-                            '.kokoro/presubmit/node18/system-test.cfg',
+                            '.kokoro/continuous/node14/system-test.cfg',
+                            '.kokoro/presubmit/node14/system-test.cfg',
                             '.kokoro/release/publish.cfg',
-                            '.kokoro/system-test.sh'
+                            '.kokoro/system-test.sh',
+                            '.kokoro/samples-test.sh',
+                            '.OwlBot.yaml'
                             ])
 
 # Create .config directory under $HOME to get around permissions issues
 # with resumable upload.
 s.replace(
-    ".circleci/config.yml",
+    "handwriten/storage/.circleci/config.yml",
     "command: npm run system-test",
     "command: mkdir $HOME/.config && npm run system-test")
-node.fix()
+node.fix_hermetic(relative_dir="handwritten/storage")

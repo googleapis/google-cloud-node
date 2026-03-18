@@ -1,0 +1,75 @@
+{
+  "name": "@google-cloud/automl",
+  "description": "Cloud AutoML API client for Node.js",
+  "version": "5.1.1",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-automl",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
+  "main": "build/src/index.js",
+  "files": [
+    "build/protos",
+    "build/src"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google automl",
+    "automl",
+    "Cloud AutoML API"
+  ],
+  "scripts": {
+    "test": "c8 mocha build/test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "lint": "gts check",
+    "fix": "gts fix",
+    "prelint": "cd samples; npm link ../; npm install",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "docs": "jsdoc -c .jsdoc.js",
+    "docs-test": "linkinator docs",
+    "predocs-test": "npm run docs",
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "prepare": "npm run compile",
+    "precompile": "gts clean"
+  },
+  "dependencies": {
+    "google-gax": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.13.9",
+    "@types/sinon": "^17.0.4",
+    "c8": "^10.1.3",
+    "codecov": "^3.8.3",
+    "gapic-tools": "^1.0.0",
+    "gts": "^6.0.2",
+    "jsdoc": "^4.0.4",
+    "jsdoc-fresh": "^4.0.0",
+    "jsdoc-region-tag": "^3.0.0",
+    "linkinator": "^6.1.2",
+    "long": "^5.3.1",
+    "mocha": "^11.1.0",
+    "null-loader": "^4.0.1",
+    "pack-n-play": "^3.0.0",
+    "sinon": "^21.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-automl"
+}
