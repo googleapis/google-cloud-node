@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -207,10 +207,13 @@ export class PublisherClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}',
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
-      projectTopicPathTemplate: new this._gaxModule.PathTemplate(
+      projectTopicsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/topics/{topic}',
       ),
       schemaPathTemplate: new this._gaxModule.PathTemplate(
@@ -245,7 +248,7 @@ export class PublisherClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // Some methods on this API support automatically batching
     // requests; denote this.
 
@@ -447,7 +450,7 @@ export class PublisherClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the topic. It must have the format
+   *   Required. Identifier. The name of the topic. It must have the format
    *   `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
    *   and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
    *   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
@@ -487,6 +490,13 @@ export class PublisherClient {
    * @param {number[]} [request.messageTransforms]
    *   Optional. Transforms to be applied to messages published to the topic.
    *   Transforms are applied in the order specified.
+   * @param {number[]} request.tags
+   *   Optional. Input only. Immutable. Tag keys/values directly bound to this
+   *   resource. For example:
+   *     "123/environment": "production",
+   *     "123/costCenter": "marketing"
+   *   See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+   *   using tags with Pub/Sub resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -584,7 +594,23 @@ export class PublisherClient {
           this._log.info('createTopic response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates an existing topic by updating the fields specified in the update
@@ -697,7 +723,23 @@ export class PublisherClient {
           this._log.info('updateTopic response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic
@@ -807,7 +849,23 @@ export class PublisherClient {
           this._log.info('publish response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets the configuration of a topic.
@@ -914,7 +972,23 @@ export class PublisherClient {
           this._log.info('getTopic response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes the topic with the given name. Returns `NOT_FOUND` if the topic
@@ -1025,7 +1099,23 @@ export class PublisherClient {
           this._log.info('deleteTopic response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Detaches a subscription from this topic. All messages retained in the
@@ -1135,7 +1225,23 @@ export class PublisherClient {
           this._log.info('detachSubscription response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -1950,6 +2056,77 @@ export class PublisherClient {
   // --------------------
 
   /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -1973,40 +2150,40 @@ export class PublisherClient {
   }
 
   /**
-   * Return a fully-qualified projectTopic resource name string.
+   * Return a fully-qualified projectTopics resource name string.
    *
    * @param {string} project
    * @param {string} topic
    * @returns {string} Resource name string.
    */
-  projectTopicPath(project: string, topic: string) {
-    return this.pathTemplates.projectTopicPathTemplate.render({
+  projectTopicsPath(project: string, topic: string) {
+    return this.pathTemplates.projectTopicsPathTemplate.render({
       project: project,
       topic: topic,
     });
   }
 
   /**
-   * Parse the project from ProjectTopic resource.
+   * Parse the project from ProjectTopics resource.
    *
-   * @param {string} projectTopicName
-   *   A fully-qualified path representing project_topic resource.
+   * @param {string} projectTopicsName
+   *   A fully-qualified path representing project_topics resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectTopicName(projectTopicName: string) {
-    return this.pathTemplates.projectTopicPathTemplate.match(projectTopicName)
+  matchProjectFromProjectTopicsName(projectTopicsName: string) {
+    return this.pathTemplates.projectTopicsPathTemplate.match(projectTopicsName)
       .project;
   }
 
   /**
-   * Parse the topic from ProjectTopic resource.
+   * Parse the topic from ProjectTopics resource.
    *
-   * @param {string} projectTopicName
-   *   A fully-qualified path representing project_topic resource.
+   * @param {string} projectTopicsName
+   *   A fully-qualified path representing project_topics resource.
    * @returns {string} A string representing the topic.
    */
-  matchTopicFromProjectTopicName(projectTopicName: string) {
-    return this.pathTemplates.projectTopicPathTemplate.match(projectTopicName)
+  matchTopicFromProjectTopicsName(projectTopicsName: string) {
+    return this.pathTemplates.projectTopicsPathTemplate.match(projectTopicsName)
       .topic;
   }
 
