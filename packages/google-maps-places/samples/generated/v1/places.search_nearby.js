@@ -135,6 +135,11 @@ function main(locationRestriction) {
    *  Optional. Parameters that affect the routing to the search results.
    */
   // const routingParameters = {}
+  /**
+   *  Optional. If true, include businesses that are not yet open but will open
+   *  in the future.
+   */
+  // const includeFutureOpeningBusinesses = true
 
   // Imports the Places library
   const {PlacesClient} = require('@googlemaps/places').v1;
