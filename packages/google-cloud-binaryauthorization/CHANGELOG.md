@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.3.0...binary-authorization-v4.4.0) (2026-03-18)
+
+
+### Features
+
+* [binaryauthorization] Added line_number to FileLocation ([#7609](https://github.com/googleapis/google-cloud-node/issues/7609)) ([c156f91](https://github.com/googleapis/google-cloud-node/commit/c156f91425669f249c9a49befda2d200ac482182))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.2.0...binary-authorization-v4.3.0) (2026-02-19)
 
 
