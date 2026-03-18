@@ -49,10 +49,10 @@ function main(resource, policy) {
   // const updateMask = {}
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callSetIamPolicy() {
     // Construct request
@@ -62,7 +62,7 @@ function main(resource, policy) {
     };
 
     // Run request
-    const response = await controlClient.setIamPolicy(request);
+    const response = await storageControlClient.setIamPolicy(request);
     console.log(response);
   }
 

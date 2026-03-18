@@ -33751,6 +33751,9 @@ export namespace google {
 
                         /** FoundationModelTuningOptions learningRateMultiplier */
                         learningRateMultiplier?: (number|null);
+
+                        /** FoundationModelTuningOptions previousFineTunedProcessorVersionName */
+                        previousFineTunedProcessorVersionName?: (string|null);
                     }
 
                     /** Represents a FoundationModelTuningOptions. */
@@ -33767,6 +33770,9 @@ export namespace google {
 
                         /** FoundationModelTuningOptions learningRateMultiplier. */
                         public learningRateMultiplier: number;
+
+                        /** FoundationModelTuningOptions previousFineTunedProcessorVersionName. */
+                        public previousFineTunedProcessorVersionName: string;
 
                         /**
                          * Creates a new FoundationModelTuningOptions instance using the specified properties.

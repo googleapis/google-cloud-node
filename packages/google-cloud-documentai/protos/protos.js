@@ -83629,6 +83629,7 @@
                              * @interface IFoundationModelTuningOptions
                              * @property {number|null} [trainSteps] FoundationModelTuningOptions trainSteps
                              * @property {number|null} [learningRateMultiplier] FoundationModelTuningOptions learningRateMultiplier
+                             * @property {string|null} [previousFineTunedProcessorVersionName] FoundationModelTuningOptions previousFineTunedProcessorVersionName
                              */
     
                             /**
@@ -83663,6 +83664,14 @@
                             FoundationModelTuningOptions.prototype.learningRateMultiplier = 0;
     
                             /**
+                             * FoundationModelTuningOptions previousFineTunedProcessorVersionName.
+                             * @member {string} previousFineTunedProcessorVersionName
+                             * @memberof google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions
+                             * @instance
+                             */
+                            FoundationModelTuningOptions.prototype.previousFineTunedProcessorVersionName = "";
+    
+                            /**
                              * Creates a new FoundationModelTuningOptions instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions
@@ -83690,6 +83699,8 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.trainSteps);
                                 if (message.learningRateMultiplier != null && Object.hasOwnProperty.call(message, "learningRateMultiplier"))
                                     writer.uint32(/* id 3, wireType 5 =*/29).float(message.learningRateMultiplier);
+                                if (message.previousFineTunedProcessorVersionName != null && Object.hasOwnProperty.call(message, "previousFineTunedProcessorVersionName"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.previousFineTunedProcessorVersionName);
                                 return writer;
                             };
     
@@ -83734,6 +83745,10 @@
                                             message.learningRateMultiplier = reader.float();
                                             break;
                                         }
+                                    case 5: {
+                                            message.previousFineTunedProcessorVersionName = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -83775,6 +83790,9 @@
                                 if (message.learningRateMultiplier != null && message.hasOwnProperty("learningRateMultiplier"))
                                     if (typeof message.learningRateMultiplier !== "number")
                                         return "learningRateMultiplier: number expected";
+                                if (message.previousFineTunedProcessorVersionName != null && message.hasOwnProperty("previousFineTunedProcessorVersionName"))
+                                    if (!$util.isString(message.previousFineTunedProcessorVersionName))
+                                        return "previousFineTunedProcessorVersionName: string expected";
                                 return null;
                             };
     
@@ -83794,6 +83812,8 @@
                                     message.trainSteps = object.trainSteps | 0;
                                 if (object.learningRateMultiplier != null)
                                     message.learningRateMultiplier = Number(object.learningRateMultiplier);
+                                if (object.previousFineTunedProcessorVersionName != null)
+                                    message.previousFineTunedProcessorVersionName = String(object.previousFineTunedProcessorVersionName);
                                 return message;
                             };
     
@@ -83813,11 +83833,14 @@
                                 if (options.defaults) {
                                     object.trainSteps = 0;
                                     object.learningRateMultiplier = 0;
+                                    object.previousFineTunedProcessorVersionName = "";
                                 }
                                 if (message.trainSteps != null && message.hasOwnProperty("trainSteps"))
                                     object.trainSteps = message.trainSteps;
                                 if (message.learningRateMultiplier != null && message.hasOwnProperty("learningRateMultiplier"))
                                     object.learningRateMultiplier = options.json && !isFinite(message.learningRateMultiplier) ? String(message.learningRateMultiplier) : message.learningRateMultiplier;
+                                if (message.previousFineTunedProcessorVersionName != null && message.hasOwnProperty("previousFineTunedProcessorVersionName"))
+                                    object.previousFineTunedProcessorVersionName = message.previousFineTunedProcessorVersionName;
                                 return object;
                             };
     
