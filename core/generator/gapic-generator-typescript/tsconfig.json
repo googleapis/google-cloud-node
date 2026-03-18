@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build",
+    "resolveJsonModule": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "lib": ["esnext",  "DOM"],
+    "target": "esnext"
+  },
+  "include": [
+    "typescript/**/*.ts",
+    "./index.d.ts",
+    "protos/index.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

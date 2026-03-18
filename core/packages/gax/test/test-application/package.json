@@ -1,0 +1,37 @@
+{
+  "name": "google-gax-packaging-test-app",
+  "version": "0.0.1",
+  "description": "Test application for google-gax",
+  "main": "build/src/index.js",
+  "files": [
+    "src",
+    "protos"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [],
+  "scripts": {
+    "compile": "tsc -p .",
+    "prefetch-cleanup": "rm -rf node_modules package-lock.json google-gax*.tgz showcase-echo-client*.tgz showcase-server*.tgz",
+    "prefetch-google-gax": "cd ../.. && npm pack && mv google-gax*.tgz test/test-application/google-gax.tgz",
+    "prefetch-showcase-echo-client": "cd ../showcase-echo-client && npm run prefetch && npm install && npm pack && mv showcase-echo-client*.tgz ../test-application/showcase-echo-client.tgz",
+    "prefetch-showcase-server": "cd ../showcase-server && npm install && npm pack && mv showcase-server*.tgz ../test-application/showcase-server.tgz",
+    "prefetch": "npm run prefetch-cleanup && npm run prefetch-google-gax && npm run prefetch-showcase-echo-client && npm run prefetch-showcase-server",
+    "prepare": "npm run compile",
+    "start": "node build/src/index.js"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "~1.6.0",
+    "google-gax": "file:./google-gax.tgz",
+    "protobufjs": "^7.0.0",
+    "pumpify": "^2.0.1",
+    "showcase-echo-client": "./showcase-echo-client.tgz",
+    "showcase-server": "./showcase-server.tgz"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

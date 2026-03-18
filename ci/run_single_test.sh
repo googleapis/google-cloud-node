@@ -46,6 +46,26 @@ pnpm install --ignore-scripts --engine-strict --prod; pnpm install
 
 retval=0
 
+if [ "${RUN_INTERDEPENDENT_TESTS}" = "true" ]; then
+    case ${TEST_TYPE} in
+    lint)
+        # Skip interdependent tests for lint
+        ;;
+    samples)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "samples-test"
+        ;;
+    system)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "system-test"
+        ;;
+    units)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "test"
+        ;;
+    *)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "${TEST_TYPE}"
+        ;;
+    esac
+fi
+
 set +e
 case ${TEST_TYPE} in
 lint)
@@ -68,6 +88,5 @@ units)
 *)
     ;;
 esac
-set -e
 
 exit ${retval}

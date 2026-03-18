@@ -1,0 +1,35 @@
+{
+  "name": "leaky",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A package that leaks types",
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "build/src"
+  ],
+  "main": "build/src/index.js",
+  "scripts": {
+    "prepare": "npm run compile",
+    "compile": "tsc -p tsconfig.json",
+    "test": "mocha build/test",
+    "pretest": "npm run compile",
+    "lint": "gts check",
+    "clean": "gts clean",
+    "fix": "gts fix"
+  },
+  "keywords": [],
+  "author": "Google LLC",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/long": "^4.0.0",
+    "@types/node": "20.6.3",
+    "gts": "^3.1.0",
+    "long": "^4.0.0",
+    "mocha": "^6.2.2",
+    "pack-n-play": "^2.0.0",
+    "typescript": "5.2.2"
+  }
+}

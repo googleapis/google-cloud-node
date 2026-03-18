@@ -1,0 +1,11 @@
+{
+  "name": "gaxios",
+  "name_pretty": "Gaxios",
+  "release_level": "stable",
+  "client_documentation": "https://github.com/googleapis/gaxios",
+  "library_type": "CORE",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node-core",
+  "distribution_name": "gaxios",
+  "api_shortname": "gaxios"
+}
