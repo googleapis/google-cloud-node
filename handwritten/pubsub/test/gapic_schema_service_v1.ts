@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2341,8 +2341,8 @@ describe('v1.SchemaServiceClient', () => {
       });
     });
 
-    describe('projectTopic', async () => {
-      const fakePath = '/rendered/path/projectTopic';
+    describe('projectTopics', async () => {
+      const fakePath = '/rendered/path/projectTopics';
       const expectedParameters = {
         project: 'projectValue',
         topic: 'topicValue',
@@ -2352,38 +2352,38 @@ describe('v1.SchemaServiceClient', () => {
         projectId: 'bogus',
       });
       await client.initialize();
-      client.pathTemplates.projectTopicPathTemplate.render = sinon
+      client.pathTemplates.projectTopicsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.projectTopicPathTemplate.match = sinon
+      client.pathTemplates.projectTopicsPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('projectTopicPath', () => {
-        const result = client.projectTopicPath('projectValue', 'topicValue');
+      it('projectTopicsPath', () => {
+        const result = client.projectTopicsPath('projectValue', 'topicValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTopicPathTemplate.render as SinonStub)
+          (client.pathTemplates.projectTopicsPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters),
         );
       });
 
-      it('matchProjectFromProjectTopicName', () => {
-        const result = client.matchProjectFromProjectTopicName(fakePath);
+      it('matchProjectFromProjectTopicsName', () => {
+        const result = client.matchProjectFromProjectTopicsName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectTopicPathTemplate.match as SinonStub)
+          (client.pathTemplates.projectTopicsPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
       });
 
-      it('matchTopicFromProjectTopicName', () => {
-        const result = client.matchTopicFromProjectTopicName(fakePath);
+      it('matchTopicFromProjectTopicsName', () => {
+        const result = client.matchTopicFromProjectTopicsName(fakePath);
         assert.strictEqual(result, 'topicValue');
         assert(
-          (client.pathTemplates.projectTopicPathTemplate.match as SinonStub)
+          (client.pathTemplates.projectTopicsPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
