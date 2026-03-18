@@ -1,0 +1,7 @@
+{
+  "cert_configs": {
+    "workload": {
+      "cert_path": "./test/fixtures/external-account-cert/leaf.crt"
+    }
+  }
+}
