@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import type {
 import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -208,10 +208,13 @@ export class SubscriberClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}',
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
-      projectTopicPathTemplate: new this._gaxModule.PathTemplate(
+      projectTopicsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/topics/{topic}',
       ),
       schemaPathTemplate: new this._gaxModule.PathTemplate(
@@ -465,7 +468,7 @@ export class SubscriberClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the subscription. It must have the format
+   *   Required. Identifier. The name of the subscription. It must have the format
    *   `"projects/{project}/subscriptions/{subscription}"`. `{subscription}` must
    *   start with a letter, and contain only letters (`[A-Za-z]`), numbers
    *   (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`),
@@ -484,6 +487,9 @@ export class SubscriberClient {
    * @param {google.pubsub.v1.CloudStorageConfig} [request.cloudStorageConfig]
    *   Optional. If delivery to Google Cloud Storage is used with this
    *   subscription, this field is used to configure it.
+   * @param {google.pubsub.v1.BigtableConfig} [request.bigtableConfig]
+   *   Optional. If delivery to Bigtable is used with this subscription, this
+   *   field is used to configure it.
    * @param {number} [request.ackDeadlineSeconds]
    *   Optional. The approximate amount of time (on a best-effort basis) Pub/Sub
    *   waits for the subscriber to acknowledge receipt before resending the
@@ -588,10 +594,17 @@ export class SubscriberClient {
    *   subscription can receive messages.
    * @param {google.pubsub.v1.Subscription.AnalyticsHubSubscriptionInfo} request.analyticsHubSubscriptionInfo
    *   Output only. Information about the associated Analytics Hub subscription.
-   *   Only set if the subscritpion is created by Analytics Hub.
+   *   Only set if the subscription is created by Analytics Hub.
    * @param {number[]} [request.messageTransforms]
    *   Optional. Transforms to be applied to messages before they are delivered to
    *   subscribers. Transforms are applied in the order specified.
+   * @param {number[]} request.tags
+   *   Optional. Input only. Immutable. Tag keys/values directly bound to this
+   *   resource. For example:
+   *     "123/environment": "production",
+   *     "123/costCenter": "marketing"
+   *   See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+   *   using tags with Pub/Sub resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -689,7 +702,23 @@ export class SubscriberClient {
           this._log.info('createSubscription response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets the configuration details of a subscription.
@@ -796,7 +825,23 @@ export class SubscriberClient {
           this._log.info('getSubscription response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates an existing subscription by updating the fields specified in the
@@ -907,7 +952,23 @@ export class SubscriberClient {
           this._log.info('updateSubscription response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes an existing subscription. All messages retained in the subscription
@@ -1018,7 +1079,23 @@ export class SubscriberClient {
           this._log.info('deleteSubscription response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Modifies the ack deadline for a specific message. This method is useful
@@ -1141,7 +1218,23 @@ export class SubscriberClient {
           this._log.info('modifyAckDeadline response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Acknowledges the messages associated with the `ack_ids` in the
@@ -1258,7 +1351,23 @@ export class SubscriberClient {
           this._log.info('acknowledge response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Pulls messages from the server.
@@ -1377,7 +1486,23 @@ export class SubscriberClient {
           this._log.info('pull response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Modifies the `PushConfig` for a specified subscription.
@@ -1496,7 +1621,23 @@ export class SubscriberClient {
           this._log.info('modifyPushConfig response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets the configuration details of a snapshot. Snapshots are used in
@@ -1607,7 +1748,23 @@ export class SubscriberClient {
           this._log.info('getSnapshot response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Creates a snapshot from the requested subscription. Snapshots are used in
@@ -1649,6 +1806,13 @@ export class SubscriberClient {
    * @param {number[]} [request.labels]
    *   Optional. See [Creating and managing
    *   labels](https://cloud.google.com/pubsub/docs/labels).
+   * @param {number[]} request.tags
+   *   Optional. Input only. Immutable. Tag keys/values directly bound to this
+   *   resource. For example:
+   *     "123/environment": "production",
+   *     "123/costCenter": "marketing"
+   *   See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+   *   using tags with Pub/Sub resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1746,7 +1910,23 @@ export class SubscriberClient {
           this._log.info('createSnapshot response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates an existing snapshot by updating the fields specified in the update
@@ -1860,7 +2040,23 @@ export class SubscriberClient {
           this._log.info('updateSnapshot response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Removes an existing snapshot. Snapshots are used in [Seek]
@@ -1975,7 +2171,23 @@ export class SubscriberClient {
           this._log.info('deleteSnapshot response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Seeks an existing subscription to a point in time or to a given snapshot,
@@ -2103,7 +2315,23 @@ export class SubscriberClient {
           this._log.info('seek response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -2713,6 +2941,77 @@ export class SubscriberClient {
   // --------------------
 
   /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -2736,40 +3035,40 @@ export class SubscriberClient {
   }
 
   /**
-   * Return a fully-qualified projectTopic resource name string.
+   * Return a fully-qualified projectTopics resource name string.
    *
    * @param {string} project
    * @param {string} topic
    * @returns {string} Resource name string.
    */
-  projectTopicPath(project: string, topic: string) {
-    return this.pathTemplates.projectTopicPathTemplate.render({
+  projectTopicsPath(project: string, topic: string) {
+    return this.pathTemplates.projectTopicsPathTemplate.render({
       project: project,
       topic: topic,
     });
   }
 
   /**
-   * Parse the project from ProjectTopic resource.
+   * Parse the project from ProjectTopics resource.
    *
-   * @param {string} projectTopicName
-   *   A fully-qualified path representing project_topic resource.
+   * @param {string} projectTopicsName
+   *   A fully-qualified path representing project_topics resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectTopicName(projectTopicName: string) {
-    return this.pathTemplates.projectTopicPathTemplate.match(projectTopicName)
+  matchProjectFromProjectTopicsName(projectTopicsName: string) {
+    return this.pathTemplates.projectTopicsPathTemplate.match(projectTopicsName)
       .project;
   }
 
   /**
-   * Parse the topic from ProjectTopic resource.
+   * Parse the topic from ProjectTopics resource.
    *
-   * @param {string} projectTopicName
-   *   A fully-qualified path representing project_topic resource.
+   * @param {string} projectTopicsName
+   *   A fully-qualified path representing project_topics resource.
    * @returns {string} A string representing the topic.
    */
-  matchTopicFromProjectTopicName(projectTopicName: string) {
-    return this.pathTemplates.projectTopicPathTemplate.match(projectTopicName)
+  matchTopicFromProjectTopicsName(projectTopicsName: string) {
+    return this.pathTemplates.projectTopicsPathTemplate.match(projectTopicsName)
       .topic;
   }
 

@@ -1,0 +1,79 @@
+{
+  "nested": {
+    "TestMessage": {
+      "oneofs": {
+        "_optionalValue": {
+          "oneof": [
+            "optionalValue"
+          ]
+        }
+      },
+      "fields": {
+        "content": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(google.api.field_behavior)": "REQUIRED"
+          }
+        },
+        "projectId": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(google.api.field_behavior)": "REQUIRED"
+          }
+        },
+        "optionalValue": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "proto3_optional": true
+          }
+        },
+        "labels": {
+          "keyType": "string",
+          "type": "string",
+          "id": 500195327
+        }
+      }
+    },
+    "BadTestMessage": {
+      "oneofs": {
+        "_projectId": {
+          "oneof": [
+            "projectId"
+          ]
+        },
+        "_optionalValue": {
+          "oneof": [
+            "optionalValue"
+          ]
+        }
+      },
+      "fields": {
+        "content": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(google.api.field_behavior)": "REQUIRED"
+          }
+        },
+        "projectId": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(google.api.field_behavior)": "REQUIRED",
+            "proto3_optional": true
+          }
+        },
+        "optionalValue": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "proto3_optional": true
+          }
+        }
+      }
+    }
+  }
+}

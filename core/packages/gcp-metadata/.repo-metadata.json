@@ -1,0 +1,13 @@
+{
+  "name": "gcp-metadata",
+  "name_pretty": "GCP Metadata",
+  "product_documentation": "https://cloud.google.com/compute/docs/storing-retrieving-metadata",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gcp-metadata/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node-core/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node-core",
+  "distribution_name": "gcp-metadata",
+  "requires_billing": false,
+  "library_type": "CORE"
+}

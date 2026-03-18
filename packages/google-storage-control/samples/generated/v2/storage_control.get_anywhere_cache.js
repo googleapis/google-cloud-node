@@ -40,10 +40,10 @@ function main(name) {
   // const requestId = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callGetAnywhereCache() {
     // Construct request
@@ -52,7 +52,7 @@ function main(name) {
     };
 
     // Run request
-    const response = await controlClient.getAnywhereCache(request);
+    const response = await storageControlClient.getAnywhereCache(request);
     console.log(response);
   }
 

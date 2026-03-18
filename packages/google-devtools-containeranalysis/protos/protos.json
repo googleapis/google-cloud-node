@@ -147,6 +147,10 @@
                 "layerDetails": {
                   "type": "LayerDetails",
                   "id": 2
+                },
+                "lineNumber": {
+                  "type": "int32",
+                  "id": 3
                 }
               }
             },

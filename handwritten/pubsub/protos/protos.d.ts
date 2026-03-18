@@ -2968,11 +2968,226 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a AIInference. */
+            interface IAIInference {
+
+                /** AIInference endpoint */
+                endpoint?: (string|null);
+
+                /** AIInference unstructuredInference */
+                unstructuredInference?: (google.pubsub.v1.AIInference.IUnstructuredInference|null);
+
+                /** AIInference serviceAccountEmail */
+                serviceAccountEmail?: (string|null);
+            }
+
+            /** Represents a AIInference. */
+            class AIInference implements IAIInference {
+
+                /**
+                 * Constructs a new AIInference.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.pubsub.v1.IAIInference);
+
+                /** AIInference endpoint. */
+                public endpoint: string;
+
+                /** AIInference unstructuredInference. */
+                public unstructuredInference?: (google.pubsub.v1.AIInference.IUnstructuredInference|null);
+
+                /** AIInference serviceAccountEmail. */
+                public serviceAccountEmail: string;
+
+                /** AIInference inferenceMode. */
+                public inferenceMode?: "unstructuredInference";
+
+                /**
+                 * Creates a new AIInference instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AIInference instance
+                 */
+                public static create(properties?: google.pubsub.v1.IAIInference): google.pubsub.v1.AIInference;
+
+                /**
+                 * Encodes the specified AIInference message. Does not implicitly {@link google.pubsub.v1.AIInference.verify|verify} messages.
+                 * @param message AIInference message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.pubsub.v1.IAIInference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AIInference message, length delimited. Does not implicitly {@link google.pubsub.v1.AIInference.verify|verify} messages.
+                 * @param message AIInference message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.pubsub.v1.IAIInference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a AIInference message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AIInference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.AIInference;
+
+                /**
+                 * Decodes a AIInference message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AIInference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.AIInference;
+
+                /**
+                 * Verifies a AIInference message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a AIInference message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AIInference
+                 */
+                public static fromObject(object: { [k: string]: any }): google.pubsub.v1.AIInference;
+
+                /**
+                 * Creates a plain object from a AIInference message. Also converts values to other types if specified.
+                 * @param message AIInference
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.pubsub.v1.AIInference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AIInference to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AIInference
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AIInference {
+
+                /** Properties of an UnstructuredInference. */
+                interface IUnstructuredInference {
+
+                    /** UnstructuredInference parameters */
+                    parameters?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents an UnstructuredInference. */
+                class UnstructuredInference implements IUnstructuredInference {
+
+                    /**
+                     * Constructs a new UnstructuredInference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.pubsub.v1.AIInference.IUnstructuredInference);
+
+                    /** UnstructuredInference parameters. */
+                    public parameters?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new UnstructuredInference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UnstructuredInference instance
+                     */
+                    public static create(properties?: google.pubsub.v1.AIInference.IUnstructuredInference): google.pubsub.v1.AIInference.UnstructuredInference;
+
+                    /**
+                     * Encodes the specified UnstructuredInference message. Does not implicitly {@link google.pubsub.v1.AIInference.UnstructuredInference.verify|verify} messages.
+                     * @param message UnstructuredInference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.pubsub.v1.AIInference.IUnstructuredInference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UnstructuredInference message, length delimited. Does not implicitly {@link google.pubsub.v1.AIInference.UnstructuredInference.verify|verify} messages.
+                     * @param message UnstructuredInference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.pubsub.v1.AIInference.IUnstructuredInference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UnstructuredInference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UnstructuredInference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.AIInference.UnstructuredInference;
+
+                    /**
+                     * Decodes an UnstructuredInference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UnstructuredInference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.AIInference.UnstructuredInference;
+
+                    /**
+                     * Verifies an UnstructuredInference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UnstructuredInference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UnstructuredInference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.pubsub.v1.AIInference.UnstructuredInference;
+
+                    /**
+                     * Creates a plain object from an UnstructuredInference message. Also converts values to other types if specified.
+                     * @param message UnstructuredInference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.pubsub.v1.AIInference.UnstructuredInference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UnstructuredInference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UnstructuredInference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Properties of a MessageTransform. */
             interface IMessageTransform {
 
                 /** MessageTransform javascriptUdf */
                 javascriptUdf?: (google.pubsub.v1.IJavaScriptUDF|null);
+
+                /** MessageTransform aiInference */
+                aiInference?: (google.pubsub.v1.IAIInference|null);
 
                 /** MessageTransform enabled */
                 enabled?: (boolean|null);
@@ -2993,6 +3208,9 @@ export namespace google {
                 /** MessageTransform javascriptUdf. */
                 public javascriptUdf?: (google.pubsub.v1.IJavaScriptUDF|null);
 
+                /** MessageTransform aiInference. */
+                public aiInference?: (google.pubsub.v1.IAIInference|null);
+
                 /** MessageTransform enabled. */
                 public enabled: boolean;
 
@@ -3000,7 +3218,7 @@ export namespace google {
                 public disabled: boolean;
 
                 /** MessageTransform transform. */
-                public transform?: "javascriptUdf";
+                public transform?: ("javascriptUdf"|"aiInference");
 
                 /**
                  * Creates a new MessageTransform instance using the specified properties.
@@ -5067,6 +5285,9 @@ export namespace google {
                 /** Subscription cloudStorageConfig */
                 cloudStorageConfig?: (google.pubsub.v1.ICloudStorageConfig|null);
 
+                /** Subscription bigtableConfig */
+                bigtableConfig?: (google.pubsub.v1.IBigtableConfig|null);
+
                 /** Subscription ackDeadlineSeconds */
                 ackDeadlineSeconds?: (number|null);
 
@@ -5139,6 +5360,9 @@ export namespace google {
 
                 /** Subscription cloudStorageConfig. */
                 public cloudStorageConfig?: (google.pubsub.v1.ICloudStorageConfig|null);
+
+                /** Subscription bigtableConfig. */
+                public bigtableConfig?: (google.pubsub.v1.IBigtableConfig|null);
 
                 /** Subscription ackDeadlineSeconds. */
                 public ackDeadlineSeconds: number;
@@ -6245,7 +6469,144 @@ export namespace google {
                     PERMISSION_DENIED = 2,
                     NOT_FOUND = 3,
                     SCHEMA_MISMATCH = 4,
-                    IN_TRANSIT_LOCATION_RESTRICTION = 5
+                    IN_TRANSIT_LOCATION_RESTRICTION = 5,
+                    VERTEX_AI_LOCATION_RESTRICTION = 6
+                }
+            }
+
+            /** Properties of a BigtableConfig. */
+            interface IBigtableConfig {
+
+                /** BigtableConfig table */
+                table?: (string|null);
+
+                /** BigtableConfig appProfileId */
+                appProfileId?: (string|null);
+
+                /** BigtableConfig serviceAccountEmail */
+                serviceAccountEmail?: (string|null);
+
+                /** BigtableConfig writeMetadata */
+                writeMetadata?: (boolean|null);
+
+                /** BigtableConfig state */
+                state?: (google.pubsub.v1.BigtableConfig.State|keyof typeof google.pubsub.v1.BigtableConfig.State|null);
+            }
+
+            /** Represents a BigtableConfig. */
+            class BigtableConfig implements IBigtableConfig {
+
+                /**
+                 * Constructs a new BigtableConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.pubsub.v1.IBigtableConfig);
+
+                /** BigtableConfig table. */
+                public table: string;
+
+                /** BigtableConfig appProfileId. */
+                public appProfileId: string;
+
+                /** BigtableConfig serviceAccountEmail. */
+                public serviceAccountEmail: string;
+
+                /** BigtableConfig writeMetadata. */
+                public writeMetadata: boolean;
+
+                /** BigtableConfig state. */
+                public state: (google.pubsub.v1.BigtableConfig.State|keyof typeof google.pubsub.v1.BigtableConfig.State);
+
+                /**
+                 * Creates a new BigtableConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BigtableConfig instance
+                 */
+                public static create(properties?: google.pubsub.v1.IBigtableConfig): google.pubsub.v1.BigtableConfig;
+
+                /**
+                 * Encodes the specified BigtableConfig message. Does not implicitly {@link google.pubsub.v1.BigtableConfig.verify|verify} messages.
+                 * @param message BigtableConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.pubsub.v1.IBigtableConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BigtableConfig message, length delimited. Does not implicitly {@link google.pubsub.v1.BigtableConfig.verify|verify} messages.
+                 * @param message BigtableConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.pubsub.v1.IBigtableConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BigtableConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BigtableConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.BigtableConfig;
+
+                /**
+                 * Decodes a BigtableConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BigtableConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.BigtableConfig;
+
+                /**
+                 * Verifies a BigtableConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BigtableConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BigtableConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.pubsub.v1.BigtableConfig;
+
+                /**
+                 * Creates a plain object from a BigtableConfig message. Also converts values to other types if specified.
+                 * @param message BigtableConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.pubsub.v1.BigtableConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BigtableConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BigtableConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace BigtableConfig {
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    ACTIVE = 1,
+                    NOT_FOUND = 2,
+                    APP_PROFILE_MISCONFIGURED = 3,
+                    PERMISSION_DENIED = 4,
+                    SCHEMA_MISMATCH = 5,
+                    IN_TRANSIT_LOCATION_RESTRICTION = 6,
+                    VERTEX_AI_LOCATION_RESTRICTION = 7
                 }
             }
 
@@ -6612,7 +6973,8 @@ export namespace google {
                     PERMISSION_DENIED = 2,
                     NOT_FOUND = 3,
                     IN_TRANSIT_LOCATION_RESTRICTION = 4,
-                    SCHEMA_MISMATCH = 5
+                    SCHEMA_MISMATCH = 5,
+                    VERTEX_AI_LOCATION_RESTRICTION = 6
                 }
             }
 
@@ -18160,6 +18522,335 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Struct. */
+        interface IStruct {
+
+            /** Struct fields */
+            fields?: ({ [k: string]: google.protobuf.IValue }|null);
+        }
+
+        /** Represents a Struct. */
+        class Struct implements IStruct {
+
+            /**
+             * Constructs a new Struct.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IStruct);
+
+            /** Struct fields. */
+            public fields: { [k: string]: google.protobuf.IValue };
+
+            /**
+             * Creates a new Struct instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Struct instance
+             */
+            public static create(properties?: google.protobuf.IStruct): google.protobuf.Struct;
+
+            /**
+             * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Struct;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Struct;
+
+            /**
+             * Verifies a Struct message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Struct
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Struct;
+
+            /**
+             * Creates a plain object from a Struct message. Also converts values to other types if specified.
+             * @param message Struct
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Struct, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Struct to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Struct
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Value. */
+        interface IValue {
+
+            /** Value nullValue */
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue */
+            numberValue?: (number|null);
+
+            /** Value stringValue */
+            stringValue?: (string|null);
+
+            /** Value boolValue */
+            boolValue?: (boolean|null);
+
+            /** Value structValue */
+            structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue */
+            listValue?: (google.protobuf.IListValue|null);
+        }
+
+        /** Represents a Value. */
+        class Value implements IValue {
+
+            /**
+             * Constructs a new Value.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IValue);
+
+            /** Value nullValue. */
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue. */
+            public numberValue?: (number|null);
+
+            /** Value stringValue. */
+            public stringValue?: (string|null);
+
+            /** Value boolValue. */
+            public boolValue?: (boolean|null);
+
+            /** Value structValue. */
+            public structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue. */
+            public listValue?: (google.protobuf.IListValue|null);
+
+            /** Value kind. */
+            public kind?: ("nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue");
+
+            /**
+             * Creates a new Value instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Value instance
+             */
+            public static create(properties?: google.protobuf.IValue): google.protobuf.Value;
+
+            /**
+             * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Value;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Value;
+
+            /**
+             * Verifies a Value message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Value message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Value
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Value;
+
+            /**
+             * Creates a plain object from a Value message. Also converts values to other types if specified.
+             * @param message Value
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Value, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Value to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** NullValue enum. */
+        enum NullValue {
+            NULL_VALUE = 0
+        }
+
+        /** Properties of a ListValue. */
+        interface IListValue {
+
+            /** ListValue values */
+            values?: (google.protobuf.IValue[]|null);
+        }
+
+        /** Represents a ListValue. */
+        class ListValue implements IListValue {
+
+            /**
+             * Constructs a new ListValue.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IListValue);
+
+            /** ListValue values. */
+            public values: google.protobuf.IValue[];
+
+            /**
+             * Creates a new ListValue instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListValue instance
+             */
+            public static create(properties?: google.protobuf.IListValue): google.protobuf.ListValue;
+
+            /**
+             * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ListValue;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ListValue;
+
+            /**
+             * Verifies a ListValue message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListValue
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ListValue;
+
+            /**
+             * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+             * @param message ListValue
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.ListValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListValue to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListValue
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
