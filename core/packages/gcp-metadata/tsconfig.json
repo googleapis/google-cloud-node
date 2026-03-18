@@ -1,0 +1,12 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "dom"],
+    "module": "nodenext",
+    "outDir": "build",
+    "rootDir": ".",
+    "skipLibCheck": true
+  },
+  "include": ["src/*.ts", "test/*.ts", "system-test/*.ts", "test/**/*.ts"],
+  "exclude": ["test/fixtures"]
+}
