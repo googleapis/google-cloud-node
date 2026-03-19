@@ -29,6 +29,11 @@ function main(instance, instanceResource, project, zone) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Whether to discard local SSDs from the instance during restart
+   *  default value is false.
+   */
+  // const discardLocalSsd = true
+  /**
    *  Name of the instance resource to update.
    */
   // const instance = 'abc123'

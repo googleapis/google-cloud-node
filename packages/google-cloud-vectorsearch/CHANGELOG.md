@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.3.0...vectorsearch-v0.4.0) (2026-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* [vectorsearch] Removed field DenseScannParams from SearchHint ([#7312](https://github.com/googleapis/google-cloud-node/issues/7312))
+* Removed obsolete message `VertexRanker`
+* [vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`
+* Removed obsolete message `VertexRanker`
+* [vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`
+
+### Features
+
+* Added index and search configuration management ([ba6ce50](https://github.com/googleapis/google-cloud-node/commit/ba6ce501fab130287af546a2c9da1368cb9d3b5c))
+
+
+### Bug Fixes
+
+* [vectorsearch] Removed field DenseScannParams from SearchHint ([#7312](https://github.com/googleapis/google-cloud-node/issues/7312)) ([ba6ce50](https://github.com/googleapis/google-cloud-node/commit/ba6ce501fab130287af546a2c9da1368cb9d3b5c))
+* [vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker` ([ba6ce50](https://github.com/googleapis/google-cloud-node/commit/ba6ce501fab130287af546a2c9da1368cb9d3b5c))
+* [vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker` ([ba6ce50](https://github.com/googleapis/google-cloud-node/commit/ba6ce501fab130287af546a2c9da1368cb9d3b5c))
+* Removed obsolete message `VertexRanker` ([ba6ce50](https://github.com/googleapis/google-cloud-node/commit/ba6ce501fab130287af546a2c9da1368cb9d3b5c))
+* Removed obsolete message `VertexRanker` ([ba6ce50](https://github.com/googleapis/google-cloud-node/commit/ba6ce501fab130287af546a2c9da1368cb9d3b5c))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.2.0...vectorsearch-v0.3.0) (2026-03-02)
 
 

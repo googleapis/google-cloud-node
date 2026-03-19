@@ -1,0 +1,33 @@
+<?js
+var returns = obj;
+?>
+
+<table class="returns">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <?js
+      var self = this;
+      returns.forEach(item => {
+        if (!item) { return; }
+    ?>
+      <tr>
+        <td class="type">
+          <?js if (item.type && item.type.names) {?>
+            <?js= self.partial('type.tmpl', item.type.names) ?>
+          <?js } ?>
+        </td>
+
+        <td class="description">
+          <?js= item.description ?>
+        </td>
+      </tr>
+    <?js }
+  ); ?>
+  </tbody>
+</table>

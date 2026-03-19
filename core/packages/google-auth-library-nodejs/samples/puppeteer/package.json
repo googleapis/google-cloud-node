@@ -1,0 +1,17 @@
+{
+  "name": "puppeteer-example",
+  "private": true,
+  "description": "An example of using puppeteer to orchestrate a Google sign in flow.",
+  "main": "oauth2-test.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node oauth2-test.js"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "google-auth-library": "^10.0.0",
+    "puppeteer": "^24.0.0"
+  }
+}

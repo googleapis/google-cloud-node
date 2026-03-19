@@ -1,0 +1,19 @@
+createTime: '2025-09-18T18:59:46.989696345Z'
+description: Presubmit build with node 18
+filename: ci/cloudbuild.yaml
+github:
+  name: google-cloud-node
+  owner: googleapis
+  pullRequest:
+    branch: ^main$
+    commentControl: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
+id: 5e222c6e-5107-46e6-9397-d6a7d7277bc2
+includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
+name: core-samples-presubmit-node
+resourceName: projects/long-door-651/locations/global/triggers/5e222c6e-5107-46e6-9397-d6a7d7277bc2
+serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
+substitutions:
+  _BUILD_TYPE: presubmit
+  _IS_CORE: 'true'
+  _LOGS_BUCKET: cloud-node-public-logs
+  _TEST_TYPE: samples

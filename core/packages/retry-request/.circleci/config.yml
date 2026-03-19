@@ -1,0 +1,27 @@
+version: 2.1
+
+install_and_test: &install_and_test
+  steps:
+    - checkout
+    - run:
+        name: Install
+        command: npm install
+    - run:
+        name: Test
+        command: npm test
+
+jobs:
+  test_node10:
+    docker:
+      - image: circleci/node:10
+    <<: *install_and_test
+  test_node12:
+    docker:
+      - image: circleci/node:12
+    <<: *install_and_test
+
+workflows:
+  test:
+    jobs:
+      - test_node10
+      - test_node12
