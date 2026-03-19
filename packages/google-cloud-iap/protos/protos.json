@@ -610,6 +610,27 @@
                           "type": "google.protobuf.StringValue",
                           "id": 2
                         },
+                        "clientId": {
+                          "type": "google.protobuf.StringValue",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientSecret": {
+                          "type": "google.protobuf.StringValue",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientSecretSha256": {
+                          "type": "google.protobuf.StringValue",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "programmaticClients": {
                           "rule": "repeated",
                           "type": "string",

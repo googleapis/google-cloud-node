@@ -450,6 +450,9 @@ export class PlacesClient {
  *   How results will be ranked in the response.
  * @param {google.maps.places.v1.RoutingParameters} [request.routingParameters]
  *   Optional. Parameters that affect the routing to the search results.
+ * @param {boolean} [request.includeFutureOpeningBusinesses]
+ *   Optional. If true, include businesses that are not yet open but will open
+ *   in the future.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -607,6 +610,9 @@ export class PlacesClient {
  *   businesses do not have a physical address or location on Google Maps.
  *   Places will not return fields including `location`, `plus_code`, and other
  *   location related fields for these businesses.
+ * @param {boolean} [request.includeFutureOpeningBusinesses]
+ *   Optional. If true, include businesses that are not yet open but will open
+ *   in the future.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1047,6 +1053,9 @@ export class PlacesClient {
  *   businesses do not have a physical address or location on Google Maps.
  *   Places will not return fields including `location`, `plus_code`, and other
  *   location related fields for these businesses.
+ * @param {boolean} [request.includeFutureOpeningBusinesses]
+ *   Optional. If true, include businesses that are not yet open but will open
+ *   in the future.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
