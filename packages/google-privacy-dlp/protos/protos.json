@@ -1475,6 +1475,19 @@
                         }
                       }
                     },
+                    "ExcludeByImageFindings": {
+                      "fields": {
+                        "infoTypes": {
+                          "rule": "repeated",
+                          "type": "InfoType",
+                          "id": 1
+                        },
+                        "imageContainmentType": {
+                          "type": "ImageContainmentType",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ExclusionRule": {
                       "oneofs": {
                         "type": {
@@ -1482,7 +1495,8 @@
                             "dictionary",
                             "regex",
                             "excludeInfoTypes",
-                            "excludeByHotword"
+                            "excludeByHotword",
+                            "excludeByImageFindings"
                           ]
                         }
                       },
@@ -1503,9 +1517,71 @@
                           "type": "ExcludeByHotword",
                           "id": 5
                         },
+                        "excludeByImageFindings": {
+                          "type": "ExcludeByImageFindings",
+                          "id": 6
+                        },
                         "matchingType": {
                           "type": "MatchingType",
                           "id": 4
+                        }
+                      }
+                    },
+                    "AdjustByMatchingInfoTypes": {
+                      "fields": {
+                        "infoTypes": {
+                          "rule": "repeated",
+                          "type": "InfoType",
+                          "id": 1
+                        },
+                        "minLikelihood": {
+                          "type": "Likelihood",
+                          "id": 2
+                        },
+                        "matchingType": {
+                          "type": "MatchingType",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AdjustByImageFindings": {
+                      "fields": {
+                        "infoTypes": {
+                          "rule": "repeated",
+                          "type": "InfoType",
+                          "id": 1
+                        },
+                        "minLikelihood": {
+                          "type": "Likelihood",
+                          "id": 2
+                        },
+                        "imageContainmentType": {
+                          "type": "ImageContainmentType",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AdjustmentRule": {
+                      "oneofs": {
+                        "conditions": {
+                          "oneof": [
+                            "adjustByMatchingInfoTypes",
+                            "adjustByImageFindings"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "adjustByMatchingInfoTypes": {
+                          "type": "AdjustByMatchingInfoTypes",
+                          "id": 1
+                        },
+                        "adjustByImageFindings": {
+                          "type": "AdjustByImageFindings",
+                          "id": 3
+                        },
+                        "likelihoodAdjustment": {
+                          "type": "CustomInfoType.DetectionRule.LikelihoodAdjustment",
+                          "id": 2
                         }
                       }
                     },
@@ -1514,7 +1590,8 @@
                         "type": {
                           "oneof": [
                             "hotwordRule",
-                            "exclusionRule"
+                            "exclusionRule",
+                            "adjustmentRule"
                           ]
                         }
                       },
@@ -1526,6 +1603,10 @@
                         "exclusionRule": {
                           "type": "ExclusionRule",
                           "id": 2
+                        },
+                        "adjustmentRule": {
+                          "type": "AdjustmentRule",
+                          "id": 3
                         }
                       }
                     },
@@ -1869,7 +1950,8 @@
                       "oneofs": {
                         "label": {
                           "oneof": [
-                            "storageLabel"
+                            "storageLabel",
+                            "keyValueMetadataLabel"
                           ]
                         }
                       },
@@ -1881,10 +1963,22 @@
                         "storageLabel": {
                           "type": "StorageMetadataLabel",
                           "id": 3
+                        },
+                        "keyValueMetadataLabel": {
+                          "type": "KeyValueMetadataLabel",
+                          "id": 4
                         }
                       }
                     },
                     "StorageMetadataLabel": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "KeyValueMetadataLabel": {
                       "fields": {
                         "key": {
                           "type": "string",
@@ -2493,6 +2587,20 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 12
+                        },
+                        "launchStatus": {
+                          "type": "InfoTypeLaunchStatus",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "InfoTypeLaunchStatus": {
+                          "values": {
+                            "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED": 0,
+                            "GENERAL_AVAILABILITY": 1,
+                            "PUBLIC_PREVIEW": 2,
+                            "PRIVATE_PREVIEW": 3
+                          }
                         }
                       }
                     },
@@ -7216,8 +7324,43 @@
                         "MATCHING_TYPE_UNSPECIFIED": 0,
                         "MATCHING_TYPE_FULL_MATCH": 1,
                         "MATCHING_TYPE_PARTIAL_MATCH": 2,
-                        "MATCHING_TYPE_INVERSE_MATCH": 3
+                        "MATCHING_TYPE_INVERSE_MATCH": 3,
+                        "MATCHING_TYPE_RULE_SPECIFIC": 4
                       }
+                    },
+                    "ImageContainmentType": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "encloses",
+                            "fullyInside",
+                            "overlaps"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "encloses": {
+                          "type": "Encloses",
+                          "id": 1
+                        },
+                        "fullyInside": {
+                          "type": "FullyInside",
+                          "id": 2
+                        },
+                        "overlaps": {
+                          "type": "Overlap",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Overlap": {
+                      "fields": {}
+                    },
+                    "Encloses": {
+                      "fields": {}
+                    },
+                    "FullyInside": {
+                      "fields": {}
                     },
                     "ContentOption": {
                       "values": {
@@ -7229,7 +7372,8 @@
                     "MetadataType": {
                       "values": {
                         "METADATATYPE_UNSPECIFIED": 0,
-                        "STORAGE_METADATA": 2
+                        "STORAGE_METADATA": 2,
+                        "CONTENT_METADATA": 3
                       }
                     },
                     "InfoTypeSupportedBy": {
@@ -8653,6 +8797,7 @@
                             "SIGNAL_UNSPECIFIED": 0,
                             "MODEL": 1,
                             "TEXT_EMBEDDING": 2,
+                            "EMBEDDING": 7,
                             "VERTEX_PLUGIN": 3,
                             "VECTOR_PLUGIN": 4,
                             "SOURCE_CODE": 5,
@@ -8725,7 +8870,8 @@
                             "dictionary",
                             "regex",
                             "surrogateType",
-                            "storedType"
+                            "storedType",
+                            "metadataKeyValueExpression"
                           ]
                         }
                       },
@@ -8753,6 +8899,10 @@
                         "storedType": {
                           "type": "StoredType",
                           "id": 5
+                        },
+                        "metadataKeyValueExpression": {
+                          "type": "MetadataKeyValueExpression",
+                          "id": 10
                         },
                         "detectionRules": {
                           "rule": "repeated",
@@ -8815,6 +8965,18 @@
                         },
                         "SurrogateType": {
                           "fields": {}
+                        },
+                        "MetadataKeyValueExpression": {
+                          "fields": {
+                            "keyRegex": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "valueRegex": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         },
                         "DetectionRule": {
                           "oneofs": {

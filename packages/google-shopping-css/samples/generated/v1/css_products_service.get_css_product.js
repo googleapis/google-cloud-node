@@ -30,6 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The name of the CSS product to retrieve.
+   *  Format: `accounts/{account}/cssProducts/{css_product}`
    */
   // const name = 'abc123'
 

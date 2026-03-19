@@ -155,5 +155,7 @@ export {
   stringRepeat,
   stringReplaceAll,
   stringReplaceOne,
+  nor,
+  switchOn,
   // TODO(new-expression): Add new expression exports above this line
 } from './expression';
