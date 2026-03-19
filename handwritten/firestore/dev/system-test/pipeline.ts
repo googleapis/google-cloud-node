@@ -148,6 +148,8 @@ import {
   isType,
   timestampTruncate,
   split,
+  switchOn,
+  nor,
   // TODO(new-expression): add new expression imports above this line
 } from '../src/pipelines';
 
@@ -1641,6 +1643,27 @@ describe.skipClassic('Pipeline class', () => {
           {title: 'Pride and Prejudice'},
           {title: 'The Lord of the Rings'},
           {title: "The Handmaid's Tale"},
+        );
+      });
+
+      it('where with nor', async () => {
+        const snapshot = await firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .where(
+            nor(
+              equal('genre', 'Romance'),
+              equal('genre', 'Dystopian'),
+              equal('genre', 'Fantasy'),
+              greaterThan('published', 1949),
+            ),
+          )
+          .select('title')
+          .execute();
+        expectResults(
+          snapshot,
+          {title: 'Crime and Punishment'},
+          {title: 'The Great Gatsby'},
         );
       });
 
@@ -5227,6 +5250,107 @@ describe.skipClassic('Pipeline class', () => {
         isMap: true,
         isArray: true,
         isStrNum: false,
+      });
+    });
+
+    it('supports nor', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            a: false,
+            b: false,
+            c: true,
+            d: null,
+          }),
+        )
+        .select(
+          nor(field('a').asBoolean(), field('b').asBoolean()).as(
+            'twoConditions',
+          ),
+          nor(
+            field('a').asBoolean(),
+            field('b').asBoolean(),
+            field('c').asBoolean(),
+          ).as('threeConditions'),
+          nor(
+            field('a').asBoolean(),
+            field('b').asBoolean(),
+            field('d').asBoolean(),
+          ).as('threeConditionsWithNull'),
+        )
+        .execute();
+
+      expectResults(snapshot, {
+        twoConditions: true,
+        threeConditions: false,
+        threeConditionsWithNull: null,
+      });
+    });
+
+    describe('switchOn', () => {
+      it('supports basic switch', async () => {
+        const snapshot = await firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .limit(1)
+          .replaceWith(map({value: 1}))
+          .select(
+            switchOn(
+              equal(field('value'), 1),
+              constant('one'),
+              constant('NA'),
+            ).as('result1'),
+            switchOn(
+              equal(field('value'), 2),
+              constant('two'),
+              constant('NA'),
+            ).as('result2'),
+          )
+          .execute();
+        expectResults(snapshot, {result1: 'one', result2: 'NA'});
+      });
+
+      it('supports multi-branch switch', async () => {
+        const snapshot = await firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .limit(1)
+          .replaceWith(map({value: 2}))
+          .select(
+            switchOn(
+              equal(field('value'), 1),
+              constant('one'),
+              equal(field('value'), 2),
+              constant('two'),
+              equal(field('value'), 3),
+              constant('three'),
+              constant('default'),
+            ).as('result'),
+          )
+          .execute();
+        expectResults(snapshot, {result: 'two'});
+      });
+
+      it('throws if no match and no default', async () => {
+        await expect(
+          firestore
+            .pipeline()
+            .collection(randomCol.path)
+            .limit(1)
+            .replaceWith(map({value: 5}))
+            .select(
+              switchOn(
+                equal(field('value'), 1),
+                constant('one'),
+                equal(field('value'), 2),
+                constant('two'),
+              ).as('result'),
+            )
+            .execute(),
+        ).to.be.rejectedWith(/all switch cases evaluate to false/);
       });
     });
 

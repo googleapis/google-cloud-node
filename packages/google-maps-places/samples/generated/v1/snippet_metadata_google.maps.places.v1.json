@@ -22,7 +22,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 156,
+          "end": 161,
           "type": "FULL"
         }
       ],
@@ -70,6 +70,10 @@
           {
             "name": "routing_parameters",
             "type": ".google.maps.places.v1.RoutingParameters"
+          },
+          {
+            "name": "include_future_opening_businesses",
+            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.maps.places.v1.SearchNearbyResponse",
@@ -98,7 +102,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 147,
+          "end": 152,
           "type": "FULL"
         }
       ],
@@ -169,6 +173,10 @@
           },
           {
             "name": "include_pure_service_area_businesses",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "include_future_opening_businesses",
             "type": "TYPE_BOOL"
           }
         ],
@@ -302,7 +310,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 153,
+          "end": 158,
           "type": "FULL"
         }
       ],
@@ -357,6 +365,10 @@
           },
           {
             "name": "include_pure_service_area_businesses",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "include_future_opening_businesses",
             "type": "TYPE_BOOL"
           }
         ],
