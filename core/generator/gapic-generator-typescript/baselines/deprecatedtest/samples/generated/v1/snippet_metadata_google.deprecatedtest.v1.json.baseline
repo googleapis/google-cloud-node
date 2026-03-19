@@ -1,0 +1,95 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-deprecatedtest",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.deprecatedtest.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "localhost_v1_generated_DeprecatedService_FastFibonacci_async",
+      "title": "DeprecatedService fastFibonacci Sample",
+      "origin": "API_DEFINITION",
+      "description": " Calculates Fibonacci on the provided value, quickly.",
+      "canonical": true,
+      "file": "deprecated_service.fast_fibonacci.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FastFibonacci",
+        "fullName": "google.deprecatedtest.v1.DeprecatedService.FastFibonacci",
+        "async": true,
+        "parameters": [
+          {
+            "name": "value",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DeprecatedServiceClient",
+          "fullName": "google.deprecatedtest.v1.DeprecatedServiceClient"
+        },
+        "method": {
+          "shortName": "FastFibonacci",
+          "fullName": "google.deprecatedtest.v1.DeprecatedService.FastFibonacci",
+          "service": {
+            "shortName": "DeprecatedService",
+            "fullName": "google.deprecatedtest.v1.DeprecatedService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "localhost_v1_generated_DeprecatedService_SlowFibonacci_async",
+      "title": "DeprecatedService slowFibonacci Sample",
+      "origin": "API_DEFINITION",
+      "description": " Calculates Fibonacci on the provided value, slowly.",
+      "canonical": true,
+      "file": "deprecated_service.slow_fibonacci.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SlowFibonacci",
+        "fullName": "google.deprecatedtest.v1.DeprecatedService.SlowFibonacci",
+        "async": true,
+        "parameters": [
+          {
+            "name": "value",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DeprecatedServiceClient",
+          "fullName": "google.deprecatedtest.v1.DeprecatedServiceClient"
+        },
+        "method": {
+          "shortName": "SlowFibonacci",
+          "fullName": "google.deprecatedtest.v1.DeprecatedService.SlowFibonacci",
+          "service": {
+            "shortName": "DeprecatedService",
+            "fullName": "google.deprecatedtest.v1.DeprecatedService"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1337,6 +1337,30 @@
                               }
                             }
                           ]
+                        },
+                        "ExportDataObjects": {
+                          "requestType": "ExportDataObjectsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/collections/*}:exportDataObjects",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ExportDataObjectsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExportDataObjectsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/collections/*}:exportDataObjects",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportDataObjectsResponse",
+                                "metadata_type": "ExportDataObjectsMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1969,6 +1993,78 @@
                           "id": 1
                         }
                       }
+                    },
+                    "ExportDataObjectsRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsExportDestination",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsExportDestination": {
+                          "fields": {
+                            "exportUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "format": {
+                              "type": "Format",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Format": {
+                              "values": {
+                                "FORMAT_UNSPECIFIED": 0,
+                                "JSONL": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataObjectsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataObjectsResponse": {
+                      "fields": {}
                     },
                     "DedicatedInfrastructure": {
                       "oneofs": {

@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.3.0...dataplex-v5.4.0) (2026-03-18)
+
+
+### Features
+
+* **dataplex:** [dataplex] add DataProductService to manage data products and underlying data assets ([#7612](https://github.com/googleapis/google-cloud-node/issues/7612)) ([cb2345a](https://github.com/googleapis/google-cloud-node/commit/cb2345ab8636cb2fae3b1a3842a93c56f132bfbe))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.2.0...dataplex-v5.3.0) (2025-11-11)
 
 

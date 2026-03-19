@@ -2,11 +2,17 @@
   "commit-batch-size": 1,
   "include-component-in-tag": true,
   "packages": {
+    "core/common": {
+      "component": "common"
+    },
     "core/paginator": {
       "component": "paginator"
     },
     "core/projectify": {
       "component": "projectify"
+    },
+    "core/promisify": {
+      "component": "promisify"
     },
     "handwritten/bigquery": {
       "component": "bigquery"
@@ -34,6 +40,9 @@
     },
     "handwritten/logging-winston": {
       "component": "logging-winston"
+    },
+    "handwritten/pubsub": {
+      "component": "pubsub"
     },
     "handwritten/spanner": {
       "component": "spanner"

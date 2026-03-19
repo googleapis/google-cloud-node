@@ -3041,6 +3041,60 @@ describe('v1.BusinessGlossaryServiceClient', () => {
             });
         });
 
+        describe('dataAsset', async () => {
+            const fakePath = "/rendered/path/dataAsset";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_product: "dataProductValue",
+                data_asset: "dataAssetValue",
+            };
+            const client = new businessglossaryserviceModule.v1.BusinessGlossaryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataAssetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataAssetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataAssetPath', () => {
+                const result = client.dataAssetPath("projectValue", "locationValue", "dataProductValue", "dataAssetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataAssetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataAssetName', () => {
+                const result = client.matchProjectFromDataAssetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataAssetName', () => {
+                const result = client.matchLocationFromDataAssetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataProductFromDataAssetName', () => {
+                const result = client.matchDataProductFromDataAssetName(fakePath);
+                assert.strictEqual(result, "dataProductValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataAssetFromDataAssetName', () => {
+                const result = client.matchDataAssetFromDataAssetName(fakePath);
+                assert.strictEqual(result, "dataAssetValue");
+                assert((client.pathTemplates.dataAssetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('dataAttribute', async () => {
             const fakePath = "/rendered/path/dataAttribute";
             const expectedParameters = {
@@ -3137,6 +3191,52 @@ describe('v1.BusinessGlossaryServiceClient', () => {
                 const result = client.matchDataAttributeBindingIdFromDataAttributeBindingName(fakePath);
                 assert.strictEqual(result, "dataAttributeBindingIdValue");
                 assert((client.pathTemplates.dataAttributeBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataProduct', async () => {
+            const fakePath = "/rendered/path/dataProduct";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_product: "dataProductValue",
+            };
+            const client = new businessglossaryserviceModule.v1.BusinessGlossaryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataProductPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataProductPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataProductPath', () => {
+                const result = client.dataProductPath("projectValue", "locationValue", "dataProductValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataProductPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataProductName', () => {
+                const result = client.matchProjectFromDataProductName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataProductName', () => {
+                const result = client.matchLocationFromDataProductName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataProductFromDataProductName', () => {
+                const result = client.matchDataProductFromDataProductName(fakePath);
+                assert.strictEqual(result, "dataProductValue");
+                assert((client.pathTemplates.dataProductPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -3945,6 +4045,52 @@ describe('v1.BusinessGlossaryServiceClient', () => {
                 const result = client.matchLocationFromLocationName(fakePath);
                 assert.strictEqual(result, "locationValue");
                 assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('metadataFeed', async () => {
+            const fakePath = "/rendered/path/metadataFeed";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                metadata_feed: "metadataFeedValue",
+            };
+            const client = new businessglossaryserviceModule.v1.BusinessGlossaryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.metadataFeedPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.metadataFeedPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('metadataFeedPath', () => {
+                const result = client.metadataFeedPath("projectValue", "locationValue", "metadataFeedValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.metadataFeedPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMetadataFeedName', () => {
+                const result = client.matchProjectFromMetadataFeedName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.metadataFeedPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMetadataFeedName', () => {
+                const result = client.matchLocationFromMetadataFeedName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.metadataFeedPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMetadataFeedFromMetadataFeedName', () => {
+                const result = client.matchMetadataFeedFromMetadataFeedName(fakePath);
+                assert.strictEqual(result, "metadataFeedValue");
+                assert((client.pathTemplates.metadataFeedPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

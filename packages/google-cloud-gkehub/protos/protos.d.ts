@@ -10430,6 +10430,9 @@ export namespace google {
 
                         /** MembershipState hierarchyControllerState */
                         hierarchyControllerState?: (google.cloud.gkehub.configmanagement.v1beta.IHierarchyControllerState|null);
+
+                        /** MembershipState kubernetesApiServerVersion */
+                        kubernetesApiServerVersion?: (string|null);
                     }
 
                     /** Represents a MembershipState. */
@@ -10461,6 +10464,9 @@ export namespace google {
 
                         /** MembershipState hierarchyControllerState. */
                         public hierarchyControllerState?: (google.cloud.gkehub.configmanagement.v1beta.IHierarchyControllerState|null);
+
+                        /** MembershipState kubernetesApiServerVersion. */
+                        public kubernetesApiServerVersion: string;
 
                         /**
                          * Creates a new MembershipState instance using the specified properties.
@@ -10703,6 +10709,9 @@ export namespace google {
 
                         /** ConfigSync stopSyncing */
                         stopSyncing?: (boolean|null);
+
+                        /** ConfigSync deploymentOverrides */
+                        deploymentOverrides?: (google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride[]|null);
                     }
 
                     /** Represents a ConfigSync. */
@@ -10731,6 +10740,9 @@ export namespace google {
 
                         /** ConfigSync stopSyncing. */
                         public stopSyncing: boolean;
+
+                        /** ConfigSync deploymentOverrides. */
+                        public deploymentOverrides: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride[];
 
                         /**
                          * Creates a new ConfigSync instance using the specified properties.
@@ -10804,6 +10816,236 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ConfigSync
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeploymentOverride. */
+                    interface IDeploymentOverride {
+
+                        /** DeploymentOverride deploymentName */
+                        deploymentName?: (string|null);
+
+                        /** DeploymentOverride deploymentNamespace */
+                        deploymentNamespace?: (string|null);
+
+                        /** DeploymentOverride containers */
+                        containers?: (google.cloud.gkehub.configmanagement.v1beta.IContainerOverride[]|null);
+                    }
+
+                    /** Represents a DeploymentOverride. */
+                    class DeploymentOverride implements IDeploymentOverride {
+
+                        /**
+                         * Constructs a new DeploymentOverride.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride);
+
+                        /** DeploymentOverride deploymentName. */
+                        public deploymentName: string;
+
+                        /** DeploymentOverride deploymentNamespace. */
+                        public deploymentNamespace: string;
+
+                        /** DeploymentOverride containers. */
+                        public containers: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride[];
+
+                        /**
+                         * Creates a new DeploymentOverride instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeploymentOverride instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride): google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride;
+
+                        /**
+                         * Encodes the specified DeploymentOverride message. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.verify|verify} messages.
+                         * @param message DeploymentOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeploymentOverride message, length delimited. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.verify|verify} messages.
+                         * @param message DeploymentOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeploymentOverride message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeploymentOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride;
+
+                        /**
+                         * Decodes a DeploymentOverride message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeploymentOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride;
+
+                        /**
+                         * Verifies a DeploymentOverride message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeploymentOverride message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeploymentOverride
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride;
+
+                        /**
+                         * Creates a plain object from a DeploymentOverride message. Also converts values to other types if specified.
+                         * @param message DeploymentOverride
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeploymentOverride to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeploymentOverride
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ContainerOverride. */
+                    interface IContainerOverride {
+
+                        /** ContainerOverride containerName */
+                        containerName?: (string|null);
+
+                        /** ContainerOverride cpuRequest */
+                        cpuRequest?: (string|null);
+
+                        /** ContainerOverride cpuLimit */
+                        cpuLimit?: (string|null);
+
+                        /** ContainerOverride memoryRequest */
+                        memoryRequest?: (string|null);
+
+                        /** ContainerOverride memoryLimit */
+                        memoryLimit?: (string|null);
+                    }
+
+                    /** Represents a ContainerOverride. */
+                    class ContainerOverride implements IContainerOverride {
+
+                        /**
+                         * Constructs a new ContainerOverride.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride);
+
+                        /** ContainerOverride containerName. */
+                        public containerName: string;
+
+                        /** ContainerOverride cpuRequest. */
+                        public cpuRequest: string;
+
+                        /** ContainerOverride cpuLimit. */
+                        public cpuLimit: string;
+
+                        /** ContainerOverride memoryRequest. */
+                        public memoryRequest: string;
+
+                        /** ContainerOverride memoryLimit. */
+                        public memoryLimit: string;
+
+                        /**
+                         * Creates a new ContainerOverride instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ContainerOverride instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride): google.cloud.gkehub.configmanagement.v1beta.ContainerOverride;
+
+                        /**
+                         * Encodes the specified ContainerOverride message. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.verify|verify} messages.
+                         * @param message ContainerOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ContainerOverride message, length delimited. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.verify|verify} messages.
+                         * @param message ContainerOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ContainerOverride message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ContainerOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.configmanagement.v1beta.ContainerOverride;
+
+                        /**
+                         * Decodes a ContainerOverride message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ContainerOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.configmanagement.v1beta.ContainerOverride;
+
+                        /**
+                         * Verifies a ContainerOverride message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ContainerOverride message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ContainerOverride
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.configmanagement.v1beta.ContainerOverride;
+
+                        /**
+                         * Creates a plain object from a ContainerOverride message. Also converts values to other types if specified.
+                         * @param message ContainerOverride
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.configmanagement.v1beta.ContainerOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ContainerOverride to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ContainerOverride
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

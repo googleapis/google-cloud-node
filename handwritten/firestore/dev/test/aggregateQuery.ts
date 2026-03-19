@@ -25,6 +25,8 @@ import {google} from '../protos/firestore_v1_proto_api';
 import api = google.firestore.v1;
 import * as chaiAsPromised from 'chai-as-promised';
 import {setTimeoutHandler} from '../src/backoff';
+import * as extend from 'extend';
+
 use(chaiAsPromised);
 
 describe('aggregate query interface', () => {
@@ -97,6 +99,57 @@ describe('aggregate query interface', () => {
       expect(results.data().count).to.be.equal(99);
       expect(results.readTime.isEqual(new Timestamp(5, 6))).to.be.true;
       expect(results.query).to.be.equal(query);
+    });
+  });
+
+  it('supports alwaysUseImplicitOrderBy', async () => {
+    const result: api.IRunAggregationQueryResponse = {
+      result: {
+        aggregateFields: {
+          aggregate_0: {integerValue: '99'},
+        },
+      },
+      readTime: {seconds: 5, nanos: 6},
+    };
+    const overrides: ApiOverride = {
+      runAggregationQuery: request => {
+        let actualStructuredQuery =
+          request!.structuredAggregationQuery?.structuredQuery;
+        actualStructuredQuery = extend(true, {}, actualStructuredQuery);
+        expect(actualStructuredQuery).to.deep.equal({
+          from: [{collectionId: 'collectionId'}],
+          where: {
+            fieldFilter: {
+              field: {fieldPath: 'foo'},
+              op: 'GREATER_THAN' as api.StructuredQuery.FieldFilter.Operator,
+              value: {stringValue: 'bar'},
+            },
+          },
+          orderBy: [
+            {
+              direction: 'ASCENDING' as api.StructuredQuery.Direction,
+              field: {fieldPath: 'foo'},
+            },
+            {
+              direction: 'ASCENDING' as api.StructuredQuery.Direction,
+              field: {fieldPath: '__name__'},
+            },
+          ],
+        });
+        return stream(result);
+      },
+    };
+
+    firestore = await createInstance(overrides, {
+      alwaysUseImplicitOrderBy: true,
+    });
+
+    const query = firestore
+      .collection('collectionId')
+      .where('foo', '>', 'bar')
+      .count();
+    return query.get().then(results => {
+      expect(results.data().count).to.be.equal(99);
     });
   });
 

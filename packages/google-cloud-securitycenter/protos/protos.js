@@ -5541,6 +5541,227 @@
                         return BigQueryExport;
                     })();
     
+                    v1.Chokepoint = (function() {
+    
+                        /**
+                         * Properties of a Chokepoint.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IChokepoint
+                         * @property {Array.<string>|null} [relatedFindings] Chokepoint relatedFindings
+                         */
+    
+                        /**
+                         * Constructs a new Chokepoint.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Chokepoint.
+                         * @implements IChokepoint
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IChokepoint=} [properties] Properties to set
+                         */
+                        function Chokepoint(properties) {
+                            this.relatedFindings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Chokepoint relatedFindings.
+                         * @member {Array.<string>} relatedFindings
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @instance
+                         */
+                        Chokepoint.prototype.relatedFindings = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Chokepoint instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IChokepoint=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Chokepoint} Chokepoint instance
+                         */
+                        Chokepoint.create = function create(properties) {
+                            return new Chokepoint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Chokepoint message. Does not implicitly {@link google.cloud.securitycenter.v1.Chokepoint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IChokepoint} message Chokepoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Chokepoint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.relatedFindings != null && message.relatedFindings.length)
+                                for (var i = 0; i < message.relatedFindings.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.relatedFindings[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Chokepoint message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Chokepoint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IChokepoint} message Chokepoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Chokepoint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Chokepoint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Chokepoint} Chokepoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Chokepoint.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Chokepoint();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.relatedFindings && message.relatedFindings.length))
+                                            message.relatedFindings = [];
+                                        message.relatedFindings.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Chokepoint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Chokepoint} Chokepoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Chokepoint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Chokepoint message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Chokepoint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.relatedFindings != null && message.hasOwnProperty("relatedFindings")) {
+                                if (!Array.isArray(message.relatedFindings))
+                                    return "relatedFindings: array expected";
+                                for (var i = 0; i < message.relatedFindings.length; ++i)
+                                    if (!$util.isString(message.relatedFindings[i]))
+                                        return "relatedFindings: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Chokepoint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Chokepoint} Chokepoint
+                         */
+                        Chokepoint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Chokepoint)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Chokepoint();
+                            if (object.relatedFindings) {
+                                if (!Array.isArray(object.relatedFindings))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Chokepoint.relatedFindings: array expected");
+                                message.relatedFindings = [];
+                                for (var i = 0; i < object.relatedFindings.length; ++i)
+                                    message.relatedFindings[i] = String(object.relatedFindings[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Chokepoint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Chokepoint} message Chokepoint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Chokepoint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.relatedFindings = [];
+                            if (message.relatedFindings && message.relatedFindings.length) {
+                                object.relatedFindings = [];
+                                for (var j = 0; j < message.relatedFindings.length; ++j)
+                                    object.relatedFindings[j] = message.relatedFindings[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Chokepoint to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Chokepoint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Chokepoint
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v1.Chokepoint
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Chokepoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v1.Chokepoint";
+                        };
+    
+                        return Chokepoint;
+                    })();
+    
                     v1.CloudArmor = (function() {
     
                         /**
@@ -6879,6 +7100,7 @@
                          * @interface ICloudDlpDataProfile
                          * @property {string|null} [dataProfile] CloudDlpDataProfile dataProfile
                          * @property {google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType|null} [parentType] CloudDlpDataProfile parentType
+                         * @property {Array.<google.cloud.securitycenter.v1.IInfoType>|null} [infoTypes] CloudDlpDataProfile infoTypes
                          */
     
                         /**
@@ -6890,6 +7112,7 @@
                          * @param {google.cloud.securitycenter.v1.ICloudDlpDataProfile=} [properties] Properties to set
                          */
                         function CloudDlpDataProfile(properties) {
+                            this.infoTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6911,6 +7134,14 @@
                          * @instance
                          */
                         CloudDlpDataProfile.prototype.parentType = 0;
+    
+                        /**
+                         * CloudDlpDataProfile infoTypes.
+                         * @member {Array.<google.cloud.securitycenter.v1.IInfoType>} infoTypes
+                         * @memberof google.cloud.securitycenter.v1.CloudDlpDataProfile
+                         * @instance
+                         */
+                        CloudDlpDataProfile.prototype.infoTypes = $util.emptyArray;
     
                         /**
                          * Creates a new CloudDlpDataProfile instance using the specified properties.
@@ -6940,6 +7171,9 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataProfile);
                             if (message.parentType != null && Object.hasOwnProperty.call(message, "parentType"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.parentType);
+                            if (message.infoTypes != null && message.infoTypes.length)
+                                for (var i = 0; i < message.infoTypes.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.InfoType.encode(message.infoTypes[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -6982,6 +7216,12 @@
                                     }
                                 case 2: {
                                         message.parentType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.infoTypes && message.infoTypes.length))
+                                            message.infoTypes = [];
+                                        message.infoTypes.push($root.google.cloud.securitycenter.v1.InfoType.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -7031,6 +7271,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.infoTypes != null && message.hasOwnProperty("infoTypes")) {
+                                if (!Array.isArray(message.infoTypes))
+                                    return "infoTypes: array expected";
+                                for (var i = 0; i < message.infoTypes.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.InfoType.verify(message.infoTypes[i]);
+                                    if (error)
+                                        return "infoTypes." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -7068,6 +7317,16 @@
                                 message.parentType = 2;
                                 break;
                             }
+                            if (object.infoTypes) {
+                                if (!Array.isArray(object.infoTypes))
+                                    throw TypeError(".google.cloud.securitycenter.v1.CloudDlpDataProfile.infoTypes: array expected");
+                                message.infoTypes = [];
+                                for (var i = 0; i < object.infoTypes.length; ++i) {
+                                    if (typeof object.infoTypes[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.CloudDlpDataProfile.infoTypes: object expected");
+                                    message.infoTypes[i] = $root.google.cloud.securitycenter.v1.InfoType.fromObject(object.infoTypes[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -7084,6 +7343,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.infoTypes = [];
                             if (options.defaults) {
                                 object.dataProfile = "";
                                 object.parentType = options.enums === String ? "PARENT_TYPE_UNSPECIFIED" : 0;
@@ -7092,6 +7353,11 @@
                                 object.dataProfile = message.dataProfile;
                             if (message.parentType != null && message.hasOwnProperty("parentType"))
                                 object.parentType = options.enums === String ? $root.google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType[message.parentType] === undefined ? message.parentType : $root.google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType[message.parentType] : message.parentType;
+                            if (message.infoTypes && message.infoTypes.length) {
+                                object.infoTypes = [];
+                                for (var j = 0; j < message.infoTypes.length; ++j)
+                                    object.infoTypes[j] = $root.google.cloud.securitycenter.v1.InfoType.toObject(message.infoTypes[j], options);
+                            }
                             return object;
                         };
     
@@ -7138,6 +7404,522 @@
                         })();
     
                         return CloudDlpDataProfile;
+                    })();
+    
+                    v1.InfoType = (function() {
+    
+                        /**
+                         * Properties of an InfoType.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IInfoType
+                         * @property {string|null} [name] InfoType name
+                         * @property {string|null} [version] InfoType version
+                         * @property {google.cloud.securitycenter.v1.ISensitivityScore|null} [sensitivityScore] InfoType sensitivityScore
+                         */
+    
+                        /**
+                         * Constructs a new InfoType.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an InfoType.
+                         * @implements IInfoType
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IInfoType=} [properties] Properties to set
+                         */
+                        function InfoType(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InfoType name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @instance
+                         */
+                        InfoType.prototype.name = "";
+    
+                        /**
+                         * InfoType version.
+                         * @member {string} version
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @instance
+                         */
+                        InfoType.prototype.version = "";
+    
+                        /**
+                         * InfoType sensitivityScore.
+                         * @member {google.cloud.securitycenter.v1.ISensitivityScore|null|undefined} sensitivityScore
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @instance
+                         */
+                        InfoType.prototype.sensitivityScore = null;
+    
+                        /**
+                         * Creates a new InfoType instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IInfoType=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.InfoType} InfoType instance
+                         */
+                        InfoType.create = function create(properties) {
+                            return new InfoType(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InfoType message. Does not implicitly {@link google.cloud.securitycenter.v1.InfoType.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IInfoType} message InfoType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InfoType.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                            if (message.sensitivityScore != null && Object.hasOwnProperty.call(message, "sensitivityScore"))
+                                $root.google.cloud.securitycenter.v1.SensitivityScore.encode(message.sensitivityScore, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InfoType message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.InfoType.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IInfoType} message InfoType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InfoType.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InfoType message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.InfoType} InfoType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InfoType.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.InfoType();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.version = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sensitivityScore = $root.google.cloud.securitycenter.v1.SensitivityScore.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InfoType message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.InfoType} InfoType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InfoType.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InfoType message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InfoType.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.sensitivityScore != null && message.hasOwnProperty("sensitivityScore")) {
+                                var error = $root.google.cloud.securitycenter.v1.SensitivityScore.verify(message.sensitivityScore);
+                                if (error)
+                                    return "sensitivityScore." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InfoType message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.InfoType} InfoType
+                         */
+                        InfoType.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.InfoType)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.InfoType();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.sensitivityScore != null) {
+                                if (typeof object.sensitivityScore !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.InfoType.sensitivityScore: object expected");
+                                message.sensitivityScore = $root.google.cloud.securitycenter.v1.SensitivityScore.fromObject(object.sensitivityScore);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InfoType message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.InfoType} message InfoType
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InfoType.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.version = "";
+                                object.sensitivityScore = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.sensitivityScore != null && message.hasOwnProperty("sensitivityScore"))
+                                object.sensitivityScore = $root.google.cloud.securitycenter.v1.SensitivityScore.toObject(message.sensitivityScore, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InfoType to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InfoType.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InfoType
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v1.InfoType
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InfoType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v1.InfoType";
+                        };
+    
+                        return InfoType;
+                    })();
+    
+                    v1.SensitivityScore = (function() {
+    
+                        /**
+                         * Properties of a SensitivityScore.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface ISensitivityScore
+                         * @property {google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel|null} [score] SensitivityScore score
+                         */
+    
+                        /**
+                         * Constructs a new SensitivityScore.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a SensitivityScore.
+                         * @implements ISensitivityScore
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.ISensitivityScore=} [properties] Properties to set
+                         */
+                        function SensitivityScore(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SensitivityScore score.
+                         * @member {google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel} score
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @instance
+                         */
+                        SensitivityScore.prototype.score = 0;
+    
+                        /**
+                         * Creates a new SensitivityScore instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ISensitivityScore=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.SensitivityScore} SensitivityScore instance
+                         */
+                        SensitivityScore.create = function create(properties) {
+                            return new SensitivityScore(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SensitivityScore message. Does not implicitly {@link google.cloud.securitycenter.v1.SensitivityScore.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ISensitivityScore} message SensitivityScore message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SensitivityScore.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.score);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SensitivityScore message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SensitivityScore.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ISensitivityScore} message SensitivityScore message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SensitivityScore.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SensitivityScore message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.SensitivityScore} SensitivityScore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SensitivityScore.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.SensitivityScore();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.score = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SensitivityScore message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.SensitivityScore} SensitivityScore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SensitivityScore.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SensitivityScore message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SensitivityScore.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.score != null && message.hasOwnProperty("score"))
+                                switch (message.score) {
+                                default:
+                                    return "score: enum value expected";
+                                case 0:
+                                case 10:
+                                case 12:
+                                case 20:
+                                case 30:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SensitivityScore message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.SensitivityScore} SensitivityScore
+                         */
+                        SensitivityScore.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.SensitivityScore)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.SensitivityScore();
+                            switch (object.score) {
+                            default:
+                                if (typeof object.score === "number") {
+                                    message.score = object.score;
+                                    break;
+                                }
+                                break;
+                            case "SENSITIVITY_SCORE_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.score = 0;
+                                break;
+                            case "SENSITIVITY_LOW":
+                            case 10:
+                                message.score = 10;
+                                break;
+                            case "SENSITIVITY_UNKNOWN":
+                            case 12:
+                                message.score = 12;
+                                break;
+                            case "SENSITIVITY_MODERATE":
+                            case 20:
+                                message.score = 20;
+                                break;
+                            case "SENSITIVITY_HIGH":
+                            case 30:
+                                message.score = 30;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SensitivityScore message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.SensitivityScore} message SensitivityScore
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SensitivityScore.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.score = options.enums === String ? "SENSITIVITY_SCORE_LEVEL_UNSPECIFIED" : 0;
+                            if (message.score != null && message.hasOwnProperty("score"))
+                                object.score = options.enums === String ? $root.google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel[message.score] === undefined ? message.score : $root.google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel[message.score] : message.score;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SensitivityScore to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SensitivityScore.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SensitivityScore
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v1.SensitivityScore
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SensitivityScore.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v1.SensitivityScore";
+                        };
+    
+                        /**
+                         * SensitivityScoreLevel enum.
+                         * @name google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel
+                         * @enum {number}
+                         * @property {number} SENSITIVITY_SCORE_LEVEL_UNSPECIFIED=0 SENSITIVITY_SCORE_LEVEL_UNSPECIFIED value
+                         * @property {number} SENSITIVITY_LOW=10 SENSITIVITY_LOW value
+                         * @property {number} SENSITIVITY_UNKNOWN=12 SENSITIVITY_UNKNOWN value
+                         * @property {number} SENSITIVITY_MODERATE=20 SENSITIVITY_MODERATE value
+                         * @property {number} SENSITIVITY_HIGH=30 SENSITIVITY_HIGH value
+                         */
+                        SensitivityScore.SensitivityScoreLevel = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SENSITIVITY_SCORE_LEVEL_UNSPECIFIED"] = 0;
+                            values[valuesById[10] = "SENSITIVITY_LOW"] = 10;
+                            values[valuesById[12] = "SENSITIVITY_UNKNOWN"] = 12;
+                            values[valuesById[20] = "SENSITIVITY_MODERATE"] = 20;
+                            values[valuesById[30] = "SENSITIVITY_HIGH"] = 30;
+                            return values;
+                        })();
+    
+                        return SensitivityScore;
                     })();
     
                     v1.CloudDlpInspection = (function() {
@@ -12904,6 +13686,465 @@
                         return ExfilResource;
                     })();
     
+                    v1.ExternalExposure = (function() {
+    
+                        /**
+                         * Properties of an ExternalExposure.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IExternalExposure
+                         * @property {string|null} [privateIpAddress] ExternalExposure privateIpAddress
+                         * @property {string|null} [privatePort] ExternalExposure privatePort
+                         * @property {string|null} [exposedService] ExternalExposure exposedService
+                         * @property {string|null} [publicIpAddress] ExternalExposure publicIpAddress
+                         * @property {string|null} [publicPort] ExternalExposure publicPort
+                         * @property {string|null} [exposedEndpoint] ExternalExposure exposedEndpoint
+                         * @property {string|null} [loadBalancerFirewallPolicy] ExternalExposure loadBalancerFirewallPolicy
+                         * @property {string|null} [serviceFirewallPolicy] ExternalExposure serviceFirewallPolicy
+                         * @property {string|null} [forwardingRule] ExternalExposure forwardingRule
+                         * @property {string|null} [backendService] ExternalExposure backendService
+                         * @property {string|null} [instanceGroup] ExternalExposure instanceGroup
+                         * @property {string|null} [networkEndpointGroup] ExternalExposure networkEndpointGroup
+                         */
+    
+                        /**
+                         * Constructs a new ExternalExposure.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an ExternalExposure.
+                         * @implements IExternalExposure
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IExternalExposure=} [properties] Properties to set
+                         */
+                        function ExternalExposure(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExternalExposure privateIpAddress.
+                         * @member {string} privateIpAddress
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.privateIpAddress = "";
+    
+                        /**
+                         * ExternalExposure privatePort.
+                         * @member {string} privatePort
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.privatePort = "";
+    
+                        /**
+                         * ExternalExposure exposedService.
+                         * @member {string} exposedService
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.exposedService = "";
+    
+                        /**
+                         * ExternalExposure publicIpAddress.
+                         * @member {string} publicIpAddress
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.publicIpAddress = "";
+    
+                        /**
+                         * ExternalExposure publicPort.
+                         * @member {string} publicPort
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.publicPort = "";
+    
+                        /**
+                         * ExternalExposure exposedEndpoint.
+                         * @member {string} exposedEndpoint
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.exposedEndpoint = "";
+    
+                        /**
+                         * ExternalExposure loadBalancerFirewallPolicy.
+                         * @member {string} loadBalancerFirewallPolicy
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.loadBalancerFirewallPolicy = "";
+    
+                        /**
+                         * ExternalExposure serviceFirewallPolicy.
+                         * @member {string} serviceFirewallPolicy
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.serviceFirewallPolicy = "";
+    
+                        /**
+                         * ExternalExposure forwardingRule.
+                         * @member {string} forwardingRule
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.forwardingRule = "";
+    
+                        /**
+                         * ExternalExposure backendService.
+                         * @member {string} backendService
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.backendService = "";
+    
+                        /**
+                         * ExternalExposure instanceGroup.
+                         * @member {string} instanceGroup
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.instanceGroup = "";
+    
+                        /**
+                         * ExternalExposure networkEndpointGroup.
+                         * @member {string} networkEndpointGroup
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         */
+                        ExternalExposure.prototype.networkEndpointGroup = "";
+    
+                        /**
+                         * Creates a new ExternalExposure instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExternalExposure=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ExternalExposure} ExternalExposure instance
+                         */
+                        ExternalExposure.create = function create(properties) {
+                            return new ExternalExposure(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExternalExposure message. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalExposure.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExternalExposure} message ExternalExposure message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExternalExposure.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.privateIpAddress != null && Object.hasOwnProperty.call(message, "privateIpAddress"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.privateIpAddress);
+                            if (message.privatePort != null && Object.hasOwnProperty.call(message, "privatePort"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.privatePort);
+                            if (message.exposedService != null && Object.hasOwnProperty.call(message, "exposedService"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.exposedService);
+                            if (message.publicIpAddress != null && Object.hasOwnProperty.call(message, "publicIpAddress"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.publicIpAddress);
+                            if (message.publicPort != null && Object.hasOwnProperty.call(message, "publicPort"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.publicPort);
+                            if (message.exposedEndpoint != null && Object.hasOwnProperty.call(message, "exposedEndpoint"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.exposedEndpoint);
+                            if (message.loadBalancerFirewallPolicy != null && Object.hasOwnProperty.call(message, "loadBalancerFirewallPolicy"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.loadBalancerFirewallPolicy);
+                            if (message.serviceFirewallPolicy != null && Object.hasOwnProperty.call(message, "serviceFirewallPolicy"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.serviceFirewallPolicy);
+                            if (message.forwardingRule != null && Object.hasOwnProperty.call(message, "forwardingRule"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.forwardingRule);
+                            if (message.backendService != null && Object.hasOwnProperty.call(message, "backendService"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.backendService);
+                            if (message.instanceGroup != null && Object.hasOwnProperty.call(message, "instanceGroup"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.instanceGroup);
+                            if (message.networkEndpointGroup != null && Object.hasOwnProperty.call(message, "networkEndpointGroup"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.networkEndpointGroup);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExternalExposure message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalExposure.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExternalExposure} message ExternalExposure message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExternalExposure.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExternalExposure message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ExternalExposure} ExternalExposure
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExternalExposure.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ExternalExposure();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.privateIpAddress = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.privatePort = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.exposedService = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.publicIpAddress = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.publicPort = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.exposedEndpoint = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.loadBalancerFirewallPolicy = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.serviceFirewallPolicy = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.forwardingRule = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.backendService = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.instanceGroup = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.networkEndpointGroup = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExternalExposure message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ExternalExposure} ExternalExposure
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExternalExposure.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExternalExposure message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExternalExposure.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.privateIpAddress != null && message.hasOwnProperty("privateIpAddress"))
+                                if (!$util.isString(message.privateIpAddress))
+                                    return "privateIpAddress: string expected";
+                            if (message.privatePort != null && message.hasOwnProperty("privatePort"))
+                                if (!$util.isString(message.privatePort))
+                                    return "privatePort: string expected";
+                            if (message.exposedService != null && message.hasOwnProperty("exposedService"))
+                                if (!$util.isString(message.exposedService))
+                                    return "exposedService: string expected";
+                            if (message.publicIpAddress != null && message.hasOwnProperty("publicIpAddress"))
+                                if (!$util.isString(message.publicIpAddress))
+                                    return "publicIpAddress: string expected";
+                            if (message.publicPort != null && message.hasOwnProperty("publicPort"))
+                                if (!$util.isString(message.publicPort))
+                                    return "publicPort: string expected";
+                            if (message.exposedEndpoint != null && message.hasOwnProperty("exposedEndpoint"))
+                                if (!$util.isString(message.exposedEndpoint))
+                                    return "exposedEndpoint: string expected";
+                            if (message.loadBalancerFirewallPolicy != null && message.hasOwnProperty("loadBalancerFirewallPolicy"))
+                                if (!$util.isString(message.loadBalancerFirewallPolicy))
+                                    return "loadBalancerFirewallPolicy: string expected";
+                            if (message.serviceFirewallPolicy != null && message.hasOwnProperty("serviceFirewallPolicy"))
+                                if (!$util.isString(message.serviceFirewallPolicy))
+                                    return "serviceFirewallPolicy: string expected";
+                            if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
+                                if (!$util.isString(message.forwardingRule))
+                                    return "forwardingRule: string expected";
+                            if (message.backendService != null && message.hasOwnProperty("backendService"))
+                                if (!$util.isString(message.backendService))
+                                    return "backendService: string expected";
+                            if (message.instanceGroup != null && message.hasOwnProperty("instanceGroup"))
+                                if (!$util.isString(message.instanceGroup))
+                                    return "instanceGroup: string expected";
+                            if (message.networkEndpointGroup != null && message.hasOwnProperty("networkEndpointGroup"))
+                                if (!$util.isString(message.networkEndpointGroup))
+                                    return "networkEndpointGroup: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExternalExposure message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ExternalExposure} ExternalExposure
+                         */
+                        ExternalExposure.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ExternalExposure)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ExternalExposure();
+                            if (object.privateIpAddress != null)
+                                message.privateIpAddress = String(object.privateIpAddress);
+                            if (object.privatePort != null)
+                                message.privatePort = String(object.privatePort);
+                            if (object.exposedService != null)
+                                message.exposedService = String(object.exposedService);
+                            if (object.publicIpAddress != null)
+                                message.publicIpAddress = String(object.publicIpAddress);
+                            if (object.publicPort != null)
+                                message.publicPort = String(object.publicPort);
+                            if (object.exposedEndpoint != null)
+                                message.exposedEndpoint = String(object.exposedEndpoint);
+                            if (object.loadBalancerFirewallPolicy != null)
+                                message.loadBalancerFirewallPolicy = String(object.loadBalancerFirewallPolicy);
+                            if (object.serviceFirewallPolicy != null)
+                                message.serviceFirewallPolicy = String(object.serviceFirewallPolicy);
+                            if (object.forwardingRule != null)
+                                message.forwardingRule = String(object.forwardingRule);
+                            if (object.backendService != null)
+                                message.backendService = String(object.backendService);
+                            if (object.instanceGroup != null)
+                                message.instanceGroup = String(object.instanceGroup);
+                            if (object.networkEndpointGroup != null)
+                                message.networkEndpointGroup = String(object.networkEndpointGroup);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExternalExposure message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ExternalExposure} message ExternalExposure
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExternalExposure.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.privateIpAddress = "";
+                                object.privatePort = "";
+                                object.exposedService = "";
+                                object.publicIpAddress = "";
+                                object.publicPort = "";
+                                object.exposedEndpoint = "";
+                                object.loadBalancerFirewallPolicy = "";
+                                object.serviceFirewallPolicy = "";
+                                object.forwardingRule = "";
+                                object.backendService = "";
+                                object.instanceGroup = "";
+                                object.networkEndpointGroup = "";
+                            }
+                            if (message.privateIpAddress != null && message.hasOwnProperty("privateIpAddress"))
+                                object.privateIpAddress = message.privateIpAddress;
+                            if (message.privatePort != null && message.hasOwnProperty("privatePort"))
+                                object.privatePort = message.privatePort;
+                            if (message.exposedService != null && message.hasOwnProperty("exposedService"))
+                                object.exposedService = message.exposedService;
+                            if (message.publicIpAddress != null && message.hasOwnProperty("publicIpAddress"))
+                                object.publicIpAddress = message.publicIpAddress;
+                            if (message.publicPort != null && message.hasOwnProperty("publicPort"))
+                                object.publicPort = message.publicPort;
+                            if (message.exposedEndpoint != null && message.hasOwnProperty("exposedEndpoint"))
+                                object.exposedEndpoint = message.exposedEndpoint;
+                            if (message.loadBalancerFirewallPolicy != null && message.hasOwnProperty("loadBalancerFirewallPolicy"))
+                                object.loadBalancerFirewallPolicy = message.loadBalancerFirewallPolicy;
+                            if (message.serviceFirewallPolicy != null && message.hasOwnProperty("serviceFirewallPolicy"))
+                                object.serviceFirewallPolicy = message.serviceFirewallPolicy;
+                            if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
+                                object.forwardingRule = message.forwardingRule;
+                            if (message.backendService != null && message.hasOwnProperty("backendService"))
+                                object.backendService = message.backendService;
+                            if (message.instanceGroup != null && message.hasOwnProperty("instanceGroup"))
+                                object.instanceGroup = message.instanceGroup;
+                            if (message.networkEndpointGroup != null && message.hasOwnProperty("networkEndpointGroup"))
+                                object.networkEndpointGroup = message.networkEndpointGroup;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExternalExposure to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExternalExposure.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExternalExposure
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v1.ExternalExposure
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExternalExposure.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v1.ExternalExposure";
+                        };
+    
+                        return ExternalExposure;
+                    })();
+    
                     v1.ExternalSystem = (function() {
     
                         /**
@@ -14370,6 +15611,8 @@
                          * @property {google.cloud.securitycenter.v1.INotebook|null} [notebook] Finding notebook
                          * @property {google.cloud.securitycenter.v1.IToxicCombination|null} [toxicCombination] Finding toxicCombination
                          * @property {Array.<google.cloud.securitycenter.v1.IGroupMembership>|null} [groupMemberships] Finding groupMemberships
+                         * @property {google.cloud.securitycenter.v1.IChokepoint|null} [chokepoint] Finding chokepoint
+                         * @property {google.cloud.securitycenter.v1.IExternalExposure|null} [externalExposure] Finding externalExposure
                          */
     
                         /**
@@ -14801,6 +16044,22 @@
                         Finding.prototype.groupMemberships = $util.emptyArray;
     
                         /**
+                         * Finding chokepoint.
+                         * @member {google.cloud.securitycenter.v1.IChokepoint|null|undefined} chokepoint
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.chokepoint = null;
+    
+                        /**
+                         * Finding externalExposure.
+                         * @member {google.cloud.securitycenter.v1.IExternalExposure|null|undefined} externalExposure
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.externalExposure = null;
+    
+                        /**
                          * Creates a new Finding instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -14943,6 +16202,10 @@
                             if (message.groupMemberships != null && message.groupMemberships.length)
                                 for (var i = 0; i < message.groupMemberships.length; ++i)
                                     $root.google.cloud.securitycenter.v1.GroupMembership.encode(message.groupMemberships[i], writer.uint32(/* id 65, wireType 2 =*/522).fork()).ldelim();
+                            if (message.chokepoint != null && Object.hasOwnProperty.call(message, "chokepoint"))
+                                $root.google.cloud.securitycenter.v1.Chokepoint.encode(message.chokepoint, writer.uint32(/* id 77, wireType 2 =*/618).fork()).ldelim();
+                            if (message.externalExposure != null && Object.hasOwnProperty.call(message, "externalExposure"))
+                                $root.google.cloud.securitycenter.v1.ExternalExposure.encode(message.externalExposure, writer.uint32(/* id 84, wireType 2 =*/674).fork()).ldelim();
                             return writer;
                         };
     
@@ -15256,6 +16519,14 @@
                                         message.groupMemberships.push($root.google.cloud.securitycenter.v1.GroupMembership.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 77: {
+                                        message.chokepoint = $root.google.cloud.securitycenter.v1.Chokepoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 84: {
+                                        message.externalExposure = $root.google.cloud.securitycenter.v1.ExternalExposure.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -15376,6 +16647,9 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
+                                case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.indicator != null && message.hasOwnProperty("indicator")) {
@@ -15598,6 +16872,16 @@
                                         return "groupMemberships." + error;
                                 }
                             }
+                            if (message.chokepoint != null && message.hasOwnProperty("chokepoint")) {
+                                var error = $root.google.cloud.securitycenter.v1.Chokepoint.verify(message.chokepoint);
+                                if (error)
+                                    return "chokepoint." + error;
+                            }
+                            if (message.externalExposure != null && message.hasOwnProperty("externalExposure")) {
+                                var error = $root.google.cloud.securitycenter.v1.ExternalExposure.verify(message.externalExposure);
+                                if (error)
+                                    return "externalExposure." + error;
+                            }
                             return null;
                         };
     
@@ -15760,6 +17044,18 @@
                             case "TOXIC_COMBINATION":
                             case 7:
                                 message.findingClass = 7;
+                                break;
+                            case "SENSITIVE_DATA_RISK":
+                            case 8:
+                                message.findingClass = 8;
+                                break;
+                            case "CHOKEPOINT":
+                            case 9:
+                                message.findingClass = 9;
+                                break;
+                            case "EXTERNAL_EXPOSURE":
+                            case 10:
+                                message.findingClass = 10;
                                 break;
                             }
                             if (object.indicator != null) {
@@ -15987,6 +17283,16 @@
                                     message.groupMemberships[i] = $root.google.cloud.securitycenter.v1.GroupMembership.fromObject(object.groupMemberships[i]);
                                 }
                             }
+                            if (object.chokepoint != null) {
+                                if (typeof object.chokepoint !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.chokepoint: object expected");
+                                message.chokepoint = $root.google.cloud.securitycenter.v1.Chokepoint.fromObject(object.chokepoint);
+                            }
+                            if (object.externalExposure != null) {
+                                if (typeof object.externalExposure !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.externalExposure: object expected");
+                                message.externalExposure = $root.google.cloud.securitycenter.v1.ExternalExposure.fromObject(object.externalExposure);
+                            }
                             return message;
                         };
     
@@ -16058,6 +17364,8 @@
                                 object.muteInfo = null;
                                 object.notebook = null;
                                 object.toxicCombination = null;
+                                object.chokepoint = null;
+                                object.externalExposure = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -16199,6 +17507,10 @@
                                 for (var j = 0; j < message.groupMemberships.length; ++j)
                                     object.groupMemberships[j] = $root.google.cloud.securitycenter.v1.GroupMembership.toObject(message.groupMemberships[j], options);
                             }
+                            if (message.chokepoint != null && message.hasOwnProperty("chokepoint"))
+                                object.chokepoint = $root.google.cloud.securitycenter.v1.Chokepoint.toObject(message.chokepoint, options);
+                            if (message.externalExposure != null && message.hasOwnProperty("externalExposure"))
+                                object.externalExposure = $root.google.cloud.securitycenter.v1.ExternalExposure.toObject(message.externalExposure, options);
                             return object;
                         };
     
@@ -16294,6 +17606,9 @@
                          * @property {number} SCC_ERROR=5 SCC_ERROR value
                          * @property {number} POSTURE_VIOLATION=6 POSTURE_VIOLATION value
                          * @property {number} TOXIC_COMBINATION=7 TOXIC_COMBINATION value
+                         * @property {number} SENSITIVE_DATA_RISK=8 SENSITIVE_DATA_RISK value
+                         * @property {number} CHOKEPOINT=9 CHOKEPOINT value
+                         * @property {number} EXTERNAL_EXPOSURE=10 EXTERNAL_EXPOSURE value
                          */
                         Finding.FindingClass = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -16305,6 +17620,9 @@
                             values[valuesById[5] = "SCC_ERROR"] = 5;
                             values[valuesById[6] = "POSTURE_VIOLATION"] = 6;
                             values[valuesById[7] = "TOXIC_COMBINATION"] = 7;
+                            values[valuesById[8] = "SENSITIVE_DATA_RISK"] = 8;
+                            values[valuesById[9] = "CHOKEPOINT"] = 9;
+                            values[valuesById[10] = "EXTERNAL_EXPOSURE"] = 10;
                             return values;
                         })();
     
@@ -17217,6 +18535,7 @@
                                     return "groupType: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
                                     break;
                                 }
                             if (message.groupId != null && message.hasOwnProperty("groupId"))
@@ -17251,6 +18570,10 @@
                             case "GROUP_TYPE_TOXIC_COMBINATION":
                             case 1:
                                 message.groupType = 1;
+                                break;
+                            case "GROUP_TYPE_CHOKEPOINT":
+                            case 3:
+                                message.groupType = 3;
                                 break;
                             }
                             if (object.groupId != null)
@@ -17314,11 +18637,13 @@
                          * @enum {number}
                          * @property {number} GROUP_TYPE_UNSPECIFIED=0 GROUP_TYPE_UNSPECIFIED value
                          * @property {number} GROUP_TYPE_TOXIC_COMBINATION=1 GROUP_TYPE_TOXIC_COMBINATION value
+                         * @property {number} GROUP_TYPE_CHOKEPOINT=3 GROUP_TYPE_CHOKEPOINT value
                          */
                         GroupMembership.GroupType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "GROUP_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GROUP_TYPE_TOXIC_COMBINATION"] = 1;
+                            values[valuesById[3] = "GROUP_TYPE_CHOKEPOINT"] = 3;
                             return values;
                         })();
     
@@ -137756,6 +139081,265 @@
                 return values;
             })();
     
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
+            })();
+    
             api.Http = (function() {
     
                 /**
@@ -149364,6 +150948,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  */
     
                 /**
@@ -149506,6 +151091,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -149563,6 +151156,8 @@
                             writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -149675,6 +151270,10 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -149823,6 +151422,11 @@
                             case 8:
                                 break;
                             }
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     return null;
                 };
@@ -150043,6 +151647,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
                     return message;
                 };
     
@@ -150077,6 +151686,7 @@
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -150120,6 +151730,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     

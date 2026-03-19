@@ -358,6 +358,7 @@ export class CssProductsServiceClient {
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The name of the CSS product to retrieve.
+ *   Format: `accounts/{account}/cssProducts/{css_product}`
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
