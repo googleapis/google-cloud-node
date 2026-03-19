@@ -1401,24 +1401,6 @@
     "support_documentation": "https://cloud.google.com/livestream/docs/getting-support"
   },
   {
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/logging/latest",
-    "product_documentation": "https://cloud.google.com/logging/docs",
-    "name": "logging",
-    "codeowner_team": "@googleapis/yoshi-nodejs",
-    "release_level": "stable",
-    "language": "nodejs",
-    "api_id": "logging.googleapis.com",
-    "distribution_name": "@google-cloud/logging",
-    "repo": "googleapis/nodejs-logging",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
-    "name_pretty": "Logging",
-    "default_version": "v2",
-    "api_shortname": "logging",
-    "library_type": "GAPIC_COMBO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-logging",
-    "support_documentation": "https://cloud.google.com/logging/docs/getting-support"
-  },
-  {
     "name": "logging-winston",
     "name_pretty": "Logging for Winston",
     "product_documentation": "https://cloud.google.com/logging",
@@ -1939,25 +1921,6 @@
     "api_shortname": "policysimulator",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-policysimulator",
     "support_documentation": "https://cloud.google.com/policy-intelligence/docs/getting-support"
-  },
-  {
-    "distribution_name": "@google-cloud/pubsub",
-    "release_level": "stable",
-    "product_documentation": "https://cloud.google.com/pubsub/docs/",
-    "repo": "googleapis/nodejs-pubsub",
-    "default_version": "v1",
-    "language": "nodejs",
-    "requires_billing": true,
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559741",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/pubsub/latest",
-    "name": "pubsub",
-    "name_pretty": "Pub/Sub",
-    "api_id": "pubsub.googleapis.com",
-    "codeowner_team": "@googleapis/pubsub-team @googleapis/cloud-sdk-nodejs-team",
-    "api_shortname": "pubsub",
-    "library_type": "GAPIC_COMBO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-pubsub",
-    "support_documentation": "https://cloud.google.com/pubsub/docs/getting-support"
   },
   {
     "name": "publicca",

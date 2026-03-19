@@ -1,0 +1,162 @@
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@aspect_rules_js//js:defs.bzl", "js_binary", "js_library", "js_test")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+load("@npm//:gapic-tools/package_json.bzl", gapic_tools_bin = "bin")
+load("@npm//:gapic-node-processing/package_json.bzl", gapic_node_processing_bin = "bin")
+package(default_visibility = ["//visibility:public"])
+
+npm_link_all_packages(name = "node_modules")
+
+filegroup(
+    name = "templates",
+    srcs = glob(["templates/**/*.*", "templates/**/.*"]),
+)
+
+filegroup(
+    name = "test_fixtures",
+    srcs = glob(["test-fixtures/**/*.*"]),
+)
+
+filegroup(
+    name = "baselines",
+    srcs = glob(["baselines/**/*.*", "baselines/**/.*"]),
+)
+
+filegroup(
+    name = "protos",
+    srcs = [
+      "//:protos/index.js",
+      "//:protos/protos.json",
+    ],
+)
+
+npm_runtime_dependencies = [
+    "//:node_modules/protobufjs",
+    "//:node_modules/js-yaml",
+    "//:node_modules/long",
+    "//:node_modules/nunjucks",
+    "//:node_modules/object-hash",
+    "//:node_modules/proto3-json-serializer",
+    "//:node_modules/yargs",
+    "//:node_modules/google-gax",
+]
+
+npm_test_dependencies = npm_runtime_dependencies + [
+    "//:node_modules/espower-typescript",
+    "//:node_modules/mocha",
+]
+
+npm_compile_dependencies = npm_test_dependencies + [
+    "//:node_modules/@types/js-yaml",
+    "//:node_modules/@types/mocha",
+    "//:node_modules/@types/module-alias",
+    "//:node_modules/@types/node",
+    "//:node_modules/@types/nunjucks",
+    "//:node_modules/@types/object-hash",
+    "//:node_modules/@types/yargs",
+]
+
+ts_project(
+    name = "compile",
+    srcs = glob([
+            "typescript/**/*.ts",
+        ]) + [
+            "index.d.ts",
+            "protos/index.d.ts",
+            "protos/protos.json",
+        ],
+    tsconfig = "//:tsconfig.json",
+    source_map = False,
+    validate = False,
+    declaration = False,
+    allow_js = True,
+    deps = npm_compile_dependencies,
+    resolve_json_module = True,
+    args = [
+        "--module",
+        "esnext",
+        "--moduleResolution",
+        "node",
+        "--esModuleInterop",
+        "true",
+        "--target",
+        "esnext",
+    ],
+    supports_workers = 0,
+    transpiler = "tsc"
+)
+
+js_library(
+    name = "library",
+    srcs = [
+        "package.json",
+        ":compile",
+    ],
+)
+
+gapic_tools_bin.compileProtos_binary(
+    name = "compile_protos_binary",
+    data = ["//:node_modules/protobufjs-cli"],
+    env = {
+        "BAZEL_BINDIR": ".",
+    },
+    visibility = ["//visibility:public"],
+)  
+
+gapic_node_processing_bin.gapic_node_processing_binary(
+    name = "combine_libraries_binary",
+    data = [
+        "//:node_modules/nunjucks",
+    ],
+    env = {
+        "BAZEL_BINDIR": ".",
+    },
+    visibility = ["//visibility:public"],
+)  
+
+js_binary(
+    name = "protoc_plugin",
+    entry_point = "typescript/src/protoc-plugin.js",
+    data = [
+        ":library",
+        ":templates",
+        ":protos",
+    ],
+    env = {
+        "BAZEL_BINDIR": ".", # required by the JS rules if we need to use them in the build process
+        "NODE_OPTIONS": "--no-warnings", # disable ExperimentalWarning about loading JSON modules
+    },
+)
+
+js_binary(
+    name = "gapic_generator_typescript",
+    entry_point = "typescript/src/gapic-generator-typescript.js",
+    data = [
+        ":library",
+        ":protoc_plugin",
+        ":templates",
+        ":protos",
+        "@com_google_protobuf//:protoc",
+    ],
+    env = {
+        "PROTOC_PATH": "$(rootpath @com_google_protobuf//:protoc)",
+        "NODE_OPTIONS": "--no-warnings", # disable ExperimentalWarning about loading JSON modules
+    },
+)
+
+js_test(
+    name = "unit_tests",
+    entry_point = "typescript/test/unit-test-runner.js",
+    data = [
+        "package.json",
+        ":gapic_generator_typescript",
+        ":compile",
+        ":test_fixtures",
+        ":baselines",
+        "@com_google_protobuf//:protoc",
+    ] + npm_test_dependencies,
+    env = {
+        "PROTOC_PATH": "$(rootpath @com_google_protobuf//:protoc)",
+        "NODE_OPTIONS": "--no-warnings", # disable ExperimentalWarning about loading JSON modules
+    },
+)

@@ -21,6 +21,7 @@ export {CatalogServiceClient} from './catalog_service_client';
 export {CmekServiceClient} from './cmek_service_client';
 export {ContentServiceClient} from './content_service_client';
 export {DataplexServiceClient} from './dataplex_service_client';
+export {DataProductServiceClient} from './data_product_service_client';
 export {DataScanServiceClient} from './data_scan_service_client';
 export {DataTaxonomyServiceClient} from './data_taxonomy_service_client';
 export {MetadataServiceClient} from './metadata_service_client';
