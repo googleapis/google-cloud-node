@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.2.1...security-center-v9.3.0) (2026-03-19)
+
+
+### Features
+
+* [securitycenter] Support Chokepoint and external exposure in findings Proto ([#7638](https://github.com/googleapis/google-cloud-node/issues/7638)) ([694f8f9](https://github.com/googleapis/google-cloud-node/commit/694f8f92608fc1b4afbf7c71ecce90341fea5908))
+
 ## [9.2.1](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.2.0...security-center-v9.2.1) (2025-10-13)
 
 

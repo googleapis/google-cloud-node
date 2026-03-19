@@ -5,6 +5,125 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "1f6f8cc33f811631b58007cc0645b476e65f8e26",
+          "message": "[dlp] added support for detecting key-value pairs in document metadata",
+          "issues": [
+            "7822"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "10ea7e1e-bd9a-4379-a56b-a0c47b841d58",
+      "createTime": "2026-03-19T18:18:35.904Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b906b3ac62ee0513392d62defc7d168966c989f3",
+          "message": "[routing] add a new Waypoint source to accept a token that identifies a Navigation Point obtained from the `SearchDestinations` method of the Geocoding API",
+          "issues": [
+            "7531"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "44c3e2c6-1106-454f-9530-892c47bf1f87",
+      "createTime": "2026-03-19T18:18:35.883Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bbaf91884b006918b1235edb483e5ac7ed09442b",
+          "message": "[places] add a new business status `FUTURE_OPENING` for places,",
+          "issues": [
+            "7821"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "56058c47-372c-46c4-b917-379aee9ccc75",
+      "createTime": "2026-03-19T18:18:35.850Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "451de89cdd525b8aac424fc30ead047246ec521b",
+          "message": "[vectorsearch] Mark Vector Search v1 API as GA",
+          "issues": [
+            "7610"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "744c0026-d1d8-4b0a-a76c-48c0247a8f4b",
+      "createTime": "2026-03-19T18:18:35.823Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "694f8f92608fc1b4afbf7c71ecce90341fea5908",
+          "message": "[securitycenter] Support Chokepoint and external exposure in findings Proto",
+          "issues": [
+            "7638"
+          ]
+        }
+      ],
+      "version": "9.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "67f7ff53-1786-4e92-9319-99b9f6f32744",
+      "createTime": "2026-03-19T18:18:35.792Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0012a46efa30c86cf8a88a88d3c4077bbbfe670c",
+          "message": "[iap] add oauth fields for IapSettings",
+          "issues": [
+            "7613"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "bfbf2189-c8db-4d8e-b124-8d9af2b8c663",
+      "createTime": "2026-03-19T18:18:35.759Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9de14388ef6e9919bb75de88d63cecb1c9a9a629",
+          "message": "[gkehub] A new field `kubernetes_api_server_version` is added to message `.google.cloud.gkehub.configmanagement.v1beta.MembershipState`",
+          "issues": [
+            "7534"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "8da5cdb7-0d1e-4af6-ab15-3887074c8a71",
+      "createTime": "2026-03-19T18:18:35.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "7340b3f0ee9b8c0a4446d85cdbbadd9cdfa2db33",
           "message": "[navconnect] add Navigation Connect API",
           "issues": [
@@ -68999,5 +69118,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-03-18T20:59:46.364Z"
+  "updateTime": "2026-03-19T18:18:35.904Z"
 }

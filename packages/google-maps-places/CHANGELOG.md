@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.3.0...places-v2.4.0) (2026-03-19)
+
+
+### Features
+
+* [places] add a new business status `FUTURE_OPENING` for places, ([#7821](https://github.com/googleapis/google-cloud-node/issues/7821)) ([bbaf918](https://github.com/googleapis/google-cloud-node/commit/bbaf91884b006918b1235edb483e5ac7ed09442b))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.2.0...places-v2.3.0) (2026-02-19)
 
 
