@@ -783,6 +783,13 @@ export class Firestore implements firestore.Firestore {
       validateBoolean('settings.ssl', settings.ssl);
     }
 
+    if (settings.alwaysUseImplicitOrderBy !== undefined) {
+      validateBoolean(
+        'settings.alwaysUseImplicitOrderBy',
+        settings.alwaysUseImplicitOrderBy,
+      );
+    }
+
     if (settings.maxIdleChannels !== undefined) {
       validateInteger('settings.maxIdleChannels', settings.maxIdleChannels, {
         minValue: 0,
@@ -843,6 +850,14 @@ export class Firestore implements firestore.Firestore {
    */
   get databaseId(): string {
     return this._databaseId || DEFAULT_DATABASE_ID;
+  }
+
+  /**
+   * Whether to always use implicit order by clauses.
+   * @internal
+   */
+  get alwaysUseImplicitOrderBy(): boolean {
+    return this._settings.alwaysUseImplicitOrderBy ?? false;
   }
 
   /**

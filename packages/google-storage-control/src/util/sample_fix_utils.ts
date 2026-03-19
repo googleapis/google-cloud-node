@@ -22,7 +22,7 @@ export function updateSamples() {
     '..',
     'samples',
     'generated',
-    'v2'
+    'v2',
   );
 
   if (!fs.existsSync(dirPath)) {
@@ -38,32 +38,32 @@ export function updateSamples() {
 
       content = content.replace(
         /const\s+\{StorageClient\}\s*=\s*require\('@google-cloud\/storage'\)\.v2;/g,
-        "const {StorageControlClient} = require('@google-cloud/storage-control');"
+        "const {StorageControlClient} = require('@google-cloud/storage-control');",
       );
 
       content = content.replace(
         /const\s+\{StorageControlClient\}\s*=\s*require\('@google-cloud\/storage-control'\)\.v2;/g,
-        "const {StorageControlClient} = require('@google-cloud/storage-control');"
+        "const {StorageControlClient} = require('@google-cloud/storage-control');",
       );
 
       content = content.replace(
         /const\s+storageClient\s*=\s*new\s+StorageClient\(\);/g,
-        'const storageControlClient = new StorageControlClient();'
+        'const storageControlClient = new StorageControlClient();',
       );
 
       content = content.replace(
         /(\b|await\s+)storageClient\./g,
-        '$1storageControlClient.'
+        '$1storageControlClient.',
       );
 
       content = content.replace(
         /const\s+controlClient\s*=\s*new\s+StorageControlClient\(\);/g,
-        'const storageControlClient = new StorageControlClient();'
+        'const storageControlClient = new StorageControlClient();',
       );
 
       content = content.replace(
         /(\b|await\s+)controlClient\./g,
-        '$1storageControlClient.'
+        '$1storageControlClient.',
       );
 
       fs.writeFileSync(filePath, content);

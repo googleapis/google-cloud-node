@@ -597,6 +597,12 @@ describe('Query watch', () => {
           parent: `projects/${PROJECT_ID}/databases/(default)/documents`,
           structuredQuery: {
             from: [{collectionId: 'col'}],
+            orderBy: [
+              {
+                direction: 'ASCENDING' as api.StructuredQuery.Direction,
+                field: {fieldPath: '__name__'},
+              },
+            ],
           },
         },
         targetId,
@@ -628,6 +634,12 @@ describe('Query watch', () => {
                 },
               },
             },
+            orderBy: [
+              {
+                direction: 'ASCENDING' as api.StructuredQuery.Direction,
+                field: {fieldPath: '__name__'},
+              },
+            ],
           },
         },
         targetId,
@@ -646,6 +658,14 @@ describe('Query watch', () => {
           parent: `projects/${PROJECT_ID}/databases/(default)/documents`,
           structuredQuery: {
             from: [{collectionId: 'col'}],
+            orderBy: [
+              {
+                direction: 'ASCENDING',
+                field: {
+                  fieldPath: '__name__',
+                },
+              },
+            ],
           },
         },
         targetId,
@@ -667,7 +687,16 @@ describe('Query watch', () => {
           parent: `projects/${PROJECT_ID}/databases/(default)/documents`,
           structuredQuery: {
             from: [{collectionId: 'col'}],
-            orderBy: [{direction: 'DESCENDING', field: {fieldPath: 'foo'}}],
+            orderBy: [
+              {
+                direction: 'DESCENDING' as api.StructuredQuery.Direction,
+                field: {fieldPath: 'foo'},
+              },
+              {
+                direction: 'DESCENDING' as api.StructuredQuery.Direction,
+                field: {fieldPath: '__name__'},
+              },
+            ],
           },
         },
         targetId,
@@ -784,6 +813,55 @@ describe('Query watch', () => {
       },
       'Error 7: test remove',
     );
+  });
+
+  it('supports alwaysUseImplicitOrderBy', async () => {
+    // Re-initialize with alwaysUseImplicitOrderBy: true
+    firestore = await createInstance(
+      {listen: () => listenCallback()},
+      {
+        alwaysUseImplicitOrderBy: true,
+      },
+    );
+    const query = firestore.collection('col').where('foo', '>', 'bar');
+    watchHelper = new WatchHelper(streamHelper, query, targetId);
+
+    const expectedQueryJSON = {
+      database: `projects/${PROJECT_ID}/databases/(default)`,
+      addTarget: {
+        query: {
+          parent: `projects/${PROJECT_ID}/databases/(default)/documents`,
+          structuredQuery: {
+            from: [{collectionId: 'col'}],
+            where: {
+              fieldFilter: {
+                field: {fieldPath: 'foo'},
+                op: 'GREATER_THAN' as api.StructuredQuery.FieldFilter.Operator,
+                value: {stringValue: 'bar'},
+              },
+            },
+            orderBy: [
+              {
+                direction: 'ASCENDING' as api.StructuredQuery.Direction,
+                field: {fieldPath: 'foo'},
+              },
+              {
+                direction: 'ASCENDING' as api.StructuredQuery.Direction,
+                field: {fieldPath: '__name__'},
+              },
+            ],
+          },
+        },
+        targetId,
+      },
+    };
+
+    return watchHelper.runTest(expectedQueryJSON, () => {
+      watchHelper.sendAddTarget(targetId);
+      watchHelper.sendCurrent();
+      watchHelper.sendSnapshot(1);
+      return watchHelper.await('snapshot');
+    });
   });
 
   it('rejects an unknown target', () => {
@@ -1280,10 +1358,6 @@ describe('Query watch', () => {
 
     // Add FieldPath.documentId() sorting
     query = query.orderBy(FieldPath.documentId(), 'desc');
-    expectedJson.addTarget!.query!.structuredQuery!.orderBy!.push({
-      direction: 'DESCENDING',
-      field: {fieldPath: '__name__'},
-    });
 
     watchHelper = new WatchHelper(streamHelper, query, targetId);
 
