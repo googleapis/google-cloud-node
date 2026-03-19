@@ -711,11 +711,16 @@
                                         case 5:
                                         case 6:
                                         case 7:
+                                        case 19:
                                         case 8:
                                         case 9:
+                                        case 18:
                                         case 10:
                                         case 11:
                                         case 12:
+                                        case 15:
+                                        case 16:
+                                        case 17:
                                             break;
                                         }
                                     }
@@ -790,6 +795,10 @@
                                     case 7:
                                         message.reportingContext = 7;
                                         break;
+                                    case "FREE_LISTINGS_UCP_CHECKOUT":
+                                    case 19:
+                                        message.reportingContext = 19;
+                                        break;
                                     case "FREE_LOCAL_LISTINGS":
                                     case 8:
                                         message.reportingContext = 8;
@@ -797,6 +806,10 @@
                                     case "FREE_LOCAL_VEHICLE_LISTINGS":
                                     case 9:
                                         message.reportingContext = 9;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 18:
+                                        message.reportingContext = 18;
                                         break;
                                     case "YOUTUBE_SHOPPING":
                                     case 10:
@@ -809,6 +822,18 @@
                                     case "LOCAL_CLOUD_RETAIL":
                                     case 12:
                                         message.reportingContext = 12;
+                                        break;
+                                    case "PRODUCT_REVIEWS":
+                                    case 15:
+                                        message.reportingContext = 15;
+                                        break;
+                                    case "MERCHANT_REVIEWS":
+                                    case 16:
+                                        message.reportingContext = 16;
+                                        break;
+                                    case "YOUTUBE_CHECKOUT":
+                                    case 17:
+                                        message.reportingContext = 17;
                                         break;
                                     }
                                     if (object.impacts) {
@@ -3176,6 +3201,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1.AccountsService|createTestAccount}.
+                             * @memberof google.shopping.merchant.accounts.v1.AccountsService
+                             * @typedef CreateTestAccountCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1.Account} [response] Account
+                             */
+    
+                            /**
+                             * Calls CreateTestAccount.
+                             * @function createTestAccount
+                             * @memberof google.shopping.merchant.accounts.v1.AccountsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.ICreateTestAccountRequest} request CreateTestAccountRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1.AccountsService.CreateTestAccountCallback} callback Node-style callback called with the error, if any, and Account
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AccountsService.prototype.createTestAccount = function createTestAccount(request, callback) {
+                                return this.rpcCall(createTestAccount, $root.google.shopping.merchant.accounts.v1.CreateTestAccountRequest, $root.google.shopping.merchant.accounts.v1.Account, request, callback);
+                            }, "name", { value: "CreateTestAccount" });
+    
+                            /**
+                             * Calls CreateTestAccount.
+                             * @function createTestAccount
+                             * @memberof google.shopping.merchant.accounts.v1.AccountsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.ICreateTestAccountRequest} request CreateTestAccountRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1.Account>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.shopping.merchant.accounts.v1.AccountsService|deleteAccount}.
                              * @memberof google.shopping.merchant.accounts.v1.AccountsService
                              * @typedef DeleteAccountCallback
@@ -5151,6 +5209,240 @@
                             })();
     
                             return CreateAndConfigureAccountRequest;
+                        })();
+    
+                        v1.CreateTestAccountRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateTestAccountRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface ICreateTestAccountRequest
+                             * @property {string|null} [parent] CreateTestAccountRequest parent
+                             * @property {google.shopping.merchant.accounts.v1.IAccount|null} [account] CreateTestAccountRequest account
+                             */
+    
+                            /**
+                             * Constructs a new CreateTestAccountRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a CreateTestAccountRequest.
+                             * @implements ICreateTestAccountRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.ICreateTestAccountRequest=} [properties] Properties to set
+                             */
+                            function CreateTestAccountRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateTestAccountRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @instance
+                             */
+                            CreateTestAccountRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateTestAccountRequest account.
+                             * @member {google.shopping.merchant.accounts.v1.IAccount|null|undefined} account
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @instance
+                             */
+                            CreateTestAccountRequest.prototype.account = null;
+    
+                            /**
+                             * Creates a new CreateTestAccountRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.ICreateTestAccountRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.CreateTestAccountRequest} CreateTestAccountRequest instance
+                             */
+                            CreateTestAccountRequest.create = function create(properties) {
+                                return new CreateTestAccountRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateTestAccountRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1.CreateTestAccountRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.ICreateTestAccountRequest} message CreateTestAccountRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateTestAccountRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.account != null && Object.hasOwnProperty.call(message, "account"))
+                                    $root.google.shopping.merchant.accounts.v1.Account.encode(message.account, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateTestAccountRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.CreateTestAccountRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.ICreateTestAccountRequest} message CreateTestAccountRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateTestAccountRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateTestAccountRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.CreateTestAccountRequest} CreateTestAccountRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateTestAccountRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.CreateTestAccountRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.account = $root.google.shopping.merchant.accounts.v1.Account.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateTestAccountRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.CreateTestAccountRequest} CreateTestAccountRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateTestAccountRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateTestAccountRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateTestAccountRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.account != null && message.hasOwnProperty("account")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1.Account.verify(message.account);
+                                    if (error)
+                                        return "account." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateTestAccountRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.CreateTestAccountRequest} CreateTestAccountRequest
+                             */
+                            CreateTestAccountRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.CreateTestAccountRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1.CreateTestAccountRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.account != null) {
+                                    if (typeof object.account !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1.CreateTestAccountRequest.account: object expected");
+                                    message.account = $root.google.shopping.merchant.accounts.v1.Account.fromObject(object.account);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateTestAccountRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.CreateTestAccountRequest} message CreateTestAccountRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateTestAccountRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.account = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.account != null && message.hasOwnProperty("account"))
+                                    object.account = $root.google.shopping.merchant.accounts.v1.Account.toObject(message.account, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateTestAccountRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateTestAccountRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateTestAccountRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.CreateTestAccountRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateTestAccountRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.CreateTestAccountRequest";
+                            };
+    
+                            return CreateTestAccountRequest;
                         })();
     
                         v1.DeleteAccountRequest = (function() {
@@ -19420,6 +19712,12 @@
                                         case 4:
                                         case 5:
                                         case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
                                             break;
                                         }
                                 }
@@ -19536,6 +19834,30 @@
                                         case "YOUTUBE_SHOPPING":
                                         case 6:
                                             message.eligibleDestinations[i] = 6;
+                                            break;
+                                        case "YOUTUBE_SHOPPING_CHECKOUT":
+                                        case 7:
+                                            message.eligibleDestinations[i] = 7;
+                                            break;
+                                        case "YOUTUBE_AFFILIATE":
+                                        case 8:
+                                            message.eligibleDestinations[i] = 8;
+                                            break;
+                                        case "FREE_VEHICLE_LISTINGS":
+                                        case 9:
+                                            message.eligibleDestinations[i] = 9;
+                                            break;
+                                        case "VEHICLE_ADS":
+                                        case 10:
+                                            message.eligibleDestinations[i] = 10;
+                                            break;
+                                        case "CLOUD_RETAIL":
+                                        case 11:
+                                            message.eligibleDestinations[i] = 11;
+                                            break;
+                                        case "LOCAL_CLOUD_RETAIL":
+                                        case 12:
+                                            message.eligibleDestinations[i] = 12;
                                             break;
                                         }
                                 }
@@ -54458,11 +54780,16 @@
                                         case 5:
                                         case 6:
                                         case 7:
+                                        case 19:
                                         case 8:
                                         case 9:
+                                        case 18:
                                         case 10:
                                         case 11:
                                         case 12:
+                                        case 15:
+                                        case 16:
+                                        case 17:
                                             break;
                                         }
                                     }
@@ -54537,6 +54864,10 @@
                                     case 7:
                                         message.reportingContext = 7;
                                         break;
+                                    case "FREE_LISTINGS_UCP_CHECKOUT":
+                                    case 19:
+                                        message.reportingContext = 19;
+                                        break;
                                     case "FREE_LOCAL_LISTINGS":
                                     case 8:
                                         message.reportingContext = 8;
@@ -54544,6 +54875,10 @@
                                     case "FREE_LOCAL_VEHICLE_LISTINGS":
                                     case 9:
                                         message.reportingContext = 9;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 18:
+                                        message.reportingContext = 18;
                                         break;
                                     case "YOUTUBE_SHOPPING":
                                     case 10:
@@ -54556,6 +54891,18 @@
                                     case "LOCAL_CLOUD_RETAIL":
                                     case 12:
                                         message.reportingContext = 12;
+                                        break;
+                                    case "PRODUCT_REVIEWS":
+                                    case 15:
+                                        message.reportingContext = 15;
+                                        break;
+                                    case "MERCHANT_REVIEWS":
+                                    case 16:
+                                        message.reportingContext = 16;
+                                        break;
+                                    case "YOUTUBE_CHECKOUT":
+                                    case 17:
+                                        message.reportingContext = 17;
                                         break;
                                     }
                                     if (object.impacts) {
@@ -67490,6 +67837,12 @@
                                         case 4:
                                         case 5:
                                         case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
                                             break;
                                         }
                                 }
@@ -67606,6 +67959,30 @@
                                         case "YOUTUBE_SHOPPING":
                                         case 6:
                                             message.eligibleDestinations[i] = 6;
+                                            break;
+                                        case "YOUTUBE_SHOPPING_CHECKOUT":
+                                        case 7:
+                                            message.eligibleDestinations[i] = 7;
+                                            break;
+                                        case "YOUTUBE_AFFILIATE":
+                                        case 8:
+                                            message.eligibleDestinations[i] = 8;
+                                            break;
+                                        case "FREE_VEHICLE_LISTINGS":
+                                        case 9:
+                                            message.eligibleDestinations[i] = 9;
+                                            break;
+                                        case "VEHICLE_ADS":
+                                        case 10:
+                                            message.eligibleDestinations[i] = 10;
+                                            break;
+                                        case "CLOUD_RETAIL":
+                                        case 11:
+                                            message.eligibleDestinations[i] = 11;
+                                            break;
+                                        case "LOCAL_CLOUD_RETAIL":
+                                        case 12:
+                                            message.eligibleDestinations[i] = 12;
                                             break;
                                         }
                                 }
@@ -98296,6 +98673,12 @@
                      * @property {number} FREE_LISTINGS=4 FREE_LISTINGS value
                      * @property {number} FREE_LOCAL_LISTINGS=5 FREE_LOCAL_LISTINGS value
                      * @property {number} YOUTUBE_SHOPPING=6 YOUTUBE_SHOPPING value
+                     * @property {number} YOUTUBE_SHOPPING_CHECKOUT=7 YOUTUBE_SHOPPING_CHECKOUT value
+                     * @property {number} YOUTUBE_AFFILIATE=8 YOUTUBE_AFFILIATE value
+                     * @property {number} FREE_VEHICLE_LISTINGS=9 FREE_VEHICLE_LISTINGS value
+                     * @property {number} VEHICLE_ADS=10 VEHICLE_ADS value
+                     * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
+                     * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
                      */
                     Destination.DestinationEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -98306,6 +98689,12 @@
                         values[valuesById[4] = "FREE_LISTINGS"] = 4;
                         values[valuesById[5] = "FREE_LOCAL_LISTINGS"] = 5;
                         values[valuesById[6] = "YOUTUBE_SHOPPING"] = 6;
+                        values[valuesById[7] = "YOUTUBE_SHOPPING_CHECKOUT"] = 7;
+                        values[valuesById[8] = "YOUTUBE_AFFILIATE"] = 8;
+                        values[valuesById[9] = "FREE_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[10] = "VEHICLE_ADS"] = 10;
+                        values[valuesById[11] = "CLOUD_RETAIL"] = 11;
+                        values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
                         return values;
                     })();
     
@@ -98500,11 +98889,16 @@
                      * @property {number} LOCAL_INVENTORY_ADS=5 LOCAL_INVENTORY_ADS value
                      * @property {number} VEHICLE_INVENTORY_ADS=6 VEHICLE_INVENTORY_ADS value
                      * @property {number} FREE_LISTINGS=7 FREE_LISTINGS value
+                     * @property {number} FREE_LISTINGS_UCP_CHECKOUT=19 FREE_LISTINGS_UCP_CHECKOUT value
                      * @property {number} FREE_LOCAL_LISTINGS=8 FREE_LOCAL_LISTINGS value
                      * @property {number} FREE_LOCAL_VEHICLE_LISTINGS=9 FREE_LOCAL_VEHICLE_LISTINGS value
+                     * @property {number} YOUTUBE_AFFILIATE=18 YOUTUBE_AFFILIATE value
                      * @property {number} YOUTUBE_SHOPPING=10 YOUTUBE_SHOPPING value
                      * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
                      * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
+                     * @property {number} PRODUCT_REVIEWS=15 PRODUCT_REVIEWS value
+                     * @property {number} MERCHANT_REVIEWS=16 MERCHANT_REVIEWS value
+                     * @property {number} YOUTUBE_CHECKOUT=17 YOUTUBE_CHECKOUT value
                      */
                     ReportingContext.ReportingContextEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -98518,11 +98912,16 @@
                         values[valuesById[5] = "LOCAL_INVENTORY_ADS"] = 5;
                         values[valuesById[6] = "VEHICLE_INVENTORY_ADS"] = 6;
                         values[valuesById[7] = "FREE_LISTINGS"] = 7;
+                        values[valuesById[19] = "FREE_LISTINGS_UCP_CHECKOUT"] = 19;
                         values[valuesById[8] = "FREE_LOCAL_LISTINGS"] = 8;
                         values[valuesById[9] = "FREE_LOCAL_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[18] = "YOUTUBE_AFFILIATE"] = 18;
                         values[valuesById[10] = "YOUTUBE_SHOPPING"] = 10;
                         values[valuesById[11] = "CLOUD_RETAIL"] = 11;
                         values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
+                        values[valuesById[15] = "PRODUCT_REVIEWS"] = 15;
+                        values[valuesById[16] = "MERCHANT_REVIEWS"] = 16;
+                        values[valuesById[17] = "YOUTUBE_CHECKOUT"] = 17;
                         return values;
                     })();
     
