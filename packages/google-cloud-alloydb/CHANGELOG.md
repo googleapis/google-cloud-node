@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.4.0...alloydb-v2.5.0) (2026-03-18)
+
+
+### Features
+
+* [alloydb] Add a new field to support Dataplex integration configuration ([#7322](https://github.com/googleapis/google-cloud-node/issues/7322)) ([a74e547](https://github.com/googleapis/google-cloud-node/commit/a74e547ff722d19a3e50adf06bef03f46231daef))
+
 ## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.3.0...alloydb-v2.4.0) (2026-01-22)
 
 

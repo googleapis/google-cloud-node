@@ -1610,6 +1610,18 @@ export namespace google {
 
                     /** Attributes headlineOfferSubscriptionCost */
                     headlineOfferSubscriptionCost?: (google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null);
+
+                    /** Attributes reviewCount */
+                    reviewCount?: (number|Long|string|null);
+
+                    /** Attributes minRating */
+                    minRating?: (number|Long|string|null);
+
+                    /** Attributes maxRating */
+                    maxRating?: (number|Long|string|null);
+
+                    /** Attributes rating */
+                    rating?: (number|null);
                 }
 
                 /** Represents an Attributes. */
@@ -1770,6 +1782,18 @@ export namespace google {
 
                     /** Attributes headlineOfferSubscriptionCost. */
                     public headlineOfferSubscriptionCost?: (google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null);
+
+                    /** Attributes reviewCount. */
+                    public reviewCount?: (number|Long|string|null);
+
+                    /** Attributes minRating. */
+                    public minRating?: (number|Long|string|null);
+
+                    /** Attributes maxRating. */
+                    public maxRating?: (number|Long|string|null);
+
+                    /** Attributes rating. */
+                    public rating?: (number|null);
 
                     /**
                      * Creates a new Attributes instance using the specified properties.
@@ -4855,7 +4879,13 @@ export namespace google {
                     LOCAL_INVENTORY_ADS = 3,
                     FREE_LISTINGS = 4,
                     FREE_LOCAL_LISTINGS = 5,
-                    YOUTUBE_SHOPPING = 6
+                    YOUTUBE_SHOPPING = 6,
+                    YOUTUBE_SHOPPING_CHECKOUT = 7,
+                    YOUTUBE_AFFILIATE = 8,
+                    FREE_VEHICLE_LISTINGS = 9,
+                    VEHICLE_ADS = 10,
+                    CLOUD_RETAIL = 11,
+                    LOCAL_CLOUD_RETAIL = 12
                 }
             }
 
@@ -4964,11 +4994,16 @@ export namespace google {
                     LOCAL_INVENTORY_ADS = 5,
                     VEHICLE_INVENTORY_ADS = 6,
                     FREE_LISTINGS = 7,
+                    FREE_LISTINGS_UCP_CHECKOUT = 19,
                     FREE_LOCAL_LISTINGS = 8,
                     FREE_LOCAL_VEHICLE_LISTINGS = 9,
+                    YOUTUBE_AFFILIATE = 18,
                     YOUTUBE_SHOPPING = 10,
                     CLOUD_RETAIL = 11,
-                    LOCAL_CLOUD_RETAIL = 12
+                    LOCAL_CLOUD_RETAIL = 12,
+                    PRODUCT_REVIEWS = 15,
+                    MERCHANT_REVIEWS = 16,
+                    YOUTUBE_CHECKOUT = 17
                 }
             }
 

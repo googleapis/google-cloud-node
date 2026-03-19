@@ -39,7 +39,7 @@ function main(secret, updateMask) {
   // const updateMask = {}
 
   // Imports the Secretmanager library
-  const {SecretManagerServiceClient} = require('@google-cloud/secretmanager').v1beta2;
+  const {SecretManagerServiceClient} = require('@google-cloud/secret-manager').v1beta2;
 
   // Instantiates a client
   const secretmanagerClient = new SecretManagerServiceClient();
