@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/hypercomputecluster-v0.1.0...hypercomputecluster-v0.2.0) (2026-03-18)
+
+
+### Features
+
+* [hypercomputecluster] add v1 version ([ceeb607](https://github.com/googleapis/google-cloud-node/commit/ceeb607df31c504456590a8253d165b71348d5dc))
+
 ## 0.1.0 (2025-12-15)
 
 
