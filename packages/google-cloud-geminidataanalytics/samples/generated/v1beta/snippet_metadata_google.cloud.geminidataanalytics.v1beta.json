@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 88,
+          "end": 93,
           "type": "FULL"
         }
       ],
@@ -602,6 +602,10 @@
           {
             "name": "messages",
             "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "thinking_mode",
+            "type": ".google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode"
           }
         ],
         "resultType": ".google.cloud.geminidataanalytics.v1beta.Message",

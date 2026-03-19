@@ -64,6 +64,11 @@ function main(parent, messages) {
    *  Required. Content of current conversation.
    */
   // const messages = [1,2,3,4]
+  /**
+   *  Optional. The thinking mode to use for the agent loop.
+   *  Defaults to THINKING_MODE_UNSPECIFIED if not specified.
+   */
+  // const thinkingMode = {}
 
   // Imports the Geminidataanalytics library
   const {DataChatServiceClient} = require('@google-cloud/geminidataanalytics').v1alpha;
