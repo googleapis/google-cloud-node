@@ -5,6 +5,194 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "d40e9bab-1c41-4115-a61b-a4a207e56613",
+      "createTime": "2026-03-19T21:58:31.408Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "4aa175cc-7347-4c00-a3f9-a4df09400db5",
+      "createTime": "2026-03-19T21:58:31.377Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "af1983c9-61b6-4a10-bb4f-e7f151fc702a",
+      "createTime": "2026-03-19T21:58:31.353Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/ordertracking",
+      "id": "764d148c-38cb-45b5-8e41-4e318a5489e3",
+      "createTime": "2026-03-19T21:58:31.268Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "29117eb9-9b20-4b9c-ab74-5dc73cc57c29",
+      "createTime": "2026-03-19T21:58:31.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "6ef4d7fc-cb8b-463b-a9f7-14195e16ae9e",
+      "createTime": "2026-03-19T21:58:31.196Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/issueresolution",
+      "id": "67b12251-9998-4f3b-9960-bfb154caabbd",
+      "createTime": "2026-03-19T21:58:31.175Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "88810b0a-68b7-4ea2-850f-bc42c00d9fb1",
+      "createTime": "2026-03-19T21:58:31.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "b9907e5d-3c1c-4998-9c68-e85fb705a1ba",
+      "createTime": "2026-03-19T21:58:31.136Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "febcc550346c468a5c6dc97070a8498d8c0a9516",
+          "message": "Update dependency redis to ~5.11.0",
+          "issues": [
+            "7619"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.3.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "b1bfdfa7-ac6e-4414-9846-975c76b71031",
+      "createTime": "2026-03-19T21:58:31.114Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dbfee3b4ec80e336061549fcb718cea27ee6b3a1",
+          "message": "[geminidataanalytics] add `ParameterizedSecureViewParameters` message and field for PSV support",
+          "issues": [
+            "7549"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "4bd541d7-8747-4b2b-9ca2-1b5244490b44",
+      "createTime": "2026-03-19T21:58:31.094Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "1f6f8cc33f811631b58007cc0645b476e65f8e26",
           "message": "[dlp] added support for detecting key-value pairs in document metadata",
           "issues": [
@@ -69118,5 +69306,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-03-19T18:18:35.904Z"
+  "updateTime": "2026-03-19T21:58:31.408Z"
 }
