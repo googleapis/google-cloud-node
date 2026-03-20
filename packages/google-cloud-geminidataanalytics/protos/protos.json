@@ -2046,6 +2046,25 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "parameterizedSecureViewParameters": {
+                          "type": "ParameterizedSecureViewParameters",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ParameterizedSecureViewParameters": {
+                      "fields": {
+                        "parameters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2251,6 +2270,22 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "thinkingMode": {
+                          "type": "ThinkingMode",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ThinkingMode": {
+                          "values": {
+                            "THINKING_MODE_UNSPECIFIED": 0,
+                            "FAST": 1,
+                            "THINKING": 2
                           }
                         }
                       }
@@ -4980,6 +5015,25 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "parameterizedSecureViewParameters": {
+                          "type": "ParameterizedSecureViewParameters",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ParameterizedSecureViewParameters": {
+                      "fields": {
+                        "parameters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -5185,6 +5239,22 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "thinkingMode": {
+                          "type": "ThinkingMode",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ThinkingMode": {
+                          "values": {
+                            "THINKING_MODE_UNSPECIFIED": 0,
+                            "FAST": 1,
+                            "THINKING": 2
                           }
                         }
                       }

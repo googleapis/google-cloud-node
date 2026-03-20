@@ -2099,6 +2099,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a Chokepoint. */
+                interface IChokepoint {
+
+                    /** Chokepoint relatedFindings */
+                    relatedFindings?: (string[]|null);
+                }
+
+                /** Represents a Chokepoint. */
+                class Chokepoint implements IChokepoint {
+
+                    /**
+                     * Constructs a new Chokepoint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IChokepoint);
+
+                    /** Chokepoint relatedFindings. */
+                    public relatedFindings: string[];
+
+                    /**
+                     * Creates a new Chokepoint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Chokepoint instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IChokepoint): google.cloud.securitycenter.v1.Chokepoint;
+
+                    /**
+                     * Encodes the specified Chokepoint message. Does not implicitly {@link google.cloud.securitycenter.v1.Chokepoint.verify|verify} messages.
+                     * @param message Chokepoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IChokepoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Chokepoint message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Chokepoint.verify|verify} messages.
+                     * @param message Chokepoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IChokepoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Chokepoint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Chokepoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Chokepoint;
+
+                    /**
+                     * Decodes a Chokepoint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Chokepoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Chokepoint;
+
+                    /**
+                     * Verifies a Chokepoint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Chokepoint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Chokepoint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Chokepoint;
+
+                    /**
+                     * Creates a plain object from a Chokepoint message. Also converts values to other types if specified.
+                     * @param message Chokepoint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Chokepoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Chokepoint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Chokepoint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CloudArmor. */
                 interface ICloudArmor {
 
@@ -2664,6 +2761,9 @@ export namespace google {
 
                     /** CloudDlpDataProfile parentType */
                     parentType?: (google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType|keyof typeof google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType|null);
+
+                    /** CloudDlpDataProfile infoTypes */
+                    infoTypes?: (google.cloud.securitycenter.v1.IInfoType[]|null);
                 }
 
                 /** Represents a CloudDlpDataProfile. */
@@ -2680,6 +2780,9 @@ export namespace google {
 
                     /** CloudDlpDataProfile parentType. */
                     public parentType: (google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType|keyof typeof google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType);
+
+                    /** CloudDlpDataProfile infoTypes. */
+                    public infoTypes: google.cloud.securitycenter.v1.IInfoType[];
 
                     /**
                      * Creates a new CloudDlpDataProfile instance using the specified properties.
@@ -2766,6 +2869,224 @@ export namespace google {
                         PARENT_TYPE_UNSPECIFIED = 0,
                         ORGANIZATION = 1,
                         PROJECT = 2
+                    }
+                }
+
+                /** Properties of an InfoType. */
+                interface IInfoType {
+
+                    /** InfoType name */
+                    name?: (string|null);
+
+                    /** InfoType version */
+                    version?: (string|null);
+
+                    /** InfoType sensitivityScore */
+                    sensitivityScore?: (google.cloud.securitycenter.v1.ISensitivityScore|null);
+                }
+
+                /** Represents an InfoType. */
+                class InfoType implements IInfoType {
+
+                    /**
+                     * Constructs a new InfoType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IInfoType);
+
+                    /** InfoType name. */
+                    public name: string;
+
+                    /** InfoType version. */
+                    public version: string;
+
+                    /** InfoType sensitivityScore. */
+                    public sensitivityScore?: (google.cloud.securitycenter.v1.ISensitivityScore|null);
+
+                    /**
+                     * Creates a new InfoType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InfoType instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IInfoType): google.cloud.securitycenter.v1.InfoType;
+
+                    /**
+                     * Encodes the specified InfoType message. Does not implicitly {@link google.cloud.securitycenter.v1.InfoType.verify|verify} messages.
+                     * @param message InfoType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IInfoType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InfoType message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.InfoType.verify|verify} messages.
+                     * @param message InfoType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IInfoType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InfoType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InfoType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.InfoType;
+
+                    /**
+                     * Decodes an InfoType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InfoType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.InfoType;
+
+                    /**
+                     * Verifies an InfoType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InfoType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InfoType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.InfoType;
+
+                    /**
+                     * Creates a plain object from an InfoType message. Also converts values to other types if specified.
+                     * @param message InfoType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.InfoType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InfoType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InfoType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SensitivityScore. */
+                interface ISensitivityScore {
+
+                    /** SensitivityScore score */
+                    score?: (google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel|keyof typeof google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel|null);
+                }
+
+                /** Represents a SensitivityScore. */
+                class SensitivityScore implements ISensitivityScore {
+
+                    /**
+                     * Constructs a new SensitivityScore.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ISensitivityScore);
+
+                    /** SensitivityScore score. */
+                    public score: (google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel|keyof typeof google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel);
+
+                    /**
+                     * Creates a new SensitivityScore instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SensitivityScore instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ISensitivityScore): google.cloud.securitycenter.v1.SensitivityScore;
+
+                    /**
+                     * Encodes the specified SensitivityScore message. Does not implicitly {@link google.cloud.securitycenter.v1.SensitivityScore.verify|verify} messages.
+                     * @param message SensitivityScore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ISensitivityScore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SensitivityScore message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SensitivityScore.verify|verify} messages.
+                     * @param message SensitivityScore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ISensitivityScore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SensitivityScore message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SensitivityScore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SensitivityScore;
+
+                    /**
+                     * Decodes a SensitivityScore message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SensitivityScore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SensitivityScore;
+
+                    /**
+                     * Verifies a SensitivityScore message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SensitivityScore message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SensitivityScore
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SensitivityScore;
+
+                    /**
+                     * Creates a plain object from a SensitivityScore message. Also converts values to other types if specified.
+                     * @param message SensitivityScore
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.SensitivityScore, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SensitivityScore to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SensitivityScore
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SensitivityScore {
+
+                    /** SensitivityScoreLevel enum. */
+                    enum SensitivityScoreLevel {
+                        SENSITIVITY_SCORE_LEVEL_UNSPECIFIED = 0,
+                        SENSITIVITY_LOW = 10,
+                        SENSITIVITY_UNKNOWN = 12,
+                        SENSITIVITY_MODERATE = 20,
+                        SENSITIVITY_HIGH = 30
                     }
                 }
 
@@ -5056,6 +5377,169 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ExternalExposure. */
+                interface IExternalExposure {
+
+                    /** ExternalExposure privateIpAddress */
+                    privateIpAddress?: (string|null);
+
+                    /** ExternalExposure privatePort */
+                    privatePort?: (string|null);
+
+                    /** ExternalExposure exposedService */
+                    exposedService?: (string|null);
+
+                    /** ExternalExposure publicIpAddress */
+                    publicIpAddress?: (string|null);
+
+                    /** ExternalExposure publicPort */
+                    publicPort?: (string|null);
+
+                    /** ExternalExposure exposedEndpoint */
+                    exposedEndpoint?: (string|null);
+
+                    /** ExternalExposure loadBalancerFirewallPolicy */
+                    loadBalancerFirewallPolicy?: (string|null);
+
+                    /** ExternalExposure serviceFirewallPolicy */
+                    serviceFirewallPolicy?: (string|null);
+
+                    /** ExternalExposure forwardingRule */
+                    forwardingRule?: (string|null);
+
+                    /** ExternalExposure backendService */
+                    backendService?: (string|null);
+
+                    /** ExternalExposure instanceGroup */
+                    instanceGroup?: (string|null);
+
+                    /** ExternalExposure networkEndpointGroup */
+                    networkEndpointGroup?: (string|null);
+                }
+
+                /** Represents an ExternalExposure. */
+                class ExternalExposure implements IExternalExposure {
+
+                    /**
+                     * Constructs a new ExternalExposure.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IExternalExposure);
+
+                    /** ExternalExposure privateIpAddress. */
+                    public privateIpAddress: string;
+
+                    /** ExternalExposure privatePort. */
+                    public privatePort: string;
+
+                    /** ExternalExposure exposedService. */
+                    public exposedService: string;
+
+                    /** ExternalExposure publicIpAddress. */
+                    public publicIpAddress: string;
+
+                    /** ExternalExposure publicPort. */
+                    public publicPort: string;
+
+                    /** ExternalExposure exposedEndpoint. */
+                    public exposedEndpoint: string;
+
+                    /** ExternalExposure loadBalancerFirewallPolicy. */
+                    public loadBalancerFirewallPolicy: string;
+
+                    /** ExternalExposure serviceFirewallPolicy. */
+                    public serviceFirewallPolicy: string;
+
+                    /** ExternalExposure forwardingRule. */
+                    public forwardingRule: string;
+
+                    /** ExternalExposure backendService. */
+                    public backendService: string;
+
+                    /** ExternalExposure instanceGroup. */
+                    public instanceGroup: string;
+
+                    /** ExternalExposure networkEndpointGroup. */
+                    public networkEndpointGroup: string;
+
+                    /**
+                     * Creates a new ExternalExposure instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExternalExposure instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IExternalExposure): google.cloud.securitycenter.v1.ExternalExposure;
+
+                    /**
+                     * Encodes the specified ExternalExposure message. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalExposure.verify|verify} messages.
+                     * @param message ExternalExposure message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IExternalExposure, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExternalExposure message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalExposure.verify|verify} messages.
+                     * @param message ExternalExposure message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IExternalExposure, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExternalExposure message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExternalExposure
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ExternalExposure;
+
+                    /**
+                     * Decodes an ExternalExposure message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExternalExposure
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ExternalExposure;
+
+                    /**
+                     * Verifies an ExternalExposure message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExternalExposure message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExternalExposure
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ExternalExposure;
+
+                    /**
+                     * Creates a plain object from an ExternalExposure message. Also converts values to other types if specified.
+                     * @param message ExternalExposure
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ExternalExposure, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExternalExposure to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExternalExposure
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an ExternalSystem. */
                 interface IExternalSystem {
 
@@ -5734,6 +6218,12 @@ export namespace google {
 
                     /** Finding groupMemberships */
                     groupMemberships?: (google.cloud.securitycenter.v1.IGroupMembership[]|null);
+
+                    /** Finding chokepoint */
+                    chokepoint?: (google.cloud.securitycenter.v1.IChokepoint|null);
+
+                    /** Finding externalExposure */
+                    externalExposure?: (google.cloud.securitycenter.v1.IExternalExposure|null);
                 }
 
                 /** Represents a Finding. */
@@ -5895,6 +6385,12 @@ export namespace google {
                     /** Finding groupMemberships. */
                     public groupMemberships: google.cloud.securitycenter.v1.IGroupMembership[];
 
+                    /** Finding chokepoint. */
+                    public chokepoint?: (google.cloud.securitycenter.v1.IChokepoint|null);
+
+                    /** Finding externalExposure. */
+                    public externalExposure?: (google.cloud.securitycenter.v1.IExternalExposure|null);
+
                     /**
                      * Creates a new Finding instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6008,7 +6504,10 @@ export namespace google {
                         OBSERVATION = 4,
                         SCC_ERROR = 5,
                         POSTURE_VIOLATION = 6,
-                        TOXIC_COMBINATION = 7
+                        TOXIC_COMBINATION = 7,
+                        SENSITIVE_DATA_RISK = 8,
+                        CHOKEPOINT = 9,
+                        EXTERNAL_EXPOSURE = 10
                     }
 
                     /** Properties of a MuteInfo. */
@@ -6432,7 +6931,8 @@ export namespace google {
                     /** GroupType enum. */
                     enum GroupType {
                         GROUP_TYPE_UNSPECIFIED = 0,
-                        GROUP_TYPE_TOXIC_COMBINATION = 1
+                        GROUP_TYPE_TOXIC_COMBINATION = 1,
+                        GROUP_TYPE_CHOKEPOINT = 3
                     }
                 }
 
@@ -54357,6 +54857,115 @@ export namespace google {
             IDENTIFIER = 8
         }
 
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -58583,6 +59192,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
         }
 
         /** Represents a FieldOptions. */

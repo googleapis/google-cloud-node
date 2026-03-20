@@ -5,6 +5,610 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "d40e9bab-1c41-4115-a61b-a4a207e56613",
+      "createTime": "2026-03-19T21:58:31.408Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "4aa175cc-7347-4c00-a3f9-a4df09400db5",
+      "createTime": "2026-03-19T21:58:31.377Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "af1983c9-61b6-4a10-bb4f-e7f151fc702a",
+      "createTime": "2026-03-19T21:58:31.353Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/ordertracking",
+      "id": "764d148c-38cb-45b5-8e41-4e318a5489e3",
+      "createTime": "2026-03-19T21:58:31.268Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "29117eb9-9b20-4b9c-ab74-5dc73cc57c29",
+      "createTime": "2026-03-19T21:58:31.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "6ef4d7fc-cb8b-463b-a9f7-14195e16ae9e",
+      "createTime": "2026-03-19T21:58:31.196Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/issueresolution",
+      "id": "67b12251-9998-4f3b-9960-bfb154caabbd",
+      "createTime": "2026-03-19T21:58:31.175Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "88810b0a-68b7-4ea2-850f-bc42c00d9fb1",
+      "createTime": "2026-03-19T21:58:31.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
+          "message": "[Many APIs] add more values in DestintionEnum",
+          "issues": [
+            "7556"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "b9907e5d-3c1c-4998-9c68-e85fb705a1ba",
+      "createTime": "2026-03-19T21:58:31.136Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "febcc550346c468a5c6dc97070a8498d8c0a9516",
+          "message": "Update dependency redis to ~5.11.0",
+          "issues": [
+            "7619"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.3.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "b1bfdfa7-ac6e-4414-9846-975c76b71031",
+      "createTime": "2026-03-19T21:58:31.114Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dbfee3b4ec80e336061549fcb718cea27ee6b3a1",
+          "message": "[geminidataanalytics] add `ParameterizedSecureViewParameters` message and field for PSV support",
+          "issues": [
+            "7549"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "4bd541d7-8747-4b2b-9ca2-1b5244490b44",
+      "createTime": "2026-03-19T21:58:31.094Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1f6f8cc33f811631b58007cc0645b476e65f8e26",
+          "message": "[dlp] added support for detecting key-value pairs in document metadata",
+          "issues": [
+            "7822"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "10ea7e1e-bd9a-4379-a56b-a0c47b841d58",
+      "createTime": "2026-03-19T18:18:35.904Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b906b3ac62ee0513392d62defc7d168966c989f3",
+          "message": "[routing] add a new Waypoint source to accept a token that identifies a Navigation Point obtained from the `SearchDestinations` method of the Geocoding API",
+          "issues": [
+            "7531"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "44c3e2c6-1106-454f-9530-892c47bf1f87",
+      "createTime": "2026-03-19T18:18:35.883Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bbaf91884b006918b1235edb483e5ac7ed09442b",
+          "message": "[places] add a new business status `FUTURE_OPENING` for places,",
+          "issues": [
+            "7821"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "56058c47-372c-46c4-b917-379aee9ccc75",
+      "createTime": "2026-03-19T18:18:35.850Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "451de89cdd525b8aac424fc30ead047246ec521b",
+          "message": "[vectorsearch] Mark Vector Search v1 API as GA",
+          "issues": [
+            "7610"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "744c0026-d1d8-4b0a-a76c-48c0247a8f4b",
+      "createTime": "2026-03-19T18:18:35.823Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "694f8f92608fc1b4afbf7c71ecce90341fea5908",
+          "message": "[securitycenter] Support Chokepoint and external exposure in findings Proto",
+          "issues": [
+            "7638"
+          ]
+        }
+      ],
+      "version": "9.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "67f7ff53-1786-4e92-9319-99b9f6f32744",
+      "createTime": "2026-03-19T18:18:35.792Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0012a46efa30c86cf8a88a88d3c4077bbbfe670c",
+          "message": "[iap] add oauth fields for IapSettings",
+          "issues": [
+            "7613"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "bfbf2189-c8db-4d8e-b124-8d9af2b8c663",
+      "createTime": "2026-03-19T18:18:35.759Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9de14388ef6e9919bb75de88d63cecb1c9a9a629",
+          "message": "[gkehub] A new field `kubernetes_api_server_version` is added to message `.google.cloud.gkehub.configmanagement.v1beta.MembershipState`",
+          "issues": [
+            "7534"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "8da5cdb7-0d1e-4af6-ab15-3887074c8a71",
+      "createTime": "2026-03-19T18:18:35.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7340b3f0ee9b8c0a4446d85cdbbadd9cdfa2db33",
+          "message": "[navconnect] add Navigation Connect API",
+          "issues": [
+            "7530"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "2631c982494178df2d58913b686d05d752ee9e15",
+          "message": "Add initial files for google.maps.navconnect.v1",
+          "issues": [
+            "7529"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/navconnect",
+      "id": "432135a8-803f-41bf-9b25-c0a8b68dae55",
+      "createTime": "2026-03-18T20:59:46.364Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "345bf5dc9d48027193f2af5951ca61d5b2936f4f",
+          "message": "[ces] update public libraries for CES v1beta",
+          "issues": [
+            "7356"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "2ab5c199-af7f-4b31-a02e-1d308582d80e",
+      "createTime": "2026-03-18T20:59:46.342Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "08e9bae6b1f756e2aa457b5f31e2d5096658912f",
+          "message": "Add utility to use correct client and update al…",
+          "issues": [
+            "7600"
+          ],
+          "scope": "storage-control"
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "4baa5f6d-321c-4d93-abf5-f2dd85c259c9",
+      "createTime": "2026-03-18T20:59:46.308Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7f03646a5e0d259336b2a6fb902200b6c5d70733",
+          "message": "[merchantapi] Add CreateTestAccount RPC to Accounts service for creating test-only Merchant Center accounts",
+          "issues": [
+            "7640"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "aa5b9481-883a-4703-a956-88b4268c4989",
+      "createTime": "2026-03-18T20:59:46.284Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e3615322fe40bff1c09456a451ac1371727a2592",
+          "message": "[css] add product rating fields to CSS API v1. This is in",
+          "issues": [
+            "7611"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "8047ad64-8b23-410e-80c1-6e856ecc0448",
+      "createTime": "2026-03-18T20:59:46.266Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "72867475f8475a961db73e910d5c2d20cd894f06",
+          "message": "[containeranalysis] Added line_number to FileLocation",
+          "issues": [
+            "7608"
+          ]
+        }
+      ],
+      "version": "6.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "892ac848-1701-428a-ab10-bdc574988e2b",
+      "createTime": "2026-03-18T20:59:46.225Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "[vectorsearch] Removed field DenseScannParams from SearchHint",
+          "issues": [
+            "7312"
+          ],
+          "breakingChangeNote": "[vectorsearch] Removed field DenseScannParams from SearchHint ([#7312](https://github.com/googleapis/google-cloud-node/issues/7312))"
+        },
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "Removed obsolete message `VertexRanker`",
+          "issues": [],
+          "breakingChangeNote": "Removed obsolete message `VertexRanker`"
+        },
+        {
+          "type": "feat",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "Added index and search configuration management",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "[vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`",
+          "issues": [],
+          "breakingChangeNote": "[vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`"
+        },
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "Removed obsolete message `VertexRanker`",
+          "issues": [],
+          "breakingChangeNote": "Removed obsolete message `VertexRanker`"
+        },
+        {
+          "type": "fix",
+          "sha": "ba6ce501fab130287af546a2c9da1368cb9d3b5c",
+          "message": "[vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`",
+          "issues": [],
+          "breakingChangeNote": "[vectorsearch] Removed obsolete field `vertex` from message `.google.cloud.vectorsearch.v1.Ranker`"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "73f987a0-6fec-4d60-99bf-24032ee8fbff",
+      "createTime": "2026-03-18T20:59:46.127Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ceeb607df31c504456590a8253d165b71348d5dc",
+          "message": "[hypercomputecluster] add v1 version",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/hypercomputecluster",
+      "id": "d75d0e8a-eb51-4042-863c-e1e3d2f19e19",
+      "createTime": "2026-03-18T20:59:46.109Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fdecca62c8a8138bea15df300063a9bdda83880f",
+          "message": "[gdchardwaremanagement] Add `OFFLINE` state to Zone resources",
+          "issues": [
+            "7513"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "63b96079-5381-45e4-9e5f-3aa1423cf189",
+      "createTime": "2026-03-18T20:59:46.088Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "44f9995d777dcc45bae426fa7ed1d9abd9751544",
+          "message": "[documentai] Add a field for upgrading previous processor version when fine tuning",
+          "issues": [
+            "7607"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "bdd6c7ac2f1e00c2e175a894c4f20e1b4364881d",
+          "message": "[documentai] Added a field for enabling image and table annotation for layout parser processor",
+          "issues": [
+            "7318"
+          ]
+        }
+      ],
+      "version": "9.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "b5b617c4-3d72-430f-9ef0-eeb459682e4c",
+      "createTime": "2026-03-18T20:59:46.070Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cb2345ab8636cb2fae3b1a3842a93c56f132bfbe",
+          "message": "[dataplex] add DataProductService to manage data products and underlying data assets",
+          "issues": [
+            "7612"
+          ],
+          "scope": "dataplex"
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "93994433-e7ad-435d-85ef-41174d905bfd",
+      "createTime": "2026-03-18T20:59:46.050Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6f9f14bde85551f8259ccc5c49f92ffad282ca64",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20260227 (googleapis#1164)",
+          "issues": [
+            "7555"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "dc04e0c2073ff7155b0f55342d8e9954c30cd173",
+          "message": "[compute] Update Compute Engine v1 API to revision 20260213",
+          "issues": [
+            "7320"
+          ]
+        }
+      ],
+      "version": "6.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "5cbeabe7-78b8-4d9f-b6a1-3a4f97171db4",
+      "createTime": "2026-03-18T20:59:46.024Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c156f91425669f249c9a49befda2d200ac482182",
+          "message": "[binaryauthorization] Added line_number to FileLocation",
+          "issues": [
+            "7609"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "d209242c-8262-4fdd-84b8-6e6bf575c921",
+      "createTime": "2026-03-18T20:59:46.001Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a74e547ff722d19a3e50adf06bef03f46231daef",
+          "message": "[alloydb] Add a new field to support Dataplex integration configuration",
+          "issues": [
+            "7322"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "32c8ef51-ac79-4b95-9b6a-427570ba17ff",
+      "createTime": "2026-03-18T20:59:45.984Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "7eb5628e05f7592c7c3857035f82e9f44d8d4ef4",
           "message": "[contentwarehouse] Added a field for enabling image and table annotation for layout parser processor",
           "issues": [
@@ -68702,5 +69306,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-03-04T19:33:12.038Z"
+  "updateTime": "2026-03-19T21:58:31.408Z"
 }

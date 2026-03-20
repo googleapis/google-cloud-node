@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [5.3.5](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.4...vision-v5.3.5) (2026-03-19)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency redis to ~5.11.0 ([#7619](https://github.com/googleapis/google-cloud-node/issues/7619)) ([febcc55](https://github.com/googleapis/google-cloud-node/commit/febcc550346c468a5c6dc97070a8498d8c0a9516))
+
 ## [5.3.4](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.3...vision-v5.3.4) (2025-10-13)
 
 

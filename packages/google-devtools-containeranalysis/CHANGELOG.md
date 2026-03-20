@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.6.0...containeranalysis-v6.7.0) (2026-03-18)
+
+
+### Features
+
+* [containeranalysis] Added line_number to FileLocation ([#7608](https://github.com/googleapis/google-cloud-node/issues/7608)) ([7286747](https://github.com/googleapis/google-cloud-node/commit/72867475f8475a961db73e910d5c2d20cd894f06))
+
 ## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.5.0...containeranalysis-v6.6.0) (2026-02-19)
 
 
