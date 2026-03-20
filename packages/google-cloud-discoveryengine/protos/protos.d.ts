@@ -110782,6 +110782,9 @@ export namespace google {
 
                         /** DataStoreSpec filter */
                         filter?: (string|null);
+
+                        /** DataStoreSpec boostSpec */
+                        boostSpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec|null);
                     }
 
                     /** Represents a DataStoreSpec. */
@@ -110798,6 +110801,9 @@ export namespace google {
 
                         /** DataStoreSpec filter. */
                         public filter: string;
+
+                        /** DataStoreSpec boostSpec. */
+                        public boostSpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec|null);
 
                         /**
                          * Creates a new DataStoreSpec instance using the specified properties.
