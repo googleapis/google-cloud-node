@@ -542,6 +542,34 @@ export class TransferManager {
    * instead of being returned as a buffer.
    * @returns {Promise<DownloadResponse[]>}
    *
+   * @behavior
+   * **Return shape change (breaking/observable behavior):**
+   * - Previously, the returned array only contained entries for files that were successfully downloaded.
+   * - This meant the response length could be smaller than the number of requested input files.
+   * - Now, the returned array always has the same length and ordering as the input file list.
+   * - Each index in the response corresponds directly to the same index in the input.
+   * - Files that are skipped or fail will still have an entry in the result with:
+   *   - `skipped = true`
+   *   - `reason` populated with a {@link SkipReason}
+   *
+   * **New guarantees:**
+   * - Response length === number of requested files
+   * - Stable positional mapping between input and output
+   * - All outcomes (success, skipped, error) are explicitly represented
+   *
+   * @security
+   * **Path traversal protection (new):**
+   * - File paths are resolved relative to the configured destination directory.
+   * - Any file whose resolved path escapes the base destination directory is rejected.
+   * - This prevents directory traversal attacks (e.g. `../../etc/passwd`).
+   * - Such files are not downloaded and instead return:
+   *   - `skipped = true`
+   *   - `reason = SkipReason.PATH_TRAVERSAL`
+   *
+   * **Additional validation:**
+   * - File names containing illegal drive prefixes (e.g. `C:\`) are skipped
+   * to prevent unintended writes on host systems.
+   *
    * @example
    * ```
    * const {Storage} = require('@google-cloud/storage');
@@ -556,12 +584,15 @@ export class TransferManager {
    * // The following files have been downloaded:
    * // - "file1.txt" (with the contents from my-bucket.file1.txt)
    * // - "file2.txt" (with the contents from my-bucket.file2.txt)
+   * // response.length === 2 (always matches input length)
+   * // Each entry corresponds to the respective input file
    * const response = await transferManager.downloadManyFiles([bucket.File('file1.txt'), bucket.File('file2.txt')]);
    * // The following files have been downloaded:
    * // - "file1.txt" (with the contents from my-bucket.file1.txt)
    * // - "file2.txt" (with the contents from my-bucket.file2.txt)
    * const response = await transferManager.downloadManyFiles('test-folder');
-   * // All files with GCS prefix of 'test-folder' have been downloaded.
+   * // All files with GCS prefix of 'test-folder' have been processed.
+   * // Skipped or failed files are still included in the response.
    * ```
    *
    */
@@ -637,6 +668,12 @@ export class TransferManager {
       }
 
       if (options.skipIfExists && existsSync(resolvedPath)) {
+        const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
+        skippedResult.skipped = true;
+        skippedResult.reason = SkipReason.ALREADY_EXISTS;
+        skippedResult.fileName = file.name;
+        skippedResult.localPath = resolvedPath;
+        finalResults[i] = skippedResult;
         continue;
       }
 
