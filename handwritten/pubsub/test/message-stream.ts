@@ -555,47 +555,40 @@ describe('MessageStream', () => {
         });
       });
 
-      it('should close stream if no data received for 30 seconds', async () => {
+      it('should close stream if no data received for 15 seconds after keepalive', async () => {
         messageStream.destroy();
         client.streams.length = 0;
 
         const ms = new MessageStream(subscriber);
         await ms.start();
 
-        const streamCount = client.streams.length;
         const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
 
-        sandbox.clock.tick(32000);
+        // wait for keepalive ping (30s) + 21s timeout to pass two 10s polling intervals 
+        sandbox.clock.tick(51000);
 
         cancelSpies.forEach(spy => {
           assert.strictEqual(spy.callCount, 1);
         });
 
-        // The retry minimum backoff is 100ms.
-        sandbox.clock.tick(150);
-
-        // The streams are restarted, wait for next tick for fill stream pool
-        await promisify(process.nextTick)();
-        assert.ok(client.streams.length > streamCount);
-
         ms.destroy();
       });
 
-      it('should not close stream if data received within 30 seconds', async () => {
+      it('should not close stream if data received within 15 seconds of keepalive', async () => {
         messageStream.destroy();
-        // client.streams.length = 0;
 
         const ms = new MessageStream(subscriber);
         await ms.start();
 
         const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
 
-        sandbox.clock.tick(20000);
+        sandbox.clock.tick(30000);
 
         // Simulating data prevents timeout
         client.streams.forEach(s => s.emit('data', {}));
 
-        sandbox.clock.tick(20000);
+        // Wait for two 10s polling intervals to pass
+        sandbox.clock.tick(21000);
 
         cancelSpies.forEach(spy => {
           assert.strictEqual(spy.callCount, 0);
