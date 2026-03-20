@@ -27,6 +27,7 @@ import {Duration} from './temporal';
 import {ExponentialRetry} from './exponential-retry';
 import {DebugMessage} from './debug';
 import {logs as baseLogs} from './logs';
+import {randomUUID} from 'crypto';
 
 /**
  * Loggers. Exported for unit tests.
@@ -395,7 +396,7 @@ export class MessageStream extends PassThrough {
       maxOutstandingBytes: this._subscriber.useLegacyFlowControl
         ? 0
         : this._subscriber.maxBytes,
-      clientId: 'node-pubsub',
+      clientId: randomUUID().toString(),
       protocolVersion: 1, // Set protocol version to fulfill keepalive capabilities
     };
     const otherArgs = {
