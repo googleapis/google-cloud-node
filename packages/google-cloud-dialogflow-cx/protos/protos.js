@@ -173518,6 +173518,7 @@
                              * @property {boolean|null} [isFallback] Intent isFallback
                              * @property {Object.<string,string>|null} [labels] Intent labels
                              * @property {string|null} [description] Intent description
+                             * @property {string|null} [dtmfPattern] Intent dtmfPattern
                              */
     
                             /**
@@ -173603,6 +173604,14 @@
                             Intent.prototype.description = "";
     
                             /**
+                             * Intent dtmfPattern.
+                             * @member {string} dtmfPattern
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.Intent
+                             * @instance
+                             */
+                            Intent.prototype.dtmfPattern = "";
+    
+                            /**
                              * Creates a new Intent instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.dialogflow.cx.v3beta1.Intent
@@ -173645,6 +173654,8 @@
                                         writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                                 if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.description);
+                                if (message.dtmfPattern != null && Object.hasOwnProperty.call(message, "dtmfPattern"))
+                                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.dtmfPattern);
                                 return writer;
                             };
     
@@ -173736,6 +173747,10 @@
                                             message.description = reader.string();
                                             break;
                                         }
+                                    case 16: {
+                                            message.dtmfPattern = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -173812,6 +173827,9 @@
                                 if (message.description != null && message.hasOwnProperty("description"))
                                     if (!$util.isString(message.description))
                                         return "description: string expected";
+                                if (message.dtmfPattern != null && message.hasOwnProperty("dtmfPattern"))
+                                    if (!$util.isString(message.dtmfPattern))
+                                        return "dtmfPattern: string expected";
                                 return null;
                             };
     
@@ -173864,6 +173882,8 @@
                                 }
                                 if (object.description != null)
                                     message.description = String(object.description);
+                                if (object.dtmfPattern != null)
+                                    message.dtmfPattern = String(object.dtmfPattern);
                                 return message;
                             };
     
@@ -173892,6 +173912,7 @@
                                     object.priority = 0;
                                     object.isFallback = false;
                                     object.description = "";
+                                    object.dtmfPattern = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -173919,6 +173940,8 @@
                                 }
                                 if (message.description != null && message.hasOwnProperty("description"))
                                     object.description = message.description;
+                                if (message.dtmfPattern != null && message.hasOwnProperty("dtmfPattern"))
+                                    object.dtmfPattern = message.dtmfPattern;
                                 return object;
                             };
     
@@ -185477,6 +185500,7 @@
                              * @property {google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null} [advancedSettings] QueryResult advancedSettings
                              * @property {boolean|null} [allowAnswerFeedback] QueryResult allowAnswerFeedback
                              * @property {google.cloud.dialogflow.cx.v3beta1.IDataStoreConnectionSignals|null} [dataStoreConnectionSignals] QueryResult dataStoreConnectionSignals
+                             * @property {Array.<google.cloud.dialogflow.cx.v3beta1.ITraceBlock>|null} [traceBlocks] QueryResult traceBlocks
                              */
     
                             /**
@@ -185495,6 +185519,7 @@
                                 this.webhookTags = [];
                                 this.webhookStatuses = [];
                                 this.webhookPayloads = [];
+                                this.traceBlocks = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -185701,6 +185726,14 @@
                              */
                             QueryResult.prototype.dataStoreConnectionSignals = null;
     
+                            /**
+                             * QueryResult traceBlocks.
+                             * @member {Array.<google.cloud.dialogflow.cx.v3beta1.ITraceBlock>} traceBlocks
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.QueryResult
+                             * @instance
+                             */
+                            QueryResult.prototype.traceBlocks = $util.emptyArray;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -185796,6 +185829,9 @@
                                     $root.google.cloud.dialogflow.cx.v3beta1.GenerativeInfo.encode(message.generativeInfo, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
                                 if (message.dataStoreConnectionSignals != null && Object.hasOwnProperty.call(message, "dataStoreConnectionSignals"))
                                     $root.google.cloud.dialogflow.cx.v3beta1.DataStoreConnectionSignals.encode(message.dataStoreConnectionSignals, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                                if (message.traceBlocks != null && message.traceBlocks.length)
+                                    for (var i = 0; i < message.traceBlocks.length; ++i)
+                                        $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.encode(message.traceBlocks[i], writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
                                 return writer;
                             };
     
@@ -185944,6 +185980,12 @@
                                         }
                                     case 35: {
                                             message.dataStoreConnectionSignals = $root.google.cloud.dialogflow.cx.v3beta1.DataStoreConnectionSignals.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 37: {
+                                            if (!(message.traceBlocks && message.traceBlocks.length))
+                                                message.traceBlocks = [];
+                                            message.traceBlocks.push($root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -186134,6 +186176,15 @@
                                     if (error)
                                         return "dataStoreConnectionSignals." + error;
                                 }
+                                if (message.traceBlocks != null && message.hasOwnProperty("traceBlocks")) {
+                                    if (!Array.isArray(message.traceBlocks))
+                                        return "traceBlocks: array expected";
+                                    for (var i = 0; i < message.traceBlocks.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.verify(message.traceBlocks[i]);
+                                        if (error)
+                                            return "traceBlocks." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -186279,6 +186330,16 @@
                                         throw TypeError(".google.cloud.dialogflow.cx.v3beta1.QueryResult.dataStoreConnectionSignals: object expected");
                                     message.dataStoreConnectionSignals = $root.google.cloud.dialogflow.cx.v3beta1.DataStoreConnectionSignals.fromObject(object.dataStoreConnectionSignals);
                                 }
+                                if (object.traceBlocks) {
+                                    if (!Array.isArray(object.traceBlocks))
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.QueryResult.traceBlocks: array expected");
+                                    message.traceBlocks = [];
+                                    for (var i = 0; i < object.traceBlocks.length; ++i) {
+                                        if (typeof object.traceBlocks[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3beta1.QueryResult.traceBlocks: object expected");
+                                        message.traceBlocks[i] = $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.fromObject(object.traceBlocks[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -186303,6 +186364,7 @@
                                     object.webhookDisplayNames = [];
                                     object.webhookLatencies = [];
                                     object.webhookTags = [];
+                                    object.traceBlocks = [];
                                 }
                                 if (options.defaults) {
                                     object.languageCode = "";
@@ -186405,6 +186467,11 @@
                                     object.generativeInfo = $root.google.cloud.dialogflow.cx.v3beta1.GenerativeInfo.toObject(message.generativeInfo, options);
                                 if (message.dataStoreConnectionSignals != null && message.hasOwnProperty("dataStoreConnectionSignals"))
                                     object.dataStoreConnectionSignals = $root.google.cloud.dialogflow.cx.v3beta1.DataStoreConnectionSignals.toObject(message.dataStoreConnectionSignals, options);
+                                if (message.traceBlocks && message.traceBlocks.length) {
+                                    object.traceBlocks = [];
+                                    for (var j = 0; j < message.traceBlocks.length; ++j)
+                                        object.traceBlocks[j] = $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.toObject(message.traceBlocks[j], options);
+                                }
                                 return object;
                             };
     
@@ -191551,6 +191618,1189 @@
                             };
     
                             return Example;
+                        })();
+    
+                        v3beta1.TraceBlock = (function() {
+    
+                            /**
+                             * Properties of a TraceBlock.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @interface ITraceBlock
+                             * @property {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata|null} [playbookTraceMetadata] TraceBlock playbookTraceMetadata
+                             * @property {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata|null} [flowTraceMetadata] TraceBlock flowTraceMetadata
+                             * @property {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata|null} [speechProcessingMetadata] TraceBlock speechProcessingMetadata
+                             * @property {Array.<google.cloud.dialogflow.cx.v3beta1.IAction>|null} [actions] TraceBlock actions
+                             * @property {google.protobuf.ITimestamp|null} [startTime] TraceBlock startTime
+                             * @property {google.protobuf.ITimestamp|null} [completeTime] TraceBlock completeTime
+                             * @property {google.protobuf.IStruct|null} [inputParameters] TraceBlock inputParameters
+                             * @property {google.protobuf.IStruct|null} [outputParameters] TraceBlock outputParameters
+                             * @property {google.cloud.dialogflow.cx.v3beta1.OutputState|null} [endState] TraceBlock endState
+                             */
+    
+                            /**
+                             * Constructs a new TraceBlock.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @classdesc Represents a TraceBlock.
+                             * @implements ITraceBlock
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ITraceBlock=} [properties] Properties to set
+                             */
+                            function TraceBlock(properties) {
+                                this.actions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TraceBlock playbookTraceMetadata.
+                             * @member {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata|null|undefined} playbookTraceMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.playbookTraceMetadata = null;
+    
+                            /**
+                             * TraceBlock flowTraceMetadata.
+                             * @member {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata|null|undefined} flowTraceMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.flowTraceMetadata = null;
+    
+                            /**
+                             * TraceBlock speechProcessingMetadata.
+                             * @member {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata|null|undefined} speechProcessingMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.speechProcessingMetadata = null;
+    
+                            /**
+                             * TraceBlock actions.
+                             * @member {Array.<google.cloud.dialogflow.cx.v3beta1.IAction>} actions
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.actions = $util.emptyArray;
+    
+                            /**
+                             * TraceBlock startTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.startTime = null;
+    
+                            /**
+                             * TraceBlock completeTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} completeTime
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.completeTime = null;
+    
+                            /**
+                             * TraceBlock inputParameters.
+                             * @member {google.protobuf.IStruct|null|undefined} inputParameters
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.inputParameters = null;
+    
+                            /**
+                             * TraceBlock outputParameters.
+                             * @member {google.protobuf.IStruct|null|undefined} outputParameters
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.outputParameters = null;
+    
+                            /**
+                             * TraceBlock endState.
+                             * @member {google.cloud.dialogflow.cx.v3beta1.OutputState} endState
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.endState = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * TraceBlock traceMetadata.
+                             * @member {"playbookTraceMetadata"|"flowTraceMetadata"|"speechProcessingMetadata"|undefined} traceMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            Object.defineProperty(TraceBlock.prototype, "traceMetadata", {
+                                get: $util.oneOfGetter($oneOfFields = ["playbookTraceMetadata", "flowTraceMetadata", "speechProcessingMetadata"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new TraceBlock instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ITraceBlock=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.TraceBlock} TraceBlock instance
+                             */
+                            TraceBlock.create = function create(properties) {
+                                return new TraceBlock(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TraceBlock message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TraceBlock.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ITraceBlock} message TraceBlock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TraceBlock.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.playbookTraceMetadata != null && Object.hasOwnProperty.call(message, "playbookTraceMetadata"))
+                                    $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.encode(message.playbookTraceMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.flowTraceMetadata != null && Object.hasOwnProperty.call(message, "flowTraceMetadata"))
+                                    $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.encode(message.flowTraceMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.actions != null && message.actions.length)
+                                    for (var i = 0; i < message.actions.length; ++i)
+                                        $root.google.cloud.dialogflow.cx.v3beta1.Action.encode(message.actions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.completeTime != null && Object.hasOwnProperty.call(message, "completeTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.completeTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.outputParameters != null && Object.hasOwnProperty.call(message, "outputParameters"))
+                                    $root.google.protobuf.Struct.encode(message.outputParameters, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.endState != null && Object.hasOwnProperty.call(message, "endState"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.endState);
+                                if (message.speechProcessingMetadata != null && Object.hasOwnProperty.call(message, "speechProcessingMetadata"))
+                                    $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.encode(message.speechProcessingMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.inputParameters != null && Object.hasOwnProperty.call(message, "inputParameters"))
+                                    $root.google.protobuf.Struct.encode(message.inputParameters, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TraceBlock message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TraceBlock.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ITraceBlock} message TraceBlock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TraceBlock.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TraceBlock message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.TraceBlock} TraceBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TraceBlock.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.playbookTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.flowTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.speechProcessingMetadata = $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.actions && message.actions.length))
+                                                message.actions = [];
+                                            message.actions.push($root.google.cloud.dialogflow.cx.v3beta1.Action.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.completeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.inputParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.outputParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.endState = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TraceBlock message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.TraceBlock} TraceBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TraceBlock.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TraceBlock message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TraceBlock.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.playbookTraceMetadata != null && message.hasOwnProperty("playbookTraceMetadata")) {
+                                    properties.traceMetadata = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.verify(message.playbookTraceMetadata);
+                                        if (error)
+                                            return "playbookTraceMetadata." + error;
+                                    }
+                                }
+                                if (message.flowTraceMetadata != null && message.hasOwnProperty("flowTraceMetadata")) {
+                                    if (properties.traceMetadata === 1)
+                                        return "traceMetadata: multiple values";
+                                    properties.traceMetadata = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.verify(message.flowTraceMetadata);
+                                        if (error)
+                                            return "flowTraceMetadata." + error;
+                                    }
+                                }
+                                if (message.speechProcessingMetadata != null && message.hasOwnProperty("speechProcessingMetadata")) {
+                                    if (properties.traceMetadata === 1)
+                                        return "traceMetadata: multiple values";
+                                    properties.traceMetadata = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.verify(message.speechProcessingMetadata);
+                                        if (error)
+                                            return "speechProcessingMetadata." + error;
+                                    }
+                                }
+                                if (message.actions != null && message.hasOwnProperty("actions")) {
+                                    if (!Array.isArray(message.actions))
+                                        return "actions: array expected";
+                                    for (var i = 0; i < message.actions.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.Action.verify(message.actions[i]);
+                                        if (error)
+                                            return "actions." + error;
+                                    }
+                                }
+                                if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                    if (error)
+                                        return "startTime." + error;
+                                }
+                                if (message.completeTime != null && message.hasOwnProperty("completeTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.completeTime);
+                                    if (error)
+                                        return "completeTime." + error;
+                                }
+                                if (message.inputParameters != null && message.hasOwnProperty("inputParameters")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.inputParameters);
+                                    if (error)
+                                        return "inputParameters." + error;
+                                }
+                                if (message.outputParameters != null && message.hasOwnProperty("outputParameters")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.outputParameters);
+                                    if (error)
+                                        return "outputParameters." + error;
+                                }
+                                if (message.endState != null && message.hasOwnProperty("endState"))
+                                    switch (message.endState) {
+                                    default:
+                                        return "endState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TraceBlock message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.TraceBlock} TraceBlock
+                             */
+                            TraceBlock.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock();
+                                if (object.playbookTraceMetadata != null) {
+                                    if (typeof object.playbookTraceMetadata !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.playbookTraceMetadata: object expected");
+                                    message.playbookTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.fromObject(object.playbookTraceMetadata);
+                                }
+                                if (object.flowTraceMetadata != null) {
+                                    if (typeof object.flowTraceMetadata !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.flowTraceMetadata: object expected");
+                                    message.flowTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.fromObject(object.flowTraceMetadata);
+                                }
+                                if (object.speechProcessingMetadata != null) {
+                                    if (typeof object.speechProcessingMetadata !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.speechProcessingMetadata: object expected");
+                                    message.speechProcessingMetadata = $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.fromObject(object.speechProcessingMetadata);
+                                }
+                                if (object.actions) {
+                                    if (!Array.isArray(object.actions))
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.actions: array expected");
+                                    message.actions = [];
+                                    for (var i = 0; i < object.actions.length; ++i) {
+                                        if (typeof object.actions[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.actions: object expected");
+                                        message.actions[i] = $root.google.cloud.dialogflow.cx.v3beta1.Action.fromObject(object.actions[i]);
+                                    }
+                                }
+                                if (object.startTime != null) {
+                                    if (typeof object.startTime !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.startTime: object expected");
+                                    message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                }
+                                if (object.completeTime != null) {
+                                    if (typeof object.completeTime !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.completeTime: object expected");
+                                    message.completeTime = $root.google.protobuf.Timestamp.fromObject(object.completeTime);
+                                }
+                                if (object.inputParameters != null) {
+                                    if (typeof object.inputParameters !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.inputParameters: object expected");
+                                    message.inputParameters = $root.google.protobuf.Struct.fromObject(object.inputParameters);
+                                }
+                                if (object.outputParameters != null) {
+                                    if (typeof object.outputParameters !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.outputParameters: object expected");
+                                    message.outputParameters = $root.google.protobuf.Struct.fromObject(object.outputParameters);
+                                }
+                                switch (object.endState) {
+                                default:
+                                    if (typeof object.endState === "number") {
+                                        message.endState = object.endState;
+                                        break;
+                                    }
+                                    break;
+                                case "OUTPUT_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.endState = 0;
+                                    break;
+                                case "OUTPUT_STATE_OK":
+                                case 1:
+                                    message.endState = 1;
+                                    break;
+                                case "OUTPUT_STATE_CANCELLED":
+                                case 2:
+                                    message.endState = 2;
+                                    break;
+                                case "OUTPUT_STATE_FAILED":
+                                case 3:
+                                    message.endState = 3;
+                                    break;
+                                case "OUTPUT_STATE_ESCALATED":
+                                case 4:
+                                    message.endState = 4;
+                                    break;
+                                case "OUTPUT_STATE_PENDING":
+                                case 5:
+                                    message.endState = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TraceBlock message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.TraceBlock} message TraceBlock
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TraceBlock.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.actions = [];
+                                if (options.defaults) {
+                                    object.startTime = null;
+                                    object.completeTime = null;
+                                    object.outputParameters = null;
+                                    object.endState = options.enums === String ? "OUTPUT_STATE_UNSPECIFIED" : 0;
+                                    object.inputParameters = null;
+                                }
+                                if (message.playbookTraceMetadata != null && message.hasOwnProperty("playbookTraceMetadata")) {
+                                    object.playbookTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.toObject(message.playbookTraceMetadata, options);
+                                    if (options.oneofs)
+                                        object.traceMetadata = "playbookTraceMetadata";
+                                }
+                                if (message.flowTraceMetadata != null && message.hasOwnProperty("flowTraceMetadata")) {
+                                    object.flowTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.toObject(message.flowTraceMetadata, options);
+                                    if (options.oneofs)
+                                        object.traceMetadata = "flowTraceMetadata";
+                                }
+                                if (message.actions && message.actions.length) {
+                                    object.actions = [];
+                                    for (var j = 0; j < message.actions.length; ++j)
+                                        object.actions[j] = $root.google.cloud.dialogflow.cx.v3beta1.Action.toObject(message.actions[j], options);
+                                }
+                                if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                    object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                                if (message.completeTime != null && message.hasOwnProperty("completeTime"))
+                                    object.completeTime = $root.google.protobuf.Timestamp.toObject(message.completeTime, options);
+                                if (message.outputParameters != null && message.hasOwnProperty("outputParameters"))
+                                    object.outputParameters = $root.google.protobuf.Struct.toObject(message.outputParameters, options);
+                                if (message.endState != null && message.hasOwnProperty("endState"))
+                                    object.endState = options.enums === String ? $root.google.cloud.dialogflow.cx.v3beta1.OutputState[message.endState] === undefined ? message.endState : $root.google.cloud.dialogflow.cx.v3beta1.OutputState[message.endState] : message.endState;
+                                if (message.speechProcessingMetadata != null && message.hasOwnProperty("speechProcessingMetadata")) {
+                                    object.speechProcessingMetadata = $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.toObject(message.speechProcessingMetadata, options);
+                                    if (options.oneofs)
+                                        object.traceMetadata = "speechProcessingMetadata";
+                                }
+                                if (message.inputParameters != null && message.hasOwnProperty("inputParameters"))
+                                    object.inputParameters = $root.google.protobuf.Struct.toObject(message.inputParameters, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TraceBlock to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TraceBlock.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TraceBlock
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TraceBlock.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.TraceBlock";
+                            };
+    
+                            return TraceBlock;
+                        })();
+    
+                        v3beta1.SpeechProcessingMetadata = (function() {
+    
+                            /**
+                             * Properties of a SpeechProcessingMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @interface ISpeechProcessingMetadata
+                             * @property {string|null} [displayName] SpeechProcessingMetadata displayName
+                             */
+    
+                            /**
+                             * Constructs a new SpeechProcessingMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @classdesc Represents a SpeechProcessingMetadata.
+                             * @implements ISpeechProcessingMetadata
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata=} [properties] Properties to set
+                             */
+                            function SpeechProcessingMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SpeechProcessingMetadata displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @instance
+                             */
+                            SpeechProcessingMetadata.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new SpeechProcessingMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} SpeechProcessingMetadata instance
+                             */
+                            SpeechProcessingMetadata.create = function create(properties) {
+                                return new SpeechProcessingMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SpeechProcessingMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata} message SpeechProcessingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpeechProcessingMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SpeechProcessingMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata} message SpeechProcessingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpeechProcessingMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SpeechProcessingMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} SpeechProcessingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpeechProcessingMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SpeechProcessingMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} SpeechProcessingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpeechProcessingMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SpeechProcessingMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SpeechProcessingMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SpeechProcessingMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} SpeechProcessingMetadata
+                             */
+                            SpeechProcessingMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SpeechProcessingMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} message SpeechProcessingMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SpeechProcessingMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.displayName = "";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SpeechProcessingMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SpeechProcessingMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SpeechProcessingMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SpeechProcessingMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata";
+                            };
+    
+                            return SpeechProcessingMetadata;
+                        })();
+    
+                        v3beta1.PlaybookTraceMetadata = (function() {
+    
+                            /**
+                             * Properties of a PlaybookTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @interface IPlaybookTraceMetadata
+                             * @property {string|null} [playbook] PlaybookTraceMetadata playbook
+                             * @property {string|null} [displayName] PlaybookTraceMetadata displayName
+                             */
+    
+                            /**
+                             * Constructs a new PlaybookTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @classdesc Represents a PlaybookTraceMetadata.
+                             * @implements IPlaybookTraceMetadata
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata=} [properties] Properties to set
+                             */
+                            function PlaybookTraceMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PlaybookTraceMetadata playbook.
+                             * @member {string} playbook
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @instance
+                             */
+                            PlaybookTraceMetadata.prototype.playbook = "";
+    
+                            /**
+                             * PlaybookTraceMetadata displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @instance
+                             */
+                            PlaybookTraceMetadata.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new PlaybookTraceMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} PlaybookTraceMetadata instance
+                             */
+                            PlaybookTraceMetadata.create = function create(properties) {
+                                return new PlaybookTraceMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookTraceMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata} message PlaybookTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookTraceMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.playbook != null && Object.hasOwnProperty.call(message, "playbook"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.playbook);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookTraceMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata} message PlaybookTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookTraceMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PlaybookTraceMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} PlaybookTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookTraceMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.playbook = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PlaybookTraceMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} PlaybookTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookTraceMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PlaybookTraceMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PlaybookTraceMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    if (!$util.isString(message.playbook))
+                                        return "playbook: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PlaybookTraceMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} PlaybookTraceMetadata
+                             */
+                            PlaybookTraceMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata();
+                                if (object.playbook != null)
+                                    message.playbook = String(object.playbook);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PlaybookTraceMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} message PlaybookTraceMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PlaybookTraceMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.playbook = "";
+                                    object.displayName = "";
+                                }
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    object.playbook = message.playbook;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PlaybookTraceMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PlaybookTraceMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PlaybookTraceMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PlaybookTraceMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata";
+                            };
+    
+                            return PlaybookTraceMetadata;
+                        })();
+    
+                        v3beta1.FlowTraceMetadata = (function() {
+    
+                            /**
+                             * Properties of a FlowTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @interface IFlowTraceMetadata
+                             * @property {string|null} [flow] FlowTraceMetadata flow
+                             * @property {string|null} [displayName] FlowTraceMetadata displayName
+                             */
+    
+                            /**
+                             * Constructs a new FlowTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @classdesc Represents a FlowTraceMetadata.
+                             * @implements IFlowTraceMetadata
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata=} [properties] Properties to set
+                             */
+                            function FlowTraceMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FlowTraceMetadata flow.
+                             * @member {string} flow
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @instance
+                             */
+                            FlowTraceMetadata.prototype.flow = "";
+    
+                            /**
+                             * FlowTraceMetadata displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @instance
+                             */
+                            FlowTraceMetadata.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new FlowTraceMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} FlowTraceMetadata instance
+                             */
+                            FlowTraceMetadata.create = function create(properties) {
+                                return new FlowTraceMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FlowTraceMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata} message FlowTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowTraceMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.flow != null && Object.hasOwnProperty.call(message, "flow"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.flow);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FlowTraceMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata} message FlowTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowTraceMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FlowTraceMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} FlowTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowTraceMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.flow = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FlowTraceMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} FlowTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowTraceMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FlowTraceMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FlowTraceMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    if (!$util.isString(message.flow))
+                                        return "flow: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FlowTraceMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} FlowTraceMetadata
+                             */
+                            FlowTraceMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata();
+                                if (object.flow != null)
+                                    message.flow = String(object.flow);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FlowTraceMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} message FlowTraceMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FlowTraceMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.flow = "";
+                                    object.displayName = "";
+                                }
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    object.flow = message.flow;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FlowTraceMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FlowTraceMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FlowTraceMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FlowTraceMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata";
+                            };
+    
+                            return FlowTraceMetadata;
                         })();
     
                         v3beta1.Action = (function() {

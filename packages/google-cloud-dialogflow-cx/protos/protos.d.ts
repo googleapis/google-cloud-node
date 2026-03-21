@@ -71677,6 +71677,9 @@ export namespace google {
 
                         /** Intent description */
                         description?: (string|null);
+
+                        /** Intent dtmfPattern */
+                        dtmfPattern?: (string|null);
                     }
 
                     /** Represents an Intent. */
@@ -71711,6 +71714,9 @@ export namespace google {
 
                         /** Intent description. */
                         public description: string;
+
+                        /** Intent dtmfPattern. */
+                        public dtmfPattern: string;
 
                         /**
                          * Creates a new Intent instance using the specified properties.
@@ -76338,6 +76344,9 @@ export namespace google {
 
                         /** QueryResult dataStoreConnectionSignals */
                         dataStoreConnectionSignals?: (google.cloud.dialogflow.cx.v3beta1.IDataStoreConnectionSignals|null);
+
+                        /** QueryResult traceBlocks */
+                        traceBlocks?: (google.cloud.dialogflow.cx.v3beta1.ITraceBlock[]|null);
                     }
 
                     /** Represents a QueryResult. */
@@ -76423,6 +76432,9 @@ export namespace google {
 
                         /** QueryResult dataStoreConnectionSignals. */
                         public dataStoreConnectionSignals?: (google.cloud.dialogflow.cx.v3beta1.IDataStoreConnectionSignals|null);
+
+                        /** QueryResult traceBlocks. */
+                        public traceBlocks: google.cloud.dialogflow.cx.v3beta1.ITraceBlock[];
 
                         /** QueryResult query. */
                         public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent"|"dtmf");
@@ -78623,6 +78635,457 @@ export namespace google {
 
                         /**
                          * Gets the default type url for Example
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TraceBlock. */
+                    interface ITraceBlock {
+
+                        /** TraceBlock playbookTraceMetadata */
+                        playbookTraceMetadata?: (google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata|null);
+
+                        /** TraceBlock flowTraceMetadata */
+                        flowTraceMetadata?: (google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata|null);
+
+                        /** TraceBlock speechProcessingMetadata */
+                        speechProcessingMetadata?: (google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata|null);
+
+                        /** TraceBlock actions */
+                        actions?: (google.cloud.dialogflow.cx.v3beta1.IAction[]|null);
+
+                        /** TraceBlock startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TraceBlock completeTime */
+                        completeTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TraceBlock inputParameters */
+                        inputParameters?: (google.protobuf.IStruct|null);
+
+                        /** TraceBlock outputParameters */
+                        outputParameters?: (google.protobuf.IStruct|null);
+
+                        /** TraceBlock endState */
+                        endState?: (google.cloud.dialogflow.cx.v3beta1.OutputState|keyof typeof google.cloud.dialogflow.cx.v3beta1.OutputState|null);
+                    }
+
+                    /** Represents a TraceBlock. */
+                    class TraceBlock implements ITraceBlock {
+
+                        /**
+                         * Constructs a new TraceBlock.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ITraceBlock);
+
+                        /** TraceBlock playbookTraceMetadata. */
+                        public playbookTraceMetadata?: (google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata|null);
+
+                        /** TraceBlock flowTraceMetadata. */
+                        public flowTraceMetadata?: (google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata|null);
+
+                        /** TraceBlock speechProcessingMetadata. */
+                        public speechProcessingMetadata?: (google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata|null);
+
+                        /** TraceBlock actions. */
+                        public actions: google.cloud.dialogflow.cx.v3beta1.IAction[];
+
+                        /** TraceBlock startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TraceBlock completeTime. */
+                        public completeTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TraceBlock inputParameters. */
+                        public inputParameters?: (google.protobuf.IStruct|null);
+
+                        /** TraceBlock outputParameters. */
+                        public outputParameters?: (google.protobuf.IStruct|null);
+
+                        /** TraceBlock endState. */
+                        public endState: (google.cloud.dialogflow.cx.v3beta1.OutputState|keyof typeof google.cloud.dialogflow.cx.v3beta1.OutputState);
+
+                        /** TraceBlock traceMetadata. */
+                        public traceMetadata?: ("playbookTraceMetadata"|"flowTraceMetadata"|"speechProcessingMetadata");
+
+                        /**
+                         * Creates a new TraceBlock instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TraceBlock instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ITraceBlock): google.cloud.dialogflow.cx.v3beta1.TraceBlock;
+
+                        /**
+                         * Encodes the specified TraceBlock message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TraceBlock.verify|verify} messages.
+                         * @param message TraceBlock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ITraceBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TraceBlock message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TraceBlock.verify|verify} messages.
+                         * @param message TraceBlock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ITraceBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TraceBlock message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TraceBlock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.TraceBlock;
+
+                        /**
+                         * Decodes a TraceBlock message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TraceBlock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.TraceBlock;
+
+                        /**
+                         * Verifies a TraceBlock message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TraceBlock message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TraceBlock
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.TraceBlock;
+
+                        /**
+                         * Creates a plain object from a TraceBlock message. Also converts values to other types if specified.
+                         * @param message TraceBlock
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.TraceBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TraceBlock to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TraceBlock
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SpeechProcessingMetadata. */
+                    interface ISpeechProcessingMetadata {
+
+                        /** SpeechProcessingMetadata displayName */
+                        displayName?: (string|null);
+                    }
+
+                    /** Represents a SpeechProcessingMetadata. */
+                    class SpeechProcessingMetadata implements ISpeechProcessingMetadata {
+
+                        /**
+                         * Constructs a new SpeechProcessingMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata);
+
+                        /** SpeechProcessingMetadata displayName. */
+                        public displayName: string;
+
+                        /**
+                         * Creates a new SpeechProcessingMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SpeechProcessingMetadata instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata): google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata;
+
+                        /**
+                         * Encodes the specified SpeechProcessingMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.verify|verify} messages.
+                         * @param message SpeechProcessingMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SpeechProcessingMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.verify|verify} messages.
+                         * @param message SpeechProcessingMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SpeechProcessingMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SpeechProcessingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata;
+
+                        /**
+                         * Decodes a SpeechProcessingMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SpeechProcessingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata;
+
+                        /**
+                         * Verifies a SpeechProcessingMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SpeechProcessingMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SpeechProcessingMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata;
+
+                        /**
+                         * Creates a plain object from a SpeechProcessingMetadata message. Also converts values to other types if specified.
+                         * @param message SpeechProcessingMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SpeechProcessingMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SpeechProcessingMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookTraceMetadata. */
+                    interface IPlaybookTraceMetadata {
+
+                        /** PlaybookTraceMetadata playbook */
+                        playbook?: (string|null);
+
+                        /** PlaybookTraceMetadata displayName */
+                        displayName?: (string|null);
+                    }
+
+                    /** Represents a PlaybookTraceMetadata. */
+                    class PlaybookTraceMetadata implements IPlaybookTraceMetadata {
+
+                        /**
+                         * Constructs a new PlaybookTraceMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata);
+
+                        /** PlaybookTraceMetadata playbook. */
+                        public playbook: string;
+
+                        /** PlaybookTraceMetadata displayName. */
+                        public displayName: string;
+
+                        /**
+                         * Creates a new PlaybookTraceMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookTraceMetadata instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata): google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata;
+
+                        /**
+                         * Encodes the specified PlaybookTraceMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.verify|verify} messages.
+                         * @param message PlaybookTraceMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookTraceMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.verify|verify} messages.
+                         * @param message PlaybookTraceMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookTraceMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookTraceMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata;
+
+                        /**
+                         * Decodes a PlaybookTraceMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookTraceMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata;
+
+                        /**
+                         * Verifies a PlaybookTraceMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookTraceMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookTraceMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata;
+
+                        /**
+                         * Creates a plain object from a PlaybookTraceMetadata message. Also converts values to other types if specified.
+                         * @param message PlaybookTraceMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookTraceMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookTraceMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FlowTraceMetadata. */
+                    interface IFlowTraceMetadata {
+
+                        /** FlowTraceMetadata flow */
+                        flow?: (string|null);
+
+                        /** FlowTraceMetadata displayName */
+                        displayName?: (string|null);
+                    }
+
+                    /** Represents a FlowTraceMetadata. */
+                    class FlowTraceMetadata implements IFlowTraceMetadata {
+
+                        /**
+                         * Constructs a new FlowTraceMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata);
+
+                        /** FlowTraceMetadata flow. */
+                        public flow: string;
+
+                        /** FlowTraceMetadata displayName. */
+                        public displayName: string;
+
+                        /**
+                         * Creates a new FlowTraceMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FlowTraceMetadata instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata): google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata;
+
+                        /**
+                         * Encodes the specified FlowTraceMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.verify|verify} messages.
+                         * @param message FlowTraceMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FlowTraceMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.verify|verify} messages.
+                         * @param message FlowTraceMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FlowTraceMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FlowTraceMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata;
+
+                        /**
+                         * Decodes a FlowTraceMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FlowTraceMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata;
+
+                        /**
+                         * Verifies a FlowTraceMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FlowTraceMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FlowTraceMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata;
+
+                        /**
+                         * Creates a plain object from a FlowTraceMetadata message. Also converts values to other types if specified.
+                         * @param message FlowTraceMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FlowTraceMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FlowTraceMetadata
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
