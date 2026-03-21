@@ -70610,6 +70610,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                                 if (message.theme != null && message.hasOwnProperty("theme"))
@@ -70666,6 +70667,10 @@
                                 case "CHAT_ONLY":
                                 case 3:
                                     message.modality = 3;
+                                    break;
+                                case "CHAT_VOICE_AND_VIDEO":
+                                case 4:
+                                    message.modality = 4;
                                     break;
                                 }
                                 switch (object.theme) {
@@ -71054,6 +71059,7 @@
                              * @property {number} CHAT_AND_VOICE=1 CHAT_AND_VOICE value
                              * @property {number} VOICE_ONLY=2 VOICE_ONLY value
                              * @property {number} CHAT_ONLY=3 CHAT_ONLY value
+                             * @property {number} CHAT_VOICE_AND_VIDEO=4 CHAT_VOICE_AND_VIDEO value
                              */
                             WebWidgetConfig.Modality = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -71061,6 +71067,7 @@
                                 values[valuesById[1] = "CHAT_AND_VOICE"] = 1;
                                 values[valuesById[2] = "VOICE_ONLY"] = 2;
                                 values[valuesById[3] = "CHAT_ONLY"] = 3;
+                                values[valuesById[4] = "CHAT_VOICE_AND_VIDEO"] = 4;
                                 return values;
                             })();
     
@@ -74687,6 +74694,7 @@
                          * @property {string|null} [name] ExportAppRequest name
                          * @property {google.cloud.ces.v1beta.ExportAppRequest.ExportFormat|null} [exportFormat] ExportAppRequest exportFormat
                          * @property {string|null} [gcsUri] ExportAppRequest gcsUri
+                         * @property {string|null} [appVersion] ExportAppRequest appVersion
                          */
     
                         /**
@@ -74729,6 +74737,14 @@
                         ExportAppRequest.prototype.gcsUri = "";
     
                         /**
+                         * ExportAppRequest appVersion.
+                         * @member {string} appVersion
+                         * @memberof google.cloud.ces.v1beta.ExportAppRequest
+                         * @instance
+                         */
+                        ExportAppRequest.prototype.appVersion = "";
+    
+                        /**
                          * Creates a new ExportAppRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.ExportAppRequest
@@ -74758,6 +74774,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.exportFormat);
                             if (message.gcsUri != null && Object.hasOwnProperty.call(message, "gcsUri"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.gcsUri);
+                            if (message.appVersion != null && Object.hasOwnProperty.call(message, "appVersion"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.appVersion);
                             return writer;
                         };
     
@@ -74804,6 +74822,10 @@
                                     }
                                 case 3: {
                                         message.gcsUri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.appVersion = reader.string();
                                         break;
                                     }
                                 default:
@@ -74856,6 +74878,9 @@
                             if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
                                 if (!$util.isString(message.gcsUri))
                                     return "gcsUri: string expected";
+                            if (message.appVersion != null && message.hasOwnProperty("appVersion"))
+                                if (!$util.isString(message.appVersion))
+                                    return "appVersion: string expected";
                             return null;
                         };
     
@@ -74895,6 +74920,8 @@
                             }
                             if (object.gcsUri != null)
                                 message.gcsUri = String(object.gcsUri);
+                            if (object.appVersion != null)
+                                message.appVersion = String(object.appVersion);
                             return message;
                         };
     
@@ -74915,6 +74942,7 @@
                                 object.name = "";
                                 object.exportFormat = options.enums === String ? "EXPORT_FORMAT_UNSPECIFIED" : 0;
                                 object.gcsUri = "";
+                                object.appVersion = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -74922,6 +74950,8 @@
                                 object.exportFormat = options.enums === String ? $root.google.cloud.ces.v1beta.ExportAppRequest.ExportFormat[message.exportFormat] === undefined ? message.exportFormat : $root.google.cloud.ces.v1beta.ExportAppRequest.ExportFormat[message.exportFormat] : message.exportFormat;
                             if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
                                 object.gcsUri = message.gcsUri;
+                            if (message.appVersion != null && message.hasOwnProperty("appVersion"))
+                                object.appVersion = message.appVersion;
                             return object;
                         };
     
@@ -88662,6 +88692,7 @@
                          * @property {google.cloud.ces.v1beta.GenerateAppResourceResponse.ITools|null} [tools] GenerateAppResourceResponse tools
                          * @property {google.cloud.ces.v1beta.GenerateAppResourceResponse.IEvaluations|null} [evaluations] GenerateAppResourceResponse evaluations
                          * @property {google.cloud.ces.v1beta.GenerateAppResourceResponse.IAppResources|null} [appResources] GenerateAppResourceResponse appResources
+                         * @property {google.cloud.ces.v1beta.IQualityReport|null} [qualityReport] GenerateAppResourceResponse qualityReport
                          * @property {google.cloud.ces.v1beta.GenerateAppResourceResponse.IGenerateResultInfo|null} [generateResultInfo] GenerateAppResourceResponse generateResultInfo
                          */
     
@@ -88729,6 +88760,14 @@
                         GenerateAppResourceResponse.prototype.appResources = null;
     
                         /**
+                         * GenerateAppResourceResponse qualityReport.
+                         * @member {google.cloud.ces.v1beta.IQualityReport|null|undefined} qualityReport
+                         * @memberof google.cloud.ces.v1beta.GenerateAppResourceResponse
+                         * @instance
+                         */
+                        GenerateAppResourceResponse.prototype.qualityReport = null;
+    
+                        /**
                          * GenerateAppResourceResponse generateResultInfo.
                          * @member {google.cloud.ces.v1beta.GenerateAppResourceResponse.IGenerateResultInfo|null|undefined} generateResultInfo
                          * @memberof google.cloud.ces.v1beta.GenerateAppResourceResponse
@@ -88741,12 +88780,12 @@
     
                         /**
                          * GenerateAppResourceResponse generatedResource.
-                         * @member {"agent"|"toolset"|"appSnapshot"|"tools"|"evaluations"|"appResources"|undefined} generatedResource
+                         * @member {"agent"|"toolset"|"appSnapshot"|"tools"|"evaluations"|"appResources"|"qualityReport"|undefined} generatedResource
                          * @memberof google.cloud.ces.v1beta.GenerateAppResourceResponse
                          * @instance
                          */
                         Object.defineProperty(GenerateAppResourceResponse.prototype, "generatedResource", {
-                            get: $util.oneOfGetter($oneOfFields = ["agent", "toolset", "appSnapshot", "tools", "evaluations", "appResources"]),
+                            get: $util.oneOfGetter($oneOfFields = ["agent", "toolset", "appSnapshot", "tools", "evaluations", "appResources", "qualityReport"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -88788,6 +88827,8 @@
                                 $root.google.cloud.ces.v1beta.GenerateAppResourceResponse.Evaluations.encode(message.evaluations, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.appResources != null && Object.hasOwnProperty.call(message, "appResources"))
                                 $root.google.cloud.ces.v1beta.GenerateAppResourceResponse.AppResources.encode(message.appResources, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.qualityReport != null && Object.hasOwnProperty.call(message, "qualityReport"))
+                                $root.google.cloud.ces.v1beta.QualityReport.encode(message.qualityReport, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -88846,6 +88887,10 @@
                                     }
                                 case 7: {
                                         message.appResources = $root.google.cloud.ces.v1beta.GenerateAppResourceResponse.AppResources.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.qualityReport = $root.google.cloud.ces.v1beta.QualityReport.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 2: {
@@ -88946,6 +88991,16 @@
                                         return "appResources." + error;
                                 }
                             }
+                            if (message.qualityReport != null && message.hasOwnProperty("qualityReport")) {
+                                if (properties.generatedResource === 1)
+                                    return "generatedResource: multiple values";
+                                properties.generatedResource = 1;
+                                {
+                                    var error = $root.google.cloud.ces.v1beta.QualityReport.verify(message.qualityReport);
+                                    if (error)
+                                        return "qualityReport." + error;
+                                }
+                            }
                             if (message.generateResultInfo != null && message.hasOwnProperty("generateResultInfo")) {
                                 var error = $root.google.cloud.ces.v1beta.GenerateAppResourceResponse.GenerateResultInfo.verify(message.generateResultInfo);
                                 if (error)
@@ -88995,6 +89050,11 @@
                                 if (typeof object.appResources !== "object")
                                     throw TypeError(".google.cloud.ces.v1beta.GenerateAppResourceResponse.appResources: object expected");
                                 message.appResources = $root.google.cloud.ces.v1beta.GenerateAppResourceResponse.AppResources.fromObject(object.appResources);
+                            }
+                            if (object.qualityReport != null) {
+                                if (typeof object.qualityReport !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.GenerateAppResourceResponse.qualityReport: object expected");
+                                message.qualityReport = $root.google.cloud.ces.v1beta.QualityReport.fromObject(object.qualityReport);
                             }
                             if (object.generateResultInfo != null) {
                                 if (typeof object.generateResultInfo !== "object")
@@ -89050,6 +89110,11 @@
                                 object.appResources = $root.google.cloud.ces.v1beta.GenerateAppResourceResponse.AppResources.toObject(message.appResources, options);
                                 if (options.oneofs)
                                     object.generatedResource = "appResources";
+                            }
+                            if (message.qualityReport != null && message.hasOwnProperty("qualityReport")) {
+                                object.qualityReport = $root.google.cloud.ces.v1beta.QualityReport.toObject(message.qualityReport, options);
+                                if (options.oneofs)
+                                    object.generatedResource = "qualityReport";
                             }
                             return object;
                         };
@@ -89993,6 +90058,818 @@
                         })();
     
                         return GenerateAppResourceResponse;
+                    })();
+    
+                    v1beta.QualityReport = (function() {
+    
+                        /**
+                         * Properties of a QualityReport.
+                         * @memberof google.cloud.ces.v1beta
+                         * @interface IQualityReport
+                         * @property {Array.<google.cloud.ces.v1beta.QualityReport.IAgentIssues>|null} [issues] QualityReport issues
+                         * @property {Array.<string>|null} [evaluationRuns] QualityReport evaluationRuns
+                         * @property {Array.<google.cloud.ces.v1beta.QualityReport.IIssue>|null} [generalIssues] QualityReport generalIssues
+                         */
+    
+                        /**
+                         * Constructs a new QualityReport.
+                         * @memberof google.cloud.ces.v1beta
+                         * @classdesc Represents a QualityReport.
+                         * @implements IQualityReport
+                         * @constructor
+                         * @param {google.cloud.ces.v1beta.IQualityReport=} [properties] Properties to set
+                         */
+                        function QualityReport(properties) {
+                            this.issues = [];
+                            this.evaluationRuns = [];
+                            this.generalIssues = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QualityReport issues.
+                         * @member {Array.<google.cloud.ces.v1beta.QualityReport.IAgentIssues>} issues
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @instance
+                         */
+                        QualityReport.prototype.issues = $util.emptyArray;
+    
+                        /**
+                         * QualityReport evaluationRuns.
+                         * @member {Array.<string>} evaluationRuns
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @instance
+                         */
+                        QualityReport.prototype.evaluationRuns = $util.emptyArray;
+    
+                        /**
+                         * QualityReport generalIssues.
+                         * @member {Array.<google.cloud.ces.v1beta.QualityReport.IIssue>} generalIssues
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @instance
+                         */
+                        QualityReport.prototype.generalIssues = $util.emptyArray;
+    
+                        /**
+                         * Creates a new QualityReport instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IQualityReport=} [properties] Properties to set
+                         * @returns {google.cloud.ces.v1beta.QualityReport} QualityReport instance
+                         */
+                        QualityReport.create = function create(properties) {
+                            return new QualityReport(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QualityReport message. Does not implicitly {@link google.cloud.ces.v1beta.QualityReport.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IQualityReport} message QualityReport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QualityReport.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.issues != null && message.issues.length)
+                                for (var i = 0; i < message.issues.length; ++i)
+                                    $root.google.cloud.ces.v1beta.QualityReport.AgentIssues.encode(message.issues[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.evaluationRuns != null && message.evaluationRuns.length)
+                                for (var i = 0; i < message.evaluationRuns.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.evaluationRuns[i]);
+                            if (message.generalIssues != null && message.generalIssues.length)
+                                for (var i = 0; i < message.generalIssues.length; ++i)
+                                    $root.google.cloud.ces.v1beta.QualityReport.Issue.encode(message.generalIssues[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QualityReport message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.QualityReport.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @static
+                         * @param {google.cloud.ces.v1beta.IQualityReport} message QualityReport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QualityReport.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QualityReport message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.ces.v1beta.QualityReport} QualityReport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QualityReport.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.QualityReport();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.issues && message.issues.length))
+                                            message.issues = [];
+                                        message.issues.push($root.google.cloud.ces.v1beta.QualityReport.AgentIssues.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.evaluationRuns && message.evaluationRuns.length))
+                                            message.evaluationRuns = [];
+                                        message.evaluationRuns.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.generalIssues && message.generalIssues.length))
+                                            message.generalIssues = [];
+                                        message.generalIssues.push($root.google.cloud.ces.v1beta.QualityReport.Issue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QualityReport message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.ces.v1beta.QualityReport} QualityReport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QualityReport.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QualityReport message.
+                         * @function verify
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QualityReport.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.issues != null && message.hasOwnProperty("issues")) {
+                                if (!Array.isArray(message.issues))
+                                    return "issues: array expected";
+                                for (var i = 0; i < message.issues.length; ++i) {
+                                    var error = $root.google.cloud.ces.v1beta.QualityReport.AgentIssues.verify(message.issues[i]);
+                                    if (error)
+                                        return "issues." + error;
+                                }
+                            }
+                            if (message.evaluationRuns != null && message.hasOwnProperty("evaluationRuns")) {
+                                if (!Array.isArray(message.evaluationRuns))
+                                    return "evaluationRuns: array expected";
+                                for (var i = 0; i < message.evaluationRuns.length; ++i)
+                                    if (!$util.isString(message.evaluationRuns[i]))
+                                        return "evaluationRuns: string[] expected";
+                            }
+                            if (message.generalIssues != null && message.hasOwnProperty("generalIssues")) {
+                                if (!Array.isArray(message.generalIssues))
+                                    return "generalIssues: array expected";
+                                for (var i = 0; i < message.generalIssues.length; ++i) {
+                                    var error = $root.google.cloud.ces.v1beta.QualityReport.Issue.verify(message.generalIssues[i]);
+                                    if (error)
+                                        return "generalIssues." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QualityReport message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.ces.v1beta.QualityReport} QualityReport
+                         */
+                        QualityReport.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.ces.v1beta.QualityReport)
+                                return object;
+                            var message = new $root.google.cloud.ces.v1beta.QualityReport();
+                            if (object.issues) {
+                                if (!Array.isArray(object.issues))
+                                    throw TypeError(".google.cloud.ces.v1beta.QualityReport.issues: array expected");
+                                message.issues = [];
+                                for (var i = 0; i < object.issues.length; ++i) {
+                                    if (typeof object.issues[i] !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.QualityReport.issues: object expected");
+                                    message.issues[i] = $root.google.cloud.ces.v1beta.QualityReport.AgentIssues.fromObject(object.issues[i]);
+                                }
+                            }
+                            if (object.evaluationRuns) {
+                                if (!Array.isArray(object.evaluationRuns))
+                                    throw TypeError(".google.cloud.ces.v1beta.QualityReport.evaluationRuns: array expected");
+                                message.evaluationRuns = [];
+                                for (var i = 0; i < object.evaluationRuns.length; ++i)
+                                    message.evaluationRuns[i] = String(object.evaluationRuns[i]);
+                            }
+                            if (object.generalIssues) {
+                                if (!Array.isArray(object.generalIssues))
+                                    throw TypeError(".google.cloud.ces.v1beta.QualityReport.generalIssues: array expected");
+                                message.generalIssues = [];
+                                for (var i = 0; i < object.generalIssues.length; ++i) {
+                                    if (typeof object.generalIssues[i] !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.QualityReport.generalIssues: object expected");
+                                    message.generalIssues[i] = $root.google.cloud.ces.v1beta.QualityReport.Issue.fromObject(object.generalIssues[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QualityReport message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @static
+                         * @param {google.cloud.ces.v1beta.QualityReport} message QualityReport
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QualityReport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.issues = [];
+                                object.evaluationRuns = [];
+                                object.generalIssues = [];
+                            }
+                            if (message.issues && message.issues.length) {
+                                object.issues = [];
+                                for (var j = 0; j < message.issues.length; ++j)
+                                    object.issues[j] = $root.google.cloud.ces.v1beta.QualityReport.AgentIssues.toObject(message.issues[j], options);
+                            }
+                            if (message.evaluationRuns && message.evaluationRuns.length) {
+                                object.evaluationRuns = [];
+                                for (var j = 0; j < message.evaluationRuns.length; ++j)
+                                    object.evaluationRuns[j] = message.evaluationRuns[j];
+                            }
+                            if (message.generalIssues && message.generalIssues.length) {
+                                object.generalIssues = [];
+                                for (var j = 0; j < message.generalIssues.length; ++j)
+                                    object.generalIssues[j] = $root.google.cloud.ces.v1beta.QualityReport.Issue.toObject(message.generalIssues[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QualityReport to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QualityReport.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QualityReport
+                         * @function getTypeUrl
+                         * @memberof google.cloud.ces.v1beta.QualityReport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QualityReport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.ces.v1beta.QualityReport";
+                        };
+    
+                        QualityReport.Issue = (function() {
+    
+                            /**
+                             * Properties of an Issue.
+                             * @memberof google.cloud.ces.v1beta.QualityReport
+                             * @interface IIssue
+                             * @property {string|null} [description] Issue description
+                             * @property {number|null} [occurrenceCount] Issue occurrenceCount
+                             * @property {string|null} [proposedSolution] Issue proposedSolution
+                             */
+    
+                            /**
+                             * Constructs a new Issue.
+                             * @memberof google.cloud.ces.v1beta.QualityReport
+                             * @classdesc Represents an Issue.
+                             * @implements IIssue
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.QualityReport.IIssue=} [properties] Properties to set
+                             */
+                            function Issue(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Issue description.
+                             * @member {string} description
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @instance
+                             */
+                            Issue.prototype.description = "";
+    
+                            /**
+                             * Issue occurrenceCount.
+                             * @member {number} occurrenceCount
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @instance
+                             */
+                            Issue.prototype.occurrenceCount = 0;
+    
+                            /**
+                             * Issue proposedSolution.
+                             * @member {string} proposedSolution
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @instance
+                             */
+                            Issue.prototype.proposedSolution = "";
+    
+                            /**
+                             * Creates a new Issue instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @static
+                             * @param {google.cloud.ces.v1beta.QualityReport.IIssue=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.QualityReport.Issue} Issue instance
+                             */
+                            Issue.create = function create(properties) {
+                                return new Issue(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Issue message. Does not implicitly {@link google.cloud.ces.v1beta.QualityReport.Issue.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @static
+                             * @param {google.cloud.ces.v1beta.QualityReport.IIssue} message Issue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Issue.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                                if (message.occurrenceCount != null && Object.hasOwnProperty.call(message, "occurrenceCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.occurrenceCount);
+                                if (message.proposedSolution != null && Object.hasOwnProperty.call(message, "proposedSolution"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.proposedSolution);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Issue message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.QualityReport.Issue.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @static
+                             * @param {google.cloud.ces.v1beta.QualityReport.IIssue} message Issue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Issue.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Issue message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.QualityReport.Issue} Issue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Issue.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.QualityReport.Issue();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.occurrenceCount = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.proposedSolution = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Issue message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.QualityReport.Issue} Issue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Issue.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Issue message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Issue.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                if (message.occurrenceCount != null && message.hasOwnProperty("occurrenceCount"))
+                                    if (!$util.isInteger(message.occurrenceCount))
+                                        return "occurrenceCount: integer expected";
+                                if (message.proposedSolution != null && message.hasOwnProperty("proposedSolution"))
+                                    if (!$util.isString(message.proposedSolution))
+                                        return "proposedSolution: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Issue message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.QualityReport.Issue} Issue
+                             */
+                            Issue.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.QualityReport.Issue)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.QualityReport.Issue();
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                if (object.occurrenceCount != null)
+                                    message.occurrenceCount = object.occurrenceCount | 0;
+                                if (object.proposedSolution != null)
+                                    message.proposedSolution = String(object.proposedSolution);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Issue message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @static
+                             * @param {google.cloud.ces.v1beta.QualityReport.Issue} message Issue
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Issue.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.description = "";
+                                    object.occurrenceCount = 0;
+                                    object.proposedSolution = "";
+                                }
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                if (message.occurrenceCount != null && message.hasOwnProperty("occurrenceCount"))
+                                    object.occurrenceCount = message.occurrenceCount;
+                                if (message.proposedSolution != null && message.hasOwnProperty("proposedSolution"))
+                                    object.proposedSolution = message.proposedSolution;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Issue to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Issue.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Issue
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.QualityReport.Issue
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Issue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.QualityReport.Issue";
+                            };
+    
+                            return Issue;
+                        })();
+    
+                        QualityReport.AgentIssues = (function() {
+    
+                            /**
+                             * Properties of an AgentIssues.
+                             * @memberof google.cloud.ces.v1beta.QualityReport
+                             * @interface IAgentIssues
+                             * @property {string|null} [agent] AgentIssues agent
+                             * @property {Array.<google.cloud.ces.v1beta.QualityReport.IIssue>|null} [issues] AgentIssues issues
+                             */
+    
+                            /**
+                             * Constructs a new AgentIssues.
+                             * @memberof google.cloud.ces.v1beta.QualityReport
+                             * @classdesc Represents an AgentIssues.
+                             * @implements IAgentIssues
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.QualityReport.IAgentIssues=} [properties] Properties to set
+                             */
+                            function AgentIssues(properties) {
+                                this.issues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AgentIssues agent.
+                             * @member {string} agent
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @instance
+                             */
+                            AgentIssues.prototype.agent = "";
+    
+                            /**
+                             * AgentIssues issues.
+                             * @member {Array.<google.cloud.ces.v1beta.QualityReport.IIssue>} issues
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @instance
+                             */
+                            AgentIssues.prototype.issues = $util.emptyArray;
+    
+                            /**
+                             * Creates a new AgentIssues instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @static
+                             * @param {google.cloud.ces.v1beta.QualityReport.IAgentIssues=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.QualityReport.AgentIssues} AgentIssues instance
+                             */
+                            AgentIssues.create = function create(properties) {
+                                return new AgentIssues(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AgentIssues message. Does not implicitly {@link google.cloud.ces.v1beta.QualityReport.AgentIssues.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @static
+                             * @param {google.cloud.ces.v1beta.QualityReport.IAgentIssues} message AgentIssues message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AgentIssues.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.agent != null && Object.hasOwnProperty.call(message, "agent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.agent);
+                                if (message.issues != null && message.issues.length)
+                                    for (var i = 0; i < message.issues.length; ++i)
+                                        $root.google.cloud.ces.v1beta.QualityReport.Issue.encode(message.issues[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AgentIssues message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.QualityReport.AgentIssues.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @static
+                             * @param {google.cloud.ces.v1beta.QualityReport.IAgentIssues} message AgentIssues message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AgentIssues.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AgentIssues message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.QualityReport.AgentIssues} AgentIssues
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AgentIssues.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.QualityReport.AgentIssues();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.agent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.issues && message.issues.length))
+                                                message.issues = [];
+                                            message.issues.push($root.google.cloud.ces.v1beta.QualityReport.Issue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AgentIssues message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.QualityReport.AgentIssues} AgentIssues
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AgentIssues.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AgentIssues message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AgentIssues.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.agent != null && message.hasOwnProperty("agent"))
+                                    if (!$util.isString(message.agent))
+                                        return "agent: string expected";
+                                if (message.issues != null && message.hasOwnProperty("issues")) {
+                                    if (!Array.isArray(message.issues))
+                                        return "issues: array expected";
+                                    for (var i = 0; i < message.issues.length; ++i) {
+                                        var error = $root.google.cloud.ces.v1beta.QualityReport.Issue.verify(message.issues[i]);
+                                        if (error)
+                                            return "issues." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AgentIssues message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.QualityReport.AgentIssues} AgentIssues
+                             */
+                            AgentIssues.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.QualityReport.AgentIssues)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.QualityReport.AgentIssues();
+                                if (object.agent != null)
+                                    message.agent = String(object.agent);
+                                if (object.issues) {
+                                    if (!Array.isArray(object.issues))
+                                        throw TypeError(".google.cloud.ces.v1beta.QualityReport.AgentIssues.issues: array expected");
+                                    message.issues = [];
+                                    for (var i = 0; i < object.issues.length; ++i) {
+                                        if (typeof object.issues[i] !== "object")
+                                            throw TypeError(".google.cloud.ces.v1beta.QualityReport.AgentIssues.issues: object expected");
+                                        message.issues[i] = $root.google.cloud.ces.v1beta.QualityReport.Issue.fromObject(object.issues[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AgentIssues message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @static
+                             * @param {google.cloud.ces.v1beta.QualityReport.AgentIssues} message AgentIssues
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AgentIssues.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.issues = [];
+                                if (options.defaults)
+                                    object.agent = "";
+                                if (message.agent != null && message.hasOwnProperty("agent"))
+                                    object.agent = message.agent;
+                                if (message.issues && message.issues.length) {
+                                    object.issues = [];
+                                    for (var j = 0; j < message.issues.length; ++j)
+                                        object.issues[j] = $root.google.cloud.ces.v1beta.QualityReport.Issue.toObject(message.issues[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AgentIssues to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AgentIssues.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AgentIssues
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.QualityReport.AgentIssues
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AgentIssues.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.QualityReport.AgentIssues";
+                            };
+    
+                            return AgentIssues;
+                        })();
+    
+                        return QualityReport;
                     })();
     
                     v1beta.ListChangelogsRequest = (function() {
@@ -94862,6 +95739,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             return null;
@@ -94897,6 +95775,10 @@
                             case "FALLBACK_RESPONSE":
                             case 2:
                                 message.errorHandlingStrategy = 2;
+                                break;
+                            case "END_SESSION":
+                            case 3:
+                                message.errorHandlingStrategy = 3;
                                 break;
                             }
                             return message;
@@ -94955,12 +95837,14 @@
                          * @property {number} ERROR_HANDLING_STRATEGY_UNSPECIFIED=0 ERROR_HANDLING_STRATEGY_UNSPECIFIED value
                          * @property {number} NONE=1 NONE value
                          * @property {number} FALLBACK_RESPONSE=2 FALLBACK_RESPONSE value
+                         * @property {number} END_SESSION=3 END_SESSION value
                          */
                         ErrorHandlingSettings.ErrorHandlingStrategy = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "ERROR_HANDLING_STRATEGY_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "NONE"] = 1;
                             values[valuesById[2] = "FALLBACK_RESPONSE"] = 2;
+                            values[valuesById[3] = "END_SESSION"] = 3;
                             return values;
                         })();
     
@@ -116628,6 +117512,7 @@
                          * @property {google.cloud.ces.v1beta.IApiAuthentication|null} [apiAuthentication] McpTool apiAuthentication
                          * @property {google.cloud.ces.v1beta.ITlsConfig|null} [tlsConfig] McpTool tlsConfig
                          * @property {google.cloud.ces.v1beta.IServiceDirectoryConfig|null} [serviceDirectoryConfig] McpTool serviceDirectoryConfig
+                         * @property {Object.<string,string>|null} [customHeaders] McpTool customHeaders
                          */
     
                         /**
@@ -116639,6 +117524,7 @@
                          * @param {google.cloud.ces.v1beta.IMcpTool=} [properties] Properties to set
                          */
                         function McpTool(properties) {
+                            this.customHeaders = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -116710,6 +117596,14 @@
                         McpTool.prototype.serviceDirectoryConfig = null;
     
                         /**
+                         * McpTool customHeaders.
+                         * @member {Object.<string,string>} customHeaders
+                         * @memberof google.cloud.ces.v1beta.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.customHeaders = $util.emptyObject;
+    
+                        /**
                          * Creates a new McpTool instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.McpTool
@@ -116749,6 +117643,9 @@
                                 $root.google.cloud.ces.v1beta.TlsConfig.encode(message.tlsConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.serviceDirectoryConfig != null && Object.hasOwnProperty.call(message, "serviceDirectoryConfig"))
                                 $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.encode(message.serviceDirectoryConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.customHeaders != null && Object.hasOwnProperty.call(message, "customHeaders"))
+                                for (var keys = Object.keys(message.customHeaders), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.customHeaders[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -116779,7 +117676,7 @@
                         McpTool.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.McpTool();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.McpTool(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -116815,6 +117712,29 @@
                                     }
                                 case 8: {
                                         message.serviceDirectoryConfig = $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        if (message.customHeaders === $util.emptyObject)
+                                            message.customHeaders = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.customHeaders[key] = value;
                                         break;
                                     }
                                 default:
@@ -116886,6 +117806,14 @@
                                 if (error)
                                     return "serviceDirectoryConfig." + error;
                             }
+                            if (message.customHeaders != null && message.hasOwnProperty("customHeaders")) {
+                                if (!$util.isObject(message.customHeaders))
+                                    return "customHeaders: object expected";
+                                var key = Object.keys(message.customHeaders);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.customHeaders[key[i]]))
+                                        return "customHeaders: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -116932,6 +117860,13 @@
                                     throw TypeError(".google.cloud.ces.v1beta.McpTool.serviceDirectoryConfig: object expected");
                                 message.serviceDirectoryConfig = $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.fromObject(object.serviceDirectoryConfig);
                             }
+                            if (object.customHeaders) {
+                                if (typeof object.customHeaders !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.McpTool.customHeaders: object expected");
+                                message.customHeaders = {};
+                                for (var keys = Object.keys(object.customHeaders), i = 0; i < keys.length; ++i)
+                                    message.customHeaders[keys[i]] = String(object.customHeaders[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -116948,6 +117883,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.customHeaders = {};
                             if (options.defaults) {
                                 object.name = "";
                                 object.description = "";
@@ -116974,6 +117911,12 @@
                                 object.tlsConfig = $root.google.cloud.ces.v1beta.TlsConfig.toObject(message.tlsConfig, options);
                             if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig"))
                                 object.serviceDirectoryConfig = $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.toObject(message.serviceDirectoryConfig, options);
+                            var keys2;
+                            if (message.customHeaders && (keys2 = Object.keys(message.customHeaders)).length) {
+                                object.customHeaders = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.customHeaders[keys2[j]] = message.customHeaders[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -117879,6 +118822,8 @@
                          * @property {string|null} [name] WidgetTool name
                          * @property {string|null} [description] WidgetTool description
                          * @property {google.cloud.ces.v1beta.WidgetTool.WidgetType|null} [widgetType] WidgetTool widgetType
+                         * @property {google.protobuf.IStruct|null} [uiConfig] WidgetTool uiConfig
+                         * @property {google.cloud.ces.v1beta.WidgetTool.IDataMapping|null} [dataMapping] WidgetTool dataMapping
                          */
     
                         /**
@@ -117928,6 +118873,22 @@
                          */
                         WidgetTool.prototype.widgetType = 0;
     
+                        /**
+                         * WidgetTool uiConfig.
+                         * @member {google.protobuf.IStruct|null|undefined} uiConfig
+                         * @memberof google.cloud.ces.v1beta.WidgetTool
+                         * @instance
+                         */
+                        WidgetTool.prototype.uiConfig = null;
+    
+                        /**
+                         * WidgetTool dataMapping.
+                         * @member {google.cloud.ces.v1beta.WidgetTool.IDataMapping|null|undefined} dataMapping
+                         * @memberof google.cloud.ces.v1beta.WidgetTool
+                         * @instance
+                         */
+                        WidgetTool.prototype.dataMapping = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -117974,6 +118935,10 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.widgetType);
                             if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
                                 $root.google.cloud.ces.v1beta.Schema.encode(message.parameters, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.uiConfig != null && Object.hasOwnProperty.call(message, "uiConfig"))
+                                $root.google.protobuf.Struct.encode(message.uiConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.dataMapping != null && Object.hasOwnProperty.call(message, "dataMapping"))
+                                $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.encode(message.dataMapping, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -118024,6 +118989,14 @@
                                     }
                                 case 3: {
                                         message.widgetType = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.uiConfig = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.dataMapping = $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -118095,6 +119068,16 @@
                                 case 12:
                                     break;
                                 }
+                            if (message.uiConfig != null && message.hasOwnProperty("uiConfig")) {
+                                var error = $root.google.protobuf.Struct.verify(message.uiConfig);
+                                if (error)
+                                    return "uiConfig." + error;
+                            }
+                            if (message.dataMapping != null && message.hasOwnProperty("dataMapping")) {
+                                var error = $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.verify(message.dataMapping);
+                                if (error)
+                                    return "dataMapping." + error;
+                            }
                             return null;
                         };
     
@@ -118179,6 +119162,16 @@
                                 message.widgetType = 12;
                                 break;
                             }
+                            if (object.uiConfig != null) {
+                                if (typeof object.uiConfig !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.WidgetTool.uiConfig: object expected");
+                                message.uiConfig = $root.google.protobuf.Struct.fromObject(object.uiConfig);
+                            }
+                            if (object.dataMapping != null) {
+                                if (typeof object.dataMapping !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.WidgetTool.dataMapping: object expected");
+                                message.dataMapping = $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.fromObject(object.dataMapping);
+                            }
                             return message;
                         };
     
@@ -118199,6 +119192,8 @@
                                 object.name = "";
                                 object.description = "";
                                 object.widgetType = options.enums === String ? "WIDGET_TYPE_UNSPECIFIED" : 0;
+                                object.uiConfig = null;
+                                object.dataMapping = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -118211,6 +119206,10 @@
                                 if (options.oneofs)
                                     object.input = "parameters";
                             }
+                            if (message.uiConfig != null && message.hasOwnProperty("uiConfig"))
+                                object.uiConfig = $root.google.protobuf.Struct.toObject(message.uiConfig, options);
+                            if (message.dataMapping != null && message.hasOwnProperty("dataMapping"))
+                                object.dataMapping = $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.toObject(message.dataMapping, options);
                             return object;
                         };
     
@@ -118239,6 +119238,385 @@
                             }
                             return typeUrlPrefix + "/google.cloud.ces.v1beta.WidgetTool";
                         };
+    
+                        WidgetTool.DataMapping = (function() {
+    
+                            /**
+                             * Properties of a DataMapping.
+                             * @memberof google.cloud.ces.v1beta.WidgetTool
+                             * @interface IDataMapping
+                             * @property {string|null} [sourceToolName] DataMapping sourceToolName
+                             * @property {Object.<string,string>|null} [fieldMappings] DataMapping fieldMappings
+                             * @property {google.cloud.ces.v1beta.IPythonFunction|null} [pythonFunction] DataMapping pythonFunction
+                             * @property {google.cloud.ces.v1beta.WidgetTool.DataMapping.Mode|null} [mode] DataMapping mode
+                             * @property {string|null} [pythonScript] DataMapping pythonScript
+                             */
+    
+                            /**
+                             * Constructs a new DataMapping.
+                             * @memberof google.cloud.ces.v1beta.WidgetTool
+                             * @classdesc Represents a DataMapping.
+                             * @implements IDataMapping
+                             * @constructor
+                             * @param {google.cloud.ces.v1beta.WidgetTool.IDataMapping=} [properties] Properties to set
+                             */
+                            function DataMapping(properties) {
+                                this.fieldMappings = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataMapping sourceToolName.
+                             * @member {string} sourceToolName
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @instance
+                             */
+                            DataMapping.prototype.sourceToolName = "";
+    
+                            /**
+                             * DataMapping fieldMappings.
+                             * @member {Object.<string,string>} fieldMappings
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @instance
+                             */
+                            DataMapping.prototype.fieldMappings = $util.emptyObject;
+    
+                            /**
+                             * DataMapping pythonFunction.
+                             * @member {google.cloud.ces.v1beta.IPythonFunction|null|undefined} pythonFunction
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @instance
+                             */
+                            DataMapping.prototype.pythonFunction = null;
+    
+                            /**
+                             * DataMapping mode.
+                             * @member {google.cloud.ces.v1beta.WidgetTool.DataMapping.Mode} mode
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @instance
+                             */
+                            DataMapping.prototype.mode = 0;
+    
+                            /**
+                             * DataMapping pythonScript.
+                             * @member {string} pythonScript
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @instance
+                             */
+                            DataMapping.prototype.pythonScript = "";
+    
+                            /**
+                             * Creates a new DataMapping instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @static
+                             * @param {google.cloud.ces.v1beta.WidgetTool.IDataMapping=} [properties] Properties to set
+                             * @returns {google.cloud.ces.v1beta.WidgetTool.DataMapping} DataMapping instance
+                             */
+                            DataMapping.create = function create(properties) {
+                                return new DataMapping(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataMapping message. Does not implicitly {@link google.cloud.ces.v1beta.WidgetTool.DataMapping.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @static
+                             * @param {google.cloud.ces.v1beta.WidgetTool.IDataMapping} message DataMapping message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataMapping.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.sourceToolName != null && Object.hasOwnProperty.call(message, "sourceToolName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceToolName);
+                                if (message.fieldMappings != null && Object.hasOwnProperty.call(message, "fieldMappings"))
+                                    for (var keys = Object.keys(message.fieldMappings), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.fieldMappings[keys[i]]).ldelim();
+                                if (message.pythonScript != null && Object.hasOwnProperty.call(message, "pythonScript"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pythonScript);
+                                if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.mode);
+                                if (message.pythonFunction != null && Object.hasOwnProperty.call(message, "pythonFunction"))
+                                    $root.google.cloud.ces.v1beta.PythonFunction.encode(message.pythonFunction, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataMapping message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.WidgetTool.DataMapping.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @static
+                             * @param {google.cloud.ces.v1beta.WidgetTool.IDataMapping} message DataMapping message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataMapping.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataMapping message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.ces.v1beta.WidgetTool.DataMapping} DataMapping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataMapping.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.WidgetTool.DataMapping(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.sourceToolName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (message.fieldMappings === $util.emptyObject)
+                                                message.fieldMappings = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.fieldMappings[key] = value;
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.pythonFunction = $root.google.cloud.ces.v1beta.PythonFunction.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.mode = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pythonScript = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataMapping message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.ces.v1beta.WidgetTool.DataMapping} DataMapping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataMapping.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataMapping message.
+                             * @function verify
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataMapping.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.sourceToolName != null && message.hasOwnProperty("sourceToolName"))
+                                    if (!$util.isString(message.sourceToolName))
+                                        return "sourceToolName: string expected";
+                                if (message.fieldMappings != null && message.hasOwnProperty("fieldMappings")) {
+                                    if (!$util.isObject(message.fieldMappings))
+                                        return "fieldMappings: object expected";
+                                    var key = Object.keys(message.fieldMappings);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.fieldMappings[key[i]]))
+                                            return "fieldMappings: string{k:string} expected";
+                                }
+                                if (message.pythonFunction != null && message.hasOwnProperty("pythonFunction")) {
+                                    var error = $root.google.cloud.ces.v1beta.PythonFunction.verify(message.pythonFunction);
+                                    if (error)
+                                        return "pythonFunction." + error;
+                                }
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    switch (message.mode) {
+                                    default:
+                                        return "mode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.pythonScript != null && message.hasOwnProperty("pythonScript"))
+                                    if (!$util.isString(message.pythonScript))
+                                        return "pythonScript: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataMapping message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.ces.v1beta.WidgetTool.DataMapping} DataMapping
+                             */
+                            DataMapping.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.ces.v1beta.WidgetTool.DataMapping)
+                                    return object;
+                                var message = new $root.google.cloud.ces.v1beta.WidgetTool.DataMapping();
+                                if (object.sourceToolName != null)
+                                    message.sourceToolName = String(object.sourceToolName);
+                                if (object.fieldMappings) {
+                                    if (typeof object.fieldMappings !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.WidgetTool.DataMapping.fieldMappings: object expected");
+                                    message.fieldMappings = {};
+                                    for (var keys = Object.keys(object.fieldMappings), i = 0; i < keys.length; ++i)
+                                        message.fieldMappings[keys[i]] = String(object.fieldMappings[keys[i]]);
+                                }
+                                if (object.pythonFunction != null) {
+                                    if (typeof object.pythonFunction !== "object")
+                                        throw TypeError(".google.cloud.ces.v1beta.WidgetTool.DataMapping.pythonFunction: object expected");
+                                    message.pythonFunction = $root.google.cloud.ces.v1beta.PythonFunction.fromObject(object.pythonFunction);
+                                }
+                                switch (object.mode) {
+                                default:
+                                    if (typeof object.mode === "number") {
+                                        message.mode = object.mode;
+                                        break;
+                                    }
+                                    break;
+                                case "MODE_UNSPECIFIED":
+                                case 0:
+                                    message.mode = 0;
+                                    break;
+                                case "FIELD_MAPPING":
+                                case 1:
+                                    message.mode = 1;
+                                    break;
+                                case "PYTHON_SCRIPT":
+                                case 2:
+                                    message.mode = 2;
+                                    break;
+                                }
+                                if (object.pythonScript != null)
+                                    message.pythonScript = String(object.pythonScript);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataMapping message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @static
+                             * @param {google.cloud.ces.v1beta.WidgetTool.DataMapping} message DataMapping
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataMapping.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.fieldMappings = {};
+                                if (options.defaults) {
+                                    object.sourceToolName = "";
+                                    object.pythonScript = "";
+                                    object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
+                                    object.pythonFunction = null;
+                                }
+                                if (message.sourceToolName != null && message.hasOwnProperty("sourceToolName"))
+                                    object.sourceToolName = message.sourceToolName;
+                                var keys2;
+                                if (message.fieldMappings && (keys2 = Object.keys(message.fieldMappings)).length) {
+                                    object.fieldMappings = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.fieldMappings[keys2[j]] = message.fieldMappings[keys2[j]];
+                                }
+                                if (message.pythonScript != null && message.hasOwnProperty("pythonScript"))
+                                    object.pythonScript = message.pythonScript;
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    object.mode = options.enums === String ? $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.ces.v1beta.WidgetTool.DataMapping.Mode[message.mode] : message.mode;
+                                if (message.pythonFunction != null && message.hasOwnProperty("pythonFunction"))
+                                    object.pythonFunction = $root.google.cloud.ces.v1beta.PythonFunction.toObject(message.pythonFunction, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataMapping to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataMapping.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataMapping
+                             * @function getTypeUrl
+                             * @memberof google.cloud.ces.v1beta.WidgetTool.DataMapping
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataMapping.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.ces.v1beta.WidgetTool.DataMapping";
+                            };
+    
+                            /**
+                             * Mode enum.
+                             * @name google.cloud.ces.v1beta.WidgetTool.DataMapping.Mode
+                             * @enum {number}
+                             * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                             * @property {number} FIELD_MAPPING=1 FIELD_MAPPING value
+                             * @property {number} PYTHON_SCRIPT=2 PYTHON_SCRIPT value
+                             */
+                            DataMapping.Mode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "FIELD_MAPPING"] = 1;
+                                values[valuesById[2] = "PYTHON_SCRIPT"] = 2;
+                                return values;
+                            })();
+    
+                            return DataMapping;
+                        })();
     
                         /**
                          * WidgetType enum.
@@ -119092,6 +120470,7 @@
                          * @property {google.cloud.ces.v1beta.IApiAuthentication|null} [apiAuthentication] McpToolset apiAuthentication
                          * @property {google.cloud.ces.v1beta.IServiceDirectoryConfig|null} [serviceDirectoryConfig] McpToolset serviceDirectoryConfig
                          * @property {google.cloud.ces.v1beta.ITlsConfig|null} [tlsConfig] McpToolset tlsConfig
+                         * @property {Object.<string,string>|null} [customHeaders] McpToolset customHeaders
                          */
     
                         /**
@@ -119103,6 +120482,7 @@
                          * @param {google.cloud.ces.v1beta.IMcpToolset=} [properties] Properties to set
                          */
                         function McpToolset(properties) {
+                            this.customHeaders = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -119142,6 +120522,14 @@
                         McpToolset.prototype.tlsConfig = null;
     
                         /**
+                         * McpToolset customHeaders.
+                         * @member {Object.<string,string>} customHeaders
+                         * @memberof google.cloud.ces.v1beta.McpToolset
+                         * @instance
+                         */
+                        McpToolset.prototype.customHeaders = $util.emptyObject;
+    
+                        /**
                          * Creates a new McpToolset instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.McpToolset
@@ -119173,6 +120561,9 @@
                                 $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.encode(message.serviceDirectoryConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.tlsConfig != null && Object.hasOwnProperty.call(message, "tlsConfig"))
                                 $root.google.cloud.ces.v1beta.TlsConfig.encode(message.tlsConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.customHeaders != null && Object.hasOwnProperty.call(message, "customHeaders"))
+                                for (var keys = Object.keys(message.customHeaders), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.customHeaders[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -119203,7 +120594,7 @@
                         McpToolset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.McpToolset();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.ces.v1beta.McpToolset(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -119223,6 +120614,29 @@
                                     }
                                 case 4: {
                                         message.tlsConfig = $root.google.cloud.ces.v1beta.TlsConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.customHeaders === $util.emptyObject)
+                                            message.customHeaders = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.customHeaders[key] = value;
                                         break;
                                     }
                                 default:
@@ -119278,6 +120692,14 @@
                                 if (error)
                                     return "tlsConfig." + error;
                             }
+                            if (message.customHeaders != null && message.hasOwnProperty("customHeaders")) {
+                                if (!$util.isObject(message.customHeaders))
+                                    return "customHeaders: object expected";
+                                var key = Object.keys(message.customHeaders);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.customHeaders[key[i]]))
+                                        return "customHeaders: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -119310,6 +120732,13 @@
                                     throw TypeError(".google.cloud.ces.v1beta.McpToolset.tlsConfig: object expected");
                                 message.tlsConfig = $root.google.cloud.ces.v1beta.TlsConfig.fromObject(object.tlsConfig);
                             }
+                            if (object.customHeaders) {
+                                if (typeof object.customHeaders !== "object")
+                                    throw TypeError(".google.cloud.ces.v1beta.McpToolset.customHeaders: object expected");
+                                message.customHeaders = {};
+                                for (var keys = Object.keys(object.customHeaders), i = 0; i < keys.length; ++i)
+                                    message.customHeaders[keys[i]] = String(object.customHeaders[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -119326,6 +120755,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.customHeaders = {};
                             if (options.defaults) {
                                 object.serverAddress = "";
                                 object.apiAuthentication = null;
@@ -119340,6 +120771,12 @@
                                 object.serviceDirectoryConfig = $root.google.cloud.ces.v1beta.ServiceDirectoryConfig.toObject(message.serviceDirectoryConfig, options);
                             if (message.tlsConfig != null && message.hasOwnProperty("tlsConfig"))
                                 object.tlsConfig = $root.google.cloud.ces.v1beta.TlsConfig.toObject(message.tlsConfig, options);
+                            var keys2;
+                            if (message.customHeaders && (keys2 = Object.keys(message.customHeaders)).length) {
+                                object.customHeaders = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.customHeaders[keys2[j]] = message.customHeaders[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -140489,6 +141926,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.ces.v1beta.SessionService|streamRunSession}.
+                         * @memberof google.cloud.ces.v1beta.SessionService
+                         * @typedef StreamRunSessionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.ces.v1beta.RunSessionResponse} [response] RunSessionResponse
+                         */
+    
+                        /**
+                         * Calls StreamRunSession.
+                         * @function streamRunSession
+                         * @memberof google.cloud.ces.v1beta.SessionService
+                         * @instance
+                         * @param {google.cloud.ces.v1beta.IRunSessionRequest} request RunSessionRequest message or plain object
+                         * @param {google.cloud.ces.v1beta.SessionService.StreamRunSessionCallback} callback Node-style callback called with the error, if any, and RunSessionResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SessionService.prototype.streamRunSession = function streamRunSession(request, callback) {
+                            return this.rpcCall(streamRunSession, $root.google.cloud.ces.v1beta.RunSessionRequest, $root.google.cloud.ces.v1beta.RunSessionResponse, request, callback);
+                        }, "name", { value: "StreamRunSession" });
+    
+                        /**
+                         * Calls StreamRunSession.
+                         * @function streamRunSession
+                         * @memberof google.cloud.ces.v1beta.SessionService
+                         * @instance
+                         * @param {google.cloud.ces.v1beta.IRunSessionRequest} request RunSessionRequest message or plain object
+                         * @returns {Promise<google.cloud.ces.v1beta.RunSessionResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.ces.v1beta.SessionService|bidiRunSession}.
                          * @memberof google.cloud.ces.v1beta.SessionService
                          * @typedef BidiRunSessionCallback
@@ -141096,6 +142566,7 @@
                          * @property {string|null} [timeZone] SessionConfig timeZone
                          * @property {boolean|null} [useToolFakes] SessionConfig useToolFakes
                          * @property {google.cloud.ces.v1beta.SessionConfig.IRemoteDialogflowQueryParameters|null} [remoteDialogflowQueryParameters] SessionConfig remoteDialogflowQueryParameters
+                         * @property {boolean|null} [enableTextStreaming] SessionConfig enableTextStreaming
                          */
     
                         /**
@@ -141187,6 +142658,14 @@
                         SessionConfig.prototype.remoteDialogflowQueryParameters = null;
     
                         /**
+                         * SessionConfig enableTextStreaming.
+                         * @member {boolean} enableTextStreaming
+                         * @memberof google.cloud.ces.v1beta.SessionConfig
+                         * @instance
+                         */
+                        SessionConfig.prototype.enableTextStreaming = false;
+    
+                        /**
                          * Creates a new SessionConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.SessionConfig
@@ -141229,6 +142708,8 @@
                                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.useToolFakes);
                             if (message.remoteDialogflowQueryParameters != null && Object.hasOwnProperty.call(message, "remoteDialogflowQueryParameters"))
                                 $root.google.cloud.ces.v1beta.SessionConfig.RemoteDialogflowQueryParameters.encode(message.remoteDialogflowQueryParameters, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.enableTextStreaming != null && Object.hasOwnProperty.call(message, "enableTextStreaming"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.enableTextStreaming);
                             return writer;
                         };
     
@@ -141301,6 +142782,10 @@
                                     }
                                 case 15: {
                                         message.remoteDialogflowQueryParameters = $root.google.cloud.ces.v1beta.SessionConfig.RemoteDialogflowQueryParameters.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 18: {
+                                        message.enableTextStreaming = reader.bool();
                                         break;
                                     }
                                 default:
@@ -141377,6 +142862,9 @@
                                 if (error)
                                     return "remoteDialogflowQueryParameters." + error;
                             }
+                            if (message.enableTextStreaming != null && message.hasOwnProperty("enableTextStreaming"))
+                                if (typeof message.enableTextStreaming !== "boolean")
+                                    return "enableTextStreaming: boolean expected";
                             return null;
                         };
     
@@ -141427,6 +142915,8 @@
                                     throw TypeError(".google.cloud.ces.v1beta.SessionConfig.remoteDialogflowQueryParameters: object expected");
                                 message.remoteDialogflowQueryParameters = $root.google.cloud.ces.v1beta.SessionConfig.RemoteDialogflowQueryParameters.fromObject(object.remoteDialogflowQueryParameters);
                             }
+                            if (object.enableTextStreaming != null)
+                                message.enableTextStreaming = Boolean(object.enableTextStreaming);
                             return message;
                         };
     
@@ -141454,6 +142944,7 @@
                                 object.entryAgent = "";
                                 object.useToolFakes = false;
                                 object.remoteDialogflowQueryParameters = null;
+                                object.enableTextStreaming = false;
                             }
                             if (message.session != null && message.hasOwnProperty("session"))
                                 object.session = message.session;
@@ -141476,6 +142967,8 @@
                                 object.useToolFakes = message.useToolFakes;
                             if (message.remoteDialogflowQueryParameters != null && message.hasOwnProperty("remoteDialogflowQueryParameters"))
                                 object.remoteDialogflowQueryParameters = $root.google.cloud.ces.v1beta.SessionConfig.RemoteDialogflowQueryParameters.toObject(message.remoteDialogflowQueryParameters, options);
+                            if (message.enableTextStreaming != null && message.hasOwnProperty("enableTextStreaming"))
+                                object.enableTextStreaming = message.enableTextStreaming;
                             return object;
                         };
     
@@ -163879,6 +165372,7 @@
                          * @property {string|null} [name] GenerateChatTokenRequest name
                          * @property {string|null} [deployment] GenerateChatTokenRequest deployment
                          * @property {string|null} [recaptchaToken] GenerateChatTokenRequest recaptchaToken
+                         * @property {boolean|null} [liveHandoffEnabled] GenerateChatTokenRequest liveHandoffEnabled
                          */
     
                         /**
@@ -163921,6 +165415,14 @@
                         GenerateChatTokenRequest.prototype.recaptchaToken = "";
     
                         /**
+                         * GenerateChatTokenRequest liveHandoffEnabled.
+                         * @member {boolean} liveHandoffEnabled
+                         * @memberof google.cloud.ces.v1beta.GenerateChatTokenRequest
+                         * @instance
+                         */
+                        GenerateChatTokenRequest.prototype.liveHandoffEnabled = false;
+    
+                        /**
                          * Creates a new GenerateChatTokenRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.ces.v1beta.GenerateChatTokenRequest
@@ -163950,6 +165452,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.deployment);
                             if (message.recaptchaToken != null && Object.hasOwnProperty.call(message, "recaptchaToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.recaptchaToken);
+                            if (message.liveHandoffEnabled != null && Object.hasOwnProperty.call(message, "liveHandoffEnabled"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.liveHandoffEnabled);
                             return writer;
                         };
     
@@ -163998,6 +165502,10 @@
                                         message.recaptchaToken = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.liveHandoffEnabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -164042,6 +165550,9 @@
                             if (message.recaptchaToken != null && message.hasOwnProperty("recaptchaToken"))
                                 if (!$util.isString(message.recaptchaToken))
                                     return "recaptchaToken: string expected";
+                            if (message.liveHandoffEnabled != null && message.hasOwnProperty("liveHandoffEnabled"))
+                                if (typeof message.liveHandoffEnabled !== "boolean")
+                                    return "liveHandoffEnabled: boolean expected";
                             return null;
                         };
     
@@ -164063,6 +165574,8 @@
                                 message.deployment = String(object.deployment);
                             if (object.recaptchaToken != null)
                                 message.recaptchaToken = String(object.recaptchaToken);
+                            if (object.liveHandoffEnabled != null)
+                                message.liveHandoffEnabled = Boolean(object.liveHandoffEnabled);
                             return message;
                         };
     
@@ -164083,6 +165596,7 @@
                                 object.name = "";
                                 object.deployment = "";
                                 object.recaptchaToken = "";
+                                object.liveHandoffEnabled = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -164090,6 +165604,8 @@
                                 object.deployment = message.deployment;
                             if (message.recaptchaToken != null && message.hasOwnProperty("recaptchaToken"))
                                 object.recaptchaToken = message.recaptchaToken;
+                            if (message.liveHandoffEnabled != null && message.hasOwnProperty("liveHandoffEnabled"))
+                                object.liveHandoffEnabled = message.liveHandoffEnabled;
                             return object;
                         };
     
