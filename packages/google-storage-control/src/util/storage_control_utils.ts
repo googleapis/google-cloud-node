@@ -20,13 +20,14 @@ import {
 } from './proto_utils';
 import {buildOutput} from './uber_client_builder';
 import {fixIndexFile, fixV2Index} from './index_fix_utils';
-import {updateSamples} from './sample_fix_utils';
+import {updateSamples, fixDocsHeaders} from './samples_and_doc_fix_utils';
 
 async function main() {
   fixIndexFile('src/index.ts');
   fixV2Index('v2/index.ts');
   cleanObjectReferences(filesToUpdate, replacements);
   updateSamples();
+  fixDocsHeaders();
   const finaloutput = await buildOutput();
   fs.writeFile('../storage_control_client.ts', finaloutput, err => {
     if (err) throw err;
