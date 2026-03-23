@@ -54,6 +54,18 @@ function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubServerStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // write something to the stream to trigger transformStub and send the response back to the client
+    setImmediate(() => { mockStream.write({}); });
+    setImmediate(() => { mockStream.end(); });
+    return sinon.stub().returns(mockStream);
+}
+
 function stubBidiStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
     const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
     const mockStream = new PassThrough({
@@ -352,6 +364,150 @@ describe('v1.SessionServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.runSession(request), expectedError);
+        });
+    });
+
+    describe('streamRunSession', () => {
+        it('invokes streamRunSession without error', async () => {
+            const client = new sessionserviceModule.v1.SessionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1.RunSessionRequest()
+            );
+            request.config ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1.RunSessionRequest', ['config', 'session']);
+            request.config.session = defaultValue1;
+            const expectedHeaderRequestParams = `config.session=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.ces.v1.RunSessionResponse()
+            );
+            client.innerApiCalls.streamRunSession = stubServerStreamingCall(expectedResponse);
+            const stream = client.streamRunSession(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.ces.v1.RunSessionResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.streamRunSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.streamRunSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes streamRunSession without error and gaxServerStreamingRetries enabled', async () => {
+            const client = new sessionserviceModule.v1.SessionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+              gaxServerStreamingRetries: true
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1.RunSessionRequest()
+            );
+            request.config ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1.RunSessionRequest', ['config', 'session']);
+            request.config.session = defaultValue1;
+            const expectedHeaderRequestParams = `config.session=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.ces.v1.RunSessionResponse()
+            );
+            client.innerApiCalls.streamRunSession = stubServerStreamingCall(expectedResponse);
+            const stream = client.streamRunSession(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.ces.v1.RunSessionResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.streamRunSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.streamRunSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes streamRunSession with error', async () => {
+            const client = new sessionserviceModule.v1.SessionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1.RunSessionRequest()
+            );
+            request.config ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1.RunSessionRequest', ['config', 'session']);
+            request.config.session = defaultValue1;
+            const expectedHeaderRequestParams = `config.session=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.streamRunSession = stubServerStreamingCall(undefined, expectedError);
+            const stream = client.streamRunSession(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.ces.v1.RunSessionResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            const actualRequest = (client.innerApiCalls.streamRunSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.streamRunSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes streamRunSession with closed client', async () => {
+            const client = new sessionserviceModule.v1.SessionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1.RunSessionRequest()
+            );
+            request.config ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1.RunSessionRequest', ['config', 'session']);
+            request.config.session = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            const stream = client.streamRunSession(request, {retryRequestOptions: {noResponseRetries: 0}});
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.ces.v1.RunSessionResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+        });
+        it('should create a client with gaxServerStreamingRetries enabled', () => {
+            const client = new sessionserviceModule.v1.SessionServiceClient({
+                gaxServerStreamingRetries: true,
+            });
+            assert(client);
         });
     });
 
@@ -1053,6 +1209,44 @@ describe('v1.SessionServiceClient', () => {
                 const result = client.matchOmnichannelFromOmnichannelName(fakePath);
                 assert.strictEqual(result, "omnichannelValue");
                 assert((client.pathTemplates.omnichannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('securitySettings', async () => {
+            const fakePath = "/rendered/path/securitySettings";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new sessionserviceModule.v1.SessionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.securitySettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.securitySettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('securitySettingsPath', () => {
+                const result = client.securitySettingsPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.securitySettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSecuritySettingsName', () => {
+                const result = client.matchProjectFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSecuritySettingsName', () => {
+                const result = client.matchLocationFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
