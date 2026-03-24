@@ -17,6 +17,11 @@
           "RESOURCE_EXHAUSTED",
           "UNAVAILABLE"
         ],
+        "deadline_exceeded_internal_unavailable": [
+          "DEADLINE_EXCEEDED",
+          "INTERNAL",
+          "UNAVAILABLE"
+        ],
         "resource_exhausted_aborted_unavailable": [
           "RESOURCE_EXHAUSTED",
           "ABORTED",
@@ -57,7 +62,7 @@
         },
         "BatchGetDocuments": {
           "timeout_millis": 300000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "deadline_exceeded_internal_unavailable",
           "retry_params_name": "default"
         },
         "BeginTransaction": {
@@ -77,22 +82,22 @@
         },
         "RunQuery": {
           "timeout_millis": 300000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "deadline_exceeded_internal_unavailable",
           "retry_params_name": "default"
         },
         "ExecutePipeline": {
           "timeout_millis": 300000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "deadline_exceeded_internal_unavailable",
           "retry_params_name": "default"
         },
         "RunAggregationQuery": {
           "timeout_millis": 300000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "deadline_exceeded_internal_unavailable",
           "retry_params_name": "default"
         },
         "PartitionQuery": {
           "timeout_millis": 300000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "deadline_exceeded_internal_unavailable",
           "retry_params_name": "default"
         },
         "Write": {

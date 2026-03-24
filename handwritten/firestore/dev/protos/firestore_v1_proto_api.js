@@ -1167,6 +1167,7 @@
                      * @property {google.firestore.v1.IArrayValue|null} [arrayValue] Value arrayValue
                      * @property {google.firestore.v1.IMapValue|null} [mapValue] Value mapValue
                      * @property {string|null} [fieldReferenceValue] Value fieldReferenceValue
+                     * @property {string|null} [variableReferenceValue] Value variableReferenceValue
                      * @property {google.firestore.v1.IFunction|null} [functionValue] Value functionValue
                      * @property {google.firestore.v1.IPipeline|null} [pipelineValue] Value pipelineValue
                      */
@@ -1283,6 +1284,14 @@
                     Value.prototype.fieldReferenceValue = null;
     
                     /**
+                     * Value variableReferenceValue.
+                     * @member {string|null|undefined} variableReferenceValue
+                     * @memberof google.firestore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.variableReferenceValue = null;
+    
+                    /**
                      * Value functionValue.
                      * @member {google.firestore.v1.IFunction|null|undefined} functionValue
                      * @memberof google.firestore.v1.Value
@@ -1303,12 +1312,12 @@
     
                     /**
                      * Value valueType.
-                     * @member {"nullValue"|"booleanValue"|"integerValue"|"doubleValue"|"timestampValue"|"stringValue"|"bytesValue"|"referenceValue"|"geoPointValue"|"arrayValue"|"mapValue"|"fieldReferenceValue"|"functionValue"|"pipelineValue"|undefined} valueType
+                     * @member {"nullValue"|"booleanValue"|"integerValue"|"doubleValue"|"timestampValue"|"stringValue"|"bytesValue"|"referenceValue"|"geoPointValue"|"arrayValue"|"mapValue"|"fieldReferenceValue"|"variableReferenceValue"|"functionValue"|"pipelineValue"|undefined} valueType
                      * @memberof google.firestore.v1.Value
                      * @instance
                      */
                     Object.defineProperty(Value.prototype, "valueType", {
-                        get: $util.oneOfGetter($oneOfFields = ["nullValue", "booleanValue", "integerValue", "doubleValue", "timestampValue", "stringValue", "bytesValue", "referenceValue", "geoPointValue", "arrayValue", "mapValue", "fieldReferenceValue", "functionValue", "pipelineValue"]),
+                        get: $util.oneOfGetter($oneOfFields = ["nullValue", "booleanValue", "integerValue", "doubleValue", "timestampValue", "stringValue", "bytesValue", "referenceValue", "geoPointValue", "arrayValue", "mapValue", "fieldReferenceValue", "variableReferenceValue", "functionValue", "pipelineValue"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -1380,6 +1389,8 @@
                         }
                         if (object.fieldReferenceValue != null)
                             message.fieldReferenceValue = String(object.fieldReferenceValue);
+                        if (object.variableReferenceValue != null)
+                            message.variableReferenceValue = String(object.variableReferenceValue);
                         if (object.functionValue != null) {
                             if (typeof object.functionValue !== "object")
                                 throw TypeError(".google.firestore.v1.Value.functionValue: object expected");
@@ -1478,6 +1489,11 @@
                             object.pipelineValue = $root.google.firestore.v1.Pipeline.toObject(message.pipelineValue, options);
                             if (options.oneofs)
                                 object.valueType = "pipelineValue";
+                        }
+                        if (message.variableReferenceValue != null && message.hasOwnProperty("variableReferenceValue")) {
+                            object.variableReferenceValue = message.variableReferenceValue;
+                            if (options.oneofs)
+                                object.valueType = "variableReferenceValue";
                         }
                         return object;
                     };
