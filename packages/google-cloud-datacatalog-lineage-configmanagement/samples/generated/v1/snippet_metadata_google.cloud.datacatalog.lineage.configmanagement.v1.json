@@ -1,0 +1,95 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-configmanagement",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.datacatalog.lineage.configmanagement.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "datalineage_v1_generated_ConfigManagementService_GetConfig_async",
+      "title": "ConfigManagementService getConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the Config for a given resource.",
+      "canonical": true,
+      "file": "config_management_service.get_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConfig",
+        "fullName": "google.cloud.datacatalog.lineage.configmanagement.v1.ConfigManagementService.GetConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.lineage.configmanagement.v1.Config",
+        "client": {
+          "shortName": "ConfigManagementServiceClient",
+          "fullName": "google.cloud.datacatalog.lineage.configmanagement.v1.ConfigManagementServiceClient"
+        },
+        "method": {
+          "shortName": "GetConfig",
+          "fullName": "google.cloud.datacatalog.lineage.configmanagement.v1.ConfigManagementService.GetConfig",
+          "service": {
+            "shortName": "ConfigManagementService",
+            "fullName": "google.cloud.datacatalog.lineage.configmanagement.v1.ConfigManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalineage_v1_generated_ConfigManagementService_UpdateConfig_async",
+      "title": "ConfigManagementService updateConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update the Config for a given resource.",
+      "canonical": true,
+      "file": "config_management_service.update_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConfig",
+        "fullName": "google.cloud.datacatalog.lineage.configmanagement.v1.ConfigManagementService.UpdateConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": ".google.cloud.datacatalog.lineage.configmanagement.v1.Config"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.lineage.configmanagement.v1.Config",
+        "client": {
+          "shortName": "ConfigManagementServiceClient",
+          "fullName": "google.cloud.datacatalog.lineage.configmanagement.v1.ConfigManagementServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateConfig",
+          "fullName": "google.cloud.datacatalog.lineage.configmanagement.v1.ConfigManagementService.UpdateConfig",
+          "service": {
+            "shortName": "ConfigManagementService",
+            "fullName": "google.cloud.datacatalog.lineage.configmanagement.v1.ConfigManagementService"
+          }
+        }
+      }
+    }
+  ]
+}

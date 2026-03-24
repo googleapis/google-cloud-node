@@ -29,6 +29,8 @@ import {
 } from './expression';
 import {OptionsUtil} from './options-util';
 import {CollectionReference} from '../reference/collection-reference';
+import {validateUserDataHelper} from './pipeline-util';
+import {Pipeline} from './pipelines';
 
 /**
  * Interface for Stage classes.
@@ -37,6 +39,7 @@ export interface Stage extends ProtoSerializable<api.Pipeline.IStage> {
   name: string;
 
   _toProto(serializer: Serializer): api.Pipeline.IStage;
+  _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
 /**
@@ -68,6 +71,10 @@ export class RemoveFields implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.fields, ignoreUndefinedProperties);
   }
 }
 
@@ -105,6 +112,14 @@ export class Aggregate implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.groups, ignoreUndefinedProperties);
+    validateUserDataHelper(
+      this.options.accumulators,
+      ignoreUndefinedProperties,
+    );
+  }
 }
 
 /**
@@ -136,6 +151,10 @@ export class Distinct implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.groups, ignoreUndefinedProperties);
   }
 }
 
@@ -180,6 +199,8 @@ export class CollectionSource implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -215,6 +236,8 @@ export class CollectionGroupSource implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -242,6 +265,8 @@ export class DatabaseSource implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -277,6 +302,8 @@ export class DocumentsSource implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -308,6 +335,10 @@ export class Where implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.condition, ignoreUndefinedProperties);
   }
 }
 
@@ -354,6 +385,20 @@ export class FindNearest implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this._options.field, ignoreUndefinedProperties);
+    validateUserDataHelper(
+      this._options.vectorValue,
+      ignoreUndefinedProperties,
+    );
+    if (this._options.distanceField) {
+      validateUserDataHelper(
+        this._options.distanceField,
+        ignoreUndefinedProperties,
+      );
+    }
+  }
 }
 
 /**
@@ -390,6 +435,8 @@ export class Sample implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -416,6 +463,13 @@ export class Union implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    // A Union stage embeds a full pipeline, we trigger its validation here.
+    (this.options.other as Pipeline)._validateUserData(
+      ignoreUndefinedProperties,
+    );
   }
 }
 
@@ -458,6 +512,10 @@ export class Unnest implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.expr, ignoreUndefinedProperties);
+  }
 }
 
 /**
@@ -485,6 +543,8 @@ export class Limit implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -512,6 +572,8 @@ export class Offset implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -547,6 +609,10 @@ export class ReplaceWith implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.map, ignoreUndefinedProperties);
+  }
 }
 
 /**
@@ -578,6 +644,10 @@ export class Select implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.selections, ignoreUndefinedProperties);
   }
 }
 
@@ -611,6 +681,10 @@ export class AddFields implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.fields, ignoreUndefinedProperties);
+  }
 }
 
 /**
@@ -642,6 +716,10 @@ export class Sort implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.orderings, ignoreUndefinedProperties);
   }
 }
 
@@ -675,5 +753,9 @@ export class RawStage implements Stage {
         this.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.params, ignoreUndefinedProperties);
   }
 }

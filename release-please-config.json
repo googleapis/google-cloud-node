@@ -233,7 +233,8 @@
     "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs/speech-v1p1beta1-nodejs": {},
     "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs/speech-v2-nodejs": {},
     "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs/tasks-v2-nodejs": {},
-    "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs/tasks-v2beta2-nodejs": {}
+    "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs/tasks-v2beta2-nodejs": {},
+    "packages/google-cloud-datacatalog-lineage-configmanagement": {}
   },
   "plugins": [
     {

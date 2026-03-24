@@ -1,0 +1,43 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.datacatalog.lineage.configmanagement.v1",
+  "libraryPackage": "@google-cloud/configmanagement",
+  "services": {
+    "ConfigManagementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConfigManagementServiceClient",
+          "rpcs": {
+            "GetConfig": {
+              "methods": [
+                "getConfig"
+              ]
+            },
+            "UpdateConfig": {
+              "methods": [
+                "updateConfig"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConfigManagementServiceClient",
+          "rpcs": {
+            "GetConfig": {
+              "methods": [
+                "getConfig"
+              ]
+            },
+            "UpdateConfig": {
+              "methods": [
+                "updateConfig"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
