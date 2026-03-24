@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3705,8 +3705,8 @@ export class FirestoreAdminClient {
    *   Required. Database to export. Should be of the form:
    *   `projects/{project_id}/databases/{database_id}`.
    * @param {string[]} request.collectionIds
-   *   Which collection IDs to export. Unspecified means all collections. Each
-   *   collection ID in this list must be unique.
+   *   IDs of the collection groups to export. Unspecified means all
+   *   collection groups. Each collection group in this list must be unique.
    * @param {string} request.outputUriPrefix
    *   The output URI. Currently only supports Google Cloud Storage URIs of the
    *   form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name
@@ -3906,8 +3906,9 @@ export class FirestoreAdminClient {
    *   Required. Database to import into. Should be of the form:
    *   `projects/{project_id}/databases/{database_id}`.
    * @param {string[]} request.collectionIds
-   *   Which collection IDs to import. Unspecified means all collections included
-   *   in the import. Each collection ID in this list must be unique.
+   *   IDs of the collection groups to import. Unspecified means all collection
+   *   groups that were included in the export. Each collection group in this list
+   *   must be unique.
    * @param {string} request.inputUriPrefix
    *   Location of the exported files.
    *   This must match the output_uri_prefix of an ExportDocumentsResponse from
@@ -4294,7 +4295,7 @@ export class FirestoreAdminClient {
    *   with first character a letter and the last a letter or a number. Must not
    *   be UUID-like /[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/.
    *
-   *   "(default)" database ID is also valid.
+   *   "(default)" database ID is also valid if the database is Standard edition.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4835,7 +4836,7 @@ export class FirestoreAdminClient {
    *   with first character a letter and the last a letter or a number. Must not
    *   be UUID-like /[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/.
    *
-   *   "(default)" database ID is also valid.
+   *   "(default)" database ID is also valid if the database is Standard edition.
    * @param {string} request.backup
    *   Required. Backup to restore from. Must be from the same project as the
    *   parent.
@@ -5050,7 +5051,7 @@ export class FirestoreAdminClient {
    *   with first character a letter and the last a letter or a number. Must not
    *   be UUID-like /[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/.
    *
-   *   "(default)" database ID is also valid.
+   *   "(default)" database ID is also valid if the database is Standard edition.
    * @param {google.firestore.admin.v1.PitrSnapshot} request.pitrSnapshot
    *   Required. Specification of the PITR data to clone from. The source database
    *   must exist.

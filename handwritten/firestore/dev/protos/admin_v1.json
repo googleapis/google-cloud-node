@@ -251,6 +251,27 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "realtimeUpdatesMode": {
+                          "type": "RealtimeUpdatesMode",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "firestoreDataAccessMode": {
+                          "type": "DataAccessMode",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mongodbCompatibleDataAccessMode": {
+                          "type": "DataAccessMode",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -394,7 +415,21 @@
                             "STANDARD": 1,
                             "ENTERPRISE": 2
                           }
+                        },
+                        "DataAccessMode": {
+                          "values": {
+                            "DATA_ACCESS_MODE_UNSPECIFIED": 0,
+                            "DATA_ACCESS_MODE_ENABLED": 1,
+                            "DATA_ACCESS_MODE_DISABLED": 2
+                          }
                         }
+                      }
+                    },
+                    "RealtimeUpdatesMode": {
+                      "values": {
+                        "REALTIME_UPDATES_MODE_UNSPECIFIED": 0,
+                        "REALTIME_UPDATES_MODE_ENABLED": 1,
+                        "REALTIME_UPDATES_MODE_DISABLED": 2
                       }
                     },
                     "Field": {
@@ -508,6 +543,13 @@
                         "shardCount": {
                           "type": "int32",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "unique": {
+                          "type": "bool",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

@@ -244,6 +244,15 @@ export namespace google {
 
                     /** Database databaseEdition */
                     databaseEdition?: (google.firestore.admin.v1.Database.DatabaseEdition|null);
+
+                    /** Database realtimeUpdatesMode */
+                    realtimeUpdatesMode?: (google.firestore.admin.v1.RealtimeUpdatesMode|null);
+
+                    /** Database firestoreDataAccessMode */
+                    firestoreDataAccessMode?: (google.firestore.admin.v1.Database.DataAccessMode|null);
+
+                    /** Database mongodbCompatibleDataAccessMode */
+                    mongodbCompatibleDataAccessMode?: (google.firestore.admin.v1.Database.DataAccessMode|null);
                 }
 
                 /** Represents a Database. */
@@ -317,6 +326,15 @@ export namespace google {
 
                     /** Database databaseEdition. */
                     public databaseEdition: google.firestore.admin.v1.Database.DatabaseEdition;
+
+                    /** Database realtimeUpdatesMode. */
+                    public realtimeUpdatesMode: google.firestore.admin.v1.RealtimeUpdatesMode;
+
+                    /** Database firestoreDataAccessMode. */
+                    public firestoreDataAccessMode: google.firestore.admin.v1.Database.DataAccessMode;
+
+                    /** Database mongodbCompatibleDataAccessMode. */
+                    public mongodbCompatibleDataAccessMode: google.firestore.admin.v1.Database.DataAccessMode;
 
                     /**
                      * Creates a Database message from a plain object. Also converts values to their respective internal types.
@@ -732,7 +750,15 @@ export namespace google {
                     /** DatabaseEdition enum. */
                     type DatabaseEdition =
                         "DATABASE_EDITION_UNSPECIFIED"| "STANDARD"| "ENTERPRISE";
+
+                    /** DataAccessMode enum. */
+                    type DataAccessMode =
+                        "DATA_ACCESS_MODE_UNSPECIFIED"| "DATA_ACCESS_MODE_ENABLED"| "DATA_ACCESS_MODE_DISABLED";
                 }
+
+                /** RealtimeUpdatesMode enum. */
+                type RealtimeUpdatesMode =
+                    "REALTIME_UPDATES_MODE_UNSPECIFIED"| "REALTIME_UPDATES_MODE_ENABLED"| "REALTIME_UPDATES_MODE_DISABLED";
 
                 /** Properties of a Field. */
                 interface IField {
@@ -944,6 +970,9 @@ export namespace google {
 
                     /** Index shardCount */
                     shardCount?: (number|null);
+
+                    /** Index unique */
+                    unique?: (boolean|null);
                 }
 
                 /** Represents an Index. */
@@ -978,6 +1007,9 @@ export namespace google {
 
                     /** Index shardCount. */
                     public shardCount: number;
+
+                    /** Index unique. */
+                    public unique: boolean;
 
                     /**
                      * Creates an Index message from a plain object. Also converts values to their respective internal types.

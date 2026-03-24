@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-shopping/reviews": "^0.5.1"
+    "@google-shopping/reviews": "^0.6.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",
