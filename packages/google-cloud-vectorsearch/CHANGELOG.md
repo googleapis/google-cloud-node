@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.4.0...vectorsearch-v0.5.0) (2026-03-19)
+
+
+### Features
+
+* [vectorsearch] Mark Vector Search v1 API as GA ([#7610](https://github.com/googleapis/google-cloud-node/issues/7610)) ([451de89](https://github.com/googleapis/google-cloud-node/commit/451de89cdd525b8aac424fc30ead047246ec521b))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.3.0...vectorsearch-v0.4.0) (2026-03-18)
 
 

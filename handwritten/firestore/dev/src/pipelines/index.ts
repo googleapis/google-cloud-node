@@ -146,7 +146,6 @@ export {
   arrayConcat,
   type,
   isType,
-  Type,
   timestampTruncate,
   split,
   ltrim,

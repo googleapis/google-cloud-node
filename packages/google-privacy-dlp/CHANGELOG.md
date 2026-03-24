@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.5.0...dlp-v6.6.0) (2026-03-19)
+
+
+### Features
+
+* [dlp] added support for detecting key-value pairs in document metadata ([#7822](https://github.com/googleapis/google-cloud-node/issues/7822)) ([1f6f8cc](https://github.com/googleapis/google-cloud-node/commit/1f6f8cc33f811631b58007cc0645b476e65f8e26))
+
 ## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.4.0...dlp-v6.5.0) (2025-10-13)
 
 

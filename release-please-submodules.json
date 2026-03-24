@@ -2,8 +2,14 @@
   "commit-batch-size": 1,
   "include-component-in-tag": true,
   "packages": {
+    "core/common": {
+      "component": "common"
+    },
     "core/paginator": {
       "component": "paginator"
+    },
+    "core/precise-date": {
+      "component": "precise-date"
     },
     "core/projectify": {
       "component": "projectify"

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.11.1...inventories-v0.12.0) (2026-03-19)
+
+
+### Features
+
+* [Many APIs] add more values in DestintionEnum ([#7556](https://github.com/googleapis/google-cloud-node/issues/7556)) ([721dd4c](https://github.com/googleapis/google-cloud-node/commit/721dd4cfb2c8f4759f5e17e3496284d2b78489e0))
+
 ## [0.11.1](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.11.0...inventories-v0.11.1) (2025-10-13)
 
 
