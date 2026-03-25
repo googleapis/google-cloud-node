@@ -90,20 +90,25 @@ export function fixDocsHeaders() {
     }
 
     let content = fs.readFileSync(filePath, 'utf8');
-    
+
     // Check if @internal is already present in the block to prevent duplicate additions
     const replaceRegex = /\* @memberof v2\n \*\/(?!\s*export class)/g;
-    
+
     // We want to target the class documentation block that ends with `* @memberof v2\n */\nexport class `
     // and replace it with `* @memberof v2\n * @internal\n */\nexport class `
     const classDocRegex = /(\* @memberof v2\n) \*\/\nexport class /g;
-    
+
     if (classDocRegex.test(content)) {
-      content = content.replace(classDocRegex, '$1 * @internal\n */\nexport class ');
+      content = content.replace(
+        classDocRegex,
+        '$1 * @internal\n */\nexport class ',
+      );
       fs.writeFileSync(filePath, content);
       console.log(`Successfully added @internal to doc header in: ${filePath}`);
     } else {
-      console.log(`Did not find the expected doc header format in: ${filePath}`);
+      console.log(
+        `Did not find the expected doc header format in: ${filePath}`,
+      );
     }
   }
 }
