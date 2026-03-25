@@ -245,6 +245,7 @@ export class SessionServiceClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
+      streamRunSession: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.SERVER_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries),
       bidiRunSession: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
     };
 
@@ -291,7 +292,7 @@ export class SessionServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const sessionServiceStubMethods =
-        ['runSession', 'bidiRunSession'];
+        ['runSession', 'streamRunSession', 'bidiRunSession'];
     for (const methodName of sessionServiceStubMethods) {
       const callPromise = this.sessionServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -403,8 +404,7 @@ export class SessionServiceClient {
   // -- Service calls --
   // -------------------
 /**
- * Initiates a single turn interaction with the CES agent within a
- * session.
+ * Initiates a single-turn interaction with the CES agent within a session.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -498,6 +498,50 @@ export class SessionServiceClient {
         }
         throw error;
       });
+  }
+
+/**
+ * Initiates a single-turn interaction with the CES agent. Uses server-side
+ * streaming to deliver incremental results and partial responses as they are
+ * generated.
+ *
+ * By default, complete responses (e.g., messages from callbacks or full LLM
+ * responses) are sent to the client as soon as they are available. To enable
+ * streaming individual text chunks directly from the model, set
+ * {@link protos.google.cloud.ces.v1beta.SessionConfig.enable_text_streaming|enable_text_streaming}
+ * to true.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.ces.v1beta.SessionConfig} request.config
+ *   Required. The configuration for the session.
+ * @param {number[]} request.inputs
+ *   Required. Inputs for the session.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits {@link protos.google.cloud.ces.v1beta.RunSessionResponse|RunSessionResponse} on 'data' event.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/session_service.stream_run_session.js</caption>
+ * region_tag:ces_v1beta_generated_SessionService_StreamRunSession_async
+ */
+  streamRunSession(
+      request?: protos.google.cloud.ces.v1beta.IRunSessionRequest,
+      options?: CallOptions):
+    gax.CancellableStream{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'config.session': request.config!.session ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('streamRunSession stream %j', options);
+    return this.innerApiCalls.streamRunSession(request, options);
   }
 
 /**
