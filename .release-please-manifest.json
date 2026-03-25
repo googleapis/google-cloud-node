@@ -65,7 +65,7 @@
   "packages/google-cloud-binaryauthorization": "4.4.0",
   "packages/google-cloud-capacityplanner": "0.1.2",
   "packages/google-cloud-certificatemanager": "2.1.1",
-  "packages/google-cloud-ces": "0.2.0",
+  "packages/google-cloud-ces": "0.3.0",
   "packages/google-cloud-channel": "4.1.2",
   "packages/google-cloud-chronicle": "0.2.1",
   "packages/google-cloud-cloudcontrolspartner": "0.6.1",
@@ -93,7 +93,7 @@
   "packages/google-cloud-devicestreaming": "0.2.1",
   "packages/google-cloud-dialogflow": "7.5.0",
   "packages/google-cloud-dialogflow-cx": "5.7.0",
-  "packages/google-cloud-discoveryengine": "2.5.3",
+  "packages/google-cloud-discoveryengine": "2.6.0",
   "packages/google-cloud-dns": "5.3.1",
   "packages/google-cloud-documentai": "9.6.0",
   "packages/google-cloud-domains": "4.2.1",
@@ -234,10 +234,11 @@
   "packages/google-shopping-merchant-quota": "0.9.0",
   "packages/google-shopping-merchant-reports": "0.14.0",
   "packages/google-shopping-merchant-reviews": "0.6.0",
-  "packages/google-storage-control": "0.8.1",
+  "packages/google-storage-control": "0.8.2",
   "packages/google-storagetransfer": "4.2.1",
   "packages/google-streetview-publish": "0.4.1",
   "packages/grafeas": "6.1.1",
   "packages/typeless-sample-bot": "3.1.1",
-  "packages/google-maps-navconnect": "0.1.0"
+  "packages/google-maps-navconnect": "0.1.0",
+  "packages/google-cloud-datacatalog-lineage-configmanagement": "0.1.0"
 }
