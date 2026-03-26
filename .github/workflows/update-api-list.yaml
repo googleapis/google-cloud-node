@@ -15,7 +15,7 @@ jobs:
       - run: npm run generate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: googleapis/code-suggester@v5
+      - uses: googleapis/code-suggester@f9fef85aa02459e30e62526abe950341cbbd768b # v5
         env:
           ACCESS_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
         with:
