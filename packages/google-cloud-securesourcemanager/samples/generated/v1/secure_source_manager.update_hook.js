@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(updateMask, hook) {
+function main(hook) {
   // [START securesourcemanager_v1_generated_SecureSourceManager_UpdateHook_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main(updateMask, hook) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Field mask is used to specify the fields to be overwritten in the
+   *  Optional. Field mask is used to specify the fields to be overwritten in the
    *  hook resource by the update.
    *  The fields specified in the update_mask are relative to the resource, not
    *  the full request. A field will be overwritten if it is in the mask.
@@ -50,7 +50,6 @@ function main(updateMask, hook) {
   async function callUpdateHook() {
     // Construct request
     const request = {
-      updateMask,
       hook,
     };
 
