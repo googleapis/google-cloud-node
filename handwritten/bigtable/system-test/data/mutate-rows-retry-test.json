@@ -1,0 +1,117 @@
+{
+  "tests": [
+    {
+      "name": "valid mutation",
+      "max_retries": 3,
+      "mutations_request": [
+        { "method": "insert", "key": "foo", "data": {} },
+        { "method": "insert", "key": "bar", "data": {} },
+        { "method": "insert", "key": "baz", "data": {} }
+      ],
+      "responses": [
+        { "code": 200, "entry_codes": [ 0, 0, 0 ] }
+      ],
+      "mutation_batches_invoked": [
+        [ "foo", "bar", "baz" ]
+      ]
+    }, {
+      "name": "retries the failed mutations",
+      "max_retries": 3,
+      "mutations_request": [
+        { "method": "insert", "key": "foo", "data": {} },
+        { "method": "insert", "key": "bar", "data": {} },
+        { "method": "insert", "key": "baz", "data": {} }
+      ],
+      "responses": [
+        { "code": 200, "entry_codes": [ 0, 4, 4 ] },
+        { "code": 200, "entry_codes": [ 4, 0 ] },
+        { "code": 200, "entry_codes": [ 4 ] },
+        { "code": 200, "entry_codes": [ 0 ] }
+      ],
+      "mutation_batches_invoked": [
+        [ "foo", "bar", "baz" ],
+        [ "bar", "baz" ],
+        [ "bar" ],
+        [ "bar" ]
+      ]
+    }, {
+      "name": "has a `PartialFailureError` error when an entry fails after the retries",
+      "max_retries": 3,
+      "mutations_request": [
+        { "method": "insert", "key": "foo", "data": {} },
+        { "method": "insert", "key": "bar", "data": {} },
+        { "method": "insert", "key": "baz", "data": {} }
+      ],
+      "responses": [
+        { "code": 200, "entry_codes": [ 0, 4, 0 ] },
+        { "code": 200, "entry_codes": [ 4 ] },
+        { "code": 200, "entry_codes": [ 4 ] },
+        { "code": 200, "entry_codes": [ 4 ] }
+      ],
+      "mutation_batches_invoked": [
+        [ "foo", "bar", "baz" ],
+        [ "bar" ],
+        [ "bar" ],
+        [ "bar" ]
+      ],
+      "errors": [
+        { "index_in_mutations_request": 1 }
+      ]
+    }, {
+      "name": "does not retry unretryable mutations",
+      "max_retries": 5,
+      "mutations_request": [
+        { "method": "insert", "key": "foo", "data": {} },
+        { "method": "insert", "key": "bar", "data": {} },
+        { "method": "insert", "key": "baz", "data": {} },
+        { "method": "insert", "key": "qux", "data": {} },
+        { "method": "insert", "key": "quux", "data": {} },
+        { "method": "insert", "key": "corge", "data": {} }
+      ],
+      "responses": [
+        { "code": 200, "entry_codes": [ 4, 4, 4, 4, 4, 1 ] },
+        { "code": 200, "entry_codes": [ 4, 14, 14, 14, 0 ] },
+        { "code": 200, "entry_codes": [ 1, 4, 4, 0 ] },
+        { "code": 200, "entry_codes": [ 0, 4 ] },
+        { "code": 200, "entry_codes": [ 4 ] },
+        { "code": 200, "entry_codes": [ 1 ] }
+      ],
+      "mutation_batches_invoked": [
+        [ "foo", "bar", "baz", "qux", "quux", "corge" ],
+        [ "foo", "bar", "baz", "qux", "quux" ],
+        [ "foo", "bar", "baz", "qux" ],
+        [ "bar", "baz" ],
+        [ "baz" ],
+        [ "baz" ]
+      ],
+      "errors": [
+        { "index_in_mutations_request": 0 },
+        { "index_in_mutations_request": 2 },
+        { "index_in_mutations_request": 5 }
+      ]
+    }, {
+      "name": "considers network errors towards the retry count",
+      "max_retries": 3,
+      "mutations_request": [
+        { "method": "insert", "key": "foo", "data": {} },
+        { "method": "insert", "key": "bar", "data": {} },
+        { "method": "insert", "key": "baz", "data": {} }
+      ],
+      "responses": [
+        { "code": 200, "entry_codes": [ 0, 4, 0 ] },
+        { "code": 429 },
+        { "code": 200, "entry_codes": [ 4 ] },
+        { "code": 200, "entry_codes": [ 4 ] }
+      ],
+      "mutation_batches_invoked": [
+        [ "foo", "bar", "baz" ],
+        [ "bar" ],
+        [ "bar" ],
+        [ "bar" ]
+      ],
+      "errors":  [
+        { "index_in_mutations_request": 1 }
+      ]
+    }
+  ]
+}

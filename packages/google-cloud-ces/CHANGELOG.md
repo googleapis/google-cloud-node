@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.2.0...ces-v0.3.0) (2026-03-25)
+
+
+### Features
+
+* [ces] update public libraries for CES v1 ([#7845](https://github.com/googleapis/google-cloud-node/issues/7845)) ([0e80254](https://github.com/googleapis/google-cloud-node/commit/0e802546d86a64e5317fda86f99ed9f1b1026e0f))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.1.0...ces-v0.2.0) (2026-03-18)
 
 
