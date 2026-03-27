@@ -2189,6 +2189,27 @@ describe('BigQuery/Table', () => {
       });
     });
 
+    it('should skip parsing if skipParsing is true', done => {
+      const rows = [{f: [{v: 'stephen'}]}];
+      const schema = {fields: [{name: 'name', type: 'string'}]};
+      table.metadata = {schema};
+
+      table.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        callback(null, {rows});
+      };
+
+      sandbox.restore();
+      const mergeStub = sandbox.stub(BigQuery, 'mergeSchemaWithRows_');
+
+      table.getRows({skipParsing: true}, (err: Error, rows_: {}[], nextQuery: {}, apiResponse: any) => {
+        assert.ifError(err);
+        assert.strictEqual(rows_, rows);
+        assert.strictEqual(mergeStub.called, false);
+        assert.deepStrictEqual(apiResponse.rows, rows);
+        done();
+      });
+    });
+
     it('should pass nextQuery if pageToken is returned', done => {
       const options = {a: 'b', c: 'd'};
       const pageToken = 'token';
@@ -3024,6 +3045,20 @@ describe('BigQuery/Table', () => {
       };
 
       table.query('a', 'b');
+    });
+
+    it('should pass skipParsing through to datasetInstance.query()', done => {
+      const query = {
+        query: 'a',
+        skipParsing: true,
+      };
+      table.dataset.query = (a: {}, b: {}) => {
+        assert.deepStrictEqual(a, query);
+        assert.strictEqual(b, 'b');
+        done();
+      };
+
+      table.query(query, 'b');
     });
   });
 

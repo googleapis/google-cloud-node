@@ -1207,6 +1207,10 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     sum(): AggregateFunction;
     timestampAdd(unit: Expression, amount: Expression): FunctionExpression;
     timestampAdd(unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day', amount: number): FunctionExpression;
+    timestampDiff(start: Expression, unit: Expression): FunctionExpression;
+    timestampDiff(start: string | Expression, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day'): FunctionExpression;
+    timestampExtract(part: firestore.Pipelines.TimePart, timezone?: string | Expression): FunctionExpression;
+    timestampExtract(part: Expression, timezone?: string | Expression): FunctionExpression;
     timestampSubtract(unit: Expression, amount: Expression): FunctionExpression;
     timestampSubtract(unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day', amount: number): FunctionExpression;
     timestampToUnixMicros(): FunctionExpression;
@@ -2116,6 +2120,8 @@ declare namespace Pipelines {
         isType,
         Type,
         timestampTruncate,
+        timestampExtract,
+        timestampDiff,
         split,
         ltrim,
         rtrim,
@@ -2708,6 +2714,30 @@ function timestampAdd(timestamp: Expression, unit: 'microsecond' | 'millisecond'
 
 // @beta
 function timestampAdd(fieldName: string, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day', amount: number): FunctionExpression;
+
+// @beta
+function timestampDiff(endFieldName: string, startFieldName: string, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | Expression): FunctionExpression;
+
+// @beta
+function timestampDiff(endFieldName: string, startExpression: Expression, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | Expression): FunctionExpression;
+
+// @beta
+function timestampDiff(endExpression: Expression, startFieldName: string, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | Expression): FunctionExpression;
+
+// @beta
+function timestampDiff(endExpression: Expression, startExpression: Expression, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | Expression): FunctionExpression;
+
+// @beta
+function timestampExtract(fieldName: string, part: firestore.Pipelines.TimePart, timezone?: string | Expression): FunctionExpression;
+
+// @beta
+function timestampExtract(fieldName: string, part: Expression, timezone?: string | Expression): FunctionExpression;
+
+// @beta
+function timestampExtract(timestampExpression: Expression, part: firestore.Pipelines.TimePart, timezone?: string | Expression): FunctionExpression;
+
+// @beta
+function timestampExtract(timestampExpression: Expression, part: Expression, timezone?: string | Expression): FunctionExpression;
 
 // @beta
 function timestampSubtract(timestamp: Expression, unit: Expression, amount: Expression): FunctionExpression;
