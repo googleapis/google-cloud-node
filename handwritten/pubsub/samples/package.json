@@ -1,0 +1,52 @@
+{
+  "name": "nodejs-docs-samples-pubsub",
+  "files": [
+    "*.js",
+    "typescript/*.ts"
+  ],
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "repository": "googleapis/nodejs-pubsub",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "mocha build/system-test --timeout 600000",
+    "pretest": "npm run compile && cp -f *.js build/",
+    "tsc": "tsc -p .",
+    "sampletsc": "cd typescript && tsc -p . && cd ..",
+    "compile": "npm run tsc && npm run sampletsc",
+    "clean": "gts clean && rm -rf build/",
+    "precompile": "npm run clean",
+    "pretypeless": "npx eslint --fix typescript/*.ts",
+    "typeless": "npx typeless-sample-bot --outputpath . --targets typescript --recursive",
+    "posttypeless": "npx eslint --fix *.js"
+  },
+  "dependencies": {
+    "@google-cloud/opentelemetry-cloud-trace-exporter": "^2.0.0",
+    "@google-cloud/pubsub": "^5.3.0",
+    "@google-cloud/storage": "^7.11.1",
+    "@opentelemetry/api": "^1.6.0",
+    "@opentelemetry/resources": "^1.17.0",
+    "@opentelemetry/sdk-trace-base": "^1.17.0",
+    "@opentelemetry/sdk-trace-node": "^1.17.0",
+    "@opentelemetry/semantic-conventions": "^1.17.0",
+    "avro-js": "^1.11.3",
+    "google-auth-library": "^10.5.0",
+    "p-defer": "^3.0.0",
+    "protobufjs": "~7.5.0"
+  },
+  "devDependencies": {
+    "@google-cloud/bigquery": "^8.0.0",
+    "@google-cloud/typeless-sample-bot": "^3.0.0",
+    "@types/chai": "^5.0.0",
+    "chai": "^6.0.0",
+    "gts": "^6.0.0",
+    "lru-cache": "10.4.3",
+    "mocha": "^10.0.0",
+    "rimraf": "5.0.10",
+    "typescript": "^5.1.6",
+    "uuid": "^11.1.0"
+  }
+}

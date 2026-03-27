@@ -1,0 +1,18 @@
+{
+  "extends": "../node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "outDir": "../build",
+    "resolveJsonModule": true,
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "module": "es2020",
+    "sourceMap": false,
+    "moduleResolution": "node"
+  },
+  "include": [
+    "./*.ts"
+  ]
+}
