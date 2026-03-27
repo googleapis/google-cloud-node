@@ -1,0 +1,103 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.bigtable.v2",
+  "libraryPackage": "@google-cloud/bigtable",
+  "services": {
+    "Bigtable": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BigtableClient",
+          "rpcs": {
+            "MutateRow": {
+              "methods": [
+                "mutateRow"
+              ]
+            },
+            "CheckAndMutateRow": {
+              "methods": [
+                "checkAndMutateRow"
+              ]
+            },
+            "PingAndWarm": {
+              "methods": [
+                "pingAndWarm"
+              ]
+            },
+            "ReadModifyWriteRow": {
+              "methods": [
+                "readModifyWriteRow"
+              ]
+            },
+            "PrepareQuery": {
+              "methods": [
+                "prepareQuery"
+              ]
+            },
+            "ReadRows": {
+              "methods": [
+                "readRows"
+              ]
+            },
+            "SampleRowKeys": {
+              "methods": [
+                "sampleRowKeys"
+              ]
+            },
+            "MutateRows": {
+              "methods": [
+                "mutateRows"
+              ]
+            },
+            "GenerateInitialChangeStreamPartitions": {
+              "methods": [
+                "generateInitialChangeStreamPartitions"
+              ]
+            },
+            "ReadChangeStream": {
+              "methods": [
+                "readChangeStream"
+              ]
+            },
+            "ExecuteQuery": {
+              "methods": [
+                "executeQuery"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BigtableClient",
+          "rpcs": {
+            "MutateRow": {
+              "methods": [
+                "mutateRow"
+              ]
+            },
+            "CheckAndMutateRow": {
+              "methods": [
+                "checkAndMutateRow"
+              ]
+            },
+            "PingAndWarm": {
+              "methods": [
+                "pingAndWarm"
+              ]
+            },
+            "ReadModifyWriteRow": {
+              "methods": [
+                "readModifyWriteRow"
+              ]
+            },
+            "PrepareQuery": {
+              "methods": [
+                "prepareQuery"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

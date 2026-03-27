@@ -147,6 +147,8 @@ export {
   type,
   isType,
   timestampTruncate,
+  timestampExtract,
+  timestampDiff,
   split,
   ltrim,
   rtrim,

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.3...discoveryengine-v2.6.0) (2026-03-25)
+
+
+### Features
+
+* [discoveryengine] Update DataStoreSpec and add BoostSpec to SearchService ([#7837](https://github.com/googleapis/google-cloud-node/issues/7837)) ([6943587](https://github.com/googleapis/google-cloud-node/commit/694358739b082ad17f42800b42e5dbbf4c2c975b))
+
 ## [2.5.3](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.2...discoveryengine-v2.5.3) (2026-03-02)
 
 

@@ -170,7 +170,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 68,
+          "end": 72,
           "type": "FULL"
         }
       ],
@@ -186,6 +186,10 @@
           {
             "name": "request_id",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.longrunning.Operation",
@@ -586,7 +590,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 63,
+          "end": 62,
           "type": "FULL"
         }
       ],
@@ -854,7 +858,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 60,
+          "end": 63,
           "type": "FULL"
         }
       ],
@@ -942,7 +946,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 67,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -1830,7 +1834,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 65,
           "type": "FULL"
         }
       ],
@@ -1999,7 +2003,7 @@
       "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_BatchCreatePullRequestComments_async",
       "title": "SecureSourceManager batchCreatePullRequestComments Sample",
       "origin": "API_DEFINITION",
-      "description": " Batch creates pull request comments. This function is used to create multiple PullRequestComments for code review. There needs to be exactly one PullRequestComment of type Review, and at most 100 PullRequestComments of type Code per request. The Postition of the code comments must be unique within the request.",
+      "description": " Batch creates pull request comments. This function is used to create multiple PullRequestComments for code review. There needs to be exactly one PullRequestComment of type Review, and at most 100 PullRequestComments of type Code per request. The Position of the code comments must be unique within the request.",
       "canonical": true,
       "file": "secure_source_manager.batch_create_pull_request_comments.js",
       "language": "JAVASCRIPT",

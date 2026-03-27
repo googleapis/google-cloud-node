@@ -549,6 +549,11 @@
                 "runSession"
               ]
             },
+            "StreamRunSession": {
+              "methods": [
+                "streamRunSession"
+              ]
+            },
             "BidiRunSession": {
               "methods": [
                 "bidiRunSession"

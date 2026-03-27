@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.maps.geocode.v4",
+  "libraryPackage": "@google-cloud/geocode",
+  "services": {
+    "DestinationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DestinationServiceClient",
+          "rpcs": {
+            "SearchDestinations": {
+              "methods": [
+                "searchDestinations"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DestinationServiceClient",
+          "rpcs": {
+            "SearchDestinations": {
+              "methods": [
+                "searchDestinations"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GeocodeService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GeocodeServiceClient",
+          "rpcs": {
+            "GeocodeAddress": {
+              "methods": [
+                "geocodeAddress"
+              ]
+            },
+            "GeocodeLocation": {
+              "methods": [
+                "geocodeLocation"
+              ]
+            },
+            "GeocodePlace": {
+              "methods": [
+                "geocodePlace"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GeocodeServiceClient",
+          "rpcs": {
+            "GeocodeAddress": {
+              "methods": [
+                "geocodeAddress"
+              ]
+            },
+            "GeocodeLocation": {
+              "methods": [
+                "geocodeLocation"
+              ]
+            },
+            "GeocodePlace": {
+              "methods": [
+                "geocodePlace"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
