@@ -3619,6 +3619,8 @@ describe('BigQuery', () => {
       pageToken: undefined,
       wrapIntegers: undefined,
       parseJSON: undefined,
+      'formatOptions.timestampOutputFormat': undefined,
+      'formatOptions.useInt64Timestamp': undefined,
       autoPaginate: false,
     };
 
@@ -3688,6 +3690,24 @@ describe('BigQuery', () => {
       const opts = {
         ...defaultOpts,
         parseJSON,
+      };
+
+      assert(queryStub.calledOnceWithExactly(query, opts, sinon.match.func));
+    });
+
+    it('should pass formatOptions if supplied', done => {
+      const query = {
+        query: 'SELECT',
+        'formatOptions.timestampOutputFormat': 'INT64',
+        'formatOptions.useInt64Timestamp': true,
+      };
+
+      bq.queryAsStream_(query, done);
+
+      const opts = {
+        ...defaultOpts,
+        'formatOptions.timestampOutputFormat': 'INT64',
+        'formatOptions.useInt64Timestamp': true,
       };
 
       assert(queryStub.calledOnceWithExactly(query, opts, sinon.match.func));

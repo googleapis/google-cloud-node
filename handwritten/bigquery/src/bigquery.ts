@@ -2458,7 +2458,15 @@ export class BigQuery extends Service {
       return;
     }
 
-    const {location, maxResults, pageToken, wrapIntegers, parseJSON} = query;
+    const {
+      location,
+      maxResults,
+      pageToken,
+      wrapIntegers,
+      parseJSON,
+      'formatOptions.timestampOutputFormat': timestampOutputFormat,
+      'formatOptions.useInt64Timestamp': useInt64Timestamp,
+    } = query as any;
 
     const opts = {
       location,
@@ -2466,6 +2474,8 @@ export class BigQuery extends Service {
       pageToken,
       wrapIntegers,
       parseJSON,
+      'formatOptions.timestampOutputFormat': timestampOutputFormat,
+      'formatOptions.useInt64Timestamp': useInt64Timestamp,
       autoPaginate: false,
     };
 
@@ -2474,6 +2484,8 @@ export class BigQuery extends Service {
     delete query.pageToken;
     delete query.wrapIntegers;
     delete query.parseJSON;
+    delete (query as any)['formatOptions.timestampOutputFormat'];
+    delete (query as any)['formatOptions.useInt64Timestamp'];
 
     this.query(query, opts, callback);
   }
