@@ -1444,6 +1444,9 @@ export namespace google {
 
                         /** PrivateConfig pscAllowedProjects */
                         pscAllowedProjects?: (string[]|null);
+
+                        /** PrivateConfig customHostConfig */
+                        customHostConfig?: (google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig|null);
                     }
 
                     /** Represents a PrivateConfig. */
@@ -1469,6 +1472,9 @@ export namespace google {
 
                         /** PrivateConfig pscAllowedProjects. */
                         public pscAllowedProjects: string[];
+
+                        /** PrivateConfig customHostConfig. */
+                        public customHostConfig?: (google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig|null);
 
                         /**
                          * Creates a new PrivateConfig instance using the specified properties.
@@ -1546,6 +1552,124 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PrivateConfig {
+
+                        /** Properties of a CustomHostConfig. */
+                        interface ICustomHostConfig {
+
+                            /** CustomHostConfig html */
+                            html?: (string|null);
+
+                            /** CustomHostConfig api */
+                            api?: (string|null);
+
+                            /** CustomHostConfig gitSsh */
+                            gitSsh?: (string|null);
+
+                            /** CustomHostConfig gitHttp */
+                            gitHttp?: (string|null);
+                        }
+
+                        /** Represents a CustomHostConfig. */
+                        class CustomHostConfig implements ICustomHostConfig {
+
+                            /**
+                             * Constructs a new CustomHostConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig);
+
+                            /** CustomHostConfig html. */
+                            public html: string;
+
+                            /** CustomHostConfig api. */
+                            public api: string;
+
+                            /** CustomHostConfig gitSsh. */
+                            public gitSsh: string;
+
+                            /** CustomHostConfig gitHttp. */
+                            public gitHttp: string;
+
+                            /**
+                             * Creates a new CustomHostConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CustomHostConfig instance
+                             */
+                            public static create(properties?: google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig): google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig;
+
+                            /**
+                             * Encodes the specified CustomHostConfig message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig.verify|verify} messages.
+                             * @param message CustomHostConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CustomHostConfig message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig.verify|verify} messages.
+                             * @param message CustomHostConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CustomHostConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CustomHostConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig;
+
+                            /**
+                             * Decodes a CustomHostConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CustomHostConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig;
+
+                            /**
+                             * Verifies a CustomHostConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CustomHostConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CustomHostConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig;
+
+                            /**
+                             * Creates a plain object from a CustomHostConfig message. Also converts values to other types if specified.
+                             * @param message CustomHostConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CustomHostConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomHostConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a WorkforceIdentityFederationConfig. */
@@ -2306,6 +2430,9 @@ export namespace google {
                     /** BranchRule minimumApprovalsCount */
                     minimumApprovalsCount?: (number|null);
 
+                    /** BranchRule requireCodeOwnerApproval */
+                    requireCodeOwnerApproval?: (boolean|null);
+
                     /** BranchRule requireCommentsResolved */
                     requireCommentsResolved?: (boolean|null);
 
@@ -2360,6 +2487,9 @@ export namespace google {
 
                     /** BranchRule minimumApprovalsCount. */
                     public minimumApprovalsCount: number;
+
+                    /** BranchRule requireCodeOwnerApproval. */
+                    public requireCodeOwnerApproval: boolean;
 
                     /** BranchRule requireCommentsResolved. */
                     public requireCommentsResolved: boolean;
@@ -4230,6 +4360,9 @@ export namespace google {
 
                     /** DeleteInstanceRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteInstanceRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteInstanceRequest. */
@@ -4246,6 +4379,9 @@ export namespace google {
 
                     /** DeleteInstanceRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteInstanceRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteInstanceRequest instance using the specified properties.
@@ -12466,6 +12602,115 @@ export namespace google {
             IDENTIFIER = 8
         }
 
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
         /** Properties of a ResourceDescriptor. */
         interface IResourceDescriptor {
 
@@ -14888,6 +15133,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);

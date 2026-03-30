@@ -37,7 +37,7 @@ import {
   PipelineStreamElement,
   QueryCursor,
 } from '../reference/types';
-import {Serializer} from '../serializer';
+import {hasUserData, HasUserData, Serializer} from '../serializer';
 import {
   Deferred,
   getTotalTimeout,
@@ -762,4 +762,26 @@ export function aliasedAggregateToMap(
     },
     new Map() as Map<string, AggregateFunction>,
   );
+}
+
+/**
+ * @internal
+ *
+ * Helper to read user data across a number of different formats.
+ */
+export function validateUserDataHelper<
+  T extends Map<string, HasUserData> | HasUserData[] | HasUserData,
+>(expressionMap: T, ignoreUndefinedProperties: boolean): T {
+  if (hasUserData(expressionMap)) {
+    expressionMap._validateUserData(ignoreUndefinedProperties);
+  } else if (Array.isArray(expressionMap)) {
+    expressionMap.forEach(readableData => {
+      readableData._validateUserData(ignoreUndefinedProperties);
+    });
+  } else {
+    expressionMap.forEach(expr =>
+      expr._validateUserData(ignoreUndefinedProperties),
+    );
+  }
+  return expressionMap;
 }

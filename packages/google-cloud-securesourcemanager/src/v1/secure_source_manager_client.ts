@@ -1970,6 +1970,8 @@ export class SecureSourceManagerClient {
  *
  *   The request ID must be a valid UUID with the exception that zero UUID is
  *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, will force the deletion of the instance.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -2536,8 +2538,8 @@ export class SecureSourceManagerClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Field mask is used to specify the fields to be overwritten in the
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
  *   hook resource by the update.
  *   The fields specified in the update_mask are relative to the resource, not
  *   the full request. A field will be overwritten if it is in the mask.
@@ -2870,8 +2872,8 @@ export class SecureSourceManagerClient {
  * @param {boolean} [request.validateOnly]
  *   Optional. If set, validate the request and preview the review, but do not
  *   actually post it.  (https://google.aip.dev/163, for declarative friendly)
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Field mask is used to specify the fields to be overwritten in the
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
  *   branchRule resource by the update.
  *   The fields specified in the update_mask are relative to the resource, not
  *   the full request. A field will be overwritten if it is in the mask.
@@ -4536,7 +4538,7 @@ export class SecureSourceManagerClient {
  * Batch creates pull request comments. This function is used to create
  * multiple PullRequestComments for code review. There needs to be exactly one
  * PullRequestComment of type Review, and at most 100 PullRequestComments of
- * type Code per request. The Postition of the code comments must be unique
+ * type Code per request. The Position of the code comments must be unique
  * within the request.
  *
  * @param {Object} request
@@ -5229,15 +5231,15 @@ export class SecureSourceManagerClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. Parent value for ListInstancesRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filter for filtering results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filter for filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -5332,15 +5334,15 @@ export class SecureSourceManagerClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. Parent value for ListInstancesRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filter for filtering results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filter for filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -5384,15 +5386,15 @@ export class SecureSourceManagerClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. Parent value for ListInstancesRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filter for filtering results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filter for filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -5439,10 +5441,10 @@ export class SecureSourceManagerClient {
  * @param {string} request.parent
  *   Required. Parent value for ListRepositoriesRequest.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
  * @param {string} [request.filter]
  *   Optional. Filter results.
  * @param {string} [request.instance]
@@ -5547,10 +5549,10 @@ export class SecureSourceManagerClient {
  * @param {string} request.parent
  *   Required. Parent value for ListRepositoriesRequest.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
  * @param {string} [request.filter]
  *   Optional. Filter results.
  * @param {string} [request.instance]
@@ -5604,10 +5606,10 @@ export class SecureSourceManagerClient {
  * @param {string} request.parent
  *   Required. Parent value for ListRepositoriesRequest.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
  * @param {string} [request.filter]
  *   Optional. Filter results.
  * @param {string} [request.instance]
@@ -5660,8 +5662,8 @@ export class SecureSourceManagerClient {
  * @param {string} request.parent
  *   Required. Parent value for ListHooksRequest.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -5759,8 +5761,8 @@ export class SecureSourceManagerClient {
  * @param {string} request.parent
  *   Required. Parent value for ListHooksRequest.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -5807,8 +5809,8 @@ export class SecureSourceManagerClient {
  * @param {string} request.parent
  *   Required. Parent value for ListHooksRequest.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -5853,7 +5855,10 @@ export class SecureSourceManagerClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  * @param {number} [request.pageSize]
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -5948,7 +5953,10 @@ export class SecureSourceManagerClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  * @param {number} [request.pageSize]
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -5992,7 +6000,10 @@ export class SecureSourceManagerClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  * @param {number} [request.pageSize]
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -6037,8 +6048,8 @@ export class SecureSourceManagerClient {
  *   Required. The repository in which to list pull requests. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -6137,8 +6148,8 @@ export class SecureSourceManagerClient {
  *   Required. The repository in which to list pull requests. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -6186,8 +6197,8 @@ export class SecureSourceManagerClient {
  *   Required. The repository in which to list pull requests. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -6235,8 +6246,8 @@ export class SecureSourceManagerClient {
  *   Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -6336,8 +6347,8 @@ export class SecureSourceManagerClient {
  *   Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -6386,8 +6397,8 @@ export class SecureSourceManagerClient {
  *   Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -6652,8 +6663,8 @@ export class SecureSourceManagerClient {
  *   Required. The repository in which to list issues. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {string} [request.filter]
@@ -6754,8 +6765,8 @@ export class SecureSourceManagerClient {
  *   Required. The repository in which to list issues. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {string} [request.filter]
@@ -6805,8 +6816,8 @@ export class SecureSourceManagerClient {
  *   Required. The repository in which to list issues. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {string} [request.filter]
@@ -6855,9 +6866,8 @@ export class SecureSourceManagerClient {
  *   Required. The pull request in which to list pull request comments. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, at most 100 pull request
- *   comments will be returned. The maximum value is 100; values above 100 will
- *   be coerced to 100.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -6956,9 +6966,8 @@ export class SecureSourceManagerClient {
  *   Required. The pull request in which to list pull request comments. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, at most 100 pull request
- *   comments will be returned. The maximum value is 100; values above 100 will
- *   be coerced to 100.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -7006,9 +7015,8 @@ export class SecureSourceManagerClient {
  *   Required. The pull request in which to list pull request comments. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, at most 100 pull request
- *   comments will be returned. The maximum value is 100; values above 100 will
- *   be coerced to 100.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -7055,8 +7063,8 @@ export class SecureSourceManagerClient {
  *   Required. The issue in which to list the comments. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -7155,8 +7163,8 @@ export class SecureSourceManagerClient {
  *   Required. The issue in which to list the comments. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
@@ -7204,8 +7212,8 @@ export class SecureSourceManagerClient {
  *   Required. The issue in which to list the comments. Format:
  *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. Requested page size. If unspecified, a default size of 30 will be
+ *   used. The maximum value is 100; values above 100 will be coerced to 100.
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results the server should return.
  * @param {object} [options]
