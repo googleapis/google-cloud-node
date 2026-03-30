@@ -33062,7 +33062,8 @@
                       "oneofs": {
                         "deploymentSource": {
                           "oneof": [
-                            "sourceCodeSpec"
+                            "sourceCodeSpec",
+                            "containerSpec"
                           ]
                         },
                         "_serviceAccount": {
@@ -33075,6 +33076,10 @@
                         "sourceCodeSpec": {
                           "type": "SourceCodeSpec",
                           "id": 11
+                        },
+                        "containerSpec": {
+                          "type": "ContainerSpec",
+                          "id": 15
                         },
                         "serviceAccount": {
                           "type": "string",
@@ -33350,6 +33355,17 @@
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "ContainerSpec": {
+                          "fields": {
+                            "imageUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }
