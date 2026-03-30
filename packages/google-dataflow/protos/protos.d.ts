@@ -82,6 +82,9 @@ export namespace google {
 
                 /** Environment streamingMode */
                 streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
+
+                /** Environment usePublicIps */
+                usePublicIps?: (boolean|null);
             }
 
             /** Represents an Environment. */
@@ -149,6 +152,9 @@ export namespace google {
 
                 /** Environment streamingMode. */
                 public streamingMode: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode);
+
+                /** Environment usePublicIps. */
+                public usePublicIps: boolean;
 
                 /**
                  * Creates a new Environment instance using the specified properties.
@@ -1061,6 +1067,12 @@ export namespace google {
                 /** WorkerPool diskType */
                 diskType?: (string|null);
 
+                /** WorkerPool diskProvisionedIops */
+                diskProvisionedIops?: (number|Long|string|null);
+
+                /** WorkerPool diskProvisionedThroughputMibps */
+                diskProvisionedThroughputMibps?: (number|Long|string|null);
+
                 /** WorkerPool diskSourceImage */
                 diskSourceImage?: (string|null);
 
@@ -1136,6 +1148,12 @@ export namespace google {
 
                 /** WorkerPool diskType. */
                 public diskType: string;
+
+                /** WorkerPool diskProvisionedIops. */
+                public diskProvisionedIops: (number|Long|string);
+
+                /** WorkerPool diskProvisionedThroughputMibps. */
+                public diskProvisionedThroughputMibps: (number|Long|string);
 
                 /** WorkerPool diskSourceImage. */
                 public diskSourceImage: string;
@@ -1739,6 +1757,9 @@ export namespace google {
 
                 /** Job serviceResources */
                 serviceResources?: (google.dataflow.v1beta3.IServiceResources|null);
+
+                /** Job pausable */
+                pausable?: (boolean|null);
             }
 
             /** Represents a Job. */
@@ -1833,6 +1854,9 @@ export namespace google {
 
                 /** Job serviceResources. */
                 public serviceResources?: (google.dataflow.v1beta3.IServiceResources|null);
+
+                /** Job pausable. */
+                public pausable: boolean;
 
                 /**
                  * Creates a new Job instance using the specified properties.
@@ -2020,6 +2044,12 @@ export namespace google {
 
                 /** RuntimeUpdatableParams workerUtilizationHint */
                 workerUtilizationHint?: (number|null);
+
+                /** RuntimeUpdatableParams acceptableBacklogDuration */
+                acceptableBacklogDuration?: (google.protobuf.IDuration|null);
+
+                /** RuntimeUpdatableParams autoscalingTier */
+                autoscalingTier?: (string|null);
             }
 
             /** Represents a RuntimeUpdatableParams. */
@@ -2039,6 +2069,12 @@ export namespace google {
 
                 /** RuntimeUpdatableParams workerUtilizationHint. */
                 public workerUtilizationHint?: (number|null);
+
+                /** RuntimeUpdatableParams acceptableBacklogDuration. */
+                public acceptableBacklogDuration?: (google.protobuf.IDuration|null);
+
+                /** RuntimeUpdatableParams autoscalingTier. */
+                public autoscalingTier?: (string|null);
 
                 /**
                  * Creates a new RuntimeUpdatableParams instance using the specified properties.
@@ -4276,7 +4312,9 @@ export namespace google {
                 JOB_STATE_PENDING = 9,
                 JOB_STATE_CANCELLING = 10,
                 JOB_STATE_QUEUED = 11,
-                JOB_STATE_RESOURCE_CLEANING_UP = 12
+                JOB_STATE_RESOURCE_CLEANING_UP = 12,
+                JOB_STATE_PAUSING = 13,
+                JOB_STATE_PAUSED = 14
             }
 
             /** Properties of a JobExecutionInfo. */
@@ -7376,6 +7414,9 @@ export namespace google {
                 /** MetricUpdate trie */
                 trie?: (google.protobuf.IValue|null);
 
+                /** MetricUpdate boundedTrie */
+                boundedTrie?: (google.protobuf.IValue|null);
+
                 /** MetricUpdate distribution */
                 distribution?: (google.protobuf.IValue|null);
 
@@ -7421,6 +7462,9 @@ export namespace google {
 
                 /** MetricUpdate trie. */
                 public trie?: (google.protobuf.IValue|null);
+
+                /** MetricUpdate boundedTrie. */
+                public boundedTrie?: (google.protobuf.IValue|null);
 
                 /** MetricUpdate distribution. */
                 public distribution?: (google.protobuf.IValue|null);
@@ -11663,6 +11707,9 @@ export namespace google {
 
                 /** FlexTemplateRuntimeEnvironment streamingMode */
                 streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
+
+                /** FlexTemplateRuntimeEnvironment additionalPipelineOptions */
+                additionalPipelineOptions?: (string[]|null);
             }
 
             /** Represents a FlexTemplateRuntimeEnvironment. */
@@ -11748,6 +11795,9 @@ export namespace google {
 
                 /** FlexTemplateRuntimeEnvironment streamingMode. */
                 public streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
+
+                /** FlexTemplateRuntimeEnvironment additionalPipelineOptions. */
+                public additionalPipelineOptions: string[];
 
                 /**
                  * Creates a new FlexTemplateRuntimeEnvironment instance using the specified properties.
@@ -11998,6 +12048,9 @@ export namespace google {
 
                 /** RuntimeEnvironment streamingMode */
                 streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
+
+                /** RuntimeEnvironment additionalPipelineOptions */
+                additionalPipelineOptions?: (string[]|null);
             }
 
             /** Represents a RuntimeEnvironment. */
@@ -12062,6 +12115,9 @@ export namespace google {
 
                 /** RuntimeEnvironment streamingMode. */
                 public streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
+
+                /** RuntimeEnvironment additionalPipelineOptions. */
+                public additionalPipelineOptions: string[];
 
                 /**
                  * Creates a new RuntimeEnvironment instance using the specified properties.
@@ -12662,7 +12718,8 @@ export namespace google {
                     UNKNOWN = 0,
                     JAVA = 1,
                     PYTHON = 2,
-                    GO = 3
+                    GO = 3,
+                    YAML = 4
                 }
             }
 
