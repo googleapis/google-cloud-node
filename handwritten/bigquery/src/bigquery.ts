@@ -128,7 +128,6 @@ export type Query = JobRequest<bigquery.IJobConfigurationQuery> & {
   pageToken?: string;
   wrapIntegers?: boolean | IntegerTypeCastOptions;
   parseJSON?: boolean;
-  skipParsing?: boolean;
   // Overrides default job creation mode set on the client.
   jobCreationMode?: JobCreationMode;
 };
@@ -2218,7 +2217,6 @@ export class BigQuery extends Service {
         ? {
             wrapIntegers: query.wrapIntegers,
             parseJSON: query.parseJSON,
-            skipParsing: query.skipParsing,
           }
         : {};
     const callback =
@@ -2256,33 +2254,14 @@ export class BigQuery extends Service {
       if (res && res.jobComplete) {
         let rows: any = [];
         if (res.schema && res.rows) {
-          try {
-            /*
-            Without this try/catch block, calls to getRows will hang indefinitely if
-            a call to mergeSchemaWithRows_ fails because the error never makes it to
-            the callback. Instead, pass the error to the callback the user provides
-            so that the user can see the error.
-             */
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const listParams = {
-              'formatOptions.timestampOutputFormat':
-                queryReq.formatOptions?.timestampOutputFormat,
-              'formatOptions.useInt64Timestamp':
-                queryReq.formatOptions?.useInt64Timestamp,
-            };
-            if (options.skipParsing) {
-              rows = res.rows;
-            } else {
-              rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
-                wrapIntegers: options.wrapIntegers || false,
-                parseJSON: options.parseJSON,
-                listParams,
-              });
-              delete res.rows;
-            }
-          } catch (e) {
-            (callback as SimpleQueryRowsCallback)(e as Error, null, job);
-            return;
+          if (options.skipParsing) {
+            rows = res.rows;
+          } else {
+            rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
+              wrapIntegers: options.wrapIntegers || false,
+              parseJSON: options.parseJSON,
+            });
+            delete res.rows;
           }
         }
         this.trace_('[runJobsQuery] job complete');
@@ -2300,7 +2279,7 @@ export class BigQuery extends Service {
       // If timeout override was provided, return error.
       if (queryReq.timeoutMs) {
         const err = new Error(
-          `The query did not complete before ${queryReq.timeoutMs}ms`,
+            `The query did not complete before ${queryReq.timeoutMs}ms`,
         );
         (callback as SimpleQueryRowsCallback)(err, null, job);
         return;
