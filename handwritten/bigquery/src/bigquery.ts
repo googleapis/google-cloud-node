@@ -128,6 +128,7 @@ export type Query = JobRequest<bigquery.IJobConfigurationQuery> & {
   pageToken?: string;
   wrapIntegers?: boolean | IntegerTypeCastOptions;
   parseJSON?: boolean;
+  skipParsing?: boolean;
   // Overrides default job creation mode set on the client.
   jobCreationMode?: JobCreationMode;
 };
@@ -2217,6 +2218,7 @@ export class BigQuery extends Service {
         ? {
             wrapIntegers: query.wrapIntegers,
             parseJSON: query.parseJSON,
+            skipParsing: query.skipParsing,
           }
         : {};
     const callback =
