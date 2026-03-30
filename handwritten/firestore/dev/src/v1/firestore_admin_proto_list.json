@@ -6,6 +6,7 @@
   "../../protos/google/firestore/admin/v1/index.proto",
   "../../protos/google/firestore/admin/v1/location.proto",
   "../../protos/google/firestore/admin/v1/operation.proto",
+  "../../protos/google/firestore/admin/v1/realtime_updates.proto",
   "../../protos/google/firestore/admin/v1/schedule.proto",
   "../../protos/google/firestore/admin/v1/snapshot.proto",
   "../../protos/google/firestore/admin/v1/user_creds.proto"

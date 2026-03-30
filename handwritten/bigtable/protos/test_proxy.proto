@@ -1,0 +1,350 @@
+// Copyright 2024 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package google.bigtable.testproxy;
+
+import "google/api/client.proto";
+import "google/bigtable/v2/bigtable.proto";
+import "google/bigtable/v2/data.proto";
+import "google/protobuf/duration.proto";
+import "google/rpc/status.proto";
+
+option go_package = "cloud.google.com/go/bigtable/testproxy/testproxypb;testproxypb";
+option java_multiple_files = true;
+option java_package = "com.google.cloud.bigtable.testproxy";
+
+// A config flag that dictates how the optional features should be enabled
+// during the client creation. The optional features customize how the client
+// interacts with the server, and are defined in
+// https://github.com/googleapis/googleapis/blob/master/google/bigtable/v2/feature_flags.proto
+enum OptionalFeatureConfig {
+  OPTIONAL_FEATURE_CONFIG_DEFAULT = 0;
+
+  OPTIONAL_FEATURE_CONFIG_ENABLE_ALL = 1;
+}
+
+// Request to test proxy service to create a client object.
+message CreateClientRequest {
+  message SecurityOptions {
+    // Access token to use for client credentials. If empty, the client will not
+    // use any call credentials. Certain implementations may require `use_ssl`
+    // to be set when using this.
+    string access_token = 1;
+
+    // Whether to use SSL channel credentials when connecting to the data
+    // endpoint.
+    bool use_ssl = 2;
+
+    // If using SSL channel credentials, override the SSL endpoint to match the
+    // host that is specified in the backend's certificate. Also sets the
+    // client's authority header value.
+    string ssl_endpoint_override = 3;
+
+    // PEM encoding of the server root certificates. If not set, the default
+    // root certs will be used instead. The default can be overridden via the
+    // GRPC_DEFAULT_SSL_ROOTS_FILE_PATH env var.
+    string ssl_root_certs_pem = 4;
+  }
+
+  // A unique ID associated with the client object to be created.
+  string client_id = 1;
+
+  // The "host:port" address of the data API endpoint (i.e. the backend being
+  // proxied to). Example: 127.0.0.1:38543. If you want to connect to a local
+  // emulator via BIGTABLE_EMULATOR_HOST environment variable, you can use
+  // "emulator" instead of "host:port" for this field.
+  string data_target = 2;
+
+  // The project for all calls on this client.
+  string project_id = 3;
+
+  // The instance for all calls on this client.
+  string instance_id = 4;
+
+  // Optional app profile for all calls on this client.
+  // Some client bindings allow specifying the app profile on a per-operation
+  // basis. We don't yet support this in the proxy API, but may in the future.
+  string app_profile_id = 5;
+
+  // If provided, a custom timeout will be set for each API call conducted by
+  // the created client. Otherwise, the default timeout from the client library
+  // will be used. Note that the override applies to all the methods.
+  google.protobuf.Duration per_operation_timeout = 6;
+
+  // Optional config that dictates how the optional features should be enabled
+  // during the client creation. Please check the enum type's docstring above.
+  OptionalFeatureConfig optional_feature_config = 7;
+
+  // Options to allow connecting to backends with channel and/or call
+  // credentials. This is needed internally by Cloud Bigtable's own testing
+  // frameworks.It is not necessary to support these fields for client
+  // conformance testing.
+  //
+  // WARNING: this allows the proxy to connect to a real production
+  // CBT backend with the right options, however, the proxy itself is insecure
+  // so it is not recommended to use it with real credentials or outside testing
+  // contexts.
+  SecurityOptions security_options = 8;
+}
+
+// Response from test proxy service for CreateClientRequest.
+message CreateClientResponse {}
+
+// Request to test proxy service to close a client object.
+message CloseClientRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+}
+
+// Response from test proxy service for CloseClientRequest.
+message CloseClientResponse {}
+
+// Request to test proxy service to remove a client object.
+message RemoveClientRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+}
+
+// Response from test proxy service for RemoveClientRequest.
+message RemoveClientResponse {}
+
+// Request to test proxy service to read a row.
+message ReadRowRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+
+  // The unique name of the table from which to read the row.
+  // Values are of the form
+  // `projects/<project>/instances/<instance>/tables/<table>`.
+  string table_name = 4;
+
+  // The row key of the target row.
+  string row_key = 2;
+
+  // The row filter to be applied to the target row.
+  google.bigtable.v2.RowFilter filter = 3;
+}
+
+// Response from test proxy service for ReadRowRequest or
+// ReadModifyWriteRowRequest.
+message RowResult {
+  // The RPC status from the client binding.
+  google.rpc.Status status = 1;
+
+  // The contents of a single row.
+  google.bigtable.v2.Row row = 2;
+}
+
+// Request to test proxy service to read rows.
+message ReadRowsRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+
+  // The raw request to the Bigtable server.
+  google.bigtable.v2.ReadRowsRequest request = 2;
+
+  // The streaming read can be canceled before all items are seen.
+  // Has no effect if non-positive.
+  int32 cancel_after_rows = 3;
+}
+
+// Response from test proxy service for ReadRowsRequest.
+message RowsResult {
+  // The RPC status from the client binding.
+  google.rpc.Status status = 1;
+
+  // The contents of rows.
+  repeated google.bigtable.v2.Row rows = 2;
+}
+
+// Request to test proxy service to mutate a row.
+message MutateRowRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+
+  // The raw request to the Bigtable server.
+  google.bigtable.v2.MutateRowRequest request = 2;
+}
+
+// Response from test proxy service for MutateRowRequest.
+message MutateRowResult {
+  // The RPC status from the client binding.
+  google.rpc.Status status = 1;
+}
+
+// Request to test proxy service to mutate rows.
+message MutateRowsRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+
+  // The raw request to the Bigtable server.
+  google.bigtable.v2.MutateRowsRequest request = 2;
+}
+
+// Response from test proxy service for MutateRowsRequest.
+message MutateRowsResult {
+  // The RPC status from the client binding, corresponding to the
+  // whole operation.
+  google.rpc.Status status = 1;
+
+  // The results corresponding to the failed rows.
+  repeated google.bigtable.v2.MutateRowsResponse.Entry entries = 2;
+}
+
+// Request to test proxy service to check and mutate a row.
+message CheckAndMutateRowRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+
+  // The raw request to the Bigtable server.
+  google.bigtable.v2.CheckAndMutateRowRequest request = 2;
+}
+
+// Response from test proxy service for CheckAndMutateRowRequest.
+message CheckAndMutateRowResult {
+  // The RPC status from the client binding.
+  google.rpc.Status status = 1;
+
+  // The raw response from the Bigtable server.
+  google.bigtable.v2.CheckAndMutateRowResponse result = 2;
+}
+
+// Request to test proxy service to sample row keys.
+message SampleRowKeysRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+
+  // The raw request to the Bigtable server.
+  google.bigtable.v2.SampleRowKeysRequest request = 2;
+}
+
+// Response from test proxy service for SampleRowKeysRequest.
+message SampleRowKeysResult {
+  // The RPC status from the client binding.
+  google.rpc.Status status = 1;
+
+  // The raw responses from the Bigtable server.
+  repeated google.bigtable.v2.SampleRowKeysResponse samples = 2;
+}
+
+// Request to test proxy service to read modify write a row.
+message ReadModifyWriteRowRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+
+  // The raw request to the Bigtable server.
+  google.bigtable.v2.ReadModifyWriteRowRequest request = 2;
+}
+
+// Request to test proxy service to execute a query.
+message ExecuteQueryRequest {
+  // The ID of the target client object.
+  string client_id = 1;
+
+  // The raw request to the Bigtable server.
+  google.bigtable.v2.ExecuteQueryRequest request = 2;
+}
+
+// Response from test proxy service for ExecuteQueryRequest.
+message ExecuteQueryResult {
+  // The RPC status from the client binding.
+  google.rpc.Status status = 1;
+
+  // Name and type information for the query result.
+  ResultSetMetadata metadata = 4;
+
+  // Encoded version of the ResultSet. Should not contain type information.
+  repeated SqlRow rows = 3;
+}
+
+// Schema information for the query result.
+message ResultSetMetadata {
+  // Column metadata for each column inthe query result.
+  repeated google.bigtable.v2.ColumnMetadata columns = 1;
+}
+
+// Representation of a single row in the query result.
+message SqlRow {
+  // Columnar values returned by the query.
+  repeated google.bigtable.v2.Value values = 1;
+}
+
+// Note that all RPCs are unary, even when the equivalent client binding call
+// may be streaming. This is an intentional simplification.
+//
+// Most methods have sync (default) and async variants. For async variants,
+// the proxy is expected to perform the async operation, then wait for results
+// before delivering them back to the driver client.
+//
+// Operations that may have interesting concurrency characteristics are
+// represented explicitly in the API (see ReadRowsRequest.cancel_after_rows).
+// We include such operations only when they can be meaningfully performed
+// through client bindings.
+//
+// Users should generally avoid setting deadlines for requests to the Proxy
+// because operations are not cancelable. If the deadline is set anyway, please
+// understand that the underlying operation will continue to be executed even
+// after the deadline expires.
+service CloudBigtableV2TestProxy {
+  option (google.api.default_host) =
+      "bigtable-test-proxy-not-accessible.googleapis.com";
+
+  // Client management:
+  //
+  // Creates a client in the proxy.
+  // Each client has its own dedicated channel(s), and can be used concurrently
+  // and independently with other clients.
+  rpc CreateClient(CreateClientRequest) returns (CreateClientResponse) {}
+
+  // Closes a client in the proxy, making it not accept new requests.
+  rpc CloseClient(CloseClientRequest) returns (CloseClientResponse) {}
+
+  // Removes a client in the proxy, making it inaccessible. Client closing
+  // should be done by CloseClient() separately.
+  rpc RemoveClient(RemoveClientRequest) returns (RemoveClientResponse) {}
+
+  // Bigtable operations: for each operation, you should use the synchronous or
+  // asynchronous variant of the client method based on the `use_async_method`
+  // setting of the client instance. For starters, you can choose to implement
+  // one variant, and return UNIMPLEMENTED status for the other.
+  //
+  // Reads a row with the client instance.
+  // The result row may not be present in the response.
+  // Callers should check for it (e.g. calling has_row() in C++).
+  rpc ReadRow(ReadRowRequest) returns (RowResult) {}
+
+  // Reads rows with the client instance.
+  rpc ReadRows(ReadRowsRequest) returns (RowsResult) {}
+
+  // Writes a row with the client instance.
+  rpc MutateRow(MutateRowRequest) returns (MutateRowResult) {}
+
+  // Writes multiple rows with the client instance.
+  rpc BulkMutateRows(MutateRowsRequest) returns (MutateRowsResult) {}
+
+  // Performs a check-and-mutate-row operation with the client instance.
+  rpc CheckAndMutateRow(CheckAndMutateRowRequest)
+      returns (CheckAndMutateRowResult) {}
+
+  // Obtains a row key sampling with the client instance.
+  rpc SampleRowKeys(SampleRowKeysRequest) returns (SampleRowKeysResult) {}
+
+  // Performs a read-modify-write operation with the client.
+  rpc ReadModifyWriteRow(ReadModifyWriteRowRequest) returns (RowResult) {}
+
+  // Executes a BTQL query with the client.
+  rpc ExecuteQuery(ExecuteQueryRequest) returns (ExecuteQueryResult) {}
+}

@@ -69,6 +69,7 @@ import {
   isError,
   substring,
   documentId,
+  parent,
   arrayContainsAll,
   mapRemove,
   mapMerge,
@@ -147,7 +148,11 @@ import {
   type,
   isType,
   timestampTruncate,
+  timestampExtract,
+  timestampDiff,
   split,
+  switchOn,
+  nor,
   // TODO(new-expression): add new expression imports above this line
 } from '../src/pipelines';
 
@@ -1641,6 +1646,27 @@ describe.skipClassic('Pipeline class', () => {
           {title: 'Pride and Prejudice'},
           {title: 'The Lord of the Rings'},
           {title: "The Handmaid's Tale"},
+        );
+      });
+
+      it('where with nor', async () => {
+        const snapshot = await firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .where(
+            nor(
+              equal('genre', 'Romance'),
+              equal('genre', 'Dystopian'),
+              equal('genre', 'Fantasy'),
+              greaterThan('published', 1949),
+            ),
+          )
+          .select('title')
+          .execute();
+        expectResults(
+          snapshot,
+          {title: 'Crime and Punishment'},
+          {title: 'The Great Gatsby'},
         );
       });
 
@@ -4552,6 +4578,29 @@ describe.skipClassic('Pipeline class', () => {
       });
     });
 
+    it('supports parent', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .select(
+          parent(randomCol.doc('book4/reviews/review1')).as('parentRefStatic'),
+          constant(randomCol.doc('book4/reviews/review1'))
+            .parent()
+            .as('parentRefInstance'),
+        )
+        .select(
+          field('parentRefStatic').documentId().as('parentIdStatic'),
+          field('parentRefInstance').documentId().as('parentIdInstance'),
+        )
+        .execute();
+
+      expectResults(snapshot, {
+        parentIdStatic: 'book4',
+        parentIdInstance: 'book4',
+      });
+    });
+
     it('supports substring', async () => {
       let snapshot = await firestore
         .pipeline()
@@ -5052,6 +5101,73 @@ describe.skipClassic('Pipeline class', () => {
       });
     });
 
+    it('supports timestamp difference', async () => {
+      const results = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            end: new Timestamp(1741437296, 123456789),
+            start: new Timestamp(1741428000, 0),
+          }),
+        )
+        .select(
+          timestampDiff(field('end'), field('start'), 'hour').as('diffHour'),
+          field('end').timestampDiff(field('start'), 'minute').as('diffMinute'),
+          field('end').timestampDiff(field('start'), 'second').as('diffSecond'),
+          field('start').timestampDiff(field('end'), 'hour').as('diffHourNeg'),
+        )
+        .execute();
+
+      expectResults(results, {
+        diffHour: 2,
+        diffMinute: 154,
+        diffSecond: 9296,
+        diffHourNeg: -2,
+      });
+    });
+
+    it('supports timestamp extraction', async () => {
+      const results = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            ts: new Timestamp(1741437296, 123456789),
+          }),
+        )
+        .select(
+          timestampExtract(field('ts'), 'year').as('year'),
+          field('ts').timestampExtract('month').as('month'),
+          timestampExtract(field('ts'), 'day').as('day'),
+          field('ts').timestampExtract('hour').as('hour'),
+          timestampExtract(field('ts'), 'minute').as('minute'),
+          field('ts').timestampExtract('second').as('second'),
+          timestampExtract(field('ts'), 'millisecond').as('millis'),
+          field('ts').timestampExtract('microsecond').as('micros'),
+          timestampExtract(field('ts'), 'dayofyear').as('dayOfYear'),
+          field('ts')
+            .timestampExtract('hour', 'America/Los_Angeles')
+            .as('hourLa'),
+        )
+        .execute();
+
+      expectResults(results, {
+        year: 2025,
+        month: 3,
+        day: 8,
+        hour: 12,
+        minute: 34,
+        second: 56,
+        millis: 123,
+        micros: 123456,
+        dayOfYear: 67,
+        hourLa: 4,
+      });
+    });
+
     it('supports split', async () => {
       const results = await firestore
         .pipeline()
@@ -5227,6 +5343,107 @@ describe.skipClassic('Pipeline class', () => {
         isMap: true,
         isArray: true,
         isStrNum: false,
+      });
+    });
+
+    it('supports nor', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            a: false,
+            b: false,
+            c: true,
+            d: null,
+          }),
+        )
+        .select(
+          nor(field('a').asBoolean(), field('b').asBoolean()).as(
+            'twoConditions',
+          ),
+          nor(
+            field('a').asBoolean(),
+            field('b').asBoolean(),
+            field('c').asBoolean(),
+          ).as('threeConditions'),
+          nor(
+            field('a').asBoolean(),
+            field('b').asBoolean(),
+            field('d').asBoolean(),
+          ).as('threeConditionsWithNull'),
+        )
+        .execute();
+
+      expectResults(snapshot, {
+        twoConditions: true,
+        threeConditions: false,
+        threeConditionsWithNull: null,
+      });
+    });
+
+    describe('switchOn', () => {
+      it('supports basic switch', async () => {
+        const snapshot = await firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .limit(1)
+          .replaceWith(map({value: 1}))
+          .select(
+            switchOn(
+              equal(field('value'), 1),
+              constant('one'),
+              constant('NA'),
+            ).as('result1'),
+            switchOn(
+              equal(field('value'), 2),
+              constant('two'),
+              constant('NA'),
+            ).as('result2'),
+          )
+          .execute();
+        expectResults(snapshot, {result1: 'one', result2: 'NA'});
+      });
+
+      it('supports multi-branch switch', async () => {
+        const snapshot = await firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .limit(1)
+          .replaceWith(map({value: 2}))
+          .select(
+            switchOn(
+              equal(field('value'), 1),
+              constant('one'),
+              equal(field('value'), 2),
+              constant('two'),
+              equal(field('value'), 3),
+              constant('three'),
+              constant('default'),
+            ).as('result'),
+          )
+          .execute();
+        expectResults(snapshot, {result: 'two'});
+      });
+
+      it('throws if no match and no default', async () => {
+        await expect(
+          firestore
+            .pipeline()
+            .collection(randomCol.path)
+            .limit(1)
+            .replaceWith(map({value: 5}))
+            .select(
+              switchOn(
+                equal(field('value'), 1),
+                constant('one'),
+                equal(field('value'), 2),
+                constant('two'),
+              ).as('result'),
+            )
+            .execute(),
+        ).to.be.rejectedWith(/all switch cases evaluate to false/);
       });
     });
 

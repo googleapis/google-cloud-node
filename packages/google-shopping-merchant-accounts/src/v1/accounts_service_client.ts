@@ -298,7 +298,7 @@ export class AccountsServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const accountsServiceStubMethods =
-        ['getAccount', 'createAndConfigureAccount', 'deleteAccount', 'updateAccount', 'listAccounts', 'listSubAccounts'];
+        ['getAccount', 'createAndConfigureAccount', 'createTestAccount', 'deleteAccount', 'updateAccount', 'listAccounts', 'listSubAccounts'];
     for (const methodName of accountsServiceStubMethods) {
       const callPromise = this.accountsServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -515,7 +515,7 @@ export class AccountsServiceClient {
  *   `account_aggregation` and `accounts.createAndConfigure` method can be
  *   used to create a sub-account under an existing advanced account through
  *   this method. Additional `account_management` or
- *   `product_management` services may be provided.
+ *   `products_management` services may be provided.
  * @param {number[]} [request.setAlias]
  *   Optional. If a relationship is created with a provider, you can set an
  *   alias for it with this field. The calling user must be an admin on the
@@ -593,6 +593,116 @@ export class AccountsServiceClient {
         {}|undefined
       ]) => {
         this._log.info('createAndConfigureAccount response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Creates a Merchant Center test account.
+ *
+ * Test accounts are intended for development and testing purposes, such as
+ * validating API integrations or new feature behavior.
+ *
+ * Key characteristics and limitations of test accounts:
+ * - Immutable Type: A test account cannot be converted into a regular
+ *   (live) Merchant Center account. Likewise, a regular account cannot be
+ *   converted into a test account.
+ * - Non-Serving Products: Any products, offers, or data created within a
+ *   test account will not be published or made visible to end-users on any
+ *   Google surfaces. They are strictly for testing environments.
+ * - Separate Environment: Test accounts operate in a sandbox-like manner,
+ *   isolated from live serving and real user traffic.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account resource name to create the test account under.
+ *   Format: accounts/{account}
+ * @param {google.shopping.merchant.accounts.v1.Account} request.account
+ *   Required. The account to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.Account|Account}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/accounts_service.create_test_account.js</caption>
+ * region_tag:merchantapi_v1_generated_AccountsService_CreateTestAccount_async
+ */
+  createTestAccount(
+      request?: protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IAccount,
+        protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest|undefined, {}|undefined
+      ]>;
+  createTestAccount(
+      request: protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IAccount,
+          protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  createTestAccount(
+      request: protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IAccount,
+          protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  createTestAccount(
+      request?: protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1.IAccount,
+          protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1.IAccount,
+          protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IAccount,
+        protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createTestAccount request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1.IAccount,
+        protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTestAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createTestAccount(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1.IAccount,
+        protos.google.shopping.merchant.accounts.v1.ICreateTestAccountRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createTestAccount response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

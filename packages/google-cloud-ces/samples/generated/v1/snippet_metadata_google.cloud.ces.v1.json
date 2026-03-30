@@ -254,7 +254,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 72,
           "type": "FULL"
         }
       ],
@@ -273,6 +273,10 @@
           },
           {
             "name": "gcs_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "app_version",
             "type": "TYPE_STRING"
           }
         ],
@@ -2279,7 +2283,7 @@
       "regionTag": "ces_v1_generated_SessionService_RunSession_async",
       "title": "AgentService runSession Sample",
       "origin": "API_DEFINITION",
-      "description": " Initiates a single turn interaction with the CES agent within a session.",
+      "description": " Initiates a single-turn interaction with the CES agent within a session.",
       "canonical": true,
       "file": "session_service.run_session.js",
       "language": "JAVASCRIPT",
@@ -2312,6 +2316,50 @@
         "method": {
           "shortName": "RunSession",
           "fullName": "google.cloud.ces.v1.SessionService.RunSession",
+          "service": {
+            "shortName": "SessionService",
+            "fullName": "google.cloud.ces.v1.SessionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1_generated_SessionService_StreamRunSession_async",
+      "title": "AgentService streamRunSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Initiates a single-turn interaction with the CES agent. Uses server-side streaming to deliver incremental results and partial responses as they are generated. By default, complete responses (e.g., messages from callbacks or full LLM responses) are sent to the client as soon as they are available. To enable streaming individual text chunks directly from the model, set [enable_text_streaming][google.cloud.ces.v1.SessionConfig.enable_text_streaming] to true.",
+      "canonical": true,
+      "file": "session_service.stream_run_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StreamRunSession",
+        "fullName": "google.cloud.ces.v1.SessionService.StreamRunSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": ".google.cloud.ces.v1.SessionConfig"
+          },
+          {
+            "name": "inputs",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1.RunSessionResponse",
+        "client": {
+          "shortName": "SessionServiceClient",
+          "fullName": "google.cloud.ces.v1.SessionServiceClient"
+        },
+        "method": {
+          "shortName": "StreamRunSession",
+          "fullName": "google.cloud.ces.v1.SessionService.StreamRunSession",
           "service": {
             "shortName": "SessionService",
             "fullName": "google.cloud.ces.v1.SessionService"
@@ -2374,7 +2422,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 70,
+          "end": 80,
           "type": "FULL"
         }
       ],
@@ -2390,6 +2438,14 @@
           {
             "name": "toolset_tool",
             "type": ".google.cloud.ces.v1.ToolsetTool"
+          },
+          {
+            "name": "variables",
+            "type": ".google.protobuf.Struct"
+          },
+          {
+            "name": "context",
+            "type": ".google.protobuf.Struct"
           },
           {
             "name": "parent",
@@ -2518,7 +2574,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 70,
           "type": "FULL"
         }
       ],
@@ -2538,6 +2594,10 @@
           {
             "name": "recaptcha_token",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "live_handoff_enabled",
+            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.cloud.ces.v1.GenerateChatTokenResponse",

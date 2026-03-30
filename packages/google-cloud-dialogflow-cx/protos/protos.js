@@ -57510,6 +57510,7 @@
                              * @property {boolean|null} [isFallback] Intent isFallback
                              * @property {Object.<string,string>|null} [labels] Intent labels
                              * @property {string|null} [description] Intent description
+                             * @property {string|null} [dtmfPattern] Intent dtmfPattern
                              */
     
                             /**
@@ -57595,6 +57596,14 @@
                             Intent.prototype.description = "";
     
                             /**
+                             * Intent dtmfPattern.
+                             * @member {string} dtmfPattern
+                             * @memberof google.cloud.dialogflow.cx.v3.Intent
+                             * @instance
+                             */
+                            Intent.prototype.dtmfPattern = "";
+    
+                            /**
                              * Creates a new Intent instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.dialogflow.cx.v3.Intent
@@ -57637,6 +57646,8 @@
                                         writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                                 if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.description);
+                                if (message.dtmfPattern != null && Object.hasOwnProperty.call(message, "dtmfPattern"))
+                                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.dtmfPattern);
                                 return writer;
                             };
     
@@ -57728,6 +57739,10 @@
                                             message.description = reader.string();
                                             break;
                                         }
+                                    case 16: {
+                                            message.dtmfPattern = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -57804,6 +57819,9 @@
                                 if (message.description != null && message.hasOwnProperty("description"))
                                     if (!$util.isString(message.description))
                                         return "description: string expected";
+                                if (message.dtmfPattern != null && message.hasOwnProperty("dtmfPattern"))
+                                    if (!$util.isString(message.dtmfPattern))
+                                        return "dtmfPattern: string expected";
                                 return null;
                             };
     
@@ -57856,6 +57874,8 @@
                                 }
                                 if (object.description != null)
                                     message.description = String(object.description);
+                                if (object.dtmfPattern != null)
+                                    message.dtmfPattern = String(object.dtmfPattern);
                                 return message;
                             };
     
@@ -57884,6 +57904,7 @@
                                     object.priority = 0;
                                     object.isFallback = false;
                                     object.description = "";
+                                    object.dtmfPattern = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -57911,6 +57932,8 @@
                                 }
                                 if (message.description != null && message.hasOwnProperty("description"))
                                     object.description = message.description;
+                                if (message.dtmfPattern != null && message.hasOwnProperty("dtmfPattern"))
+                                    object.dtmfPattern = message.dtmfPattern;
                                 return object;
                             };
     
@@ -68786,6 +68809,7 @@
                              * @property {google.cloud.dialogflow.cx.v3.IAdvancedSettings|null} [advancedSettings] QueryResult advancedSettings
                              * @property {boolean|null} [allowAnswerFeedback] QueryResult allowAnswerFeedback
                              * @property {google.cloud.dialogflow.cx.v3.IDataStoreConnectionSignals|null} [dataStoreConnectionSignals] QueryResult dataStoreConnectionSignals
+                             * @property {Array.<google.cloud.dialogflow.cx.v3.ITraceBlock>|null} [traceBlocks] QueryResult traceBlocks
                              */
     
                             /**
@@ -68800,6 +68824,7 @@
                                 this.responseMessages = [];
                                 this.webhookStatuses = [];
                                 this.webhookPayloads = [];
+                                this.traceBlocks = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -68966,6 +68991,14 @@
                              */
                             QueryResult.prototype.dataStoreConnectionSignals = null;
     
+                            /**
+                             * QueryResult traceBlocks.
+                             * @member {Array.<google.cloud.dialogflow.cx.v3.ITraceBlock>} traceBlocks
+                             * @memberof google.cloud.dialogflow.cx.v3.QueryResult
+                             * @instance
+                             */
+                            QueryResult.prototype.traceBlocks = $util.emptyArray;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -69047,6 +69080,9 @@
                                     writer.uint32(/* id 32, wireType 0 =*/256).bool(message.allowAnswerFeedback);
                                 if (message.dataStoreConnectionSignals != null && Object.hasOwnProperty.call(message, "dataStoreConnectionSignals"))
                                     $root.google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.encode(message.dataStoreConnectionSignals, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                                if (message.traceBlocks != null && message.traceBlocks.length)
+                                    for (var i = 0; i < message.traceBlocks.length; ++i)
+                                        $root.google.cloud.dialogflow.cx.v3.TraceBlock.encode(message.traceBlocks[i], writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
                                 return writer;
                             };
     
@@ -69167,6 +69203,12 @@
                                         }
                                     case 35: {
                                             message.dataStoreConnectionSignals = $root.google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 37: {
+                                            if (!(message.traceBlocks && message.traceBlocks.length))
+                                                message.traceBlocks = [];
+                                            message.traceBlocks.push($root.google.cloud.dialogflow.cx.v3.TraceBlock.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -69322,6 +69364,15 @@
                                     if (error)
                                         return "dataStoreConnectionSignals." + error;
                                 }
+                                if (message.traceBlocks != null && message.hasOwnProperty("traceBlocks")) {
+                                    if (!Array.isArray(message.traceBlocks))
+                                        return "traceBlocks: array expected";
+                                    for (var i = 0; i < message.traceBlocks.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.TraceBlock.verify(message.traceBlocks[i]);
+                                        if (error)
+                                            return "traceBlocks." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -69431,6 +69482,16 @@
                                         throw TypeError(".google.cloud.dialogflow.cx.v3.QueryResult.dataStoreConnectionSignals: object expected");
                                     message.dataStoreConnectionSignals = $root.google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.fromObject(object.dataStoreConnectionSignals);
                                 }
+                                if (object.traceBlocks) {
+                                    if (!Array.isArray(object.traceBlocks))
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.QueryResult.traceBlocks: array expected");
+                                    message.traceBlocks = [];
+                                    for (var i = 0; i < object.traceBlocks.length; ++i) {
+                                        if (typeof object.traceBlocks[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3.QueryResult.traceBlocks: object expected");
+                                        message.traceBlocks[i] = $root.google.cloud.dialogflow.cx.v3.TraceBlock.fromObject(object.traceBlocks[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -69451,6 +69512,7 @@
                                     object.responseMessages = [];
                                     object.webhookPayloads = [];
                                     object.webhookStatuses = [];
+                                    object.traceBlocks = [];
                                 }
                                 if (options.defaults) {
                                     object.languageCode = "";
@@ -69530,6 +69592,11 @@
                                     object.allowAnswerFeedback = message.allowAnswerFeedback;
                                 if (message.dataStoreConnectionSignals != null && message.hasOwnProperty("dataStoreConnectionSignals"))
                                     object.dataStoreConnectionSignals = $root.google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.toObject(message.dataStoreConnectionSignals, options);
+                                if (message.traceBlocks && message.traceBlocks.length) {
+                                    object.traceBlocks = [];
+                                    for (var j = 0; j < message.traceBlocks.length; ++j)
+                                        object.traceBlocks[j] = $root.google.cloud.dialogflow.cx.v3.TraceBlock.toObject(message.traceBlocks[j], options);
+                                }
                                 return object;
                             };
     
@@ -74436,6 +74503,3874 @@
                             };
     
                             return DeleteSessionEntityTypeRequest;
+                        })();
+    
+                        v3.TraceBlock = (function() {
+    
+                            /**
+                             * Properties of a TraceBlock.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface ITraceBlock
+                             * @property {google.cloud.dialogflow.cx.v3.IPlaybookTraceMetadata|null} [playbookTraceMetadata] TraceBlock playbookTraceMetadata
+                             * @property {google.cloud.dialogflow.cx.v3.IFlowTraceMetadata|null} [flowTraceMetadata] TraceBlock flowTraceMetadata
+                             * @property {google.cloud.dialogflow.cx.v3.ISpeechProcessingMetadata|null} [speechProcessingMetadata] TraceBlock speechProcessingMetadata
+                             * @property {Array.<google.cloud.dialogflow.cx.v3.IAction>|null} [actions] TraceBlock actions
+                             * @property {google.protobuf.ITimestamp|null} [startTime] TraceBlock startTime
+                             * @property {google.protobuf.ITimestamp|null} [completeTime] TraceBlock completeTime
+                             * @property {google.protobuf.IStruct|null} [inputParameters] TraceBlock inputParameters
+                             * @property {google.protobuf.IStruct|null} [outputParameters] TraceBlock outputParameters
+                             * @property {google.cloud.dialogflow.cx.v3.OutputState|null} [endState] TraceBlock endState
+                             */
+    
+                            /**
+                             * Constructs a new TraceBlock.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a TraceBlock.
+                             * @implements ITraceBlock
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.ITraceBlock=} [properties] Properties to set
+                             */
+                            function TraceBlock(properties) {
+                                this.actions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TraceBlock playbookTraceMetadata.
+                             * @member {google.cloud.dialogflow.cx.v3.IPlaybookTraceMetadata|null|undefined} playbookTraceMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.playbookTraceMetadata = null;
+    
+                            /**
+                             * TraceBlock flowTraceMetadata.
+                             * @member {google.cloud.dialogflow.cx.v3.IFlowTraceMetadata|null|undefined} flowTraceMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.flowTraceMetadata = null;
+    
+                            /**
+                             * TraceBlock speechProcessingMetadata.
+                             * @member {google.cloud.dialogflow.cx.v3.ISpeechProcessingMetadata|null|undefined} speechProcessingMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.speechProcessingMetadata = null;
+    
+                            /**
+                             * TraceBlock actions.
+                             * @member {Array.<google.cloud.dialogflow.cx.v3.IAction>} actions
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.actions = $util.emptyArray;
+    
+                            /**
+                             * TraceBlock startTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.startTime = null;
+    
+                            /**
+                             * TraceBlock completeTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} completeTime
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.completeTime = null;
+    
+                            /**
+                             * TraceBlock inputParameters.
+                             * @member {google.protobuf.IStruct|null|undefined} inputParameters
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.inputParameters = null;
+    
+                            /**
+                             * TraceBlock outputParameters.
+                             * @member {google.protobuf.IStruct|null|undefined} outputParameters
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.outputParameters = null;
+    
+                            /**
+                             * TraceBlock endState.
+                             * @member {google.cloud.dialogflow.cx.v3.OutputState} endState
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.endState = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * TraceBlock traceMetadata.
+                             * @member {"playbookTraceMetadata"|"flowTraceMetadata"|"speechProcessingMetadata"|undefined} traceMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             */
+                            Object.defineProperty(TraceBlock.prototype, "traceMetadata", {
+                                get: $util.oneOfGetter($oneOfFields = ["playbookTraceMetadata", "flowTraceMetadata", "speechProcessingMetadata"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new TraceBlock instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.ITraceBlock=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.TraceBlock} TraceBlock instance
+                             */
+                            TraceBlock.create = function create(properties) {
+                                return new TraceBlock(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TraceBlock message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.TraceBlock.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.ITraceBlock} message TraceBlock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TraceBlock.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.playbookTraceMetadata != null && Object.hasOwnProperty.call(message, "playbookTraceMetadata"))
+                                    $root.google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata.encode(message.playbookTraceMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.flowTraceMetadata != null && Object.hasOwnProperty.call(message, "flowTraceMetadata"))
+                                    $root.google.cloud.dialogflow.cx.v3.FlowTraceMetadata.encode(message.flowTraceMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.actions != null && message.actions.length)
+                                    for (var i = 0; i < message.actions.length; ++i)
+                                        $root.google.cloud.dialogflow.cx.v3.Action.encode(message.actions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.completeTime != null && Object.hasOwnProperty.call(message, "completeTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.completeTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.outputParameters != null && Object.hasOwnProperty.call(message, "outputParameters"))
+                                    $root.google.protobuf.Struct.encode(message.outputParameters, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.endState != null && Object.hasOwnProperty.call(message, "endState"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.endState);
+                                if (message.speechProcessingMetadata != null && Object.hasOwnProperty.call(message, "speechProcessingMetadata"))
+                                    $root.google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata.encode(message.speechProcessingMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.inputParameters != null && Object.hasOwnProperty.call(message, "inputParameters"))
+                                    $root.google.protobuf.Struct.encode(message.inputParameters, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TraceBlock message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.TraceBlock.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.ITraceBlock} message TraceBlock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TraceBlock.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TraceBlock message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.TraceBlock} TraceBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TraceBlock.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.TraceBlock();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.playbookTraceMetadata = $root.google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.flowTraceMetadata = $root.google.cloud.dialogflow.cx.v3.FlowTraceMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.speechProcessingMetadata = $root.google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.actions && message.actions.length))
+                                                message.actions = [];
+                                            message.actions.push($root.google.cloud.dialogflow.cx.v3.Action.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.completeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.inputParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.outputParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.endState = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TraceBlock message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.TraceBlock} TraceBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TraceBlock.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TraceBlock message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TraceBlock.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.playbookTraceMetadata != null && message.hasOwnProperty("playbookTraceMetadata")) {
+                                    properties.traceMetadata = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata.verify(message.playbookTraceMetadata);
+                                        if (error)
+                                            return "playbookTraceMetadata." + error;
+                                    }
+                                }
+                                if (message.flowTraceMetadata != null && message.hasOwnProperty("flowTraceMetadata")) {
+                                    if (properties.traceMetadata === 1)
+                                        return "traceMetadata: multiple values";
+                                    properties.traceMetadata = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.FlowTraceMetadata.verify(message.flowTraceMetadata);
+                                        if (error)
+                                            return "flowTraceMetadata." + error;
+                                    }
+                                }
+                                if (message.speechProcessingMetadata != null && message.hasOwnProperty("speechProcessingMetadata")) {
+                                    if (properties.traceMetadata === 1)
+                                        return "traceMetadata: multiple values";
+                                    properties.traceMetadata = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata.verify(message.speechProcessingMetadata);
+                                        if (error)
+                                            return "speechProcessingMetadata." + error;
+                                    }
+                                }
+                                if (message.actions != null && message.hasOwnProperty("actions")) {
+                                    if (!Array.isArray(message.actions))
+                                        return "actions: array expected";
+                                    for (var i = 0; i < message.actions.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.Action.verify(message.actions[i]);
+                                        if (error)
+                                            return "actions." + error;
+                                    }
+                                }
+                                if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                    if (error)
+                                        return "startTime." + error;
+                                }
+                                if (message.completeTime != null && message.hasOwnProperty("completeTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.completeTime);
+                                    if (error)
+                                        return "completeTime." + error;
+                                }
+                                if (message.inputParameters != null && message.hasOwnProperty("inputParameters")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.inputParameters);
+                                    if (error)
+                                        return "inputParameters." + error;
+                                }
+                                if (message.outputParameters != null && message.hasOwnProperty("outputParameters")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.outputParameters);
+                                    if (error)
+                                        return "outputParameters." + error;
+                                }
+                                if (message.endState != null && message.hasOwnProperty("endState"))
+                                    switch (message.endState) {
+                                    default:
+                                        return "endState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TraceBlock message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.TraceBlock} TraceBlock
+                             */
+                            TraceBlock.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.TraceBlock)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.TraceBlock();
+                                if (object.playbookTraceMetadata != null) {
+                                    if (typeof object.playbookTraceMetadata !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.TraceBlock.playbookTraceMetadata: object expected");
+                                    message.playbookTraceMetadata = $root.google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata.fromObject(object.playbookTraceMetadata);
+                                }
+                                if (object.flowTraceMetadata != null) {
+                                    if (typeof object.flowTraceMetadata !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.TraceBlock.flowTraceMetadata: object expected");
+                                    message.flowTraceMetadata = $root.google.cloud.dialogflow.cx.v3.FlowTraceMetadata.fromObject(object.flowTraceMetadata);
+                                }
+                                if (object.speechProcessingMetadata != null) {
+                                    if (typeof object.speechProcessingMetadata !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.TraceBlock.speechProcessingMetadata: object expected");
+                                    message.speechProcessingMetadata = $root.google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata.fromObject(object.speechProcessingMetadata);
+                                }
+                                if (object.actions) {
+                                    if (!Array.isArray(object.actions))
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.TraceBlock.actions: array expected");
+                                    message.actions = [];
+                                    for (var i = 0; i < object.actions.length; ++i) {
+                                        if (typeof object.actions[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3.TraceBlock.actions: object expected");
+                                        message.actions[i] = $root.google.cloud.dialogflow.cx.v3.Action.fromObject(object.actions[i]);
+                                    }
+                                }
+                                if (object.startTime != null) {
+                                    if (typeof object.startTime !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.TraceBlock.startTime: object expected");
+                                    message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                }
+                                if (object.completeTime != null) {
+                                    if (typeof object.completeTime !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.TraceBlock.completeTime: object expected");
+                                    message.completeTime = $root.google.protobuf.Timestamp.fromObject(object.completeTime);
+                                }
+                                if (object.inputParameters != null) {
+                                    if (typeof object.inputParameters !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.TraceBlock.inputParameters: object expected");
+                                    message.inputParameters = $root.google.protobuf.Struct.fromObject(object.inputParameters);
+                                }
+                                if (object.outputParameters != null) {
+                                    if (typeof object.outputParameters !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.TraceBlock.outputParameters: object expected");
+                                    message.outputParameters = $root.google.protobuf.Struct.fromObject(object.outputParameters);
+                                }
+                                switch (object.endState) {
+                                default:
+                                    if (typeof object.endState === "number") {
+                                        message.endState = object.endState;
+                                        break;
+                                    }
+                                    break;
+                                case "OUTPUT_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.endState = 0;
+                                    break;
+                                case "OUTPUT_STATE_OK":
+                                case 1:
+                                    message.endState = 1;
+                                    break;
+                                case "OUTPUT_STATE_CANCELLED":
+                                case 2:
+                                    message.endState = 2;
+                                    break;
+                                case "OUTPUT_STATE_FAILED":
+                                case 3:
+                                    message.endState = 3;
+                                    break;
+                                case "OUTPUT_STATE_ESCALATED":
+                                case 4:
+                                    message.endState = 4;
+                                    break;
+                                case "OUTPUT_STATE_PENDING":
+                                case 5:
+                                    message.endState = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TraceBlock message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.TraceBlock} message TraceBlock
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TraceBlock.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.actions = [];
+                                if (options.defaults) {
+                                    object.startTime = null;
+                                    object.completeTime = null;
+                                    object.outputParameters = null;
+                                    object.endState = options.enums === String ? "OUTPUT_STATE_UNSPECIFIED" : 0;
+                                    object.inputParameters = null;
+                                }
+                                if (message.playbookTraceMetadata != null && message.hasOwnProperty("playbookTraceMetadata")) {
+                                    object.playbookTraceMetadata = $root.google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata.toObject(message.playbookTraceMetadata, options);
+                                    if (options.oneofs)
+                                        object.traceMetadata = "playbookTraceMetadata";
+                                }
+                                if (message.flowTraceMetadata != null && message.hasOwnProperty("flowTraceMetadata")) {
+                                    object.flowTraceMetadata = $root.google.cloud.dialogflow.cx.v3.FlowTraceMetadata.toObject(message.flowTraceMetadata, options);
+                                    if (options.oneofs)
+                                        object.traceMetadata = "flowTraceMetadata";
+                                }
+                                if (message.actions && message.actions.length) {
+                                    object.actions = [];
+                                    for (var j = 0; j < message.actions.length; ++j)
+                                        object.actions[j] = $root.google.cloud.dialogflow.cx.v3.Action.toObject(message.actions[j], options);
+                                }
+                                if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                    object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                                if (message.completeTime != null && message.hasOwnProperty("completeTime"))
+                                    object.completeTime = $root.google.protobuf.Timestamp.toObject(message.completeTime, options);
+                                if (message.outputParameters != null && message.hasOwnProperty("outputParameters"))
+                                    object.outputParameters = $root.google.protobuf.Struct.toObject(message.outputParameters, options);
+                                if (message.endState != null && message.hasOwnProperty("endState"))
+                                    object.endState = options.enums === String ? $root.google.cloud.dialogflow.cx.v3.OutputState[message.endState] === undefined ? message.endState : $root.google.cloud.dialogflow.cx.v3.OutputState[message.endState] : message.endState;
+                                if (message.speechProcessingMetadata != null && message.hasOwnProperty("speechProcessingMetadata")) {
+                                    object.speechProcessingMetadata = $root.google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata.toObject(message.speechProcessingMetadata, options);
+                                    if (options.oneofs)
+                                        object.traceMetadata = "speechProcessingMetadata";
+                                }
+                                if (message.inputParameters != null && message.hasOwnProperty("inputParameters"))
+                                    object.inputParameters = $root.google.protobuf.Struct.toObject(message.inputParameters, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TraceBlock to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TraceBlock.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TraceBlock
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.TraceBlock
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TraceBlock.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.TraceBlock";
+                            };
+    
+                            return TraceBlock;
+                        })();
+    
+                        v3.SpeechProcessingMetadata = (function() {
+    
+                            /**
+                             * Properties of a SpeechProcessingMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface ISpeechProcessingMetadata
+                             * @property {string|null} [displayName] SpeechProcessingMetadata displayName
+                             */
+    
+                            /**
+                             * Constructs a new SpeechProcessingMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a SpeechProcessingMetadata.
+                             * @implements ISpeechProcessingMetadata
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.ISpeechProcessingMetadata=} [properties] Properties to set
+                             */
+                            function SpeechProcessingMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SpeechProcessingMetadata displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @instance
+                             */
+                            SpeechProcessingMetadata.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new SpeechProcessingMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.ISpeechProcessingMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata} SpeechProcessingMetadata instance
+                             */
+                            SpeechProcessingMetadata.create = function create(properties) {
+                                return new SpeechProcessingMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SpeechProcessingMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.ISpeechProcessingMetadata} message SpeechProcessingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpeechProcessingMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SpeechProcessingMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.ISpeechProcessingMetadata} message SpeechProcessingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpeechProcessingMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SpeechProcessingMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata} SpeechProcessingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpeechProcessingMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SpeechProcessingMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata} SpeechProcessingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpeechProcessingMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SpeechProcessingMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SpeechProcessingMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SpeechProcessingMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata} SpeechProcessingMetadata
+                             */
+                            SpeechProcessingMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SpeechProcessingMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata} message SpeechProcessingMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SpeechProcessingMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.displayName = "";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SpeechProcessingMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SpeechProcessingMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SpeechProcessingMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SpeechProcessingMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.SpeechProcessingMetadata";
+                            };
+    
+                            return SpeechProcessingMetadata;
+                        })();
+    
+                        v3.PlaybookTraceMetadata = (function() {
+    
+                            /**
+                             * Properties of a PlaybookTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IPlaybookTraceMetadata
+                             * @property {string|null} [playbook] PlaybookTraceMetadata playbook
+                             * @property {string|null} [displayName] PlaybookTraceMetadata displayName
+                             */
+    
+                            /**
+                             * Constructs a new PlaybookTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a PlaybookTraceMetadata.
+                             * @implements IPlaybookTraceMetadata
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTraceMetadata=} [properties] Properties to set
+                             */
+                            function PlaybookTraceMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PlaybookTraceMetadata playbook.
+                             * @member {string} playbook
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @instance
+                             */
+                            PlaybookTraceMetadata.prototype.playbook = "";
+    
+                            /**
+                             * PlaybookTraceMetadata displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @instance
+                             */
+                            PlaybookTraceMetadata.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new PlaybookTraceMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTraceMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata} PlaybookTraceMetadata instance
+                             */
+                            PlaybookTraceMetadata.create = function create(properties) {
+                                return new PlaybookTraceMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookTraceMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTraceMetadata} message PlaybookTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookTraceMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.playbook != null && Object.hasOwnProperty.call(message, "playbook"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.playbook);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookTraceMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTraceMetadata} message PlaybookTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookTraceMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PlaybookTraceMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata} PlaybookTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookTraceMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.playbook = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PlaybookTraceMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata} PlaybookTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookTraceMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PlaybookTraceMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PlaybookTraceMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    if (!$util.isString(message.playbook))
+                                        return "playbook: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PlaybookTraceMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata} PlaybookTraceMetadata
+                             */
+                            PlaybookTraceMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata();
+                                if (object.playbook != null)
+                                    message.playbook = String(object.playbook);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PlaybookTraceMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata} message PlaybookTraceMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PlaybookTraceMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.playbook = "";
+                                    object.displayName = "";
+                                }
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    object.playbook = message.playbook;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PlaybookTraceMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PlaybookTraceMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PlaybookTraceMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PlaybookTraceMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.PlaybookTraceMetadata";
+                            };
+    
+                            return PlaybookTraceMetadata;
+                        })();
+    
+                        v3.FlowTraceMetadata = (function() {
+    
+                            /**
+                             * Properties of a FlowTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IFlowTraceMetadata
+                             * @property {string|null} [flow] FlowTraceMetadata flow
+                             * @property {string|null} [displayName] FlowTraceMetadata displayName
+                             */
+    
+                            /**
+                             * Constructs a new FlowTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a FlowTraceMetadata.
+                             * @implements IFlowTraceMetadata
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowTraceMetadata=} [properties] Properties to set
+                             */
+                            function FlowTraceMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FlowTraceMetadata flow.
+                             * @member {string} flow
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @instance
+                             */
+                            FlowTraceMetadata.prototype.flow = "";
+    
+                            /**
+                             * FlowTraceMetadata displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @instance
+                             */
+                            FlowTraceMetadata.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new FlowTraceMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowTraceMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowTraceMetadata} FlowTraceMetadata instance
+                             */
+                            FlowTraceMetadata.create = function create(properties) {
+                                return new FlowTraceMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FlowTraceMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowTraceMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowTraceMetadata} message FlowTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowTraceMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.flow != null && Object.hasOwnProperty.call(message, "flow"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.flow);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FlowTraceMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowTraceMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowTraceMetadata} message FlowTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowTraceMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FlowTraceMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowTraceMetadata} FlowTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowTraceMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.FlowTraceMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.flow = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FlowTraceMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowTraceMetadata} FlowTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowTraceMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FlowTraceMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FlowTraceMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    if (!$util.isString(message.flow))
+                                        return "flow: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FlowTraceMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowTraceMetadata} FlowTraceMetadata
+                             */
+                            FlowTraceMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.FlowTraceMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.FlowTraceMetadata();
+                                if (object.flow != null)
+                                    message.flow = String(object.flow);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FlowTraceMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.FlowTraceMetadata} message FlowTraceMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FlowTraceMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.flow = "";
+                                    object.displayName = "";
+                                }
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    object.flow = message.flow;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FlowTraceMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FlowTraceMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FlowTraceMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTraceMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FlowTraceMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.FlowTraceMetadata";
+                            };
+    
+                            return FlowTraceMetadata;
+                        })();
+    
+                        v3.PlaybookInput = (function() {
+    
+                            /**
+                             * Properties of a PlaybookInput.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IPlaybookInput
+                             * @property {string|null} [precedingConversationSummary] PlaybookInput precedingConversationSummary
+                             */
+    
+                            /**
+                             * Constructs a new PlaybookInput.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a PlaybookInput.
+                             * @implements IPlaybookInput
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInput=} [properties] Properties to set
+                             */
+                            function PlaybookInput(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PlaybookInput precedingConversationSummary.
+                             * @member {string} precedingConversationSummary
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @instance
+                             */
+                            PlaybookInput.prototype.precedingConversationSummary = "";
+    
+                            /**
+                             * Creates a new PlaybookInput instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInput=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInput} PlaybookInput instance
+                             */
+                            PlaybookInput.create = function create(properties) {
+                                return new PlaybookInput(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookInput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInput.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInput} message PlaybookInput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookInput.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.precedingConversationSummary != null && Object.hasOwnProperty.call(message, "precedingConversationSummary"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.precedingConversationSummary);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookInput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInput.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInput} message PlaybookInput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookInput.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PlaybookInput message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInput} PlaybookInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookInput.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.PlaybookInput();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.precedingConversationSummary = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PlaybookInput message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInput} PlaybookInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookInput.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PlaybookInput message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PlaybookInput.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.precedingConversationSummary != null && message.hasOwnProperty("precedingConversationSummary"))
+                                    if (!$util.isString(message.precedingConversationSummary))
+                                        return "precedingConversationSummary: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PlaybookInput message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInput} PlaybookInput
+                             */
+                            PlaybookInput.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.PlaybookInput)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.PlaybookInput();
+                                if (object.precedingConversationSummary != null)
+                                    message.precedingConversationSummary = String(object.precedingConversationSummary);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PlaybookInput message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.PlaybookInput} message PlaybookInput
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PlaybookInput.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.precedingConversationSummary = "";
+                                if (message.precedingConversationSummary != null && message.hasOwnProperty("precedingConversationSummary"))
+                                    object.precedingConversationSummary = message.precedingConversationSummary;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PlaybookInput to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PlaybookInput.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PlaybookInput
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PlaybookInput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.PlaybookInput";
+                            };
+    
+                            return PlaybookInput;
+                        })();
+    
+                        v3.PlaybookOutput = (function() {
+    
+                            /**
+                             * Properties of a PlaybookOutput.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IPlaybookOutput
+                             * @property {string|null} [executionSummary] PlaybookOutput executionSummary
+                             */
+    
+                            /**
+                             * Constructs a new PlaybookOutput.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a PlaybookOutput.
+                             * @implements IPlaybookOutput
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookOutput=} [properties] Properties to set
+                             */
+                            function PlaybookOutput(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PlaybookOutput executionSummary.
+                             * @member {string} executionSummary
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @instance
+                             */
+                            PlaybookOutput.prototype.executionSummary = "";
+    
+                            /**
+                             * Creates a new PlaybookOutput instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookOutput=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookOutput} PlaybookOutput instance
+                             */
+                            PlaybookOutput.create = function create(properties) {
+                                return new PlaybookOutput(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookOutput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookOutput.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookOutput} message PlaybookOutput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookOutput.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.executionSummary != null && Object.hasOwnProperty.call(message, "executionSummary"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.executionSummary);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookOutput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookOutput.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookOutput} message PlaybookOutput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookOutput.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PlaybookOutput message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookOutput} PlaybookOutput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookOutput.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.PlaybookOutput();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.executionSummary = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PlaybookOutput message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookOutput} PlaybookOutput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookOutput.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PlaybookOutput message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PlaybookOutput.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.executionSummary != null && message.hasOwnProperty("executionSummary"))
+                                    if (!$util.isString(message.executionSummary))
+                                        return "executionSummary: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PlaybookOutput message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookOutput} PlaybookOutput
+                             */
+                            PlaybookOutput.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.PlaybookOutput)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.PlaybookOutput();
+                                if (object.executionSummary != null)
+                                    message.executionSummary = String(object.executionSummary);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PlaybookOutput message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.PlaybookOutput} message PlaybookOutput
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PlaybookOutput.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.executionSummary = "";
+                                if (message.executionSummary != null && message.hasOwnProperty("executionSummary"))
+                                    object.executionSummary = message.executionSummary;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PlaybookOutput to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PlaybookOutput.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PlaybookOutput
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PlaybookOutput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.PlaybookOutput";
+                            };
+    
+                            return PlaybookOutput;
+                        })();
+    
+                        v3.Action = (function() {
+    
+                            /**
+                             * Properties of an Action.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IAction
+                             * @property {google.cloud.dialogflow.cx.v3.IUserUtterance|null} [userUtterance] Action userUtterance
+                             * @property {google.cloud.dialogflow.cx.v3.IAgentUtterance|null} [agentUtterance] Action agentUtterance
+                             * @property {google.cloud.dialogflow.cx.v3.IToolUse|null} [toolUse] Action toolUse
+                             * @property {google.cloud.dialogflow.cx.v3.IPlaybookInvocation|null} [playbookInvocation] Action playbookInvocation
+                             * @property {google.cloud.dialogflow.cx.v3.IFlowInvocation|null} [flowInvocation] Action flowInvocation
+                             * @property {google.cloud.dialogflow.cx.v3.IPlaybookTransition|null} [playbookTransition] Action playbookTransition
+                             * @property {google.cloud.dialogflow.cx.v3.IFlowTransition|null} [flowTransition] Action flowTransition
+                             */
+    
+                            /**
+                             * Constructs a new Action.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents an Action.
+                             * @implements IAction
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IAction=} [properties] Properties to set
+                             */
+                            function Action(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Action userUtterance.
+                             * @member {google.cloud.dialogflow.cx.v3.IUserUtterance|null|undefined} userUtterance
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @instance
+                             */
+                            Action.prototype.userUtterance = null;
+    
+                            /**
+                             * Action agentUtterance.
+                             * @member {google.cloud.dialogflow.cx.v3.IAgentUtterance|null|undefined} agentUtterance
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @instance
+                             */
+                            Action.prototype.agentUtterance = null;
+    
+                            /**
+                             * Action toolUse.
+                             * @member {google.cloud.dialogflow.cx.v3.IToolUse|null|undefined} toolUse
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @instance
+                             */
+                            Action.prototype.toolUse = null;
+    
+                            /**
+                             * Action playbookInvocation.
+                             * @member {google.cloud.dialogflow.cx.v3.IPlaybookInvocation|null|undefined} playbookInvocation
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @instance
+                             */
+                            Action.prototype.playbookInvocation = null;
+    
+                            /**
+                             * Action flowInvocation.
+                             * @member {google.cloud.dialogflow.cx.v3.IFlowInvocation|null|undefined} flowInvocation
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @instance
+                             */
+                            Action.prototype.flowInvocation = null;
+    
+                            /**
+                             * Action playbookTransition.
+                             * @member {google.cloud.dialogflow.cx.v3.IPlaybookTransition|null|undefined} playbookTransition
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @instance
+                             */
+                            Action.prototype.playbookTransition = null;
+    
+                            /**
+                             * Action flowTransition.
+                             * @member {google.cloud.dialogflow.cx.v3.IFlowTransition|null|undefined} flowTransition
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @instance
+                             */
+                            Action.prototype.flowTransition = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Action action.
+                             * @member {"userUtterance"|"agentUtterance"|"toolUse"|"playbookInvocation"|"flowInvocation"|"playbookTransition"|"flowTransition"|undefined} action
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @instance
+                             */
+                            Object.defineProperty(Action.prototype, "action", {
+                                get: $util.oneOfGetter($oneOfFields = ["userUtterance", "agentUtterance", "toolUse", "playbookInvocation", "flowInvocation", "playbookTransition", "flowTransition"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Action instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IAction=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.Action} Action instance
+                             */
+                            Action.create = function create(properties) {
+                                return new Action(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Action message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Action.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IAction} message Action message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Action.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.userUtterance != null && Object.hasOwnProperty.call(message, "userUtterance"))
+                                    $root.google.cloud.dialogflow.cx.v3.UserUtterance.encode(message.userUtterance, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.agentUtterance != null && Object.hasOwnProperty.call(message, "agentUtterance"))
+                                    $root.google.cloud.dialogflow.cx.v3.AgentUtterance.encode(message.agentUtterance, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.toolUse != null && Object.hasOwnProperty.call(message, "toolUse"))
+                                    $root.google.cloud.dialogflow.cx.v3.ToolUse.encode(message.toolUse, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.playbookInvocation != null && Object.hasOwnProperty.call(message, "playbookInvocation"))
+                                    $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.encode(message.playbookInvocation, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.flowInvocation != null && Object.hasOwnProperty.call(message, "flowInvocation"))
+                                    $root.google.cloud.dialogflow.cx.v3.FlowInvocation.encode(message.flowInvocation, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.playbookTransition != null && Object.hasOwnProperty.call(message, "playbookTransition"))
+                                    $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.encode(message.playbookTransition, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                if (message.flowTransition != null && Object.hasOwnProperty.call(message, "flowTransition"))
+                                    $root.google.cloud.dialogflow.cx.v3.FlowTransition.encode(message.flowTransition, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Action message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Action.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IAction} message Action message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Action.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Action message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.Action} Action
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Action.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.Action();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.userUtterance = $root.google.cloud.dialogflow.cx.v3.UserUtterance.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.agentUtterance = $root.google.cloud.dialogflow.cx.v3.AgentUtterance.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.toolUse = $root.google.cloud.dialogflow.cx.v3.ToolUse.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.playbookInvocation = $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.flowInvocation = $root.google.cloud.dialogflow.cx.v3.FlowInvocation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.playbookTransition = $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.flowTransition = $root.google.cloud.dialogflow.cx.v3.FlowTransition.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Action message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.Action} Action
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Action.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Action message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Action.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.userUtterance != null && message.hasOwnProperty("userUtterance")) {
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.UserUtterance.verify(message.userUtterance);
+                                        if (error)
+                                            return "userUtterance." + error;
+                                    }
+                                }
+                                if (message.agentUtterance != null && message.hasOwnProperty("agentUtterance")) {
+                                    if (properties.action === 1)
+                                        return "action: multiple values";
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.AgentUtterance.verify(message.agentUtterance);
+                                        if (error)
+                                            return "agentUtterance." + error;
+                                    }
+                                }
+                                if (message.toolUse != null && message.hasOwnProperty("toolUse")) {
+                                    if (properties.action === 1)
+                                        return "action: multiple values";
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.ToolUse.verify(message.toolUse);
+                                        if (error)
+                                            return "toolUse." + error;
+                                    }
+                                }
+                                if (message.playbookInvocation != null && message.hasOwnProperty("playbookInvocation")) {
+                                    if (properties.action === 1)
+                                        return "action: multiple values";
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.verify(message.playbookInvocation);
+                                        if (error)
+                                            return "playbookInvocation." + error;
+                                    }
+                                }
+                                if (message.flowInvocation != null && message.hasOwnProperty("flowInvocation")) {
+                                    if (properties.action === 1)
+                                        return "action: multiple values";
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.FlowInvocation.verify(message.flowInvocation);
+                                        if (error)
+                                            return "flowInvocation." + error;
+                                    }
+                                }
+                                if (message.playbookTransition != null && message.hasOwnProperty("playbookTransition")) {
+                                    if (properties.action === 1)
+                                        return "action: multiple values";
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.verify(message.playbookTransition);
+                                        if (error)
+                                            return "playbookTransition." + error;
+                                    }
+                                }
+                                if (message.flowTransition != null && message.hasOwnProperty("flowTransition")) {
+                                    if (properties.action === 1)
+                                        return "action: multiple values";
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.FlowTransition.verify(message.flowTransition);
+                                        if (error)
+                                            return "flowTransition." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Action message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.Action} Action
+                             */
+                            Action.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.Action)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.Action();
+                                if (object.userUtterance != null) {
+                                    if (typeof object.userUtterance !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.userUtterance: object expected");
+                                    message.userUtterance = $root.google.cloud.dialogflow.cx.v3.UserUtterance.fromObject(object.userUtterance);
+                                }
+                                if (object.agentUtterance != null) {
+                                    if (typeof object.agentUtterance !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.agentUtterance: object expected");
+                                    message.agentUtterance = $root.google.cloud.dialogflow.cx.v3.AgentUtterance.fromObject(object.agentUtterance);
+                                }
+                                if (object.toolUse != null) {
+                                    if (typeof object.toolUse !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.toolUse: object expected");
+                                    message.toolUse = $root.google.cloud.dialogflow.cx.v3.ToolUse.fromObject(object.toolUse);
+                                }
+                                if (object.playbookInvocation != null) {
+                                    if (typeof object.playbookInvocation !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.playbookInvocation: object expected");
+                                    message.playbookInvocation = $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.fromObject(object.playbookInvocation);
+                                }
+                                if (object.flowInvocation != null) {
+                                    if (typeof object.flowInvocation !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.flowInvocation: object expected");
+                                    message.flowInvocation = $root.google.cloud.dialogflow.cx.v3.FlowInvocation.fromObject(object.flowInvocation);
+                                }
+                                if (object.playbookTransition != null) {
+                                    if (typeof object.playbookTransition !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.playbookTransition: object expected");
+                                    message.playbookTransition = $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.fromObject(object.playbookTransition);
+                                }
+                                if (object.flowTransition != null) {
+                                    if (typeof object.flowTransition !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.flowTransition: object expected");
+                                    message.flowTransition = $root.google.cloud.dialogflow.cx.v3.FlowTransition.fromObject(object.flowTransition);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Action message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.Action} message Action
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Action.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.userUtterance != null && message.hasOwnProperty("userUtterance")) {
+                                    object.userUtterance = $root.google.cloud.dialogflow.cx.v3.UserUtterance.toObject(message.userUtterance, options);
+                                    if (options.oneofs)
+                                        object.action = "userUtterance";
+                                }
+                                if (message.agentUtterance != null && message.hasOwnProperty("agentUtterance")) {
+                                    object.agentUtterance = $root.google.cloud.dialogflow.cx.v3.AgentUtterance.toObject(message.agentUtterance, options);
+                                    if (options.oneofs)
+                                        object.action = "agentUtterance";
+                                }
+                                if (message.toolUse != null && message.hasOwnProperty("toolUse")) {
+                                    object.toolUse = $root.google.cloud.dialogflow.cx.v3.ToolUse.toObject(message.toolUse, options);
+                                    if (options.oneofs)
+                                        object.action = "toolUse";
+                                }
+                                if (message.playbookInvocation != null && message.hasOwnProperty("playbookInvocation")) {
+                                    object.playbookInvocation = $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.toObject(message.playbookInvocation, options);
+                                    if (options.oneofs)
+                                        object.action = "playbookInvocation";
+                                }
+                                if (message.flowInvocation != null && message.hasOwnProperty("flowInvocation")) {
+                                    object.flowInvocation = $root.google.cloud.dialogflow.cx.v3.FlowInvocation.toObject(message.flowInvocation, options);
+                                    if (options.oneofs)
+                                        object.action = "flowInvocation";
+                                }
+                                if (message.playbookTransition != null && message.hasOwnProperty("playbookTransition")) {
+                                    object.playbookTransition = $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.toObject(message.playbookTransition, options);
+                                    if (options.oneofs)
+                                        object.action = "playbookTransition";
+                                }
+                                if (message.flowTransition != null && message.hasOwnProperty("flowTransition")) {
+                                    object.flowTransition = $root.google.cloud.dialogflow.cx.v3.FlowTransition.toObject(message.flowTransition, options);
+                                    if (options.oneofs)
+                                        object.action = "flowTransition";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Action to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Action.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Action
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.Action
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Action.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.Action";
+                            };
+    
+                            return Action;
+                        })();
+    
+                        v3.UserUtterance = (function() {
+    
+                            /**
+                             * Properties of a UserUtterance.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IUserUtterance
+                             * @property {string|null} [text] UserUtterance text
+                             */
+    
+                            /**
+                             * Constructs a new UserUtterance.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a UserUtterance.
+                             * @implements IUserUtterance
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IUserUtterance=} [properties] Properties to set
+                             */
+                            function UserUtterance(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UserUtterance text.
+                             * @member {string} text
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @instance
+                             */
+                            UserUtterance.prototype.text = "";
+    
+                            /**
+                             * Creates a new UserUtterance instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IUserUtterance=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.UserUtterance} UserUtterance instance
+                             */
+                            UserUtterance.create = function create(properties) {
+                                return new UserUtterance(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserUtterance message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UserUtterance.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IUserUtterance} message UserUtterance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserUtterance.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserUtterance message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UserUtterance.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IUserUtterance} message UserUtterance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserUtterance.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserUtterance message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.UserUtterance} UserUtterance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserUtterance.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.UserUtterance();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.text = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserUtterance message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.UserUtterance} UserUtterance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserUtterance.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserUtterance message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserUtterance.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.text != null && message.hasOwnProperty("text"))
+                                    if (!$util.isString(message.text))
+                                        return "text: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserUtterance message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.UserUtterance} UserUtterance
+                             */
+                            UserUtterance.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.UserUtterance)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.UserUtterance();
+                                if (object.text != null)
+                                    message.text = String(object.text);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserUtterance message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.UserUtterance} message UserUtterance
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserUtterance.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.text = "";
+                                if (message.text != null && message.hasOwnProperty("text"))
+                                    object.text = message.text;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UserUtterance to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserUtterance.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UserUtterance
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UserUtterance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.UserUtterance";
+                            };
+    
+                            return UserUtterance;
+                        })();
+    
+                        v3.AgentUtterance = (function() {
+    
+                            /**
+                             * Properties of an AgentUtterance.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IAgentUtterance
+                             * @property {string|null} [text] AgentUtterance text
+                             */
+    
+                            /**
+                             * Constructs a new AgentUtterance.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents an AgentUtterance.
+                             * @implements IAgentUtterance
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IAgentUtterance=} [properties] Properties to set
+                             */
+                            function AgentUtterance(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AgentUtterance text.
+                             * @member {string} text
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @instance
+                             */
+                            AgentUtterance.prototype.text = "";
+    
+                            /**
+                             * Creates a new AgentUtterance instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IAgentUtterance=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.AgentUtterance} AgentUtterance instance
+                             */
+                            AgentUtterance.create = function create(properties) {
+                                return new AgentUtterance(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AgentUtterance message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AgentUtterance.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IAgentUtterance} message AgentUtterance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AgentUtterance.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AgentUtterance message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AgentUtterance.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IAgentUtterance} message AgentUtterance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AgentUtterance.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AgentUtterance message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.AgentUtterance} AgentUtterance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AgentUtterance.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.AgentUtterance();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.text = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AgentUtterance message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.AgentUtterance} AgentUtterance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AgentUtterance.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AgentUtterance message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AgentUtterance.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.text != null && message.hasOwnProperty("text"))
+                                    if (!$util.isString(message.text))
+                                        return "text: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AgentUtterance message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.AgentUtterance} AgentUtterance
+                             */
+                            AgentUtterance.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.AgentUtterance)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.AgentUtterance();
+                                if (object.text != null)
+                                    message.text = String(object.text);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AgentUtterance message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.AgentUtterance} message AgentUtterance
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AgentUtterance.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.text = "";
+                                if (message.text != null && message.hasOwnProperty("text"))
+                                    object.text = message.text;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AgentUtterance to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AgentUtterance.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AgentUtterance
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AgentUtterance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.AgentUtterance";
+                            };
+    
+                            return AgentUtterance;
+                        })();
+    
+                        v3.ToolUse = (function() {
+    
+                            /**
+                             * Properties of a ToolUse.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IToolUse
+                             * @property {string|null} [tool] ToolUse tool
+                             * @property {string|null} [displayName] ToolUse displayName
+                             * @property {string|null} [action] ToolUse action
+                             * @property {google.protobuf.IStruct|null} [inputActionParameters] ToolUse inputActionParameters
+                             * @property {google.protobuf.IStruct|null} [outputActionParameters] ToolUse outputActionParameters
+                             */
+    
+                            /**
+                             * Constructs a new ToolUse.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a ToolUse.
+                             * @implements IToolUse
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IToolUse=} [properties] Properties to set
+                             */
+                            function ToolUse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ToolUse tool.
+                             * @member {string} tool
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @instance
+                             */
+                            ToolUse.prototype.tool = "";
+    
+                            /**
+                             * ToolUse displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @instance
+                             */
+                            ToolUse.prototype.displayName = "";
+    
+                            /**
+                             * ToolUse action.
+                             * @member {string} action
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @instance
+                             */
+                            ToolUse.prototype.action = "";
+    
+                            /**
+                             * ToolUse inputActionParameters.
+                             * @member {google.protobuf.IStruct|null|undefined} inputActionParameters
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @instance
+                             */
+                            ToolUse.prototype.inputActionParameters = null;
+    
+                            /**
+                             * ToolUse outputActionParameters.
+                             * @member {google.protobuf.IStruct|null|undefined} outputActionParameters
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @instance
+                             */
+                            ToolUse.prototype.outputActionParameters = null;
+    
+                            /**
+                             * Creates a new ToolUse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IToolUse=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.ToolUse} ToolUse instance
+                             */
+                            ToolUse.create = function create(properties) {
+                                return new ToolUse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ToolUse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolUse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IToolUse} message ToolUse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ToolUse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.tool != null && Object.hasOwnProperty.call(message, "tool"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.tool);
+                                if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.action);
+                                if (message.inputActionParameters != null && Object.hasOwnProperty.call(message, "inputActionParameters"))
+                                    $root.google.protobuf.Struct.encode(message.inputActionParameters, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.outputActionParameters != null && Object.hasOwnProperty.call(message, "outputActionParameters"))
+                                    $root.google.protobuf.Struct.encode(message.outputActionParameters, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ToolUse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolUse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IToolUse} message ToolUse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ToolUse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ToolUse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.ToolUse} ToolUse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ToolUse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.ToolUse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.tool = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.action = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.inputActionParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.outputActionParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ToolUse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.ToolUse} ToolUse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ToolUse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ToolUse message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ToolUse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.tool != null && message.hasOwnProperty("tool"))
+                                    if (!$util.isString(message.tool))
+                                        return "tool: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.action != null && message.hasOwnProperty("action"))
+                                    if (!$util.isString(message.action))
+                                        return "action: string expected";
+                                if (message.inputActionParameters != null && message.hasOwnProperty("inputActionParameters")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.inputActionParameters);
+                                    if (error)
+                                        return "inputActionParameters." + error;
+                                }
+                                if (message.outputActionParameters != null && message.hasOwnProperty("outputActionParameters")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.outputActionParameters);
+                                    if (error)
+                                        return "outputActionParameters." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ToolUse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.ToolUse} ToolUse
+                             */
+                            ToolUse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.ToolUse)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.ToolUse();
+                                if (object.tool != null)
+                                    message.tool = String(object.tool);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.action != null)
+                                    message.action = String(object.action);
+                                if (object.inputActionParameters != null) {
+                                    if (typeof object.inputActionParameters !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.ToolUse.inputActionParameters: object expected");
+                                    message.inputActionParameters = $root.google.protobuf.Struct.fromObject(object.inputActionParameters);
+                                }
+                                if (object.outputActionParameters != null) {
+                                    if (typeof object.outputActionParameters !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.ToolUse.outputActionParameters: object expected");
+                                    message.outputActionParameters = $root.google.protobuf.Struct.fromObject(object.outputActionParameters);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ToolUse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.ToolUse} message ToolUse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ToolUse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.tool = "";
+                                    object.action = "";
+                                    object.inputActionParameters = null;
+                                    object.outputActionParameters = null;
+                                    object.displayName = "";
+                                }
+                                if (message.tool != null && message.hasOwnProperty("tool"))
+                                    object.tool = message.tool;
+                                if (message.action != null && message.hasOwnProperty("action"))
+                                    object.action = message.action;
+                                if (message.inputActionParameters != null && message.hasOwnProperty("inputActionParameters"))
+                                    object.inputActionParameters = $root.google.protobuf.Struct.toObject(message.inputActionParameters, options);
+                                if (message.outputActionParameters != null && message.hasOwnProperty("outputActionParameters"))
+                                    object.outputActionParameters = $root.google.protobuf.Struct.toObject(message.outputActionParameters, options);
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ToolUse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ToolUse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ToolUse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ToolUse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.ToolUse";
+                            };
+    
+                            return ToolUse;
+                        })();
+    
+                        v3.PlaybookInvocation = (function() {
+    
+                            /**
+                             * Properties of a PlaybookInvocation.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IPlaybookInvocation
+                             * @property {string|null} [playbook] PlaybookInvocation playbook
+                             * @property {string|null} [displayName] PlaybookInvocation displayName
+                             * @property {google.cloud.dialogflow.cx.v3.IPlaybookInput|null} [playbookInput] PlaybookInvocation playbookInput
+                             * @property {google.cloud.dialogflow.cx.v3.IPlaybookOutput|null} [playbookOutput] PlaybookInvocation playbookOutput
+                             * @property {google.cloud.dialogflow.cx.v3.OutputState|null} [playbookState] PlaybookInvocation playbookState
+                             */
+    
+                            /**
+                             * Constructs a new PlaybookInvocation.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a PlaybookInvocation.
+                             * @implements IPlaybookInvocation
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInvocation=} [properties] Properties to set
+                             */
+                            function PlaybookInvocation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PlaybookInvocation playbook.
+                             * @member {string} playbook
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @instance
+                             */
+                            PlaybookInvocation.prototype.playbook = "";
+    
+                            /**
+                             * PlaybookInvocation displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @instance
+                             */
+                            PlaybookInvocation.prototype.displayName = "";
+    
+                            /**
+                             * PlaybookInvocation playbookInput.
+                             * @member {google.cloud.dialogflow.cx.v3.IPlaybookInput|null|undefined} playbookInput
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @instance
+                             */
+                            PlaybookInvocation.prototype.playbookInput = null;
+    
+                            /**
+                             * PlaybookInvocation playbookOutput.
+                             * @member {google.cloud.dialogflow.cx.v3.IPlaybookOutput|null|undefined} playbookOutput
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @instance
+                             */
+                            PlaybookInvocation.prototype.playbookOutput = null;
+    
+                            /**
+                             * PlaybookInvocation playbookState.
+                             * @member {google.cloud.dialogflow.cx.v3.OutputState} playbookState
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @instance
+                             */
+                            PlaybookInvocation.prototype.playbookState = 0;
+    
+                            /**
+                             * Creates a new PlaybookInvocation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInvocation=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInvocation} PlaybookInvocation instance
+                             */
+                            PlaybookInvocation.create = function create(properties) {
+                                return new PlaybookInvocation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookInvocation message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInvocation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInvocation} message PlaybookInvocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookInvocation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.playbook != null && Object.hasOwnProperty.call(message, "playbook"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.playbook);
+                                if (message.playbookInput != null && Object.hasOwnProperty.call(message, "playbookInput"))
+                                    $root.google.cloud.dialogflow.cx.v3.PlaybookInput.encode(message.playbookInput, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.playbookOutput != null && Object.hasOwnProperty.call(message, "playbookOutput"))
+                                    $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.encode(message.playbookOutput, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.playbookState != null && Object.hasOwnProperty.call(message, "playbookState"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.playbookState);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookInvocation message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInvocation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInvocation} message PlaybookInvocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookInvocation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PlaybookInvocation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInvocation} PlaybookInvocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookInvocation.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.playbook = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.playbookInput = $root.google.cloud.dialogflow.cx.v3.PlaybookInput.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.playbookOutput = $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.playbookState = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PlaybookInvocation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInvocation} PlaybookInvocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookInvocation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PlaybookInvocation message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PlaybookInvocation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    if (!$util.isString(message.playbook))
+                                        return "playbook: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.playbookInput != null && message.hasOwnProperty("playbookInput")) {
+                                    var error = $root.google.cloud.dialogflow.cx.v3.PlaybookInput.verify(message.playbookInput);
+                                    if (error)
+                                        return "playbookInput." + error;
+                                }
+                                if (message.playbookOutput != null && message.hasOwnProperty("playbookOutput")) {
+                                    var error = $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.verify(message.playbookOutput);
+                                    if (error)
+                                        return "playbookOutput." + error;
+                                }
+                                if (message.playbookState != null && message.hasOwnProperty("playbookState"))
+                                    switch (message.playbookState) {
+                                    default:
+                                        return "playbookState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PlaybookInvocation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInvocation} PlaybookInvocation
+                             */
+                            PlaybookInvocation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation();
+                                if (object.playbook != null)
+                                    message.playbook = String(object.playbook);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.playbookInput != null) {
+                                    if (typeof object.playbookInput !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.PlaybookInvocation.playbookInput: object expected");
+                                    message.playbookInput = $root.google.cloud.dialogflow.cx.v3.PlaybookInput.fromObject(object.playbookInput);
+                                }
+                                if (object.playbookOutput != null) {
+                                    if (typeof object.playbookOutput !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.PlaybookInvocation.playbookOutput: object expected");
+                                    message.playbookOutput = $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.fromObject(object.playbookOutput);
+                                }
+                                switch (object.playbookState) {
+                                default:
+                                    if (typeof object.playbookState === "number") {
+                                        message.playbookState = object.playbookState;
+                                        break;
+                                    }
+                                    break;
+                                case "OUTPUT_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.playbookState = 0;
+                                    break;
+                                case "OUTPUT_STATE_OK":
+                                case 1:
+                                    message.playbookState = 1;
+                                    break;
+                                case "OUTPUT_STATE_CANCELLED":
+                                case 2:
+                                    message.playbookState = 2;
+                                    break;
+                                case "OUTPUT_STATE_FAILED":
+                                case 3:
+                                    message.playbookState = 3;
+                                    break;
+                                case "OUTPUT_STATE_ESCALATED":
+                                case 4:
+                                    message.playbookState = 4;
+                                    break;
+                                case "OUTPUT_STATE_PENDING":
+                                case 5:
+                                    message.playbookState = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PlaybookInvocation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.PlaybookInvocation} message PlaybookInvocation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PlaybookInvocation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.playbook = "";
+                                    object.playbookInput = null;
+                                    object.playbookOutput = null;
+                                    object.playbookState = options.enums === String ? "OUTPUT_STATE_UNSPECIFIED" : 0;
+                                    object.displayName = "";
+                                }
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    object.playbook = message.playbook;
+                                if (message.playbookInput != null && message.hasOwnProperty("playbookInput"))
+                                    object.playbookInput = $root.google.cloud.dialogflow.cx.v3.PlaybookInput.toObject(message.playbookInput, options);
+                                if (message.playbookOutput != null && message.hasOwnProperty("playbookOutput"))
+                                    object.playbookOutput = $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.toObject(message.playbookOutput, options);
+                                if (message.playbookState != null && message.hasOwnProperty("playbookState"))
+                                    object.playbookState = options.enums === String ? $root.google.cloud.dialogflow.cx.v3.OutputState[message.playbookState] === undefined ? message.playbookState : $root.google.cloud.dialogflow.cx.v3.OutputState[message.playbookState] : message.playbookState;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PlaybookInvocation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PlaybookInvocation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PlaybookInvocation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PlaybookInvocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.PlaybookInvocation";
+                            };
+    
+                            return PlaybookInvocation;
+                        })();
+    
+                        v3.FlowInvocation = (function() {
+    
+                            /**
+                             * Properties of a FlowInvocation.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IFlowInvocation
+                             * @property {string|null} [flow] FlowInvocation flow
+                             * @property {string|null} [displayName] FlowInvocation displayName
+                             * @property {google.cloud.dialogflow.cx.v3.OutputState|null} [flowState] FlowInvocation flowState
+                             */
+    
+                            /**
+                             * Constructs a new FlowInvocation.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a FlowInvocation.
+                             * @implements IFlowInvocation
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowInvocation=} [properties] Properties to set
+                             */
+                            function FlowInvocation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FlowInvocation flow.
+                             * @member {string} flow
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @instance
+                             */
+                            FlowInvocation.prototype.flow = "";
+    
+                            /**
+                             * FlowInvocation displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @instance
+                             */
+                            FlowInvocation.prototype.displayName = "";
+    
+                            /**
+                             * FlowInvocation flowState.
+                             * @member {google.cloud.dialogflow.cx.v3.OutputState} flowState
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @instance
+                             */
+                            FlowInvocation.prototype.flowState = 0;
+    
+                            /**
+                             * Creates a new FlowInvocation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowInvocation=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowInvocation} FlowInvocation instance
+                             */
+                            FlowInvocation.create = function create(properties) {
+                                return new FlowInvocation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FlowInvocation message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowInvocation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowInvocation} message FlowInvocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowInvocation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.flow != null && Object.hasOwnProperty.call(message, "flow"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.flow);
+                                if (message.flowState != null && Object.hasOwnProperty.call(message, "flowState"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.flowState);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FlowInvocation message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowInvocation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowInvocation} message FlowInvocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowInvocation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FlowInvocation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowInvocation} FlowInvocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowInvocation.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.FlowInvocation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.flow = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.flowState = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FlowInvocation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowInvocation} FlowInvocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowInvocation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FlowInvocation message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FlowInvocation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    if (!$util.isString(message.flow))
+                                        return "flow: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.flowState != null && message.hasOwnProperty("flowState"))
+                                    switch (message.flowState) {
+                                    default:
+                                        return "flowState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FlowInvocation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowInvocation} FlowInvocation
+                             */
+                            FlowInvocation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.FlowInvocation)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.FlowInvocation();
+                                if (object.flow != null)
+                                    message.flow = String(object.flow);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                switch (object.flowState) {
+                                default:
+                                    if (typeof object.flowState === "number") {
+                                        message.flowState = object.flowState;
+                                        break;
+                                    }
+                                    break;
+                                case "OUTPUT_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.flowState = 0;
+                                    break;
+                                case "OUTPUT_STATE_OK":
+                                case 1:
+                                    message.flowState = 1;
+                                    break;
+                                case "OUTPUT_STATE_CANCELLED":
+                                case 2:
+                                    message.flowState = 2;
+                                    break;
+                                case "OUTPUT_STATE_FAILED":
+                                case 3:
+                                    message.flowState = 3;
+                                    break;
+                                case "OUTPUT_STATE_ESCALATED":
+                                case 4:
+                                    message.flowState = 4;
+                                    break;
+                                case "OUTPUT_STATE_PENDING":
+                                case 5:
+                                    message.flowState = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FlowInvocation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.FlowInvocation} message FlowInvocation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FlowInvocation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.flow = "";
+                                    object.flowState = options.enums === String ? "OUTPUT_STATE_UNSPECIFIED" : 0;
+                                    object.displayName = "";
+                                }
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    object.flow = message.flow;
+                                if (message.flowState != null && message.hasOwnProperty("flowState"))
+                                    object.flowState = options.enums === String ? $root.google.cloud.dialogflow.cx.v3.OutputState[message.flowState] === undefined ? message.flowState : $root.google.cloud.dialogflow.cx.v3.OutputState[message.flowState] : message.flowState;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FlowInvocation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FlowInvocation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FlowInvocation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FlowInvocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.FlowInvocation";
+                            };
+    
+                            return FlowInvocation;
+                        })();
+    
+                        v3.PlaybookTransition = (function() {
+    
+                            /**
+                             * Properties of a PlaybookTransition.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IPlaybookTransition
+                             * @property {string|null} [playbook] PlaybookTransition playbook
+                             * @property {string|null} [displayName] PlaybookTransition displayName
+                             */
+    
+                            /**
+                             * Constructs a new PlaybookTransition.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a PlaybookTransition.
+                             * @implements IPlaybookTransition
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTransition=} [properties] Properties to set
+                             */
+                            function PlaybookTransition(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PlaybookTransition playbook.
+                             * @member {string} playbook
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @instance
+                             */
+                            PlaybookTransition.prototype.playbook = "";
+    
+                            /**
+                             * PlaybookTransition displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @instance
+                             */
+                            PlaybookTransition.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new PlaybookTransition instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTransition=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTransition} PlaybookTransition instance
+                             */
+                            PlaybookTransition.create = function create(properties) {
+                                return new PlaybookTransition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookTransition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookTransition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTransition} message PlaybookTransition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookTransition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.playbook != null && Object.hasOwnProperty.call(message, "playbook"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.playbook);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookTransition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookTransition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTransition} message PlaybookTransition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookTransition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PlaybookTransition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTransition} PlaybookTransition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookTransition.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.PlaybookTransition();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.playbook = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PlaybookTransition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTransition} PlaybookTransition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookTransition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PlaybookTransition message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PlaybookTransition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    if (!$util.isString(message.playbook))
+                                        return "playbook: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PlaybookTransition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTransition} PlaybookTransition
+                             */
+                            PlaybookTransition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.PlaybookTransition)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.PlaybookTransition();
+                                if (object.playbook != null)
+                                    message.playbook = String(object.playbook);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PlaybookTransition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.PlaybookTransition} message PlaybookTransition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PlaybookTransition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.playbook = "";
+                                    object.displayName = "";
+                                }
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    object.playbook = message.playbook;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PlaybookTransition to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PlaybookTransition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PlaybookTransition
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PlaybookTransition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.PlaybookTransition";
+                            };
+    
+                            return PlaybookTransition;
+                        })();
+    
+                        v3.FlowTransition = (function() {
+    
+                            /**
+                             * Properties of a FlowTransition.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @interface IFlowTransition
+                             * @property {string|null} [flow] FlowTransition flow
+                             * @property {string|null} [displayName] FlowTransition displayName
+                             */
+    
+                            /**
+                             * Constructs a new FlowTransition.
+                             * @memberof google.cloud.dialogflow.cx.v3
+                             * @classdesc Represents a FlowTransition.
+                             * @implements IFlowTransition
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowTransition=} [properties] Properties to set
+                             */
+                            function FlowTransition(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FlowTransition flow.
+                             * @member {string} flow
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @instance
+                             */
+                            FlowTransition.prototype.flow = "";
+    
+                            /**
+                             * FlowTransition displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @instance
+                             */
+                            FlowTransition.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new FlowTransition instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowTransition=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowTransition} FlowTransition instance
+                             */
+                            FlowTransition.create = function create(properties) {
+                                return new FlowTransition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FlowTransition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowTransition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowTransition} message FlowTransition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowTransition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.flow != null && Object.hasOwnProperty.call(message, "flow"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.flow);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FlowTransition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowTransition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.IFlowTransition} message FlowTransition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowTransition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FlowTransition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowTransition} FlowTransition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowTransition.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.FlowTransition();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.flow = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FlowTransition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowTransition} FlowTransition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowTransition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FlowTransition message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FlowTransition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    if (!$util.isString(message.flow))
+                                        return "flow: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FlowTransition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3.FlowTransition} FlowTransition
+                             */
+                            FlowTransition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.FlowTransition)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3.FlowTransition();
+                                if (object.flow != null)
+                                    message.flow = String(object.flow);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FlowTransition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3.FlowTransition} message FlowTransition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FlowTransition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.flow = "";
+                                    object.displayName = "";
+                                }
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    object.flow = message.flow;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FlowTransition to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FlowTransition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FlowTransition
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FlowTransition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.FlowTransition";
+                            };
+    
+                            return FlowTransition;
+                        })();
+    
+                        /**
+                         * OutputState enum.
+                         * @name google.cloud.dialogflow.cx.v3.OutputState
+                         * @enum {number}
+                         * @property {number} OUTPUT_STATE_UNSPECIFIED=0 OUTPUT_STATE_UNSPECIFIED value
+                         * @property {number} OUTPUT_STATE_OK=1 OUTPUT_STATE_OK value
+                         * @property {number} OUTPUT_STATE_CANCELLED=2 OUTPUT_STATE_CANCELLED value
+                         * @property {number} OUTPUT_STATE_FAILED=3 OUTPUT_STATE_FAILED value
+                         * @property {number} OUTPUT_STATE_ESCALATED=4 OUTPUT_STATE_ESCALATED value
+                         * @property {number} OUTPUT_STATE_PENDING=5 OUTPUT_STATE_PENDING value
+                         */
+                        v3.OutputState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "OUTPUT_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "OUTPUT_STATE_OK"] = 1;
+                            values[valuesById[2] = "OUTPUT_STATE_CANCELLED"] = 2;
+                            values[valuesById[3] = "OUTPUT_STATE_FAILED"] = 3;
+                            values[valuesById[4] = "OUTPUT_STATE_ESCALATED"] = 4;
+                            values[valuesById[5] = "OUTPUT_STATE_PENDING"] = 5;
+                            return values;
                         })();
     
                         v3.TransitionRouteGroups = (function() {
@@ -85917,2691 +89852,6 @@
                             };
     
                             return Example;
-                        })();
-    
-                        v3.PlaybookInput = (function() {
-    
-                            /**
-                             * Properties of a PlaybookInput.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IPlaybookInput
-                             * @property {string|null} [precedingConversationSummary] PlaybookInput precedingConversationSummary
-                             */
-    
-                            /**
-                             * Constructs a new PlaybookInput.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents a PlaybookInput.
-                             * @implements IPlaybookInput
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInput=} [properties] Properties to set
-                             */
-                            function PlaybookInput(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * PlaybookInput precedingConversationSummary.
-                             * @member {string} precedingConversationSummary
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @instance
-                             */
-                            PlaybookInput.prototype.precedingConversationSummary = "";
-    
-                            /**
-                             * Creates a new PlaybookInput instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInput=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInput} PlaybookInput instance
-                             */
-                            PlaybookInput.create = function create(properties) {
-                                return new PlaybookInput(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified PlaybookInput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInput.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInput} message PlaybookInput message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PlaybookInput.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.precedingConversationSummary != null && Object.hasOwnProperty.call(message, "precedingConversationSummary"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.precedingConversationSummary);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified PlaybookInput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInput.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInput} message PlaybookInput message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PlaybookInput.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a PlaybookInput message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInput} PlaybookInput
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PlaybookInput.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.PlaybookInput();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.precedingConversationSummary = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a PlaybookInput message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInput} PlaybookInput
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PlaybookInput.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a PlaybookInput message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            PlaybookInput.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.precedingConversationSummary != null && message.hasOwnProperty("precedingConversationSummary"))
-                                    if (!$util.isString(message.precedingConversationSummary))
-                                        return "precedingConversationSummary: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a PlaybookInput message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInput} PlaybookInput
-                             */
-                            PlaybookInput.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.PlaybookInput)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.PlaybookInput();
-                                if (object.precedingConversationSummary != null)
-                                    message.precedingConversationSummary = String(object.precedingConversationSummary);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a PlaybookInput message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.PlaybookInput} message PlaybookInput
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            PlaybookInput.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.precedingConversationSummary = "";
-                                if (message.precedingConversationSummary != null && message.hasOwnProperty("precedingConversationSummary"))
-                                    object.precedingConversationSummary = message.precedingConversationSummary;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this PlaybookInput to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            PlaybookInput.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for PlaybookInput
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInput
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            PlaybookInput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.PlaybookInput";
-                            };
-    
-                            return PlaybookInput;
-                        })();
-    
-                        v3.PlaybookOutput = (function() {
-    
-                            /**
-                             * Properties of a PlaybookOutput.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IPlaybookOutput
-                             * @property {string|null} [executionSummary] PlaybookOutput executionSummary
-                             */
-    
-                            /**
-                             * Constructs a new PlaybookOutput.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents a PlaybookOutput.
-                             * @implements IPlaybookOutput
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookOutput=} [properties] Properties to set
-                             */
-                            function PlaybookOutput(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * PlaybookOutput executionSummary.
-                             * @member {string} executionSummary
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @instance
-                             */
-                            PlaybookOutput.prototype.executionSummary = "";
-    
-                            /**
-                             * Creates a new PlaybookOutput instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookOutput=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookOutput} PlaybookOutput instance
-                             */
-                            PlaybookOutput.create = function create(properties) {
-                                return new PlaybookOutput(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified PlaybookOutput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookOutput.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookOutput} message PlaybookOutput message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PlaybookOutput.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.executionSummary != null && Object.hasOwnProperty.call(message, "executionSummary"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.executionSummary);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified PlaybookOutput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookOutput.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookOutput} message PlaybookOutput message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PlaybookOutput.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a PlaybookOutput message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookOutput} PlaybookOutput
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PlaybookOutput.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.PlaybookOutput();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.executionSummary = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a PlaybookOutput message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookOutput} PlaybookOutput
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PlaybookOutput.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a PlaybookOutput message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            PlaybookOutput.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.executionSummary != null && message.hasOwnProperty("executionSummary"))
-                                    if (!$util.isString(message.executionSummary))
-                                        return "executionSummary: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a PlaybookOutput message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookOutput} PlaybookOutput
-                             */
-                            PlaybookOutput.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.PlaybookOutput)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.PlaybookOutput();
-                                if (object.executionSummary != null)
-                                    message.executionSummary = String(object.executionSummary);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a PlaybookOutput message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.PlaybookOutput} message PlaybookOutput
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            PlaybookOutput.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.executionSummary = "";
-                                if (message.executionSummary != null && message.hasOwnProperty("executionSummary"))
-                                    object.executionSummary = message.executionSummary;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this PlaybookOutput to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            PlaybookOutput.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for PlaybookOutput
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookOutput
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            PlaybookOutput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.PlaybookOutput";
-                            };
-    
-                            return PlaybookOutput;
-                        })();
-    
-                        v3.Action = (function() {
-    
-                            /**
-                             * Properties of an Action.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IAction
-                             * @property {google.cloud.dialogflow.cx.v3.IUserUtterance|null} [userUtterance] Action userUtterance
-                             * @property {google.cloud.dialogflow.cx.v3.IAgentUtterance|null} [agentUtterance] Action agentUtterance
-                             * @property {google.cloud.dialogflow.cx.v3.IToolUse|null} [toolUse] Action toolUse
-                             * @property {google.cloud.dialogflow.cx.v3.IPlaybookInvocation|null} [playbookInvocation] Action playbookInvocation
-                             * @property {google.cloud.dialogflow.cx.v3.IFlowInvocation|null} [flowInvocation] Action flowInvocation
-                             * @property {google.cloud.dialogflow.cx.v3.IPlaybookTransition|null} [playbookTransition] Action playbookTransition
-                             * @property {google.cloud.dialogflow.cx.v3.IFlowTransition|null} [flowTransition] Action flowTransition
-                             */
-    
-                            /**
-                             * Constructs a new Action.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents an Action.
-                             * @implements IAction
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IAction=} [properties] Properties to set
-                             */
-                            function Action(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Action userUtterance.
-                             * @member {google.cloud.dialogflow.cx.v3.IUserUtterance|null|undefined} userUtterance
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @instance
-                             */
-                            Action.prototype.userUtterance = null;
-    
-                            /**
-                             * Action agentUtterance.
-                             * @member {google.cloud.dialogflow.cx.v3.IAgentUtterance|null|undefined} agentUtterance
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @instance
-                             */
-                            Action.prototype.agentUtterance = null;
-    
-                            /**
-                             * Action toolUse.
-                             * @member {google.cloud.dialogflow.cx.v3.IToolUse|null|undefined} toolUse
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @instance
-                             */
-                            Action.prototype.toolUse = null;
-    
-                            /**
-                             * Action playbookInvocation.
-                             * @member {google.cloud.dialogflow.cx.v3.IPlaybookInvocation|null|undefined} playbookInvocation
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @instance
-                             */
-                            Action.prototype.playbookInvocation = null;
-    
-                            /**
-                             * Action flowInvocation.
-                             * @member {google.cloud.dialogflow.cx.v3.IFlowInvocation|null|undefined} flowInvocation
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @instance
-                             */
-                            Action.prototype.flowInvocation = null;
-    
-                            /**
-                             * Action playbookTransition.
-                             * @member {google.cloud.dialogflow.cx.v3.IPlaybookTransition|null|undefined} playbookTransition
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @instance
-                             */
-                            Action.prototype.playbookTransition = null;
-    
-                            /**
-                             * Action flowTransition.
-                             * @member {google.cloud.dialogflow.cx.v3.IFlowTransition|null|undefined} flowTransition
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @instance
-                             */
-                            Action.prototype.flowTransition = null;
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * Action action.
-                             * @member {"userUtterance"|"agentUtterance"|"toolUse"|"playbookInvocation"|"flowInvocation"|"playbookTransition"|"flowTransition"|undefined} action
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @instance
-                             */
-                            Object.defineProperty(Action.prototype, "action", {
-                                get: $util.oneOfGetter($oneOfFields = ["userUtterance", "agentUtterance", "toolUse", "playbookInvocation", "flowInvocation", "playbookTransition", "flowTransition"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new Action instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IAction=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.Action} Action instance
-                             */
-                            Action.create = function create(properties) {
-                                return new Action(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Action message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Action.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IAction} message Action message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Action.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.userUtterance != null && Object.hasOwnProperty.call(message, "userUtterance"))
-                                    $root.google.cloud.dialogflow.cx.v3.UserUtterance.encode(message.userUtterance, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.agentUtterance != null && Object.hasOwnProperty.call(message, "agentUtterance"))
-                                    $root.google.cloud.dialogflow.cx.v3.AgentUtterance.encode(message.agentUtterance, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                if (message.toolUse != null && Object.hasOwnProperty.call(message, "toolUse"))
-                                    $root.google.cloud.dialogflow.cx.v3.ToolUse.encode(message.toolUse, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                                if (message.playbookInvocation != null && Object.hasOwnProperty.call(message, "playbookInvocation"))
-                                    $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.encode(message.playbookInvocation, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                                if (message.flowInvocation != null && Object.hasOwnProperty.call(message, "flowInvocation"))
-                                    $root.google.cloud.dialogflow.cx.v3.FlowInvocation.encode(message.flowInvocation, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                                if (message.playbookTransition != null && Object.hasOwnProperty.call(message, "playbookTransition"))
-                                    $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.encode(message.playbookTransition, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
-                                if (message.flowTransition != null && Object.hasOwnProperty.call(message, "flowTransition"))
-                                    $root.google.cloud.dialogflow.cx.v3.FlowTransition.encode(message.flowTransition, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Action message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Action.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IAction} message Action message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Action.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an Action message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.Action} Action
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Action.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.Action();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.userUtterance = $root.google.cloud.dialogflow.cx.v3.UserUtterance.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.agentUtterance = $root.google.cloud.dialogflow.cx.v3.AgentUtterance.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.toolUse = $root.google.cloud.dialogflow.cx.v3.ToolUse.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.playbookInvocation = $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.flowInvocation = $root.google.cloud.dialogflow.cx.v3.FlowInvocation.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 12: {
-                                            message.playbookTransition = $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 13: {
-                                            message.flowTransition = $root.google.cloud.dialogflow.cx.v3.FlowTransition.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an Action message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.Action} Action
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Action.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an Action message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Action.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.userUtterance != null && message.hasOwnProperty("userUtterance")) {
-                                    properties.action = 1;
-                                    {
-                                        var error = $root.google.cloud.dialogflow.cx.v3.UserUtterance.verify(message.userUtterance);
-                                        if (error)
-                                            return "userUtterance." + error;
-                                    }
-                                }
-                                if (message.agentUtterance != null && message.hasOwnProperty("agentUtterance")) {
-                                    if (properties.action === 1)
-                                        return "action: multiple values";
-                                    properties.action = 1;
-                                    {
-                                        var error = $root.google.cloud.dialogflow.cx.v3.AgentUtterance.verify(message.agentUtterance);
-                                        if (error)
-                                            return "agentUtterance." + error;
-                                    }
-                                }
-                                if (message.toolUse != null && message.hasOwnProperty("toolUse")) {
-                                    if (properties.action === 1)
-                                        return "action: multiple values";
-                                    properties.action = 1;
-                                    {
-                                        var error = $root.google.cloud.dialogflow.cx.v3.ToolUse.verify(message.toolUse);
-                                        if (error)
-                                            return "toolUse." + error;
-                                    }
-                                }
-                                if (message.playbookInvocation != null && message.hasOwnProperty("playbookInvocation")) {
-                                    if (properties.action === 1)
-                                        return "action: multiple values";
-                                    properties.action = 1;
-                                    {
-                                        var error = $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.verify(message.playbookInvocation);
-                                        if (error)
-                                            return "playbookInvocation." + error;
-                                    }
-                                }
-                                if (message.flowInvocation != null && message.hasOwnProperty("flowInvocation")) {
-                                    if (properties.action === 1)
-                                        return "action: multiple values";
-                                    properties.action = 1;
-                                    {
-                                        var error = $root.google.cloud.dialogflow.cx.v3.FlowInvocation.verify(message.flowInvocation);
-                                        if (error)
-                                            return "flowInvocation." + error;
-                                    }
-                                }
-                                if (message.playbookTransition != null && message.hasOwnProperty("playbookTransition")) {
-                                    if (properties.action === 1)
-                                        return "action: multiple values";
-                                    properties.action = 1;
-                                    {
-                                        var error = $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.verify(message.playbookTransition);
-                                        if (error)
-                                            return "playbookTransition." + error;
-                                    }
-                                }
-                                if (message.flowTransition != null && message.hasOwnProperty("flowTransition")) {
-                                    if (properties.action === 1)
-                                        return "action: multiple values";
-                                    properties.action = 1;
-                                    {
-                                        var error = $root.google.cloud.dialogflow.cx.v3.FlowTransition.verify(message.flowTransition);
-                                        if (error)
-                                            return "flowTransition." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an Action message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.Action} Action
-                             */
-                            Action.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.Action)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.Action();
-                                if (object.userUtterance != null) {
-                                    if (typeof object.userUtterance !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.userUtterance: object expected");
-                                    message.userUtterance = $root.google.cloud.dialogflow.cx.v3.UserUtterance.fromObject(object.userUtterance);
-                                }
-                                if (object.agentUtterance != null) {
-                                    if (typeof object.agentUtterance !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.agentUtterance: object expected");
-                                    message.agentUtterance = $root.google.cloud.dialogflow.cx.v3.AgentUtterance.fromObject(object.agentUtterance);
-                                }
-                                if (object.toolUse != null) {
-                                    if (typeof object.toolUse !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.toolUse: object expected");
-                                    message.toolUse = $root.google.cloud.dialogflow.cx.v3.ToolUse.fromObject(object.toolUse);
-                                }
-                                if (object.playbookInvocation != null) {
-                                    if (typeof object.playbookInvocation !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.playbookInvocation: object expected");
-                                    message.playbookInvocation = $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.fromObject(object.playbookInvocation);
-                                }
-                                if (object.flowInvocation != null) {
-                                    if (typeof object.flowInvocation !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.flowInvocation: object expected");
-                                    message.flowInvocation = $root.google.cloud.dialogflow.cx.v3.FlowInvocation.fromObject(object.flowInvocation);
-                                }
-                                if (object.playbookTransition != null) {
-                                    if (typeof object.playbookTransition !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.playbookTransition: object expected");
-                                    message.playbookTransition = $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.fromObject(object.playbookTransition);
-                                }
-                                if (object.flowTransition != null) {
-                                    if (typeof object.flowTransition !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Action.flowTransition: object expected");
-                                    message.flowTransition = $root.google.cloud.dialogflow.cx.v3.FlowTransition.fromObject(object.flowTransition);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an Action message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.Action} message Action
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Action.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (message.userUtterance != null && message.hasOwnProperty("userUtterance")) {
-                                    object.userUtterance = $root.google.cloud.dialogflow.cx.v3.UserUtterance.toObject(message.userUtterance, options);
-                                    if (options.oneofs)
-                                        object.action = "userUtterance";
-                                }
-                                if (message.agentUtterance != null && message.hasOwnProperty("agentUtterance")) {
-                                    object.agentUtterance = $root.google.cloud.dialogflow.cx.v3.AgentUtterance.toObject(message.agentUtterance, options);
-                                    if (options.oneofs)
-                                        object.action = "agentUtterance";
-                                }
-                                if (message.toolUse != null && message.hasOwnProperty("toolUse")) {
-                                    object.toolUse = $root.google.cloud.dialogflow.cx.v3.ToolUse.toObject(message.toolUse, options);
-                                    if (options.oneofs)
-                                        object.action = "toolUse";
-                                }
-                                if (message.playbookInvocation != null && message.hasOwnProperty("playbookInvocation")) {
-                                    object.playbookInvocation = $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation.toObject(message.playbookInvocation, options);
-                                    if (options.oneofs)
-                                        object.action = "playbookInvocation";
-                                }
-                                if (message.flowInvocation != null && message.hasOwnProperty("flowInvocation")) {
-                                    object.flowInvocation = $root.google.cloud.dialogflow.cx.v3.FlowInvocation.toObject(message.flowInvocation, options);
-                                    if (options.oneofs)
-                                        object.action = "flowInvocation";
-                                }
-                                if (message.playbookTransition != null && message.hasOwnProperty("playbookTransition")) {
-                                    object.playbookTransition = $root.google.cloud.dialogflow.cx.v3.PlaybookTransition.toObject(message.playbookTransition, options);
-                                    if (options.oneofs)
-                                        object.action = "playbookTransition";
-                                }
-                                if (message.flowTransition != null && message.hasOwnProperty("flowTransition")) {
-                                    object.flowTransition = $root.google.cloud.dialogflow.cx.v3.FlowTransition.toObject(message.flowTransition, options);
-                                    if (options.oneofs)
-                                        object.action = "flowTransition";
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Action to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Action.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Action
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.Action
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Action.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.Action";
-                            };
-    
-                            return Action;
-                        })();
-    
-                        v3.UserUtterance = (function() {
-    
-                            /**
-                             * Properties of a UserUtterance.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IUserUtterance
-                             * @property {string|null} [text] UserUtterance text
-                             */
-    
-                            /**
-                             * Constructs a new UserUtterance.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents a UserUtterance.
-                             * @implements IUserUtterance
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IUserUtterance=} [properties] Properties to set
-                             */
-                            function UserUtterance(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * UserUtterance text.
-                             * @member {string} text
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @instance
-                             */
-                            UserUtterance.prototype.text = "";
-    
-                            /**
-                             * Creates a new UserUtterance instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IUserUtterance=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.UserUtterance} UserUtterance instance
-                             */
-                            UserUtterance.create = function create(properties) {
-                                return new UserUtterance(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified UserUtterance message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UserUtterance.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IUserUtterance} message UserUtterance message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UserUtterance.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified UserUtterance message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UserUtterance.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IUserUtterance} message UserUtterance message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UserUtterance.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a UserUtterance message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.UserUtterance} UserUtterance
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UserUtterance.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.UserUtterance();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.text = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a UserUtterance message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.UserUtterance} UserUtterance
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UserUtterance.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a UserUtterance message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            UserUtterance.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.text != null && message.hasOwnProperty("text"))
-                                    if (!$util.isString(message.text))
-                                        return "text: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a UserUtterance message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.UserUtterance} UserUtterance
-                             */
-                            UserUtterance.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.UserUtterance)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.UserUtterance();
-                                if (object.text != null)
-                                    message.text = String(object.text);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a UserUtterance message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.UserUtterance} message UserUtterance
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            UserUtterance.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.text = "";
-                                if (message.text != null && message.hasOwnProperty("text"))
-                                    object.text = message.text;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this UserUtterance to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            UserUtterance.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for UserUtterance
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.UserUtterance
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            UserUtterance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.UserUtterance";
-                            };
-    
-                            return UserUtterance;
-                        })();
-    
-                        v3.AgentUtterance = (function() {
-    
-                            /**
-                             * Properties of an AgentUtterance.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IAgentUtterance
-                             * @property {string|null} [text] AgentUtterance text
-                             */
-    
-                            /**
-                             * Constructs a new AgentUtterance.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents an AgentUtterance.
-                             * @implements IAgentUtterance
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IAgentUtterance=} [properties] Properties to set
-                             */
-                            function AgentUtterance(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * AgentUtterance text.
-                             * @member {string} text
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @instance
-                             */
-                            AgentUtterance.prototype.text = "";
-    
-                            /**
-                             * Creates a new AgentUtterance instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IAgentUtterance=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.AgentUtterance} AgentUtterance instance
-                             */
-                            AgentUtterance.create = function create(properties) {
-                                return new AgentUtterance(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified AgentUtterance message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AgentUtterance.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IAgentUtterance} message AgentUtterance message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AgentUtterance.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified AgentUtterance message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AgentUtterance.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IAgentUtterance} message AgentUtterance message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AgentUtterance.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an AgentUtterance message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.AgentUtterance} AgentUtterance
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AgentUtterance.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.AgentUtterance();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.text = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an AgentUtterance message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.AgentUtterance} AgentUtterance
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AgentUtterance.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an AgentUtterance message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            AgentUtterance.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.text != null && message.hasOwnProperty("text"))
-                                    if (!$util.isString(message.text))
-                                        return "text: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an AgentUtterance message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.AgentUtterance} AgentUtterance
-                             */
-                            AgentUtterance.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.AgentUtterance)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.AgentUtterance();
-                                if (object.text != null)
-                                    message.text = String(object.text);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an AgentUtterance message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.AgentUtterance} message AgentUtterance
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            AgentUtterance.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.text = "";
-                                if (message.text != null && message.hasOwnProperty("text"))
-                                    object.text = message.text;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this AgentUtterance to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            AgentUtterance.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for AgentUtterance
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.AgentUtterance
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            AgentUtterance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.AgentUtterance";
-                            };
-    
-                            return AgentUtterance;
-                        })();
-    
-                        v3.ToolUse = (function() {
-    
-                            /**
-                             * Properties of a ToolUse.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IToolUse
-                             * @property {string|null} [tool] ToolUse tool
-                             * @property {string|null} [displayName] ToolUse displayName
-                             * @property {string|null} [action] ToolUse action
-                             * @property {google.protobuf.IStruct|null} [inputActionParameters] ToolUse inputActionParameters
-                             * @property {google.protobuf.IStruct|null} [outputActionParameters] ToolUse outputActionParameters
-                             */
-    
-                            /**
-                             * Constructs a new ToolUse.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents a ToolUse.
-                             * @implements IToolUse
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IToolUse=} [properties] Properties to set
-                             */
-                            function ToolUse(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ToolUse tool.
-                             * @member {string} tool
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @instance
-                             */
-                            ToolUse.prototype.tool = "";
-    
-                            /**
-                             * ToolUse displayName.
-                             * @member {string} displayName
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @instance
-                             */
-                            ToolUse.prototype.displayName = "";
-    
-                            /**
-                             * ToolUse action.
-                             * @member {string} action
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @instance
-                             */
-                            ToolUse.prototype.action = "";
-    
-                            /**
-                             * ToolUse inputActionParameters.
-                             * @member {google.protobuf.IStruct|null|undefined} inputActionParameters
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @instance
-                             */
-                            ToolUse.prototype.inputActionParameters = null;
-    
-                            /**
-                             * ToolUse outputActionParameters.
-                             * @member {google.protobuf.IStruct|null|undefined} outputActionParameters
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @instance
-                             */
-                            ToolUse.prototype.outputActionParameters = null;
-    
-                            /**
-                             * Creates a new ToolUse instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IToolUse=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.ToolUse} ToolUse instance
-                             */
-                            ToolUse.create = function create(properties) {
-                                return new ToolUse(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ToolUse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolUse.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IToolUse} message ToolUse message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ToolUse.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.tool != null && Object.hasOwnProperty.call(message, "tool"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.tool);
-                                if (message.action != null && Object.hasOwnProperty.call(message, "action"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.action);
-                                if (message.inputActionParameters != null && Object.hasOwnProperty.call(message, "inputActionParameters"))
-                                    $root.google.protobuf.Struct.encode(message.inputActionParameters, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                                if (message.outputActionParameters != null && Object.hasOwnProperty.call(message, "outputActionParameters"))
-                                    $root.google.protobuf.Struct.encode(message.outputActionParameters, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ToolUse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolUse.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IToolUse} message ToolUse message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ToolUse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ToolUse message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.ToolUse} ToolUse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ToolUse.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.ToolUse();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.tool = reader.string();
-                                            break;
-                                        }
-                                    case 8: {
-                                            message.displayName = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.action = reader.string();
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.inputActionParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 6: {
-                                            message.outputActionParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ToolUse message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.ToolUse} ToolUse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ToolUse.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ToolUse message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ToolUse.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.tool != null && message.hasOwnProperty("tool"))
-                                    if (!$util.isString(message.tool))
-                                        return "tool: string expected";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    if (!$util.isString(message.displayName))
-                                        return "displayName: string expected";
-                                if (message.action != null && message.hasOwnProperty("action"))
-                                    if (!$util.isString(message.action))
-                                        return "action: string expected";
-                                if (message.inputActionParameters != null && message.hasOwnProperty("inputActionParameters")) {
-                                    var error = $root.google.protobuf.Struct.verify(message.inputActionParameters);
-                                    if (error)
-                                        return "inputActionParameters." + error;
-                                }
-                                if (message.outputActionParameters != null && message.hasOwnProperty("outputActionParameters")) {
-                                    var error = $root.google.protobuf.Struct.verify(message.outputActionParameters);
-                                    if (error)
-                                        return "outputActionParameters." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ToolUse message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.ToolUse} ToolUse
-                             */
-                            ToolUse.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.ToolUse)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.ToolUse();
-                                if (object.tool != null)
-                                    message.tool = String(object.tool);
-                                if (object.displayName != null)
-                                    message.displayName = String(object.displayName);
-                                if (object.action != null)
-                                    message.action = String(object.action);
-                                if (object.inputActionParameters != null) {
-                                    if (typeof object.inputActionParameters !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.ToolUse.inputActionParameters: object expected");
-                                    message.inputActionParameters = $root.google.protobuf.Struct.fromObject(object.inputActionParameters);
-                                }
-                                if (object.outputActionParameters != null) {
-                                    if (typeof object.outputActionParameters !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.ToolUse.outputActionParameters: object expected");
-                                    message.outputActionParameters = $root.google.protobuf.Struct.fromObject(object.outputActionParameters);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ToolUse message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.ToolUse} message ToolUse
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ToolUse.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.tool = "";
-                                    object.action = "";
-                                    object.inputActionParameters = null;
-                                    object.outputActionParameters = null;
-                                    object.displayName = "";
-                                }
-                                if (message.tool != null && message.hasOwnProperty("tool"))
-                                    object.tool = message.tool;
-                                if (message.action != null && message.hasOwnProperty("action"))
-                                    object.action = message.action;
-                                if (message.inputActionParameters != null && message.hasOwnProperty("inputActionParameters"))
-                                    object.inputActionParameters = $root.google.protobuf.Struct.toObject(message.inputActionParameters, options);
-                                if (message.outputActionParameters != null && message.hasOwnProperty("outputActionParameters"))
-                                    object.outputActionParameters = $root.google.protobuf.Struct.toObject(message.outputActionParameters, options);
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    object.displayName = message.displayName;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ToolUse to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ToolUse.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ToolUse
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.ToolUse
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ToolUse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.ToolUse";
-                            };
-    
-                            return ToolUse;
-                        })();
-    
-                        v3.PlaybookInvocation = (function() {
-    
-                            /**
-                             * Properties of a PlaybookInvocation.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IPlaybookInvocation
-                             * @property {string|null} [playbook] PlaybookInvocation playbook
-                             * @property {string|null} [displayName] PlaybookInvocation displayName
-                             * @property {google.cloud.dialogflow.cx.v3.IPlaybookInput|null} [playbookInput] PlaybookInvocation playbookInput
-                             * @property {google.cloud.dialogflow.cx.v3.IPlaybookOutput|null} [playbookOutput] PlaybookInvocation playbookOutput
-                             * @property {google.cloud.dialogflow.cx.v3.OutputState|null} [playbookState] PlaybookInvocation playbookState
-                             */
-    
-                            /**
-                             * Constructs a new PlaybookInvocation.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents a PlaybookInvocation.
-                             * @implements IPlaybookInvocation
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInvocation=} [properties] Properties to set
-                             */
-                            function PlaybookInvocation(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * PlaybookInvocation playbook.
-                             * @member {string} playbook
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @instance
-                             */
-                            PlaybookInvocation.prototype.playbook = "";
-    
-                            /**
-                             * PlaybookInvocation displayName.
-                             * @member {string} displayName
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @instance
-                             */
-                            PlaybookInvocation.prototype.displayName = "";
-    
-                            /**
-                             * PlaybookInvocation playbookInput.
-                             * @member {google.cloud.dialogflow.cx.v3.IPlaybookInput|null|undefined} playbookInput
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @instance
-                             */
-                            PlaybookInvocation.prototype.playbookInput = null;
-    
-                            /**
-                             * PlaybookInvocation playbookOutput.
-                             * @member {google.cloud.dialogflow.cx.v3.IPlaybookOutput|null|undefined} playbookOutput
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @instance
-                             */
-                            PlaybookInvocation.prototype.playbookOutput = null;
-    
-                            /**
-                             * PlaybookInvocation playbookState.
-                             * @member {google.cloud.dialogflow.cx.v3.OutputState} playbookState
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @instance
-                             */
-                            PlaybookInvocation.prototype.playbookState = 0;
-    
-                            /**
-                             * Creates a new PlaybookInvocation instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInvocation=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInvocation} PlaybookInvocation instance
-                             */
-                            PlaybookInvocation.create = function create(properties) {
-                                return new PlaybookInvocation(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified PlaybookInvocation message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInvocation.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInvocation} message PlaybookInvocation message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PlaybookInvocation.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.playbook != null && Object.hasOwnProperty.call(message, "playbook"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.playbook);
-                                if (message.playbookInput != null && Object.hasOwnProperty.call(message, "playbookInput"))
-                                    $root.google.cloud.dialogflow.cx.v3.PlaybookInput.encode(message.playbookInput, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                if (message.playbookOutput != null && Object.hasOwnProperty.call(message, "playbookOutput"))
-                                    $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.encode(message.playbookOutput, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                                if (message.playbookState != null && Object.hasOwnProperty.call(message, "playbookState"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.playbookState);
-                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.displayName);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified PlaybookInvocation message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInvocation.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookInvocation} message PlaybookInvocation message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PlaybookInvocation.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a PlaybookInvocation message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInvocation} PlaybookInvocation
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PlaybookInvocation.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.playbook = reader.string();
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.displayName = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.playbookInput = $root.google.cloud.dialogflow.cx.v3.PlaybookInput.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.playbookOutput = $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.playbookState = reader.int32();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a PlaybookInvocation message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInvocation} PlaybookInvocation
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PlaybookInvocation.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a PlaybookInvocation message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            PlaybookInvocation.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.playbook != null && message.hasOwnProperty("playbook"))
-                                    if (!$util.isString(message.playbook))
-                                        return "playbook: string expected";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    if (!$util.isString(message.displayName))
-                                        return "displayName: string expected";
-                                if (message.playbookInput != null && message.hasOwnProperty("playbookInput")) {
-                                    var error = $root.google.cloud.dialogflow.cx.v3.PlaybookInput.verify(message.playbookInput);
-                                    if (error)
-                                        return "playbookInput." + error;
-                                }
-                                if (message.playbookOutput != null && message.hasOwnProperty("playbookOutput")) {
-                                    var error = $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.verify(message.playbookOutput);
-                                    if (error)
-                                        return "playbookOutput." + error;
-                                }
-                                if (message.playbookState != null && message.hasOwnProperty("playbookState"))
-                                    switch (message.playbookState) {
-                                    default:
-                                        return "playbookState: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                    case 4:
-                                    case 5:
-                                        break;
-                                    }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a PlaybookInvocation message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookInvocation} PlaybookInvocation
-                             */
-                            PlaybookInvocation.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.PlaybookInvocation();
-                                if (object.playbook != null)
-                                    message.playbook = String(object.playbook);
-                                if (object.displayName != null)
-                                    message.displayName = String(object.displayName);
-                                if (object.playbookInput != null) {
-                                    if (typeof object.playbookInput !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.PlaybookInvocation.playbookInput: object expected");
-                                    message.playbookInput = $root.google.cloud.dialogflow.cx.v3.PlaybookInput.fromObject(object.playbookInput);
-                                }
-                                if (object.playbookOutput != null) {
-                                    if (typeof object.playbookOutput !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.cx.v3.PlaybookInvocation.playbookOutput: object expected");
-                                    message.playbookOutput = $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.fromObject(object.playbookOutput);
-                                }
-                                switch (object.playbookState) {
-                                default:
-                                    if (typeof object.playbookState === "number") {
-                                        message.playbookState = object.playbookState;
-                                        break;
-                                    }
-                                    break;
-                                case "OUTPUT_STATE_UNSPECIFIED":
-                                case 0:
-                                    message.playbookState = 0;
-                                    break;
-                                case "OUTPUT_STATE_OK":
-                                case 1:
-                                    message.playbookState = 1;
-                                    break;
-                                case "OUTPUT_STATE_CANCELLED":
-                                case 2:
-                                    message.playbookState = 2;
-                                    break;
-                                case "OUTPUT_STATE_FAILED":
-                                case 3:
-                                    message.playbookState = 3;
-                                    break;
-                                case "OUTPUT_STATE_ESCALATED":
-                                case 4:
-                                    message.playbookState = 4;
-                                    break;
-                                case "OUTPUT_STATE_PENDING":
-                                case 5:
-                                    message.playbookState = 5;
-                                    break;
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a PlaybookInvocation message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.PlaybookInvocation} message PlaybookInvocation
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            PlaybookInvocation.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.playbook = "";
-                                    object.playbookInput = null;
-                                    object.playbookOutput = null;
-                                    object.playbookState = options.enums === String ? "OUTPUT_STATE_UNSPECIFIED" : 0;
-                                    object.displayName = "";
-                                }
-                                if (message.playbook != null && message.hasOwnProperty("playbook"))
-                                    object.playbook = message.playbook;
-                                if (message.playbookInput != null && message.hasOwnProperty("playbookInput"))
-                                    object.playbookInput = $root.google.cloud.dialogflow.cx.v3.PlaybookInput.toObject(message.playbookInput, options);
-                                if (message.playbookOutput != null && message.hasOwnProperty("playbookOutput"))
-                                    object.playbookOutput = $root.google.cloud.dialogflow.cx.v3.PlaybookOutput.toObject(message.playbookOutput, options);
-                                if (message.playbookState != null && message.hasOwnProperty("playbookState"))
-                                    object.playbookState = options.enums === String ? $root.google.cloud.dialogflow.cx.v3.OutputState[message.playbookState] === undefined ? message.playbookState : $root.google.cloud.dialogflow.cx.v3.OutputState[message.playbookState] : message.playbookState;
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    object.displayName = message.displayName;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this PlaybookInvocation to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            PlaybookInvocation.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for PlaybookInvocation
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookInvocation
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            PlaybookInvocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.PlaybookInvocation";
-                            };
-    
-                            return PlaybookInvocation;
-                        })();
-    
-                        v3.FlowInvocation = (function() {
-    
-                            /**
-                             * Properties of a FlowInvocation.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IFlowInvocation
-                             * @property {string|null} [flow] FlowInvocation flow
-                             * @property {string|null} [displayName] FlowInvocation displayName
-                             * @property {google.cloud.dialogflow.cx.v3.OutputState|null} [flowState] FlowInvocation flowState
-                             */
-    
-                            /**
-                             * Constructs a new FlowInvocation.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents a FlowInvocation.
-                             * @implements IFlowInvocation
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IFlowInvocation=} [properties] Properties to set
-                             */
-                            function FlowInvocation(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * FlowInvocation flow.
-                             * @member {string} flow
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @instance
-                             */
-                            FlowInvocation.prototype.flow = "";
-    
-                            /**
-                             * FlowInvocation displayName.
-                             * @member {string} displayName
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @instance
-                             */
-                            FlowInvocation.prototype.displayName = "";
-    
-                            /**
-                             * FlowInvocation flowState.
-                             * @member {google.cloud.dialogflow.cx.v3.OutputState} flowState
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @instance
-                             */
-                            FlowInvocation.prototype.flowState = 0;
-    
-                            /**
-                             * Creates a new FlowInvocation instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IFlowInvocation=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.FlowInvocation} FlowInvocation instance
-                             */
-                            FlowInvocation.create = function create(properties) {
-                                return new FlowInvocation(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified FlowInvocation message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowInvocation.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IFlowInvocation} message FlowInvocation message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            FlowInvocation.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.flow != null && Object.hasOwnProperty.call(message, "flow"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.flow);
-                                if (message.flowState != null && Object.hasOwnProperty.call(message, "flowState"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.flowState);
-                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.displayName);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified FlowInvocation message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowInvocation.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IFlowInvocation} message FlowInvocation message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            FlowInvocation.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a FlowInvocation message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.FlowInvocation} FlowInvocation
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            FlowInvocation.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.FlowInvocation();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.flow = reader.string();
-                                            break;
-                                        }
-                                    case 7: {
-                                            message.displayName = reader.string();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.flowState = reader.int32();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a FlowInvocation message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.FlowInvocation} FlowInvocation
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            FlowInvocation.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a FlowInvocation message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            FlowInvocation.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.flow != null && message.hasOwnProperty("flow"))
-                                    if (!$util.isString(message.flow))
-                                        return "flow: string expected";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    if (!$util.isString(message.displayName))
-                                        return "displayName: string expected";
-                                if (message.flowState != null && message.hasOwnProperty("flowState"))
-                                    switch (message.flowState) {
-                                    default:
-                                        return "flowState: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                    case 4:
-                                    case 5:
-                                        break;
-                                    }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a FlowInvocation message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.FlowInvocation} FlowInvocation
-                             */
-                            FlowInvocation.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.FlowInvocation)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.FlowInvocation();
-                                if (object.flow != null)
-                                    message.flow = String(object.flow);
-                                if (object.displayName != null)
-                                    message.displayName = String(object.displayName);
-                                switch (object.flowState) {
-                                default:
-                                    if (typeof object.flowState === "number") {
-                                        message.flowState = object.flowState;
-                                        break;
-                                    }
-                                    break;
-                                case "OUTPUT_STATE_UNSPECIFIED":
-                                case 0:
-                                    message.flowState = 0;
-                                    break;
-                                case "OUTPUT_STATE_OK":
-                                case 1:
-                                    message.flowState = 1;
-                                    break;
-                                case "OUTPUT_STATE_CANCELLED":
-                                case 2:
-                                    message.flowState = 2;
-                                    break;
-                                case "OUTPUT_STATE_FAILED":
-                                case 3:
-                                    message.flowState = 3;
-                                    break;
-                                case "OUTPUT_STATE_ESCALATED":
-                                case 4:
-                                    message.flowState = 4;
-                                    break;
-                                case "OUTPUT_STATE_PENDING":
-                                case 5:
-                                    message.flowState = 5;
-                                    break;
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a FlowInvocation message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.FlowInvocation} message FlowInvocation
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            FlowInvocation.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.flow = "";
-                                    object.flowState = options.enums === String ? "OUTPUT_STATE_UNSPECIFIED" : 0;
-                                    object.displayName = "";
-                                }
-                                if (message.flow != null && message.hasOwnProperty("flow"))
-                                    object.flow = message.flow;
-                                if (message.flowState != null && message.hasOwnProperty("flowState"))
-                                    object.flowState = options.enums === String ? $root.google.cloud.dialogflow.cx.v3.OutputState[message.flowState] === undefined ? message.flowState : $root.google.cloud.dialogflow.cx.v3.OutputState[message.flowState] : message.flowState;
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    object.displayName = message.displayName;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this FlowInvocation to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            FlowInvocation.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for FlowInvocation
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowInvocation
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            FlowInvocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.FlowInvocation";
-                            };
-    
-                            return FlowInvocation;
-                        })();
-    
-                        v3.PlaybookTransition = (function() {
-    
-                            /**
-                             * Properties of a PlaybookTransition.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IPlaybookTransition
-                             * @property {string|null} [playbook] PlaybookTransition playbook
-                             * @property {string|null} [displayName] PlaybookTransition displayName
-                             */
-    
-                            /**
-                             * Constructs a new PlaybookTransition.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents a PlaybookTransition.
-                             * @implements IPlaybookTransition
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTransition=} [properties] Properties to set
-                             */
-                            function PlaybookTransition(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * PlaybookTransition playbook.
-                             * @member {string} playbook
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @instance
-                             */
-                            PlaybookTransition.prototype.playbook = "";
-    
-                            /**
-                             * PlaybookTransition displayName.
-                             * @member {string} displayName
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @instance
-                             */
-                            PlaybookTransition.prototype.displayName = "";
-    
-                            /**
-                             * Creates a new PlaybookTransition instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTransition=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTransition} PlaybookTransition instance
-                             */
-                            PlaybookTransition.create = function create(properties) {
-                                return new PlaybookTransition(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified PlaybookTransition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookTransition.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTransition} message PlaybookTransition message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PlaybookTransition.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.playbook != null && Object.hasOwnProperty.call(message, "playbook"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.playbook);
-                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified PlaybookTransition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookTransition.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IPlaybookTransition} message PlaybookTransition message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PlaybookTransition.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a PlaybookTransition message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTransition} PlaybookTransition
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PlaybookTransition.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.PlaybookTransition();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.playbook = reader.string();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.displayName = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a PlaybookTransition message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTransition} PlaybookTransition
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PlaybookTransition.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a PlaybookTransition message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            PlaybookTransition.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.playbook != null && message.hasOwnProperty("playbook"))
-                                    if (!$util.isString(message.playbook))
-                                        return "playbook: string expected";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    if (!$util.isString(message.displayName))
-                                        return "displayName: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a PlaybookTransition message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.PlaybookTransition} PlaybookTransition
-                             */
-                            PlaybookTransition.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.PlaybookTransition)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.PlaybookTransition();
-                                if (object.playbook != null)
-                                    message.playbook = String(object.playbook);
-                                if (object.displayName != null)
-                                    message.displayName = String(object.displayName);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a PlaybookTransition message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.PlaybookTransition} message PlaybookTransition
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            PlaybookTransition.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.playbook = "";
-                                    object.displayName = "";
-                                }
-                                if (message.playbook != null && message.hasOwnProperty("playbook"))
-                                    object.playbook = message.playbook;
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    object.displayName = message.displayName;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this PlaybookTransition to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            PlaybookTransition.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for PlaybookTransition
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.PlaybookTransition
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            PlaybookTransition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.PlaybookTransition";
-                            };
-    
-                            return PlaybookTransition;
-                        })();
-    
-                        v3.FlowTransition = (function() {
-    
-                            /**
-                             * Properties of a FlowTransition.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @interface IFlowTransition
-                             * @property {string|null} [flow] FlowTransition flow
-                             * @property {string|null} [displayName] FlowTransition displayName
-                             */
-    
-                            /**
-                             * Constructs a new FlowTransition.
-                             * @memberof google.cloud.dialogflow.cx.v3
-                             * @classdesc Represents a FlowTransition.
-                             * @implements IFlowTransition
-                             * @constructor
-                             * @param {google.cloud.dialogflow.cx.v3.IFlowTransition=} [properties] Properties to set
-                             */
-                            function FlowTransition(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * FlowTransition flow.
-                             * @member {string} flow
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @instance
-                             */
-                            FlowTransition.prototype.flow = "";
-    
-                            /**
-                             * FlowTransition displayName.
-                             * @member {string} displayName
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @instance
-                             */
-                            FlowTransition.prototype.displayName = "";
-    
-                            /**
-                             * Creates a new FlowTransition instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IFlowTransition=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.cx.v3.FlowTransition} FlowTransition instance
-                             */
-                            FlowTransition.create = function create(properties) {
-                                return new FlowTransition(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified FlowTransition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowTransition.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IFlowTransition} message FlowTransition message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            FlowTransition.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.flow != null && Object.hasOwnProperty.call(message, "flow"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.flow);
-                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified FlowTransition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowTransition.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.IFlowTransition} message FlowTransition message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            FlowTransition.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a FlowTransition message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.cx.v3.FlowTransition} FlowTransition
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            FlowTransition.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.FlowTransition();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.flow = reader.string();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.displayName = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a FlowTransition message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.cx.v3.FlowTransition} FlowTransition
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            FlowTransition.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a FlowTransition message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            FlowTransition.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.flow != null && message.hasOwnProperty("flow"))
-                                    if (!$util.isString(message.flow))
-                                        return "flow: string expected";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    if (!$util.isString(message.displayName))
-                                        return "displayName: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a FlowTransition message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.cx.v3.FlowTransition} FlowTransition
-                             */
-                            FlowTransition.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dialogflow.cx.v3.FlowTransition)
-                                    return object;
-                                var message = new $root.google.cloud.dialogflow.cx.v3.FlowTransition();
-                                if (object.flow != null)
-                                    message.flow = String(object.flow);
-                                if (object.displayName != null)
-                                    message.displayName = String(object.displayName);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a FlowTransition message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @static
-                             * @param {google.cloud.dialogflow.cx.v3.FlowTransition} message FlowTransition
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            FlowTransition.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.flow = "";
-                                    object.displayName = "";
-                                }
-                                if (message.flow != null && message.hasOwnProperty("flow"))
-                                    object.flow = message.flow;
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    object.displayName = message.displayName;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this FlowTransition to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            FlowTransition.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for FlowTransition
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.cx.v3.FlowTransition
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            FlowTransition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.FlowTransition";
-                            };
-    
-                            return FlowTransition;
-                        })();
-    
-                        /**
-                         * OutputState enum.
-                         * @name google.cloud.dialogflow.cx.v3.OutputState
-                         * @enum {number}
-                         * @property {number} OUTPUT_STATE_UNSPECIFIED=0 OUTPUT_STATE_UNSPECIFIED value
-                         * @property {number} OUTPUT_STATE_OK=1 OUTPUT_STATE_OK value
-                         * @property {number} OUTPUT_STATE_CANCELLED=2 OUTPUT_STATE_CANCELLED value
-                         * @property {number} OUTPUT_STATE_FAILED=3 OUTPUT_STATE_FAILED value
-                         * @property {number} OUTPUT_STATE_ESCALATED=4 OUTPUT_STATE_ESCALATED value
-                         * @property {number} OUTPUT_STATE_PENDING=5 OUTPUT_STATE_PENDING value
-                         */
-                        v3.OutputState = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "OUTPUT_STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "OUTPUT_STATE_OK"] = 1;
-                            values[valuesById[2] = "OUTPUT_STATE_CANCELLED"] = 2;
-                            values[valuesById[3] = "OUTPUT_STATE_FAILED"] = 3;
-                            values[valuesById[4] = "OUTPUT_STATE_ESCALATED"] = 4;
-                            values[valuesById[5] = "OUTPUT_STATE_PENDING"] = 5;
-                            return values;
                         })();
     
                         v3.Experiments = (function() {
@@ -173518,6 +174768,7 @@
                              * @property {boolean|null} [isFallback] Intent isFallback
                              * @property {Object.<string,string>|null} [labels] Intent labels
                              * @property {string|null} [description] Intent description
+                             * @property {string|null} [dtmfPattern] Intent dtmfPattern
                              */
     
                             /**
@@ -173603,6 +174854,14 @@
                             Intent.prototype.description = "";
     
                             /**
+                             * Intent dtmfPattern.
+                             * @member {string} dtmfPattern
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.Intent
+                             * @instance
+                             */
+                            Intent.prototype.dtmfPattern = "";
+    
+                            /**
                              * Creates a new Intent instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.dialogflow.cx.v3beta1.Intent
@@ -173645,6 +174904,8 @@
                                         writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                                 if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.description);
+                                if (message.dtmfPattern != null && Object.hasOwnProperty.call(message, "dtmfPattern"))
+                                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.dtmfPattern);
                                 return writer;
                             };
     
@@ -173736,6 +174997,10 @@
                                             message.description = reader.string();
                                             break;
                                         }
+                                    case 16: {
+                                            message.dtmfPattern = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -173812,6 +175077,9 @@
                                 if (message.description != null && message.hasOwnProperty("description"))
                                     if (!$util.isString(message.description))
                                         return "description: string expected";
+                                if (message.dtmfPattern != null && message.hasOwnProperty("dtmfPattern"))
+                                    if (!$util.isString(message.dtmfPattern))
+                                        return "dtmfPattern: string expected";
                                 return null;
                             };
     
@@ -173864,6 +175132,8 @@
                                 }
                                 if (object.description != null)
                                     message.description = String(object.description);
+                                if (object.dtmfPattern != null)
+                                    message.dtmfPattern = String(object.dtmfPattern);
                                 return message;
                             };
     
@@ -173892,6 +175162,7 @@
                                     object.priority = 0;
                                     object.isFallback = false;
                                     object.description = "";
+                                    object.dtmfPattern = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -173919,6 +175190,8 @@
                                 }
                                 if (message.description != null && message.hasOwnProperty("description"))
                                     object.description = message.description;
+                                if (message.dtmfPattern != null && message.hasOwnProperty("dtmfPattern"))
+                                    object.dtmfPattern = message.dtmfPattern;
                                 return object;
                             };
     
@@ -185477,6 +186750,7 @@
                              * @property {google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null} [advancedSettings] QueryResult advancedSettings
                              * @property {boolean|null} [allowAnswerFeedback] QueryResult allowAnswerFeedback
                              * @property {google.cloud.dialogflow.cx.v3beta1.IDataStoreConnectionSignals|null} [dataStoreConnectionSignals] QueryResult dataStoreConnectionSignals
+                             * @property {Array.<google.cloud.dialogflow.cx.v3beta1.ITraceBlock>|null} [traceBlocks] QueryResult traceBlocks
                              */
     
                             /**
@@ -185495,6 +186769,7 @@
                                 this.webhookTags = [];
                                 this.webhookStatuses = [];
                                 this.webhookPayloads = [];
+                                this.traceBlocks = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -185701,6 +186976,14 @@
                              */
                             QueryResult.prototype.dataStoreConnectionSignals = null;
     
+                            /**
+                             * QueryResult traceBlocks.
+                             * @member {Array.<google.cloud.dialogflow.cx.v3beta1.ITraceBlock>} traceBlocks
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.QueryResult
+                             * @instance
+                             */
+                            QueryResult.prototype.traceBlocks = $util.emptyArray;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -185796,6 +187079,9 @@
                                     $root.google.cloud.dialogflow.cx.v3beta1.GenerativeInfo.encode(message.generativeInfo, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
                                 if (message.dataStoreConnectionSignals != null && Object.hasOwnProperty.call(message, "dataStoreConnectionSignals"))
                                     $root.google.cloud.dialogflow.cx.v3beta1.DataStoreConnectionSignals.encode(message.dataStoreConnectionSignals, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                                if (message.traceBlocks != null && message.traceBlocks.length)
+                                    for (var i = 0; i < message.traceBlocks.length; ++i)
+                                        $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.encode(message.traceBlocks[i], writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
                                 return writer;
                             };
     
@@ -185944,6 +187230,12 @@
                                         }
                                     case 35: {
                                             message.dataStoreConnectionSignals = $root.google.cloud.dialogflow.cx.v3beta1.DataStoreConnectionSignals.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 37: {
+                                            if (!(message.traceBlocks && message.traceBlocks.length))
+                                                message.traceBlocks = [];
+                                            message.traceBlocks.push($root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -186134,6 +187426,15 @@
                                     if (error)
                                         return "dataStoreConnectionSignals." + error;
                                 }
+                                if (message.traceBlocks != null && message.hasOwnProperty("traceBlocks")) {
+                                    if (!Array.isArray(message.traceBlocks))
+                                        return "traceBlocks: array expected";
+                                    for (var i = 0; i < message.traceBlocks.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.verify(message.traceBlocks[i]);
+                                        if (error)
+                                            return "traceBlocks." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -186279,6 +187580,16 @@
                                         throw TypeError(".google.cloud.dialogflow.cx.v3beta1.QueryResult.dataStoreConnectionSignals: object expected");
                                     message.dataStoreConnectionSignals = $root.google.cloud.dialogflow.cx.v3beta1.DataStoreConnectionSignals.fromObject(object.dataStoreConnectionSignals);
                                 }
+                                if (object.traceBlocks) {
+                                    if (!Array.isArray(object.traceBlocks))
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.QueryResult.traceBlocks: array expected");
+                                    message.traceBlocks = [];
+                                    for (var i = 0; i < object.traceBlocks.length; ++i) {
+                                        if (typeof object.traceBlocks[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3beta1.QueryResult.traceBlocks: object expected");
+                                        message.traceBlocks[i] = $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.fromObject(object.traceBlocks[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -186303,6 +187614,7 @@
                                     object.webhookDisplayNames = [];
                                     object.webhookLatencies = [];
                                     object.webhookTags = [];
+                                    object.traceBlocks = [];
                                 }
                                 if (options.defaults) {
                                     object.languageCode = "";
@@ -186405,6 +187717,11 @@
                                     object.generativeInfo = $root.google.cloud.dialogflow.cx.v3beta1.GenerativeInfo.toObject(message.generativeInfo, options);
                                 if (message.dataStoreConnectionSignals != null && message.hasOwnProperty("dataStoreConnectionSignals"))
                                     object.dataStoreConnectionSignals = $root.google.cloud.dialogflow.cx.v3beta1.DataStoreConnectionSignals.toObject(message.dataStoreConnectionSignals, options);
+                                if (message.traceBlocks && message.traceBlocks.length) {
+                                    object.traceBlocks = [];
+                                    for (var j = 0; j < message.traceBlocks.length; ++j)
+                                        object.traceBlocks[j] = $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock.toObject(message.traceBlocks[j], options);
+                                }
                                 return object;
                             };
     
@@ -191551,6 +192868,1189 @@
                             };
     
                             return Example;
+                        })();
+    
+                        v3beta1.TraceBlock = (function() {
+    
+                            /**
+                             * Properties of a TraceBlock.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @interface ITraceBlock
+                             * @property {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata|null} [playbookTraceMetadata] TraceBlock playbookTraceMetadata
+                             * @property {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata|null} [flowTraceMetadata] TraceBlock flowTraceMetadata
+                             * @property {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata|null} [speechProcessingMetadata] TraceBlock speechProcessingMetadata
+                             * @property {Array.<google.cloud.dialogflow.cx.v3beta1.IAction>|null} [actions] TraceBlock actions
+                             * @property {google.protobuf.ITimestamp|null} [startTime] TraceBlock startTime
+                             * @property {google.protobuf.ITimestamp|null} [completeTime] TraceBlock completeTime
+                             * @property {google.protobuf.IStruct|null} [inputParameters] TraceBlock inputParameters
+                             * @property {google.protobuf.IStruct|null} [outputParameters] TraceBlock outputParameters
+                             * @property {google.cloud.dialogflow.cx.v3beta1.OutputState|null} [endState] TraceBlock endState
+                             */
+    
+                            /**
+                             * Constructs a new TraceBlock.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @classdesc Represents a TraceBlock.
+                             * @implements ITraceBlock
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ITraceBlock=} [properties] Properties to set
+                             */
+                            function TraceBlock(properties) {
+                                this.actions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TraceBlock playbookTraceMetadata.
+                             * @member {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata|null|undefined} playbookTraceMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.playbookTraceMetadata = null;
+    
+                            /**
+                             * TraceBlock flowTraceMetadata.
+                             * @member {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata|null|undefined} flowTraceMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.flowTraceMetadata = null;
+    
+                            /**
+                             * TraceBlock speechProcessingMetadata.
+                             * @member {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata|null|undefined} speechProcessingMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.speechProcessingMetadata = null;
+    
+                            /**
+                             * TraceBlock actions.
+                             * @member {Array.<google.cloud.dialogflow.cx.v3beta1.IAction>} actions
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.actions = $util.emptyArray;
+    
+                            /**
+                             * TraceBlock startTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.startTime = null;
+    
+                            /**
+                             * TraceBlock completeTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} completeTime
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.completeTime = null;
+    
+                            /**
+                             * TraceBlock inputParameters.
+                             * @member {google.protobuf.IStruct|null|undefined} inputParameters
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.inputParameters = null;
+    
+                            /**
+                             * TraceBlock outputParameters.
+                             * @member {google.protobuf.IStruct|null|undefined} outputParameters
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.outputParameters = null;
+    
+                            /**
+                             * TraceBlock endState.
+                             * @member {google.cloud.dialogflow.cx.v3beta1.OutputState} endState
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            TraceBlock.prototype.endState = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * TraceBlock traceMetadata.
+                             * @member {"playbookTraceMetadata"|"flowTraceMetadata"|"speechProcessingMetadata"|undefined} traceMetadata
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             */
+                            Object.defineProperty(TraceBlock.prototype, "traceMetadata", {
+                                get: $util.oneOfGetter($oneOfFields = ["playbookTraceMetadata", "flowTraceMetadata", "speechProcessingMetadata"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new TraceBlock instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ITraceBlock=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.TraceBlock} TraceBlock instance
+                             */
+                            TraceBlock.create = function create(properties) {
+                                return new TraceBlock(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TraceBlock message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TraceBlock.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ITraceBlock} message TraceBlock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TraceBlock.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.playbookTraceMetadata != null && Object.hasOwnProperty.call(message, "playbookTraceMetadata"))
+                                    $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.encode(message.playbookTraceMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.flowTraceMetadata != null && Object.hasOwnProperty.call(message, "flowTraceMetadata"))
+                                    $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.encode(message.flowTraceMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.actions != null && message.actions.length)
+                                    for (var i = 0; i < message.actions.length; ++i)
+                                        $root.google.cloud.dialogflow.cx.v3beta1.Action.encode(message.actions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.completeTime != null && Object.hasOwnProperty.call(message, "completeTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.completeTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.outputParameters != null && Object.hasOwnProperty.call(message, "outputParameters"))
+                                    $root.google.protobuf.Struct.encode(message.outputParameters, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.endState != null && Object.hasOwnProperty.call(message, "endState"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.endState);
+                                if (message.speechProcessingMetadata != null && Object.hasOwnProperty.call(message, "speechProcessingMetadata"))
+                                    $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.encode(message.speechProcessingMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.inputParameters != null && Object.hasOwnProperty.call(message, "inputParameters"))
+                                    $root.google.protobuf.Struct.encode(message.inputParameters, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TraceBlock message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TraceBlock.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ITraceBlock} message TraceBlock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TraceBlock.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TraceBlock message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.TraceBlock} TraceBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TraceBlock.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.playbookTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.flowTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.speechProcessingMetadata = $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.actions && message.actions.length))
+                                                message.actions = [];
+                                            message.actions.push($root.google.cloud.dialogflow.cx.v3beta1.Action.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.completeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.inputParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.outputParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.endState = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TraceBlock message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.TraceBlock} TraceBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TraceBlock.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TraceBlock message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TraceBlock.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.playbookTraceMetadata != null && message.hasOwnProperty("playbookTraceMetadata")) {
+                                    properties.traceMetadata = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.verify(message.playbookTraceMetadata);
+                                        if (error)
+                                            return "playbookTraceMetadata." + error;
+                                    }
+                                }
+                                if (message.flowTraceMetadata != null && message.hasOwnProperty("flowTraceMetadata")) {
+                                    if (properties.traceMetadata === 1)
+                                        return "traceMetadata: multiple values";
+                                    properties.traceMetadata = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.verify(message.flowTraceMetadata);
+                                        if (error)
+                                            return "flowTraceMetadata." + error;
+                                    }
+                                }
+                                if (message.speechProcessingMetadata != null && message.hasOwnProperty("speechProcessingMetadata")) {
+                                    if (properties.traceMetadata === 1)
+                                        return "traceMetadata: multiple values";
+                                    properties.traceMetadata = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.verify(message.speechProcessingMetadata);
+                                        if (error)
+                                            return "speechProcessingMetadata." + error;
+                                    }
+                                }
+                                if (message.actions != null && message.hasOwnProperty("actions")) {
+                                    if (!Array.isArray(message.actions))
+                                        return "actions: array expected";
+                                    for (var i = 0; i < message.actions.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.Action.verify(message.actions[i]);
+                                        if (error)
+                                            return "actions." + error;
+                                    }
+                                }
+                                if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                    if (error)
+                                        return "startTime." + error;
+                                }
+                                if (message.completeTime != null && message.hasOwnProperty("completeTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.completeTime);
+                                    if (error)
+                                        return "completeTime." + error;
+                                }
+                                if (message.inputParameters != null && message.hasOwnProperty("inputParameters")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.inputParameters);
+                                    if (error)
+                                        return "inputParameters." + error;
+                                }
+                                if (message.outputParameters != null && message.hasOwnProperty("outputParameters")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.outputParameters);
+                                    if (error)
+                                        return "outputParameters." + error;
+                                }
+                                if (message.endState != null && message.hasOwnProperty("endState"))
+                                    switch (message.endState) {
+                                    default:
+                                        return "endState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TraceBlock message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.TraceBlock} TraceBlock
+                             */
+                            TraceBlock.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3beta1.TraceBlock();
+                                if (object.playbookTraceMetadata != null) {
+                                    if (typeof object.playbookTraceMetadata !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.playbookTraceMetadata: object expected");
+                                    message.playbookTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.fromObject(object.playbookTraceMetadata);
+                                }
+                                if (object.flowTraceMetadata != null) {
+                                    if (typeof object.flowTraceMetadata !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.flowTraceMetadata: object expected");
+                                    message.flowTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.fromObject(object.flowTraceMetadata);
+                                }
+                                if (object.speechProcessingMetadata != null) {
+                                    if (typeof object.speechProcessingMetadata !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.speechProcessingMetadata: object expected");
+                                    message.speechProcessingMetadata = $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.fromObject(object.speechProcessingMetadata);
+                                }
+                                if (object.actions) {
+                                    if (!Array.isArray(object.actions))
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.actions: array expected");
+                                    message.actions = [];
+                                    for (var i = 0; i < object.actions.length; ++i) {
+                                        if (typeof object.actions[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.actions: object expected");
+                                        message.actions[i] = $root.google.cloud.dialogflow.cx.v3beta1.Action.fromObject(object.actions[i]);
+                                    }
+                                }
+                                if (object.startTime != null) {
+                                    if (typeof object.startTime !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.startTime: object expected");
+                                    message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                }
+                                if (object.completeTime != null) {
+                                    if (typeof object.completeTime !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.completeTime: object expected");
+                                    message.completeTime = $root.google.protobuf.Timestamp.fromObject(object.completeTime);
+                                }
+                                if (object.inputParameters != null) {
+                                    if (typeof object.inputParameters !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.inputParameters: object expected");
+                                    message.inputParameters = $root.google.protobuf.Struct.fromObject(object.inputParameters);
+                                }
+                                if (object.outputParameters != null) {
+                                    if (typeof object.outputParameters !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.TraceBlock.outputParameters: object expected");
+                                    message.outputParameters = $root.google.protobuf.Struct.fromObject(object.outputParameters);
+                                }
+                                switch (object.endState) {
+                                default:
+                                    if (typeof object.endState === "number") {
+                                        message.endState = object.endState;
+                                        break;
+                                    }
+                                    break;
+                                case "OUTPUT_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.endState = 0;
+                                    break;
+                                case "OUTPUT_STATE_OK":
+                                case 1:
+                                    message.endState = 1;
+                                    break;
+                                case "OUTPUT_STATE_CANCELLED":
+                                case 2:
+                                    message.endState = 2;
+                                    break;
+                                case "OUTPUT_STATE_FAILED":
+                                case 3:
+                                    message.endState = 3;
+                                    break;
+                                case "OUTPUT_STATE_ESCALATED":
+                                case 4:
+                                    message.endState = 4;
+                                    break;
+                                case "OUTPUT_STATE_PENDING":
+                                case 5:
+                                    message.endState = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TraceBlock message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.TraceBlock} message TraceBlock
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TraceBlock.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.actions = [];
+                                if (options.defaults) {
+                                    object.startTime = null;
+                                    object.completeTime = null;
+                                    object.outputParameters = null;
+                                    object.endState = options.enums === String ? "OUTPUT_STATE_UNSPECIFIED" : 0;
+                                    object.inputParameters = null;
+                                }
+                                if (message.playbookTraceMetadata != null && message.hasOwnProperty("playbookTraceMetadata")) {
+                                    object.playbookTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.toObject(message.playbookTraceMetadata, options);
+                                    if (options.oneofs)
+                                        object.traceMetadata = "playbookTraceMetadata";
+                                }
+                                if (message.flowTraceMetadata != null && message.hasOwnProperty("flowTraceMetadata")) {
+                                    object.flowTraceMetadata = $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.toObject(message.flowTraceMetadata, options);
+                                    if (options.oneofs)
+                                        object.traceMetadata = "flowTraceMetadata";
+                                }
+                                if (message.actions && message.actions.length) {
+                                    object.actions = [];
+                                    for (var j = 0; j < message.actions.length; ++j)
+                                        object.actions[j] = $root.google.cloud.dialogflow.cx.v3beta1.Action.toObject(message.actions[j], options);
+                                }
+                                if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                    object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                                if (message.completeTime != null && message.hasOwnProperty("completeTime"))
+                                    object.completeTime = $root.google.protobuf.Timestamp.toObject(message.completeTime, options);
+                                if (message.outputParameters != null && message.hasOwnProperty("outputParameters"))
+                                    object.outputParameters = $root.google.protobuf.Struct.toObject(message.outputParameters, options);
+                                if (message.endState != null && message.hasOwnProperty("endState"))
+                                    object.endState = options.enums === String ? $root.google.cloud.dialogflow.cx.v3beta1.OutputState[message.endState] === undefined ? message.endState : $root.google.cloud.dialogflow.cx.v3beta1.OutputState[message.endState] : message.endState;
+                                if (message.speechProcessingMetadata != null && message.hasOwnProperty("speechProcessingMetadata")) {
+                                    object.speechProcessingMetadata = $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.toObject(message.speechProcessingMetadata, options);
+                                    if (options.oneofs)
+                                        object.traceMetadata = "speechProcessingMetadata";
+                                }
+                                if (message.inputParameters != null && message.hasOwnProperty("inputParameters"))
+                                    object.inputParameters = $root.google.protobuf.Struct.toObject(message.inputParameters, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TraceBlock to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TraceBlock.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TraceBlock
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.TraceBlock
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TraceBlock.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.TraceBlock";
+                            };
+    
+                            return TraceBlock;
+                        })();
+    
+                        v3beta1.SpeechProcessingMetadata = (function() {
+    
+                            /**
+                             * Properties of a SpeechProcessingMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @interface ISpeechProcessingMetadata
+                             * @property {string|null} [displayName] SpeechProcessingMetadata displayName
+                             */
+    
+                            /**
+                             * Constructs a new SpeechProcessingMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @classdesc Represents a SpeechProcessingMetadata.
+                             * @implements ISpeechProcessingMetadata
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata=} [properties] Properties to set
+                             */
+                            function SpeechProcessingMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SpeechProcessingMetadata displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @instance
+                             */
+                            SpeechProcessingMetadata.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new SpeechProcessingMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} SpeechProcessingMetadata instance
+                             */
+                            SpeechProcessingMetadata.create = function create(properties) {
+                                return new SpeechProcessingMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SpeechProcessingMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata} message SpeechProcessingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpeechProcessingMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SpeechProcessingMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ISpeechProcessingMetadata} message SpeechProcessingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpeechProcessingMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SpeechProcessingMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} SpeechProcessingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpeechProcessingMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SpeechProcessingMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} SpeechProcessingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpeechProcessingMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SpeechProcessingMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SpeechProcessingMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SpeechProcessingMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} SpeechProcessingMetadata
+                             */
+                            SpeechProcessingMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SpeechProcessingMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata} message SpeechProcessingMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SpeechProcessingMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.displayName = "";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SpeechProcessingMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SpeechProcessingMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SpeechProcessingMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SpeechProcessingMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.SpeechProcessingMetadata";
+                            };
+    
+                            return SpeechProcessingMetadata;
+                        })();
+    
+                        v3beta1.PlaybookTraceMetadata = (function() {
+    
+                            /**
+                             * Properties of a PlaybookTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @interface IPlaybookTraceMetadata
+                             * @property {string|null} [playbook] PlaybookTraceMetadata playbook
+                             * @property {string|null} [displayName] PlaybookTraceMetadata displayName
+                             */
+    
+                            /**
+                             * Constructs a new PlaybookTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @classdesc Represents a PlaybookTraceMetadata.
+                             * @implements IPlaybookTraceMetadata
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata=} [properties] Properties to set
+                             */
+                            function PlaybookTraceMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PlaybookTraceMetadata playbook.
+                             * @member {string} playbook
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @instance
+                             */
+                            PlaybookTraceMetadata.prototype.playbook = "";
+    
+                            /**
+                             * PlaybookTraceMetadata displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @instance
+                             */
+                            PlaybookTraceMetadata.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new PlaybookTraceMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} PlaybookTraceMetadata instance
+                             */
+                            PlaybookTraceMetadata.create = function create(properties) {
+                                return new PlaybookTraceMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookTraceMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata} message PlaybookTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookTraceMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.playbook != null && Object.hasOwnProperty.call(message, "playbook"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.playbook);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PlaybookTraceMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IPlaybookTraceMetadata} message PlaybookTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlaybookTraceMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PlaybookTraceMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} PlaybookTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookTraceMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.playbook = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PlaybookTraceMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} PlaybookTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlaybookTraceMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PlaybookTraceMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PlaybookTraceMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    if (!$util.isString(message.playbook))
+                                        return "playbook: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PlaybookTraceMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} PlaybookTraceMetadata
+                             */
+                            PlaybookTraceMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata();
+                                if (object.playbook != null)
+                                    message.playbook = String(object.playbook);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PlaybookTraceMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata} message PlaybookTraceMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PlaybookTraceMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.playbook = "";
+                                    object.displayName = "";
+                                }
+                                if (message.playbook != null && message.hasOwnProperty("playbook"))
+                                    object.playbook = message.playbook;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PlaybookTraceMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PlaybookTraceMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PlaybookTraceMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PlaybookTraceMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.PlaybookTraceMetadata";
+                            };
+    
+                            return PlaybookTraceMetadata;
+                        })();
+    
+                        v3beta1.FlowTraceMetadata = (function() {
+    
+                            /**
+                             * Properties of a FlowTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @interface IFlowTraceMetadata
+                             * @property {string|null} [flow] FlowTraceMetadata flow
+                             * @property {string|null} [displayName] FlowTraceMetadata displayName
+                             */
+    
+                            /**
+                             * Constructs a new FlowTraceMetadata.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @classdesc Represents a FlowTraceMetadata.
+                             * @implements IFlowTraceMetadata
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata=} [properties] Properties to set
+                             */
+                            function FlowTraceMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FlowTraceMetadata flow.
+                             * @member {string} flow
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @instance
+                             */
+                            FlowTraceMetadata.prototype.flow = "";
+    
+                            /**
+                             * FlowTraceMetadata displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @instance
+                             */
+                            FlowTraceMetadata.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new FlowTraceMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} FlowTraceMetadata instance
+                             */
+                            FlowTraceMetadata.create = function create(properties) {
+                                return new FlowTraceMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FlowTraceMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata} message FlowTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowTraceMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.flow != null && Object.hasOwnProperty.call(message, "flow"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.flow);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FlowTraceMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.IFlowTraceMetadata} message FlowTraceMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlowTraceMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FlowTraceMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} FlowTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowTraceMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.flow = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FlowTraceMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} FlowTraceMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlowTraceMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FlowTraceMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FlowTraceMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    if (!$util.isString(message.flow))
+                                        return "flow: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FlowTraceMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} FlowTraceMetadata
+                             */
+                            FlowTraceMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata();
+                                if (object.flow != null)
+                                    message.flow = String(object.flow);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FlowTraceMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata} message FlowTraceMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FlowTraceMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.flow = "";
+                                    object.displayName = "";
+                                }
+                                if (message.flow != null && message.hasOwnProperty("flow"))
+                                    object.flow = message.flow;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FlowTraceMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FlowTraceMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FlowTraceMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FlowTraceMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.FlowTraceMetadata";
+                            };
+    
+                            return FlowTraceMetadata;
                         })();
     
                         v3beta1.Action = (function() {

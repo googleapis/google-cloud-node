@@ -40,6 +40,16 @@ function main(parent) {
    */
   // const toolsetTool = {}
   /**
+   *  Optional. The variables that are available for the tool execution.
+   */
+  // const variables = {}
+  /**
+   *  Optional. The
+   *  ToolCallContext (https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps/tool/python#environment
+   *  for details) to be passed to the Python tool.
+   */
+  // const context = {}
+  /**
    *  Required. The resource name of the app which the tool/toolset belongs to.
    *  Format: `projects/{project}/locations/{location}/apps/{app}`
    */

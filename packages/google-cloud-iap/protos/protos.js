@@ -4061,6 +4061,9 @@
                          * @memberof google.cloud.iap.v1
                          * @interface IOAuthSettings
                          * @property {google.protobuf.IStringValue|null} [loginHint] OAuthSettings loginHint
+                         * @property {google.protobuf.IStringValue|null} [clientId] OAuthSettings clientId
+                         * @property {google.protobuf.IStringValue|null} [clientSecret] OAuthSettings clientSecret
+                         * @property {google.protobuf.IStringValue|null} [clientSecretSha256] OAuthSettings clientSecretSha256
                          * @property {Array.<string>|null} [programmaticClients] OAuthSettings programmaticClients
                          */
     
@@ -4087,6 +4090,30 @@
                          * @instance
                          */
                         OAuthSettings.prototype.loginHint = null;
+    
+                        /**
+                         * OAuthSettings clientId.
+                         * @member {google.protobuf.IStringValue|null|undefined} clientId
+                         * @memberof google.cloud.iap.v1.OAuthSettings
+                         * @instance
+                         */
+                        OAuthSettings.prototype.clientId = null;
+    
+                        /**
+                         * OAuthSettings clientSecret.
+                         * @member {google.protobuf.IStringValue|null|undefined} clientSecret
+                         * @memberof google.cloud.iap.v1.OAuthSettings
+                         * @instance
+                         */
+                        OAuthSettings.prototype.clientSecret = null;
+    
+                        /**
+                         * OAuthSettings clientSecretSha256.
+                         * @member {google.protobuf.IStringValue|null|undefined} clientSecretSha256
+                         * @memberof google.cloud.iap.v1.OAuthSettings
+                         * @instance
+                         */
+                        OAuthSettings.prototype.clientSecretSha256 = null;
     
                         /**
                          * OAuthSettings programmaticClients.
@@ -4122,9 +4149,15 @@
                                 writer = $Writer.create();
                             if (message.loginHint != null && Object.hasOwnProperty.call(message, "loginHint"))
                                 $root.google.protobuf.StringValue.encode(message.loginHint, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.clientId != null && Object.hasOwnProperty.call(message, "clientId"))
+                                $root.google.protobuf.StringValue.encode(message.clientId, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.clientSecret != null && Object.hasOwnProperty.call(message, "clientSecret"))
+                                $root.google.protobuf.StringValue.encode(message.clientSecret, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.programmaticClients != null && message.programmaticClients.length)
                                 for (var i = 0; i < message.programmaticClients.length; ++i)
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.programmaticClients[i]);
+                            if (message.clientSecretSha256 != null && Object.hasOwnProperty.call(message, "clientSecretSha256"))
+                                $root.google.protobuf.StringValue.encode(message.clientSecretSha256, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -4163,6 +4196,18 @@
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.loginHint = $root.google.protobuf.StringValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.clientId = $root.google.protobuf.StringValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.clientSecret = $root.google.protobuf.StringValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.clientSecretSha256 = $root.google.protobuf.StringValue.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 5: {
@@ -4211,6 +4256,21 @@
                                 if (error)
                                     return "loginHint." + error;
                             }
+                            if (message.clientId != null && message.hasOwnProperty("clientId")) {
+                                var error = $root.google.protobuf.StringValue.verify(message.clientId);
+                                if (error)
+                                    return "clientId." + error;
+                            }
+                            if (message.clientSecret != null && message.hasOwnProperty("clientSecret")) {
+                                var error = $root.google.protobuf.StringValue.verify(message.clientSecret);
+                                if (error)
+                                    return "clientSecret." + error;
+                            }
+                            if (message.clientSecretSha256 != null && message.hasOwnProperty("clientSecretSha256")) {
+                                var error = $root.google.protobuf.StringValue.verify(message.clientSecretSha256);
+                                if (error)
+                                    return "clientSecretSha256." + error;
+                            }
                             if (message.programmaticClients != null && message.hasOwnProperty("programmaticClients")) {
                                 if (!Array.isArray(message.programmaticClients))
                                     return "programmaticClients: array expected";
@@ -4238,6 +4298,21 @@
                                     throw TypeError(".google.cloud.iap.v1.OAuthSettings.loginHint: object expected");
                                 message.loginHint = $root.google.protobuf.StringValue.fromObject(object.loginHint);
                             }
+                            if (object.clientId != null) {
+                                if (typeof object.clientId !== "object")
+                                    throw TypeError(".google.cloud.iap.v1.OAuthSettings.clientId: object expected");
+                                message.clientId = $root.google.protobuf.StringValue.fromObject(object.clientId);
+                            }
+                            if (object.clientSecret != null) {
+                                if (typeof object.clientSecret !== "object")
+                                    throw TypeError(".google.cloud.iap.v1.OAuthSettings.clientSecret: object expected");
+                                message.clientSecret = $root.google.protobuf.StringValue.fromObject(object.clientSecret);
+                            }
+                            if (object.clientSecretSha256 != null) {
+                                if (typeof object.clientSecretSha256 !== "object")
+                                    throw TypeError(".google.cloud.iap.v1.OAuthSettings.clientSecretSha256: object expected");
+                                message.clientSecretSha256 = $root.google.protobuf.StringValue.fromObject(object.clientSecretSha256);
+                            }
                             if (object.programmaticClients) {
                                 if (!Array.isArray(object.programmaticClients))
                                     throw TypeError(".google.cloud.iap.v1.OAuthSettings.programmaticClients: array expected");
@@ -4263,15 +4338,25 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.programmaticClients = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.loginHint = null;
+                                object.clientId = null;
+                                object.clientSecret = null;
+                                object.clientSecretSha256 = null;
+                            }
                             if (message.loginHint != null && message.hasOwnProperty("loginHint"))
                                 object.loginHint = $root.google.protobuf.StringValue.toObject(message.loginHint, options);
+                            if (message.clientId != null && message.hasOwnProperty("clientId"))
+                                object.clientId = $root.google.protobuf.StringValue.toObject(message.clientId, options);
+                            if (message.clientSecret != null && message.hasOwnProperty("clientSecret"))
+                                object.clientSecret = $root.google.protobuf.StringValue.toObject(message.clientSecret, options);
                             if (message.programmaticClients && message.programmaticClients.length) {
                                 object.programmaticClients = [];
                                 for (var j = 0; j < message.programmaticClients.length; ++j)
                                     object.programmaticClients[j] = message.programmaticClients[j];
                             }
+                            if (message.clientSecretSha256 != null && message.hasOwnProperty("clientSecretSha256"))
+                                object.clientSecretSha256 = $root.google.protobuf.StringValue.toObject(message.clientSecretSha256, options);
                             return object;
                         };
     

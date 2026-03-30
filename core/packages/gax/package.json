@@ -19,7 +19,7 @@
     "object-hash": "^3.0.0",
     "proto3-json-serializer": "3.0.4",
     "protobufjs": "^7.5.4",
-    "retry-request": "8.0.2",
+    "retry-request": "^8.0.2",
     "rimraf": "^5.0.1"
   },
   "devDependencies": {

@@ -1578,8 +1578,7 @@
                     "java_package": "com.google.maps.routing.v2",
                     "objc_class_prefix": "GMRV2",
                     "php_namespace": "Google\\Maps\\Routing\\V2",
-                    "ruby_package": "Google::Maps::Routing::V2",
-                    "cc_enable_arenas": true
+                    "ruby_package": "Google::Maps::Routing::V2"
                   },
                   "nested": {
                     "FallbackInfo": {
@@ -3045,7 +3044,8 @@
                           "oneof": [
                             "location",
                             "placeId",
-                            "address"
+                            "address",
+                            "navigationPointToken"
                           ]
                         }
                       },
@@ -3061,6 +3061,10 @@
                         "address": {
                           "type": "string",
                           "id": 7
+                        },
+                        "navigationPointToken": {
+                          "type": "string",
+                          "id": 8
                         },
                         "via": {
                           "type": "bool",
