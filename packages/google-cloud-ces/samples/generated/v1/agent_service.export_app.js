@@ -43,6 +43,12 @@ function main(name, exportFormat) {
    *  exported app archive will be written directly to the specified GCS object.
    */
   // const gcsUri = 'abc123'
+  /**
+   *  Optional. The resource name of the app version to export.
+   *  Format:
+   *  `projects/{project}/locations/{location}/apps/{app}/versions/{version}`.
+   */
+  // const appVersion = 'abc123'
 
   // Imports the Ces library
   const {AgentServiceClient} = require('@google-cloud/ces').v1;

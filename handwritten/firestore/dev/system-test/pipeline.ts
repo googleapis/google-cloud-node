@@ -69,6 +69,7 @@ import {
   isError,
   substring,
   documentId,
+  parent,
   arrayContainsAll,
   mapRemove,
   mapMerge,
@@ -140,6 +141,8 @@ import {
   log10,
   concat,
   ifAbsent,
+  ifNull,
+  coalesce,
   join,
   arraySum,
   currentTimestamp,
@@ -147,6 +150,8 @@ import {
   type,
   isType,
   timestampTruncate,
+  timestampExtract,
+  timestampDiff,
   split,
   switchOn,
   nor,
@@ -184,16 +189,19 @@ describe.skipClassic('Pipeline class', () => {
   let beginDocCreation = 0;
   let endDocCreation = 0;
 
-  async function testCollectionWithDocs(docs: {
-    [id: string]: DocumentData;
-  }): Promise<CollectionReference<DocumentData>> {
+  async function testCollectionWithDocs(
+    targetCol: CollectionReference,
+    docs: {
+      [id: string]: DocumentData;
+    },
+  ): Promise<CollectionReference<DocumentData>> {
     beginDocCreation = new Date().valueOf();
     for (const id in docs) {
-      const ref = randomCol.doc(id);
+      const ref = targetCol.doc(id);
       await ref.set(docs[id]);
     }
     endDocCreation = new Date().valueOf();
-    return randomCol;
+    return targetCol;
   }
 
   function expectResults(result: PipelineSnapshot, ...docs: string[]): void;
@@ -219,7 +227,9 @@ describe.skipClassic('Pipeline class', () => {
     }
   }
 
-  async function setupBookDocs(): Promise<CollectionReference<DocumentData>> {
+  async function setupBookDocs(
+    targetCol: CollectionReference,
+  ): Promise<CollectionReference<DocumentData>> {
     const bookDocs: {[id: string]: DocumentData} = {
       book1: {
         title: "The Hitchhiker's Guide to the Galaxy",
@@ -329,18 +339,153 @@ describe.skipClassic('Pipeline class', () => {
         embedding: FieldValue.vector([1, 1, 1, 1, 1, 1, 1, 1, 1, 10]),
       },
     };
-    return testCollectionWithDocs(bookDocs);
+    return testCollectionWithDocs(targetCol, bookDocs);
   }
 
   before(async () => {
     randomCol = getTestRoot();
-    await setupBookDocs();
+    await setupBookDocs(randomCol);
     firestore = randomCol.firestore;
   });
 
   afterEach(() => verifyInstance(firestore as unknown as InternalFirestore));
 
   describe('pipeline results', () => {
+    describe('DML stages', () => {
+      let dmlCol: CollectionReference;
+
+      beforeEach(async () => {
+        dmlCol = getTestRoot();
+        await setupBookDocs(dmlCol);
+      });
+
+      it('can execute delete stage multiple documents', async () => {
+        const deletePpl = firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('genre'), 'Science Fiction'))
+          .delete();
+
+        const promise = deletePpl.execute();
+
+        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
+          const deleteRes = await promise;
+          expectResults(deleteRes, {documents_modified: 2});
+
+          const docSnap1 = await dmlCol.doc('book1').get();
+          expect(docSnap1.exists).to.be.false;
+
+          const docSnap10 = await dmlCol.doc('book10').get();
+          expect(docSnap10.exists).to.be.false;
+        } else {
+          await expect(promise).to.be.rejected;
+        }
+      });
+
+      it('can execute delete stage within a transaction', async () => {
+        const promise = firestore.runTransaction(async transaction => {
+          const deletePpl = firestore
+            .pipeline()
+            .collection(dmlCol.path)
+            .where(equal(field('__name__').documentId(), 'book2'))
+            .delete();
+
+          const deleteRes = await transaction.execute(deletePpl);
+          expectResults(deleteRes, {documents_modified: 1});
+        });
+
+        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
+          await promise;
+          const docSnap = await dmlCol.doc('book2').get();
+          expect(docSnap.exists).to.be.false;
+        } else {
+          await expect(promise).to.be.rejected;
+        }
+      });
+
+      it('can execute update stage with addFields', async () => {
+        const ppl = firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book3'))
+          .addFields(field('__name__').documentId().as('id'))
+          .update([constant('baz').as('foo')]);
+
+        const promise = ppl.execute();
+
+        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
+          const res = await promise;
+          expectResults(res, {documents_modified: 1});
+
+          const docSnap = await dmlCol.doc('book3').get();
+          expect(docSnap.get('foo')).to.equal('baz');
+          expect(docSnap.get('id')).to.equal('book3');
+        } else {
+          await expect(promise).to.be.rejected;
+        }
+      });
+
+      it('can update multiple documents and remove fields', async () => {
+        const promise = firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('genre'), 'Science Fiction'))
+          .removeFields('awards')
+          .update([constant('Updated').as('status')])
+          .execute();
+
+        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
+          const res = await promise;
+          expectResults(res, {documents_modified: 2});
+
+          const docSnap1 = await dmlCol.doc('book1').get();
+          expect(docSnap1.get('status')).to.equal('Updated');
+          expect(docSnap1.get('awards')).to.be.undefined;
+
+          const docSnap10 = await dmlCol.doc('book10').get();
+          expect(docSnap10.get('status')).to.equal('Updated');
+          expect(docSnap10.get('awards')).to.be.undefined;
+        } else {
+          await expect(promise).to.be.rejected;
+        }
+      });
+
+      it('can update with expressions', async () => {
+        const promise = firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .update([add(field('rating'), constant(1.0)).as('rating')])
+          .execute();
+
+        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
+          const res = await promise;
+          expectResults(res, {documents_modified: 1});
+
+          const docSnap = await dmlCol.doc('book1').get();
+          expect(docSnap.get('rating')).to.equal(5.2);
+        } else {
+          await expect(promise).to.be.rejected;
+        }
+      });
+
+      it('can update non existing document modifies zero documents', async () => {
+        const nonExistingId = 'nonExistingId_123';
+        const promise = firestore
+          .pipeline()
+          .documents([dmlCol.doc(nonExistingId)])
+          .update([constant('Updated').as('status')])
+          .execute();
+
+        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
+          const res = await promise;
+          expectResults(res, {documents_modified: 0});
+        } else {
+          await expect(promise).to.be.rejected;
+        }
+      });
+    });
+
     it('empty snapshot as expected', async () => {
       const snapshot = await firestore
         .pipeline()
@@ -2458,7 +2603,7 @@ describe.skipClassic('Pipeline class', () => {
         .select(
           'title',
           logicalMaximum(constant(1960), field('published'), 1961).as(
-            'published-safe',
+            'publishedSafe',
           ),
         )
         .sort(field('title').ascending())
@@ -2466,9 +2611,9 @@ describe.skipClassic('Pipeline class', () => {
         .execute();
       expectResults(
         snapshot,
-        {title: '1984', 'published-safe': 1961},
-        {title: 'Crime and Punishment', 'published-safe': 1961},
-        {title: 'Dune', 'published-safe': 1965},
+        {title: '1984', publishedSafe: 1961},
+        {title: 'Crime and Punishment', publishedSafe: 1961},
+        {title: 'Dune', publishedSafe: 1965},
       );
     });
 
@@ -2479,7 +2624,7 @@ describe.skipClassic('Pipeline class', () => {
         .select(
           'title',
           logicalMinimum(constant(1960), field('published'), 1961).as(
-            'published-safe',
+            'publishedSafe',
           ),
         )
         .sort(field('title').ascending())
@@ -2487,9 +2632,9 @@ describe.skipClassic('Pipeline class', () => {
         .execute();
       expectResults(
         snapshot,
-        {title: '1984', 'published-safe': 1949},
-        {title: 'Crime and Punishment', 'published-safe': 1866},
-        {title: 'Dune', 'published-safe': 1960},
+        {title: '1984', publishedSafe: 1949},
+        {title: 'Crime and Punishment', publishedSafe: 1866},
+        {title: 'Dune', publishedSafe: 1960},
       );
     });
 
@@ -2503,7 +2648,7 @@ describe.skipClassic('Pipeline class', () => {
             lessThan(field('published'), 1960),
             constant(1960),
             field('published'),
-          ).as('published-safe'),
+          ).as('publishedSafe'),
           field('rating')
             .greaterThanOrEqual(4.5)
             .conditional(constant('great'), constant('good'))
@@ -2514,13 +2659,13 @@ describe.skipClassic('Pipeline class', () => {
         .execute();
       expectResults(
         snapshot,
-        {title: '1984', 'published-safe': 1960, rating: 'good'},
+        {title: '1984', publishedSafe: 1960, rating: 'good'},
         {
           title: 'Crime and Punishment',
-          'published-safe': 1960,
+          publishedSafe: 1960,
           rating: 'good',
         },
-        {title: 'Dune', 'published-safe': 1965, rating: 'great'},
+        {title: 'Dune', publishedSafe: 1965, rating: 'great'},
       );
     });
 
@@ -3111,9 +3256,9 @@ describe.skipClassic('Pipeline class', () => {
         snapshot,
         {
           title: "The Hitchhiker's Guide to the Galaxy",
-          'awards.hugo': true,
+          awards: {hugo: true},
         },
-        {title: 'Dune', 'awards.hugo': true},
+        {title: 'Dune', awards: {hugo: true}},
       );
     });
 
@@ -3138,14 +3283,14 @@ describe.skipClassic('Pipeline class', () => {
         .select(
           'title',
           field('nested.level.1'),
-          mapGet('nested', 'level.1').mapGet('level.2').as('nested'),
+          mapGet('nested', 'level.1').mapGet('level.2').as('new_nested'),
         )
         .execute();
 
       expectResults(snapshot, {
         title: 'foo',
-        'nested.level.`1`': 'bar',
-        nested: 'baz',
+        nested: {level: {1: 'bar'}},
+        new_nested: 'baz',
       });
     });
 
@@ -4253,17 +4398,17 @@ describe.skipClassic('Pipeline class', () => {
           }),
         )
         .select(
-          field('foo').round(0).as('0'),
-          round('foo', 1).as('1'),
-          round('foo', constant(2)).as('2'),
-          round(field('foo'), 4).as('4'),
+          field('foo').round(0).as('round0'),
+          round('foo', 1).as('round1'),
+          round('foo', constant(2)).as('round2'),
+          round(field('foo'), 4).as('round4'),
         )
         .execute();
       expectResults(snapshot, {
-        '0': 4,
-        '1': 4.1,
-        '2': 4.12,
-        '4': 4.1235,
+        round0: 4,
+        round1: 4.1,
+        round2: 4.12,
+        round4: 4.1235,
       });
     });
 
@@ -4304,17 +4449,17 @@ describe.skipClassic('Pipeline class', () => {
           }),
         )
         .select(
-          field('foo').trunc(0).as('0'),
-          trunc('foo', 1).as('1'),
-          trunc('foo', constant(2)).as('2'),
-          trunc(field('foo'), 4).as('4'),
+          field('foo').trunc(0).as('trunc0'),
+          trunc('foo', 1).as('trunc1'),
+          trunc('foo', constant(2)).as('trunc2'),
+          trunc(field('foo'), 4).as('trunc4'),
         )
         .execute();
       expectResults(snapshot, {
-        '0': 4,
-        '1': 4.1,
-        '2': 4.12,
-        '4': 4.1234,
+        trunc0: 4,
+        trunc1: 4.1,
+        trunc2: 4.12,
+        trunc4: 4.1234,
       });
     });
 
@@ -4572,6 +4717,29 @@ describe.skipClassic('Pipeline class', () => {
         .execute();
       expectResults(snapshot, {
         docId: 'book4',
+      });
+    });
+
+    it('supports parent', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .select(
+          parent(randomCol.doc('book4/reviews/review1')).as('parentRefStatic'),
+          constant(randomCol.doc('book4/reviews/review1'))
+            .parent()
+            .as('parentRefInstance'),
+        )
+        .select(
+          field('parentRefStatic').documentId().as('parentIdStatic'),
+          field('parentRefInstance').documentId().as('parentIdInstance'),
+        )
+        .execute();
+
+      expectResults(snapshot, {
+        parentIdStatic: 'book4',
+        parentIdInstance: 'book4',
       });
     });
 
@@ -4888,15 +5056,15 @@ describe.skipClassic('Pipeline class', () => {
           constant(1).as('pos1'),
         )
         .select(
-          abs('neg10').as('10'),
-          abs(field('neg22')).as('22'),
-          field('pos1').as('1'),
+          abs('neg10').as('abs10'),
+          abs(field('neg22')).as('abs22'),
+          field('pos1').as('abs1'),
         )
         .execute();
       expectResults(snapshot, {
-        '10': 10,
-        '22': 22.22,
-        '1': 1,
+        abs10: 10,
+        abs22: 22.22,
+        abs1: 1,
       });
     });
 
@@ -4981,6 +5149,87 @@ describe.skipClassic('Pipeline class', () => {
         title: 'foo',
         name: 'default name',
         nameOrTitle: 'foo',
+      });
+    });
+
+    it('supports ifNull', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            title: 'foo',
+            name: null,
+          }),
+        )
+        .select(
+          ifNull('title', 'default title').as('staticMethod'),
+          field('title').ifNull('default title').as('instanceMethod'),
+          field('name').ifNull(field('title')).as('nameOrTitle'),
+          field('name').ifNull('default name').as('fieldIsNull'),
+          field('absent').ifNull('default name').as('fieldIsAbsent'),
+        )
+        .execute();
+
+      expectResults(snapshot, {
+        staticMethod: 'foo',
+        instanceMethod: 'foo',
+        nameOrTitle: 'foo',
+        fieldIsNull: 'default name',
+        fieldIsAbsent: 'default name',
+      });
+    });
+
+    it('supports coalesce', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            numberValue: 1,
+            stringValue: 'hello',
+            booleanValue: false,
+            nullValue: null,
+            nullValue2: null,
+          }),
+        )
+        .select(
+          coalesce(field('numberValue'), field('stringValue')).as(
+            'staticMethod',
+          ),
+          field('numberValue')
+            .coalesce(field('stringValue'))
+            .as('instanceMethod'),
+          coalesce(field('nullValue'), field('stringValue')).as('firstIsNull'),
+          coalesce(
+            field('nullValue'),
+            field('nullValue2'),
+            field('booleanValue'),
+          ).as('lastIsNotNull'),
+          coalesce(field('nullValue'), field('nullValue2')).as('allFieldsNull'),
+          coalesce(
+            field('nullValue'),
+            field('nullValue2'),
+            constant('default'),
+          ).as('allFieldsNullWithDefault'),
+          coalesce(
+            field('absentField'),
+            field('numberValue'),
+            constant('default'),
+          ).as('withAbsentField'),
+        )
+        .execute();
+
+      expectResults(snapshot, {
+        staticMethod: 1,
+        instanceMethod: 1,
+        firstIsNull: 'hello',
+        lastIsNotNull: false,
+        allFieldsNull: null,
+        allFieldsNullWithDefault: 'default',
+        withAbsentField: 1,
       });
     });
 
@@ -5072,6 +5321,73 @@ describe.skipClassic('Pipeline class', () => {
         trunc_hour: new Timestamp(Date.UTC(2025, 10, 30, 1) / 1000, 0),
         trunc_minute: new Timestamp(Date.UTC(2025, 10, 30, 1, 2) / 1000, 0),
         trunc_second: new Timestamp(Date.UTC(2025, 10, 30, 1, 2, 3) / 1000, 0),
+      });
+    });
+
+    it('supports timestamp difference', async () => {
+      const results = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            end: new Timestamp(1741437296, 123456789),
+            start: new Timestamp(1741428000, 0),
+          }),
+        )
+        .select(
+          timestampDiff(field('end'), field('start'), 'hour').as('diffHour'),
+          field('end').timestampDiff(field('start'), 'minute').as('diffMinute'),
+          field('end').timestampDiff(field('start'), 'second').as('diffSecond'),
+          field('start').timestampDiff(field('end'), 'hour').as('diffHourNeg'),
+        )
+        .execute();
+
+      expectResults(results, {
+        diffHour: 2,
+        diffMinute: 154,
+        diffSecond: 9296,
+        diffHourNeg: -2,
+      });
+    });
+
+    it('supports timestamp extraction', async () => {
+      const results = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            ts: new Timestamp(1741437296, 123456789),
+          }),
+        )
+        .select(
+          timestampExtract(field('ts'), 'year').as('year'),
+          field('ts').timestampExtract('month').as('month'),
+          timestampExtract(field('ts'), 'day').as('day'),
+          field('ts').timestampExtract('hour').as('hour'),
+          timestampExtract(field('ts'), 'minute').as('minute'),
+          field('ts').timestampExtract('second').as('second'),
+          timestampExtract(field('ts'), 'millisecond').as('millis'),
+          field('ts').timestampExtract('microsecond').as('micros'),
+          timestampExtract(field('ts'), 'dayofyear').as('dayOfYear'),
+          field('ts')
+            .timestampExtract('hour', 'America/Los_Angeles')
+            .as('hourLa'),
+        )
+        .execute();
+
+      expectResults(results, {
+        year: 2025,
+        month: 3,
+        day: 8,
+        hour: 12,
+        minute: 34,
+        second: 56,
+        millis: 123,
+        micros: 123456,
+        dayOfYear: 67,
+        hourLa: 4,
       });
     });
 

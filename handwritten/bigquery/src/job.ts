@@ -51,6 +51,7 @@ export type QueryResultsOptions = {
   job?: Job;
   wrapIntegers?: boolean | IntegerTypeCastOptions;
   parseJSON?: boolean;
+  skipParsing?: boolean;
 } & PagedRequest<bigquery.jobs.IGetQueryResultsParams> & {
     /**
      * internal properties
@@ -602,10 +603,15 @@ class Job extends Operation {
             error never makes it to the callback. Instead, pass the error to the
             callback the user provides so that the user can see the error.
              */
-            rows = BigQuery.mergeSchemaWithRows_(resp.schema, resp.rows, {
-              wrapIntegers,
-              parseJSON,
-            });
+            if (options.skipParsing) {
+              rows = resp.rows;
+            } else {
+              rows = BigQuery.mergeSchemaWithRows_(resp.schema, resp.rows, {
+                wrapIntegers,
+                parseJSON,
+              });
+              delete resp.rows;
+            }
           } catch (e) {
             callback!(e as Error, null, null, resp);
             return;
@@ -633,7 +639,6 @@ class Job extends Operation {
           });
           delete nextQuery.startIndex;
         }
-        delete resp.rows;
         callback!(null, rows, nextQuery, resp);
       },
     );

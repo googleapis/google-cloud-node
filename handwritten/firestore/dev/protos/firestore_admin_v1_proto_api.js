@@ -496,6 +496,9 @@
                          * @property {boolean|null} [freeTier] Database freeTier
                          * @property {string|null} [etag] Database etag
                          * @property {google.firestore.admin.v1.Database.DatabaseEdition|null} [databaseEdition] Database databaseEdition
+                         * @property {google.firestore.admin.v1.RealtimeUpdatesMode|null} [realtimeUpdatesMode] Database realtimeUpdatesMode
+                         * @property {google.firestore.admin.v1.Database.DataAccessMode|null} [firestoreDataAccessMode] Database firestoreDataAccessMode
+                         * @property {google.firestore.admin.v1.Database.DataAccessMode|null} [mongodbCompatibleDataAccessMode] Database mongodbCompatibleDataAccessMode
                          */
     
                         /**
@@ -681,6 +684,30 @@
                          * @instance
                          */
                         Database.prototype.databaseEdition = 0;
+    
+                        /**
+                         * Database realtimeUpdatesMode.
+                         * @member {google.firestore.admin.v1.RealtimeUpdatesMode} realtimeUpdatesMode
+                         * @memberof google.firestore.admin.v1.Database
+                         * @instance
+                         */
+                        Database.prototype.realtimeUpdatesMode = 0;
+    
+                        /**
+                         * Database firestoreDataAccessMode.
+                         * @member {google.firestore.admin.v1.Database.DataAccessMode} firestoreDataAccessMode
+                         * @memberof google.firestore.admin.v1.Database
+                         * @instance
+                         */
+                        Database.prototype.firestoreDataAccessMode = 0;
+    
+                        /**
+                         * Database mongodbCompatibleDataAccessMode.
+                         * @member {google.firestore.admin.v1.Database.DataAccessMode} mongodbCompatibleDataAccessMode
+                         * @memberof google.firestore.admin.v1.Database
+                         * @instance
+                         */
+                        Database.prototype.mongodbCompatibleDataAccessMode = 0;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -883,6 +910,66 @@
                                 message.databaseEdition = 2;
                                 break;
                             }
+                            switch (object.realtimeUpdatesMode) {
+                            default:
+                                if (typeof object.realtimeUpdatesMode === "number") {
+                                    message.realtimeUpdatesMode = object.realtimeUpdatesMode;
+                                    break;
+                                }
+                                break;
+                            case "REALTIME_UPDATES_MODE_UNSPECIFIED":
+                            case 0:
+                                message.realtimeUpdatesMode = 0;
+                                break;
+                            case "REALTIME_UPDATES_MODE_ENABLED":
+                            case 1:
+                                message.realtimeUpdatesMode = 1;
+                                break;
+                            case "REALTIME_UPDATES_MODE_DISABLED":
+                            case 2:
+                                message.realtimeUpdatesMode = 2;
+                                break;
+                            }
+                            switch (object.firestoreDataAccessMode) {
+                            default:
+                                if (typeof object.firestoreDataAccessMode === "number") {
+                                    message.firestoreDataAccessMode = object.firestoreDataAccessMode;
+                                    break;
+                                }
+                                break;
+                            case "DATA_ACCESS_MODE_UNSPECIFIED":
+                            case 0:
+                                message.firestoreDataAccessMode = 0;
+                                break;
+                            case "DATA_ACCESS_MODE_ENABLED":
+                            case 1:
+                                message.firestoreDataAccessMode = 1;
+                                break;
+                            case "DATA_ACCESS_MODE_DISABLED":
+                            case 2:
+                                message.firestoreDataAccessMode = 2;
+                                break;
+                            }
+                            switch (object.mongodbCompatibleDataAccessMode) {
+                            default:
+                                if (typeof object.mongodbCompatibleDataAccessMode === "number") {
+                                    message.mongodbCompatibleDataAccessMode = object.mongodbCompatibleDataAccessMode;
+                                    break;
+                                }
+                                break;
+                            case "DATA_ACCESS_MODE_UNSPECIFIED":
+                            case 0:
+                                message.mongodbCompatibleDataAccessMode = 0;
+                                break;
+                            case "DATA_ACCESS_MODE_ENABLED":
+                            case 1:
+                                message.mongodbCompatibleDataAccessMode = 1;
+                                break;
+                            case "DATA_ACCESS_MODE_DISABLED":
+                            case 2:
+                                message.mongodbCompatibleDataAccessMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -920,6 +1007,9 @@
                                 object.previousId = "";
                                 object.sourceInfo = null;
                                 object.databaseEdition = options.enums === String ? "DATABASE_EDITION_UNSPECIFIED" : 0;
+                                object.realtimeUpdatesMode = options.enums === String ? "REALTIME_UPDATES_MODE_UNSPECIFIED" : 0;
+                                object.firestoreDataAccessMode = options.enums === String ? "DATA_ACCESS_MODE_UNSPECIFIED" : 0;
+                                object.mongodbCompatibleDataAccessMode = options.enums === String ? "DATA_ACCESS_MODE_UNSPECIFIED" : 0;
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -969,6 +1059,12 @@
                                 if (options.oneofs)
                                     object._freeTier = "freeTier";
                             }
+                            if (message.realtimeUpdatesMode != null && message.hasOwnProperty("realtimeUpdatesMode"))
+                                object.realtimeUpdatesMode = options.enums === String ? $root.google.firestore.admin.v1.RealtimeUpdatesMode[message.realtimeUpdatesMode] === undefined ? message.realtimeUpdatesMode : $root.google.firestore.admin.v1.RealtimeUpdatesMode[message.realtimeUpdatesMode] : message.realtimeUpdatesMode;
+                            if (message.firestoreDataAccessMode != null && message.hasOwnProperty("firestoreDataAccessMode"))
+                                object.firestoreDataAccessMode = options.enums === String ? $root.google.firestore.admin.v1.Database.DataAccessMode[message.firestoreDataAccessMode] === undefined ? message.firestoreDataAccessMode : $root.google.firestore.admin.v1.Database.DataAccessMode[message.firestoreDataAccessMode] : message.firestoreDataAccessMode;
+                            if (message.mongodbCompatibleDataAccessMode != null && message.hasOwnProperty("mongodbCompatibleDataAccessMode"))
+                                object.mongodbCompatibleDataAccessMode = options.enums === String ? $root.google.firestore.admin.v1.Database.DataAccessMode[message.mongodbCompatibleDataAccessMode] === undefined ? message.mongodbCompatibleDataAccessMode : $root.google.firestore.admin.v1.Database.DataAccessMode[message.mongodbCompatibleDataAccessMode] : message.mongodbCompatibleDataAccessMode;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -1859,7 +1955,39 @@
                             return values;
                         })();
     
+                        /**
+                         * DataAccessMode enum.
+                         * @name google.firestore.admin.v1.Database.DataAccessMode
+                         * @enum {string}
+                         * @property {string} DATA_ACCESS_MODE_UNSPECIFIED=DATA_ACCESS_MODE_UNSPECIFIED DATA_ACCESS_MODE_UNSPECIFIED value
+                         * @property {string} DATA_ACCESS_MODE_ENABLED=DATA_ACCESS_MODE_ENABLED DATA_ACCESS_MODE_ENABLED value
+                         * @property {string} DATA_ACCESS_MODE_DISABLED=DATA_ACCESS_MODE_DISABLED DATA_ACCESS_MODE_DISABLED value
+                         */
+                        Database.DataAccessMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DATA_ACCESS_MODE_UNSPECIFIED"] = "DATA_ACCESS_MODE_UNSPECIFIED";
+                            values[valuesById[1] = "DATA_ACCESS_MODE_ENABLED"] = "DATA_ACCESS_MODE_ENABLED";
+                            values[valuesById[2] = "DATA_ACCESS_MODE_DISABLED"] = "DATA_ACCESS_MODE_DISABLED";
+                            return values;
+                        })();
+    
                         return Database;
+                    })();
+    
+                    /**
+                     * RealtimeUpdatesMode enum.
+                     * @name google.firestore.admin.v1.RealtimeUpdatesMode
+                     * @enum {string}
+                     * @property {string} REALTIME_UPDATES_MODE_UNSPECIFIED=REALTIME_UPDATES_MODE_UNSPECIFIED REALTIME_UPDATES_MODE_UNSPECIFIED value
+                     * @property {string} REALTIME_UPDATES_MODE_ENABLED=REALTIME_UPDATES_MODE_ENABLED REALTIME_UPDATES_MODE_ENABLED value
+                     * @property {string} REALTIME_UPDATES_MODE_DISABLED=REALTIME_UPDATES_MODE_DISABLED REALTIME_UPDATES_MODE_DISABLED value
+                     */
+                    v1.RealtimeUpdatesMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "REALTIME_UPDATES_MODE_UNSPECIFIED"] = "REALTIME_UPDATES_MODE_UNSPECIFIED";
+                        values[valuesById[1] = "REALTIME_UPDATES_MODE_ENABLED"] = "REALTIME_UPDATES_MODE_ENABLED";
+                        values[valuesById[2] = "REALTIME_UPDATES_MODE_DISABLED"] = "REALTIME_UPDATES_MODE_DISABLED";
+                        return values;
                     })();
     
                     v1.Field = (function() {
@@ -2301,6 +2429,7 @@
                          * @property {google.firestore.admin.v1.Index.Density|null} [density] Index density
                          * @property {boolean|null} [multikey] Index multikey
                          * @property {number|null} [shardCount] Index shardCount
+                         * @property {boolean|null} [unique] Index unique
                          */
     
                         /**
@@ -2382,6 +2511,14 @@
                          * @instance
                          */
                         Index.prototype.shardCount = 0;
+    
+                        /**
+                         * Index unique.
+                         * @member {boolean} unique
+                         * @memberof google.firestore.admin.v1.Index
+                         * @instance
+                         */
+                        Index.prototype.unique = false;
     
                         /**
                          * Creates an Index message from a plain object. Also converts values to their respective internal types.
@@ -2503,6 +2640,8 @@
                                 message.multikey = Boolean(object.multikey);
                             if (object.shardCount != null)
                                 message.shardCount = object.shardCount | 0;
+                            if (object.unique != null)
+                                message.unique = Boolean(object.unique);
                             return message;
                         };
     
@@ -2529,6 +2668,7 @@
                                 object.density = options.enums === String ? "DENSITY_UNSPECIFIED" : 0;
                                 object.multikey = false;
                                 object.shardCount = 0;
+                                object.unique = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2549,6 +2689,8 @@
                                 object.multikey = message.multikey;
                             if (message.shardCount != null && message.hasOwnProperty("shardCount"))
                                 object.shardCount = message.shardCount;
+                            if (message.unique != null && message.hasOwnProperty("unique"))
+                                object.unique = message.unique;
                             return object;
                         };
     
