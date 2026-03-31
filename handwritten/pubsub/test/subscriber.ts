@@ -918,13 +918,22 @@ describe('Subscriber', () => {
   });
 
   describe('nack', () => {
-    it('should modAck the message with a 0 deadline', async () => {
+    it('should modAck the message with a 0 deadline (nack)', async () => {
       const stub = sandbox.stub(subscriber, 'modAck');
 
       await subscriber.nack(message);
 
       const [msg, deadline] = stub.lastCall.args;
+      assert.strictEqual(msg, message);
+      assert.strictEqual(deadline, 0);
+    });
 
+    it('should modAck the message with a 0 deadline (nackWithResponse)', async () => {
+      const stub = sandbox.stub(subscriber, 'modAckWithResponse');
+
+      await subscriber.nackWithResponse(message);
+
+      const [msg, deadline] = stub.lastCall.args;
       assert.strictEqual(msg, message);
       assert.strictEqual(deadline, 0);
     });
@@ -942,11 +951,20 @@ describe('Subscriber', () => {
       assert.strictEqual(fakeLog.args![1], message.id);
     });
 
-    it('should remove the message from the inventory', async () => {
+    it('should remove the message from the inventory (nack)', async () => {
       const inventory: FakeLeaseManager = stubs.get('inventory');
       const stub = sandbox.stub(inventory, 'remove').withArgs(message);
 
       await subscriber.nack(message);
+
+      assert.strictEqual(stub.callCount, 1);
+    });
+
+    it('should remove the message from the inventory (nackWithResponse)', async () => {
+      const inventory: FakeLeaseManager = stubs.get('inventory');
+      const stub = sandbox.stub(inventory, 'remove').withArgs(message);
+
+      await subscriber.nackWithResponse(message);
 
       assert.strictEqual(stub.callCount, 1);
     });
