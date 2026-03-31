@@ -55,7 +55,6 @@ import {JobMetadata, JobOptions} from './job';
 import bigquery from './types';
 import {IntegerTypeCastOptions} from './bigquery';
 import {RowQueue} from './rowQueue';
-import IDataFormatOptions = bigquery.IDataFormatOptions;
 
 // This is supposed to be a @google-cloud/storage `File` type. The storage npm
 // module includes these types, but is current installed as a devDependency.
@@ -1867,42 +1866,25 @@ class Table extends ServiceObject {
         callback!(err, null, null, resp);
         return;
       }
-      try {
-        /*
-        Without this try/catch block, calls to getRows will hang indefinitely if
-        a call to mergeSchemaWithRows_ fails because the error never makes it to
-        the callback. Instead, pass the error to the callback the user provides
-        so that the user can see the error.
-         */
-        if (options.skipParsing) {
-          rows = rows || [];
-        } else {
-          rows = BigQuery.mergeSchemaWithRows_(
-            this.metadata.schema,
-            rows || [],
-            {
-              wrapIntegers,
-              selectedFields,
-              parseJSON,
-              listParams: qs,
-            },
-          );
-        }
-      } catch (err) {
-        callback!(err as Error | null, null, null, resp);
-        return;
+      if (options.skipParsing) {
+        rows = rows || [];
+      } else {
+        rows = BigQuery.mergeSchemaWithRows_(this.metadata.schema, rows || [], {
+          wrapIntegers,
+          selectedFields,
+          parseJSON,
+        });
       }
       callback!(null, rows, nextQuery, resp);
     };
-    const hasAnyFormatOpts =
-      options['formatOptions.timestampOutputFormat'] !== undefined ||
-      options['formatOptions.useInt64Timestamp'] !== undefined;
-    const defaultOpts = hasAnyFormatOpts
-      ? {}
-      : {
-          'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
-        };
-    const qs = extend(defaultOpts, options);
+
+    const qs = extend(
+      {
+        'formatOptions.useInt64Timestamp': true,
+      },
+      options,
+    );
+
     this.request(
       {
         uri: '/data',

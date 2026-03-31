@@ -2046,7 +2046,7 @@ describe('BigQuery/Table', () => {
         assert.strictEqual(reqOpts.uri, '/data');
         assert.deepStrictEqual(reqOpts.qs, {
           ...options,
-          'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+          'formatOptions.useInt64Timestamp': true,
         });
         callback(null, {});
       };
@@ -2219,6 +2219,7 @@ describe('BigQuery/Table', () => {
 
       table.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(null, {
+          'formatOptions.useInt64Timestamp': true,
           pageToken,
         });
       };
@@ -2228,7 +2229,7 @@ describe('BigQuery/Table', () => {
         assert.deepStrictEqual(nextQuery, {
           a: 'b',
           c: 'd',
-          'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+          'formatOptions.useInt64Timestamp': true,
           pageToken,
         });
         // Original object isn't affected.
@@ -2445,7 +2446,7 @@ describe('BigQuery/Table', () => {
 
       table.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.deepStrictEqual(reqOpts.qs, {
-          'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+          'formatOptions.useInt64Timestamp': true,
         });
         callback(null, {});
       };
@@ -2469,7 +2470,7 @@ describe('BigQuery/Table', () => {
 
       table.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.deepStrictEqual(reqOpts.qs, {
-          'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+          'formatOptions.useInt64Timestamp': true,
         });
         callback(null, {});
       };
