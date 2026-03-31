@@ -403,6 +403,57 @@ describe('BigQuery/Job', () => {
       job.getQueryResults(options, assert.ifError);
     });
 
+    it('should skip parsing if skipParsing is true', done => {
+      const response = {
+        schema: {},
+        rows: [{f: [{v: 'hi'}]}],
+      };
+
+      BIGQUERY.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function,
+      ) => {
+        callback(null, response);
+      };
+
+      const mergeStub = sandbox.stub(BigQuery, 'mergeSchemaWithRows_');
+
+      job.getQueryResults({skipParsing: true}, (err: Error, rows: {}[]) => {
+        assert.ifError(err);
+        assert.strictEqual(rows, response.rows);
+        assert.strictEqual(mergeStub.called, false);
+        done();
+      });
+    });
+
+    it('should not delete resp.rows if skipParsing is true', done => {
+      const options: QueryResultsOptions = {
+        skipParsing: true,
+      };
+
+      const rawRows = [{f: [{v: 'hi'}]}];
+      const resp = {
+        jobComplete: true,
+        rows: rawRows,
+        schema: {
+          fields: [{name: 'name', type: 'STRING'}],
+        },
+      };
+
+      job.bigQuery.request = (reqOpts: {}, callback: Function) => {
+        callback(null, resp);
+      };
+
+      job.getQueryResults(
+        options,
+        (err: Error, rows: {}, nextQuery: {}, response: any) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(response.rows, rawRows);
+          done();
+        },
+      );
+    });
+
     it('should return the query when the job is not complete', done => {
       BIGQUERY.request = (
         reqOpts: DecorateRequestOptions,
@@ -442,6 +493,32 @@ describe('BigQuery/Job', () => {
           assert.strictEqual(rows, null);
           assert.deepStrictEqual(nextQuery, options);
           assert.strictEqual(resp, response);
+          done();
+        },
+      );
+    });
+
+    it('should delete resp.rows if skipParsing is false by default', done => {
+      const options: QueryResultsOptions = {};
+
+      const rawRows = [{f: [{v: 'hi'}]}];
+      const resp = {
+        jobComplete: true,
+        rows: rawRows,
+        schema: {
+          fields: [{name: 'name', type: 'STRING'}],
+        },
+      };
+
+      job.bigQuery.request = (reqOpts: {}, callback: Function) => {
+        callback(null, resp);
+      };
+
+      job.getQueryResults(
+        options,
+        (err: Error, rows: {}, nextQuery: {}, response: any) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(response.rows, undefined);
           done();
         },
       );

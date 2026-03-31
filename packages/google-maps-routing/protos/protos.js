@@ -31376,6 +31376,7 @@
                          * @property {google.maps.routing.v2.ILocation|null} [location] Waypoint location
                          * @property {string|null} [placeId] Waypoint placeId
                          * @property {string|null} [address] Waypoint address
+                         * @property {string|null} [navigationPointToken] Waypoint navigationPointToken
                          * @property {boolean|null} [via] Waypoint via
                          * @property {boolean|null} [vehicleStopover] Waypoint vehicleStopover
                          * @property {boolean|null} [sideOfRoad] Waypoint sideOfRoad
@@ -31421,6 +31422,14 @@
                         Waypoint.prototype.address = null;
     
                         /**
+                         * Waypoint navigationPointToken.
+                         * @member {string|null|undefined} navigationPointToken
+                         * @memberof google.maps.routing.v2.Waypoint
+                         * @instance
+                         */
+                        Waypoint.prototype.navigationPointToken = null;
+    
+                        /**
                          * Waypoint via.
                          * @member {boolean} via
                          * @memberof google.maps.routing.v2.Waypoint
@@ -31449,12 +31458,12 @@
     
                         /**
                          * Waypoint locationType.
-                         * @member {"location"|"placeId"|"address"|undefined} locationType
+                         * @member {"location"|"placeId"|"address"|"navigationPointToken"|undefined} locationType
                          * @memberof google.maps.routing.v2.Waypoint
                          * @instance
                          */
                         Object.defineProperty(Waypoint.prototype, "locationType", {
-                            get: $util.oneOfGetter($oneOfFields = ["location", "placeId", "address"]),
+                            get: $util.oneOfGetter($oneOfFields = ["location", "placeId", "address", "navigationPointToken"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -31494,6 +31503,8 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.sideOfRoad);
                             if (message.address != null && Object.hasOwnProperty.call(message, "address"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.address);
+                            if (message.navigationPointToken != null && Object.hasOwnProperty.call(message, "navigationPointToken"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.navigationPointToken);
                             return writer;
                         };
     
@@ -31540,6 +31551,10 @@
                                     }
                                 case 7: {
                                         message.address = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.navigationPointToken = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -31612,6 +31627,13 @@
                                 if (!$util.isString(message.address))
                                     return "address: string expected";
                             }
+                            if (message.navigationPointToken != null && message.hasOwnProperty("navigationPointToken")) {
+                                if (properties.locationType === 1)
+                                    return "locationType: multiple values";
+                                properties.locationType = 1;
+                                if (!$util.isString(message.navigationPointToken))
+                                    return "navigationPointToken: string expected";
+                            }
                             if (message.via != null && message.hasOwnProperty("via"))
                                 if (typeof message.via !== "boolean")
                                     return "via: boolean expected";
@@ -31645,6 +31667,8 @@
                                 message.placeId = String(object.placeId);
                             if (object.address != null)
                                 message.address = String(object.address);
+                            if (object.navigationPointToken != null)
+                                message.navigationPointToken = String(object.navigationPointToken);
                             if (object.via != null)
                                 message.via = Boolean(object.via);
                             if (object.vehicleStopover != null)
@@ -31692,6 +31716,11 @@
                                 object.address = message.address;
                                 if (options.oneofs)
                                     object.locationType = "address";
+                            }
+                            if (message.navigationPointToken != null && message.hasOwnProperty("navigationPointToken")) {
+                                object.navigationPointToken = message.navigationPointToken;
+                                if (options.oneofs)
+                                    object.locationType = "navigationPointToken";
                             }
                             return object;
                         };

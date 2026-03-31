@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/css-v0.10.1...css-v0.11.0) (2026-03-18)
+
+
+### Features
+
+* [css] add product rating fields to CSS API v1. This is in ([#7611](https://github.com/googleapis/google-cloud-node/issues/7611)) ([e361532](https://github.com/googleapis/google-cloud-node/commit/e3615322fe40bff1c09456a451ac1371727a2592))
+
 ## [0.10.1](https://github.com/googleapis/google-cloud-node/compare/css-v0.10.0...css-v0.10.1) (2025-10-13)
 
 

@@ -2675,6 +2675,7 @@
                              * @property {string|null} [httpServiceAttachment] PrivateConfig httpServiceAttachment
                              * @property {string|null} [sshServiceAttachment] PrivateConfig sshServiceAttachment
                              * @property {Array.<string>|null} [pscAllowedProjects] PrivateConfig pscAllowedProjects
+                             * @property {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig|null} [customHostConfig] PrivateConfig customHostConfig
                              */
     
                             /**
@@ -2734,6 +2735,14 @@
                             PrivateConfig.prototype.pscAllowedProjects = $util.emptyArray;
     
                             /**
+                             * PrivateConfig customHostConfig.
+                             * @member {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig|null|undefined} customHostConfig
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @instance
+                             */
+                            PrivateConfig.prototype.customHostConfig = null;
+    
+                            /**
                              * Creates a new PrivateConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
@@ -2768,6 +2777,8 @@
                                 if (message.pscAllowedProjects != null && message.pscAllowedProjects.length)
                                     for (var i = 0; i < message.pscAllowedProjects.length; ++i)
                                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.pscAllowedProjects[i]);
+                                if (message.customHostConfig != null && Object.hasOwnProperty.call(message, "customHostConfig"))
+                                    $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig.encode(message.customHostConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2826,6 +2837,10 @@
                                             message.pscAllowedProjects.push(reader.string());
                                             break;
                                         }
+                                    case 7: {
+                                            message.customHostConfig = $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2880,6 +2895,11 @@
                                         if (!$util.isString(message.pscAllowedProjects[i]))
                                             return "pscAllowedProjects: string[] expected";
                                 }
+                                if (message.customHostConfig != null && message.hasOwnProperty("customHostConfig")) {
+                                    var error = $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig.verify(message.customHostConfig);
+                                    if (error)
+                                        return "customHostConfig." + error;
+                                }
                                 return null;
                             };
     
@@ -2910,6 +2930,11 @@
                                     for (var i = 0; i < object.pscAllowedProjects.length; ++i)
                                         message.pscAllowedProjects[i] = String(object.pscAllowedProjects[i]);
                                 }
+                                if (object.customHostConfig != null) {
+                                    if (typeof object.customHostConfig !== "object")
+                                        throw TypeError(".google.cloud.securesourcemanager.v1.Instance.PrivateConfig.customHostConfig: object expected");
+                                    message.customHostConfig = $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig.fromObject(object.customHostConfig);
+                                }
                                 return message;
                             };
     
@@ -2933,6 +2958,7 @@
                                     object.caPool = "";
                                     object.httpServiceAttachment = "";
                                     object.sshServiceAttachment = "";
+                                    object.customHostConfig = null;
                                 }
                                 if (message.isPrivate != null && message.hasOwnProperty("isPrivate"))
                                     object.isPrivate = message.isPrivate;
@@ -2947,6 +2973,8 @@
                                     for (var j = 0; j < message.pscAllowedProjects.length; ++j)
                                         object.pscAllowedProjects[j] = message.pscAllowedProjects[j];
                                 }
+                                if (message.customHostConfig != null && message.hasOwnProperty("customHostConfig"))
+                                    object.customHostConfig = $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig.toObject(message.customHostConfig, options);
                                 return object;
                             };
     
@@ -2975,6 +3003,281 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.Instance.PrivateConfig";
                             };
+    
+                            PrivateConfig.CustomHostConfig = (function() {
+    
+                                /**
+                                 * Properties of a CustomHostConfig.
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                                 * @interface ICustomHostConfig
+                                 * @property {string|null} [html] CustomHostConfig html
+                                 * @property {string|null} [api] CustomHostConfig api
+                                 * @property {string|null} [gitSsh] CustomHostConfig gitSsh
+                                 * @property {string|null} [gitHttp] CustomHostConfig gitHttp
+                                 */
+    
+                                /**
+                                 * Constructs a new CustomHostConfig.
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                                 * @classdesc Represents a CustomHostConfig.
+                                 * @implements ICustomHostConfig
+                                 * @constructor
+                                 * @param {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig=} [properties] Properties to set
+                                 */
+                                function CustomHostConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CustomHostConfig html.
+                                 * @member {string} html
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @instance
+                                 */
+                                CustomHostConfig.prototype.html = "";
+    
+                                /**
+                                 * CustomHostConfig api.
+                                 * @member {string} api
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @instance
+                                 */
+                                CustomHostConfig.prototype.api = "";
+    
+                                /**
+                                 * CustomHostConfig gitSsh.
+                                 * @member {string} gitSsh
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @instance
+                                 */
+                                CustomHostConfig.prototype.gitSsh = "";
+    
+                                /**
+                                 * CustomHostConfig gitHttp.
+                                 * @member {string} gitHttp
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @instance
+                                 */
+                                CustomHostConfig.prototype.gitHttp = "";
+    
+                                /**
+                                 * Creates a new CustomHostConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @static
+                                 * @param {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig} CustomHostConfig instance
+                                 */
+                                CustomHostConfig.create = function create(properties) {
+                                    return new CustomHostConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CustomHostConfig message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @static
+                                 * @param {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig} message CustomHostConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CustomHostConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.html != null && Object.hasOwnProperty.call(message, "html"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.html);
+                                    if (message.api != null && Object.hasOwnProperty.call(message, "api"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.api);
+                                    if (message.gitSsh != null && Object.hasOwnProperty.call(message, "gitSsh"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.gitSsh);
+                                    if (message.gitHttp != null && Object.hasOwnProperty.call(message, "gitHttp"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.gitHttp);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CustomHostConfig message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @static
+                                 * @param {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.ICustomHostConfig} message CustomHostConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CustomHostConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CustomHostConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig} CustomHostConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CustomHostConfig.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.html = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.api = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.gitSsh = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.gitHttp = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CustomHostConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig} CustomHostConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CustomHostConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CustomHostConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CustomHostConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.html != null && message.hasOwnProperty("html"))
+                                        if (!$util.isString(message.html))
+                                            return "html: string expected";
+                                    if (message.api != null && message.hasOwnProperty("api"))
+                                        if (!$util.isString(message.api))
+                                            return "api: string expected";
+                                    if (message.gitSsh != null && message.hasOwnProperty("gitSsh"))
+                                        if (!$util.isString(message.gitSsh))
+                                            return "gitSsh: string expected";
+                                    if (message.gitHttp != null && message.hasOwnProperty("gitHttp"))
+                                        if (!$util.isString(message.gitHttp))
+                                            return "gitHttp: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CustomHostConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig} CustomHostConfig
+                                 */
+                                CustomHostConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig();
+                                    if (object.html != null)
+                                        message.html = String(object.html);
+                                    if (object.api != null)
+                                        message.api = String(object.api);
+                                    if (object.gitSsh != null)
+                                        message.gitSsh = String(object.gitSsh);
+                                    if (object.gitHttp != null)
+                                        message.gitHttp = String(object.gitHttp);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CustomHostConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @static
+                                 * @param {google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig} message CustomHostConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CustomHostConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.html = "";
+                                        object.api = "";
+                                        object.gitSsh = "";
+                                        object.gitHttp = "";
+                                    }
+                                    if (message.html != null && message.hasOwnProperty("html"))
+                                        object.html = message.html;
+                                    if (message.api != null && message.hasOwnProperty("api"))
+                                        object.api = message.api;
+                                    if (message.gitSsh != null && message.hasOwnProperty("gitSsh"))
+                                        object.gitSsh = message.gitSsh;
+                                    if (message.gitHttp != null && message.hasOwnProperty("gitHttp"))
+                                        object.gitHttp = message.gitHttp;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CustomHostConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CustomHostConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CustomHostConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CustomHostConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.Instance.PrivateConfig.CustomHostConfig";
+                                };
+    
+                                return CustomHostConfig;
+                            })();
     
                             return PrivateConfig;
                         })();
@@ -4833,6 +5136,7 @@
                          * @property {boolean|null} [requirePullRequest] BranchRule requirePullRequest
                          * @property {number|null} [minimumReviewsCount] BranchRule minimumReviewsCount
                          * @property {number|null} [minimumApprovalsCount] BranchRule minimumApprovalsCount
+                         * @property {boolean|null} [requireCodeOwnerApproval] BranchRule requireCodeOwnerApproval
                          * @property {boolean|null} [requireCommentsResolved] BranchRule requireCommentsResolved
                          * @property {boolean|null} [allowStaleReviews] BranchRule allowStaleReviews
                          * @property {boolean|null} [requireLinearHistory] BranchRule requireLinearHistory
@@ -4945,6 +5249,14 @@
                         BranchRule.prototype.minimumApprovalsCount = 0;
     
                         /**
+                         * BranchRule requireCodeOwnerApproval.
+                         * @member {boolean} requireCodeOwnerApproval
+                         * @memberof google.cloud.securesourcemanager.v1.BranchRule
+                         * @instance
+                         */
+                        BranchRule.prototype.requireCodeOwnerApproval = false;
+    
+                        /**
                          * BranchRule requireCommentsResolved.
                          * @member {boolean} requireCommentsResolved
                          * @memberof google.cloud.securesourcemanager.v1.BranchRule
@@ -5032,6 +5344,8 @@
                                     $root.google.cloud.securesourcemanager.v1.BranchRule.Check.encode(message.requiredStatusChecks[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             if (message.allowStaleReviews != null && Object.hasOwnProperty.call(message, "allowStaleReviews"))
                                 writer.uint32(/* id 15, wireType 0 =*/120).bool(message.allowStaleReviews);
+                            if (message.requireCodeOwnerApproval != null && Object.hasOwnProperty.call(message, "requireCodeOwnerApproval"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).bool(message.requireCodeOwnerApproval);
                             return writer;
                         };
     
@@ -5131,6 +5445,10 @@
                                         message.minimumApprovalsCount = reader.int32();
                                         break;
                                     }
+                                case 16: {
+                                        message.requireCodeOwnerApproval = reader.bool();
+                                        break;
+                                    }
                                 case 12: {
                                         message.requireCommentsResolved = reader.bool();
                                         break;
@@ -5226,6 +5544,9 @@
                             if (message.minimumApprovalsCount != null && message.hasOwnProperty("minimumApprovalsCount"))
                                 if (!$util.isInteger(message.minimumApprovalsCount))
                                     return "minimumApprovalsCount: integer expected";
+                            if (message.requireCodeOwnerApproval != null && message.hasOwnProperty("requireCodeOwnerApproval"))
+                                if (typeof message.requireCodeOwnerApproval !== "boolean")
+                                    return "requireCodeOwnerApproval: boolean expected";
                             if (message.requireCommentsResolved != null && message.hasOwnProperty("requireCommentsResolved"))
                                 if (typeof message.requireCommentsResolved !== "boolean")
                                     return "requireCommentsResolved: boolean expected";
@@ -5292,6 +5613,8 @@
                                 message.minimumReviewsCount = object.minimumReviewsCount | 0;
                             if (object.minimumApprovalsCount != null)
                                 message.minimumApprovalsCount = object.minimumApprovalsCount | 0;
+                            if (object.requireCodeOwnerApproval != null)
+                                message.requireCodeOwnerApproval = Boolean(object.requireCodeOwnerApproval);
                             if (object.requireCommentsResolved != null)
                                 message.requireCommentsResolved = Boolean(object.requireCommentsResolved);
                             if (object.allowStaleReviews != null)
@@ -5342,6 +5665,7 @@
                                 object.requireCommentsResolved = false;
                                 object.requireLinearHistory = false;
                                 object.allowStaleReviews = false;
+                                object.requireCodeOwnerApproval = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5380,6 +5704,8 @@
                             }
                             if (message.allowStaleReviews != null && message.hasOwnProperty("allowStaleReviews"))
                                 object.allowStaleReviews = message.allowStaleReviews;
+                            if (message.requireCodeOwnerApproval != null && message.hasOwnProperty("requireCodeOwnerApproval"))
+                                object.requireCodeOwnerApproval = message.requireCodeOwnerApproval;
                             return object;
                         };
     
@@ -9871,6 +10197,7 @@
                          * @interface IDeleteInstanceRequest
                          * @property {string|null} [name] DeleteInstanceRequest name
                          * @property {string|null} [requestId] DeleteInstanceRequest requestId
+                         * @property {boolean|null} [force] DeleteInstanceRequest force
                          */
     
                         /**
@@ -9905,6 +10232,14 @@
                         DeleteInstanceRequest.prototype.requestId = "";
     
                         /**
+                         * DeleteInstanceRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.securesourcemanager.v1.DeleteInstanceRequest
+                         * @instance
+                         */
+                        DeleteInstanceRequest.prototype.force = false;
+    
+                        /**
                          * Creates a new DeleteInstanceRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securesourcemanager.v1.DeleteInstanceRequest
@@ -9932,6 +10267,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
                             return writer;
                         };
     
@@ -9976,6 +10313,10 @@
                                         message.requestId = reader.string();
                                         break;
                                     }
+                                case 3: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10017,6 +10358,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -10036,6 +10380,8 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -10055,11 +10401,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.force = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     
@@ -29591,6 +29940,265 @@
                 return values;
             })();
     
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
+            })();
+    
             api.ResourceDescriptor = (function() {
     
                 /**
@@ -36484,6 +37092,7 @@
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
@@ -36619,6 +37228,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
                  * FieldOptions .google.api.resourceReference.
                  * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
                  * @memberof google.protobuf.FieldOptions
@@ -36684,6 +37301,8 @@
                             writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -36792,6 +37411,10 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         case 1055: {
@@ -36939,6 +37562,11 @@
                             case 8:
                                 break;
                             }
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
@@ -37159,6 +37787,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
                     if (object[".google.api.resourceReference"] != null) {
                         if (typeof object[".google.api.resourceReference"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
@@ -37198,6 +37831,7 @@
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -37241,6 +37875,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     

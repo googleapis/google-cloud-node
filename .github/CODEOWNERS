@@ -14,3 +14,4 @@
 /handwritten/spanner @googleapis/spanner-team
 /handwritten/bigquery-storage @googleapis/bigquery-team
 /handwritten/pubsub @googleapis/pubsub-team
+/handwritten/bigtable @googleapis/bigtable-team

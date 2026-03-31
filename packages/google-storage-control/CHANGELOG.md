@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.8.2](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.8.1...storage-control-v0.8.2) (2026-03-25)
+
+
+### Bug Fixes
+
+* **storage-control:** Update jsdocs headers in v2 clients to include … ([#7851](https://github.com/googleapis/google-cloud-node/issues/7851)) ([1dd5860](https://github.com/googleapis/google-cloud-node/commit/1dd586015cbc85409f4737c995c750bc694c14c3))
+
+## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.8.0...storage-control-v0.8.1) (2026-03-18)
+
+
+### Bug Fixes
+
+* **storage-control:** Add utility to use correct client and update al… ([#7600](https://github.com/googleapis/google-cloud-node/issues/7600)) ([08e9bae](https://github.com/googleapis/google-cloud-node/commit/08e9bae6b1f756e2aa457b5f31e2d5096658912f))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.7.0...storage-control-v0.8.0) (2026-01-31)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.9.1...gdchardwaremanagement-v0.10.0) (2026-03-18)
+
+
+### Features
+
+* [gdchardwaremanagement] Add `OFFLINE` state to Zone resources ([#7513](https://github.com/googleapis/google-cloud-node/issues/7513)) ([fdecca6](https://github.com/googleapis/google-cloud-node/commit/fdecca62c8a8138bea15df300063a9bdda83880f))
+
 ## [0.9.1](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.9.0...gdchardwaremanagement-v0.9.1) (2025-10-13)
 
 

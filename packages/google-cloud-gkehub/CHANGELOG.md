@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.3.1...gke-hub-v6.4.0) (2026-03-19)
+
+
+### Features
+
+* [gkehub] A new field `kubernetes_api_server_version` is added to message `.google.cloud.gkehub.configmanagement.v1beta.MembershipState` ([#7534](https://github.com/googleapis/google-cloud-node/issues/7534)) ([9de1438](https://github.com/googleapis/google-cloud-node/commit/9de14388ef6e9919bb75de88d63cecb1c9a9a629))
+
 ## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.3.0...gke-hub-v6.3.1) (2025-10-13)
 
 

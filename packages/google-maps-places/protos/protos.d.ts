@@ -3156,6 +3156,9 @@ export namespace google {
                     /** Place businessStatus */
                     businessStatus?: (google.maps.places.v1.Place.BusinessStatus|keyof typeof google.maps.places.v1.Place.BusinessStatus|null);
 
+                    /** Place openingDate */
+                    openingDate?: (google.type.IDate|null);
+
                     /** Place priceLevel */
                     priceLevel?: (google.maps.places.v1.PriceLevel|keyof typeof google.maps.places.v1.PriceLevel|null);
 
@@ -3393,6 +3396,9 @@ export namespace google {
 
                     /** Place businessStatus. */
                     public businessStatus: (google.maps.places.v1.Place.BusinessStatus|keyof typeof google.maps.places.v1.Place.BusinessStatus);
+
+                    /** Place openingDate. */
+                    public openingDate?: (google.type.IDate|null);
 
                     /** Place priceLevel. */
                     public priceLevel: (google.maps.places.v1.PriceLevel|keyof typeof google.maps.places.v1.PriceLevel);
@@ -4325,7 +4331,8 @@ export namespace google {
                         BUSINESS_STATUS_UNSPECIFIED = 0,
                         OPERATIONAL = 1,
                         CLOSED_TEMPORARILY = 2,
-                        CLOSED_PERMANENTLY = 3
+                        CLOSED_PERMANENTLY = 3,
+                        FUTURE_OPENING = 4
                     }
 
                     /** Properties of an Attribution. */
@@ -6304,6 +6311,9 @@ export namespace google {
 
                     /** SearchNearbyRequest routingParameters */
                     routingParameters?: (google.maps.places.v1.IRoutingParameters|null);
+
+                    /** SearchNearbyRequest includeFutureOpeningBusinesses */
+                    includeFutureOpeningBusinesses?: (boolean|null);
                 }
 
                 /** Represents a SearchNearbyRequest. */
@@ -6344,6 +6354,9 @@ export namespace google {
 
                     /** SearchNearbyRequest routingParameters. */
                     public routingParameters?: (google.maps.places.v1.IRoutingParameters|null);
+
+                    /** SearchNearbyRequest includeFutureOpeningBusinesses. */
+                    public includeFutureOpeningBusinesses: boolean;
 
                     /**
                      * Creates a new SearchNearbyRequest instance using the specified properties.
@@ -6686,6 +6699,9 @@ export namespace google {
 
                     /** SearchTextRequest includePureServiceAreaBusinesses */
                     includePureServiceAreaBusinesses?: (boolean|null);
+
+                    /** SearchTextRequest includeFutureOpeningBusinesses */
+                    includeFutureOpeningBusinesses?: (boolean|null);
                 }
 
                 /** Represents a SearchTextRequest. */
@@ -6744,6 +6760,9 @@ export namespace google {
 
                     /** SearchTextRequest includePureServiceAreaBusinesses. */
                     public includePureServiceAreaBusinesses: boolean;
+
+                    /** SearchTextRequest includeFutureOpeningBusinesses. */
+                    public includeFutureOpeningBusinesses: boolean;
 
                     /**
                      * Creates a new SearchTextRequest instance using the specified properties.
@@ -7719,6 +7738,9 @@ export namespace google {
 
                     /** AutocompletePlacesRequest includePureServiceAreaBusinesses */
                     includePureServiceAreaBusinesses?: (boolean|null);
+
+                    /** AutocompletePlacesRequest includeFutureOpeningBusinesses */
+                    includeFutureOpeningBusinesses?: (boolean|null);
                 }
 
                 /** Represents an AutocompletePlacesRequest. */
@@ -7765,6 +7787,9 @@ export namespace google {
 
                     /** AutocompletePlacesRequest includePureServiceAreaBusinesses. */
                     public includePureServiceAreaBusinesses: boolean;
+
+                    /** AutocompletePlacesRequest includeFutureOpeningBusinesses. */
+                    public includeFutureOpeningBusinesses: boolean;
 
                     /**
                      * Creates a new AutocompletePlacesRequest instance using the specified properties.

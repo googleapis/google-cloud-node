@@ -1857,6 +1857,15 @@ export namespace google {
                     /** OAuthSettings loginHint */
                     loginHint?: (google.protobuf.IStringValue|null);
 
+                    /** OAuthSettings clientId */
+                    clientId?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientSecret */
+                    clientSecret?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientSecretSha256 */
+                    clientSecretSha256?: (google.protobuf.IStringValue|null);
+
                     /** OAuthSettings programmaticClients */
                     programmaticClients?: (string[]|null);
                 }
@@ -1872,6 +1881,15 @@ export namespace google {
 
                     /** OAuthSettings loginHint. */
                     public loginHint?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientId. */
+                    public clientId?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientSecret. */
+                    public clientSecret?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientSecretSha256. */
+                    public clientSecretSha256?: (google.protobuf.IStringValue|null);
 
                     /** OAuthSettings programmaticClients. */
                     public programmaticClients: string[];

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/iap-v4.3.1...iap-v4.4.0) (2026-03-19)
+
+
+### Features
+
+* [iap] add oauth fields for IapSettings ([#7613](https://github.com/googleapis/google-cloud-node/issues/7613)) ([0012a46](https://github.com/googleapis/google-cloud-node/commit/0012a46efa30c86cf8a88a88d3c4077bbbfe670c))
+
 ## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/iap-v4.3.0...iap-v4.3.1) (2025-10-13)
 
 
