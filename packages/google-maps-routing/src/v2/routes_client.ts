@@ -397,8 +397,8 @@ export class RoutesClient {
  *   days in the future.
  * @param {google.protobuf.Timestamp} [request.arrivalTime]
  *   Optional. The arrival time.
- *   NOTE: Can only be set when
- *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+ *   NOTE: This field is ignored when requests specify a
+ *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} other than
  *   `TRANSIT`. You can specify either `departure_time` or `arrival_time`, but
  *   not both. Transit trips are available for up to 7 days in the past or 100
  *   days in the future.
@@ -653,6 +653,7 @@ export class RoutesClient {
  *   traffic. This setting affects the value returned in the duration field in
  *   the {@link protos.google.maps.routing.v2.RouteMatrixElement|RouteMatrixElement} which
  *   contains the predicted time in traffic based on historical averages.
+ *   `TrafficModel` is only available for requests that have set
  *   {@link protos.google.maps.routing.v2.RoutingPreference|RoutingPreference} to
  *   `TRAFFIC_AWARE_OPTIMAL` and
  *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} to `DRIVE`.

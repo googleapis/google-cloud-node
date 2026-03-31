@@ -114,6 +114,7 @@ export type TableRowValue = string | TableRow;
 export type GetRowsOptions = PagedRequest<bigquery.tabledata.IListParams> & {
   wrapIntegers?: boolean | IntegerTypeCastOptions;
   parseJSON?: boolean;
+  skipParsing?: boolean;
 };
 
 export type JobLoadMetadata = JobRequest<bigquery.IJobConfigurationLoad> & {
@@ -1873,12 +1874,20 @@ class Table extends ServiceObject {
         the callback. Instead, pass the error to the callback the user provides
         so that the user can see the error.
          */
-        rows = BigQuery.mergeSchemaWithRows_(this.metadata.schema, rows || [], {
-          wrapIntegers,
-          selectedFields,
-          parseJSON,
-          listParams: qs,
-        });
+        if (options.skipParsing) {
+          rows = rows || [];
+        } else {
+          rows = BigQuery.mergeSchemaWithRows_(
+            this.metadata.schema,
+            rows || [],
+            {
+              wrapIntegers,
+              selectedFields,
+              parseJSON,
+              listParams: qs,
+            },
+          );
+        }
       } catch (err) {
         callback!(err as Error | null, null, null, resp);
         return;

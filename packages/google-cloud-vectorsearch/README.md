@@ -73,6 +73,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.create_index.js) |
 | delete collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.delete_collection.js) |
 | delete index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.delete_index.js) |
+| export data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.export_data_objects.js) |
 | get collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.get_collection.js) |
 | get index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.get_index.js) |
 | import data objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1/vector_search_service.import_data_objects.js) |

@@ -32,7 +32,7 @@
   "dependencies": {
     "@babel/core": "^7.26.8",
     "@babel/traverse": "^7.26.8",
-    "google-gax": "5.0.6",
+    "google-gax": "^5.0.6",
     "google-proto-files": "^5.0.0",
     "protobufjs-cli": "^1.2.0",
     "uglify-js": "^3.19.3",
