@@ -860,6 +860,7 @@
                      * @interface IPackage
                      * @property {string|null} [name] Package name
                      * @property {string|null} [location] Package location
+                     * @property {string|null} [sha256] Package sha256
                      */
     
                     /**
@@ -894,6 +895,14 @@
                     Package.prototype.location = "";
     
                     /**
+                     * Package sha256.
+                     * @member {string} sha256
+                     * @memberof google.dataflow.v1beta3.Package
+                     * @instance
+                     */
+                    Package.prototype.sha256 = "";
+    
+                    /**
                      * Creates a new Package instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.Package
@@ -921,6 +930,8 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                        if (message.sha256 != null && Object.hasOwnProperty.call(message, "sha256"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.sha256);
                         return writer;
                     };
     
@@ -965,6 +976,10 @@
                                     message.location = reader.string();
                                     break;
                                 }
+                            case 3: {
+                                    message.sha256 = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -1006,6 +1021,9 @@
                         if (message.location != null && message.hasOwnProperty("location"))
                             if (!$util.isString(message.location))
                                 return "location: string expected";
+                        if (message.sha256 != null && message.hasOwnProperty("sha256"))
+                            if (!$util.isString(message.sha256))
+                                return "sha256: string expected";
                         return null;
                     };
     
@@ -1025,6 +1043,8 @@
                             message.name = String(object.name);
                         if (object.location != null)
                             message.location = String(object.location);
+                        if (object.sha256 != null)
+                            message.sha256 = String(object.sha256);
                         return message;
                     };
     
@@ -1044,11 +1064,14 @@
                         if (options.defaults) {
                             object.name = "";
                             object.location = "";
+                            object.sha256 = "";
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.location != null && message.hasOwnProperty("location"))
                             object.location = message.location;
+                        if (message.sha256 != null && message.hasOwnProperty("sha256"))
+                            object.sha256 = message.sha256;
                         return object;
                     };
     
