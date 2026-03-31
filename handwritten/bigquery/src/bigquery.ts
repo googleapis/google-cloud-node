@@ -1100,11 +1100,6 @@ export class BigQuery extends Service {
           };
         }),
       };
-    } else if ((providedType as string).toUpperCase() === 'TIMESTAMP(12)') {
-      return {
-        type: 'TIMESTAMP',
-        timestampPrecision: '12',
-      };
     }
 
     providedType = (providedType as string).toUpperCase();
@@ -2256,33 +2251,14 @@ export class BigQuery extends Service {
       if (res && res.jobComplete) {
         let rows: any = [];
         if (res.schema && res.rows) {
-          try {
-            /*
-            Without this try/catch block, calls to getRows will hang indefinitely if
-            a call to mergeSchemaWithRows_ fails because the error never makes it to
-            the callback. Instead, pass the error to the callback the user provides
-            so that the user can see the error.
-             */
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const listParams = {
-              'formatOptions.timestampOutputFormat':
-                queryReq.formatOptions?.timestampOutputFormat,
-              'formatOptions.useInt64Timestamp':
-                queryReq.formatOptions?.useInt64Timestamp,
-            };
-            if (options.skipParsing) {
-              rows = res.rows;
-            } else {
-              rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
-                wrapIntegers: options.wrapIntegers || false,
-                parseJSON: options.parseJSON,
-                listParams,
-              });
-              delete res.rows;
-            }
-          } catch (e) {
-            (callback as SimpleQueryRowsCallback)(e as Error, null, job);
-            return;
+          if (options.skipParsing) {
+            rows = res.rows;
+          } else {
+            rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
+              wrapIntegers: options.wrapIntegers || false,
+              parseJSON: options.parseJSON,
+            });
+            delete res.rows;
           }
         }
         this.trace_('[runJobsQuery] job complete');
@@ -2364,18 +2340,6 @@ export class BigQuery extends Service {
     if (options.job) {
       return undefined;
     }
-    const hasAnyFormatOpts =
-      options['formatOptions.timestampOutputFormat'] !== undefined ||
-      options['formatOptions.useInt64Timestamp'] !== undefined;
-    const defaultOpts = hasAnyFormatOpts
-      ? {}
-      : {
-          timestampOutputFormat: 'ISO8601_STRING',
-        };
-    const formatOptions = extend(defaultOpts, {
-      timestampOutputFormat: options['formatOptions.timestampOutputFormat'],
-      useInt64Timestamp: options['formatOptions.useInt64Timestamp'],
-    });
     const req: bigquery.IQueryRequest = {
       useQueryCache: queryObj.useQueryCache,
       labels: queryObj.labels,
@@ -2384,7 +2348,9 @@ export class BigQuery extends Service {
       maximumBytesBilled: queryObj.maximumBytesBilled,
       timeoutMs: options.timeoutMs,
       location: queryObj.location || options.location,
-      formatOptions,
+      formatOptions: {
+        useInt64Timestamp: true,
+      },
       maxResults: queryObj.maxResults || options.maxResults,
       query: queryObj.query,
       useLegacySql: false,
@@ -2628,7 +2594,6 @@ function convertSchemaFieldValue(
       value = BigQueryRange.fromSchemaValue_(
         value,
         schemaField.rangeElementType!.type!,
-        options.listParams, // Required to convert TIMESTAMP values
       );
       break;
     }
@@ -2706,14 +2671,6 @@ export class BigQueryRange {
     };
   }
 
-  /**
-   * This method returns start and end values for RANGE typed values returned from
-   * the server. It decodes the server RANGE value into start and end values so
-   * they can be used to construct a BigQueryRange.
-   * @private
-   * @param {string} value The range value.
-   * @returns {string[]} The start and end of the range.
-   */
   private static fromStringValue_(value: string): [start: string, end: string] {
     let cleanedValue = value;
     if (cleanedValue.startsWith('[') || cleanedValue.startsWith('(')) {
@@ -2733,24 +2690,7 @@ export class BigQueryRange {
     return [start, end];
   }
 
-  /**
-   * This method is only used by convertSchemaFieldValue and only when range
-   * values are passed into convertSchemaFieldValue. It produces a value that is
-   * delivered to the user for read calls and it needs to pass along listParams
-   * to ensure TIMESTAMP types are converted properly.
-   * @private
-   * @param {string} value The range value.
-   * @param {string} elementType The element type.
-   * @param {bigquery.tabledata.IListParams | bigquery.jobs.IGetQueryResultsParams} [listParams] The list parameters.
-   * @returns {BigQueryRange}
-   */
-  static fromSchemaValue_(
-    value: string,
-    elementType: string,
-    listParams?:
-      | bigquery.tabledata.IListParams
-      | bigquery.jobs.IGetQueryResultsParams,
-  ): BigQueryRange {
+  static fromSchemaValue_(value: string, elementType: string): BigQueryRange {
     const [start, end] = BigQueryRange.fromStringValue_(value);
     const convertRangeSchemaValue = (value: string) => {
       if (value === 'UNBOUNDED' || value === 'NULL') {
@@ -2758,7 +2698,6 @@ export class BigQueryRange {
       }
       return convertSchemaFieldValue({type: elementType}, value, {
         wrapIntegers: false,
-        listParams,
       });
     };
     return BigQuery.range(
