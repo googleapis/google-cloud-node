@@ -6,6 +6,7 @@
   "core/promisify": "5.0.0",
   "handwritten/bigquery": "8.2.0",
   "handwritten/bigquery-storage": "5.1.0",
+  "handwritten/bigtable": "6.5.0",
   "handwritten/cloud-profiler": "6.0.4",
   "handwritten/datastore": "10.1.0",
   "handwritten/error-reporting": "3.0.5",
@@ -213,6 +214,7 @@
   "packages/google-maps-fleetengine": "0.8.1",
   "packages/google-maps-fleetengine-delivery": "0.6.1",
   "packages/google-maps-mapsplatformdatasets": "3.1.1",
+  "packages/google-maps-navconnect": "0.1.0",
   "packages/google-maps-places": "2.4.0",
   "packages/google-maps-routeoptimization": "0.6.0",
   "packages/google-maps-routing": "2.2.0",
@@ -239,6 +241,5 @@
   "packages/google-streetview-publish": "0.4.1",
   "packages/grafeas": "6.1.1",
   "packages/typeless-sample-bot": "3.1.1",
-  "packages/google-maps-navconnect": "0.1.0",
   "packages/google-cloud-datacatalog-lineage-configmanagement": "0.1.0"
 }
