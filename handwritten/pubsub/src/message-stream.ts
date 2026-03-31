@@ -397,7 +397,7 @@ export class MessageStream extends PassThrough {
         ? 0
         : this._subscriber.maxBytes,
       clientId: randomUUID().toString(),
-      protocolVersion: 1, // Set protocol version to fulfill keepalive capabilities
+      protocolVersion: 1, // Set protocol version to enable server keepalives
     };
     const otherArgs = {
       headers: {
