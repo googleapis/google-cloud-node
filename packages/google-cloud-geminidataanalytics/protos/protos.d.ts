@@ -6965,6 +6965,9 @@ export namespace google {
 
                     /** QueryDataContext datasourceReferences */
                     datasourceReferences?: (google.cloud.geminidataanalytics.v1alpha.IDatasourceReferences|null);
+
+                    /** QueryDataContext parameterizedSecureViewParameters */
+                    parameterizedSecureViewParameters?: (google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters|null);
                 }
 
                 /** Represents a QueryDataContext. */
@@ -6978,6 +6981,9 @@ export namespace google {
 
                     /** QueryDataContext datasourceReferences. */
                     public datasourceReferences?: (google.cloud.geminidataanalytics.v1alpha.IDatasourceReferences|null);
+
+                    /** QueryDataContext parameterizedSecureViewParameters. */
+                    public parameterizedSecureViewParameters?: (google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters|null);
 
                     /**
                      * Creates a new QueryDataContext instance using the specified properties.
@@ -7051,6 +7057,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for QueryDataContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ParameterizedSecureViewParameters. */
+                interface IParameterizedSecureViewParameters {
+
+                    /** ParameterizedSecureViewParameters parameters */
+                    parameters?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a ParameterizedSecureViewParameters. */
+                class ParameterizedSecureViewParameters implements IParameterizedSecureViewParameters {
+
+                    /**
+                     * Constructs a new ParameterizedSecureViewParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters);
+
+                    /** ParameterizedSecureViewParameters parameters. */
+                    public parameters: { [k: string]: string };
+
+                    /**
+                     * Creates a new ParameterizedSecureViewParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ParameterizedSecureViewParameters instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters): google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters;
+
+                    /**
+                     * Encodes the specified ParameterizedSecureViewParameters message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.verify|verify} messages.
+                     * @param message ParameterizedSecureViewParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ParameterizedSecureViewParameters message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.verify|verify} messages.
+                     * @param message ParameterizedSecureViewParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ParameterizedSecureViewParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters;
+
+                    /**
+                     * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ParameterizedSecureViewParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters;
+
+                    /**
+                     * Verifies a ParameterizedSecureViewParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ParameterizedSecureViewParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ParameterizedSecureViewParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters;
+
+                    /**
+                     * Creates a plain object from a ParameterizedSecureViewParameters message. Also converts values to other types if specified.
+                     * @param message ParameterizedSecureViewParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ParameterizedSecureViewParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ParameterizedSecureViewParameters
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7943,6 +8046,9 @@ export namespace google {
 
                     /** ChatRequest messages */
                     messages?: (google.cloud.geminidataanalytics.v1alpha.IMessage[]|null);
+
+                    /** ChatRequest thinkingMode */
+                    thinkingMode?: (google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode|keyof typeof google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode|null);
                 }
 
                 /** Represents a ChatRequest. */
@@ -7974,6 +8080,9 @@ export namespace google {
 
                     /** ChatRequest messages. */
                     public messages: google.cloud.geminidataanalytics.v1alpha.IMessage[];
+
+                    /** ChatRequest thinkingMode. */
+                    public thinkingMode: (google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode|keyof typeof google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode);
 
                     /** ChatRequest contextProvider. */
                     public contextProvider?: ("inlineContext"|"conversationReference"|"dataAgentContext"|"clientManagedResourceContext");
@@ -8054,6 +8163,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ChatRequest {
+
+                    /** ThinkingMode enum. */
+                    enum ThinkingMode {
+                        THINKING_MODE_UNSPECIFIED = 0,
+                        FAST = 1,
+                        THINKING = 2
+                    }
                 }
 
                 /** Properties of a DataAgentContext. */
@@ -17795,6 +17914,9 @@ export namespace google {
 
                     /** QueryDataContext datasourceReferences */
                     datasourceReferences?: (google.cloud.geminidataanalytics.v1beta.IDatasourceReferences|null);
+
+                    /** QueryDataContext parameterizedSecureViewParameters */
+                    parameterizedSecureViewParameters?: (google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters|null);
                 }
 
                 /** Represents a QueryDataContext. */
@@ -17808,6 +17930,9 @@ export namespace google {
 
                     /** QueryDataContext datasourceReferences. */
                     public datasourceReferences?: (google.cloud.geminidataanalytics.v1beta.IDatasourceReferences|null);
+
+                    /** QueryDataContext parameterizedSecureViewParameters. */
+                    public parameterizedSecureViewParameters?: (google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters|null);
 
                     /**
                      * Creates a new QueryDataContext instance using the specified properties.
@@ -17881,6 +18006,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for QueryDataContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ParameterizedSecureViewParameters. */
+                interface IParameterizedSecureViewParameters {
+
+                    /** ParameterizedSecureViewParameters parameters */
+                    parameters?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a ParameterizedSecureViewParameters. */
+                class ParameterizedSecureViewParameters implements IParameterizedSecureViewParameters {
+
+                    /**
+                     * Constructs a new ParameterizedSecureViewParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters);
+
+                    /** ParameterizedSecureViewParameters parameters. */
+                    public parameters: { [k: string]: string };
+
+                    /**
+                     * Creates a new ParameterizedSecureViewParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ParameterizedSecureViewParameters instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters): google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters;
+
+                    /**
+                     * Encodes the specified ParameterizedSecureViewParameters message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.verify|verify} messages.
+                     * @param message ParameterizedSecureViewParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ParameterizedSecureViewParameters message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.verify|verify} messages.
+                     * @param message ParameterizedSecureViewParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ParameterizedSecureViewParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters;
+
+                    /**
+                     * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ParameterizedSecureViewParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters;
+
+                    /**
+                     * Verifies a ParameterizedSecureViewParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ParameterizedSecureViewParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ParameterizedSecureViewParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters;
+
+                    /**
+                     * Creates a plain object from a ParameterizedSecureViewParameters message. Also converts values to other types if specified.
+                     * @param message ParameterizedSecureViewParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ParameterizedSecureViewParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ParameterizedSecureViewParameters
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -18773,6 +18995,9 @@ export namespace google {
 
                     /** ChatRequest messages */
                     messages?: (google.cloud.geminidataanalytics.v1beta.IMessage[]|null);
+
+                    /** ChatRequest thinkingMode */
+                    thinkingMode?: (google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode|keyof typeof google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode|null);
                 }
 
                 /** Represents a ChatRequest. */
@@ -18804,6 +19029,9 @@ export namespace google {
 
                     /** ChatRequest messages. */
                     public messages: google.cloud.geminidataanalytics.v1beta.IMessage[];
+
+                    /** ChatRequest thinkingMode. */
+                    public thinkingMode: (google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode|keyof typeof google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode);
 
                     /** ChatRequest contextProvider. */
                     public contextProvider?: ("inlineContext"|"conversationReference"|"dataAgentContext"|"clientManagedResourceContext");
@@ -18884,6 +19112,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ChatRequest {
+
+                    /** ThinkingMode enum. */
+                    enum ThinkingMode {
+                        THINKING_MODE_UNSPECIFIED = 0,
+                        FAST = 1,
+                        THINKING = 2
+                    }
                 }
 
                 /** Properties of a DataAgentContext. */

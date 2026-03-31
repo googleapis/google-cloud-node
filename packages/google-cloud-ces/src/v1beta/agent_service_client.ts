@@ -4066,6 +4066,10 @@ export class AgentServiceClient {
  *   Storage](https://cloud.google.com/storage/docs/) URI to which to export the
  *   app. The format of this URI must be `gs://<bucket-name>/<object-name>`. The
  *   exported app archive will be written directly to the specified GCS object.
+ * @param {string} [request.appVersion]
+ *   Optional. The resource name of the app version to export.
+ *   Format:
+ *   `projects/{project}/locations/{location}/apps/{app}/versions/{version}`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
