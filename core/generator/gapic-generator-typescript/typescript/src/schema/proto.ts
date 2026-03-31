@@ -83,6 +83,21 @@ export interface MethodDescriptorProto
   maxResultsParameter?: boolean;
 }
 
+export interface MixinConfig {
+  enabled: boolean;
+}
+
+export interface IamPolicyMixinConfig extends MixinConfig {
+  getIamPolicy: boolean;
+  setIamPolicy: boolean;
+  testIamPermissions: boolean;
+}
+
+export interface LocationMixinConfig extends MixinConfig {
+  getLocation: boolean;
+  listLocations: boolean;
+}
+
 export interface ServiceDescriptorProto
   extends protos.google.protobuf.IServiceDescriptorProto {
   internalMethods: MethodDescriptorProto[];
@@ -111,6 +126,8 @@ export interface ServiceDescriptorProto
   IAMPolicyMixin: number;
   LocationMixin: number;
   LongRunningOperationsMixin: number;
+  iamPolicyMixinFlags?: IamPolicyMixinConfig;
+  locationMixinFlags?: LocationMixinConfig;
   protoFile: string;
   diregapicLRO?: MethodDescriptorProto[];
   httpRules?: protos.google.api.IHttpRule[];
@@ -1030,6 +1047,21 @@ export function augmentService(parameters: AugmentServiceParameters) {
       selectiveGapicMethodType(method, augmentedService.selectiveGapic) ===
       SelectiveGapicType.INTERNAL,
   );
+
+  const nativeMethods = augmentedService.method || [];
+  const nativeMethodNames = nativeMethods.map(m => m.name);
+  augmentedService.iamPolicyMixinFlags = {
+    enabled: augmentedService.IAMPolicyMixin === 1,
+    getIamPolicy: !nativeMethodNames.includes('GetIamPolicy'),
+    setIamPolicy: !nativeMethodNames.includes('SetIamPolicy'),
+    testIamPermissions: !nativeMethodNames.includes('TestIamPermissions'),
+  };
+
+  augmentedService.locationMixinFlags = {
+    enabled: augmentedService.LocationMixin === 1,
+    getLocation: !nativeMethodNames.includes('GetLocation'),
+    listLocations: !nativeMethodNames.includes('ListLocations'),
+  };
 
   augmentedService.bundleConfigsMethods = augmentedService.method.filter(
     method => method.bundleConfig,

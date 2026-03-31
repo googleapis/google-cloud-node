@@ -1095,6 +1095,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 {%- if (service.IAMPolicyMixin) > 0 %}
 {%- set IAMmethods = ['getIamPolicy', 'setIamPolicy', 'testIamPermissions'] %}
 {%- for method in IAMmethods %}
+{%- if service.iamPolicyMixinFlags[method] %}
     describe('{{ method }}', () => {
         it('invokes {{ method }} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client(
@@ -1210,10 +1211,12 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
     });
+{%- endif %}
 {%- endfor %}
 {%- endif %}
 {%- if service.LocationMixin > 0 %}
 {%- set method = 'getLocation' %}
+{%- if service.locationMixinFlags.getLocation %}
     describe('{{ method }}', () => {
         it('invokes {{ method }} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client(
@@ -1320,7 +1323,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
     });
+{%- endif %}
 {%- set method = 'listLocations' %}
+{%- if service.locationMixinFlags.listLocations %}
     describe('{{ method }}Async', () => {
         it('uses async iteration with {{method}} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
@@ -1401,6 +1406,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             );
         });
     });
+{%- endif %}
 {%- endif %}
 {%- if (service.LongRunningOperationsMixin) > 0 %}
 {%- set Operationsmethods = ['getOperation', 'cancelOperation', 'deleteOperation'] %}
