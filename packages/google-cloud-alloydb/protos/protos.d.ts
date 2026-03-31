@@ -2276,6 +2276,9 @@ export namespace google {
 
                     /** Cluster tags */
                     tags?: ({ [k: string]: string }|null);
+
+                    /** Cluster dataplexConfig */
+                    dataplexConfig?: (google.cloud.alloydb.v1.Cluster.IDataplexConfig|null);
                 }
 
                 /** Represents a Cluster. */
@@ -2388,6 +2391,9 @@ export namespace google {
 
                     /** Cluster tags. */
                     public tags: { [k: string]: string };
+
+                    /** Cluster dataplexConfig. */
+                    public dataplexConfig?: (google.cloud.alloydb.v1.Cluster.IDataplexConfig|null);
 
                     /** Cluster source. */
                     public source?: ("backupSource"|"migrationSource"|"cloudsqlBackupRunSource");
@@ -2981,6 +2987,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for TrialMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataplexConfig. */
+                    interface IDataplexConfig {
+
+                        /** DataplexConfig enabled */
+                        enabled?: (boolean|null);
+                    }
+
+                    /** Represents a DataplexConfig. */
+                    class DataplexConfig implements IDataplexConfig {
+
+                        /**
+                         * Constructs a new DataplexConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1.Cluster.IDataplexConfig);
+
+                        /** DataplexConfig enabled. */
+                        public enabled: boolean;
+
+                        /**
+                         * Creates a new DataplexConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataplexConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1.Cluster.IDataplexConfig): google.cloud.alloydb.v1.Cluster.DataplexConfig;
+
+                        /**
+                         * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.alloydb.v1.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.Cluster.DataplexConfig;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.Cluster.DataplexConfig;
+
+                        /**
+                         * Verifies a DataplexConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataplexConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.Cluster.DataplexConfig;
+
+                        /**
+                         * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                         * @param message DataplexConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1.Cluster.DataplexConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataplexConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataplexConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -16922,6 +17025,9 @@ export namespace google {
 
                     /** Cluster serviceAccountEmail */
                     serviceAccountEmail?: (string|null);
+
+                    /** Cluster dataplexConfig */
+                    dataplexConfig?: (google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig|null);
                 }
 
                 /** Represents a Cluster. */
@@ -17043,6 +17149,9 @@ export namespace google {
 
                     /** Cluster serviceAccountEmail. */
                     public serviceAccountEmail: string;
+
+                    /** Cluster dataplexConfig. */
+                    public dataplexConfig?: (google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig|null);
 
                     /** Cluster source. */
                     public source?: ("backupSource"|"migrationSource"|"cloudsqlBackupRunSource");
@@ -17636,6 +17745,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for TrialMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataplexConfig. */
+                    interface IDataplexConfig {
+
+                        /** DataplexConfig enabled */
+                        enabled?: (boolean|null);
+                    }
+
+                    /** Represents a DataplexConfig. */
+                    class DataplexConfig implements IDataplexConfig {
+
+                        /**
+                         * Constructs a new DataplexConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig);
+
+                        /** DataplexConfig enabled. */
+                        public enabled: boolean;
+
+                        /**
+                         * Creates a new DataplexConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataplexConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig): google.cloud.alloydb.v1alpha.Cluster.DataplexConfig;
+
+                        /**
+                         * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.Cluster.DataplexConfig;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.Cluster.DataplexConfig;
+
+                        /**
+                         * Verifies a DataplexConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataplexConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.Cluster.DataplexConfig;
+
+                        /**
+                         * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                         * @param message DataplexConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.Cluster.DataplexConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataplexConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataplexConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -32294,6 +32500,9 @@ export namespace google {
 
                     /** Cluster serviceAccountEmail */
                     serviceAccountEmail?: (string|null);
+
+                    /** Cluster dataplexConfig */
+                    dataplexConfig?: (google.cloud.alloydb.v1beta.Cluster.IDataplexConfig|null);
                 }
 
                 /** Represents a Cluster. */
@@ -32412,6 +32621,9 @@ export namespace google {
 
                     /** Cluster serviceAccountEmail. */
                     public serviceAccountEmail: string;
+
+                    /** Cluster dataplexConfig. */
+                    public dataplexConfig?: (google.cloud.alloydb.v1beta.Cluster.IDataplexConfig|null);
 
                     /** Cluster source. */
                     public source?: ("backupSource"|"migrationSource"|"cloudsqlBackupRunSource");
@@ -33005,6 +33217,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for TrialMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataplexConfig. */
+                    interface IDataplexConfig {
+
+                        /** DataplexConfig enabled */
+                        enabled?: (boolean|null);
+                    }
+
+                    /** Represents a DataplexConfig. */
+                    class DataplexConfig implements IDataplexConfig {
+
+                        /**
+                         * Constructs a new DataplexConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.Cluster.IDataplexConfig);
+
+                        /** DataplexConfig enabled. */
+                        public enabled: boolean;
+
+                        /**
+                         * Creates a new DataplexConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataplexConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.Cluster.IDataplexConfig): google.cloud.alloydb.v1beta.Cluster.DataplexConfig;
+
+                        /**
+                         * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.alloydb.v1beta.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.Cluster.DataplexConfig;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.Cluster.DataplexConfig;
+
+                        /**
+                         * Verifies a DataplexConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataplexConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.Cluster.DataplexConfig;
+
+                        /**
+                         * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                         * @param message DataplexConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.Cluster.DataplexConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataplexConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataplexConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

@@ -21941,6 +21941,8 @@
                              * @property {google.cloud.documentai.v1.ProcessOptions.LayoutConfig.IChunkingConfig|null} [chunkingConfig] LayoutConfig chunkingConfig
                              * @property {boolean|null} [returnImages] LayoutConfig returnImages
                              * @property {boolean|null} [returnBoundingBoxes] LayoutConfig returnBoundingBoxes
+                             * @property {boolean|null} [enableImageAnnotation] LayoutConfig enableImageAnnotation
+                             * @property {boolean|null} [enableTableAnnotation] LayoutConfig enableTableAnnotation
                              */
     
                             /**
@@ -21983,6 +21985,22 @@
                             LayoutConfig.prototype.returnBoundingBoxes = false;
     
                             /**
+                             * LayoutConfig enableImageAnnotation.
+                             * @member {boolean} enableImageAnnotation
+                             * @memberof google.cloud.documentai.v1.ProcessOptions.LayoutConfig
+                             * @instance
+                             */
+                            LayoutConfig.prototype.enableImageAnnotation = false;
+    
+                            /**
+                             * LayoutConfig enableTableAnnotation.
+                             * @member {boolean} enableTableAnnotation
+                             * @memberof google.cloud.documentai.v1.ProcessOptions.LayoutConfig
+                             * @instance
+                             */
+                            LayoutConfig.prototype.enableTableAnnotation = false;
+    
+                            /**
                              * Creates a new LayoutConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.documentai.v1.ProcessOptions.LayoutConfig
@@ -22012,6 +22030,10 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).bool(message.returnImages);
                                 if (message.returnBoundingBoxes != null && Object.hasOwnProperty.call(message, "returnBoundingBoxes"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.returnBoundingBoxes);
+                                if (message.enableImageAnnotation != null && Object.hasOwnProperty.call(message, "enableImageAnnotation"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.enableImageAnnotation);
+                                if (message.enableTableAnnotation != null && Object.hasOwnProperty.call(message, "enableTableAnnotation"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.enableTableAnnotation);
                                 return writer;
                             };
     
@@ -22060,6 +22082,14 @@
                                             message.returnBoundingBoxes = reader.bool();
                                             break;
                                         }
+                                    case 4: {
+                                            message.enableImageAnnotation = reader.bool();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.enableTableAnnotation = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -22106,6 +22136,12 @@
                                 if (message.returnBoundingBoxes != null && message.hasOwnProperty("returnBoundingBoxes"))
                                     if (typeof message.returnBoundingBoxes !== "boolean")
                                         return "returnBoundingBoxes: boolean expected";
+                                if (message.enableImageAnnotation != null && message.hasOwnProperty("enableImageAnnotation"))
+                                    if (typeof message.enableImageAnnotation !== "boolean")
+                                        return "enableImageAnnotation: boolean expected";
+                                if (message.enableTableAnnotation != null && message.hasOwnProperty("enableTableAnnotation"))
+                                    if (typeof message.enableTableAnnotation !== "boolean")
+                                        return "enableTableAnnotation: boolean expected";
                                 return null;
                             };
     
@@ -22130,6 +22166,10 @@
                                     message.returnImages = Boolean(object.returnImages);
                                 if (object.returnBoundingBoxes != null)
                                     message.returnBoundingBoxes = Boolean(object.returnBoundingBoxes);
+                                if (object.enableImageAnnotation != null)
+                                    message.enableImageAnnotation = Boolean(object.enableImageAnnotation);
+                                if (object.enableTableAnnotation != null)
+                                    message.enableTableAnnotation = Boolean(object.enableTableAnnotation);
                                 return message;
                             };
     
@@ -22150,6 +22190,8 @@
                                     object.chunkingConfig = null;
                                     object.returnImages = false;
                                     object.returnBoundingBoxes = false;
+                                    object.enableImageAnnotation = false;
+                                    object.enableTableAnnotation = false;
                                 }
                                 if (message.chunkingConfig != null && message.hasOwnProperty("chunkingConfig"))
                                     object.chunkingConfig = $root.google.cloud.documentai.v1.ProcessOptions.LayoutConfig.ChunkingConfig.toObject(message.chunkingConfig, options);
@@ -22157,6 +22199,10 @@
                                     object.returnImages = message.returnImages;
                                 if (message.returnBoundingBoxes != null && message.hasOwnProperty("returnBoundingBoxes"))
                                     object.returnBoundingBoxes = message.returnBoundingBoxes;
+                                if (message.enableImageAnnotation != null && message.hasOwnProperty("enableImageAnnotation"))
+                                    object.enableImageAnnotation = message.enableImageAnnotation;
+                                if (message.enableTableAnnotation != null && message.hasOwnProperty("enableTableAnnotation"))
+                                    object.enableTableAnnotation = message.enableTableAnnotation;
                                 return object;
                             };
     
@@ -83583,6 +83629,7 @@
                              * @interface IFoundationModelTuningOptions
                              * @property {number|null} [trainSteps] FoundationModelTuningOptions trainSteps
                              * @property {number|null} [learningRateMultiplier] FoundationModelTuningOptions learningRateMultiplier
+                             * @property {string|null} [previousFineTunedProcessorVersionName] FoundationModelTuningOptions previousFineTunedProcessorVersionName
                              */
     
                             /**
@@ -83617,6 +83664,14 @@
                             FoundationModelTuningOptions.prototype.learningRateMultiplier = 0;
     
                             /**
+                             * FoundationModelTuningOptions previousFineTunedProcessorVersionName.
+                             * @member {string} previousFineTunedProcessorVersionName
+                             * @memberof google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions
+                             * @instance
+                             */
+                            FoundationModelTuningOptions.prototype.previousFineTunedProcessorVersionName = "";
+    
+                            /**
                              * Creates a new FoundationModelTuningOptions instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions
@@ -83644,6 +83699,8 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.trainSteps);
                                 if (message.learningRateMultiplier != null && Object.hasOwnProperty.call(message, "learningRateMultiplier"))
                                     writer.uint32(/* id 3, wireType 5 =*/29).float(message.learningRateMultiplier);
+                                if (message.previousFineTunedProcessorVersionName != null && Object.hasOwnProperty.call(message, "previousFineTunedProcessorVersionName"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.previousFineTunedProcessorVersionName);
                                 return writer;
                             };
     
@@ -83688,6 +83745,10 @@
                                             message.learningRateMultiplier = reader.float();
                                             break;
                                         }
+                                    case 5: {
+                                            message.previousFineTunedProcessorVersionName = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -83729,6 +83790,9 @@
                                 if (message.learningRateMultiplier != null && message.hasOwnProperty("learningRateMultiplier"))
                                     if (typeof message.learningRateMultiplier !== "number")
                                         return "learningRateMultiplier: number expected";
+                                if (message.previousFineTunedProcessorVersionName != null && message.hasOwnProperty("previousFineTunedProcessorVersionName"))
+                                    if (!$util.isString(message.previousFineTunedProcessorVersionName))
+                                        return "previousFineTunedProcessorVersionName: string expected";
                                 return null;
                             };
     
@@ -83748,6 +83812,8 @@
                                     message.trainSteps = object.trainSteps | 0;
                                 if (object.learningRateMultiplier != null)
                                     message.learningRateMultiplier = Number(object.learningRateMultiplier);
+                                if (object.previousFineTunedProcessorVersionName != null)
+                                    message.previousFineTunedProcessorVersionName = String(object.previousFineTunedProcessorVersionName);
                                 return message;
                             };
     
@@ -83767,11 +83833,14 @@
                                 if (options.defaults) {
                                     object.trainSteps = 0;
                                     object.learningRateMultiplier = 0;
+                                    object.previousFineTunedProcessorVersionName = "";
                                 }
                                 if (message.trainSteps != null && message.hasOwnProperty("trainSteps"))
                                     object.trainSteps = message.trainSteps;
                                 if (message.learningRateMultiplier != null && message.hasOwnProperty("learningRateMultiplier"))
                                     object.learningRateMultiplier = options.json && !isFinite(message.learningRateMultiplier) ? String(message.learningRateMultiplier) : message.learningRateMultiplier;
+                                if (message.previousFineTunedProcessorVersionName != null && message.hasOwnProperty("previousFineTunedProcessorVersionName"))
+                                    object.previousFineTunedProcessorVersionName = message.previousFineTunedProcessorVersionName;
                                 return object;
                             };
     

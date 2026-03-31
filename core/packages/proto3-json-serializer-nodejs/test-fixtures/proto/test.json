@@ -1,0 +1,491 @@
+{
+  "nested": {
+    "test": {
+      "nested": {
+        "PrimitiveTypes": {
+          "fields": {
+            "integerField": {
+              "type": "int32",
+              "id": 1
+            },
+            "unsignedIntegerField": {
+              "type": "uint32",
+              "id": 2
+            },
+            "fixedIntegerField": {
+              "type": "fixed32",
+              "id": 3
+            },
+            "stringField": {
+              "type": "string",
+              "id": 4
+            },
+            "boolField": {
+              "type": "bool",
+              "id": 5
+            },
+            "int64Field": {
+              "type": "int64",
+              "id": 6
+            },
+            "uint64Field": {
+              "type": "uint64",
+              "id": 7
+            },
+            "doubleField": {
+              "type": "double",
+              "id": 8
+            }
+          }
+        },
+        "MessageWithNestedMessage": {
+          "fields": {
+            "innerMessage": {
+              "type": "AnyContent",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithAny": {
+          "fields": {
+            "anyField": {
+              "type": "google.protobuf.Any",
+              "id": 3
+            }
+          }
+        },
+        "AnyContent": {
+          "fields": {
+            "stringField": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithBytesField": {
+          "fields": {
+            "bytesField": {
+              "type": "bytes",
+              "id": 3
+            }
+          }
+        },
+        "MessageWithMap": {
+          "fields": {
+            "mapField": {
+              "keyType": "string",
+              "type": "MapValue",
+              "id": 3
+            },
+            "stringMapField": {
+              "keyType": "string",
+              "type": "string",
+              "id": 4
+            },
+            "longMapField": {
+              "keyType": "string",
+              "type": "int64",
+              "id": 5
+            },
+            "enumMapField": {
+              "keyType": "string",
+              "type": "Enum",
+              "id": 6
+            }
+          }
+        },
+        "MapValue": {
+          "fields": {
+            "stringField": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithRepeated": {
+          "fields": {
+            "repeatedString": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 3
+            },
+            "repeatedMessage": {
+              "rule": "repeated",
+              "type": "RepeatedValue",
+              "id": 4
+            },
+            "oneMoreRepeatedString": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 5
+            },
+            "repeatedLong": {
+              "rule": "repeated",
+              "type": "int64",
+              "id": 6
+            },
+            "repeatedEnum": {
+              "rule": "repeated",
+              "type": "Enum",
+              "id": 7
+            }
+          }
+        },
+        "RepeatedValue": {
+          "fields": {
+            "stringField": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "Enum": {
+          "values": {
+            "UNKNOWN": 0,
+            "KNOWN": 1
+          }
+        },
+        "MessageWithEnum": {
+          "fields": {
+            "enumField": {
+              "type": "Enum",
+              "id": 3
+            }
+          }
+        },
+        "MessageWithOneof": {
+          "oneofs": {
+            "_oneofField": {
+              "oneof": [
+                "stringField",
+                "integerField",
+                "messageField"
+              ]
+            }
+          },
+          "fields": {
+            "stringField": {
+              "type": "string",
+              "id": 1
+            },
+            "integerField": {
+              "type": "int32",
+              "id": 2
+            },
+            "messageField": {
+              "type": "AnyContent",
+              "id": 3
+            }
+          }
+        },
+        "MessageWithValue": {
+          "fields": {
+            "valueField": {
+              "type": "google.protobuf.Value",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithStruct": {
+          "fields": {
+            "structField": {
+              "type": "google.protobuf.Struct",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithListValue": {
+          "fields": {
+            "listValueField": {
+              "type": "google.protobuf.ListValue",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithNullValue": {
+          "fields": {
+            "nullValueField": {
+              "type": "google.protobuf.NullValue",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithDuration": {
+          "fields": {
+            "durationField": {
+              "type": "google.protobuf.Duration",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithTimestamp": {
+          "fields": {
+            "timestampField": {
+              "type": "google.protobuf.Timestamp",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithEmpty": {
+          "fields": {
+            "emptyField": {
+              "type": "google.protobuf.Empty",
+              "id": 1
+            }
+          }
+        },
+        "MessageWithWrappers": {
+          "fields": {
+            "doubleValueField": {
+              "type": "google.protobuf.DoubleValue",
+              "id": 1
+            },
+            "floatValueField": {
+              "type": "google.protobuf.FloatValue",
+              "id": 2
+            },
+            "int64ValueField": {
+              "type": "google.protobuf.Int64Value",
+              "id": 3
+            },
+            "uint64ValueField": {
+              "type": "google.protobuf.UInt64Value",
+              "id": 4
+            },
+            "int32ValueField": {
+              "type": "google.protobuf.Int32Value",
+              "id": 5
+            },
+            "uint32ValueField": {
+              "type": "google.protobuf.UInt32Value",
+              "id": 6
+            },
+            "boolValueField": {
+              "type": "google.protobuf.BoolValue",
+              "id": 7
+            },
+            "stringValueField": {
+              "type": "google.protobuf.StringValue",
+              "id": 8
+            },
+            "bytesValueField": {
+              "type": "google.protobuf.BytesValue",
+              "id": 9
+            },
+            "nanValueField": {
+              "type": "google.protobuf.DoubleValue",
+              "id": 10
+            },
+            "infinityValueField": {
+              "type": "google.protobuf.DoubleValue",
+              "id": 11
+            },
+            "negativeInfinityValueField": {
+              "type": "google.protobuf.DoubleValue",
+              "id": 12
+            }
+          }
+        },
+        "MessageWithFieldMask": {
+          "fields": {
+            "fieldMaskField": {
+              "type": "google.protobuf.FieldMask",
+              "id": 1
+            }
+          }
+        }
+      }
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

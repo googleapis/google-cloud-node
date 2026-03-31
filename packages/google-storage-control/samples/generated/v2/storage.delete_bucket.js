@@ -43,10 +43,10 @@ function main(name) {
   // const ifMetagenerationNotMatch = 1234
 
   // Imports the Storage library
-  const {StorageClient} = require('@google-cloud/storage').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const storageClient = new StorageClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callDeleteBucket() {
     // Construct request
@@ -55,7 +55,7 @@ function main(name) {
     };
 
     // Run request
-    const response = await storageClient.deleteBucket(request);
+    const response = await storageControlClient.deleteBucket(request);
     console.log(response);
   }
 

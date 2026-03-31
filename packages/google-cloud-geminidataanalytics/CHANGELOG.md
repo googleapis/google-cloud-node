@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.6.0...geminidataanalytics-v0.7.0) (2026-03-19)
+
+
+### Features
+
+* [geminidataanalytics] add `ParameterizedSecureViewParameters` message and field for PSV support ([#7549](https://github.com/googleapis/google-cloud-node/issues/7549)) ([dbfee3b](https://github.com/googleapis/google-cloud-node/commit/dbfee3b4ec80e336061549fcb718cea27ee6b3a1))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.5.0...geminidataanalytics-v0.6.0) (2026-02-02)
 
 

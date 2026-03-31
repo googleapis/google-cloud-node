@@ -3243,6 +3243,74 @@ describe('BigQuery', () => {
       });
     });
 
+    it('should delete res.rows if skipParsing is false', done => {
+      const rawRows = [{f: [{v: 'hi'}]}];
+      const resp = {
+        jobComplete: true,
+        schema: {
+          fields: [{name: 'name', type: 'STRING'}],
+        },
+        rows: rawRows,
+      };
+
+      const job = {
+        getQueryResults: (options: {}, callback: Function) => {
+          callback(null, [], null, resp);
+        },
+      };
+
+      bq.runJobsQuery = (reqOpts: {}, callback: Function) => {
+        callback(null, job, resp);
+      };
+
+      bq.query(
+        {
+          query: 'SELECT * FROM table',
+          skipParsing: false,
+        },
+        (err: Error, rows: {}[], nextQuery: {}, response: any) => {
+          assert.ifError(err);
+          // the job Complete callback returned the resp
+          assert.deepStrictEqual(response.rows, undefined);
+          done();
+        },
+      );
+    });
+
+    it('should skip parsing if skipParsing is true', done => {
+      const rawRows = [{f: [{v: 'hi'}]}];
+      const resp = {
+        jobComplete: true,
+        schema: {
+          fields: [{name: 'name', type: 'STRING'}],
+        },
+        rows: rawRows,
+      };
+
+      const job = {
+        getQueryResults: (options: QueryResultsOptions, callback: Function) => {
+          callback(null, options._cachedRows, null, options._cachedResponse);
+        },
+      };
+
+      bq.runJobsQuery = (reqOpts: {}, callback: Function) => {
+        callback(null, job, resp);
+      };
+
+      bq.query(
+        {
+          query: 'SELECT * FROM table',
+          skipParsing: true,
+        },
+        (err: Error, rows: {}[], nextQuery: {}, response: any) => {
+          assert.ifError(err);
+          assert.strictEqual(rows, rawRows);
+          assert.deepStrictEqual(response.rows, rawRows);
+          done();
+        },
+      );
+    });
+
     it('should call job#getQueryResults with query options', done => {
       let queryResultsOpts = {};
       const fakeJob = {

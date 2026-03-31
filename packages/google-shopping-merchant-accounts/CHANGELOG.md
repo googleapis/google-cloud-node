@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v3.1.0...accounts-v3.2.0) (2026-03-18)
+
+
+### Features
+
+* [merchantapi] Add CreateTestAccount RPC to Accounts service for creating test-only Merchant Center accounts ([#7640](https://github.com/googleapis/google-cloud-node/issues/7640)) ([7f03646](https://github.com/googleapis/google-cloud-node/commit/7f03646a5e0d259336b2a6fb902200b6c5d70733))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v3.0.1...accounts-v3.1.0) (2025-12-09)
 
 

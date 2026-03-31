@@ -163,11 +163,43 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateEntryLink": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteEntryLink": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "LookupEntryLinks": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "LookupContext": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetEntryLink": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateMetadataFeed": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetMetadataFeed": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListMetadataFeeds": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteMetadataFeed": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateMetadataFeed": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

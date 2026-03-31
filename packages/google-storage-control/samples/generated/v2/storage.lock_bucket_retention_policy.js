@@ -39,10 +39,10 @@ function main(bucket, ifMetagenerationMatch) {
   // const ifMetagenerationMatch = 1234
 
   // Imports the Storage library
-  const {StorageClient} = require('@google-cloud/storage').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const storageClient = new StorageClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callLockBucketRetentionPolicy() {
     // Construct request
@@ -52,7 +52,7 @@ function main(bucket, ifMetagenerationMatch) {
     };
 
     // Run request
-    const response = await storageClient.lockBucketRetentionPolicy(request);
+    const response = await storageControlClient.lockBucketRetentionPolicy(request);
     console.log(response);
   }
 

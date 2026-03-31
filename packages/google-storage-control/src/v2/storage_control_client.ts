@@ -45,6 +45,7 @@ const version = require('../../../package.json').version;
  *  StorageControl service includes selected control plane operations.
  * @class
  * @memberof v2
+ * @internal
  */
 export class StorageControlClient {
   private _terminated = false;

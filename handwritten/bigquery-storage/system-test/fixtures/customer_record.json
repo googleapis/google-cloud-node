@@ -1,0 +1,17 @@
+{
+  "nested": {
+    "CustomerRecord": {
+      "fields": {
+        "customer_name": {
+          "type": "string",
+          "id": 1
+        },
+        "row_num": {
+          "rule": "required",
+          "type": "int64",
+          "id": 2
+        }
+      }
+    }
+  }
+}

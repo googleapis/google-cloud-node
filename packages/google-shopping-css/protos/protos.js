@@ -3664,6 +3664,10 @@
                          * @property {string|null} [customLabel_4] Attributes customLabel_4
                          * @property {google.shopping.css.v1.IHeadlineOfferInstallment|null} [headlineOfferInstallment] Attributes headlineOfferInstallment
                          * @property {google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null} [headlineOfferSubscriptionCost] Attributes headlineOfferSubscriptionCost
+                         * @property {number|Long|null} [reviewCount] Attributes reviewCount
+                         * @property {number|Long|null} [minRating] Attributes minRating
+                         * @property {number|Long|null} [maxRating] Attributes maxRating
+                         * @property {number|null} [rating] Attributes rating
                          */
     
                         /**
@@ -4089,6 +4093,38 @@
                          */
                         Attributes.prototype.headlineOfferSubscriptionCost = null;
     
+                        /**
+                         * Attributes reviewCount.
+                         * @member {number|Long|null|undefined} reviewCount
+                         * @memberof google.shopping.css.v1.Attributes
+                         * @instance
+                         */
+                        Attributes.prototype.reviewCount = null;
+    
+                        /**
+                         * Attributes minRating.
+                         * @member {number|Long|null|undefined} minRating
+                         * @memberof google.shopping.css.v1.Attributes
+                         * @instance
+                         */
+                        Attributes.prototype.minRating = null;
+    
+                        /**
+                         * Attributes maxRating.
+                         * @member {number|Long|null|undefined} maxRating
+                         * @memberof google.shopping.css.v1.Attributes
+                         * @instance
+                         */
+                        Attributes.prototype.maxRating = null;
+    
+                        /**
+                         * Attributes rating.
+                         * @member {number|null|undefined} rating
+                         * @memberof google.shopping.css.v1.Attributes
+                         * @instance
+                         */
+                        Attributes.prototype.rating = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -4278,6 +4314,30 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Attributes.prototype, "_reviewCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["reviewCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Attributes.prototype, "_minRating", {
+                            get: $util.oneOfGetter($oneOfFields = ["minRating"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Attributes.prototype, "_maxRating", {
+                            get: $util.oneOfGetter($oneOfFields = ["maxRating"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Attributes.prototype, "_rating", {
+                            get: $util.oneOfGetter($oneOfFields = ["rating"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new Attributes instance using the specified properties.
                          * @function create
@@ -4410,6 +4470,14 @@
                                 $root.google.shopping.css.v1.HeadlineOfferInstallment.encode(message.headlineOfferInstallment, writer.uint32(/* id 51, wireType 2 =*/410).fork()).ldelim();
                             if (message.headlineOfferSubscriptionCost != null && Object.hasOwnProperty.call(message, "headlineOfferSubscriptionCost"))
                                 $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost.encode(message.headlineOfferSubscriptionCost, writer.uint32(/* id 52, wireType 2 =*/418).fork()).ldelim();
+                            if (message.reviewCount != null && Object.hasOwnProperty.call(message, "reviewCount"))
+                                writer.uint32(/* id 54, wireType 0 =*/432).int64(message.reviewCount);
+                            if (message.minRating != null && Object.hasOwnProperty.call(message, "minRating"))
+                                writer.uint32(/* id 55, wireType 0 =*/440).int64(message.minRating);
+                            if (message.maxRating != null && Object.hasOwnProperty.call(message, "maxRating"))
+                                writer.uint32(/* id 56, wireType 0 =*/448).int64(message.maxRating);
+                            if (message.rating != null && Object.hasOwnProperty.call(message, "rating"))
+                                writer.uint32(/* id 57, wireType 1 =*/457).double(message.rating);
                             return writer;
                         };
     
@@ -4660,6 +4728,22 @@
                                     }
                                 case 52: {
                                         message.headlineOfferSubscriptionCost = $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 54: {
+                                        message.reviewCount = reader.int64();
+                                        break;
+                                    }
+                                case 55: {
+                                        message.minRating = reader.int64();
+                                        break;
+                                    }
+                                case 56: {
+                                        message.maxRating = reader.int64();
+                                        break;
+                                    }
+                                case 57: {
+                                        message.rating = reader.double();
                                         break;
                                     }
                                 default:
@@ -4968,6 +5052,26 @@
                                 if (error)
                                     return "headlineOfferSubscriptionCost." + error;
                             }
+                            if (message.reviewCount != null && message.hasOwnProperty("reviewCount")) {
+                                properties._reviewCount = 1;
+                                if (!$util.isInteger(message.reviewCount) && !(message.reviewCount && $util.isInteger(message.reviewCount.low) && $util.isInteger(message.reviewCount.high)))
+                                    return "reviewCount: integer|Long expected";
+                            }
+                            if (message.minRating != null && message.hasOwnProperty("minRating")) {
+                                properties._minRating = 1;
+                                if (!$util.isInteger(message.minRating) && !(message.minRating && $util.isInteger(message.minRating.low) && $util.isInteger(message.minRating.high)))
+                                    return "minRating: integer|Long expected";
+                            }
+                            if (message.maxRating != null && message.hasOwnProperty("maxRating")) {
+                                properties._maxRating = 1;
+                                if (!$util.isInteger(message.maxRating) && !(message.maxRating && $util.isInteger(message.maxRating.low) && $util.isInteger(message.maxRating.high)))
+                                    return "maxRating: integer|Long expected";
+                            }
+                            if (message.rating != null && message.hasOwnProperty("rating")) {
+                                properties._rating = 1;
+                                if (typeof message.rating !== "number")
+                                    return "rating: number expected";
+                            }
                             return null;
                         };
     
@@ -5176,6 +5280,35 @@
                                     throw TypeError(".google.shopping.css.v1.Attributes.headlineOfferSubscriptionCost: object expected");
                                 message.headlineOfferSubscriptionCost = $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost.fromObject(object.headlineOfferSubscriptionCost);
                             }
+                            if (object.reviewCount != null)
+                                if ($util.Long)
+                                    (message.reviewCount = $util.Long.fromValue(object.reviewCount)).unsigned = false;
+                                else if (typeof object.reviewCount === "string")
+                                    message.reviewCount = parseInt(object.reviewCount, 10);
+                                else if (typeof object.reviewCount === "number")
+                                    message.reviewCount = object.reviewCount;
+                                else if (typeof object.reviewCount === "object")
+                                    message.reviewCount = new $util.LongBits(object.reviewCount.low >>> 0, object.reviewCount.high >>> 0).toNumber();
+                            if (object.minRating != null)
+                                if ($util.Long)
+                                    (message.minRating = $util.Long.fromValue(object.minRating)).unsigned = false;
+                                else if (typeof object.minRating === "string")
+                                    message.minRating = parseInt(object.minRating, 10);
+                                else if (typeof object.minRating === "number")
+                                    message.minRating = object.minRating;
+                                else if (typeof object.minRating === "object")
+                                    message.minRating = new $util.LongBits(object.minRating.low >>> 0, object.minRating.high >>> 0).toNumber();
+                            if (object.maxRating != null)
+                                if ($util.Long)
+                                    (message.maxRating = $util.Long.fromValue(object.maxRating)).unsigned = false;
+                                else if (typeof object.maxRating === "string")
+                                    message.maxRating = parseInt(object.maxRating, 10);
+                                else if (typeof object.maxRating === "number")
+                                    message.maxRating = object.maxRating;
+                                else if (typeof object.maxRating === "object")
+                                    message.maxRating = new $util.LongBits(object.maxRating.low >>> 0, object.maxRating.high >>> 0).toNumber();
+                            if (object.rating != null)
+                                message.rating = Number(object.rating);
                             return message;
                         };
     
@@ -5438,6 +5571,35 @@
                                 object.headlineOfferInstallment = $root.google.shopping.css.v1.HeadlineOfferInstallment.toObject(message.headlineOfferInstallment, options);
                             if (message.headlineOfferSubscriptionCost != null && message.hasOwnProperty("headlineOfferSubscriptionCost"))
                                 object.headlineOfferSubscriptionCost = $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost.toObject(message.headlineOfferSubscriptionCost, options);
+                            if (message.reviewCount != null && message.hasOwnProperty("reviewCount")) {
+                                if (typeof message.reviewCount === "number")
+                                    object.reviewCount = options.longs === String ? String(message.reviewCount) : message.reviewCount;
+                                else
+                                    object.reviewCount = options.longs === String ? $util.Long.prototype.toString.call(message.reviewCount) : options.longs === Number ? new $util.LongBits(message.reviewCount.low >>> 0, message.reviewCount.high >>> 0).toNumber() : message.reviewCount;
+                                if (options.oneofs)
+                                    object._reviewCount = "reviewCount";
+                            }
+                            if (message.minRating != null && message.hasOwnProperty("minRating")) {
+                                if (typeof message.minRating === "number")
+                                    object.minRating = options.longs === String ? String(message.minRating) : message.minRating;
+                                else
+                                    object.minRating = options.longs === String ? $util.Long.prototype.toString.call(message.minRating) : options.longs === Number ? new $util.LongBits(message.minRating.low >>> 0, message.minRating.high >>> 0).toNumber() : message.minRating;
+                                if (options.oneofs)
+                                    object._minRating = "minRating";
+                            }
+                            if (message.maxRating != null && message.hasOwnProperty("maxRating")) {
+                                if (typeof message.maxRating === "number")
+                                    object.maxRating = options.longs === String ? String(message.maxRating) : message.maxRating;
+                                else
+                                    object.maxRating = options.longs === String ? $util.Long.prototype.toString.call(message.maxRating) : options.longs === Number ? new $util.LongBits(message.maxRating.low >>> 0, message.maxRating.high >>> 0).toNumber() : message.maxRating;
+                                if (options.oneofs)
+                                    object._maxRating = "maxRating";
+                            }
+                            if (message.rating != null && message.hasOwnProperty("rating")) {
+                                object.rating = options.json && !isFinite(message.rating) ? String(message.rating) : message.rating;
+                                if (options.oneofs)
+                                    object._rating = "rating";
+                            }
                             return object;
                         };
     
@@ -12842,6 +13004,12 @@
                      * @property {number} FREE_LISTINGS=4 FREE_LISTINGS value
                      * @property {number} FREE_LOCAL_LISTINGS=5 FREE_LOCAL_LISTINGS value
                      * @property {number} YOUTUBE_SHOPPING=6 YOUTUBE_SHOPPING value
+                     * @property {number} YOUTUBE_SHOPPING_CHECKOUT=7 YOUTUBE_SHOPPING_CHECKOUT value
+                     * @property {number} YOUTUBE_AFFILIATE=8 YOUTUBE_AFFILIATE value
+                     * @property {number} FREE_VEHICLE_LISTINGS=9 FREE_VEHICLE_LISTINGS value
+                     * @property {number} VEHICLE_ADS=10 VEHICLE_ADS value
+                     * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
+                     * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
                      */
                     Destination.DestinationEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -12852,6 +13020,12 @@
                         values[valuesById[4] = "FREE_LISTINGS"] = 4;
                         values[valuesById[5] = "FREE_LOCAL_LISTINGS"] = 5;
                         values[valuesById[6] = "YOUTUBE_SHOPPING"] = 6;
+                        values[valuesById[7] = "YOUTUBE_SHOPPING_CHECKOUT"] = 7;
+                        values[valuesById[8] = "YOUTUBE_AFFILIATE"] = 8;
+                        values[valuesById[9] = "FREE_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[10] = "VEHICLE_ADS"] = 10;
+                        values[valuesById[11] = "CLOUD_RETAIL"] = 11;
+                        values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
                         return values;
                     })();
     
@@ -13046,11 +13220,16 @@
                      * @property {number} LOCAL_INVENTORY_ADS=5 LOCAL_INVENTORY_ADS value
                      * @property {number} VEHICLE_INVENTORY_ADS=6 VEHICLE_INVENTORY_ADS value
                      * @property {number} FREE_LISTINGS=7 FREE_LISTINGS value
+                     * @property {number} FREE_LISTINGS_UCP_CHECKOUT=19 FREE_LISTINGS_UCP_CHECKOUT value
                      * @property {number} FREE_LOCAL_LISTINGS=8 FREE_LOCAL_LISTINGS value
                      * @property {number} FREE_LOCAL_VEHICLE_LISTINGS=9 FREE_LOCAL_VEHICLE_LISTINGS value
+                     * @property {number} YOUTUBE_AFFILIATE=18 YOUTUBE_AFFILIATE value
                      * @property {number} YOUTUBE_SHOPPING=10 YOUTUBE_SHOPPING value
                      * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
                      * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
+                     * @property {number} PRODUCT_REVIEWS=15 PRODUCT_REVIEWS value
+                     * @property {number} MERCHANT_REVIEWS=16 MERCHANT_REVIEWS value
+                     * @property {number} YOUTUBE_CHECKOUT=17 YOUTUBE_CHECKOUT value
                      */
                     ReportingContext.ReportingContextEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -13064,11 +13243,16 @@
                         values[valuesById[5] = "LOCAL_INVENTORY_ADS"] = 5;
                         values[valuesById[6] = "VEHICLE_INVENTORY_ADS"] = 6;
                         values[valuesById[7] = "FREE_LISTINGS"] = 7;
+                        values[valuesById[19] = "FREE_LISTINGS_UCP_CHECKOUT"] = 19;
                         values[valuesById[8] = "FREE_LOCAL_LISTINGS"] = 8;
                         values[valuesById[9] = "FREE_LOCAL_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[18] = "YOUTUBE_AFFILIATE"] = 18;
                         values[valuesById[10] = "YOUTUBE_SHOPPING"] = 10;
                         values[valuesById[11] = "CLOUD_RETAIL"] = 11;
                         values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
+                        values[valuesById[15] = "PRODUCT_REVIEWS"] = 15;
+                        values[valuesById[16] = "MERCHANT_REVIEWS"] = 16;
+                        values[valuesById[17] = "YOUTUBE_CHECKOUT"] = 17;
                         return values;
                     })();
     

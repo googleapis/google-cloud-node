@@ -1,0 +1,17 @@
+{
+  "codeowner_team": "@googleapis/firestore-team @googleapis/cloud-sdk-nodejs-team",
+  "language": "nodejs",
+  "api_id": "firestore.googleapis.com",
+  "name_pretty": "Cloud Firestore",
+  "requires_billing ": false,
+  "default_version": "v1",
+  "product_documentation": "https://cloud.google.com/firestore",
+  "name": "firestore",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5337669",
+  "distribution_name": "@google-cloud/firestore",
+  "repo": "googleapis/google-cloud-node",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/firestore/latest",
+  "release_level": "stable",
+  "api_shortname": "firestore",
+  "library_type": "GAPIC_COMBO"
+}

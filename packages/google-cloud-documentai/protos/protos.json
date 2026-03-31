@@ -2234,6 +2234,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "enableImageAnnotation": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableTableAnnotation": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -7537,6 +7551,13 @@
                             "learningRateMultiplier": {
                               "type": "float",
                               "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "previousFineTunedProcessorVersionName": {
+                              "type": "string",
+                              "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }

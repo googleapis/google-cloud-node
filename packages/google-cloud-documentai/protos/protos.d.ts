@@ -8620,6 +8620,12 @@ export namespace google {
 
                         /** LayoutConfig returnBoundingBoxes */
                         returnBoundingBoxes?: (boolean|null);
+
+                        /** LayoutConfig enableImageAnnotation */
+                        enableImageAnnotation?: (boolean|null);
+
+                        /** LayoutConfig enableTableAnnotation */
+                        enableTableAnnotation?: (boolean|null);
                     }
 
                     /** Represents a LayoutConfig. */
@@ -8639,6 +8645,12 @@ export namespace google {
 
                         /** LayoutConfig returnBoundingBoxes. */
                         public returnBoundingBoxes: boolean;
+
+                        /** LayoutConfig enableImageAnnotation. */
+                        public enableImageAnnotation: boolean;
+
+                        /** LayoutConfig enableTableAnnotation. */
+                        public enableTableAnnotation: boolean;
 
                         /**
                          * Creates a new LayoutConfig instance using the specified properties.
@@ -33739,6 +33751,9 @@ export namespace google {
 
                         /** FoundationModelTuningOptions learningRateMultiplier */
                         learningRateMultiplier?: (number|null);
+
+                        /** FoundationModelTuningOptions previousFineTunedProcessorVersionName */
+                        previousFineTunedProcessorVersionName?: (string|null);
                     }
 
                     /** Represents a FoundationModelTuningOptions. */
@@ -33755,6 +33770,9 @@ export namespace google {
 
                         /** FoundationModelTuningOptions learningRateMultiplier. */
                         public learningRateMultiplier: number;
+
+                        /** FoundationModelTuningOptions previousFineTunedProcessorVersionName. */
+                        public previousFineTunedProcessorVersionName: string;
 
                         /**
                          * Creates a new FoundationModelTuningOptions instance using the specified properties.

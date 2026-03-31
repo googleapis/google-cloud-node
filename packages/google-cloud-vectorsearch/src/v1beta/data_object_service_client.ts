@@ -844,6 +844,10 @@ export class DataObjectServiceClient {
  *   Required. The name of the DataObject resource to be deleted.
  *   Format:
  *   `projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}`
+ * @param {string} [request.etag]
+ *   Optional. The current etag of the DataObject.
+ *   If an etag is provided and does not match the current etag of the
+ *   DataObject, deletion will be blocked and an ABORTED error will be returned.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

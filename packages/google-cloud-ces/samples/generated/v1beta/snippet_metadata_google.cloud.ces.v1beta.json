@@ -254,7 +254,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 72,
           "type": "FULL"
         }
       ],
@@ -273,6 +273,10 @@
           },
           {
             "name": "gcs_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "app_version",
             "type": "TYPE_STRING"
           }
         ],
@@ -348,6 +352,90 @@
         "method": {
           "shortName": "ImportApp",
           "fullName": "google.cloud.ces.v1beta.AgentService.ImportApp",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1beta.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1beta_generated_AgentService_GetSecuritySettings_async",
+      "title": "AgentService getSecuritySettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the security settings for the project and location.",
+      "canonical": true,
+      "file": "agent_service.get_security_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSecuritySettings",
+        "fullName": "google.cloud.ces.v1beta.AgentService.GetSecuritySettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1beta.SecuritySettings",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1beta.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GetSecuritySettings",
+          "fullName": "google.cloud.ces.v1beta.AgentService.GetSecuritySettings",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1beta.AgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1beta_generated_AgentService_UpdateSecuritySettings_async",
+      "title": "AgentService updateSecuritySettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the security settings for the project and location.",
+      "canonical": true,
+      "file": "agent_service.update_security_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSecuritySettings",
+        "fullName": "google.cloud.ces.v1beta.AgentService.UpdateSecuritySettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "security_settings",
+            "type": ".google.cloud.ces.v1beta.SecuritySettings"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1beta.SecuritySettings",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1beta.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSecuritySettings",
+          "fullName": "google.cloud.ces.v1beta.AgentService.UpdateSecuritySettings",
           "service": {
             "shortName": "AgentService",
             "fullName": "google.cloud.ces.v1beta.AgentService"
@@ -2370,7 +2458,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 61,
+          "end": 67,
           "type": "FULL"
         }
       ],
@@ -2380,12 +2468,16 @@
         "async": true,
         "parameters": [
           {
-            "name": "app",
+            "name": "name",
             "type": "TYPE_STRING"
           },
           {
             "name": "audio_content",
             "type": "TYPE_BYTES"
+          },
+          {
+            "name": "previous_audio_gcs_uri",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.cloud.ces.v1beta.UploadEvaluationAudioResponse",
@@ -3771,7 +3863,7 @@
       "regionTag": "ces_v1beta_generated_SessionService_RunSession_async",
       "title": "AgentService runSession Sample",
       "origin": "API_DEFINITION",
-      "description": " Initiates a single turn interaction with the CES agent within a session.",
+      "description": " Initiates a single-turn interaction with the CES agent within a session.",
       "canonical": true,
       "file": "session_service.run_session.js",
       "language": "JAVASCRIPT",
@@ -3804,6 +3896,50 @@
         "method": {
           "shortName": "RunSession",
           "fullName": "google.cloud.ces.v1beta.SessionService.RunSession",
+          "service": {
+            "shortName": "SessionService",
+            "fullName": "google.cloud.ces.v1beta.SessionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "ces_v1beta_generated_SessionService_StreamRunSession_async",
+      "title": "AgentService streamRunSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Initiates a single-turn interaction with the CES agent. Uses server-side streaming to deliver incremental results and partial responses as they are generated. By default, complete responses (e.g., messages from callbacks or full LLM responses) are sent to the client as soon as they are available. To enable streaming individual text chunks directly from the model, set [enable_text_streaming][google.cloud.ces.v1beta.SessionConfig.enable_text_streaming] to true.",
+      "canonical": true,
+      "file": "session_service.stream_run_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StreamRunSession",
+        "fullName": "google.cloud.ces.v1beta.SessionService.StreamRunSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": ".google.cloud.ces.v1beta.SessionConfig"
+          },
+          {
+            "name": "inputs",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.ces.v1beta.RunSessionResponse",
+        "client": {
+          "shortName": "SessionServiceClient",
+          "fullName": "google.cloud.ces.v1beta.SessionServiceClient"
+        },
+        "method": {
+          "shortName": "StreamRunSession",
+          "fullName": "google.cloud.ces.v1beta.SessionService.StreamRunSession",
           "service": {
             "shortName": "SessionService",
             "fullName": "google.cloud.ces.v1beta.SessionService"
@@ -3866,7 +4002,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 74,
+          "end": 80,
           "type": "FULL"
         }
       ],
@@ -3884,15 +4020,19 @@
             "type": ".google.cloud.ces.v1beta.ToolsetTool"
           },
           {
+            "name": "variables",
+            "type": ".google.protobuf.Struct"
+          },
+          {
+            "name": "context",
+            "type": ".google.protobuf.Struct"
+          },
+          {
             "name": "parent",
             "type": "TYPE_STRING"
           },
           {
             "name": "args",
-            "type": ".google.protobuf.Struct"
-          },
-          {
-            "name": "variables",
             "type": ".google.protobuf.Struct"
           }
         ],
@@ -4014,7 +4154,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 70,
           "type": "FULL"
         }
       ],
@@ -4034,6 +4174,10 @@
           {
             "name": "recaptcha_token",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "live_handoff_enabled",
+            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.cloud.ces.v1beta.GenerateChatTokenResponse",

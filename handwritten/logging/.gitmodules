@@ -1,0 +1,4 @@
+[submodule "env-tests-logging"]
+	path = env-tests-logging
+	url = https://github.com/googleapis/env-tests-logging
+	ignore = dirty
