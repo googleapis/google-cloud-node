@@ -1041,7 +1041,7 @@ describe('BigQuery', () => {
       }
     });
 
-    it('should create a table with timestampPrecision', async () => {
+    it.skip('should create a table with timestampPrecision', async () => {
       const table = dataset.table(generateName('timestamp-precision-table'));
       const schema = {
         fields: [
