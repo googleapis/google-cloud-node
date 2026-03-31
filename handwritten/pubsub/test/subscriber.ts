@@ -924,7 +924,6 @@ describe('Subscriber', () => {
       await subscriber.nack(message);
 
       const [msg, deadline] = stub.lastCall.args;
-
       assert.strictEqual(msg, message);
       assert.strictEqual(deadline, 0);
     });
@@ -935,7 +934,6 @@ describe('Subscriber', () => {
       await subscriber.nackWithResponse(message);
 
       const [msg, deadline] = stub.lastCall.args;
-
       assert.strictEqual(msg, message);
       assert.strictEqual(deadline, 0);
     });
