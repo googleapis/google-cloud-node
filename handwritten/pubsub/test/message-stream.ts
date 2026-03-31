@@ -564,7 +564,7 @@ describe('MessageStream', () => {
 
         const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
 
-        // wait for keepalive ping (30s) + 21s timeout to pass two 10s polling intervals 
+        // wait for keepalive ping (30s) + 21s timeout to pass two 10s polling intervals
         sandbox.clock.tick(51000);
 
         cancelSpies.forEach(spy => {
