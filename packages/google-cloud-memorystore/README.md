@@ -67,6 +67,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get backup collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_backup_collection.js) |
 | get certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_certificate_authority.js) |
 | get instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_instance.js) |
+| get shared regional certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_shared_regional_certificate_authority.js) |
 | list backup collections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.list_backup_collections.js) |
 | list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.list_backups.js) |
 | list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.list_instances.js) |
