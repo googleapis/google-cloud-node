@@ -235,7 +235,7 @@ jobs:
           npm run system-test
           cd ../..
         done
-            - name: Test combined library (Speech)
+    - name: Test combined library (Speech)
       if: steps.generator-changes.outputs.changes == 'true'
       env:
         TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
