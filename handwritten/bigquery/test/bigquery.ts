@@ -42,6 +42,7 @@ import {
   TableField,
   Query,
   QueryResultsOptions,
+  QueryOptions,
 } from '../src';
 import {SinonStub} from 'sinon';
 import {PreciseDate} from '@google-cloud/precise-date';
@@ -3438,6 +3439,14 @@ describe('BigQuery', () => {
           delete req[key];
         }
       }
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              timestampOutputFormat: 'ISO8601_STRING',
+            }
+          : {
+              useInt64Timestamp: true,
+            };
       const expectedReq = {
         query: QUERY_STRING,
         useLegacySql: false,
@@ -3464,11 +3473,76 @@ describe('BigQuery', () => {
           key: 'value',
         },
         jobCreationMode: 'JOB_CREATION_REQUIRED',
-        formatOptions: {
-          useInt64Timestamp: true,
-        },
+        formatOptions,
       };
       assert.deepStrictEqual(req, expectedReq);
+    });
+
+    describe('timestamp format options', () => {
+      const testCases: {
+        name: string;
+        opts: QueryOptions;
+        expected?: any;
+        bail?: boolean;
+      }[] = [
+        {
+          name: 'TOF: omitted, UI64: omitted (default ISO8601_STRING)',
+          opts: {},
+          expected: {
+            timestampOutputFormat: 'ISO8601_STRING',
+          },
+        },
+        {
+          name: 'TOF: omitted, UI64: true',
+          opts: {
+            ['formatOptions.useInt64Timestamp']: true,
+          },
+          expected: {
+            useInt64Timestamp: true,
+          },
+        },
+        {
+          name: 'TOF: omitted, UI64: false (default ISO8601_STRING)',
+          opts: {
+            ['formatOptions.useInt64Timestamp']: false,
+          },
+          expected: {
+            useInt64Timestamp: false,
+          },
+        },
+      ];
+
+      testCases.forEach(testCase => {
+        it(`should handle ${testCase.name}`, () => {
+          if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+            return;
+          }
+          const req = bq.buildQueryRequest_(QUERY_STRING, testCase.opts);
+
+          const expectedReq = {
+            query: QUERY_STRING,
+            useLegacySql: false,
+            requestId: req.requestId,
+            jobCreationMode: 'JOB_CREATION_OPTIONAL',
+            formatOptions: testCase.expected,
+            connectionProperties: undefined,
+            continuous: undefined,
+            createSession: undefined,
+            defaultDataset: undefined,
+            destinationEncryptionConfiguration: undefined,
+            labels: undefined,
+            location: undefined,
+            maxResults: undefined,
+            maximumBytesBilled: undefined,
+            preserveNulls: undefined,
+            reservation: undefined,
+            timeoutMs: undefined,
+            useQueryCache: undefined,
+            writeIncrementalResults: undefined,
+          };
+          assert.deepStrictEqual(req, expectedReq);
+        });
+      });
     });
 
     it('should create a QueryRequest from a SQL string', () => {
@@ -3478,14 +3552,20 @@ describe('BigQuery', () => {
           delete req[key];
         }
       }
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              timestampOutputFormat: 'ISO8601_STRING',
+            }
+          : {
+              useInt64Timestamp: true,
+            };
       const expectedReq = {
         query: QUERY_STRING,
         useLegacySql: false,
         requestId: req.requestId,
         jobCreationMode: 'JOB_CREATION_OPTIONAL',
-        formatOptions: {
-          useInt64Timestamp: true,
-        },
+        formatOptions,
       };
       assert.deepStrictEqual(req, expectedReq);
     });
