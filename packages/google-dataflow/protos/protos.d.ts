@@ -242,9 +242,6 @@ export namespace google {
 
                 /** Package location */
                 location?: (string|null);
-
-                /** Package sha256 */
-                sha256?: (string|null);
             }
 
             /** Represents a Package. */
@@ -261,9 +258,6 @@ export namespace google {
 
                 /** Package location. */
                 public location: string;
-
-                /** Package sha256. */
-                public sha256: string;
 
                 /**
                  * Creates a new Package instance using the specified properties.
