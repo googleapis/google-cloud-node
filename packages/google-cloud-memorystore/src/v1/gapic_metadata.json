@@ -20,11 +20,6 @@
                 "getCertificateAuthority"
               ]
             },
-            "GetSharedRegionalCertificateAuthority": {
-              "methods": [
-                "getSharedRegionalCertificateAuthority"
-              ]
-            },
             "GetBackupCollection": {
               "methods": [
                 "getBackupCollection"
@@ -104,11 +99,6 @@
             "GetCertificateAuthority": {
               "methods": [
                 "getCertificateAuthority"
-              ]
-            },
-            "GetSharedRegionalCertificateAuthority": {
-              "methods": [
-                "getSharedRegionalCertificateAuthority"
               ]
             },
             "GetBackupCollection": {
