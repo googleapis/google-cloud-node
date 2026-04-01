@@ -10534,6 +10534,127 @@
                         }
                       }
                     },
+                    "Metric": {
+                      "oneofs": {
+                        "metricSpec": {
+                          "oneof": [
+                            "predefinedMetricSpec",
+                            "computationBasedMetricSpec",
+                            "llmBasedMetricSpec",
+                            "pointwiseMetricSpec",
+                            "pairwiseMetricSpec",
+                            "exactMatchSpec",
+                            "bleuSpec",
+                            "rougeSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "predefinedMetricSpec": {
+                          "type": "PredefinedMetricSpec",
+                          "id": 8
+                        },
+                        "computationBasedMetricSpec": {
+                          "type": "ComputationBasedMetricSpec",
+                          "id": 9
+                        },
+                        "llmBasedMetricSpec": {
+                          "type": "LLMBasedMetricSpec",
+                          "id": 10
+                        },
+                        "pointwiseMetricSpec": {
+                          "type": "PointwiseMetricSpec",
+                          "id": 2
+                        },
+                        "pairwiseMetricSpec": {
+                          "type": "PairwiseMetricSpec",
+                          "id": 3
+                        },
+                        "exactMatchSpec": {
+                          "type": "ExactMatchSpec",
+                          "id": 4
+                        },
+                        "bleuSpec": {
+                          "type": "BleuSpec",
+                          "id": 5
+                        },
+                        "rougeSpec": {
+                          "type": "RougeSpec",
+                          "id": 6
+                        },
+                        "aggregationMetrics": {
+                          "rule": "repeated",
+                          "type": "AggregationMetric",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AggregationMetric": {
+                          "values": {
+                            "AGGREGATION_METRIC_UNSPECIFIED": 0,
+                            "AVERAGE": 1,
+                            "MODE": 2,
+                            "STANDARD_DEVIATION": 3,
+                            "VARIANCE": 4,
+                            "MINIMUM": 5,
+                            "MAXIMUM": 6,
+                            "MEDIAN": 7,
+                            "PERCENTILE_P90": 8,
+                            "PERCENTILE_P95": 9,
+                            "PERCENTILE_P99": 10
+                          }
+                        }
+                      }
+                    },
+                    "AutoraterConfig": {
+                      "oneofs": {
+                        "_samplingCount": {
+                          "oneof": [
+                            "samplingCount"
+                          ]
+                        },
+                        "_flipEnabled": {
+                          "oneof": [
+                            "flipEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "samplingCount": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "flipEnabled": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "autoraterModel": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generationConfig": {
+                          "type": "GenerationConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "EvaluateInstancesResponse": {
                       "oneofs": {
                         "evaluationResults": {
@@ -10666,6 +10787,311 @@
                         "metricxResult": {
                           "type": "MetricxResult",
                           "id": 30
+                        },
+                        "metricResults": {
+                          "rule": "repeated",
+                          "type": "MetricResult",
+                          "id": 43
+                        }
+                      }
+                    },
+                    "MetricResult": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        },
+                        "_explanation": {
+                          "oneof": [
+                            "explanation"
+                          ]
+                        },
+                        "_error": {
+                          "oneof": [
+                            "error"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "explanation": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "OutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "EvaluationDataset": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource",
+                            "bigquerySource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        },
+                        "bigquerySource": {
+                          "type": "BigQuerySource",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "EvaluateDatasetResponse": {
+                      "fields": {
+                        "aggregationOutput": {
+                          "type": "AggregationOutput",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "outputInfo": {
+                          "type": "OutputInfo",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "OutputInfo": {
+                      "oneofs": {
+                        "outputLocation": {
+                          "oneof": [
+                            "gcsOutputDirectory"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsOutputDirectory": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AggregationOutput": {
+                      "fields": {
+                        "dataset": {
+                          "type": "EvaluationDataset",
+                          "id": 1
+                        },
+                        "aggregationResults": {
+                          "rule": "repeated",
+                          "type": "AggregationResult",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AggregationResult": {
+                      "oneofs": {
+                        "aggregationResult": {
+                          "oneof": [
+                            "pointwiseMetricResult",
+                            "pairwiseMetricResult",
+                            "exactMatchMetricValue",
+                            "bleuMetricValue",
+                            "rougeMetricValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pointwiseMetricResult": {
+                          "type": "PointwiseMetricResult",
+                          "id": 5
+                        },
+                        "pairwiseMetricResult": {
+                          "type": "PairwiseMetricResult",
+                          "id": 6
+                        },
+                        "exactMatchMetricValue": {
+                          "type": "ExactMatchMetricValue",
+                          "id": 7
+                        },
+                        "bleuMetricValue": {
+                          "type": "BleuMetricValue",
+                          "id": 8
+                        },
+                        "rougeMetricValue": {
+                          "type": "RougeMetricValue",
+                          "id": 9
+                        },
+                        "aggregationMetric": {
+                          "type": "Metric.AggregationMetric",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PredefinedMetricSpec": {
+                      "fields": {
+                        "metricSpecName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metricSpecParameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ComputationBasedMetricSpec": {
+                      "oneofs": {
+                        "_type": {
+                          "oneof": [
+                            "type"
+                          ]
+                        },
+                        "_parameters": {
+                          "oneof": [
+                            "parameters"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "type": {
+                          "type": "ComputationBasedMetricType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "parameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ComputationBasedMetricType": {
+                          "values": {
+                            "COMPUTATION_BASED_METRIC_TYPE_UNSPECIFIED": 0,
+                            "EXACT_MATCH": 1,
+                            "BLEU": 2,
+                            "ROUGE": 3
+                          }
+                        }
+                      }
+                    },
+                    "LLMBasedMetricSpec": {
+                      "oneofs": {
+                        "rubricsSource": {
+                          "oneof": [
+                            "rubricGroupKey",
+                            "predefinedRubricGenerationSpec"
+                          ]
+                        },
+                        "_metricPromptTemplate": {
+                          "oneof": [
+                            "metricPromptTemplate"
+                          ]
+                        },
+                        "_systemInstruction": {
+                          "oneof": [
+                            "systemInstruction"
+                          ]
+                        },
+                        "_judgeAutoraterConfig": {
+                          "oneof": [
+                            "judgeAutoraterConfig"
+                          ]
+                        },
+                        "_additionalConfig": {
+                          "oneof": [
+                            "additionalConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rubricGroupKey": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "predefinedRubricGenerationSpec": {
+                          "type": "PredefinedMetricSpec",
+                          "id": 6
+                        },
+                        "metricPromptTemplate": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "systemInstruction": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "judgeAutoraterConfig": {
+                          "type": "AutoraterConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "additionalConfig": {
+                          "type": "google.protobuf.Struct",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -12648,7 +13074,8 @@
                       "oneofs": {
                         "instance": {
                           "oneof": [
-                            "jsonInstance"
+                            "jsonInstance",
+                            "contentMapInstance"
                           ]
                         }
                       },
@@ -12656,6 +13083,10 @@
                         "jsonInstance": {
                           "type": "string",
                           "id": 1
+                        },
+                        "contentMapInstance": {
+                          "type": "ContentMap",
+                          "id": 2
                         }
                       }
                     },
@@ -12664,6 +13095,11 @@
                         "_metricPromptTemplate": {
                           "oneof": [
                             "metricPromptTemplate"
+                          ]
+                        },
+                        "_systemInstruction": {
+                          "oneof": [
+                            "systemInstruction"
                           ]
                         }
                       },
@@ -12674,6 +13110,39 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "proto3_optional": true
+                          }
+                        },
+                        "systemInstruction": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "customOutputFormatConfig": {
+                          "type": "CustomOutputFormatConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CustomOutputFormatConfig": {
+                      "oneofs": {
+                        "customOutputFormatConfig": {
+                          "oneof": [
+                            "returnRawOutput"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "returnRawOutput": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -12698,6 +13167,43 @@
                         "explanation": {
                           "type": "string",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customOutput": {
+                          "type": "CustomOutput",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CustomOutput": {
+                      "oneofs": {
+                        "customOutput": {
+                          "oneof": [
+                            "rawOutputs"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rawOutputs": {
+                          "type": "RawOutput",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RawOutput": {
+                      "fields": {
+                        "rawOutput": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -12726,7 +13232,8 @@
                       "oneofs": {
                         "instance": {
                           "oneof": [
-                            "jsonInstance"
+                            "jsonInstance",
+                            "contentMapInstance"
                           ]
                         }
                       },
@@ -12734,6 +13241,10 @@
                         "jsonInstance": {
                           "type": "string",
                           "id": 1
+                        },
+                        "contentMapInstance": {
+                          "type": "ContentMap",
+                          "id": 2
                         }
                       }
                     },
@@ -12742,6 +13253,11 @@
                         "_metricPromptTemplate": {
                           "oneof": [
                             "metricPromptTemplate"
+                          ]
+                        },
+                        "_systemInstruction": {
+                          "oneof": [
+                            "systemInstruction"
                           ]
                         }
                       },
@@ -12752,6 +13268,35 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "proto3_optional": true
+                          }
+                        },
+                        "candidateResponseFieldName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "baselineResponseFieldName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "systemInstruction": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "customOutputFormatConfig": {
+                          "type": "CustomOutputFormatConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -12768,6 +13313,13 @@
                         "explanation": {
                           "type": "string",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customOutput": {
+                          "type": "CustomOutput",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -13366,6 +13918,32 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ContentMap": {
+                      "fields": {
+                        "values": {
+                          "keyType": "string",
+                          "type": "Contents",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Contents": {
+                          "fields": {
+                            "contents": {
+                              "rule": "repeated",
+                              "type": "Content",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -18678,6 +19256,14 @@
                         "serviceAccount": {
                           "type": "string",
                           "id": 22
+                        },
+                        "evaluateDatasetRuns": {
+                          "rule": "repeated",
+                          "type": "EvaluateDatasetRun",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -18978,6 +19564,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "evaluationConfig": {
+                          "type": "EvaluationConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -19011,6 +19604,79 @@
                           "id": 3,
                           "options": {
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
+                          }
+                        }
+                      }
+                    },
+                    "EvaluationConfig": {
+                      "fields": {
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "Metric",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputConfig": {
+                          "type": "OutputConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "autoraterConfig": {
+                          "type": "AutoraterConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inferenceGenerationConfig": {
+                          "type": "GenerationConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "EvaluateDatasetRun": {
+                      "fields": {
+                        "operationName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "evaluationRun": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "evaluateDatasetResponse": {
+                          "type": "EvaluateDatasetResponse",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
