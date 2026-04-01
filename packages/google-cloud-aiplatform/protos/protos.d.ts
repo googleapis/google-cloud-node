@@ -120005,9 +120005,6 @@ export namespace google {
                     /** ReasoningEngineSpec sourceCodeSpec */
                     sourceCodeSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.ISourceCodeSpec|null);
 
-                    /** ReasoningEngineSpec containerSpec */
-                    containerSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IContainerSpec|null);
-
                     /** ReasoningEngineSpec serviceAccount */
                     serviceAccount?: (string|null);
 
@@ -120036,9 +120033,6 @@ export namespace google {
                     /** ReasoningEngineSpec sourceCodeSpec. */
                     public sourceCodeSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.ISourceCodeSpec|null);
 
-                    /** ReasoningEngineSpec containerSpec. */
-                    public containerSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IContainerSpec|null);
-
                     /** ReasoningEngineSpec serviceAccount. */
                     public serviceAccount?: (string|null);
 
@@ -120055,7 +120049,7 @@ export namespace google {
                     public agentFramework: string;
 
                     /** ReasoningEngineSpec deploymentSource. */
-                    public deploymentSource?: ("sourceCodeSpec"|"containerSpec");
+                    public deploymentSource?: "sourceCodeSpec";
 
                     /**
                      * Creates a new ReasoningEngineSpec instance using the specified properties.
@@ -121022,103 +121016,6 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
-                    }
-
-                    /** Properties of a ContainerSpec. */
-                    interface IContainerSpec {
-
-                        /** ContainerSpec imageUri */
-                        imageUri?: (string|null);
-                    }
-
-                    /** Represents a ContainerSpec. */
-                    class ContainerSpec implements IContainerSpec {
-
-                        /**
-                         * Constructs a new ContainerSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.IContainerSpec);
-
-                        /** ContainerSpec imageUri. */
-                        public imageUri: string;
-
-                        /**
-                         * Creates a new ContainerSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ContainerSpec instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.IContainerSpec): google.cloud.aiplatform.v1.ReasoningEngineSpec.ContainerSpec;
-
-                        /**
-                         * Encodes the specified ContainerSpec message. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.ContainerSpec.verify|verify} messages.
-                         * @param message ContainerSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.IContainerSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ContainerSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.ContainerSpec.verify|verify} messages.
-                         * @param message ContainerSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.IContainerSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ContainerSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ContainerSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.ReasoningEngineSpec.ContainerSpec;
-
-                        /**
-                         * Decodes a ContainerSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ContainerSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.ReasoningEngineSpec.ContainerSpec;
-
-                        /**
-                         * Verifies a ContainerSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ContainerSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ContainerSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.ReasoningEngineSpec.ContainerSpec;
-
-                        /**
-                         * Creates a plain object from a ContainerSpec message. Also converts values to other types if specified.
-                         * @param message ContainerSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.ContainerSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ContainerSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ContainerSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -302599,9 +302496,6 @@ export namespace google {
                     /** ReasoningEngineSpec sourceCodeSpec */
                     sourceCodeSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.ISourceCodeSpec|null);
 
-                    /** ReasoningEngineSpec containerSpec */
-                    containerSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IContainerSpec|null);
-
                     /** ReasoningEngineSpec serviceAccount */
                     serviceAccount?: (string|null);
 
@@ -302630,9 +302524,6 @@ export namespace google {
                     /** ReasoningEngineSpec sourceCodeSpec. */
                     public sourceCodeSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.ISourceCodeSpec|null);
 
-                    /** ReasoningEngineSpec containerSpec. */
-                    public containerSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IContainerSpec|null);
-
                     /** ReasoningEngineSpec serviceAccount. */
                     public serviceAccount?: (string|null);
 
@@ -302649,7 +302540,7 @@ export namespace google {
                     public agentFramework: string;
 
                     /** ReasoningEngineSpec deploymentSource. */
-                    public deploymentSource?: ("sourceCodeSpec"|"containerSpec");
+                    public deploymentSource?: "sourceCodeSpec";
 
                     /**
                      * Creates a new ReasoningEngineSpec instance using the specified properties.
@@ -303616,103 +303507,6 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
-                    }
-
-                    /** Properties of a ContainerSpec. */
-                    interface IContainerSpec {
-
-                        /** ContainerSpec imageUri */
-                        imageUri?: (string|null);
-                    }
-
-                    /** Represents a ContainerSpec. */
-                    class ContainerSpec implements IContainerSpec {
-
-                        /**
-                         * Constructs a new ContainerSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IContainerSpec);
-
-                        /** ContainerSpec imageUri. */
-                        public imageUri: string;
-
-                        /**
-                         * Creates a new ContainerSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ContainerSpec instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IContainerSpec): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.ContainerSpec;
-
-                        /**
-                         * Encodes the specified ContainerSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.ContainerSpec.verify|verify} messages.
-                         * @param message ContainerSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IContainerSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ContainerSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.ContainerSpec.verify|verify} messages.
-                         * @param message ContainerSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IContainerSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ContainerSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ContainerSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.ContainerSpec;
-
-                        /**
-                         * Decodes a ContainerSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ContainerSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.ContainerSpec;
-
-                        /**
-                         * Verifies a ContainerSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ContainerSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ContainerSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.ContainerSpec;
-
-                        /**
-                         * Creates a plain object from a ContainerSpec message. Also converts values to other types if specified.
-                         * @param message ContainerSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.ContainerSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ContainerSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ContainerSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
