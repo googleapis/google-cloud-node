@@ -23,7 +23,9 @@
     "handwritten/bigquery-storage": {
       "component": "bigquery-storage"
     },
-    "handwritten/bigtable": {},
+    "handwritten/bigtable": {
+      "component": "bigtable"
+    },
     "handwritten/cloud-profiler": {
       "component": "cloud-profiler"
     },

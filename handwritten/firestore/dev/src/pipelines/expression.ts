@@ -2323,18 +2323,11 @@ export abstract class Expression
    * @returns A new `Expression` representing the resulting timestamp.
    */
   timestampAdd(
-    unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+    unit: firestore.Pipelines.TimeUnit,
     amount: number,
   ): FunctionExpression;
   timestampAdd(
-    unit:
-      | Expression
-      | 'microsecond'
-      | 'millisecond'
-      | 'second'
-      | 'minute'
-      | 'hour'
-      | 'day',
+    unit: Expression | firestore.Pipelines.TimeUnit,
     amount: Expression | number,
   ): FunctionExpression {
     return new FunctionExpression('timestamp_add', [
@@ -2375,18 +2368,11 @@ export abstract class Expression
    * @returns A new `Expression` representing the resulting timestamp.
    */
   timestampSubtract(
-    unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+    unit: firestore.Pipelines.TimeUnit,
     amount: number,
   ): FunctionExpression;
   timestampSubtract(
-    unit:
-      | Expression
-      | 'microsecond'
-      | 'millisecond'
-      | 'second'
-      | 'minute'
-      | 'hour'
-      | 'day',
+    unit: Expression | firestore.Pipelines.TimeUnit,
     amount: Expression | number,
   ): FunctionExpression {
     return new FunctionExpression('timestamp_subtract', [
@@ -2394,6 +2380,103 @@ export abstract class Expression
       valueToDefaultExpr(unit),
       valueToDefaultExpr(amount),
     ]);
+  }
+
+  /**
+   * @beta
+   * Creates an expression that calculates the difference between this timestamp and another timestamp.
+   *
+   * @example
+   * ```typescript
+   * // Calculate the difference determined by fields 'startTime' and 'unit'.
+   * field("endTime").timestampDiff(field("startTime"), field("unit"));
+   * ```
+   *
+   * @param start - The expression evaluating to the starting timestamp.
+   * @param unit - The expression evaluates to a unit of time, must be one of 'microsecond', 'millisecond', 'second', 'minute', 'hour', 'day'.
+   * @returns A new `Expression` representing the difference as an integer.
+   */
+  timestampDiff(start: Expression, unit: Expression): FunctionExpression;
+
+  /**
+   * @beta
+   * Creates an expression that calculates the difference between this timestamp and another timestamp.
+   *
+   * @example
+   * ```typescript
+   * // Calculate the difference in days between 'endTime' and 'startTime' fields.
+   * field("endTime").timestampDiff("startTime", "day");
+   * ```
+   *
+   * @param start - The field name of the starting timestamp or an expression evaluating to a timestamp.
+   * @param unit - The unit of time for the difference (e.g., "day", "hour").
+   * @returns A new `Expression` representing the difference as an integer.
+   */
+  timestampDiff(
+    start: string | Expression,
+    unit: firestore.Pipelines.TimeUnit,
+  ): FunctionExpression;
+  timestampDiff(
+    start: string | Expression,
+    unit: Expression | firestore.Pipelines.TimeUnit,
+  ): FunctionExpression {
+    return new FunctionExpression('timestamp_diff', [
+      this,
+      fieldOrExpression(start),
+      valueToDefaultExpr(unit),
+    ]);
+  }
+
+  /**
+   * @beta
+   * Creates an expression that extracts a specified part from this timestamp expression.
+   *
+   * @example
+   * ```typescript
+   * // Extract the year from the 'createdAt' field.
+   * field('createdAt').timestampExtract('year')
+   * ```
+   *
+   * @param part - The part to extract from the timestamp (e.g., "year", "month", "day").
+   * @param timezone - The timezone to use for extraction. Valid values are from
+   * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+   * Defaults to "UTC" if not specified.
+   * @returns A new `Expression` representing the extracted part as an integer.
+   */
+  timestampExtract(
+    part: firestore.Pipelines.TimePart,
+    timezone?: string | Expression,
+  ): FunctionExpression;
+
+  /**
+   * @beta
+   * Creates an expression that extracts a specified part from this timestamp expression.
+   *
+   * @example
+   * ```typescript
+   * // Extract the part specified by the field 'extractionPart' from 'createdAt'.
+   * field('createdAt').timestampExtract(field('extractionPart'))
+   * ```
+   *
+   * @param part - The expression evaluating to the part to extract.
+   * @param timezone - The timezone to use for extraction. Valid values are from
+   * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+   * Defaults to "UTC" if not specified.
+   * @returns A new `Expression` representing the extracted part as an integer.
+   */
+  timestampExtract(
+    part: Expression,
+    timezone?: string | Expression,
+  ): FunctionExpression;
+  timestampExtract(
+    part: firestore.Pipelines.TimePart | Expression,
+    timezone?: string | Expression,
+  ): FunctionExpression {
+    const args = [this, valueToDefaultExpr(part)];
+    if (timezone) {
+      args.push(valueToDefaultExpr(timezone));
+    }
+    return new FunctionExpression('timestamp_extract', args);
   }
 
   /**
@@ -2410,6 +2493,23 @@ export abstract class Expression
    */
   documentId(): FunctionExpression {
     return new FunctionExpression('document_id', [this]);
+  }
+
+  /**
+   * @beta
+   *
+   * Creates an expression that returns the parent document of a document reference.
+   *
+   * @example
+   * ```typescript
+   * // Get the parent document of a document reference.
+   * field("__path__").parent();
+   * ```
+   *
+   * @returns A new `Expression` representing the parent operation.
+   */
+  parent(): FunctionExpression {
+    return new FunctionExpression('parent', [this]);
   }
 
   /**
@@ -2878,6 +2978,79 @@ export abstract class Expression
 
   /**
    * @beta
+   * Creates an expression that returns the `elseValue` argument if this expression evaluates to null, else
+   * return the result of this expression evaluation.
+   *
+   * @remarks
+   * This function provides a fallback for both absent and explicit null values. In contrast, {@link Expression#ifAbsent}
+   * only triggers for missing fields.
+   *
+   * @example
+   * ```typescript
+   * // Returns the user's preferred name, or if that is null, returns their full name.
+   * field("preferredName").ifNull(field("fullName"))
+   * ```
+   *
+   * @param elseExpression The Expression that will be evaluated if this Expression evaluates to null.
+   * @returns A new [Expression] representing the ifNull operation.
+   */
+  ifNull(elseExpression: Expression): FunctionExpression;
+
+  /**
+   * @beta
+   * Creates an expression that returns the `elseValue` argument if this expression evaluates to null, else
+   * return the result of this expression evaluation.
+   *
+   * @remarks
+   * This function provides a fallback for both absent and explicit null values. In contrast, {@link Expression#ifAbsent}
+   * only triggers for missing fields.
+   *
+   * @example
+   * ```typescript
+   * // Returns the user's display name, or returns "Anonymous" if the field is null.
+   * field("displayName").ifNull("Anonymous")
+   * ```
+   *
+   * @param elseValue The value that will be returned if this Expression evaluates to null.
+   * @returns A new [Expression] representing the ifNull operation.
+   */
+  ifNull(elseValue: unknown): FunctionExpression;
+  ifNull(elseValueOrExpression: Expression | unknown): FunctionExpression {
+    return new FunctionExpression('if_null', [
+      this,
+      valueToDefaultExpr(elseValueOrExpression),
+    ]);
+  }
+
+  /**
+   * @beta
+   * Creates an expression that returns the first non-null, non-absent argument, without evaluating
+   * the rest of the arguments. When all arguments are null or absent, returns the last argument.
+   *
+   * @example
+   * ```typescript
+   * // Returns the value of the first non-null, non-absent field among 'preferredName', 'fullName',
+   * // or the last argument if all previous fields are null.
+   * field("preferredName").coalesce(field("fullName"), "Anonymous");
+   * ```
+   *
+   * @param replacement - The value to use if this expression evaluates to null.
+   * @param others - Optional additional values to check if previous values are null.
+   * @returns A new [Expression] representing the coalesce operation.
+   */
+  coalesce(
+    replacement: Expression | unknown,
+    ...others: Array<Expression | unknown>
+  ): FunctionExpression {
+    const values = [replacement, ...others];
+    return new FunctionExpression('coalesce', [
+      this,
+      ...values.map(valueToDefaultExpr),
+    ]);
+  }
+
+  /**
+   * @beta
    * Creates an expression that joins the elements of an array into a string.
    *
    * ```typescript
@@ -3018,11 +3191,7 @@ export abstract class Expression
     granularity: firestore.Pipelines.TimeGranularity | Expression,
     timezone?: string | Expression,
   ): FunctionExpression {
-    const internalGranularity = isString(granularity)
-      ? granularity.toLowerCase()
-      : granularity;
-
-    const args = [this, valueToDefaultExpr(internalGranularity)];
+    const args = [this, valueToDefaultExpr(granularity)];
     if (timezone) {
       args.push(valueToDefaultExpr(timezone));
     }
@@ -4315,6 +4484,46 @@ export function documentId(
 ): FunctionExpression {
   const documentPathExpr = valueToDefaultExpr(documentPath);
   return documentPathExpr.documentId();
+}
+
+/**
+ * @beta
+ *
+ * Creates an expression that returns the parent document of a document reference.
+ *
+ * @example
+ * ```typescript
+ * // Get the parent document of a document reference.
+ * parent(myDocumentReference);
+ * ```
+ *
+ * @param documentPath - A string path or DocumentReference to get the parent from.
+ * @returns A new `Expression` representing the parent operation.
+ */
+export function parent(
+  documentPath: string | firestore.DocumentReference,
+): FunctionExpression;
+
+/**
+ * @beta
+ *
+ * Creates an expression that returns the parent document of a document reference.
+ *
+ * @example
+ * ```typescript
+ * // Get the parent document of a document reference.
+ * parent(field("__path__"));
+ * ```
+ *
+ * @param documentPathExpr - An Expression evaluating to a document reference.
+ * @returns A new `Expression` representing the parent operation.
+ */
+export function parent(documentPathExpr: Expression): FunctionExpression;
+export function parent(
+  documentPath: Expression | string | firestore.DocumentReference,
+): FunctionExpression {
+  const documentPathExpr = valueToDefaultExpr(documentPath);
+  return documentPathExpr.parent();
 }
 
 /**
@@ -8396,7 +8605,7 @@ export function timestampAdd(
  */
 export function timestampAdd(
   timestamp: Expression,
-  unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+  unit: firestore.Pipelines.TimeUnit,
   amount: number,
 ): FunctionExpression;
 
@@ -8416,19 +8625,12 @@ export function timestampAdd(
  */
 export function timestampAdd(
   fieldName: string,
-  unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+  unit: firestore.Pipelines.TimeUnit,
   amount: number,
 ): FunctionExpression;
 export function timestampAdd(
   timestamp: Expression | string,
-  unit:
-    | Expression
-    | 'microsecond'
-    | 'millisecond'
-    | 'second'
-    | 'minute'
-    | 'hour'
-    | 'day',
+  unit: Expression | firestore.Pipelines.TimeUnit,
   amount: Expression | number,
 ): FunctionExpression {
   const normalizedTimestamp = fieldOrExpression(timestamp);
@@ -8473,7 +8675,7 @@ export function timestampSubtract(
  */
 export function timestampSubtract(
   timestamp: Expression,
-  unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+  unit: firestore.Pipelines.TimeUnit,
   amount: number,
 ): FunctionExpression;
 
@@ -8493,19 +8695,12 @@ export function timestampSubtract(
  */
 export function timestampSubtract(
   fieldName: string,
-  unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+  unit: firestore.Pipelines.TimeUnit,
   amount: number,
 ): FunctionExpression;
 export function timestampSubtract(
   timestamp: Expression | string,
-  unit:
-    | Expression
-    | 'microsecond'
-    | 'millisecond'
-    | 'second'
-    | 'minute'
-    | 'hour'
-    | 'day',
+  unit: Expression | firestore.Pipelines.TimeUnit,
   amount: Expression | number,
 ): FunctionExpression {
   const normalizedTimestamp = fieldOrExpression(timestamp);
@@ -9190,6 +9385,167 @@ export function ifAbsent(
 
 /**
  * @beta
+ * Creates an expression that returns the `elseExpr` argument if `ifExpr` is null, else
+ * return the result of the `ifExpr` argument evaluation.
+ *
+ * @remarks
+ * This function provides a fallback for both absent and explicit null values. In contrast,
+ * {@link Expression#ifAbsent} only triggers for missing fields.
+ *
+ * @example
+ * ```typescript
+ * // Returns the user's preferred name, or if that is null, returns their full name.
+ * ifNull(field("preferredName"), field("fullName"))
+ * ```
+ *
+ * @param ifExpr The expression to check for null.
+ * @param elseExpr The expression that will be evaluated and returned if `ifExpr` is null.
+ * @returns A new `Expression` representing the ifNull operation.
+ */
+export function ifNull(
+  ifExpr: Expression,
+  elseExpr: Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that returns the `elseValue` argument if `ifExpr` is null, else
+ * return the result of the `ifExpr` argument evaluation.
+ *
+ * @remarks
+ * This function provides a fallback for both absent and explicit null values. In contrast,
+ * {@link Expression#ifAbsent} only triggers for missing fields.
+ *
+ * @example
+ * ```typescript
+ * // Returns the user's display name, or returns "Anonymous" if the field is null.
+ * ifNull(field("displayName"), "Anonymous")
+ * ```
+ *
+ * @param ifExpr The expression to check for null.
+ * @param elseValue The value that will be returned if `ifExpr` evaluates to null.
+ * @returns A new `Expression` representing the ifNull operation.
+ */
+export function ifNull(
+  ifExpr: Expression,
+  elseValue: unknown,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that returns the `elseExpr` argument if `ifFieldName` is null, else
+ * return the value of the field.
+ *
+ * @remarks
+ * This function provides a fallback for both absent and explicit null values. In contrast,
+ * {@link Expression#ifAbsent} only triggers for missing fields.
+ *
+ * @example
+ * ```typescript
+ * // Returns the user's preferred name, or if that is null, returns their full name.
+ * ifNull("preferredName", field("fullName"))
+ * ```
+ *
+ * @param ifFieldName The field to check for null.
+ * @param elseExpr The expression that will be evaluated and returned if `ifFieldName` is
+ * null.
+ * @returns A new `Expression` representing the ifNull operation.
+ */
+export function ifNull(
+  ifFieldName: string,
+  elseExpr: Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that returns the `elseValue` argument if `ifFieldName` is null, else
+ * return the value of the field.
+ *
+ * @remarks
+ * This function provides a fallback for both absent and explicit null values. In contrast,
+ * {@link Expression#ifAbsent} only triggers for missing fields.
+ *
+ * @example
+ * ```typescript
+ * // Returns the user's display name, or returns "Anonymous" if the field is null.
+ * ifNull("displayName", "Anonymous")
+ * ```
+ *
+ * @param ifFieldName The field to check for null.
+ * @param elseValue The value that will be returned if `ifFieldName` is null.
+ * @returns A new `Expression` representing the ifNull operation.
+ */
+export function ifNull(
+  ifFieldName: string,
+  elseValue: unknown,
+): FunctionExpression;
+export function ifNull(
+  fieldNameOrExpression: string | Expression,
+  elseValue: Expression | unknown,
+): FunctionExpression {
+  return fieldOrExpression(fieldNameOrExpression).ifNull(
+    valueToDefaultExpr(elseValue),
+  );
+}
+
+/**
+ * @beta
+ * Creates an expression that returns the first non-null, non-absent argument, without evaluating
+ * the rest of the arguments. When all arguments are null or absent, returns the last argument.
+ *
+ * @example
+ * ```typescript
+ * // Returns the value of the first non-null, non-absent field among 'preferredName', 'fullName',
+ * // or the last argument if all previous fields are null.
+ * coalesce(field("preferredName"), field("fullName"), constant("Anonymous"))
+ * ```
+ *
+ * @param expression The first expression to check for null.
+ * @param replacement The fallback expression or value if the first one is null.
+ * @param others Optional additional expressions to check if previous ones are null.
+ * @returns A new `Expression` representing the coalesce operation.
+ */
+export function coalesce(
+  expression: Expression,
+  replacement: Expression | unknown,
+  ...others: Array<Expression | unknown>
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that returns the first non-null, non-absent argument, without evaluating
+ * the rest of the arguments. When all arguments are null or absent, returns the last argument.
+ *
+ * @example
+ * ```typescript
+ * // Returns the value of the first non-null, non-absent field among 'preferredName', 'fullName',
+ * // or the last argument if all previous fields are null.
+ * coalesce("preferredName", field("fullName"), constant("Anonymous"))
+ * ```
+ *
+ * @param fieldName The name of the first field to check for null.
+ * @param replacement The fallback expression or value if the first one is null.
+ * @param others Optional additional expressions to check if previous ones are null.
+ * @returns A new `Expression` representing the coalesce operation.
+ */
+export function coalesce(
+  fieldName: string,
+  replacement: Expression | unknown,
+  ...others: Array<Expression | unknown>
+): FunctionExpression;
+export function coalesce(
+  fieldNameOrExpression: Expression | string,
+  replacement: Expression | unknown,
+  ...others: Array<Expression | unknown>
+): FunctionExpression {
+  return fieldOrExpression(fieldNameOrExpression).coalesce(
+    replacement,
+    ...others,
+  );
+}
+
+/**
+ * @beta
  * Creates an expression that joins the elements of an array into a string.
  *
  * ```typescript
@@ -9417,7 +9773,7 @@ export function split(
  * @example
  * ```typescript
  * // Truncate the 'createdAt' timestamp to the beginning of the day.
- * field('createdAt').timestampTruncate('day')
+ * timestampTruncate('createdAt', 'day')
  * ```
  *
  * @param fieldName Truncate the timestamp value contained in this field.
@@ -9438,7 +9794,7 @@ export function timestampTruncate(
  * @example
  * ```typescript
  * // Truncate the 'createdAt' timestamp to the granularity specified in the field 'granularity'.
- * field('createdAt').timestampTruncate(field('granularity'))
+ * timestampTruncate('createdAt', field('granularity'))
  * ```
  *
  * @param fieldName Truncate the timestamp value contained in this field.
@@ -9459,7 +9815,7 @@ export function timestampTruncate(
  * @example
  * ```typescript
  * // Truncate the 'createdAt' timestamp to the beginning of the day.
- * field('createdAt').timestampTruncate('day')
+ *  timestampTruncate(field('createdAt'), 'day')
  * ```
  *
  * @param timestampExpression Truncate the timestamp value that is returned by this expression.
@@ -9480,7 +9836,7 @@ export function timestampTruncate(
  * @example
  * ```typescript
  * // Truncate the 'createdAt' timestamp to the granularity specified in the field 'granularity'.
- * field('createdAt').timestampTruncate(field('granularity'))
+ * timestampTruncate(field('createdAt'), field('granularity'))
  * ```
  *
  * @param timestampExpression Truncate the timestamp value that is returned by this expression.
@@ -9500,10 +9856,206 @@ export function timestampTruncate(
   timezone?: string | Expression,
 ): FunctionExpression {
   const internalGranularity = isString(granularity)
-    ? valueToDefaultExpr(granularity.toLowerCase())
+    ? valueToDefaultExpr(granularity)
     : granularity;
   return fieldOrExpression(fieldNameOrExpression).timestampTruncate(
     internalGranularity,
+    timezone,
+  );
+}
+
+/**
+ * @beta
+ * Creates an expression that calculates the difference between two timestamps.
+ *
+ * @example
+ * ```typescript
+ * // Calculate the difference in days between 'endTime' and 'startTime' fields.
+ * timestampDiff('endTime', 'startTime', 'day')
+ * ```
+ *
+ * @param endFieldName - The name of the field representing the ending timestamp.
+ * @param startFieldName - The name of the field representing the starting timestamp.
+ * @param unit - The unit of time for the difference (e.g., "day", "hour").
+ * @returns A new `Expression` representing the difference as an integer.
+ */
+export function timestampDiff(
+  endFieldName: string,
+  startFieldName: string,
+  unit: firestore.Pipelines.TimeUnit | Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that calculates the difference between two timestamps.
+ *
+ * @example
+ * ```typescript
+ * // Calculate the difference in days between 'endTime' field and a starting timestamp expression.
+ * timestampDiff('endTime', field('startTime'), 'day')
+ * ```
+ *
+ * @param endFieldName - The name of the field representing the ending timestamp.
+ * @param startExpression - The starting timestamp for the difference calculation.
+ * @param unit - The unit of time for the difference (e.g., "day", "hour").
+ * @returns A new `Expression` representing the difference as an integer.
+ */
+export function timestampDiff(
+  endFieldName: string,
+  startExpression: Expression,
+  unit: firestore.Pipelines.TimeUnit | Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that calculates the difference between two timestamps.
+ *
+ * @example
+ * ```typescript
+ * // Calculate the difference in days between an ending timestamp expression and 'startTime' field.
+ * timestampDiff(field('endTime'), 'startTime', 'day')
+ * ```
+ *
+ * @param endExpression - The ending timestamp for the difference calculation.
+ * @param startFieldName - The name of the field representing the starting timestamp.
+ * @param unit - The unit of time for the difference (e.g., "day", "hour").
+ * @returns A new `Expression` representing the difference as an integer.
+ */
+export function timestampDiff(
+  endExpression: Expression,
+  startFieldName: string,
+  unit: firestore.Pipelines.TimeUnit | Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that calculates the difference between two timestamps.
+ *
+ * @example
+ * ```typescript
+ * // Calculate the difference in days between two timestamp expressions.
+ * timestampDiff(field('endTime'), field('startTime'), 'day')
+ * ```
+ *
+ * @param endExpression - The ending timestamp for the difference calculation.
+ * @param startExpression - The starting timestamp for the difference calculation.
+ * @param unit - The unit of time for the difference (e.g., "day", "hour").
+ * @returns A new `Expression` representing the difference as an integer.
+ */
+export function timestampDiff(
+  endExpression: Expression,
+  startExpression: Expression,
+  unit: firestore.Pipelines.TimeUnit | Expression,
+): FunctionExpression;
+export function timestampDiff(
+  endFieldNameOrExpression: string | Expression,
+  startFieldNameOrExpression: string | Expression,
+  unit: firestore.Pipelines.TimeUnit | Expression,
+): FunctionExpression {
+  const normalizedEnd = fieldOrExpression(endFieldNameOrExpression);
+  const normalizedStart = fieldOrExpression(startFieldNameOrExpression);
+  const normalizedUnit = valueToDefaultExpr(unit);
+  return normalizedEnd.timestampDiff(normalizedStart, normalizedUnit);
+}
+
+/**
+ * @beta
+ * Creates an expression that extracts a specified part from a timestamp.
+ *
+ * @example
+ * ```typescript
+ * // Extract the year from the 'createdAt' timestamp.
+ * timestampExtract('createdAt', 'year')
+ * ```
+ *
+ * @param fieldName - The name of the field representing the timestamp.
+ * @param part - The part to extract from the timestamp (e.g., "year", "month", "day").
+ * @param timezone - The timezone to use for extraction. Valid values are from
+ * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+ * Defaults to "UTC" if not specified.
+ * @returns A new `Expression` representing the extracted part as an integer.
+ */
+export function timestampExtract(
+  fieldName: string,
+  part: firestore.Pipelines.TimePart,
+  timezone?: string | Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that extracts a specified part from a timestamp.
+ *
+ * @example
+ * ```typescript
+ * // Extract the part specified by the field 'part' from 'createdAt'.
+ * timestampExtract('createdAt', field('part'))
+ * ```
+ *
+ * @param fieldName - The name of the field representing the timestamp.
+ * @param part - The expression evaluating to the part to extract.
+ * @param timezone - The timezone to use for extraction. Valid values are from
+ * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+ * Defaults to "UTC" if not specified.
+ * @returns A new `Expression` representing the extracted part as an integer.
+ */
+export function timestampExtract(
+  fieldName: string,
+  part: Expression,
+  timezone?: string | Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that extracts a specified part from a timestamp.
+ *
+ * @example
+ * ```typescript
+ * // Extract the year from the timestamp returned by the expression.
+ * timestampExtract(field('createdAt'), 'year')
+ * ```
+ *
+ * @param timestampExpression - The expression evaluating to the timestamp.
+ * @param part - The part to extract from the timestamp (e.g., "year", "month", "day").
+ * @param timezone - The timezone to use for extraction. Valid values are from
+ * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+ * Defaults to "UTC" if not specified.
+ * @returns A new `Expression` representing the extracted part as an integer.
+ */
+export function timestampExtract(
+  timestampExpression: Expression,
+  part: firestore.Pipelines.TimePart,
+  timezone?: string | Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that extracts a specified part from a timestamp.
+ *
+ * @example
+ * ```typescript
+ * // Extract the part specified by the field 'part' from the timestamp.
+ * timestampExtract(field('createdAt'), field('part'))
+ * ```
+ *
+ * @param timestampExpression - The expression evaluating to the timestamp.
+ * @param part - The expression evaluating to the part to extract.
+ * @param timezone - The timezone to use for extraction. Valid values are from
+ * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+ * Defaults to "UTC" if not specified.
+ * @returns A new `Expression` representing the extracted part as an integer.
+ */
+export function timestampExtract(
+  timestampExpression: Expression,
+  part: Expression,
+  timezone?: string | Expression,
+): FunctionExpression;
+export function timestampExtract(
+  fieldNameOrExpression: string | Expression,
+  part: firestore.Pipelines.TimePart | Expression,
+  timezone?: string | Expression,
+): FunctionExpression {
+  return fieldOrExpression(fieldNameOrExpression).timestampExtract(
+    valueToDefaultExpr(part),
     timezone,
   );
 }
