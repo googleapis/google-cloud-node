@@ -41,6 +41,10 @@ jobs:
       run: npm install
       working-directory: core/generator/gapic-generator-typescript
       
+    - name: Strip local GCC 15 flags for CI
+      working-directory: core/generator/gapic-generator-typescript
+      run: sed -i '/--gsframe/d' .bazelrc
+
     - name: Run bazel build
       working-directory: core/generator/gapic-generator-typescript
       run: bazelisk build --noremote_accept_cached '//...'
@@ -171,6 +175,10 @@ jobs:
       run: npm install
       working-directory: core/generator/gapic-generator-typescript
       
+    - name: Strip local GCC 15 flags for CI
+      working-directory: core/generator/gapic-generator-typescript
+      run: sed -i '/--gsframe/d' .bazelrc
+
     - name: Run bazel build
       working-directory: core/generator/gapic-generator-typescript
       run: bazelisk build --noremote_accept_cached '//...'
