@@ -48,6 +48,7 @@
     "system-test:emulator:grpc": "FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
     "system-test:named-db:emulator:grpc": "FIRESTORE_NAMED_DATABASE=test-db FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
     "system-test": "npm run system-test:grpc && npm run system-test:rest && npm run system-test:named-db:grpc && npm run system-test:named-db:rest",
+    "system-test:nightly": "FIRESTORE_TARGET_BACKEND=nightly FIRESTORE_NAMED_DATABASE=enterprise RUN_ENTERPRISE_TESTS=yes GCLOUD_PROJECT=firestore-sdk-nightly mocha build/system-test --timeout 1200000",
     "system-test:emulator": "npm run system-test:emulator:grpc && npm run system-test:emulator:rest && npm run system-test:named-db:emulator:grpc && npm run system-test:named-db:emulator:rest",
     "presystem-test": "npm run compile",
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
