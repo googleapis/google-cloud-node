@@ -150,6 +150,13 @@
                     "location": {
                       "type": "string",
                       "id": 2
+                    },
+                    "sha256": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
