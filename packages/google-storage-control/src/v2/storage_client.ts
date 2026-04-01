@@ -68,6 +68,7 @@ const version = require('../../../package.json').version;
  *  any other character (no special directory semantics).
  * @class
  * @memberof v2
+ * @internal
  */
 export class StorageClient {
   private _terminated = false;

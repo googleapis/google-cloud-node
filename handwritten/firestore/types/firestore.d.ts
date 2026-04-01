@@ -5007,16 +5007,7 @@ declare namespace FirebaseFirestore {
        * @param amount The amount of time to add.
        * @returns A new {@code Expression} representing the resulting timestamp.
        */
-      timestampAdd(
-        unit:
-          | 'microsecond'
-          | 'millisecond'
-          | 'second'
-          | 'minute'
-          | 'hour'
-          | 'day',
-        amount: number,
-      ): FunctionExpression;
+      timestampAdd(unit: TimeUnit, amount: number): FunctionExpression;
       /**
        * @beta
        * Creates an expression that subtracts a specified amount of time from this timestamp expression.
@@ -5050,16 +5041,7 @@ declare namespace FirebaseFirestore {
        * @param amount The amount of time to subtract.
        * @returns A new {@code FunctionExpression} representing the resulting timestamp after subtraction.
        */
-      timestampSubtract(
-        unit:
-          | 'microsecond'
-          | 'millisecond'
-          | 'second'
-          | 'minute'
-          | 'hour'
-          | 'day',
-        amount: number,
-      ): FunctionExpression;
+      timestampSubtract(unit: TimeUnit, amount: number): FunctionExpression;
       /**
        * @beta
        * Creates an expression that returns the document ID from a DocumentReference.
@@ -5073,6 +5055,20 @@ declare namespace FirebaseFirestore {
        * @returns A new {@code Expression} representing the documentId operation.
        */
       documentId(): FunctionExpression;
+      /**
+       * @beta
+       *
+       * Creates an expression that returns the parent document of a document reference.
+       *
+       * @example
+       * ```typescript
+       * // Get the parent document of a document reference.
+       * field("__path__").parent();
+       * ```
+       *
+       * @returns A new `Expression` representing the parent operation.
+       */
+      parent(): FunctionExpression;
       /**
        * @beta
        * Creates an expression that returns a substring of the results of this expression.
@@ -5472,6 +5468,67 @@ declare namespace FirebaseFirestore {
 
       /**
        * @beta
+       * Creates an expression that returns the `elseValue` argument if this expression evaluates to null, else
+       * return the result of this expression evaluation.
+       *
+       * @remarks
+       * This function provides a fallback for both absent and explicit null values. In contrast, {@link ifAbsent}
+       * only triggers for missing fields.
+       *
+       * @example
+       * ```typescript
+       * // Returns the user's display name, or returns "Anonymous" if the field is null.
+       * field("displayName").ifNull("Anonymous")
+       * ```
+       *
+       * @param elseValue The value that will be returned if this Expression evaluates to null.
+       * @returns A new `Expression` representing the ifNull operation.
+       */
+      ifNull(elseValue: unknown): FunctionExpression;
+
+      /**
+       * @beta
+       * Creates an expression that returns the `elseValue` argument if this expression evaluates to null, else
+       * return the result of this expression evaluation.
+       *
+       * @remarks
+       * This function provides a fallback for both absent and explicit null values. In contrast, {@link ifAbsent}
+       * only triggers for missing fields.
+       *
+       * @example
+       * ```typescript
+       * // Returns the user's preferred name, or if that is null, returns their full name.
+       * field("preferredName").ifNull(field("fullName"))
+       * ```
+       *
+       * @param elseExpression The Expression that will be evaluated if this Expression evaluates to null.
+       * @returns A new `Expression` representing the ifNull operation.
+       */
+      ifNull(elseExpression: Expression): FunctionExpression;
+
+      /**
+       * @beta
+       * Creates an expression that returns the first non-null, non-absent argument, without evaluating
+       * the rest of the arguments. When all arguments are null or absent, returns the last argument.
+       *
+       * @example
+       * ```typescript
+       * // Returns the value of the first non-null, non-absent field among 'preferredName', 'fullName',
+       * // or the last argument if all previous fields are null.
+       * field("preferredName").coalesce(field("fullName"), "Anonymous");
+       * ```
+       *
+       * @param replacement The next expression or literal to evaluate.
+       * @param others Additional expressions or literals to evaluate.
+       * @returns A new [Expression] representing the coalesce operation.
+       */
+      coalesce(
+        replacement: Expression | unknown,
+        ...others: Array<Expression | unknown>
+      ): FunctionExpression;
+
+      /**
+       * @beta
        * Creates an expression that joins the elements of an array into a string.
        *
        * @example
@@ -5598,6 +5655,83 @@ declare namespace FirebaseFirestore {
 
       /**
        * @beta
+       * Creates an expression that calculates the difference between this timestamp and another timestamp.
+       *
+       * @example
+       * ```typescript
+       * // Calculate the difference determined by fields 'startTime' and 'unit'.
+       * field("endTime").timestampDiff(field("startTime"), field("unit"));
+       * ```
+       *
+       * @param start - The expression evaluating to the starting timestamp.
+       * @param unit - The expression evaluates to a unit of time, must be one of 'microsecond', 'millisecond', 'second', 'minute', 'hour', 'day'.
+       * @returns A new `Expression` representing the difference as an integer.
+       */
+      timestampDiff(start: Expression, unit: Expression): FunctionExpression;
+
+      /**
+       * @beta
+       * Creates an expression that calculates the difference between this timestamp and another timestamp.
+       *
+       * @example
+       * ```typescript
+       * // Calculate the difference in days between 'endTime' and 'startTime' fields.
+       * field("endTime").timestampDiff("startTime", "day");
+       * ```
+       *
+       * @param start - The field name of the starting timestamp.
+       * @param unit - The unit of time for the difference (e.g., "day", "hour").
+       * @returns A new `Expression` representing the difference as an integer.
+       */
+      timestampDiff(
+        start: string | Expression,
+        unit: TimeUnit,
+      ): FunctionExpression;
+
+      /**
+       * @beta
+       * Creates an expression that extracts a specified part from this timestamp expression.
+       *
+       * @example
+       * ```typescript
+       * // Extract the year from the 'createdAt' field.
+       * field('createdAt').timestampExtract('year')
+       * ```
+       *
+       * @param part - The part to extract from the timestamp (e.g., "year", "month", "day").
+       * @param timezone - The timezone to use for extraction. Valid values are from
+       * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+       * Defaults to "UTC" if not specified.
+       * @returns A new `Expression` representing the extracted part as an integer.
+       */
+      timestampExtract(
+        part: TimePart,
+        timezone?: string | Expression,
+      ): FunctionExpression;
+
+      /**
+       * @beta
+       * Creates an expression that extracts a specified part from this timestamp expression.
+       *
+       * @example
+       * ```typescript
+       * // Extract the part specified by the field 'extractionPart' from 'createdAt'.
+       * field('createdAt').timestampExtract(field('extractionPart'))
+       * ```
+       *
+       * @param part - The expression evaluating to the part to extract.
+       * @param timezone - The timezone to use for extraction. Valid values are from
+       * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+       * Defaults to "UTC" if not specified.
+       * @returns A new `Expression` representing the extracted part as an integer.
+       */
+      timestampExtract(
+        part: Expression,
+        timezone?: string | Expression,
+      ): FunctionExpression;
+
+      /**
+       * @beta
        * Creates an expression that returns the data type of this expression's result, as a string.
        *
        * @example
@@ -5683,15 +5817,22 @@ declare namespace FirebaseFirestore {
 
     /**
      * @beta
-     * Time granularity used for timestamp functions.
+     * Time unit used for timestamp functions.
      */
-    export type TimeGranularity =
+    export type TimeUnit =
       | 'microsecond'
       | 'millisecond'
       | 'second'
       | 'minute'
       | 'hour'
-      | 'day'
+      | 'day';
+
+    /**
+     * @beta
+     * Time granularity used for timestamp functions.
+     */
+    export type TimeGranularity =
+      | TimeUnit
       | 'week'
       | 'week(monday)'
       | 'week(tuesday)'
@@ -5700,11 +5841,17 @@ declare namespace FirebaseFirestore {
       | 'week(friday)'
       | 'week(saturday)'
       | 'week(sunday)'
-      | 'isoWeek'
+      | 'isoweek'
       | 'month'
       | 'quarter'
       | 'year'
-      | 'isoYear';
+      | 'isoyear';
+
+    /**
+     * @beta
+     * Specify time parts for `timestampExtract` expressions.
+     */
+    export type TimePart = TimeGranularity | 'dayofweek' | 'dayofyear';
 
     /**
      * @beta
@@ -6559,6 +6706,41 @@ declare namespace FirebaseFirestore {
     export function documentId(
       documentPathExpr: Expression,
     ): FunctionExpression;
+
+    /**
+     * @beta
+     *
+     * Creates an expression that returns the parent document of a document reference.
+     *
+     * @example
+     * ```typescript
+     * // Get the parent document of a document reference.
+     * parent(myDocumentReference);
+     * ```
+     *
+     * @param documentPath - A string path or DocumentReference to get the parent from.
+     * @returns A new {@code Expression} representing the parent operation.
+     */
+    export function parent(
+      documentPath: string | DocumentReference,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     *
+     * Creates an expression that returns the parent document of a document reference.
+     *
+     * @example
+     * ```typescript
+     * // Get the parent document of a document reference.
+     * parent(field("__path__"));
+     * ```
+     *
+     * @param documentPathExpr - An Expression evaluating to a document reference.
+     * @returns A new {@code Expression} representing the parent operation.
+     */
+    export function parent(documentPathExpr: Expression): FunctionExpression;
+
     /**
      * @beta
      * Creates an expression that returns a substring of a string or byte array.
@@ -10556,13 +10738,7 @@ declare namespace FirebaseFirestore {
      */
     export function timestampAdd(
       timestamp: Expression,
-      unit:
-        | 'microsecond'
-        | 'millisecond'
-        | 'second'
-        | 'minute'
-        | 'hour'
-        | 'day',
+      unit: TimeUnit,
       amount: number,
     ): FunctionExpression;
     /**
@@ -10581,13 +10757,7 @@ declare namespace FirebaseFirestore {
      */
     export function timestampAdd(
       fieldName: string,
-      unit:
-        | 'microsecond'
-        | 'millisecond'
-        | 'second'
-        | 'minute'
-        | 'hour'
-        | 'day',
+      unit: TimeUnit,
       amount: number,
     ): FunctionExpression;
     /**
@@ -10625,13 +10795,7 @@ declare namespace FirebaseFirestore {
      */
     export function timestampSubtract(
       timestamp: Expression,
-      unit:
-        | 'microsecond'
-        | 'millisecond'
-        | 'second'
-        | 'minute'
-        | 'hour'
-        | 'day',
+      unit: TimeUnit,
       amount: number,
     ): FunctionExpression;
     /**
@@ -10650,13 +10814,7 @@ declare namespace FirebaseFirestore {
      */
     export function timestampSubtract(
       fieldName: string,
-      unit:
-        | 'microsecond'
-        | 'millisecond'
-        | 'second'
-        | 'minute'
-        | 'hour'
-        | 'day',
+      unit: TimeUnit,
       amount: number,
     ): FunctionExpression;
 
@@ -11005,6 +11163,149 @@ declare namespace FirebaseFirestore {
       ifFieldName: string,
       elseExpr: Expression,
     ): Expression;
+
+    /**
+     * @beta
+     * Creates an expression that returns the `elseExpr` argument if `ifExpr` is null, else
+     * return the result of the `ifExpr` argument evaluation.
+     *
+     * @remarks
+     * This function provides a fallback for both absent and explicit null values. In contrast,
+     * {@link ifAbsent} only triggers for missing fields.
+     *
+     * @example
+     * ```typescript
+     * // Returns the user's preferred name, or if that is null, returns their full name.
+     * ifNull(field("preferredName"), field("fullName"))
+     * ```
+     *
+     * @param ifExpr The expression to check for null.
+     * @param elseExpr The value that will be returned if `ifExpr` evaluates to null.
+     * @returns A new {@code Expression} representing the ifNull operation.
+     */
+    export function ifNull(
+      ifExpr: Expression,
+      elseExpr: Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that returns the `elseValue` argument if `ifExpr` is null, else
+     * return the result of the `ifExpr` argument evaluation.
+     *
+     * @remarks
+     * This function provides a fallback for both absent and explicit null values. In contrast,
+     * {@link ifAbsent} only triggers for missing fields.
+     *
+     * @example
+     * ```typescript
+     * // Returns the user's display name, or returns "Anonymous" if the field is null.
+     * ifNull(field("displayName"), "Anonymous")
+     * ```
+     *
+     * @param ifExpr The expression to check for null.
+     * @param elseValue The value that will be returned if `ifExpr` evaluates to null.
+     * @returns A new {@code Expression} representing the ifNull operation.
+     */
+    export function ifNull(
+      ifExpr: Expression,
+      elseValue: unknown,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that returns the `elseExpr` argument if `ifFieldName` is null, else
+     * return the value of the field.
+     *
+     * @remarks
+     * This function provides a fallback for both absent and explicit null values. In contrast,
+     * {@link ifAbsent} only triggers for missing fields.
+     *
+     * @example
+     * ```typescript
+     * // Returns the user's preferred name, or if that is null, returns their full name.
+     * ifNull("preferredName", field("fullName"))
+     * ```
+     *
+     * @param ifFieldName The field to check for null.
+     * @param elseExpr The expression that will be evaluated and returned if `ifFieldName` is
+     * null.
+     * @returns A new {@code Expression} representing the ifNull operation.
+     */
+    export function ifNull(
+      ifFieldName: string,
+      elseExpr: Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that returns the `elseValue` argument if `ifFieldName` is null, else
+     * return the value of the field.
+     *
+     * @remarks
+     * This function provides a fallback for both absent and explicit null values. In contrast,
+     * {@link ifAbsent} only triggers for missing fields.
+     *
+     * @example
+     * ```typescript
+     * // Returns the user's display name, or returns "Anonymous" if the field is null.
+     * ifNull("displayName", "Anonymous")
+     * ```
+     *
+     * @param ifFieldName The field to check for null.
+     * @param elseValue The value that will be returned if `ifFieldName` is null.
+     * @returns A new {@code Expression} representing the ifNull operation.
+     */
+    export function ifNull(
+      ifFieldName: string,
+      elseValue: unknown,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that returns the first non-null, non-absent argument, without evaluating
+     * the rest of the arguments. When all arguments are null or absent, returns the last argument.
+     *
+     * @example
+     * ```typescript
+     * // Returns the value of the first non-null, non-absent field among 'preferredName', 'fullName',
+     * // or the last argument if all previous fields are null.
+     * coalesce(field("preferredName"), field("fullName"), constant("Anonymous"))
+     * ```
+     *
+     * @param expression The first expression to evaluate.
+     * @param replacement The next expression or literal to evaluate.
+     * @param others Additional expressions or literals to evaluate.
+     * @returns A new [Expression] representing the coalesce operation.
+     */
+    export function coalesce(
+      expression: Expression,
+      replacement: Expression | unknown,
+      ...others: Array<Expression | unknown>
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that returns the first non-null, non-absent argument, without evaluating
+     * the rest of the arguments. When all arguments are null or absent, returns the last argument.
+     *
+     * @example
+     * ```typescript
+     * // Returns the value of the first non-null, non-absent field among 'preferredName', 'fullName',
+     * // or the last argument if all previous fields are null.
+     * coalesce("preferredName", field("fullName"), constant("Anonymous"))
+     * ```
+     *
+     * @param fieldName The first field name to evaluate.
+     * @param replacement The next expression or literal to evaluate.
+     * @param others Additional expressions or literals to evaluate.
+     * @returns A new [Expression] representing the coalesce operation.
+     */
+    export function coalesce(
+      fieldName: string,
+      replacement: Expression | unknown,
+      ...others: Array<Expression | unknown>
+    ): FunctionExpression;
 
     /**
      * @beta
@@ -11388,7 +11689,7 @@ declare namespace FirebaseFirestore {
      * @example
      * ```typescript
      * // Truncate the 'createdAt' timestamp to the beginning of the day.
-     * field('createdAt').timestampTruncate('day')
+     * timestampTruncate('createdAt', 'day')
      * ```
      *
      * @param fieldName Truncate the timestamp value contained in this field.
@@ -11409,7 +11710,7 @@ declare namespace FirebaseFirestore {
      * @example
      * ```typescript
      * // Truncate the 'createdAt' timestamp to the granularity specified in the field 'granularity'.
-     * field('createdAt').timestampTruncate(field('granularity'))
+     * timestampTruncate('createdAt', field('granularity'))
      * ```
      *
      * @param fieldName Truncate the timestamp value contained in this field.
@@ -11430,7 +11731,7 @@ declare namespace FirebaseFirestore {
      * @example
      * ```typescript
      * // Truncate the 'createdAt' timestamp to the beginning of the day.
-     * field('createdAt').timestampTruncate('day')
+     * timestampTruncate(field('createdAt'), 'day')
      * ```
      *
      * @param timestampExpression Truncate the timestamp value that is returned by this expression.
@@ -11451,7 +11752,7 @@ declare namespace FirebaseFirestore {
      * @example
      * ```typescript
      * // Truncate the 'createdAt' timestamp to the granularity specified in the field 'granularity'.
-     * field('createdAt').timestampTruncate(field('granularity'))
+     * timestampTruncate(field('createdAt'), field('granularity')
      * ```
      *
      * @param timestampExpression Truncate the timestamp value that is returned by this expression.
@@ -11465,6 +11766,215 @@ declare namespace FirebaseFirestore {
       granularity: Expression,
       timezone?: string | Expression,
     ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that calculates the difference between two timestamps.
+     *
+     * @example
+     * ```typescript
+     * // Calculate the difference in days between 'endTime' and 'startTime' fields.
+     * timestampDiff('endTime', 'startTime', 'day')
+     * ```
+     *
+     * @param endFieldName - The name of the field representing the ending timestamp.
+     * @param startFieldName - The name of the field representing the starting timestamp.
+     * @param unit - The unit of time for the difference (e.g., "day", "hour").
+     * @returns A new {@code Expression} representing the difference as an integer.
+     */
+    export function timestampDiff(
+      endFieldName: string,
+      startFieldName: string,
+      unit: TimeUnit | Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that calculates the difference between two timestamps.
+     *
+     * @example
+     * ```typescript
+     * // Calculate the difference in days between 'endTime' field and a starting timestamp expression.
+     * timestampDiff('endTime', field('startTime'), 'day')
+     * ```
+     *
+     * @param endFieldName - The name of the field representing the ending timestamp.
+     * @param startExpression - The starting timestamp for the difference calculation.
+     * @param unit - The unit of time for the difference (e.g., "day", "hour").
+     * @returns A new {@code Expression} representing the difference as an integer.
+     */
+    export function timestampDiff(
+      endFieldName: string,
+      startExpression: Expression,
+      unit: TimeUnit | Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that calculates the difference between two timestamps.
+     *
+     * @example
+     * ```typescript
+     * // Calculate the difference in days between an ending timestamp expression and 'startTime' field.
+     * timestampDiff(field('endTime'), 'startTime', 'day')
+     * ```
+     *
+     * @param endExpression - The ending timestamp for the difference calculation.
+     * @param startFieldName - The name of the field representing the starting timestamp.
+     * @param unit - The unit of time for the difference (e.g., "day", "hour").
+     * @returns A new {@code Expression} representing the difference as an integer.
+     */
+    export function timestampDiff(
+      endExpression: Expression,
+      startFieldName: string,
+      unit: TimeUnit | Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that calculates the difference between two timestamps.
+     *
+     * @example
+     * ```typescript
+     * // Calculate the difference in days between two timestamp expressions.
+     * timestampDiff(field('endTime'), field('startTime'), 'day')
+     * ```
+     *
+     * @param endExpression - The ending timestamp for the difference calculation.
+     * @param startExpression - The starting timestamp for the difference calculation.
+     * @param unit - The unit of time for the difference (e.g., "day", "hour").
+     * @returns A new {@code Expression} representing the difference as an integer.
+     */
+    export function timestampDiff(
+      endExpression: Expression,
+      startExpression: Expression,
+      unit: TimeUnit | Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that extracts a specified part from a timestamp.
+     *
+     * @example
+     * ```typescript
+     * // Extract the year from the 'createdAt' timestamp.
+     * timestampExtract('createdAt', 'year')
+     * ```
+     *
+     * @param fieldName - The name of the field representing the timestamp.
+     * @param part - The part to extract from the timestamp (e.g., "year", "month", "day").
+     * @param timezone - The timezone to use for extraction. Valid values are from
+     * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+     * Defaults to "UTC" if not specified.
+     * @returns A new {@code Expression} representing the extracted part as an integer.
+     */
+    export function timestampExtract(
+      fieldName: string,
+      part: TimePart,
+      timezone?: string | Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that extracts a specified part from a timestamp.
+     *
+     * @example
+     * ```typescript
+     * // Extract the part specified by the field 'part' from 'createdAt'.
+     * timestampExtract('createdAt', field('part'))
+     * ```
+     *
+     * @param fieldName - The name of the field representing the timestamp.
+     * @param part - The expression evaluating to the part to extract.
+     * @param timezone - The timezone to use for extraction. Valid values are from
+     * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+     * Defaults to "UTC" if not specified.
+     * @returns A new {@code Expression} representing the extracted part as an integer.
+     */
+    export function timestampExtract(
+      fieldName: string,
+      part: Expression,
+      timezone?: string | Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that extracts a specified part from a timestamp.
+     *
+     * @example
+     * ```typescript
+     * // Extract the year from the timestamp returned by the expression.
+     * timestampExtract(field('createdAt'), 'year')
+     * ```
+     *
+     * @param timestampExpression - The expression evaluating to the timestamp.
+     * @param part - The part to extract from the timestamp (e.g., "year", "month", "day").
+     * @param timezone - The timezone to use for extraction. Valid values are from
+     * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+     * Defaults to "UTC" if not specified.
+     * @returns A new {@code Expression} representing the extracted part as an integer.
+     */
+    export function timestampExtract(
+      timestampExpression: Expression,
+      part: TimePart,
+      timezone?: string | Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     * Creates an expression that extracts a specified part from a timestamp.
+     *
+     * @example
+     * ```typescript
+     * // Extract the part specified by the field 'part' from the timestamp.
+     * timestampExtract(field('createdAt'), field('part'))
+     * ```
+     *
+     * @param timestampExpression - The expression evaluating to the timestamp.
+     * @param part - The expression evaluating to the part to extract.
+     * @param timezone - The timezone to use for extraction. Valid values are from
+     * the TZ database (e.g., "America/Los_Angeles") or in the format "Etc/GMT-1."
+     * Defaults to "UTC" if not specified.
+     * @returns A new {@code Expression} representing the extracted part as an integer.
+     */
+    export function timestampExtract(
+      timestampExpression: Expression,
+      part: Expression,
+      timezone?: string | Expression,
+    ): FunctionExpression;
+
+    /**
+     * @beta
+     *
+     * An enumeration of the different types generated by the Firestore backend.
+     *
+     * <ul>
+     *  <li>Numerics evaluate directly to backend representation (`int64` or `float64`), not JS `number`.</li>
+     *  <li>JavaScript `Date` and firestore `Timestamp` objects strictly evaluate to `'timestamp'`.</li>
+     *  <li>Advanced configurations parsing backend types (such as `decimal128`, `max_key` or `min_key` from BSON) are also incorporated in this union string type. Note that `decimal128` is a backend-only numeric type that the JavaScript SDK cannot create natively, but can be evaluated in pipelines.</li>
+     * </ul>
+     */
+    export type Type =
+      | 'null'
+      | 'array'
+      | 'boolean'
+      | 'bytes'
+      | 'timestamp'
+      | 'geo_point'
+      | 'number'
+      | 'int32'
+      | 'int64'
+      | 'float64'
+      | 'decimal128'
+      | 'map'
+      | 'reference'
+      | 'string'
+      | 'vector'
+      | 'max_key'
+      | 'min_key'
+      | 'object_id'
+      | 'regex'
+      | 'request_timestamp';
 
     /**
      * @beta
@@ -12124,6 +12634,28 @@ declare namespace FirebaseFirestore {
        * @returns A new `Pipeline` object with this select stage appended to its list of stages.
        */
       select(options: SelectStageOptions): Pipeline;
+      /**
+       * @beta
+       * Performs a delete operation on documents from previous stages.
+       *
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      delete(): Pipeline;
+      /**
+       * @beta
+       * Performs an update operation using documents from previous stages.
+       *
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      update(): Pipeline;
+      /**
+       * @beta
+       * Performs an update operation using documents from previous stages.
+       *
+       * @param transformedFields - The list of transformations to apply.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      update(transformedFields: AliasedExpression[]): Pipeline;
       /**
        * @beta
        * Filters the documents from previous stages to only include those matching the specified {@link
@@ -13013,6 +13545,7 @@ declare namespace FirebaseFirestore {
        */
       docs: Array<string | DocumentReference>;
     };
+
     /**
      * @beta
      * Options defining how an AddFieldsStage is evaluated. See {@link Pipeline.addFields}.

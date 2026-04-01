@@ -5,6 +5,75 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "91666d001bdc0d020742784bebc2c4e4bba81de4",
+          "message": "Add initial files for google.cloud.datacatalog.lineage.configmanagement.v1",
+          "issues": [
+            "7842"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/configmanagement",
+      "id": "b4bac2c8-ed00-4012-8556-f07e615aebb6",
+      "createTime": "2026-03-25T19:27:43.346Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0e802546d86a64e5317fda86f99ed9f1b1026e0f",
+          "message": "[ces] update public libraries for CES v1",
+          "issues": [
+            "7845"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "bd13ecf3-51bc-4d3e-a789-06036d9d9026",
+      "createTime": "2026-03-25T19:27:43.303Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1dd586015cbc85409f4737c995c750bc694c14c3",
+          "message": "Update jsdocs headers in v2 clients to include …",
+          "issues": [
+            "7851"
+          ],
+          "scope": "storage-control"
+        }
+      ],
+      "version": "0.8.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "7016585d-b347-4953-b381-78f7b0eccbf6",
+      "createTime": "2026-03-25T19:27:43.262Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "694358739b082ad17f42800b42e5dbbf4c2c975b",
+          "message": "[discoveryengine] Update DataStoreSpec and add BoostSpec to SearchService",
+          "issues": [
+            "7837"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "74179f79-1668-445d-9990-91aebf8611b6",
+      "createTime": "2026-03-25T19:27:43.222Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "721dd4cfb2c8f4759f5e17e3496284d2b78489e0",
           "message": "[Many APIs] add more values in DestintionEnum",
           "issues": [
@@ -69306,5 +69375,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-03-19T21:58:31.408Z"
+  "updateTime": "2026-03-25T19:27:43.346Z"
 }

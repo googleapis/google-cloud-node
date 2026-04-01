@@ -224,7 +224,9 @@ export class ExecutionUtil {
               this._serializer,
               result.fields || {},
               ref,
-              Timestamp.fromProto(proto.executionTime!),
+              proto.executionTime
+                ? Timestamp.fromProto(proto.executionTime)
+                : undefined,
               result.createTime
                 ? Timestamp.fromProto(result.createTime!)
                 : undefined,
