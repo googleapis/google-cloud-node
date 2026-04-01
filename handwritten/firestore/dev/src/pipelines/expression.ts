@@ -2323,18 +2323,11 @@ export abstract class Expression
    * @returns A new `Expression` representing the resulting timestamp.
    */
   timestampAdd(
-    unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+    unit: firestore.Pipelines.TimeUnit,
     amount: number,
   ): FunctionExpression;
   timestampAdd(
-    unit:
-      | Expression
-      | 'microsecond'
-      | 'millisecond'
-      | 'second'
-      | 'minute'
-      | 'hour'
-      | 'day',
+    unit: Expression | firestore.Pipelines.TimeUnit,
     amount: Expression | number,
   ): FunctionExpression {
     return new FunctionExpression('timestamp_add', [
@@ -2375,18 +2368,11 @@ export abstract class Expression
    * @returns A new `Expression` representing the resulting timestamp.
    */
   timestampSubtract(
-    unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+    unit: firestore.Pipelines.TimeUnit,
     amount: number,
   ): FunctionExpression;
   timestampSubtract(
-    unit:
-      | Expression
-      | 'microsecond'
-      | 'millisecond'
-      | 'second'
-      | 'minute'
-      | 'hour'
-      | 'day',
+    unit: Expression | firestore.Pipelines.TimeUnit,
     amount: Expression | number,
   ): FunctionExpression {
     return new FunctionExpression('timestamp_subtract', [
@@ -2428,18 +2414,11 @@ export abstract class Expression
    */
   timestampDiff(
     start: string | Expression,
-    unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+    unit: firestore.Pipelines.TimeUnit,
   ): FunctionExpression;
   timestampDiff(
     start: string | Expression,
-    unit:
-      | 'microsecond'
-      | 'millisecond'
-      | 'second'
-      | 'minute'
-      | 'hour'
-      | 'day'
-      | Expression,
+    unit: Expression | firestore.Pipelines.TimeUnit,
   ): FunctionExpression {
     return new FunctionExpression('timestamp_diff', [
       this,
@@ -2493,8 +2472,7 @@ export abstract class Expression
     part: firestore.Pipelines.TimePart | Expression,
     timezone?: string | Expression,
   ): FunctionExpression {
-    const internalPart = isString(part) ? part.toLowerCase() : part;
-    const args = [this, valueToDefaultExpr(internalPart)];
+    const args = [this, valueToDefaultExpr(part)];
     if (timezone) {
       args.push(valueToDefaultExpr(timezone));
     }
@@ -2515,6 +2493,23 @@ export abstract class Expression
    */
   documentId(): FunctionExpression {
     return new FunctionExpression('document_id', [this]);
+  }
+
+  /**
+   * @beta
+   *
+   * Creates an expression that returns the parent document of a document reference.
+   *
+   * @example
+   * ```typescript
+   * // Get the parent document of a document reference.
+   * field("__path__").parent();
+   * ```
+   *
+   * @returns A new `Expression` representing the parent operation.
+   */
+  parent(): FunctionExpression {
+    return new FunctionExpression('parent', [this]);
   }
 
   /**
@@ -2983,6 +2978,79 @@ export abstract class Expression
 
   /**
    * @beta
+   * Creates an expression that returns the `elseValue` argument if this expression evaluates to null, else
+   * return the result of this expression evaluation.
+   *
+   * @remarks
+   * This function provides a fallback for both absent and explicit null values. In contrast, {@link Expression#ifAbsent}
+   * only triggers for missing fields.
+   *
+   * @example
+   * ```typescript
+   * // Returns the user's preferred name, or if that is null, returns their full name.
+   * field("preferredName").ifNull(field("fullName"))
+   * ```
+   *
+   * @param elseExpression The Expression that will be evaluated if this Expression evaluates to null.
+   * @returns A new [Expression] representing the ifNull operation.
+   */
+  ifNull(elseExpression: Expression): FunctionExpression;
+
+  /**
+   * @beta
+   * Creates an expression that returns the `elseValue` argument if this expression evaluates to null, else
+   * return the result of this expression evaluation.
+   *
+   * @remarks
+   * This function provides a fallback for both absent and explicit null values. In contrast, {@link Expression#ifAbsent}
+   * only triggers for missing fields.
+   *
+   * @example
+   * ```typescript
+   * // Returns the user's display name, or returns "Anonymous" if the field is null.
+   * field("displayName").ifNull("Anonymous")
+   * ```
+   *
+   * @param elseValue The value that will be returned if this Expression evaluates to null.
+   * @returns A new [Expression] representing the ifNull operation.
+   */
+  ifNull(elseValue: unknown): FunctionExpression;
+  ifNull(elseValueOrExpression: Expression | unknown): FunctionExpression {
+    return new FunctionExpression('if_null', [
+      this,
+      valueToDefaultExpr(elseValueOrExpression),
+    ]);
+  }
+
+  /**
+   * @beta
+   * Creates an expression that returns the first non-null, non-absent argument, without evaluating
+   * the rest of the arguments. When all arguments are null or absent, returns the last argument.
+   *
+   * @example
+   * ```typescript
+   * // Returns the value of the first non-null, non-absent field among 'preferredName', 'fullName',
+   * // or the last argument if all previous fields are null.
+   * field("preferredName").coalesce(field("fullName"), "Anonymous");
+   * ```
+   *
+   * @param replacement - The value to use if this expression evaluates to null.
+   * @param others - Optional additional values to check if previous values are null.
+   * @returns A new [Expression] representing the coalesce operation.
+   */
+  coalesce(
+    replacement: Expression | unknown,
+    ...others: Array<Expression | unknown>
+  ): FunctionExpression {
+    const values = [replacement, ...others];
+    return new FunctionExpression('coalesce', [
+      this,
+      ...values.map(valueToDefaultExpr),
+    ]);
+  }
+
+  /**
+   * @beta
    * Creates an expression that joins the elements of an array into a string.
    *
    * ```typescript
@@ -3123,11 +3191,7 @@ export abstract class Expression
     granularity: firestore.Pipelines.TimeGranularity | Expression,
     timezone?: string | Expression,
   ): FunctionExpression {
-    const internalGranularity = isString(granularity)
-      ? granularity.toLowerCase()
-      : granularity;
-
-    const args = [this, valueToDefaultExpr(internalGranularity)];
+    const args = [this, valueToDefaultExpr(granularity)];
     if (timezone) {
       args.push(valueToDefaultExpr(timezone));
     }
@@ -4420,6 +4484,46 @@ export function documentId(
 ): FunctionExpression {
   const documentPathExpr = valueToDefaultExpr(documentPath);
   return documentPathExpr.documentId();
+}
+
+/**
+ * @beta
+ *
+ * Creates an expression that returns the parent document of a document reference.
+ *
+ * @example
+ * ```typescript
+ * // Get the parent document of a document reference.
+ * parent(myDocumentReference);
+ * ```
+ *
+ * @param documentPath - A string path or DocumentReference to get the parent from.
+ * @returns A new `Expression` representing the parent operation.
+ */
+export function parent(
+  documentPath: string | firestore.DocumentReference,
+): FunctionExpression;
+
+/**
+ * @beta
+ *
+ * Creates an expression that returns the parent document of a document reference.
+ *
+ * @example
+ * ```typescript
+ * // Get the parent document of a document reference.
+ * parent(field("__path__"));
+ * ```
+ *
+ * @param documentPathExpr - An Expression evaluating to a document reference.
+ * @returns A new `Expression` representing the parent operation.
+ */
+export function parent(documentPathExpr: Expression): FunctionExpression;
+export function parent(
+  documentPath: Expression | string | firestore.DocumentReference,
+): FunctionExpression {
+  const documentPathExpr = valueToDefaultExpr(documentPath);
+  return documentPathExpr.parent();
 }
 
 /**
@@ -8501,7 +8605,7 @@ export function timestampAdd(
  */
 export function timestampAdd(
   timestamp: Expression,
-  unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+  unit: firestore.Pipelines.TimeUnit,
   amount: number,
 ): FunctionExpression;
 
@@ -8521,19 +8625,12 @@ export function timestampAdd(
  */
 export function timestampAdd(
   fieldName: string,
-  unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+  unit: firestore.Pipelines.TimeUnit,
   amount: number,
 ): FunctionExpression;
 export function timestampAdd(
   timestamp: Expression | string,
-  unit:
-    | Expression
-    | 'microsecond'
-    | 'millisecond'
-    | 'second'
-    | 'minute'
-    | 'hour'
-    | 'day',
+  unit: Expression | firestore.Pipelines.TimeUnit,
   amount: Expression | number,
 ): FunctionExpression {
   const normalizedTimestamp = fieldOrExpression(timestamp);
@@ -8578,7 +8675,7 @@ export function timestampSubtract(
  */
 export function timestampSubtract(
   timestamp: Expression,
-  unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+  unit: firestore.Pipelines.TimeUnit,
   amount: number,
 ): FunctionExpression;
 
@@ -8598,19 +8695,12 @@ export function timestampSubtract(
  */
 export function timestampSubtract(
   fieldName: string,
-  unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day',
+  unit: firestore.Pipelines.TimeUnit,
   amount: number,
 ): FunctionExpression;
 export function timestampSubtract(
   timestamp: Expression | string,
-  unit:
-    | Expression
-    | 'microsecond'
-    | 'millisecond'
-    | 'second'
-    | 'minute'
-    | 'hour'
-    | 'day',
+  unit: Expression | firestore.Pipelines.TimeUnit,
   amount: Expression | number,
 ): FunctionExpression {
   const normalizedTimestamp = fieldOrExpression(timestamp);
@@ -9295,6 +9385,167 @@ export function ifAbsent(
 
 /**
  * @beta
+ * Creates an expression that returns the `elseExpr` argument if `ifExpr` is null, else
+ * return the result of the `ifExpr` argument evaluation.
+ *
+ * @remarks
+ * This function provides a fallback for both absent and explicit null values. In contrast,
+ * {@link Expression#ifAbsent} only triggers for missing fields.
+ *
+ * @example
+ * ```typescript
+ * // Returns the user's preferred name, or if that is null, returns their full name.
+ * ifNull(field("preferredName"), field("fullName"))
+ * ```
+ *
+ * @param ifExpr The expression to check for null.
+ * @param elseExpr The expression that will be evaluated and returned if `ifExpr` is null.
+ * @returns A new `Expression` representing the ifNull operation.
+ */
+export function ifNull(
+  ifExpr: Expression,
+  elseExpr: Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that returns the `elseValue` argument if `ifExpr` is null, else
+ * return the result of the `ifExpr` argument evaluation.
+ *
+ * @remarks
+ * This function provides a fallback for both absent and explicit null values. In contrast,
+ * {@link Expression#ifAbsent} only triggers for missing fields.
+ *
+ * @example
+ * ```typescript
+ * // Returns the user's display name, or returns "Anonymous" if the field is null.
+ * ifNull(field("displayName"), "Anonymous")
+ * ```
+ *
+ * @param ifExpr The expression to check for null.
+ * @param elseValue The value that will be returned if `ifExpr` evaluates to null.
+ * @returns A new `Expression` representing the ifNull operation.
+ */
+export function ifNull(
+  ifExpr: Expression,
+  elseValue: unknown,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that returns the `elseExpr` argument if `ifFieldName` is null, else
+ * return the value of the field.
+ *
+ * @remarks
+ * This function provides a fallback for both absent and explicit null values. In contrast,
+ * {@link Expression#ifAbsent} only triggers for missing fields.
+ *
+ * @example
+ * ```typescript
+ * // Returns the user's preferred name, or if that is null, returns their full name.
+ * ifNull("preferredName", field("fullName"))
+ * ```
+ *
+ * @param ifFieldName The field to check for null.
+ * @param elseExpr The expression that will be evaluated and returned if `ifFieldName` is
+ * null.
+ * @returns A new `Expression` representing the ifNull operation.
+ */
+export function ifNull(
+  ifFieldName: string,
+  elseExpr: Expression,
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that returns the `elseValue` argument if `ifFieldName` is null, else
+ * return the value of the field.
+ *
+ * @remarks
+ * This function provides a fallback for both absent and explicit null values. In contrast,
+ * {@link Expression#ifAbsent} only triggers for missing fields.
+ *
+ * @example
+ * ```typescript
+ * // Returns the user's display name, or returns "Anonymous" if the field is null.
+ * ifNull("displayName", "Anonymous")
+ * ```
+ *
+ * @param ifFieldName The field to check for null.
+ * @param elseValue The value that will be returned if `ifFieldName` is null.
+ * @returns A new `Expression` representing the ifNull operation.
+ */
+export function ifNull(
+  ifFieldName: string,
+  elseValue: unknown,
+): FunctionExpression;
+export function ifNull(
+  fieldNameOrExpression: string | Expression,
+  elseValue: Expression | unknown,
+): FunctionExpression {
+  return fieldOrExpression(fieldNameOrExpression).ifNull(
+    valueToDefaultExpr(elseValue),
+  );
+}
+
+/**
+ * @beta
+ * Creates an expression that returns the first non-null, non-absent argument, without evaluating
+ * the rest of the arguments. When all arguments are null or absent, returns the last argument.
+ *
+ * @example
+ * ```typescript
+ * // Returns the value of the first non-null, non-absent field among 'preferredName', 'fullName',
+ * // or the last argument if all previous fields are null.
+ * coalesce(field("preferredName"), field("fullName"), constant("Anonymous"))
+ * ```
+ *
+ * @param expression The first expression to check for null.
+ * @param replacement The fallback expression or value if the first one is null.
+ * @param others Optional additional expressions to check if previous ones are null.
+ * @returns A new `Expression` representing the coalesce operation.
+ */
+export function coalesce(
+  expression: Expression,
+  replacement: Expression | unknown,
+  ...others: Array<Expression | unknown>
+): FunctionExpression;
+
+/**
+ * @beta
+ * Creates an expression that returns the first non-null, non-absent argument, without evaluating
+ * the rest of the arguments. When all arguments are null or absent, returns the last argument.
+ *
+ * @example
+ * ```typescript
+ * // Returns the value of the first non-null, non-absent field among 'preferredName', 'fullName',
+ * // or the last argument if all previous fields are null.
+ * coalesce("preferredName", field("fullName"), constant("Anonymous"))
+ * ```
+ *
+ * @param fieldName The name of the first field to check for null.
+ * @param replacement The fallback expression or value if the first one is null.
+ * @param others Optional additional expressions to check if previous ones are null.
+ * @returns A new `Expression` representing the coalesce operation.
+ */
+export function coalesce(
+  fieldName: string,
+  replacement: Expression | unknown,
+  ...others: Array<Expression | unknown>
+): FunctionExpression;
+export function coalesce(
+  fieldNameOrExpression: Expression | string,
+  replacement: Expression | unknown,
+  ...others: Array<Expression | unknown>
+): FunctionExpression {
+  return fieldOrExpression(fieldNameOrExpression).coalesce(
+    replacement,
+    ...others,
+  );
+}
+
+/**
+ * @beta
  * Creates an expression that joins the elements of an array into a string.
  *
  * ```typescript
@@ -9605,7 +9856,7 @@ export function timestampTruncate(
   timezone?: string | Expression,
 ): FunctionExpression {
   const internalGranularity = isString(granularity)
-    ? valueToDefaultExpr(granularity.toLowerCase())
+    ? valueToDefaultExpr(granularity)
     : granularity;
   return fieldOrExpression(fieldNameOrExpression).timestampTruncate(
     internalGranularity,
@@ -9631,14 +9882,7 @@ export function timestampTruncate(
 export function timestampDiff(
   endFieldName: string,
   startFieldName: string,
-  unit:
-    | 'microsecond'
-    | 'millisecond'
-    | 'second'
-    | 'minute'
-    | 'hour'
-    | 'day'
-    | Expression,
+  unit: firestore.Pipelines.TimeUnit | Expression,
 ): FunctionExpression;
 
 /**
@@ -9659,14 +9903,7 @@ export function timestampDiff(
 export function timestampDiff(
   endFieldName: string,
   startExpression: Expression,
-  unit:
-    | 'microsecond'
-    | 'millisecond'
-    | 'second'
-    | 'minute'
-    | 'hour'
-    | 'day'
-    | Expression,
+  unit: firestore.Pipelines.TimeUnit | Expression,
 ): FunctionExpression;
 
 /**
@@ -9687,14 +9924,7 @@ export function timestampDiff(
 export function timestampDiff(
   endExpression: Expression,
   startFieldName: string,
-  unit:
-    | 'microsecond'
-    | 'millisecond'
-    | 'second'
-    | 'minute'
-    | 'hour'
-    | 'day'
-    | Expression,
+  unit: firestore.Pipelines.TimeUnit | Expression,
 ): FunctionExpression;
 
 /**
@@ -9715,26 +9945,12 @@ export function timestampDiff(
 export function timestampDiff(
   endExpression: Expression,
   startExpression: Expression,
-  unit:
-    | 'microsecond'
-    | 'millisecond'
-    | 'second'
-    | 'minute'
-    | 'hour'
-    | 'day'
-    | Expression,
+  unit: firestore.Pipelines.TimeUnit | Expression,
 ): FunctionExpression;
 export function timestampDiff(
   endFieldNameOrExpression: string | Expression,
   startFieldNameOrExpression: string | Expression,
-  unit:
-    | 'microsecond'
-    | 'millisecond'
-    | 'second'
-    | 'minute'
-    | 'hour'
-    | 'day'
-    | Expression,
+  unit: firestore.Pipelines.TimeUnit | Expression,
 ): FunctionExpression {
   const normalizedEnd = fieldOrExpression(endFieldNameOrExpression);
   const normalizedStart = fieldOrExpression(startFieldNameOrExpression);
@@ -9839,7 +10055,7 @@ export function timestampExtract(
   timezone?: string | Expression,
 ): FunctionExpression {
   return fieldOrExpression(fieldNameOrExpression).timestampExtract(
-    valueToDefaultExpr(isString(part) ? part.toLowerCase() : part),
+    valueToDefaultExpr(part),
     timezone,
   );
 }

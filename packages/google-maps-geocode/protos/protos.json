@@ -324,6 +324,10 @@
                           "type": "string",
                           "id": 1
                         },
+                        "placeId": {
+                          "type": "string",
+                          "id": 2
+                        },
                         "displayName": {
                           "type": "google.type.LocalizedText",
                           "id": 3

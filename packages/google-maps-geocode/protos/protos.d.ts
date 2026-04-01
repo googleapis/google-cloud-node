@@ -1241,6 +1241,9 @@ export namespace google {
                     /** PlaceView place */
                     place?: (string|null);
 
+                    /** PlaceView placeId */
+                    placeId?: (string|null);
+
                     /** PlaceView displayName */
                     displayName?: (google.type.ILocalizedText|null);
 
@@ -1277,6 +1280,9 @@ export namespace google {
 
                     /** PlaceView place. */
                     public place: string;
+
+                    /** PlaceView placeId. */
+                    public placeId: string;
 
                     /** PlaceView displayName. */
                     public displayName?: (google.type.ILocalizedText|null);
