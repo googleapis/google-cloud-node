@@ -597,6 +597,9 @@ export class BigQuery extends Service {
       wrapIntegers: boolean | IntegerTypeCastOptions;
       selectedFields?: string[];
       parseJSON?: boolean;
+      listParams?:
+        | bigquery.tabledata.IListParams
+        | bigquery.jobs.IGetQueryResultsParams;
     },
   ) {
     // deep copy schema fields to avoid mutation
@@ -1097,6 +1100,13 @@ export class BigQuery extends Service {
           };
         }),
       };
+    } else if ((providedType as string).toUpperCase() === 'TIMESTAMP(12)') {
+      if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+        return {
+          type: 'TIMESTAMP',
+          timestampPrecision: '12',
+        };
+      }
     }
 
     providedType = (providedType as string).toUpperCase();
@@ -2248,14 +2258,45 @@ export class BigQuery extends Service {
       if (res && res.jobComplete) {
         let rows: any = [];
         if (res.schema && res.rows) {
-          if (options.skipParsing) {
-            rows = res.rows;
+          if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+            try {
+              /*
+              Without this try/catch block, calls to getRows will hang indefinitely if
+              a call to mergeSchemaWithRows_ fails because the error never makes it to
+              the callback. Instead, pass the error to the callback the user provides
+              so that the user can see the error.
+               */
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const listParams = {
+                'formatOptions.timestampOutputFormat':
+                  queryReq.formatOptions?.timestampOutputFormat,
+                'formatOptions.useInt64Timestamp':
+                  queryReq.formatOptions?.useInt64Timestamp,
+              };
+              if (options.skipParsing) {
+                rows = res.rows;
+              } else {
+                rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
+                  wrapIntegers: options.wrapIntegers || false,
+                  parseJSON: options.parseJSON,
+                  listParams,
+                });
+                delete res.rows;
+              }
+            } catch (e) {
+              (callback as SimpleQueryRowsCallback)(e as Error, null, job);
+              return;
+            }
           } else {
-            rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
-              wrapIntegers: options.wrapIntegers || false,
-              parseJSON: options.parseJSON,
-            });
-            delete res.rows;
+            if (options.skipParsing) {
+              rows = res.rows;
+            } else {
+              rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
+                wrapIntegers: options.wrapIntegers || false,
+                parseJSON: options.parseJSON,
+              });
+              delete res.rows;
+            }
           }
         }
         this.trace_('[runJobsQuery] job complete');
@@ -2337,6 +2378,25 @@ export class BigQuery extends Service {
     if (options.job) {
       return undefined;
     }
+    let formatOptions;
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+      const hasAnyFormatOpts =
+        options['formatOptions.timestampOutputFormat'] !== undefined ||
+        options['formatOptions.useInt64Timestamp'] !== undefined;
+      const defaultOpts = hasAnyFormatOpts
+        ? {}
+        : {
+            timestampOutputFormat: 'ISO8601_STRING',
+          };
+      formatOptions = extend(defaultOpts, {
+        timestampOutputFormat: options['formatOptions.timestampOutputFormat'],
+        useInt64Timestamp: options['formatOptions.useInt64Timestamp'],
+      });
+    } else {
+      formatOptions = {
+        useInt64Timestamp: true,
+      };
+    }
     const req: bigquery.IQueryRequest = {
       useQueryCache: queryObj.useQueryCache,
       labels: queryObj.labels,
@@ -2345,9 +2405,7 @@ export class BigQuery extends Service {
       maximumBytesBilled: queryObj.maximumBytesBilled,
       timeoutMs: options.timeoutMs,
       location: queryObj.location || options.location,
-      formatOptions: {
-        useInt64Timestamp: true,
-      },
+      formatOptions,
       maxResults: queryObj.maxResults || options.maxResults,
       query: queryObj.query,
       useLegacySql: false,
@@ -2477,6 +2535,9 @@ function convertSchemaFieldValue(
     wrapIntegers: boolean | IntegerTypeCastOptions;
     selectedFields?: string[];
     parseJSON?: boolean;
+    listParams?:
+      | bigquery.tabledata.IListParams
+      | bigquery.jobs.IGetQueryResultsParams;
   },
 ) {
   if (value === null) {
@@ -2536,9 +2597,52 @@ function convertSchemaFieldValue(
       break;
     }
     case 'TIMESTAMP': {
-      const pd = new PreciseDate();
-      pd.setFullTime(PreciseDate.parseFull(BigInt(value) * BigInt(1000)));
-      value = BigQuery.timestamp(pd);
+      // High precision timestamp behaviour
+      if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+        /*
+        At this point, 'value' will equal the timestamp value returned from the
+        server. We need to parse this value differently depending on its format.
+        For example, value could be any of the following:
+        1672574400123456
+        1672574400.123456
+        2023-01-01T12:00:00.123456789123Z
+         */
+        const listParams = options.listParams;
+        const timestampOutputFormat = listParams
+          ? listParams['formatOptions.timestampOutputFormat']
+          : undefined;
+        const useInt64Timestamp = listParams
+          ? listParams['formatOptions.useInt64Timestamp']
+          : undefined;
+        if (timestampOutputFormat === 'ISO8601_STRING') {
+          // value is ISO string, create BigQueryTimestamp wrapping the string
+          value = BigQuery.timestamp(value);
+        } else if (
+          useInt64Timestamp !== true &&
+          timestampOutputFormat !== 'INT64' &&
+          (useInt64Timestamp !== undefined ||
+            timestampOutputFormat !== undefined)
+        ) {
+          // NOTE: The additional
+          // (useInt64Timestamp !== undefined || timestampOutputFormat !== und...)
+          // check is to ensure that calls to the /query endpoint remain
+          // unaffected as they will not be providing any listParams.
+          //
+          // If the program reaches this point in time then
+          // value is float seconds so convert to BigQueryTimestamp
+          value = BigQuery.timestamp(Number(value));
+        } else {
+          // Expect int64 micros (default or explicit INT64)
+          const pd = new PreciseDate();
+          pd.setFullTime(PreciseDate.parseFull(BigInt(value) * BigInt(1000)));
+          value = BigQuery.timestamp(pd);
+        }
+      } else {
+        // Old behaviour
+        const pd = new PreciseDate();
+        pd.setFullTime(PreciseDate.parseFull(BigInt(value) * BigInt(1000)));
+        value = BigQuery.timestamp(pd);
+      }
       break;
     }
     case 'GEOGRAPHY': {
@@ -2554,6 +2658,7 @@ function convertSchemaFieldValue(
       value = BigQueryRange.fromSchemaValue_(
         value,
         schemaField.rangeElementType!.type!,
+        options.listParams, // Required to convert TIMESTAMP values
       );
       break;
     }
@@ -2650,7 +2755,13 @@ export class BigQueryRange {
     return [start, end];
   }
 
-  static fromSchemaValue_(value: string, elementType: string): BigQueryRange {
+  static fromSchemaValue_(
+    value: string,
+    elementType: string,
+    listParams?:
+      | bigquery.tabledata.IListParams
+      | bigquery.jobs.IGetQueryResultsParams,
+  ): BigQueryRange {
     const [start, end] = BigQueryRange.fromStringValue_(value);
     const convertRangeSchemaValue = (value: string) => {
       if (value === 'UNBOUNDED' || value === 'NULL') {
@@ -2658,6 +2769,7 @@ export class BigQueryRange {
       }
       return convertSchemaFieldValue({type: elementType}, value, {
         wrapIntegers: false,
+        listParams,
       });
     };
     return BigQuery.range(
@@ -2733,6 +2845,18 @@ export class BigQueryTimestamp {
     } else if (typeof value === 'string') {
       if (/^\d{4}-\d{1,2}-\d{1,2}/.test(value)) {
         pd = new PreciseDate(value);
+        if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+          if (value.match(/\.\d{10,}/) && !Number.isNaN(pd.getTime())) {
+            /*
+            TODO:
+            When https://github.com/googleapis/nodejs-precise-date/pull/302
+            is released and we have full support for picoseconds in PreciseData
+            then we can remove this if block.
+             */
+            this.value = value;
+            return;
+          }
+        }
       } else {
         const floatValue = Number.parseFloat(value);
         if (!Number.isNaN(floatValue)) {
