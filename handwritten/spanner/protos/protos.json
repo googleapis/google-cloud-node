@@ -1619,6 +1619,13 @@
               },
               "nested": {
                 "Violation": {
+                  "oneofs": {
+                    "_futureQuotaValue": {
+                      "oneof": [
+                        "futureQuotaValue"
+                      ]
+                    }
+                  },
                   "fields": {
                     "subject": {
                       "type": "string",
@@ -1627,6 +1634,34 @@
                     "description": {
                       "type": "string",
                       "id": 2
+                    },
+                    "apiService": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "quotaMetric": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "quotaId": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "quotaDimensions": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 6
+                    },
+                    "quotaValue": {
+                      "type": "int64",
+                      "id": 7
+                    },
+                    "futureQuotaValue": {
+                      "type": "int64",
+                      "id": 8,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 }
@@ -1677,6 +1712,14 @@
                     "description": {
                       "type": "string",
                       "id": 2
+                    },
+                    "reason": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "localizedMessage": {
+                      "type": "LocalizedMessage",
+                      "id": 4
                     }
                   }
                 }

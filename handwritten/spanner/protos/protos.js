@@ -16194,6 +16194,12 @@
                      * @interface IViolation
                      * @property {string|null} [subject] Violation subject
                      * @property {string|null} [description] Violation description
+                     * @property {string|null} [apiService] Violation apiService
+                     * @property {string|null} [quotaMetric] Violation quotaMetric
+                     * @property {string|null} [quotaId] Violation quotaId
+                     * @property {Object.<string,string>|null} [quotaDimensions] Violation quotaDimensions
+                     * @property {number|Long|null} [quotaValue] Violation quotaValue
+                     * @property {number|Long|null} [futureQuotaValue] Violation futureQuotaValue
                      */
     
                     /**
@@ -16205,6 +16211,7 @@
                      * @param {google.rpc.QuotaFailure.IViolation=} [properties] Properties to set
                      */
                     function Violation(properties) {
+                        this.quotaDimensions = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -16226,6 +16233,63 @@
                      * @instance
                      */
                     Violation.prototype.description = "";
+    
+                    /**
+                     * Violation apiService.
+                     * @member {string} apiService
+                     * @memberof google.rpc.QuotaFailure.Violation
+                     * @instance
+                     */
+                    Violation.prototype.apiService = "";
+    
+                    /**
+                     * Violation quotaMetric.
+                     * @member {string} quotaMetric
+                     * @memberof google.rpc.QuotaFailure.Violation
+                     * @instance
+                     */
+                    Violation.prototype.quotaMetric = "";
+    
+                    /**
+                     * Violation quotaId.
+                     * @member {string} quotaId
+                     * @memberof google.rpc.QuotaFailure.Violation
+                     * @instance
+                     */
+                    Violation.prototype.quotaId = "";
+    
+                    /**
+                     * Violation quotaDimensions.
+                     * @member {Object.<string,string>} quotaDimensions
+                     * @memberof google.rpc.QuotaFailure.Violation
+                     * @instance
+                     */
+                    Violation.prototype.quotaDimensions = $util.emptyObject;
+    
+                    /**
+                     * Violation quotaValue.
+                     * @member {number|Long} quotaValue
+                     * @memberof google.rpc.QuotaFailure.Violation
+                     * @instance
+                     */
+                    Violation.prototype.quotaValue = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * Violation futureQuotaValue.
+                     * @member {number|Long|null|undefined} futureQuotaValue
+                     * @memberof google.rpc.QuotaFailure.Violation
+                     * @instance
+                     */
+                    Violation.prototype.futureQuotaValue = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(Violation.prototype, "_futureQuotaValue", {
+                        get: $util.oneOfGetter($oneOfFields = ["futureQuotaValue"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
     
                     /**
                      * Creates a new Violation instance using the specified properties.
@@ -16255,6 +16319,19 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.subject);
                         if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                        if (message.apiService != null && Object.hasOwnProperty.call(message, "apiService"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.apiService);
+                        if (message.quotaMetric != null && Object.hasOwnProperty.call(message, "quotaMetric"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.quotaMetric);
+                        if (message.quotaId != null && Object.hasOwnProperty.call(message, "quotaId"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.quotaId);
+                        if (message.quotaDimensions != null && Object.hasOwnProperty.call(message, "quotaDimensions"))
+                            for (var keys = Object.keys(message.quotaDimensions), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.quotaDimensions[keys[i]]).ldelim();
+                        if (message.quotaValue != null && Object.hasOwnProperty.call(message, "quotaValue"))
+                            writer.uint32(/* id 7, wireType 0 =*/56).int64(message.quotaValue);
+                        if (message.futureQuotaValue != null && Object.hasOwnProperty.call(message, "futureQuotaValue"))
+                            writer.uint32(/* id 8, wireType 0 =*/64).int64(message.futureQuotaValue);
                         return writer;
                     };
     
@@ -16285,7 +16362,7 @@
                     Violation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.QuotaFailure.Violation();
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.QuotaFailure.Violation(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -16297,6 +16374,49 @@
                                 }
                             case 2: {
                                     message.description = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.apiService = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.quotaMetric = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.quotaId = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    if (message.quotaDimensions === $util.emptyObject)
+                                        message.quotaDimensions = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.quotaDimensions[key] = value;
+                                    break;
+                                }
+                            case 7: {
+                                    message.quotaValue = reader.int64();
+                                    break;
+                                }
+                            case 8: {
+                                    message.futureQuotaValue = reader.int64();
                                     break;
                                 }
                             default:
@@ -16334,12 +16454,38 @@
                     Violation.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.subject != null && message.hasOwnProperty("subject"))
                             if (!$util.isString(message.subject))
                                 return "subject: string expected";
                         if (message.description != null && message.hasOwnProperty("description"))
                             if (!$util.isString(message.description))
                                 return "description: string expected";
+                        if (message.apiService != null && message.hasOwnProperty("apiService"))
+                            if (!$util.isString(message.apiService))
+                                return "apiService: string expected";
+                        if (message.quotaMetric != null && message.hasOwnProperty("quotaMetric"))
+                            if (!$util.isString(message.quotaMetric))
+                                return "quotaMetric: string expected";
+                        if (message.quotaId != null && message.hasOwnProperty("quotaId"))
+                            if (!$util.isString(message.quotaId))
+                                return "quotaId: string expected";
+                        if (message.quotaDimensions != null && message.hasOwnProperty("quotaDimensions")) {
+                            if (!$util.isObject(message.quotaDimensions))
+                                return "quotaDimensions: object expected";
+                            var key = Object.keys(message.quotaDimensions);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.quotaDimensions[key[i]]))
+                                    return "quotaDimensions: string{k:string} expected";
+                        }
+                        if (message.quotaValue != null && message.hasOwnProperty("quotaValue"))
+                            if (!$util.isInteger(message.quotaValue) && !(message.quotaValue && $util.isInteger(message.quotaValue.low) && $util.isInteger(message.quotaValue.high)))
+                                return "quotaValue: integer|Long expected";
+                        if (message.futureQuotaValue != null && message.hasOwnProperty("futureQuotaValue")) {
+                            properties._futureQuotaValue = 1;
+                            if (!$util.isInteger(message.futureQuotaValue) && !(message.futureQuotaValue && $util.isInteger(message.futureQuotaValue.low) && $util.isInteger(message.futureQuotaValue.high)))
+                                return "futureQuotaValue: integer|Long expected";
+                        }
                         return null;
                     };
     
@@ -16359,6 +16505,37 @@
                             message.subject = String(object.subject);
                         if (object.description != null)
                             message.description = String(object.description);
+                        if (object.apiService != null)
+                            message.apiService = String(object.apiService);
+                        if (object.quotaMetric != null)
+                            message.quotaMetric = String(object.quotaMetric);
+                        if (object.quotaId != null)
+                            message.quotaId = String(object.quotaId);
+                        if (object.quotaDimensions) {
+                            if (typeof object.quotaDimensions !== "object")
+                                throw TypeError(".google.rpc.QuotaFailure.Violation.quotaDimensions: object expected");
+                            message.quotaDimensions = {};
+                            for (var keys = Object.keys(object.quotaDimensions), i = 0; i < keys.length; ++i)
+                                message.quotaDimensions[keys[i]] = String(object.quotaDimensions[keys[i]]);
+                        }
+                        if (object.quotaValue != null)
+                            if ($util.Long)
+                                (message.quotaValue = $util.Long.fromValue(object.quotaValue)).unsigned = false;
+                            else if (typeof object.quotaValue === "string")
+                                message.quotaValue = parseInt(object.quotaValue, 10);
+                            else if (typeof object.quotaValue === "number")
+                                message.quotaValue = object.quotaValue;
+                            else if (typeof object.quotaValue === "object")
+                                message.quotaValue = new $util.LongBits(object.quotaValue.low >>> 0, object.quotaValue.high >>> 0).toNumber();
+                        if (object.futureQuotaValue != null)
+                            if ($util.Long)
+                                (message.futureQuotaValue = $util.Long.fromValue(object.futureQuotaValue)).unsigned = false;
+                            else if (typeof object.futureQuotaValue === "string")
+                                message.futureQuotaValue = parseInt(object.futureQuotaValue, 10);
+                            else if (typeof object.futureQuotaValue === "number")
+                                message.futureQuotaValue = object.futureQuotaValue;
+                            else if (typeof object.futureQuotaValue === "object")
+                                message.futureQuotaValue = new $util.LongBits(object.futureQuotaValue.low >>> 0, object.futureQuotaValue.high >>> 0).toNumber();
                         return message;
                     };
     
@@ -16375,14 +16552,49 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.objects || options.defaults)
+                            object.quotaDimensions = {};
                         if (options.defaults) {
                             object.subject = "";
                             object.description = "";
+                            object.apiService = "";
+                            object.quotaMetric = "";
+                            object.quotaId = "";
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.quotaValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.quotaValue = options.longs === String ? "0" : 0;
                         }
                         if (message.subject != null && message.hasOwnProperty("subject"))
                             object.subject = message.subject;
                         if (message.description != null && message.hasOwnProperty("description"))
                             object.description = message.description;
+                        if (message.apiService != null && message.hasOwnProperty("apiService"))
+                            object.apiService = message.apiService;
+                        if (message.quotaMetric != null && message.hasOwnProperty("quotaMetric"))
+                            object.quotaMetric = message.quotaMetric;
+                        if (message.quotaId != null && message.hasOwnProperty("quotaId"))
+                            object.quotaId = message.quotaId;
+                        var keys2;
+                        if (message.quotaDimensions && (keys2 = Object.keys(message.quotaDimensions)).length) {
+                            object.quotaDimensions = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.quotaDimensions[keys2[j]] = message.quotaDimensions[keys2[j]];
+                        }
+                        if (message.quotaValue != null && message.hasOwnProperty("quotaValue"))
+                            if (typeof message.quotaValue === "number")
+                                object.quotaValue = options.longs === String ? String(message.quotaValue) : message.quotaValue;
+                            else
+                                object.quotaValue = options.longs === String ? $util.Long.prototype.toString.call(message.quotaValue) : options.longs === Number ? new $util.LongBits(message.quotaValue.low >>> 0, message.quotaValue.high >>> 0).toNumber() : message.quotaValue;
+                        if (message.futureQuotaValue != null && message.hasOwnProperty("futureQuotaValue")) {
+                            if (typeof message.futureQuotaValue === "number")
+                                object.futureQuotaValue = options.longs === String ? String(message.futureQuotaValue) : message.futureQuotaValue;
+                            else
+                                object.futureQuotaValue = options.longs === String ? $util.Long.prototype.toString.call(message.futureQuotaValue) : options.longs === Number ? new $util.LongBits(message.futureQuotaValue.low >>> 0, message.futureQuotaValue.high >>> 0).toNumber() : message.futureQuotaValue;
+                            if (options.oneofs)
+                                object._futureQuotaValue = "futureQuotaValue";
+                        }
                         return object;
                     };
     
@@ -17127,6 +17339,8 @@
                      * @interface IFieldViolation
                      * @property {string|null} [field] FieldViolation field
                      * @property {string|null} [description] FieldViolation description
+                     * @property {string|null} [reason] FieldViolation reason
+                     * @property {google.rpc.ILocalizedMessage|null} [localizedMessage] FieldViolation localizedMessage
                      */
     
                     /**
@@ -17161,6 +17375,22 @@
                     FieldViolation.prototype.description = "";
     
                     /**
+                     * FieldViolation reason.
+                     * @member {string} reason
+                     * @memberof google.rpc.BadRequest.FieldViolation
+                     * @instance
+                     */
+                    FieldViolation.prototype.reason = "";
+    
+                    /**
+                     * FieldViolation localizedMessage.
+                     * @member {google.rpc.ILocalizedMessage|null|undefined} localizedMessage
+                     * @memberof google.rpc.BadRequest.FieldViolation
+                     * @instance
+                     */
+                    FieldViolation.prototype.localizedMessage = null;
+    
+                    /**
                      * Creates a new FieldViolation instance using the specified properties.
                      * @function create
                      * @memberof google.rpc.BadRequest.FieldViolation
@@ -17188,6 +17418,10 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
                         if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                        if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.reason);
+                        if (message.localizedMessage != null && Object.hasOwnProperty.call(message, "localizedMessage"))
+                            $root.google.rpc.LocalizedMessage.encode(message.localizedMessage, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         return writer;
                     };
     
@@ -17232,6 +17466,14 @@
                                     message.description = reader.string();
                                     break;
                                 }
+                            case 3: {
+                                    message.reason = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.localizedMessage = $root.google.rpc.LocalizedMessage.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -17273,6 +17515,14 @@
                         if (message.description != null && message.hasOwnProperty("description"))
                             if (!$util.isString(message.description))
                                 return "description: string expected";
+                        if (message.reason != null && message.hasOwnProperty("reason"))
+                            if (!$util.isString(message.reason))
+                                return "reason: string expected";
+                        if (message.localizedMessage != null && message.hasOwnProperty("localizedMessage")) {
+                            var error = $root.google.rpc.LocalizedMessage.verify(message.localizedMessage);
+                            if (error)
+                                return "localizedMessage." + error;
+                        }
                         return null;
                     };
     
@@ -17292,6 +17542,13 @@
                             message.field = String(object.field);
                         if (object.description != null)
                             message.description = String(object.description);
+                        if (object.reason != null)
+                            message.reason = String(object.reason);
+                        if (object.localizedMessage != null) {
+                            if (typeof object.localizedMessage !== "object")
+                                throw TypeError(".google.rpc.BadRequest.FieldViolation.localizedMessage: object expected");
+                            message.localizedMessage = $root.google.rpc.LocalizedMessage.fromObject(object.localizedMessage);
+                        }
                         return message;
                     };
     
@@ -17311,11 +17568,17 @@
                         if (options.defaults) {
                             object.field = "";
                             object.description = "";
+                            object.reason = "";
+                            object.localizedMessage = null;
                         }
                         if (message.field != null && message.hasOwnProperty("field"))
                             object.field = message.field;
                         if (message.description != null && message.hasOwnProperty("description"))
                             object.description = message.description;
+                        if (message.reason != null && message.hasOwnProperty("reason"))
+                            object.reason = message.reason;
+                        if (message.localizedMessage != null && message.hasOwnProperty("localizedMessage"))
+                            object.localizedMessage = $root.google.rpc.LocalizedMessage.toObject(message.localizedMessage, options);
                         return object;
                     };
     
