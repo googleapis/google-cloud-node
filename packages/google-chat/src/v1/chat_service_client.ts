@@ -377,9 +377,11 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.admin.spaces.readonly',
       'https://www.googleapis.com/auth/chat.app.delete',
       'https://www.googleapis.com/auth/chat.app.memberships',
+      'https://www.googleapis.com/auth/chat.app.memberships.readonly',
       'https://www.googleapis.com/auth/chat.app.messages.readonly',
       'https://www.googleapis.com/auth/chat.app.spaces',
       'https://www.googleapis.com/auth/chat.app.spaces.create',
+      'https://www.googleapis.com/auth/chat.app.spaces.readonly',
       'https://www.googleapis.com/auth/chat.bot',
       'https://www.googleapis.com/auth/chat.customemojis',
       'https://www.googleapis.com/auth/chat.customemojis.readonly',
@@ -759,8 +761,7 @@ export class ChatServiceClient {
  *     that invoke the Chat app.
  *     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
  *     with [administrator
- *     approval](https://support.google.com/a?p=chat-app-auth) (available in
- *     [Developer Preview](https://developers.google.com/workspace/preview)).
+ *     approval](https://support.google.com/a?p=chat-app-auth).
  *     When using this authentication scope,
  *     this method returns details about a public message in a space.
  *
@@ -3848,12 +3849,13 @@ export class ChatServiceClient {
  * - [App
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
  * with [administrator
- * approval](https://support.google.com/a?p=chat-app-auth) in
- * [Developer Preview](https://developers.google.com/workspace/preview)
- *  with one of the following authorization scopes:
+ * approval](https://support.google.com/a?p=chat-app-auth)
+ * with one of the following authorization scopes:
  *     - `https://www.googleapis.com/auth/chat.app.spaces`
+ *     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`
  *     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
  *     - `https://www.googleapis.com/auth/chat.app.memberships`
+ *     - `https://www.googleapis.com/auth/chat.app.memberships.readonly`
  *
  * - [User
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
@@ -4753,9 +4755,8 @@ export class ChatServiceClient {
  * - [App
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
  * with [administrator
- * approval](https://support.google.com/a?p=chat-app-auth) in
- * [Developer Preview](https://developers.google.com/workspace/preview)
- *  with the authorization scope:
+ * approval](https://support.google.com/a?p=chat-app-auth)
+ * with the authorization scope:
  *     - `https://www.googleapis.com/auth/chat.app.messages.readonly`. When
  *     using this authentication scope, this method only returns public
  *     messages in a space. It doesn't include private messages.
@@ -7097,12 +7098,13 @@ export class ChatServiceClient {
  * - [App
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
  * with [administrator
- * approval](https://support.google.com/a?p=chat-app-auth) in
- * [Developer Preview](https://developers.google.com/workspace/preview)
- *  with one of the following authorization scopes:
+ * approval](https://support.google.com/a?p=chat-app-auth)
+ * with one of the following authorization scopes:
  *     - `https://www.googleapis.com/auth/chat.app.spaces`
+ *     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`
  *     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
  *     - `https://www.googleapis.com/auth/chat.app.memberships`
+ *     - `https://www.googleapis.com/auth/chat.app.memberships.readonly`
  *
  * - [User
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
