@@ -6448,16 +6448,47 @@ describe.skipClassic('Pipeline class', () => {
           .where(equal('authorName', variable('doc').getField('author')))
           .select(field('reviewer').as('reviewer'));
 
-        const results = await firestore
+        const ppl = firestore
           .pipeline()
           .collection(outerCollName)
           .where(equal('title', '1984'))
           .define(currentDocument().as('doc'))
           .addFields(reviewsSub.toArrayExpression().as('reviews'))
-          .select('title', 'reviews')
-          .execute();
+          .select('title', 'reviews');
 
-        expectResults(results, {title: '1984', reviews: ['Alice']});
+        // TODO(dlarocque): Remove these target backend conditionals once the 'get_field' rename has rolled out to prod.
+        const host = firestore._settings.host;
+        const isProd = host === 'firestore.googleapis.com';
+        const isNightly = host === 'test-firestore.sandbox.googleapis.com';
+
+        if (isProd) {
+          // The execution of this pipeline is expected to result in a network error
+          // from the backend until the breaking change to rename the 'field' expression to
+          // 'get_field' has rolled out to prod.
+          try {
+            const results = await ppl.execute();
+
+            // If this is reached, the execution of the pipeline didn't throw an error, so the
+            // breaking change must have rolled out to prod. We can assert the newly expected behaviour.
+            console.warn(
+              "The 'get_field' expression rename has rolled out to the prod backend. Remove the target backend conditionals in this test.",
+            );
+            expectResults(results, {title: '1984', reviews: ['Alice']});
+          } catch (err: unknown) {
+            const error: Error = err as Error;
+            expect(error.message).to.equals(
+              "Request failed with error: The function 'get_field' does not exist, did you mean 'field'?",
+            );
+          }
+        } else if (isNightly) {
+          const results = await ppl.execute();
+          expectResults(results, {title: '1984', reviews: ['Alice']});
+        } else {
+          expect(false).to.equal(
+            true,
+            `This test is only expected to run against firestore.googleapis.com or test-firestore.sandbox.googleapis.com, but it instead ran against ${host}`,
+          );
+        }
       });
     });
 
@@ -6518,22 +6549,55 @@ describe.skipClassic('Pipeline class', () => {
       };
 
       await withSubqueryData(data, async () => {
+        // This references a non-existent field 'doesNotExist' on the current document 'doc'
         const reviewsSub = firestore
           .pipeline()
           .collection(reviewsCollName)
+          // using mapGet explicitly or just field path if supported on maps
           .where(equal('bookId', variable('doc').getField('doesNotExist')))
           .select(field('reviewer').as('reviewer'));
 
-        const results = await firestore
+        const ppl = firestore
           .pipeline()
           .collection(outerCollName)
           .where(equal('title', '1984'))
           .define(currentDocument().as('doc'))
           .addFields(reviewsSub.toArrayExpression().as('reviews'))
-          .select('title', 'reviews')
-          .execute();
+          .select('title', 'reviews');
 
-        expectResults(results, {title: '1984', reviews: []});
+        // TODO(dlarocque): Remove these target backend conditionals once the 'get_field' rename has rolled out to prod.
+        const host = firestore._settings.host;
+        const isProd = host === 'firestore.googleapis.com';
+        const isNightly = host === 'test-firestore.sandbox.googleapis.com';
+
+        if (isProd) {
+          // The execution of this pipeline is expected to result in a network error
+          // from the backend until the breaking change to rename the 'field' expression to
+          // 'get_field' has rolled out to prod.
+          try {
+            const results = await ppl.execute();
+
+            // If this is reached, the execution of the pipeline didn't throw an error, so the
+            // breaking change must have rolled out to prod. We can assert the newly expected behaviour.
+            console.warn(
+              "The 'get_field' expression rename has rolled out to the prod backend. Remove the target backend conditionals in this test.",
+            );
+            expectResults(results, {title: '1984', reviews: []});
+          } catch (err: unknown) {
+            const error: Error = err as Error;
+            expect(error.message).to.equals(
+              "Request failed with error: The function 'get_field' does not exist, did you mean 'field'?",
+            );
+          }
+        } else if (isNightly) {
+          const results = await ppl.execute();
+          expectResults(results, {title: '1984', reviews: []});
+        } else {
+          expect(false).to.equal(
+            true,
+            `This test is only expected to run against firestore.googleapis.com or test-firestore.sandbox.googleapis.com, but it instead ran against ${host}`,
+          );
+        }
       });
     });
 

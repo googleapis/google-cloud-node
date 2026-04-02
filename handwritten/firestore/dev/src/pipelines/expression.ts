@@ -10828,8 +10828,8 @@ export function getField(expression: Expression, key: string): Expression;
  *
  * @example
  * ```typescript
- * // Get the value of the key resulting from the "addressField" variable in the "address" document.
- * getField(field("address"), variable("addressField"))
+ * // Get the value of the "city" field in the "address" document.
+ * getField(field("address"), "city")
  * ```
  *
  * @param expression The expression representing the document.

@@ -9914,9 +9914,8 @@ declare namespace FirebaseFirestore {
      *
      * @example
      * ```typescript
-     * // Get the value of the key resulting from the "addressField" variable in the "address" document.
-     * getField(field("address"), variable("addressField"))
-     * ```
+     * // Get the value of the "city" field in the "address" document.
+     * getField("address", "city")
      *
      * @param expression The expression representing the document.
      * @param keyExpr The expression representing the key to access in the document.
