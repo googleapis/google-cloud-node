@@ -38,6 +38,9 @@ describe('Timestamp Output Format System Tests', () => {
   const expectedTsValuePicoseconds = '2023-01-01T12:00:00.123456789123Z';
 
   before(async () => {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+      return;
+    }
     await dataset.create();
     await table.create({
       schema: [{name: 'ts', type: 'TIMESTAMP', timestampPrecision: '12'}],
