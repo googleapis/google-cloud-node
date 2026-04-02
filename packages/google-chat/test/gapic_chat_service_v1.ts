@@ -3171,6 +3171,550 @@ describe('v1.ChatServiceClient', () => {
         });
     });
 
+    describe('createSection', () => {
+        it('invokes createSection without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.CreateSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.CreateSectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.chat.v1.Section()
+            );
+            client.innerApiCalls.createSection = stubSimpleCall(expectedResponse);
+            const [response] = await client.createSection(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSection without error using callback', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.CreateSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.CreateSectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.chat.v1.Section()
+            );
+            client.innerApiCalls.createSection = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSection(
+                    request,
+                    (err?: Error|null, result?: protos.google.chat.v1.ISection|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSection with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.CreateSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.CreateSectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSection = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createSection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSection with closed client', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.CreateSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.CreateSectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createSection(request), expectedError);
+        });
+    });
+
+    describe('deleteSection', () => {
+        it('invokes deleteSection without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.DeleteSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.DeleteSectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSection = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteSection(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSection without error using callback', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.DeleteSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.DeleteSectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSection = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSection(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSection with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.DeleteSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.DeleteSectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSection = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteSection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSection with closed client', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.DeleteSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.DeleteSectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteSection(request), expectedError);
+        });
+    });
+
+    describe('updateSection', () => {
+        it('invokes updateSection without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.UpdateSectionRequest()
+            );
+            request.section ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.UpdateSectionRequest', ['section', 'name']);
+            request.section.name = defaultValue1;
+            const expectedHeaderRequestParams = `section.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.chat.v1.Section()
+            );
+            client.innerApiCalls.updateSection = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSection(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSection without error using callback', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.UpdateSectionRequest()
+            );
+            request.section ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.UpdateSectionRequest', ['section', 'name']);
+            request.section.name = defaultValue1;
+            const expectedHeaderRequestParams = `section.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.chat.v1.Section()
+            );
+            client.innerApiCalls.updateSection = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSection(
+                    request,
+                    (err?: Error|null, result?: protos.google.chat.v1.ISection|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSection with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.UpdateSectionRequest()
+            );
+            request.section ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.UpdateSectionRequest', ['section', 'name']);
+            request.section.name = defaultValue1;
+            const expectedHeaderRequestParams = `section.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSection = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateSection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSection with closed client', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.UpdateSectionRequest()
+            );
+            request.section ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.UpdateSectionRequest', ['section', 'name']);
+            request.section.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateSection(request), expectedError);
+        });
+    });
+
+    describe('positionSection', () => {
+        it('invokes positionSection without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.PositionSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.PositionSectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.chat.v1.PositionSectionResponse()
+            );
+            client.innerApiCalls.positionSection = stubSimpleCall(expectedResponse);
+            const [response] = await client.positionSection(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.positionSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.positionSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes positionSection without error using callback', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.PositionSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.PositionSectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.chat.v1.PositionSectionResponse()
+            );
+            client.innerApiCalls.positionSection = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.positionSection(
+                    request,
+                    (err?: Error|null, result?: protos.google.chat.v1.IPositionSectionResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.positionSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.positionSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes positionSection with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.PositionSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.PositionSectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.positionSection = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.positionSection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.positionSection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.positionSection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes positionSection with closed client', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.PositionSectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.PositionSectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.positionSection(request), expectedError);
+        });
+    });
+
+    describe('moveSectionItem', () => {
+        it('invokes moveSectionItem without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.MoveSectionItemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.MoveSectionItemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.chat.v1.MoveSectionItemResponse()
+            );
+            client.innerApiCalls.moveSectionItem = stubSimpleCall(expectedResponse);
+            const [response] = await client.moveSectionItem(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.moveSectionItem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveSectionItem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveSectionItem without error using callback', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.MoveSectionItemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.MoveSectionItemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.chat.v1.MoveSectionItemResponse()
+            );
+            client.innerApiCalls.moveSectionItem = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.moveSectionItem(
+                    request,
+                    (err?: Error|null, result?: protos.google.chat.v1.IMoveSectionItemResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.moveSectionItem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveSectionItem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveSectionItem with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.MoveSectionItemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.MoveSectionItemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.moveSectionItem = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.moveSectionItem(request), expectedError);
+            const actualRequest = (client.innerApiCalls.moveSectionItem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveSectionItem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveSectionItem with closed client', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.MoveSectionItemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.MoveSectionItemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.moveSectionItem(request), expectedError);
+        });
+    });
+
     describe('listMessages', () => {
         it('invokes listMessages without error', async () => {
             const client = new chatserviceModule.v1.ChatServiceClient({
@@ -4676,6 +5220,496 @@ describe('v1.ChatServiceClient', () => {
         });
     });
 
+    describe('listSections', () => {
+        it('invokes listSections without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+            ];
+            client.innerApiCalls.listSections = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSections(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSections without error using callback', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+            ];
+            client.innerApiCalls.listSections = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSections(
+                    request,
+                    (err?: Error|null, result?: protos.google.chat.v1.ISection[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSections with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSections = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSections(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSectionsStream without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+            ];
+            client.descriptors.page.listSections.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSectionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.chat.v1.Section[] = [];
+                stream.on('data', (response: protos.google.chat.v1.Section) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSections.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSections, request));
+            assert(
+                (client.descriptors.page.listSections.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listSectionsStream with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSections.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSectionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.chat.v1.Section[] = [];
+                stream.on('data', (response: protos.google.chat.v1.Section) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSections.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSections, request));
+            assert(
+                (client.descriptors.page.listSections.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listSections without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+              generateSampleMessage(new protos.google.chat.v1.Section()),
+            ];
+            client.descriptors.page.listSections.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.chat.v1.ISection[] = [];
+            const iterable = client.listSectionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSections.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSections.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listSections with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSections.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSectionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.chat.v1.ISection[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSections.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSections.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listSectionItems', () => {
+        it('invokes listSectionItems without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionItemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionItemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+            ];
+            client.innerApiCalls.listSectionItems = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSectionItems(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSectionItems as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSectionItems as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSectionItems without error using callback', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionItemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionItemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+            ];
+            client.innerApiCalls.listSectionItems = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSectionItems(
+                    request,
+                    (err?: Error|null, result?: protos.google.chat.v1.ISectionItem[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSectionItems as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSectionItems as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSectionItems with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionItemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionItemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSectionItems = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSectionItems(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSectionItems as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSectionItems as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSectionItemsStream without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionItemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionItemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+            ];
+            client.descriptors.page.listSectionItems.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSectionItemsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.chat.v1.SectionItem[] = [];
+                stream.on('data', (response: protos.google.chat.v1.SectionItem) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSectionItems.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSectionItems, request));
+            assert(
+                (client.descriptors.page.listSectionItems.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listSectionItemsStream with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionItemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionItemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSectionItems.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSectionItemsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.chat.v1.SectionItem[] = [];
+                stream.on('data', (response: protos.google.chat.v1.SectionItem) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSectionItems.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSectionItems, request));
+            assert(
+                (client.descriptors.page.listSectionItems.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listSectionItems without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionItemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionItemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+              generateSampleMessage(new protos.google.chat.v1.SectionItem()),
+            ];
+            client.descriptors.page.listSectionItems.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.chat.v1.ISectionItem[] = [];
+            const iterable = client.listSectionItemsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSectionItems.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSectionItems.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listSectionItems with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.ListSectionItemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.chat.v1.ListSectionItemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSectionItems.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSectionItemsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.chat.v1.ISectionItem[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSectionItems.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSectionItems.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
     describe('Path templates', () => {
 
         describe('attachment', async () => {
@@ -4918,6 +5952,90 @@ describe('v1.ChatServiceClient', () => {
                 const result = client.matchReactionFromReactionName(fakePath);
                 assert.strictEqual(result, "reactionValue");
                 assert((client.pathTemplates.reactionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('section', async () => {
+            const fakePath = "/rendered/path/section";
+            const expectedParameters = {
+                user: "userValue",
+                section: "sectionValue",
+            };
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sectionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sectionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sectionPath', () => {
+                const result = client.sectionPath("userValue", "sectionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sectionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchUserFromSectionName', () => {
+                const result = client.matchUserFromSectionName(fakePath);
+                assert.strictEqual(result, "userValue");
+                assert((client.pathTemplates.sectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSectionFromSectionName', () => {
+                const result = client.matchSectionFromSectionName(fakePath);
+                assert.strictEqual(result, "sectionValue");
+                assert((client.pathTemplates.sectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sectionItem', async () => {
+            const fakePath = "/rendered/path/sectionItem";
+            const expectedParameters = {
+                user: "userValue",
+                section: "sectionValue",
+                item: "itemValue",
+            };
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sectionItemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sectionItemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sectionItemPath', () => {
+                const result = client.sectionItemPath("userValue", "sectionValue", "itemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sectionItemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchUserFromSectionItemName', () => {
+                const result = client.matchUserFromSectionItemName(fakePath);
+                assert.strictEqual(result, "userValue");
+                assert((client.pathTemplates.sectionItemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSectionFromSectionItemName', () => {
+                const result = client.matchSectionFromSectionItemName(fakePath);
+                assert.strictEqual(result, "sectionValue");
+                assert((client.pathTemplates.sectionItemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchItemFromSectionItemName', () => {
+                const result = client.matchItemFromSectionItemName(fakePath);
+                assert.strictEqual(result, "itemValue");
+                assert((client.pathTemplates.sectionItemPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
