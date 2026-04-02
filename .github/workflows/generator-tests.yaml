@@ -151,14 +151,6 @@ jobs:
     - name: Mark repo as safe for git
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-    - name: Compute GIT_DIFF_ARG
-      id: diff-logic
-      run: |
-        # For continuous build, we want to know the difference in the last
-        # commit. This assumes we use squash commit when merging PRs.
-        git fetch origin main --deepen=1
-        echo "GIT_DIFF_ARG=HEAD~.." >> $GITHUB_ENV
-
     - name: Cache Bazel files
       id: cache-bazel
       uses: actions/cache@v5
