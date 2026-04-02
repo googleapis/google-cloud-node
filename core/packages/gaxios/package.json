@@ -40,8 +40,8 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/gaxios",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/gaxios",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "keywords": [
     "google"
@@ -55,7 +55,6 @@
     "@babel/plugin-proposal-private-methods": "^7.18.6",
     "@types/cors": "^2.8.6",
     "@types/express": "^5.0.0",
-    "@types/extend": "^3.0.1",
     "@types/mocha": "^10.0.10",
     "@types/multiparty": "4.2.1",
     "@types/mv": "^2.1.0",
@@ -100,7 +99,6 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "extend": "^3.0.2",
     "https-proxy-agent": "^7.0.1",
     "node-fetch": "^3.3.2"
   },

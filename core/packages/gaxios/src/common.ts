@@ -14,8 +14,6 @@
 import {Agent} from 'http';
 import {Readable} from 'stream';
 
-import extend from 'extend';
-
 import util from './util.cjs';
 
 const pkg = util.pkg;
@@ -142,9 +140,9 @@ export class GaxiosError<T = ReturnType<JSON['parse']>> extends Error {
 
     // deep-copy config as we do not want to mutate
     // the existing config for future retries/use
-    this.config = extend(true, {}, config);
+    this.config = structuredClone(config);
     if (this.response) {
-      this.response.config = extend(true, {}, this.response.config);
+      this.response.config = structuredClone(this.response.config);
     }
 
     if (this.response) {
