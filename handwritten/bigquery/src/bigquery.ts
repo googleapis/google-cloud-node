@@ -2381,9 +2381,15 @@ export class BigQuery extends Service {
         useInt64Timestamp: options['formatOptions.useInt64Timestamp'],
       });
     } else {
-      formatOptions = {
-        useInt64Timestamp: true,
-      };
+      formatOptions = extend(
+        {
+          useInt64Timestamp: true,
+        },
+        {
+          timestampOutputFormat: options['formatOptions.timestampOutputFormat'],
+          useInt64Timestamp: options['formatOptions.useInt64Timestamp'],
+        },
+      );
     }
     const req: bigquery.IQueryRequest = {
       useQueryCache: queryObj.useQueryCache,
