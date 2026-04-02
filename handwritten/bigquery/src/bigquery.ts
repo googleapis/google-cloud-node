@@ -2258,45 +2258,33 @@ export class BigQuery extends Service {
       if (res && res.jobComplete) {
         let rows: any = [];
         if (res.schema && res.rows) {
-          if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
-            try {
-              /*
-              Without this try/catch block, calls to getRows will hang indefinitely if
-              a call to mergeSchemaWithRows_ fails because the error never makes it to
-              the callback. Instead, pass the error to the callback the user provides
-              so that the user can see the error.
-               */
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const listParams = {
-                'formatOptions.timestampOutputFormat':
-                  queryReq.formatOptions?.timestampOutputFormat,
-                'formatOptions.useInt64Timestamp':
-                  queryReq.formatOptions?.useInt64Timestamp,
-              };
-              if (options.skipParsing) {
-                rows = res.rows;
-              } else {
-                rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
-                  wrapIntegers: options.wrapIntegers || false,
-                  parseJSON: options.parseJSON,
-                  listParams,
-                });
-                delete res.rows;
-              }
-            } catch (e) {
-              (callback as SimpleQueryRowsCallback)(e as Error, null, job);
-              return;
-            }
-          } else {
+          try {
+            /*
+            Without this try/catch block, calls to getRows will hang indefinitely if
+            a call to mergeSchemaWithRows_ fails because the error never makes it to
+            the callback. Instead, pass the error to the callback the user provides
+            so that the user can see the error.
+             */
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const listParams = {
+              'formatOptions.timestampOutputFormat':
+                queryReq.formatOptions?.timestampOutputFormat,
+              'formatOptions.useInt64Timestamp':
+                queryReq.formatOptions?.useInt64Timestamp,
+            };
             if (options.skipParsing) {
               rows = res.rows;
             } else {
               rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
                 wrapIntegers: options.wrapIntegers || false,
                 parseJSON: options.parseJSON,
+                listParams,
               });
               delete res.rows;
             }
+          } catch (e) {
+            (callback as SimpleQueryRowsCallback)(e as Error, null, job);
+            return;
           }
         }
         this.trace_('[runJobsQuery] job complete');
