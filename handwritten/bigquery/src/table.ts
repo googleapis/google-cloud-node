@@ -1905,6 +1905,7 @@ class Table extends ServiceObject {
               wrapIntegers,
               selectedFields,
               parseJSON,
+              listParams: qs,
             },
           );
         }
