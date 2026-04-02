@@ -114,11 +114,19 @@ export function generateServiceStub(
   for (const [rpcName, rpc] of Object.entries(rpcs)) {
     serviceStub[rpcName] = (
       request: {},
-      options?: {[name: string]: string},
-      _metadata?: {} | Function,
+      metadata?: {[name: string]: string[]},
+      callOptions?: {deadline?: Date} | Function,
       callback?: Function,
     ) => {
-      options ??= {};
+      metadata ??= {};
+      if (typeof callOptions === 'function' && callback === undefined) {
+        callback = callOptions;
+        callOptions = {};
+      }
+      const normalizedCallOptions =
+        typeof callOptions === 'function' || callOptions === undefined
+          ? {}
+          : callOptions;
 
       // We cannot use async-await in this function because we need to return the canceller object as soon as possible.
       // Using plain old promises instead.
@@ -150,11 +158,12 @@ export function generateServiceStub(
       let cancelRequested = false;
       const url = fetchParameters.url;
       const headers = new Headers(fetchParameters.headers);
-      for (const key of Object.keys(options)) {
-        headers.set(key, options[key][0]);
+      for (const key of Object.keys(metadata)) {
+        headers.set(key, metadata[key][0]);
       }
       const streamArrayParser = new StreamArrayParser(rpc);
       let response204Ok = false;
+      let deadlineTimer: ReturnType<typeof setTimeout> | undefined;
       const fetchRequest: gaxios.GaxiosOptions = {
         headers: headers,
         body:
@@ -174,9 +183,36 @@ export function generateServiceStub(
         delete fetchRequest['body'];
       }
 
+      if (normalizedCallOptions.deadline instanceof Date) {
+        const timeoutMs = Math.max(
+          0,
+          normalizedCallOptions.deadline.getTime() - Date.now(),
+        );
+        deadlineTimer = setTimeout(() => {
+          cancelRequested = true;
+          cancelController.abort();
+        }, timeoutMs);
+      }
+
+      const clearDeadlineTimer = () => {
+        if (deadlineTimer) {
+          clearTimeout(deadlineTimer);
+          deadlineTimer = undefined;
+        }
+      };
+
+      const originalCancel = streamArrayParser.cancel.bind(streamArrayParser);
+      streamArrayParser.cancel = () => {
+        cancelRequested = true;
+        clearDeadlineTimer();
+        cancelController.abort();
+        originalCancel();
+      };
+
       auth
         .fetch(url, fetchRequest)
         .then((response: Response | NodeFetchResponse) => {
+          clearDeadlineTimer();
           // There is a legacy Apiary configuration that some services
           // use which allows 204 empty responses on success instead of
           // a 200 OK. This most commonly is seen in delete RPCs,
@@ -245,6 +281,7 @@ export function generateServiceStub(
           }
         })
         .catch((err: unknown) => {
+          clearDeadlineTimer();
           if (rpc.responseStream) {
             if (callback) {
               callback(err);
@@ -263,6 +300,7 @@ export function generateServiceStub(
       return {
         cancel: () => {
           cancelRequested = true;
+          clearDeadlineTimer();
           cancelController.abort();
         },
       };
