@@ -596,28 +596,13 @@ class Job extends Operation {
         let rows: any = [];
 
         if (resp.schema && resp.rows) {
-          if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
-            try {
-              /*
-              Without this try/catch block, calls to /query endpoint will hang
-              indefinitely if a call to mergeSchemaWithRows_ fails because the
-              error never makes it to the callback. Instead, pass the error to the
-              callback the user provides so that the user can see the error.
-               */
-              if (options.skipParsing) {
-                rows = resp.rows;
-              } else {
-                rows = BigQuery.mergeSchemaWithRows_(resp.schema, resp.rows, {
-                  wrapIntegers,
-                  parseJSON,
-                });
-                delete resp.rows;
-              }
-            } catch (e) {
-              callback!(e as Error, null, null, resp);
-              return;
-            }
-          } else {
+          try {
+            /*
+            Without this try/catch block, calls to /query endpoint will hang
+            indefinitely if a call to mergeSchemaWithRows_ fails because the
+            error never makes it to the callback. Instead, pass the error to the
+            callback the user provides so that the user can see the error.
+             */
             if (options.skipParsing) {
               rows = resp.rows;
             } else {
@@ -627,6 +612,9 @@ class Job extends Operation {
               });
               delete resp.rows;
             }
+          } catch (e) {
+            callback!(e as Error, null, null, resp);
+            return;
           }
         }
 
