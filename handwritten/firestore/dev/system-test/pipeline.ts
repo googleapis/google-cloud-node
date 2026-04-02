@@ -6775,6 +6775,23 @@ describe.skipClassic('Pipeline class', () => {
         );
       }
     });
+
+    it('union with subquery throws', async () => {
+      try {
+        await firestore
+          .pipeline()
+          .collection(randomCol)
+          .union(subcollection('subcollection'))
+          .execute();
+
+        expect(false).to.equal(true, 'Should have thrown');
+      } catch (err: unknown) {
+        const error: Error = err as Error;
+        expect(error.message).equals(
+          'This pipeline was created without a database (e.g., as a subcollection pipeline) and cannot be executed directly. It can only be used as part of another pipeline.',
+        );
+      }
+    });
   });
 });
 
