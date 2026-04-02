@@ -2730,6 +2730,14 @@ export class BigQueryRange {
     };
   }
 
+  /**
+   * This method returns start and end values for RANGE typed values returned from
+   * the server. It decodes the server RANGE value into start and end values so
+   * they can be used to construct a BigQueryRange.
+   * @private
+   * @param {string} value The range value.
+   * @returns {string[]} The start and end of the range.
+   */
   private static fromStringValue_(value: string): [start: string, end: string] {
     let cleanedValue = value;
     if (cleanedValue.startsWith('[') || cleanedValue.startsWith('(')) {
@@ -2749,6 +2757,17 @@ export class BigQueryRange {
     return [start, end];
   }
 
+  /**
+   * This method is only used by convertSchemaFieldValue and only when range
+   * values are passed into convertSchemaFieldValue. It produces a value that is
+   * delivered to the user for read calls and it needs to pass along listParams
+   * to ensure TIMESTAMP types are converted properly.
+   * @private
+   * @param {string} value The range value.
+   * @param {string} elementType The element type.
+   * @param {bigquery.tabledata.IListParams | bigquery.jobs.IGetQueryResultsParams} [listParams] The list parameters.
+   * @returns {BigQueryRange}
+   */
   static fromSchemaValue_(
     value: string,
     elementType: string,
