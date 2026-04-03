@@ -19,7 +19,6 @@ import {
   isProtoCompatible,
   normalizeDescriptor,
 } from '../adapt/proto';
-import * as extend from 'extend';
 import {JSONObject, JSONValue} from './json_writer';
 import {PreciseDate} from '@google-cloud/precise-date';
 
@@ -94,7 +93,7 @@ export class JSONEncoder {
   }
 
   private convertRow(source: JSONObject, ptype: protobuf.Type): JSONObject {
-    const row = extend(true, {}, source);
+    const row = structuredClone(source);
     const keys = Object.keys(row).map(key => {
       if (!isProtoCompatible(key)) {
         const newFieldName = generatePlaceholderFieldName(key);
