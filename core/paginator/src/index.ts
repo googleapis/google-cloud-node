@@ -18,7 +18,6 @@
  * @module common/paginator
  */
 
-import * as extend from 'extend';
 import {TransformOptions} from 'stream';
 import {ResourceStream} from './resource-stream';
 
@@ -157,7 +156,7 @@ export class Paginator {
     }
 
     if (typeof query === 'object') {
-      query = extend<{}, ParsedArguments>(true, {}, query) as ParsedArguments;
+      query = structuredClone(query);
 
       // Check if the user only asked for a certain amount of results.
       if (query.maxResults && typeof query.maxResults === 'number') {
@@ -187,11 +186,7 @@ export class Paginator {
       callback,
     } as ParsedArguments;
 
-    parsedArguments.streamOptions = extend<{}, ParsedArguments>(
-      true,
-      {},
-      parsedArguments.query as ParsedArguments,
-    );
+    parsedArguments.streamOptions = structuredClone(parsedArguments.query);
     delete parsedArguments.streamOptions.autoPaginate;
     delete parsedArguments.streamOptions.maxResults;
     delete parsedArguments.streamOptions.pageSize;
