@@ -88,8 +88,8 @@
     "html-entities": "^2.5.2",
     "mime": "^3.0.0",
     "p-limit": "^3.0.1",
-    "retry-request": "^7.0.0",
-    "teeny-request": "^9.0.0",
+    "retry-request": "^8.0.0",
+    "teeny-request": "^10.0.0",
     "uuid": "^8.0.0"
   },
   "devDependencies": {
