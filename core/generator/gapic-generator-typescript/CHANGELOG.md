@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.11.13](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.12...gapic-generator-v4.11.13) (2026-04-06)
+
+
+### Bug Fixes
+
+* Upgrade the generator to protobuf 31 and bazel 7.7.1, and update templates to fix system test ([#7943](https://github.com/googleapis/google-cloud-node/issues/7943)) ([31fa06f](https://github.com/googleapis/google-cloud-node/commit/31fa06fe888b173c86c166af1c062c3cc3211342))
+
 ## [4.11.12](https://github.com/googleapis/google-cloud-node-core/compare/gapic-generator-v4.11.11...gapic-generator-v4.11.12) (2026-01-15)
 
 
