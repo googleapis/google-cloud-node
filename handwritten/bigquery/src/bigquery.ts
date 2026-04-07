@@ -2265,7 +2265,6 @@ export class BigQuery extends Service {
             the callback. Instead, pass the error to the callback the user provides
             so that the user can see the error.
              */
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const listParams = {
               'formatOptions.timestampOutputFormat':
                 queryReq.formatOptions?.timestampOutputFormat,
