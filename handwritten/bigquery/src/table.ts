@@ -1894,25 +1894,22 @@ class Table extends ServiceObject {
       callback!(null, rows, nextQuery, resp);
     };
 
-    let qs: GetRowsOptions;
+    const hasAnyFormatOpts =
+      options['formatOptions.timestampOutputFormat'] !== undefined ||
+      options['formatOptions.useInt64Timestamp'] !== undefined;
+    let defaultOpts: GetRowsOptions = hasAnyFormatOpts
+      ? {}
+      : {
+          'formatOptions.useInt64Timestamp': true,
+        };
     if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
-      const hasAnyFormatOpts =
-        options['formatOptions.timestampOutputFormat'] !== undefined ||
-        options['formatOptions.useInt64Timestamp'] !== undefined;
-      const defaultOpts = hasAnyFormatOpts
+      defaultOpts = hasAnyFormatOpts
         ? {}
         : {
             'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
           };
-      qs = extend(defaultOpts, options);
-    } else {
-      qs = extend(
-        {
-          'formatOptions.useInt64Timestamp': true,
-        },
-        options,
-      );
     }
+    const qs: GetRowsOptions = extend(defaultOpts, options);
 
     this.request(
       {
