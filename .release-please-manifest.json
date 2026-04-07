@@ -3,7 +3,7 @@
   "core/dev-packages/jsdoc-fresh": "5.0.2",
   "core/dev-packages/jsdoc-region-tag": "4.0.1",
   "core/dev-packages/pack-n-play": "4.2.2",
-  "core/generator/gapic-generator-typescript": "4.11.12",
+  "core/generator/gapic-generator-typescript": "4.11.13",
   "core/packages/gax": "5.0.6",
   "core/packages/gaxios": "7.1.4",
   "core/packages/gcp-metadata": "8.1.2",
