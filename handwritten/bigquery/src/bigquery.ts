@@ -54,7 +54,7 @@ import {
   GoogleErrorBody,
   RetryOptions,
 } from '@google-cloud/common/build/src/util';
-import bigquery from './types';
+import bigquery, {IDataFormatOptions} from './types';
 import {logger, setLogFunction} from './logger';
 
 // Third-Party Re-exports
@@ -2365,31 +2365,25 @@ export class BigQuery extends Service {
     if (options.job) {
       return undefined;
     }
-    let formatOptions;
+    const hasAnyFormatOpts =
+      options['formatOptions.timestampOutputFormat'] !== undefined ||
+      options['formatOptions.useInt64Timestamp'] !== undefined;
+    let defaultOpts: IDataFormatOptions = hasAnyFormatOpts
+      ? {}
+      : {
+          useInt64Timestamp: true,
+        };
     if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
-      const hasAnyFormatOpts =
-        options['formatOptions.timestampOutputFormat'] !== undefined ||
-        options['formatOptions.useInt64Timestamp'] !== undefined;
-      const defaultOpts = hasAnyFormatOpts
+      defaultOpts = hasAnyFormatOpts
         ? {}
         : {
             timestampOutputFormat: 'ISO8601_STRING',
           };
-      formatOptions = extend(defaultOpts, {
-        timestampOutputFormat: options['formatOptions.timestampOutputFormat'],
-        useInt64Timestamp: options['formatOptions.useInt64Timestamp'],
-      });
-    } else {
-      formatOptions = extend(
-        {
-          useInt64Timestamp: true,
-        },
-        {
-          timestampOutputFormat: options['formatOptions.timestampOutputFormat'],
-          useInt64Timestamp: options['formatOptions.useInt64Timestamp'],
-        },
-      );
     }
+    const formatOptions = extend(defaultOpts, {
+      timestampOutputFormat: options['formatOptions.timestampOutputFormat'],
+      useInt64Timestamp: options['formatOptions.useInt64Timestamp'],
+    });
     const req: bigquery.IQueryRequest = {
       useQueryCache: queryObj.useQueryCache,
       labels: queryObj.labels,
