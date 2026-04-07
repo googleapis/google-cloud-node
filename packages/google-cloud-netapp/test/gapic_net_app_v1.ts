@@ -1571,6 +1571,438 @@ describe('v1.NetAppClient', () => {
         });
     });
 
+    describe('executeOntapPost', () => {
+        it('invokes executeOntapPost without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPostRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapPostRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPostResponse()
+            );
+            client.innerApiCalls.executeOntapPost = stubSimpleCall(expectedResponse);
+            const [response] = await client.executeOntapPost(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeOntapPost as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapPost as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapPost without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPostRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapPostRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPostResponse()
+            );
+            client.innerApiCalls.executeOntapPost = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.executeOntapPost(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.netapp.v1.IExecuteOntapPostResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeOntapPost as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapPost as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapPost with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPostRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapPostRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.executeOntapPost = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.executeOntapPost(request), expectedError);
+            const actualRequest = (client.innerApiCalls.executeOntapPost as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapPost as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapPost with closed client', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPostRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapPostRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.executeOntapPost(request), expectedError);
+        });
+    });
+
+    describe('executeOntapGet', () => {
+        it('invokes executeOntapGet without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapGetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapGetRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapGetResponse()
+            );
+            client.innerApiCalls.executeOntapGet = stubSimpleCall(expectedResponse);
+            const [response] = await client.executeOntapGet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeOntapGet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapGet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapGet without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapGetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapGetRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapGetResponse()
+            );
+            client.innerApiCalls.executeOntapGet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.executeOntapGet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.netapp.v1.IExecuteOntapGetResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeOntapGet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapGet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapGet with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapGetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapGetRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.executeOntapGet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.executeOntapGet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.executeOntapGet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapGet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapGet with closed client', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapGetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapGetRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.executeOntapGet(request), expectedError);
+        });
+    });
+
+    describe('executeOntapDelete', () => {
+        it('invokes executeOntapDelete without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapDeleteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapDeleteRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapDeleteResponse()
+            );
+            client.innerApiCalls.executeOntapDelete = stubSimpleCall(expectedResponse);
+            const [response] = await client.executeOntapDelete(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeOntapDelete as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapDelete as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapDelete without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapDeleteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapDeleteRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapDeleteResponse()
+            );
+            client.innerApiCalls.executeOntapDelete = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.executeOntapDelete(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.netapp.v1.IExecuteOntapDeleteResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeOntapDelete as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapDelete as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapDelete with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapDeleteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapDeleteRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.executeOntapDelete = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.executeOntapDelete(request), expectedError);
+            const actualRequest = (client.innerApiCalls.executeOntapDelete as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapDelete as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapDelete with closed client', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapDeleteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapDeleteRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.executeOntapDelete(request), expectedError);
+        });
+    });
+
+    describe('executeOntapPatch', () => {
+        it('invokes executeOntapPatch without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPatchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapPatchRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPatchResponse()
+            );
+            client.innerApiCalls.executeOntapPatch = stubSimpleCall(expectedResponse);
+            const [response] = await client.executeOntapPatch(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeOntapPatch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapPatch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapPatch without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPatchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapPatchRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPatchResponse()
+            );
+            client.innerApiCalls.executeOntapPatch = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.executeOntapPatch(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.netapp.v1.IExecuteOntapPatchResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeOntapPatch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapPatch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapPatch with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPatchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapPatchRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedHeaderRequestParams = `ontap_path=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.executeOntapPatch = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.executeOntapPatch(request), expectedError);
+            const actualRequest = (client.innerApiCalls.executeOntapPatch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeOntapPatch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeOntapPatch with closed client', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ExecuteOntapPatchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ExecuteOntapPatchRequest', ['ontapPath']);
+            request.ontapPath = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.executeOntapPatch(request), expectedError);
+        });
+    });
+
     describe('createStoragePool', () => {
         it('invokes createStoragePool without error', async () => {
             const client = new netappModule.v1.NetAppClient({
@@ -2960,6 +3392,160 @@ describe('v1.NetAppClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkRevertVolumeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('establishVolumePeering', () => {
+        it('invokes establishVolumePeering without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.EstablishVolumePeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.EstablishVolumePeeringRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.establishVolumePeering = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.establishVolumePeering(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.establishVolumePeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.establishVolumePeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes establishVolumePeering without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.EstablishVolumePeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.EstablishVolumePeeringRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.establishVolumePeering = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.establishVolumePeering(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.establishVolumePeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.establishVolumePeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes establishVolumePeering with call error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.EstablishVolumePeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.EstablishVolumePeeringRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.establishVolumePeering = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.establishVolumePeering(request), expectedError);
+            const actualRequest = (client.innerApiCalls.establishVolumePeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.establishVolumePeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes establishVolumePeering with LRO error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.EstablishVolumePeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.EstablishVolumePeeringRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.establishVolumePeering = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.establishVolumePeering(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.establishVolumePeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.establishVolumePeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkEstablishVolumePeeringProgress without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkEstablishVolumePeeringProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkEstablishVolumePeeringProgress with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkEstablishVolumePeeringProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
