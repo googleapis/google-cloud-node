@@ -70,6 +70,26 @@
                 "getHostGroup"
               ]
             },
+            "ExecuteOntapPost": {
+              "methods": [
+                "executeOntapPost"
+              ]
+            },
+            "ExecuteOntapGet": {
+              "methods": [
+                "executeOntapGet"
+              ]
+            },
+            "ExecuteOntapDelete": {
+              "methods": [
+                "executeOntapDelete"
+              ]
+            },
+            "ExecuteOntapPatch": {
+              "methods": [
+                "executeOntapPatch"
+              ]
+            },
             "CreateStoragePool": {
               "methods": [
                 "createStoragePool"
@@ -113,6 +133,11 @@
             "RevertVolume": {
               "methods": [
                 "revertVolume"
+              ]
+            },
+            "EstablishVolumePeering": {
+              "methods": [
+                "establishVolumePeering"
               ]
             },
             "CreateSnapshot": {
@@ -427,6 +452,26 @@
                 "getHostGroup"
               ]
             },
+            "ExecuteOntapPost": {
+              "methods": [
+                "executeOntapPost"
+              ]
+            },
+            "ExecuteOntapGet": {
+              "methods": [
+                "executeOntapGet"
+              ]
+            },
+            "ExecuteOntapDelete": {
+              "methods": [
+                "executeOntapDelete"
+              ]
+            },
+            "ExecuteOntapPatch": {
+              "methods": [
+                "executeOntapPatch"
+              ]
+            },
             "CreateStoragePool": {
               "methods": [
                 "createStoragePool"
@@ -470,6 +515,11 @@
             "RevertVolume": {
               "methods": [
                 "revertVolume"
+              ]
+            },
+            "EstablishVolumePeering": {
+              "methods": [
+                "establishVolumePeering"
               ]
             },
             "CreateSnapshot": {
