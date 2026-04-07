@@ -2599,12 +2599,9 @@ function convertSchemaFieldValue(
       2023-01-01T12:00:00.123456789123Z
        */
       const listParams = options.listParams;
-      const timestampOutputFormat = listParams
-        ? listParams['formatOptions.timestampOutputFormat']
-        : undefined;
-      const useInt64Timestamp = listParams
-        ? listParams['formatOptions.useInt64Timestamp']
-        : undefined;
+      const timestampOutputFormat =
+        listParams?.['formatOptions.timestampOutputFormat'];
+      const useInt64Timestamp = listParams?.['formatOptions.useInt64Timestamp'];
       if (timestampOutputFormat === 'ISO8601_STRING') {
         // value is ISO string, create BigQueryTimestamp wrapping the string
         value = BigQuery.timestamp(value);
