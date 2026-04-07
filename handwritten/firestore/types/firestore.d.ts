@@ -4608,7 +4608,6 @@ declare namespace FirebaseFirestore {
        */
       mapEntries(): FunctionExpression;
       /**
-       * @public
        * Creates an expression that returns the value of a field from the document that results from the evaluation of this expression.
        *
        * @example
@@ -9894,8 +9893,7 @@ declare namespace FirebaseFirestore {
     export function mapEntries(mapExpression: Expression): FunctionExpression;
 
     /**
-     * @public
-     * Creates an expression that returns the value of a field from a document that results from the evaluation of the expression.
+     * Creates an expression that gets a field from this map (object).
      *
      * @example
      * ```typescript
@@ -9903,21 +9901,20 @@ declare namespace FirebaseFirestore {
      * getField(field("address"), "city")
      * ```
      *
-     * @param expression The expression representing the document.
+     * @param expression The expression evaluating to the map from which the field will be extracted.
      * @param key The field to access in the document.
      * @returns A new `Expression` representing the value of the field in the document.
      */
     export function getField(expression: Expression, key: string): Expression;
     /**
-     * @public
-     * Creates an expression that returns the value of a field from a document that results from the evaluation of the expression.
+     * Creates an expression that gets a field from this map (object).
      *
      * @example
      * ```typescript
      * // Get the value of the "city" field in the "address" document.
      * getField("address", "city")
      *
-     * @param expression The expression representing the document.
+     * @param expression The expression evaluating to the map from which the field will be extracted.
      * @param keyExpr The expression representing the key to access in the document.
      * @returns A new `Expression` representing the value of the field in the document.
      */
@@ -9926,7 +9923,6 @@ declare namespace FirebaseFirestore {
       keyExpr: Expression,
     ): Expression;
     /**
-     * @public
      * Creates an expression that returns the value of a field from the document with the given field name.
      *
      * @example
@@ -9941,7 +9937,6 @@ declare namespace FirebaseFirestore {
      */
     export function getField(fieldName: string, key: string): Expression;
     /**
-     * @public
      * Creates an expression that returns the value of a field from the document with the given field name.
      *
      * @example
@@ -9960,7 +9955,6 @@ declare namespace FirebaseFirestore {
     ): Expression;
 
     /**
-     * @public
      * Creates an expression that retrieves the value of a variable bound via `define()`.
      *
      * @example
@@ -9980,7 +9974,6 @@ declare namespace FirebaseFirestore {
     export function variable(name: string): Expression;
 
     /**
-     * @public
      * Creates an expression that represents the current document being processed.
      *
      * @example
@@ -9989,7 +9982,7 @@ declare namespace FirebaseFirestore {
      * firestore.pipeline().collection("books")
      *     .define(currentDocument().as("doc"))
      *     // Access a field from the defined document variable
-     *     .select(variable("doc").mapGet("title"));
+     *     .select(variable("doc").getField("title"));
      * ```
      *
      * @returns An `Expression` representing the current document.
@@ -12220,7 +12213,6 @@ declare namespace FirebaseFirestore {
     }
 
     /**
-     * @public
      * Creates a new Pipeline targeted at a subcollection relative to the current document context.
      * This creates a pipeline without a database instance, suitable for embedding as a subquery.
      * If executed directly, this pipeline will fail.
@@ -12230,7 +12222,6 @@ declare namespace FirebaseFirestore {
      */
     export function subcollection(path: string): Pipeline;
     /**
-     * @public
      * Creates a new Pipeline targeted at a subcollection relative to the current document context.
      *
      * @param options - Options defining how this SubcollectionStage is evaluated.
@@ -12386,7 +12377,6 @@ declare namespace FirebaseFirestore {
       removeFields(options: RemoveFieldsStageOptions): Pipeline;
 
       /**
-       * @public
        * Defines one or more variables in the pipeline's scope. `define` is used to bind a value to a
        * variable for internal reuse within the pipeline body (accessed via the `variable()` function).
        *
@@ -12413,7 +12403,6 @@ declare namespace FirebaseFirestore {
         ...additionalExpressions: AliasedExpression[]
       ): Pipeline;
       /**
-       * @public
        * Defines one or more variables in the pipeline's scope. `define` is used to bind a value to a
        * variable for internal reuse within the pipeline body (accessed via the `variable()` function).
        *
@@ -12437,8 +12426,7 @@ declare namespace FirebaseFirestore {
       define(options: DefineStageOptions): Pipeline;
 
       /**
-       * @public
-       * Converts this Pipeline into an expression that evaluates to an array of results.
+       * Converts this Pipeline into an expression that evaluates to an array of map (objects), where each result document of the pipeline is represented as a map in the returned array.
        *
        * <p>Result Unwrapping:</p>
        * <ul>
@@ -12450,10 +12438,10 @@ declare namespace FirebaseFirestore {
        * ```typescript
        * // Get a list of reviewers for each book
        * db.pipeline().collection("books")
-       *     .define(field("id").as("book_id"))
+       *     .define(field("id").as("current_book_id"))
        *     .addFields(
        *         db.pipeline().collection("reviews")
-       *             .where(field("book_id").equal(variable("book_id")))
+       *             .where(field("book_id").equal(variable("current_book_id")))
        *             .select(field("reviewer"))
        *             .toArrayExpression()
        *             .as("reviewers");
@@ -12503,7 +12491,6 @@ declare namespace FirebaseFirestore {
       toArrayExpression(): Expression;
 
       /**
-       * @public
        * Converts this Pipeline into an expression that evaluates to a single scalar result.
        *
        * <p><b>Runtime Validation:</b> The runtime validates that the result set contains zero or one item. If
@@ -12518,13 +12505,15 @@ declare namespace FirebaseFirestore {
        * @example
        * ```typescript
        * // Calculate average rating for a restaurant
-       * db.pipeline().collection("restaurants").addFields(
-       *   db.pipeline().collection("reviews")
-       *     .where(field("restaurant_id").equal(variable("rid")))
-       *     .aggregate(average("rating").as("avg"))
-       *     // Unwraps the single "avg" field to a scalar double
-       *     .toScalarExpression().as("average_rating")
-       * );
+       * db.pipeline().collection("restaurants")
+       *     .define(field("id").as("current_restaurant_id"))
+       *     .addFields(
+       *       db.pipeline().collection("reviews")
+       *         .where(field("restaurant_id").equal(variable("current_restaurant_id")))
+       *         .aggregate(average("rating").as("avg"))
+       *         // Unwraps the single "avg" field to a scalar double
+       *         .toScalarExpression().as("average_rating")
+       *    );
        * ```
        *
        * Output:
@@ -12538,16 +12527,18 @@ declare namespace FirebaseFirestore {
        * Multiple Fields:
        * ```typescript
        * // Calculate average rating AND count for a restaurant
-       * db.pipeline().collection("restaurants").addFields(
-       *   db.pipeline().collection("reviews")
-       *     .where(field("restaurant_id").equal(variable("rid")))
-       *     .aggregate(
-       *       average("rating").as("avg"),
-       *       count().as("count")
-       *     )
-       *     // Returns an object with "avg" and "count" fields
-       *     .toScalarExpression().as("stats")
-       * );
+       * db.pipeline().collection("restaurants")
+       *     .define(field("id").as("current_restaurant_id"))
+       *     .addFields(
+       *       db.pipeline().collection("reviews")
+       *         .where(field("restaurant_id").equal(variable("current_restaurant_id")))
+       *         .aggregate(
+       *           average("rating").as("avg"),
+       *           count().as("count")
+       *         )
+       *         // Returns an object with "avg" and "count" fields
+       *         .toScalarExpression().as("stats")
+       *    );
        * ```
        *
        * Output:
@@ -13503,24 +13494,20 @@ declare namespace FirebaseFirestore {
     };
 
     /**
-     * @public
      * Options defining how a SubcollectionStage is evaluated.
      */
     export type SubcollectionStageOptions = StageOptions & {
       /**
-       * @public
        * The relative path to the subcollection.
        */
       path: string;
     };
 
     /**
-     * @public
      * Options defining how a DefineStage is evaluated. See {@link Pipeline.define}.
      */
     export type DefineStageOptions = StageOptions & {
       /**
-       * @public
        * The variables to define.
        */
       variables: AliasedExpression[];

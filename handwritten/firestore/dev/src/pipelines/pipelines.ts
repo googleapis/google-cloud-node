@@ -520,8 +520,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @public
-   * Defines one or more variables in the pipeline's scope. `define` is used to bind a value to a
+   * Defines one or more variables in the current document's scope. `define` is used to bind a value to a
    * variable for internal reuse within the pipeline body (accessed via the `variable()` function).
    *
    * This stage is useful for declaring reusable values or intermediate calculations that can be
@@ -547,7 +546,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     ...additionalExpressions: firestore.Pipelines.AliasedExpression[]
   ): Pipeline;
   /**
-   * @public
    * Defines one or more variables in the pipeline's scope. `define` is used to bind a value to a
    * variable for internal reuse within the pipeline body (accessed via the `variable()` function).
    *
@@ -596,8 +594,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @public
-   * Converts this Pipeline into an expression that evaluates to an array of results.
+   * Converts this Pipeline into an expression that evaluates to an array of map (objects), where each result document of the pipeline is represented as a map in the returned array.
    *
    * <p>Result Unwrapping:</p>
    * <ul>
@@ -609,10 +606,10 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * ```typescript
    * // Get a list of reviewers for each book
    * db.pipeline().collection("books")
-   *     .define(field("id").as("book_id"))
+   *     .define(field("id").as("current_book_id"))
    *     .addFields(
    *         db.pipeline().collection("reviews")
-   *             .where(field("book_id").equal(variable("book_id")))
+   *             .where(field("book_id").equal(variable("current_book_id")))
    *             .select(field("reviewer"))
    *             .toArrayExpression()
    *             .as("reviewers")
@@ -634,10 +631,10 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * ```typescript
    * // Get a list of reviews (reviewer and rating) for each book
    * db.pipeline().collection("books")
-   *     .define(field("id").as("book_id"))
+   *     .define(field("id").as("current_book_id"))
    *     .addFields(
    *         db.pipeline().collection("reviews")
-   *             .where(field("book_id").equal(variable("book_id")))
+   *             .where(field("book_id").equal(variable("current_book_id")))
    *             .select(field("reviewer"), field("rating"))
    *             .toArrayExpression()
    *             .as("reviews")
@@ -665,7 +662,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @public
    * Converts this Pipeline into an expression that evaluates to a single scalar result.
    *
    * <p><b>Runtime Validation:</b> The runtime validates that the result set contains zero or one item. If
@@ -680,13 +676,15 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * @example
    * ```typescript
    * // Calculate average rating for a restaurant
-   * db.pipeline().collection("restaurants").addFields(
-   *   db.pipeline().collection("reviews")
-   *     .where(field("restaurant_id").equal(variable("rid")))
-   *     .aggregate(average("rating").as("avg"))
-   *     // Unwraps the single "avg" field to a scalar double
-   *     .toScalarExpression().as("average_rating")
-   * );
+   * db.pipeline().collection("restaurants")
+   *     .define(field("id").as("current_restaurant_id"))
+   *     .addFields(
+   *       db.pipeline().collection("reviews")
+   *         .where(field("restaurant_id").equal(variable("current_restaurant_id")))
+   *         .aggregate(average("rating").as("avg"))
+   *         // Unwraps the single "avg" field to a scalar double
+   *         .toScalarExpression().as("average_rating")
+   *    );
    * ```
    *
    * Output:
@@ -700,16 +698,18 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * Multiple Fields:
    * ```typescript
    * // Calculate average rating AND count for a restaurant
-   * db.pipeline().collection("restaurants").addFields(
-   *   db.pipeline().collection("reviews")
-   *     .where(field("restaurant_id").equal(variable("rid")))
-   *     .aggregate(
-   *       average("rating").as("avg"),
-   *       count().as("count")
-   *     )
-   *     // Returns an object with "avg" and "count" fields
-   *     .toScalarExpression().as("stats")
-   * );
+   * db.pipeline().collection("restaurants")
+   *     .define(field("id").as("current_restaurant_id"))
+   *     .addFields(
+   *       db.pipeline().collection("reviews")
+   *         .where(field("restaurant_id").equal(variable("current_restaurant_id")))
+   *         .aggregate(
+   *           average("rating").as("avg"),
+   *           count().as("count")
+   *         )
+   *         // Returns an object with "avg" and "count" fields
+   *         .toScalarExpression().as("stats")
+   *    );
    * ```
    *
    * Output:
@@ -2313,7 +2313,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
 }
 
 /**
- * @public
  * Creates a new Pipeline targeted at a subcollection relative to the current document context.
  * This creates a pipeline without a database instance, suitable for embedding as a subquery.
  * If executed directly, this pipeline will fail.
@@ -2322,7 +2321,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
  */
 export function subcollection(path: string): Pipeline;
 /**
- * @public
  * Creates a new Pipeline targeted at a subcollection relative to the current document context.
  *
  * @param options - Options defining how this SubcollectionStage is evaluated.

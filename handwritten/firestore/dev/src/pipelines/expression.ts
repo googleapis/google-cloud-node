@@ -3242,7 +3242,6 @@ export abstract class Expression
   }
 
   /**
-   * @public
    * Creates an expression that returns the value of a field from the document that results from the evaluation of this expression.
    *
    * @example
@@ -10808,8 +10807,7 @@ export function isType(
 }
 
 /**
- * @public
- * Creates an expression that returns the value of a field from a document that results from the evaluation of the expression.
+ * Creates an expression that gets a field from this map (object).
  *
  * @example
  * ```typescript
@@ -10817,14 +10815,13 @@ export function isType(
  * getField(field("address"), "city")
  * ```
  *
- * @param expression The expression representing the document.
+ * @param expression The expression evaluating to the map from which the field will be extracted.
  * @param key The field to access in the document.
  * @returns A new `Expression` representing the value of the field in the document.
  */
 export function getField(expression: Expression, key: string): Expression;
 /**
- * @public
- * Creates an expression that returns the value of a field from a document that results from the evaluation of the expression.
+ * Creates an expression that gets a field from this map (object).
  *
  * @example
  * ```typescript
@@ -10832,7 +10829,7 @@ export function getField(expression: Expression, key: string): Expression;
  * getField(field("address"), "city")
  * ```
  *
- * @param expression The expression representing the document.
+ * @param expression The expression evaluating to the map from which the field will be extracted.
  * @param keyExpr The expression representing the key to access in the document.
  * @returns A new `Expression` representing the value of the field in the document.
  */
@@ -10841,7 +10838,6 @@ export function getField(
   keyExpr: Expression,
 ): Expression;
 /**
- * @public
  * Creates an expression that returns the value of a field from the document with the given field name.
  *
  * @example
@@ -10856,7 +10852,6 @@ export function getField(
  */
 export function getField(fieldName: string, key: string): Expression;
 /**
- * @public
  * Creates an expression that returns the value of a field from the document with the given field name.
  *
  * @example
@@ -10908,7 +10903,6 @@ export class VariableExpression extends Expression {
 }
 
 /**
- * @public
  * Creates an expression that retrieves the value of a variable bound via `define()`.
  *
  * @example
@@ -10930,7 +10924,6 @@ export function variable(name: string): Expression {
 }
 
 /**
- * @public
  * Creates an expression that represents the current document being processed.
  *
  * @example
@@ -10939,7 +10932,7 @@ export function variable(name: string): Expression {
  * firestore.pipeline().collection("books")
  *     .define(currentDocument().as("doc"))
  *     // Access a field from the defined document variable
- *     .select(variable("doc").mapGet("title"));
+ *     .select(variable("doc").getField("title"));
  * ```
  *
  * @returns An `Expression` representing the current document.
