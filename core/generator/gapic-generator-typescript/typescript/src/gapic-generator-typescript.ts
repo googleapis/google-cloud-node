@@ -52,7 +52,7 @@ async function main(processArgv: string[]) {
   const protocPluginBash = path.join(__dirname, '..', 'protoc_plugin.sh');
   const protocPlugin = fs.existsSync(protocPluginBash)
     ? protocPluginBash
-    : path.join(__dirname, 'protoc-plugin.js');
+    : `node ${path.join(__dirname, 'protoc-plugin.js')}`;
 
   const argv = await yargs(processArgv)
     .array('I')
