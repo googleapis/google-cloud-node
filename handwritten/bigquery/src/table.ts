@@ -1866,35 +1866,13 @@ class Table extends ServiceObject {
         callback!(err, null, null, resp);
         return;
       }
-      if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
-        // High precision timestamp behaviour
-        try {
-          /*
-          Without this try/catch block, calls to getRows will hang indefinitely if
-          a call to mergeSchemaWithRows_ fails because the error never makes it to
-          the callback. Instead, pass the error to the callback the user provides
-          so that the user can see the error.
-           */
-          if (options.skipParsing) {
-            rows = rows || [];
-          } else {
-            rows = BigQuery.mergeSchemaWithRows_(
-              this.metadata.schema,
-              rows || [],
-              {
-                wrapIntegers,
-                selectedFields,
-                parseJSON,
-                listParams: qs,
-              },
-            );
-          }
-        } catch (err) {
-          callback!(err as Error | null, null, null, resp);
-          return;
-        }
-      } else {
-        // Old behaviour
+      try {
+        /*
+        Without this try/catch block, calls to getRows will hang indefinitely if
+        a call to mergeSchemaWithRows_ fails because the error never makes it to
+        the callback. Instead, pass the error to the callback the user provides
+        so that the user can see the error.
+         */
         if (options.skipParsing) {
           rows = rows || [];
         } else {
@@ -1909,6 +1887,9 @@ class Table extends ServiceObject {
             },
           );
         }
+      } catch (err) {
+        callback!(err as Error | null, null, null, resp);
+        return;
       }
       callback!(null, rows, nextQuery, resp);
     };
