@@ -50,9 +50,21 @@ async function main(processArgv: string[]) {
   // Just in case if someone builds us without bazel, let's have a fallback to an actual
   // JS protoc plugin without a wrapper.
   const protocPluginBash = path.join(__dirname, '..', 'protoc_plugin.sh');
-  const protocPlugin = fs.existsSync(protocPluginBash)
+  let protocPlugin = fs.existsSync(protocPluginBash)
     ? protocPluginBash
-    : `node ${path.join(__dirname, 'protoc-plugin.js')}`;
+    : path.join(__dirname, 'protoc-plugin.js');
+
+  if (protocPlugin.endsWith('.js') && process.platform === 'win32') {
+      protocPlugin = `node ${protocPlugin}`;
+  } else if (protocPlugin.endsWith('.js')) {
+      // In Unix, protoc expects an actual executable file. We cannot pass "node file.js".
+      // Instead, we ensure the file has execution permissions so the shebang takes over.
+      try {
+        fs.chmodSync(protocPlugin, 0o755);
+      } catch (e) {
+        // ignore
+      }
+  }
 
   const argv = await yargs(processArgv)
     .array('I')
