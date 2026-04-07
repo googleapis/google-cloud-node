@@ -2591,48 +2591,39 @@ function convertSchemaFieldValue(
       break;
     }
     case 'TIMESTAMP': {
-      // High precision timestamp behaviour
-      if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
-        /*
-        At this point, 'value' will equal the timestamp value returned from the
-        server. We need to parse this value differently depending on its format.
-        For example, value could be any of the following:
-        1672574400123456
-        1672574400.123456
-        2023-01-01T12:00:00.123456789123Z
-         */
-        const listParams = options.listParams;
-        const timestampOutputFormat = listParams
-          ? listParams['formatOptions.timestampOutputFormat']
-          : undefined;
-        const useInt64Timestamp = listParams
-          ? listParams['formatOptions.useInt64Timestamp']
-          : undefined;
-        if (timestampOutputFormat === 'ISO8601_STRING') {
-          // value is ISO string, create BigQueryTimestamp wrapping the string
-          value = BigQuery.timestamp(value);
-        } else if (
-          useInt64Timestamp !== true &&
-          timestampOutputFormat !== 'INT64' &&
-          (useInt64Timestamp !== undefined ||
-            timestampOutputFormat !== undefined)
-        ) {
-          // NOTE: The additional
-          // (useInt64Timestamp !== undefined || timestampOutputFormat !== und...)
-          // check is to ensure that calls to the /query endpoint remain
-          // unaffected as they will not be providing any listParams.
-          //
-          // If the program reaches this point in time then
-          // value is float seconds so convert to BigQueryTimestamp
-          value = BigQuery.timestamp(Number(value));
-        } else {
-          // Expect int64 micros (default or explicit INT64)
-          const pd = new PreciseDate();
-          pd.setFullTime(PreciseDate.parseFull(BigInt(value) * BigInt(1000)));
-          value = BigQuery.timestamp(pd);
-        }
+      /*
+      At this point, 'value' will equal the timestamp value returned from the
+      server. We need to parse this value differently depending on its format.
+      For example, value could be any of the following:
+      1672574400123456
+      1672574400.123456
+      2023-01-01T12:00:00.123456789123Z
+       */
+      const listParams = options.listParams;
+      const timestampOutputFormat = listParams
+        ? listParams['formatOptions.timestampOutputFormat']
+        : undefined;
+      const useInt64Timestamp = listParams
+        ? listParams['formatOptions.useInt64Timestamp']
+        : undefined;
+      if (timestampOutputFormat === 'ISO8601_STRING') {
+        // value is ISO string, create BigQueryTimestamp wrapping the string
+        value = BigQuery.timestamp(value);
+      } else if (
+        useInt64Timestamp !== true &&
+        timestampOutputFormat !== 'INT64' &&
+        (useInt64Timestamp !== undefined || timestampOutputFormat !== undefined)
+      ) {
+        // NOTE: The additional
+        // (useInt64Timestamp !== undefined || timestampOutputFormat !== und...)
+        // check is to ensure that calls to the /query endpoint remain
+        // unaffected as they will not be providing any listParams.
+        //
+        // If the program reaches this point in time then
+        // value is float seconds so convert to BigQueryTimestamp
+        value = BigQuery.timestamp(Number(value));
       } else {
-        // Old behaviour
+        // Expect int64 micros (default or explicit INT64)
         const pd = new PreciseDate();
         pd.setFullTime(PreciseDate.parseFull(BigInt(value) * BigInt(1000)));
         value = BigQuery.timestamp(pd);
