@@ -54,7 +54,7 @@ import {
   GoogleErrorBody,
   RetryOptions,
 } from '@google-cloud/common/build/src/util';
-import bigquery, {IDataFormatOptions} from './types';
+import bigquery from './types';
 import {logger, setLogFunction} from './logger';
 
 // Third-Party Re-exports
@@ -2368,7 +2368,7 @@ export class BigQuery extends Service {
     const hasAnyFormatOpts =
       options['formatOptions.timestampOutputFormat'] !== undefined ||
       options['formatOptions.useInt64Timestamp'] !== undefined;
-    let defaultOpts: IDataFormatOptions = hasAnyFormatOpts
+    let defaultOpts: bigquery.IDataFormatOptions = hasAnyFormatOpts
       ? {}
       : {
           useInt64Timestamp: true,
