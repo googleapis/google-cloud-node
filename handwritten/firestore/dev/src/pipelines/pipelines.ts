@@ -52,6 +52,7 @@ import {isOptionalEqual, isPlainObject} from '../util';
 import {
   AggregateFunction,
   AliasedAggregate,
+  AliasedExpression,
   Expression,
   Field,
   BooleanExpression,
@@ -81,6 +82,7 @@ import {
   Sample,
   Union,
   Unnest,
+  DeleteStage,
   InternalWhereStageOptions,
   InternalOffsetStageOptions,
   InternalLimitStageOptions,
@@ -95,6 +97,7 @@ import {
   InternalDocumentsStageOptions,
   InternalCollectionGroupStageOptions,
   InternalCollectionStageOptions,
+  UpdateStage,
 } from './stage';
 import {StructuredPipeline} from './structured-pipeline';
 import Selectable = FirebaseFirestore.Pipelines.Selectable;
@@ -1484,6 +1487,42 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     };
 
     return this._addStage(new Sort(internalOptions));
+  }
+
+  /**
+   * @beta
+   * Performs a delete operation on documents from previous stages.
+   *
+   * @example
+   * ```typescript
+   * // Deletes all documents in the "books" collection.
+   * firestore.pipeline().collection("books")
+   *    .delete();
+   * ```
+   *
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  delete(): Pipeline {
+    return this._addStage(new DeleteStage());
+  }
+
+  /**
+   * @beta
+   * Performs an update operation using documents from previous stages.
+   *
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  update(): Pipeline;
+  /**
+   * @beta
+   * Performs an update operation using documents from previous stages.
+   *
+   * @param transformedFields - The list of transformations to apply.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  update(transformedFields: AliasedExpression[]): Pipeline;
+  update(transformedFields?: AliasedExpression[]): Pipeline {
+    return this._addStage(new UpdateStage(transformedFields));
   }
 
   /**

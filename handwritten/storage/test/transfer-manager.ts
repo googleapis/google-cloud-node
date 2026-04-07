@@ -32,6 +32,7 @@ import {
   DownloadManyFilesOptions,
 } from '../src/index.js';
 import assert from 'assert';
+import {describe, it, beforeEach, before, afterEach, after} from 'mocha';
 import * as path from 'path';
 import {GaxiosOptions, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
@@ -39,8 +40,8 @@ import {AuthClient, GoogleAuth} from 'google-auth-library';
 import {tmpdir} from 'os';
 import fs from 'fs';
 import {promises as fsp, Stats} from 'fs';
-
 import * as sinon from 'sinon';
+import {DownloadResponseWithStatus, SkipReason} from '../src/file.js';
 
 describe('Transfer Manager', () => {
   const BUCKET_NAME = 'test-bucket';
@@ -324,7 +325,7 @@ describe('Transfer Manager', () => {
       const file = 'first.txt';
       const filesOrFolder = [folder, path.join(folder, file)];
       const expectedFilePath = path.join(prefix, folder, file);
-      const expectedDir = path.join(prefix, folder);
+      const expectedDir = path.resolve(prefix, folder);
       const mkdirSpy = sandbox.spy(fsp, 'mkdir');
       const download = (optionsOrCb?: DownloadOptions | DownloadCallback) => {
         if (typeof optionsOrCb === 'function') {
@@ -341,14 +342,221 @@ describe('Transfer Manager', () => {
         return file;
       });
       await transferManager.downloadManyFiles(filesOrFolder, {
-        prefix: prefix,
+        passthroughOptions: {destination: prefix},
       });
       assert.strictEqual(
-        mkdirSpy.calledOnceWith(expectedDir, {
-          recursive: true,
-        }),
+        mkdirSpy.calledWith(expectedDir, {recursive: true}),
         true
       );
+    });
+
+    it('skips files that attempt path traversal via dot-segments (../) and returns them in skippedFiles', async () => {
+      const destination = 'download-directory';
+      const maliciousFilename = '../../etc/passwd';
+      const validFilename = 'valid.txt';
+
+      const maliciousFile = new File(bucket, maliciousFilename);
+      const validFile = new File(bucket, validFilename);
+
+      const downloadStub = sandbox
+        .stub(validFile, 'download')
+        .resolves([Buffer.alloc(0)]);
+      const maliciousDownloadStub = sandbox.stub(maliciousFile, 'download');
+
+      const result = (await transferManager.downloadManyFiles(
+        [maliciousFile, validFile],
+        {passthroughOptions: {destination: destination}}
+      )) as DownloadResponseWithStatus[];
+
+      assert.strictEqual(maliciousDownloadStub.called, false);
+      assert.strictEqual(downloadStub.calledOnce, true);
+
+      const skipped = result.find(r => r.fileName === maliciousFilename);
+      assert.ok(skipped);
+      assert.strictEqual(skipped!.skipped, true);
+      assert.strictEqual(skipped!.reason, SkipReason.PATH_TRAVERSAL);
+    });
+
+    it('allows files with relative segments that resolve within the target directory', async () => {
+      const destination = 'safe-directory';
+      const filename = './subdir/../subdir/file.txt';
+      const file = new File(bucket, filename);
+
+      const downloadStub = sandbox
+        .stub(file, 'download')
+        .resolves([Buffer.alloc(0)]);
+
+      await transferManager.downloadManyFiles([file], {
+        passthroughOptions: {destination: destination},
+      });
+
+      assert.strictEqual(downloadStub.calledOnce, true);
+    });
+
+    it('prevents traversal when no prefix is provided', async () => {
+      const maliciousFilename = '../../../traversal.txt';
+      const file = new File(bucket, maliciousFilename);
+      const downloadStub = sandbox.stub(file, 'download');
+
+      const result = (await transferManager.downloadManyFiles([
+        file,
+      ])) as DownloadResponseWithStatus[];
+
+      assert.strictEqual(downloadStub.called, false);
+      assert.strictEqual(result[0].skipped, true);
+      assert.strictEqual(result[0].reason, SkipReason.PATH_TRAVERSAL);
+    });
+
+    it('jails absolute-looking paths with nested segments into the target directory', async () => {
+      const destination = './downloads';
+      const filename = '/tmp/shady.txt';
+      const file = new File(bucket, filename);
+      const expectedDestination = path.resolve(
+        destination,
+        filename.replace(/^\/+/, '')
+      );
+
+      const downloadStub = sandbox
+        .stub(file, 'download')
+        .resolves([Buffer.alloc(0)]);
+
+      const result = (await transferManager.downloadManyFiles([file], {
+        passthroughOptions: {destination: destination},
+      })) as DownloadResponseWithStatus[];
+
+      assert.strictEqual(downloadStub.called, true);
+      const options = downloadStub.firstCall.args[0] as DownloadOptions;
+      assert.strictEqual(options.destination, expectedDestination);
+
+      assert.strictEqual(result.length, 1);
+      assert.strictEqual(result[0].skipped, false);
+    });
+
+    it('jails absolute-looking Unix paths (e.g. /etc/passwd) into the target directory instead of skipping', async () => {
+      const destination = 'downloads';
+      const filename = '/etc/passwd';
+      const expectedDestination = path.resolve(
+        destination,
+        filename.replace(/^\/+/, '')
+      );
+
+      const file = new File(bucket, filename);
+      const downloadStub = sandbox
+        .stub(file, 'download')
+        .resolves([Buffer.alloc(0)]);
+
+      const result = (await transferManager.downloadManyFiles([file], {
+        passthroughOptions: {destination: destination},
+      })) as DownloadResponseWithStatus[];
+
+      assert.strictEqual(downloadStub.calledOnce, true);
+      const options = downloadStub.firstCall.args[0] as DownloadOptions;
+      assert.strictEqual(options.destination, expectedDestination);
+      assert.strictEqual(result[0].skipped, false);
+    });
+
+    it('correctly handles stripPrefix and verifies the resulting path is still safe', async () => {
+      const options = {
+        stripPrefix: 'secret/',
+        prefix: 'local-folder',
+      };
+      const filename = 'secret/../../escape.txt';
+      const file = new File(bucket, filename);
+
+      const downloadStub = sandbox.stub(file, 'download');
+
+      const result = (await transferManager.downloadManyFiles(
+        [file],
+        options
+      )) as DownloadResponseWithStatus[];
+
+      assert.strictEqual(downloadStub.called, false);
+      assert.strictEqual(result[0].skipped, true);
+      assert.strictEqual(result[0].reason, SkipReason.PATH_TRAVERSAL);
+    });
+
+    it('should skip files containing Windows volume separators (:) to prevent drive-injection attacks', async () => {
+      const destination = 'C:\\local\\target';
+      const maliciousFile = new File(bucket, 'C:\\system\\win32');
+
+      const result = (await transferManager.downloadManyFiles([maliciousFile], {
+        passthroughOptions: {destination: destination},
+      })) as DownloadResponseWithStatus[];
+
+      assert.strictEqual(result.length, 1);
+
+      const response = result[0];
+      assert.strictEqual(response.skipped, true);
+      assert.strictEqual(response.reason, SkipReason.ILLEGAL_CHARACTER);
+      assert.strictEqual(response.fileName, 'C:\\system\\win32');
+    });
+
+    it('should account for every input file (Parity Check)', async () => {
+      const isWindows = process.platform === 'win32';
+      const destination = '/local/target';
+      const fileNames = [
+        'data/file.txt', // Normal (Download)
+        'data/../sibling.txt', // Internal Traversal (Download)
+        '../escape.txt', // External Traversal (Skip - Path Traversal '..')
+        '/etc/passwd', // Leading Slash (Download)
+        '/local/usr/a.txt', // Path matches prefix (Download)
+        'dir/./file.txt', // Dot segment (Download)
+        'windows\\file.txt', // Windows separator (Download)
+        'data\\..\\sibling.txt', // Windows traversal (Download) | LINUX: Skip (traversal)
+        '..\\escape.txt', // Windows escape (Skip - Path Traversal '..')
+        'C:\\system\\win32', // Windows Drive (Skip - Illegal Char ':')
+        'C:\\local\\target\\a.txt', // Windows Absolute (Skip - Illegal Char ':')
+        '..temp.txt', // Leading dots in filename (Download - Not a traversal)
+        'test-2026:01:01.txt', // GCS Timestamps (Download - Colon is middle, not drive)
+        '\\a\\b\\c.txt', // Leading backslash (Should stay in base)
+        '/abs/path/file.txt', // Leading forward slash (Should stay in base)
+        '\\\\network\\share', // UNC-style leading double backslash
+        '//multiple//slashes', // Multiple leading forward slashes
+      ];
+
+      const files = fileNames.map(name => bucket.file(name));
+
+      sandbox.stub(File.prototype, 'download').resolves([Buffer.alloc(0)]);
+      sandbox.stub(fsp, 'mkdir').resolves();
+
+      const result = (await transferManager.downloadManyFiles(files, {
+        passthroughOptions: {destination: destination},
+      })) as DownloadResponseWithStatus[];
+
+      assert.strictEqual(
+        result.length,
+        fileNames.length,
+        `Parity Failure: Processed ${result.length} files but input had ${fileNames.length}`
+      );
+
+      const downloads = result.filter(r => !r.skipped);
+      const skips = result.filter(r => r.skipped);
+
+      const expectedDownloads = isWindows ? 13 : 12;
+      const expectedSkips = isWindows ? 4 : 5;
+      const expectedTraversalSkips = isWindows ? 2 : 3;
+
+      assert.strictEqual(
+        downloads.length,
+        expectedDownloads,
+        `Expected ${expectedDownloads} downloads but got ${downloads.length}`
+      );
+
+      assert.strictEqual(
+        skips.length,
+        expectedSkips,
+        `Expected ${expectedSkips} skips but got ${skips.length}`
+      );
+
+      const traversalSkips = skips.filter(
+        f => f.reason === SkipReason.PATH_TRAVERSAL
+      );
+      assert.strictEqual(traversalSkips.length, expectedTraversalSkips);
+
+      const illegalCharSkips = skips.filter(
+        f => f.reason === SkipReason.ILLEGAL_CHARACTER
+      );
+      assert.strictEqual(illegalCharSkips.length, 2);
     });
   });
 

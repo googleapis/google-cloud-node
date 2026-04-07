@@ -1163,6 +1163,8 @@ export class Subscriber extends EventEmitter {
     const response = await this.modAckWithResponse(message, 0);
     message.subSpans.nackEnd();
     message.endParentSpan();
+    this._inventory.remove(message);
+
     return response;
   }
 

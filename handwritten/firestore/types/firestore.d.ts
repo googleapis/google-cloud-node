@@ -12316,6 +12316,28 @@ declare namespace FirebaseFirestore {
       select(options: SelectStageOptions): Pipeline;
       /**
        * @beta
+       * Performs a delete operation on documents from previous stages.
+       *
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      delete(): Pipeline;
+      /**
+       * @beta
+       * Performs an update operation using documents from previous stages.
+       *
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      update(): Pipeline;
+      /**
+       * @beta
+       * Performs an update operation using documents from previous stages.
+       *
+       * @param transformedFields - The list of transformations to apply.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      update(transformedFields: AliasedExpression[]): Pipeline;
+      /**
+       * @beta
        * Filters the documents from previous stages to only include those matching the specified {@link
        * BooleanExpression}.
        *
@@ -13178,6 +13200,7 @@ declare namespace FirebaseFirestore {
        */
       docs: Array<string | DocumentReference>;
     };
+
     /**
      * @beta
      * Options defining how an AddFieldsStage is evaluated. See {@link Pipeline.addFields}.
