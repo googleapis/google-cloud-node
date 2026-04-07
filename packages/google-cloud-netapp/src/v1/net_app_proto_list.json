@@ -7,6 +7,7 @@
   "../../protos/google/cloud/netapp/v1/common.proto",
   "../../protos/google/cloud/netapp/v1/host_group.proto",
   "../../protos/google/cloud/netapp/v1/kms.proto",
+  "../../protos/google/cloud/netapp/v1/ontap.proto",
   "../../protos/google/cloud/netapp/v1/quota_rule.proto",
   "../../protos/google/cloud/netapp/v1/replication.proto",
   "../../protos/google/cloud/netapp/v1/snapshot.proto",
