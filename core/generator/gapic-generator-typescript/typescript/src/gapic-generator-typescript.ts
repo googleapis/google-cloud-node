@@ -201,6 +201,7 @@ async function main(processArgv: string[]) {
   const protocCommand = [
     `--plugin=protoc-gen-typescript_gapic=${protocPlugin}`,
     `--typescript_gapic_out=${outputDir}`,
+    `--experimental_editions`,
   ];
   if (gapicValidatorOut && validation === 'true') {
     protocCommand.push(`--gapic-validator_out=${gapicValidatorOut}`);
