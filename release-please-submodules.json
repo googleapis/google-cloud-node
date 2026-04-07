@@ -5,6 +5,51 @@
     "core/common": {
       "component": "common"
     },
+    "core/dev-packages/jsdoc-fresh": {
+      "component": "jsdoc-fresh"
+    },
+    "core/dev-packages/jsdoc-region-tag": {
+      "component": "jsdoc-region-tag"
+    },
+    "core/dev-packages/pack-n-play": {
+      "component": "pack-n-play"
+    },
+    "core/generator/gapic-generator-typescript": {
+      "component": "gapic-generator"
+    },
+    "core/packages/gax": {
+      "component": "google-gax"
+    },
+    "core/packages/gaxios": {
+      "component": "gaxios"
+    },
+    "core/packages/gcp-metadata": {
+      "component": "gcp-metadata"
+    },
+    "core/packages/google-auth-library-nodejs": {
+      "component": "google-auth-library"
+    },
+    "core/packages/logging-utils": {
+      "component": "google-logging-utils"
+    },
+    "core/packages/nodejs-googleapis-common": {
+      "component": "googleapis-common"
+    },
+    "core/packages/nodejs-proto-files": {
+      "component": "google-proto-files"
+    },
+    "core/packages/proto3-json-serializer-nodejs": {
+      "component": "proto3-json-serializer"
+    },
+    "core/packages/retry-request": {
+      "component": "retry-request"
+    },
+    "core/packages/teeny-request": {
+      "component": "teeny-request"
+    },
+    "core/packages/tools": {
+      "component": "gapic-tools"
+    },
     "core/paginator": {
       "component": "paginator"
     },
