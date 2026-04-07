@@ -1894,7 +1894,7 @@ class Table extends ServiceObject {
       callback!(null, rows, nextQuery, resp);
     };
 
-    let qs: any;
+    let qs: GetRowsOptions;
     if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
       const hasAnyFormatOpts =
         options['formatOptions.timestampOutputFormat'] !== undefined ||
