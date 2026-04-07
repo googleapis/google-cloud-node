@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "31fa06fe888b173c86c166af1c062c3cc3211342",
+          "message": "Upgrade the generator to protobuf 31 and bazel 7.7.1, and update templates to fix system test",
+          "issues": [
+            "7943"
+          ]
+        }
+      ],
+      "version": "4.11.13",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "2d48021a-55f7-4dae-8519-0c4ce0da0a9f",
+      "createTime": "2026-04-06T17:24:30.125Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "91666d001bdc0d020742784bebc2c4e4bba81de4",
           "message": "Add initial files for google.cloud.datacatalog.lineage.configmanagement.v1",
@@ -69375,5 +69392,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-03-25T19:27:43.346Z"
+  "updateTime": "2026-04-06T17:24:30.125Z"
 }
