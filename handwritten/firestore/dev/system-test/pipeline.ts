@@ -6432,39 +6432,8 @@ describe.skipClassic('Pipeline class', () => {
           .addFields(reviewsSub.toArrayExpression().as('reviews'))
           .select('title', 'reviews');
 
-        // TODO(dlarocque): Remove these target backend conditionals once the 'get_field' rename has rolled out to prod.
-        const host = firestore._settings.host;
-        const isProd = host === 'firestore.googleapis.com';
-        const isNightly = host === 'test-firestore.sandbox.googleapis.com';
-
-        if (isProd) {
-          // The execution of this pipeline is expected to result in a network error
-          // from the backend until the breaking change to rename the 'field' expression to
-          // 'get_field' has rolled out to prod.
-          try {
-            const results = await ppl.execute();
-
-            // If this is reached, the execution of the pipeline didn't throw an error, so the
-            // breaking change must have rolled out to prod. We can assert the newly expected behaviour.
-            console.warn(
-              "The 'get_field' expression rename has rolled out to the prod backend. Remove the target backend conditionals in this test.",
-            );
-            expectResults(results, {title: '1984', reviews: ['Alice']});
-          } catch (err: unknown) {
-            const error: Error = err as Error;
-            expect(error.message).to.equals(
-              "Request failed with error: The function 'get_field' does not exist, did you mean 'field'?",
-            );
-          }
-        } else if (isNightly) {
-          const results = await ppl.execute();
-          expectResults(results, {title: '1984', reviews: ['Alice']});
-        } else {
-          expect(false).to.equal(
-            true,
-            `This test is only expected to run against firestore.googleapis.com or test-firestore.sandbox.googleapis.com, but it instead ran against ${host}`,
-          );
-        }
+        const results = await ppl.execute();
+        expectResults(results, {title: '1984', reviews: ['Alice']});
       });
     });
 
@@ -6541,39 +6510,8 @@ describe.skipClassic('Pipeline class', () => {
           .addFields(reviewsSub.toArrayExpression().as('reviews'))
           .select('title', 'reviews');
 
-        // TODO(dlarocque): Remove these target backend conditionals once the 'get_field' rename has rolled out to prod.
-        const host = firestore._settings.host;
-        const isProd = host === 'firestore.googleapis.com';
-        const isNightly = host === 'test-firestore.sandbox.googleapis.com';
-
-        if (isProd) {
-          // The execution of this pipeline is expected to result in a network error
-          // from the backend until the breaking change to rename the 'field' expression to
-          // 'get_field' has rolled out to prod.
-          try {
-            const results = await ppl.execute();
-
-            // If this is reached, the execution of the pipeline didn't throw an error, so the
-            // breaking change must have rolled out to prod. We can assert the newly expected behaviour.
-            console.warn(
-              "The 'get_field' expression rename has rolled out to the prod backend. Remove the target backend conditionals in this test.",
-            );
-            expectResults(results, {title: '1984', reviews: []});
-          } catch (err: unknown) {
-            const error: Error = err as Error;
-            expect(error.message).to.equals(
-              "Request failed with error: The function 'get_field' does not exist, did you mean 'field'?",
-            );
-          }
-        } else if (isNightly) {
-          const results = await ppl.execute();
-          expectResults(results, {title: '1984', reviews: []});
-        } else {
-          expect(false).to.equal(
-            true,
-            `This test is only expected to run against firestore.googleapis.com or test-firestore.sandbox.googleapis.com, but it instead ran against ${host}`,
-          );
-        }
+        const results = await ppl.execute();
+        expectResults(results, {title: '1984', reviews: []});
       });
     });
 
