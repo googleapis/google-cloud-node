@@ -112,6 +112,12 @@ function main(participant) {
    */
   // const enablePartialAutomatedAgentReply = true
   /**
+   *  Optional. If multiple uttereances are detected in the audio stream, process
+   *  them individually instead of stitching them together to form a single
+   *  utterance.
+   */
+  // const outputMultipleUtterances = true
+  /**
    *  If true, `StreamingAnalyzeContentResponse.debugging_info` will get
    *  populated.
    */
