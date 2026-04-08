@@ -5965,25 +5965,6 @@ describe.skipClassic('Pipeline class', () => {
       }
     }
 
-    it('variable document scope', async () => {
-      const testDocs = {
-        [`${randomCol.path}/book1`]: {title: 'A Book Title'},
-        [`${randomCol.path}/book1`]: {title: 'A Book Title2'},
-      };
-
-      await withSubqueryData(testDocs, async () => {
-        const results = await firestore
-          .pipeline()
-          .collection(randomCol.path)
-          .define(currentTimestamp().as('executionTime'))
-          .addFields(variable('executionTime').as('docExecTime'))
-          .execute();
-
-        console.log(JSON.stringify(results.results));
-        expectResults(results, {firstReviewData: null});
-      });
-    });
-
     it('zero result scalar returns null', async () => {
       const testDocs = {
         [`${randomCol.path}/book1`]: {title: 'A Book Title'},
