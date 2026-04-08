@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/saasplatform/saasservicemgmt/v1beta1/common.proto",
+  "../../protos/google/cloud/saasplatform/saasservicemgmt/v1beta1/deployments_resources.proto",
+  "../../protos/google/cloud/saasplatform/saasservicemgmt/v1beta1/deployments_service.proto",
+  "../../protos/google/cloud/saasplatform/saasservicemgmt/v1beta1/rollouts_resources.proto",
+  "../../protos/google/cloud/saasplatform/saasservicemgmt/v1beta1/rollouts_service.proto"
+]
