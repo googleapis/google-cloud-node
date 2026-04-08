@@ -113,6 +113,16 @@ for subdir in ${subdirs[@]}; do
             continue
         fi
 
+        # System tests for packages are broken and blocking PRs.
+        # See https://github.com/googleapis/google-cloud-node/issues/7976.
+        #
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # we are likely to permanently remove these tests in the near future.
+        if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "system" ]]; then
+            echo "Skipping ${TEST_TYPE} test for packages: ${d}"
+            continue
+        fi
+
         # Our CI uses Git Bash on Windows to execute this script, which returns "msys" for OSTYPE.
         if [[ "$OSTYPE" == "msys" ]]; then
             if [[ "${windows_exempt_tests}" =~ "${d}" ]]; then

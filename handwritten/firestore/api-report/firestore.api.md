@@ -498,6 +498,12 @@ function charLength(fieldName: string): FunctionExpression;
 // @beta
 function charLength(stringExpression: Expression): FunctionExpression;
 
+// @beta
+function coalesce(expression: Expression, replacement: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
+
+// @beta
+function coalesce(fieldName: string, replacement: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
+
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
 //
 // @public
@@ -1099,6 +1105,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     byteLength(): FunctionExpression;
     ceil(): FunctionExpression;
     charLength(): FunctionExpression;
+    coalesce(replacement: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
     collectionId(): FunctionExpression;
     concat(second: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
     cosineDistance(vectorExpression: Expression): FunctionExpression;
@@ -1135,6 +1142,8 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     ifAbsent(elseExpression: unknown): Expression;
     ifError(catchExpr: Expression): FunctionExpression;
     ifError(catchValue: unknown): FunctionExpression;
+    ifNull(elseExpression: Expression): FunctionExpression;
+    ifNull(elseValue: unknown): FunctionExpression;
     isAbsent(): BooleanExpression;
     isError(): BooleanExpression;
     isType(type: string): BooleanExpression;
@@ -1170,6 +1179,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     notEqual(value: unknown): BooleanExpression;
     notEqualAny(values: Array<Expression | unknown>): BooleanExpression;
     notEqualAny(arrayExpression: Expression): BooleanExpression;
+    parent(): FunctionExpression;
     pow(exponent: Expression): FunctionExpression;
     pow(exponent: number): FunctionExpression;
     // (undocumented)
@@ -1643,6 +1653,18 @@ function ifError(tryExpr: Expression, catchExpr: Expression): FunctionExpression
 function ifError(tryExpr: Expression, catchValue: unknown): FunctionExpression;
 
 // @beta
+function ifNull(ifExpr: Expression, elseExpr: Expression): FunctionExpression;
+
+// @beta
+function ifNull(ifExpr: Expression, elseValue: unknown): FunctionExpression;
+
+// @beta
+function ifNull(ifFieldName: string, elseExpr: Expression): FunctionExpression;
+
+// @beta
+function ifNull(ifFieldName: string, elseValue: unknown): FunctionExpression;
+
+// @beta
 function isAbsent(value: Expression): BooleanExpression;
 
 // @beta
@@ -1888,9 +1910,15 @@ class Ordering implements HasUserData {
 }
 
 // @beta
+function parent_2(documentPath: string | firestore.DocumentReference): FunctionExpression;
+
+// @beta
+function parent_2(documentPathExpr: Expression): FunctionExpression;
+
+// @beta
 class Pipeline implements firestore.Pipelines.Pipeline {
     // Warning: (ae-forgotten-export) The symbol "Stage" needs to be exported by the entry point index.d.ts
-    constructor(db: Firestore, stages: Stage[]);
+    constructor(db: Firestore | undefined, stages: Stage[]);
     addFields(field: firestore.Pipelines.Selectable, ...additionalFields: firestore.Pipelines.Selectable[]): Pipeline;
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     addFields(options: firestore.Pipelines.AddFieldsStageOptions): Pipeline;
@@ -1939,8 +1967,8 @@ class Pipeline implements firestore.Pipelines.Pipeline {
     union(options: firestore.Pipelines.UnionStageOptions): Pipeline;
     unnest(selectable: firestore.Pipelines.Selectable, indexField?: string): Pipeline;
     unnest(options: firestore.Pipelines.UnnestStageOptions): Pipeline;
-    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
-    _validateUserData<T extends Map<string, HasUserData> | HasUserData[] | HasUserData>(_: string, val: T): T;
+    // (undocumented)
+    _validateUserData(ignoreUndefinedProperties: boolean): void;
     where(condition: firestore.Pipelines.BooleanExpression): Pipeline;
     where(options: firestore.Pipelines.WhereStageOptions): Pipeline;
 }
@@ -2068,6 +2096,7 @@ declare namespace Pipelines {
         isError,
         substring,
         documentId,
+        parent_2 as parent,
         arrayContainsAll,
         constant,
         Field,
@@ -2131,7 +2160,9 @@ declare namespace Pipelines {
         stringReplaceAll,
         stringReplaceOne,
         nor,
-        switchOn
+        switchOn,
+        ifNull,
+        coalesce
     }
 }
 export { Pipelines }

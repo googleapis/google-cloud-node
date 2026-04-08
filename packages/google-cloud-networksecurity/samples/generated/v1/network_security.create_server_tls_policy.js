@@ -34,9 +34,10 @@ function main(parent, serverTlsPolicyId, serverTlsPolicy) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Short name of the ServerTlsPolicy resource to be created. This value should
-   *  be 1-63 characters long, containing only letters, numbers, hyphens, and
-   *  underscores, and should not start with a number. E.g. "server_mtls_policy".
+   *  Required. Short name of the ServerTlsPolicy resource to be created. This
+   *  value should be 1-63 characters long, containing only letters, numbers,
+   *  hyphens, and underscores, and should not start with a number. E.g.
+   *  "server_mtls_policy".
    */
   // const serverTlsPolicyId = 'abc123'
   /**
