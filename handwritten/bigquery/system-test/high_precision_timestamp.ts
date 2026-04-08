@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ function clearPackageCache() {
   const packageJsonPath = require.resolve('../package.json');
   const packageDir = path.dirname(packageJsonPath);
 
-  Object.keys(require.cache).forEach((key) => {
+  Object.keys(require.cache).forEach(key => {
     if (key.startsWith(packageDir) && !key.includes('node_modules')) {
       delete require.cache[key];
     }
