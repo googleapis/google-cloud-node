@@ -368,18 +368,14 @@ describe.skipClassic('Pipeline class', () => {
 
         const promise = deletePpl.execute();
 
-        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
-          const deleteRes = await promise;
-          expectResults(deleteRes, {documents_modified: 2});
+        const deleteRes = await promise;
+        expectResults(deleteRes, {documents_modified: 2});
 
-          const docSnap1 = await dmlCol.doc('book1').get();
-          expect(docSnap1.exists).to.be.false;
+        const docSnap1 = await dmlCol.doc('book1').get();
+        expect(docSnap1.exists).to.be.false;
 
-          const docSnap10 = await dmlCol.doc('book10').get();
-          expect(docSnap10.exists).to.be.false;
-        } else {
-          await expect(promise).to.be.rejected;
-        }
+        const docSnap10 = await dmlCol.doc('book10').get();
+        expect(docSnap10.exists).to.be.false;
       });
 
       it('can execute delete stage within a transaction', async () => {
@@ -394,13 +390,9 @@ describe.skipClassic('Pipeline class', () => {
           expectResults(deleteRes, {documents_modified: 1});
         });
 
-        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
-          await promise;
-          const docSnap = await dmlCol.doc('book2').get();
-          expect(docSnap.exists).to.be.false;
-        } else {
-          await expect(promise).to.be.rejected;
-        }
+        await promise;
+        const docSnap = await dmlCol.doc('book2').get();
+        expect(docSnap.exists).to.be.false;
       });
 
       it('can execute update stage with addFields', async () => {
@@ -413,16 +405,12 @@ describe.skipClassic('Pipeline class', () => {
 
         const promise = ppl.execute();
 
-        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
-          const res = await promise;
-          expectResults(res, {documents_modified: 1});
+        const res = await promise;
+        expectResults(res, {documents_modified: 1});
 
-          const docSnap = await dmlCol.doc('book3').get();
-          expect(docSnap.get('foo')).to.equal('baz');
-          expect(docSnap.get('id')).to.equal('book3');
-        } else {
-          await expect(promise).to.be.rejected;
-        }
+        const docSnap = await dmlCol.doc('book3').get();
+        expect(docSnap.get('foo')).to.equal('baz');
+        expect(docSnap.get('id')).to.equal('book3');
       });
 
       it('can update multiple documents and remove fields', async () => {
@@ -434,20 +422,16 @@ describe.skipClassic('Pipeline class', () => {
           .update([constant('Updated').as('status')])
           .execute();
 
-        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
-          const res = await promise;
-          expectResults(res, {documents_modified: 2});
+        const res = await promise;
+        expectResults(res, {documents_modified: 2});
 
-          const docSnap1 = await dmlCol.doc('book1').get();
-          expect(docSnap1.get('status')).to.equal('Updated');
-          expect(docSnap1.get('awards')).to.be.undefined;
+        const docSnap1 = await dmlCol.doc('book1').get();
+        expect(docSnap1.get('status')).to.equal('Updated');
+        expect(docSnap1.get('awards')).to.be.undefined;
 
-          const docSnap10 = await dmlCol.doc('book10').get();
-          expect(docSnap10.get('status')).to.equal('Updated');
-          expect(docSnap10.get('awards')).to.be.undefined;
-        } else {
-          await expect(promise).to.be.rejected;
-        }
+        const docSnap10 = await dmlCol.doc('book10').get();
+        expect(docSnap10.get('status')).to.equal('Updated');
+        expect(docSnap10.get('awards')).to.be.undefined;
       });
 
       it('can update with expressions', async () => {
@@ -458,15 +442,11 @@ describe.skipClassic('Pipeline class', () => {
           .update([add(field('rating'), constant(1.0)).as('rating')])
           .execute();
 
-        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
-          const res = await promise;
-          expectResults(res, {documents_modified: 1});
+        const res = await promise;
+        expectResults(res, {documents_modified: 1});
 
-          const docSnap = await dmlCol.doc('book1').get();
-          expect(docSnap.get('rating')).to.equal(5.2);
-        } else {
-          await expect(promise).to.be.rejected;
-        }
+        const docSnap = await dmlCol.doc('book1').get();
+        expect(docSnap.get('rating')).to.equal(5.2);
       });
 
       it('can update non existing document modifies zero documents', async () => {
@@ -477,12 +457,8 @@ describe.skipClassic('Pipeline class', () => {
           .update([constant('Updated').as('status')])
           .execute();
 
-        if (process.env.FIRESTORE_TARGET_BACKEND?.toUpperCase() === 'NIGHTLY') {
-          const res = await promise;
-          expectResults(res, {documents_modified: 0});
-        } else {
-          await expect(promise).to.be.rejected;
-        }
+        const res = await promise;
+        expectResults(res, {documents_modified: 0});
       });
     });
 
