@@ -26,7 +26,7 @@ const originalValue = process.env.BIGQUERY_PICOSECOND_SUPPORT;
  */
 function clearPackageCache() {
   // Find the root of the current package by looking for package.json
-  const packageJsonPath = require.resolve('../package.json');
+  const packageJsonPath = require.resolve('../../package.json');
   const packageDir = path.dirname(packageJsonPath);
 
   Object.keys(require.cache).forEach(key => {
