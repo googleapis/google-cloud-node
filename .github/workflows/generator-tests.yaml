@@ -63,7 +63,8 @@ jobs:
         curl -sSL https://github.com/googleapis/gapic-config-validator/releases/download/v0.6.0/gapic-config-validator-0.6.0-linux-amd64.tar.gz > config-validator.tar.gz
         tar xzf config-validator.tar.gz --no-same-owner
         chmod +x gapic-error-conformance
-        ./gapic-error-conformance -plugin="node build/typescript/src/protoc-plugin.js"
+        chmod +x build/typescript/src/protoc-plugin.js
+        ./gapic-error-conformance -plugin="build/typescript/src/protoc-plugin.js"
 
     - name: Prepare baseline artifacts
       working-directory: core/generator/gapic-generator-typescript
