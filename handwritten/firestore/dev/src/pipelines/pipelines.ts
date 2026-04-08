@@ -116,20 +116,17 @@ import {
 } from 'protobufjs';
 
 /**
- * @beta
  * Represents the source of a Firestore `Pipeline`.
  */
 export class PipelineSource implements firestore.Pipelines.PipelineSource {
   constructor(private db: Firestore) {}
 
   /**
-   * @beta
    * Returns all documents from the entire collection. The collection can be nested.
    * @param collection - Name or reference to the collection that will be used as the Pipeline source.
    */
   collection(collection: string | firestore.CollectionReference): Pipeline;
   /**
-   * @beta
    * Returns all documents from the entire collection. The collection can be nested.
    * @param options - Options defining how this CollectionStage is evaluated.
    */
@@ -170,14 +167,12 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
   }
 
   /**
-   * @beta
    * Returns all documents from a collection ID regardless of the parent.
    * @param collectionId - ID of the collection group to use as the Pipeline source.
    */
   collectionGroup(collectionId: string): Pipeline;
 
   /**
-   * @beta
    * Returns all documents from a collection ID regardless of the parent.
    * @param options - Options defining how this CollectionGroupStage is evaluated.
    */
@@ -198,12 +193,10 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
   }
 
   /**
-   * @beta
    * Returns all documents from the entire database.
    */
   database(): Pipeline;
   /**
-   * @beta
    * Returns all documents from the entire database.
    * @param options - Options defining how a DatabaseStage is evaluated.
    */
@@ -213,7 +206,6 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
   }
 
   /**
-   * @beta
    * Set the pipeline's source to the documents specified by the given paths and DocumentReferences.
    *
    * @param docs An array of paths and DocumentReferences specifying the individual documents that will be the source of this pipeline.
@@ -224,7 +216,6 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
   documents(docs: Array<string | DocumentReference>): Pipeline;
 
   /**
-   * @beta
    * Set the pipeline's source to the documents specified by the given paths and DocumentReferences.
    *
    * @param options - Options defining how this DocumentsStage is evaluated.
@@ -261,7 +252,6 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
   }
 
   /**
-   * @beta
    * Convert the given VectorQuery into an equivalent Pipeline.
    *
    * @param query A VectorQuery to be converted into a Pipeline.
@@ -271,7 +261,6 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
   createFrom(query: firestore.VectorQuery): Pipeline;
 
   /**
-   * @beta
    * Convert the given Query into an equivalent Pipeline.
    *
    * @param query A Query to be converted into a Pipeline.
@@ -315,7 +304,6 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
 }
 
 /**
- * @beta
  * The Pipeline class provides a flexible and expressive framework for building complex data
  * transformation and query pipelines for Firestore.
  *
@@ -369,7 +357,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Adds new fields to outputs from previous stages.
    *
    * This stage allows you to compute values on-the-fly based on existing data from previous
@@ -401,7 +388,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     ...additionalFields: firestore.Pipelines.Selectable[]
   ): Pipeline;
   /**
-   * @beta
    * Adds new fields to outputs from previous stages.
    *
    * This stage allows you to compute values on-the-fly based on existing data from previous
@@ -450,7 +436,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Remove fields from outputs of previous stages.
    *
    *
@@ -473,7 +458,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     ...additionalFields: Array<firestore.Pipelines.Field | string>
   ): Pipeline;
   /**
-   * @beta
    * Remove fields from outputs of previous stages.
    *
    *
@@ -740,7 +724,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Selects or creates a set of fields from the outputs of previous stages.
    *
    * <p>The selected fields are defined using `Selectable` expressions, which can be:
@@ -778,7 +761,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     ...additionalSelections: Array<firestore.Pipelines.Selectable | string>
   ): Pipeline;
   /**
-   * @beta
    * Selects or creates a set of fields from the outputs of previous stages.
    *
    * <p>The selected fields are defined using `Selectable` expressions, which can be:
@@ -836,7 +818,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Filters the documents from previous stages to only include those matching the specified `BooleanExpression`.
    *
    * <p>This stage allows you to apply conditions to the data, similar to a "WHERE" clause in SQL.
@@ -868,7 +849,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    */
   where(condition: firestore.Pipelines.BooleanExpression): Pipeline;
   /**
-   * @beta
    * Filters the documents from previous stages to only include those matching the specified `BooleanExpression`.
    *
    * <p>This stage allows you to apply conditions to the data, similar to a "WHERE" clause in SQL.
@@ -923,7 +903,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Skips the first `offset` number of documents from the results of previous stages.
    *
    * <p>This stage is useful for implementing pagination in your pipelines, allowing you to retrieve
@@ -945,7 +924,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    */
   offset(offset: number): Pipeline;
   /**
-   * @beta
    * Skips the first `offset` number of documents from the results of previous stages.
    *
    * <p>This stage is useful for implementing pagination in your pipelines, allowing you to retrieve
@@ -983,7 +961,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Limits the maximum number of documents returned by previous stages to `limit`.
    *
    * <p>This stage is particularly useful when you want to retrieve a controlled subset of data from
@@ -1010,7 +987,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    */
   limit(limit: number): Pipeline;
   /**
-   * @beta
    * Limits the maximum number of documents returned by previous stages to `limit`.
    *
    * <p>This stage is particularly useful when you want to retrieve a controlled subset of data from
@@ -1053,7 +1029,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Returns a set of distinct values from the inputs to this stage.
    *
    * This stage runs through the results from previous stages to include only results with
@@ -1086,7 +1061,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     ...additionalGroups: Array<string | firestore.Pipelines.Selectable>
   ): Pipeline;
   /**
-   * @beta
    * Returns a set of distinct values from the inputs to this stage.
    *
    * This stage runs through the results from previous stages to include only results with
@@ -1139,7 +1113,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Performs aggregation operations on the documents from previous stages.
    *
    * <p>This stage allows you to calculate aggregate values over a set of documents. You define the
@@ -1168,7 +1141,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     ...additionalAccumulators: firestore.Pipelines.AliasedAggregate[]
   ): Pipeline;
   /**
-   * @beta
    * Performs optionally grouped aggregation operations on the documents from previous stages.
    *
    * <p>This stage allows you to calculate aggregate values over a set of documents, optionally
@@ -1229,7 +1201,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Performs a vector proximity search on the documents from the previous stage, returning the
    * K-nearest documents based on the specified query `vectorValue` and `distanceMeasure`. The
    * returned documents will be sorted in order from nearest to furthest from the query `vectorValue`.
@@ -1272,7 +1243,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Fully overwrites all fields in a document with those coming from a nested map.
    *
    * <p>This stage allows you to emit a map value as a document. Each key of the map becomes a field
@@ -1305,7 +1275,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    */
   replaceWith(fieldName: string): Pipeline;
   /**
-   * @beta
    * Fully overwrites all fields in a document with those coming from a map.
    *
    * <p>This stage allows you to emit a map value as a document. Each key of the map becomes a field
@@ -1343,7 +1312,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    */
   replaceWith(expr: firestore.Pipelines.Expression): Pipeline;
   /**
-   * @beta
    * Fully overwrites all fields in a document with those coming from a map.
    *
    * <p>This stage allows you to emit a map value as a document. Each key of the map becomes a field
@@ -1403,7 +1371,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Performs a pseudo-random sampling of the documents from the previous stage.
    *
    * <p>This stage will filter documents pseudo-randomly. The parameter specifies how number of
@@ -1424,7 +1391,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   sample(documents: number): Pipeline;
 
   /**
-   * @beta
    * Performs a pseudo-random sampling of the documents from the previous stage.
    *
    * <p>This stage will filter documents pseudo-randomly. The 'options' parameter specifies how
@@ -1472,7 +1438,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Performs union of all documents from two pipelines, including duplicates.
    *
    * <p>This stage will pass through documents from previous stage, and also pass through documents
@@ -1492,7 +1457,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    */
   union(other: firestore.Pipelines.Pipeline): Pipeline;
   /**
-   * @beta
    * Performs union of all documents from two pipelines, including duplicates.
    *
    * <p>This stage will pass through documents from previous stage, and also pass through documents
@@ -1533,7 +1497,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Produces a document for each element in an input array.
    *
    * For each previous stage document, this stage will emit zero or more augmented documents. The
@@ -1570,7 +1533,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     indexField?: string,
   ): Pipeline;
   /**
-   * @beta
    * Produces a document for each element in an input array.
    *
    * For each previous stage document, this stage will emit zero or more augmented documents. The
@@ -1637,7 +1599,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Sorts the documents from previous stages based on one or more `Ordering` criteria.
    *
    * <p>This stage allows you to order the results of your pipeline. You can specify multiple
@@ -1667,7 +1628,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     ...additionalOrderings: firestore.Pipelines.Ordering[]
   ): Pipeline;
   /**
-   * @beta
    * Sorts the documents from previous stages based on one or more `Ordering` criteria.
    *
    * <p>This stage allows you to order the results of your pipeline. You can specify multiple
@@ -1752,7 +1712,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Adds a raw stage to the pipeline.
    *
    * <p>This method provides a flexible way to extend the pipeline's functionality by adding custom
@@ -1800,7 +1759,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Executes this pipeline and returns a Promise to represent the asynchronous operation.
    *
    * <p>The returned Promise can be used to track the progress of the pipeline execution
@@ -1882,7 +1840,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Executes this pipeline and streams the results as `PipelineResult`s.
    *
    * @returns {Stream.<PipelineResult>} A stream of
@@ -1932,7 +1889,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
 }
 
 /**
- * @beta
  * A wrapper object to access explain stats if explain or analyze
  * was enabled for the Pipeline query execution.
  */
@@ -1940,7 +1896,6 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
   private static protoRoot: ProtoRoot | undefined = undefined;
 
   /**
-   * @beta
    * @private
    * @internal
    */
@@ -1954,7 +1909,6 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
   }
 
   /**
-   * @beta
    * @private
    * @internal
    * @hideconstructor
@@ -1963,7 +1917,6 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
   constructor(private readonly explainStatsData: google.protobuf.IAny) {}
 
   /**
-   * @beta
    * Decode an ExplainStats proto message into a value.
    * @private
    * @internal
@@ -2007,7 +1960,6 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
   }
 
   /**
-   * @beta
    * When explain stats were requested with `outputFormat = 'text'`, this returns
    * the explain stats string verbatium as returned from the Firestore backend.
    *
@@ -2026,7 +1978,6 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
   }
 
   /**
-   * @beta
    * Returns the explain stats in an encoded proto format, as returned from the Firestore backend.
    * The caller is responsible for unpacking this proto message.
    */
@@ -2039,7 +1990,6 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
 }
 
 /**
- * @beta
  * Represents the results of a Firestore pipeline execution.
  *
  * A `PipelineSnapshot` contains zero or more `PipelineResult` objects
@@ -2078,7 +2028,6 @@ export class PipelineSnapshot implements firestore.Pipelines.PipelineSnapshot {
   }
 
   /**
-   * @beta
    * The Pipeline on which you called `execute()` in order to get this
    * `PipelineSnapshot`.
    */
@@ -2087,13 +2036,12 @@ export class PipelineSnapshot implements firestore.Pipelines.PipelineSnapshot {
   }
 
   /**
-   * @beta An array of all the results in the `PipelineSnapshot`. */
+   * An array of all the results in the `PipelineSnapshot`. */
   get results(): PipelineResult[] {
     return this._results;
   }
 
   /**
-   * @beta
    * The time at which the pipeline producing this result is executed.
    *
    * @type {Timestamp}
@@ -2110,7 +2058,6 @@ export class PipelineSnapshot implements firestore.Pipelines.PipelineSnapshot {
   }
 
   /**
-   * @beta
    * Return stats from query explain.
    *
    * If `explainOptions.mode` was set to `execute` or left unset, then this returns `undefined`.
@@ -2121,7 +2068,6 @@ export class PipelineSnapshot implements firestore.Pipelines.PipelineSnapshot {
 }
 
 /**
- * @beta
  * A PipelineResult contains data read from a Firestore Pipeline. The data can be extracted with the
  * `data()` or `get(String)` methods.
  *
@@ -2136,7 +2082,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   public readonly _updateTime: Timestamp | undefined;
 
   /**
-   * @beta
    * @private
    * @internal
    *
@@ -2152,7 +2097,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   constructor(
     serializer: Serializer,
     /**
-     * @beta
      * @internal
      * @private
      **/
@@ -2170,7 +2114,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   }
 
   /**
-   * @beta
    * The reference of the document, if it is a document; otherwise `undefined`.
    */
   get ref(): DocumentReference | undefined {
@@ -2178,7 +2121,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   }
 
   /**
-   * @beta
    * The ID of the document for which this PipelineResult contains data, if it is a document; otherwise `undefined`.
    *
    * @type {string}
@@ -2190,7 +2132,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   }
 
   /**
-   * @beta
    * The time the document was created. Undefined if this result is not a document.
    *
    * @type {Timestamp|undefined}
@@ -2201,7 +2142,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   }
 
   /**
-   * @beta
    * The time the document was last updated (at the time the snapshot was
    * generated). Undefined if this result is not a document.
    *
@@ -2213,7 +2153,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   }
 
   /**
-   * @beta
    * Retrieves all fields in the result as an object.
    *
    * @returns {T} An object containing all fields in the document.
@@ -2239,7 +2178,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   }
 
   /**
-   * @beta
    * Retrieves the field specified by `field`.
    *
    * @param {string|FieldPath} fieldPath The field path
@@ -2273,7 +2211,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   }
 
   /**
-   * @beta
    * Retrieves the field specified by 'fieldPath' in its Protobuf JS
    * representation.
    *
@@ -2305,7 +2242,6 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
   }
 
   /**
-   * @beta
    * Returns true if the document's data and path in this `PipelineResult` is
    * equal to the provided value.
    *
