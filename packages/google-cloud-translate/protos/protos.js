@@ -1598,6 +1598,7 @@
                          * @property {string|null} [parent] AdaptiveMtTranslateRequest parent
                          * @property {string|null} [dataset] AdaptiveMtTranslateRequest dataset
                          * @property {Array.<string>|null} [content] AdaptiveMtTranslateRequest content
+                         * @property {string|null} [mimeType] AdaptiveMtTranslateRequest mimeType
                          * @property {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null} [referenceSentenceConfig] AdaptiveMtTranslateRequest referenceSentenceConfig
                          * @property {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig|null} [glossaryConfig] AdaptiveMtTranslateRequest glossaryConfig
                          */
@@ -1641,6 +1642,14 @@
                          * @instance
                          */
                         AdaptiveMtTranslateRequest.prototype.content = $util.emptyArray;
+    
+                        /**
+                         * AdaptiveMtTranslateRequest mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         */
+                        AdaptiveMtTranslateRequest.prototype.mimeType = "";
     
                         /**
                          * AdaptiveMtTranslateRequest referenceSentenceConfig.
@@ -1704,6 +1713,8 @@
                             if (message.content != null && message.content.length)
                                 for (var i = 0; i < message.content.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.content[i]);
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.mimeType);
                             if (message.referenceSentenceConfig != null && Object.hasOwnProperty.call(message, "referenceSentenceConfig"))
                                 $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.encode(message.referenceSentenceConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.glossaryConfig != null && Object.hasOwnProperty.call(message, "glossaryConfig"))
@@ -1756,6 +1767,10 @@
                                         if (!(message.content && message.content.length))
                                             message.content = [];
                                         message.content.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.mimeType = reader.string();
                                         break;
                                     }
                                 case 6: {
@@ -1815,6 +1830,9 @@
                                     if (!$util.isString(message.content[i]))
                                         return "content: string[] expected";
                             }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
                             if (message.referenceSentenceConfig != null && message.hasOwnProperty("referenceSentenceConfig")) {
                                 properties._referenceSentenceConfig = 1;
                                 {
@@ -1857,6 +1875,8 @@
                                 for (var i = 0; i < object.content.length; ++i)
                                     message.content[i] = String(object.content[i]);
                             }
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
                             if (object.referenceSentenceConfig != null) {
                                 if (typeof object.referenceSentenceConfig !== "object")
                                     throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateRequest.referenceSentenceConfig: object expected");
@@ -1888,6 +1908,7 @@
                             if (options.defaults) {
                                 object.parent = "";
                                 object.dataset = "";
+                                object.mimeType = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -1898,6 +1919,8 @@
                                 for (var j = 0; j < message.content.length; ++j)
                                     object.content[j] = message.content[j];
                             }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
                             if (message.referenceSentenceConfig != null && message.hasOwnProperty("referenceSentenceConfig")) {
                                 object.referenceSentenceConfig = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.toObject(message.referenceSentenceConfig, options);
                                 if (options.oneofs)
