@@ -451,6 +451,132 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateAutoMigrationConfig(request: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetDeploymentGroup.
+                     * @param request GetDeploymentGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DeploymentGroup
+                     */
+                    public getDeploymentGroup(request: google.cloud.config.v1.IGetDeploymentGroupRequest, callback: google.cloud.config.v1.Config.GetDeploymentGroupCallback): void;
+
+                    /**
+                     * Calls GetDeploymentGroup.
+                     * @param request GetDeploymentGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDeploymentGroup(request: google.cloud.config.v1.IGetDeploymentGroupRequest): Promise<google.cloud.config.v1.DeploymentGroup>;
+
+                    /**
+                     * Calls CreateDeploymentGroup.
+                     * @param request CreateDeploymentGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createDeploymentGroup(request: google.cloud.config.v1.ICreateDeploymentGroupRequest, callback: google.cloud.config.v1.Config.CreateDeploymentGroupCallback): void;
+
+                    /**
+                     * Calls CreateDeploymentGroup.
+                     * @param request CreateDeploymentGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDeploymentGroup(request: google.cloud.config.v1.ICreateDeploymentGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateDeploymentGroup.
+                     * @param request UpdateDeploymentGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateDeploymentGroup(request: google.cloud.config.v1.IUpdateDeploymentGroupRequest, callback: google.cloud.config.v1.Config.UpdateDeploymentGroupCallback): void;
+
+                    /**
+                     * Calls UpdateDeploymentGroup.
+                     * @param request UpdateDeploymentGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDeploymentGroup(request: google.cloud.config.v1.IUpdateDeploymentGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteDeploymentGroup.
+                     * @param request DeleteDeploymentGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteDeploymentGroup(request: google.cloud.config.v1.IDeleteDeploymentGroupRequest, callback: google.cloud.config.v1.Config.DeleteDeploymentGroupCallback): void;
+
+                    /**
+                     * Calls DeleteDeploymentGroup.
+                     * @param request DeleteDeploymentGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDeploymentGroup(request: google.cloud.config.v1.IDeleteDeploymentGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListDeploymentGroups.
+                     * @param request ListDeploymentGroupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDeploymentGroupsResponse
+                     */
+                    public listDeploymentGroups(request: google.cloud.config.v1.IListDeploymentGroupsRequest, callback: google.cloud.config.v1.Config.ListDeploymentGroupsCallback): void;
+
+                    /**
+                     * Calls ListDeploymentGroups.
+                     * @param request ListDeploymentGroupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDeploymentGroups(request: google.cloud.config.v1.IListDeploymentGroupsRequest): Promise<google.cloud.config.v1.ListDeploymentGroupsResponse>;
+
+                    /**
+                     * Calls ProvisionDeploymentGroup.
+                     * @param request ProvisionDeploymentGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public provisionDeploymentGroup(request: google.cloud.config.v1.IProvisionDeploymentGroupRequest, callback: google.cloud.config.v1.Config.ProvisionDeploymentGroupCallback): void;
+
+                    /**
+                     * Calls ProvisionDeploymentGroup.
+                     * @param request ProvisionDeploymentGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public provisionDeploymentGroup(request: google.cloud.config.v1.IProvisionDeploymentGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeprovisionDeploymentGroup.
+                     * @param request DeprovisionDeploymentGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deprovisionDeploymentGroup(request: google.cloud.config.v1.IDeprovisionDeploymentGroupRequest, callback: google.cloud.config.v1.Config.DeprovisionDeploymentGroupCallback): void;
+
+                    /**
+                     * Calls DeprovisionDeploymentGroup.
+                     * @param request DeprovisionDeploymentGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deprovisionDeploymentGroup(request: google.cloud.config.v1.IDeprovisionDeploymentGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetDeploymentGroupRevision.
+                     * @param request GetDeploymentGroupRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DeploymentGroupRevision
+                     */
+                    public getDeploymentGroupRevision(request: google.cloud.config.v1.IGetDeploymentGroupRevisionRequest, callback: google.cloud.config.v1.Config.GetDeploymentGroupRevisionCallback): void;
+
+                    /**
+                     * Calls GetDeploymentGroupRevision.
+                     * @param request GetDeploymentGroupRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDeploymentGroupRevision(request: google.cloud.config.v1.IGetDeploymentGroupRevisionRequest): Promise<google.cloud.config.v1.DeploymentGroupRevision>;
+
+                    /**
+                     * Calls ListDeploymentGroupRevisions.
+                     * @param request ListDeploymentGroupRevisionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDeploymentGroupRevisionsResponse
+                     */
+                    public listDeploymentGroupRevisions(request: google.cloud.config.v1.IListDeploymentGroupRevisionsRequest, callback: google.cloud.config.v1.Config.ListDeploymentGroupRevisionsCallback): void;
+
+                    /**
+                     * Calls ListDeploymentGroupRevisions.
+                     * @param request ListDeploymentGroupRevisionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDeploymentGroupRevisions(request: google.cloud.config.v1.IListDeploymentGroupRevisionsRequest): Promise<google.cloud.config.v1.ListDeploymentGroupRevisionsResponse>;
                 }
 
                 namespace Config {
@@ -657,6 +783,69 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type UpdateAutoMigrationConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|getDeploymentGroup}.
+                     * @param error Error, if any
+                     * @param [response] DeploymentGroup
+                     */
+                    type GetDeploymentGroupCallback = (error: (Error|null), response?: google.cloud.config.v1.DeploymentGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|createDeploymentGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateDeploymentGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|updateDeploymentGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateDeploymentGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|deleteDeploymentGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteDeploymentGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|listDeploymentGroups}.
+                     * @param error Error, if any
+                     * @param [response] ListDeploymentGroupsResponse
+                     */
+                    type ListDeploymentGroupsCallback = (error: (Error|null), response?: google.cloud.config.v1.ListDeploymentGroupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|provisionDeploymentGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ProvisionDeploymentGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|deprovisionDeploymentGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeprovisionDeploymentGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|getDeploymentGroupRevision}.
+                     * @param error Error, if any
+                     * @param [response] DeploymentGroupRevision
+                     */
+                    type GetDeploymentGroupRevisionCallback = (error: (Error|null), response?: google.cloud.config.v1.DeploymentGroupRevision) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|listDeploymentGroupRevisions}.
+                     * @param error Error, if any
+                     * @param [response] ListDeploymentGroupRevisionsResponse
+                     */
+                    type ListDeploymentGroupRevisionsCallback = (error: (Error|null), response?: google.cloud.config.v1.ListDeploymentGroupRevisionsResponse) => void;
                 }
 
                 /** QuotaValidation enum. */
@@ -953,6 +1142,9 @@ export namespace google {
 
                     /** TerraformBlueprint inputValues */
                     inputValues?: ({ [k: string]: google.cloud.config.v1.ITerraformVariable }|null);
+
+                    /** TerraformBlueprint externalValues */
+                    externalValues?: ({ [k: string]: google.cloud.config.v1.IExternalValueSource }|null);
                 }
 
                 /** Represents a TerraformBlueprint. */
@@ -972,6 +1164,9 @@ export namespace google {
 
                     /** TerraformBlueprint inputValues. */
                     public inputValues: { [k: string]: google.cloud.config.v1.ITerraformVariable };
+
+                    /** TerraformBlueprint externalValues. */
+                    public externalValues: { [k: string]: google.cloud.config.v1.IExternalValueSource };
 
                     /** TerraformBlueprint source. */
                     public source?: ("gcsSource"|"gitSource");
@@ -1145,6 +1340,209 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TerraformVariable
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExternalValueSource. */
+                interface IExternalValueSource {
+
+                    /** ExternalValueSource deploymentSource */
+                    deploymentSource?: (google.cloud.config.v1.IDeploymentSource|null);
+                }
+
+                /** Represents an ExternalValueSource. */
+                class ExternalValueSource implements IExternalValueSource {
+
+                    /**
+                     * Constructs a new ExternalValueSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IExternalValueSource);
+
+                    /** ExternalValueSource deploymentSource. */
+                    public deploymentSource?: (google.cloud.config.v1.IDeploymentSource|null);
+
+                    /** ExternalValueSource source. */
+                    public source?: "deploymentSource";
+
+                    /**
+                     * Creates a new ExternalValueSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExternalValueSource instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IExternalValueSource): google.cloud.config.v1.ExternalValueSource;
+
+                    /**
+                     * Encodes the specified ExternalValueSource message. Does not implicitly {@link google.cloud.config.v1.ExternalValueSource.verify|verify} messages.
+                     * @param message ExternalValueSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IExternalValueSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExternalValueSource message, length delimited. Does not implicitly {@link google.cloud.config.v1.ExternalValueSource.verify|verify} messages.
+                     * @param message ExternalValueSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IExternalValueSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExternalValueSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExternalValueSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ExternalValueSource;
+
+                    /**
+                     * Decodes an ExternalValueSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExternalValueSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ExternalValueSource;
+
+                    /**
+                     * Verifies an ExternalValueSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExternalValueSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExternalValueSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ExternalValueSource;
+
+                    /**
+                     * Creates a plain object from an ExternalValueSource message. Also converts values to other types if specified.
+                     * @param message ExternalValueSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ExternalValueSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExternalValueSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExternalValueSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeploymentSource. */
+                interface IDeploymentSource {
+
+                    /** DeploymentSource deployment */
+                    deployment?: (string|null);
+
+                    /** DeploymentSource outputName */
+                    outputName?: (string|null);
+                }
+
+                /** Represents a DeploymentSource. */
+                class DeploymentSource implements IDeploymentSource {
+
+                    /**
+                     * Constructs a new DeploymentSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IDeploymentSource);
+
+                    /** DeploymentSource deployment. */
+                    public deployment: string;
+
+                    /** DeploymentSource outputName. */
+                    public outputName: string;
+
+                    /**
+                     * Creates a new DeploymentSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentSource instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IDeploymentSource): google.cloud.config.v1.DeploymentSource;
+
+                    /**
+                     * Encodes the specified DeploymentSource message. Does not implicitly {@link google.cloud.config.v1.DeploymentSource.verify|verify} messages.
+                     * @param message DeploymentSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IDeploymentSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentSource message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentSource.verify|verify} messages.
+                     * @param message DeploymentSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IDeploymentSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.DeploymentSource;
+
+                    /**
+                     * Decodes a DeploymentSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.DeploymentSource;
+
+                    /**
+                     * Verifies a DeploymentSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.DeploymentSource;
+
+                    /**
+                     * Creates a plain object from a DeploymentSource message. Also converts values to other types if specified.
+                     * @param message DeploymentSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.DeploymentSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentSource
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2132,6 +2530,356 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateDeploymentGroupRequest. */
+                interface ICreateDeploymentGroupRequest {
+
+                    /** CreateDeploymentGroupRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDeploymentGroupRequest deploymentGroupId */
+                    deploymentGroupId?: (string|null);
+
+                    /** CreateDeploymentGroupRequest deploymentGroup */
+                    deploymentGroup?: (google.cloud.config.v1.IDeploymentGroup|null);
+
+                    /** CreateDeploymentGroupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateDeploymentGroupRequest. */
+                class CreateDeploymentGroupRequest implements ICreateDeploymentGroupRequest {
+
+                    /**
+                     * Constructs a new CreateDeploymentGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.ICreateDeploymentGroupRequest);
+
+                    /** CreateDeploymentGroupRequest parent. */
+                    public parent: string;
+
+                    /** CreateDeploymentGroupRequest deploymentGroupId. */
+                    public deploymentGroupId: string;
+
+                    /** CreateDeploymentGroupRequest deploymentGroup. */
+                    public deploymentGroup?: (google.cloud.config.v1.IDeploymentGroup|null);
+
+                    /** CreateDeploymentGroupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateDeploymentGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDeploymentGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.ICreateDeploymentGroupRequest): google.cloud.config.v1.CreateDeploymentGroupRequest;
+
+                    /**
+                     * Encodes the specified CreateDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.CreateDeploymentGroupRequest.verify|verify} messages.
+                     * @param message CreateDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.ICreateDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.CreateDeploymentGroupRequest.verify|verify} messages.
+                     * @param message CreateDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.ICreateDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDeploymentGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.CreateDeploymentGroupRequest;
+
+                    /**
+                     * Decodes a CreateDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.CreateDeploymentGroupRequest;
+
+                    /**
+                     * Verifies a CreateDeploymentGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDeploymentGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.CreateDeploymentGroupRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDeploymentGroupRequest message. Also converts values to other types if specified.
+                     * @param message CreateDeploymentGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.CreateDeploymentGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDeploymentGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDeploymentGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDeploymentGroupRequest. */
+                interface IUpdateDeploymentGroupRequest {
+
+                    /** UpdateDeploymentGroupRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDeploymentGroupRequest deploymentGroup */
+                    deploymentGroup?: (google.cloud.config.v1.IDeploymentGroup|null);
+
+                    /** UpdateDeploymentGroupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateDeploymentGroupRequest. */
+                class UpdateDeploymentGroupRequest implements IUpdateDeploymentGroupRequest {
+
+                    /**
+                     * Constructs a new UpdateDeploymentGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IUpdateDeploymentGroupRequest);
+
+                    /** UpdateDeploymentGroupRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDeploymentGroupRequest deploymentGroup. */
+                    public deploymentGroup?: (google.cloud.config.v1.IDeploymentGroup|null);
+
+                    /** UpdateDeploymentGroupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateDeploymentGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDeploymentGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IUpdateDeploymentGroupRequest): google.cloud.config.v1.UpdateDeploymentGroupRequest;
+
+                    /**
+                     * Encodes the specified UpdateDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.UpdateDeploymentGroupRequest.verify|verify} messages.
+                     * @param message UpdateDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IUpdateDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.UpdateDeploymentGroupRequest.verify|verify} messages.
+                     * @param message UpdateDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IUpdateDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDeploymentGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.UpdateDeploymentGroupRequest;
+
+                    /**
+                     * Decodes an UpdateDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.UpdateDeploymentGroupRequest;
+
+                    /**
+                     * Verifies an UpdateDeploymentGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDeploymentGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.UpdateDeploymentGroupRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDeploymentGroupRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDeploymentGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.UpdateDeploymentGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDeploymentGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDeploymentGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDeploymentGroupRequest. */
+                interface IDeleteDeploymentGroupRequest {
+
+                    /** DeleteDeploymentGroupRequest name */
+                    name?: (string|null);
+
+                    /** DeleteDeploymentGroupRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteDeploymentGroupRequest force */
+                    force?: (boolean|null);
+
+                    /** DeleteDeploymentGroupRequest deploymentReferencePolicy */
+                    deploymentReferencePolicy?: (google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy|keyof typeof google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy|null);
+                }
+
+                /** Represents a DeleteDeploymentGroupRequest. */
+                class DeleteDeploymentGroupRequest implements IDeleteDeploymentGroupRequest {
+
+                    /**
+                     * Constructs a new DeleteDeploymentGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IDeleteDeploymentGroupRequest);
+
+                    /** DeleteDeploymentGroupRequest name. */
+                    public name: string;
+
+                    /** DeleteDeploymentGroupRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteDeploymentGroupRequest force. */
+                    public force: boolean;
+
+                    /** DeleteDeploymentGroupRequest deploymentReferencePolicy. */
+                    public deploymentReferencePolicy: (google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy|keyof typeof google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy);
+
+                    /**
+                     * Creates a new DeleteDeploymentGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDeploymentGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IDeleteDeploymentGroupRequest): google.cloud.config.v1.DeleteDeploymentGroupRequest;
+
+                    /**
+                     * Encodes the specified DeleteDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.DeleteDeploymentGroupRequest.verify|verify} messages.
+                     * @param message DeleteDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IDeleteDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeleteDeploymentGroupRequest.verify|verify} messages.
+                     * @param message DeleteDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IDeleteDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDeploymentGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.DeleteDeploymentGroupRequest;
+
+                    /**
+                     * Decodes a DeleteDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.DeleteDeploymentGroupRequest;
+
+                    /**
+                     * Verifies a DeleteDeploymentGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDeploymentGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.DeleteDeploymentGroupRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDeploymentGroupRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDeploymentGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.DeleteDeploymentGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDeploymentGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDeploymentGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeleteDeploymentGroupRequest {
+
+                    /** DeploymentReferencePolicy enum. */
+                    enum DeploymentReferencePolicy {
+                        DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED = 0,
+                        FAIL_IF_ANY_REFERENCES_EXIST = 1,
+                        FAIL_IF_METADATA_REFERENCES_EXIST = 2,
+                        IGNORE_DEPLOYMENT_REFERENCES = 3
+                    }
+                }
+
                 /** Properties of an UpdateDeploymentRequest. */
                 interface IUpdateDeploymentRequest {
 
@@ -2375,6 +3123,9 @@ export namespace google {
                     /** OperationMetadata previewMetadata */
                     previewMetadata?: (google.cloud.config.v1.IPreviewOperationMetadata|null);
 
+                    /** OperationMetadata provisionDeploymentGroupMetadata */
+                    provisionDeploymentGroupMetadata?: (google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata|null);
+
                     /** OperationMetadata createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -2412,6 +3163,9 @@ export namespace google {
                     /** OperationMetadata previewMetadata. */
                     public previewMetadata?: (google.cloud.config.v1.IPreviewOperationMetadata|null);
 
+                    /** OperationMetadata provisionDeploymentGroupMetadata. */
+                    public provisionDeploymentGroupMetadata?: (google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata|null);
+
                     /** OperationMetadata createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
@@ -2434,7 +3188,7 @@ export namespace google {
                     public apiVersion: string;
 
                     /** OperationMetadata resourceMetadata. */
-                    public resourceMetadata?: ("deploymentMetadata"|"previewMetadata");
+                    public resourceMetadata?: ("deploymentMetadata"|"previewMetadata"|"provisionDeploymentGroupMetadata");
 
                     /**
                      * Creates a new OperationMetadata instance using the specified properties.
@@ -8300,6 +9054,1769 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateAutoMigrationConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeploymentGroup. */
+                interface IDeploymentGroup {
+
+                    /** DeploymentGroup name */
+                    name?: (string|null);
+
+                    /** DeploymentGroup createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentGroup updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentGroup labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** DeploymentGroup annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** DeploymentGroup state */
+                    state?: (google.cloud.config.v1.DeploymentGroup.State|keyof typeof google.cloud.config.v1.DeploymentGroup.State|null);
+
+                    /** DeploymentGroup stateDescription */
+                    stateDescription?: (string|null);
+
+                    /** DeploymentGroup deploymentUnits */
+                    deploymentUnits?: (google.cloud.config.v1.IDeploymentUnit[]|null);
+
+                    /** DeploymentGroup provisioningState */
+                    provisioningState?: (google.cloud.config.v1.DeploymentGroup.ProvisioningState|keyof typeof google.cloud.config.v1.DeploymentGroup.ProvisioningState|null);
+
+                    /** DeploymentGroup provisioningStateDescription */
+                    provisioningStateDescription?: (string|null);
+
+                    /** DeploymentGroup provisioningError */
+                    provisioningError?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents a DeploymentGroup. */
+                class DeploymentGroup implements IDeploymentGroup {
+
+                    /**
+                     * Constructs a new DeploymentGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IDeploymentGroup);
+
+                    /** DeploymentGroup name. */
+                    public name: string;
+
+                    /** DeploymentGroup createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentGroup updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentGroup labels. */
+                    public labels: { [k: string]: string };
+
+                    /** DeploymentGroup annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** DeploymentGroup state. */
+                    public state: (google.cloud.config.v1.DeploymentGroup.State|keyof typeof google.cloud.config.v1.DeploymentGroup.State);
+
+                    /** DeploymentGroup stateDescription. */
+                    public stateDescription: string;
+
+                    /** DeploymentGroup deploymentUnits. */
+                    public deploymentUnits: google.cloud.config.v1.IDeploymentUnit[];
+
+                    /** DeploymentGroup provisioningState. */
+                    public provisioningState: (google.cloud.config.v1.DeploymentGroup.ProvisioningState|keyof typeof google.cloud.config.v1.DeploymentGroup.ProvisioningState);
+
+                    /** DeploymentGroup provisioningStateDescription. */
+                    public provisioningStateDescription: string;
+
+                    /** DeploymentGroup provisioningError. */
+                    public provisioningError?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new DeploymentGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentGroup instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IDeploymentGroup): google.cloud.config.v1.DeploymentGroup;
+
+                    /**
+                     * Encodes the specified DeploymentGroup message. Does not implicitly {@link google.cloud.config.v1.DeploymentGroup.verify|verify} messages.
+                     * @param message DeploymentGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IDeploymentGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentGroup message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentGroup.verify|verify} messages.
+                     * @param message DeploymentGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IDeploymentGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.DeploymentGroup;
+
+                    /**
+                     * Decodes a DeploymentGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.DeploymentGroup;
+
+                    /**
+                     * Verifies a DeploymentGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.DeploymentGroup;
+
+                    /**
+                     * Creates a plain object from a DeploymentGroup message. Also converts values to other types if specified.
+                     * @param message DeploymentGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.DeploymentGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeploymentGroup {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        UPDATING = 3,
+                        DELETING = 4,
+                        FAILED = 5,
+                        SUSPENDED = 6,
+                        DELETED = 7
+                    }
+
+                    /** ProvisioningState enum. */
+                    enum ProvisioningState {
+                        PROVISIONING_STATE_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        PROVISIONED = 2,
+                        FAILED_TO_PROVISION = 3,
+                        DEPROVISIONING = 4,
+                        DEPROVISIONED = 5,
+                        FAILED_TO_DEPROVISION = 6
+                    }
+                }
+
+                /** Properties of a DeploymentUnit. */
+                interface IDeploymentUnit {
+
+                    /** DeploymentUnit id */
+                    id?: (string|null);
+
+                    /** DeploymentUnit deployment */
+                    deployment?: (string|null);
+
+                    /** DeploymentUnit dependencies */
+                    dependencies?: (string[]|null);
+                }
+
+                /** Represents a DeploymentUnit. */
+                class DeploymentUnit implements IDeploymentUnit {
+
+                    /**
+                     * Constructs a new DeploymentUnit.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IDeploymentUnit);
+
+                    /** DeploymentUnit id. */
+                    public id: string;
+
+                    /** DeploymentUnit deployment. */
+                    public deployment?: (string|null);
+
+                    /** DeploymentUnit dependencies. */
+                    public dependencies: string[];
+
+                    /**
+                     * Creates a new DeploymentUnit instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentUnit instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IDeploymentUnit): google.cloud.config.v1.DeploymentUnit;
+
+                    /**
+                     * Encodes the specified DeploymentUnit message. Does not implicitly {@link google.cloud.config.v1.DeploymentUnit.verify|verify} messages.
+                     * @param message DeploymentUnit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IDeploymentUnit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentUnit message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentUnit.verify|verify} messages.
+                     * @param message DeploymentUnit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IDeploymentUnit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentUnit message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentUnit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.DeploymentUnit;
+
+                    /**
+                     * Decodes a DeploymentUnit message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentUnit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.DeploymentUnit;
+
+                    /**
+                     * Verifies a DeploymentUnit message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentUnit message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentUnit
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.DeploymentUnit;
+
+                    /**
+                     * Creates a plain object from a DeploymentUnit message. Also converts values to other types if specified.
+                     * @param message DeploymentUnit
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.DeploymentUnit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentUnit to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentUnit
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeploymentSpec. */
+                interface IDeploymentSpec {
+
+                    /** DeploymentSpec deploymentId */
+                    deploymentId?: (string|null);
+
+                    /** DeploymentSpec deployment */
+                    deployment?: (google.cloud.config.v1.IDeployment|null);
+                }
+
+                /** Represents a DeploymentSpec. */
+                class DeploymentSpec implements IDeploymentSpec {
+
+                    /**
+                     * Constructs a new DeploymentSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IDeploymentSpec);
+
+                    /** DeploymentSpec deploymentId. */
+                    public deploymentId: string;
+
+                    /** DeploymentSpec deployment. */
+                    public deployment?: (google.cloud.config.v1.IDeployment|null);
+
+                    /**
+                     * Creates a new DeploymentSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentSpec instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IDeploymentSpec): google.cloud.config.v1.DeploymentSpec;
+
+                    /**
+                     * Encodes the specified DeploymentSpec message. Does not implicitly {@link google.cloud.config.v1.DeploymentSpec.verify|verify} messages.
+                     * @param message DeploymentSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IDeploymentSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentSpec message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentSpec.verify|verify} messages.
+                     * @param message DeploymentSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IDeploymentSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.DeploymentSpec;
+
+                    /**
+                     * Decodes a DeploymentSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.DeploymentSpec;
+
+                    /**
+                     * Verifies a DeploymentSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.DeploymentSpec;
+
+                    /**
+                     * Creates a plain object from a DeploymentSpec message. Also converts values to other types if specified.
+                     * @param message DeploymentSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.DeploymentSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDeploymentGroupRequest. */
+                interface IGetDeploymentGroupRequest {
+
+                    /** GetDeploymentGroupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDeploymentGroupRequest. */
+                class GetDeploymentGroupRequest implements IGetDeploymentGroupRequest {
+
+                    /**
+                     * Constructs a new GetDeploymentGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IGetDeploymentGroupRequest);
+
+                    /** GetDeploymentGroupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDeploymentGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDeploymentGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IGetDeploymentGroupRequest): google.cloud.config.v1.GetDeploymentGroupRequest;
+
+                    /**
+                     * Encodes the specified GetDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.GetDeploymentGroupRequest.verify|verify} messages.
+                     * @param message GetDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IGetDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetDeploymentGroupRequest.verify|verify} messages.
+                     * @param message GetDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IGetDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDeploymentGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.GetDeploymentGroupRequest;
+
+                    /**
+                     * Decodes a GetDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.GetDeploymentGroupRequest;
+
+                    /**
+                     * Verifies a GetDeploymentGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDeploymentGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.GetDeploymentGroupRequest;
+
+                    /**
+                     * Creates a plain object from a GetDeploymentGroupRequest message. Also converts values to other types if specified.
+                     * @param message GetDeploymentGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.GetDeploymentGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDeploymentGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDeploymentGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDeploymentGroupsRequest. */
+                interface IListDeploymentGroupsRequest {
+
+                    /** ListDeploymentGroupsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDeploymentGroupsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDeploymentGroupsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDeploymentGroupsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListDeploymentGroupsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListDeploymentGroupsRequest. */
+                class ListDeploymentGroupsRequest implements IListDeploymentGroupsRequest {
+
+                    /**
+                     * Constructs a new ListDeploymentGroupsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IListDeploymentGroupsRequest);
+
+                    /** ListDeploymentGroupsRequest parent. */
+                    public parent: string;
+
+                    /** ListDeploymentGroupsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDeploymentGroupsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDeploymentGroupsRequest filter. */
+                    public filter: string;
+
+                    /** ListDeploymentGroupsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListDeploymentGroupsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDeploymentGroupsRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IListDeploymentGroupsRequest): google.cloud.config.v1.ListDeploymentGroupsRequest;
+
+                    /**
+                     * Encodes the specified ListDeploymentGroupsRequest message. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupsRequest.verify|verify} messages.
+                     * @param message ListDeploymentGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IListDeploymentGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDeploymentGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupsRequest.verify|verify} messages.
+                     * @param message ListDeploymentGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IListDeploymentGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDeploymentGroupsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDeploymentGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ListDeploymentGroupsRequest;
+
+                    /**
+                     * Decodes a ListDeploymentGroupsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDeploymentGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ListDeploymentGroupsRequest;
+
+                    /**
+                     * Verifies a ListDeploymentGroupsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDeploymentGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDeploymentGroupsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ListDeploymentGroupsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDeploymentGroupsRequest message. Also converts values to other types if specified.
+                     * @param message ListDeploymentGroupsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ListDeploymentGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDeploymentGroupsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDeploymentGroupsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDeploymentGroupsResponse. */
+                interface IListDeploymentGroupsResponse {
+
+                    /** ListDeploymentGroupsResponse deploymentGroups */
+                    deploymentGroups?: (google.cloud.config.v1.IDeploymentGroup[]|null);
+
+                    /** ListDeploymentGroupsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDeploymentGroupsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListDeploymentGroupsResponse. */
+                class ListDeploymentGroupsResponse implements IListDeploymentGroupsResponse {
+
+                    /**
+                     * Constructs a new ListDeploymentGroupsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IListDeploymentGroupsResponse);
+
+                    /** ListDeploymentGroupsResponse deploymentGroups. */
+                    public deploymentGroups: google.cloud.config.v1.IDeploymentGroup[];
+
+                    /** ListDeploymentGroupsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDeploymentGroupsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListDeploymentGroupsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDeploymentGroupsResponse instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IListDeploymentGroupsResponse): google.cloud.config.v1.ListDeploymentGroupsResponse;
+
+                    /**
+                     * Encodes the specified ListDeploymentGroupsResponse message. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupsResponse.verify|verify} messages.
+                     * @param message ListDeploymentGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IListDeploymentGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDeploymentGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupsResponse.verify|verify} messages.
+                     * @param message ListDeploymentGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IListDeploymentGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDeploymentGroupsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDeploymentGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ListDeploymentGroupsResponse;
+
+                    /**
+                     * Decodes a ListDeploymentGroupsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDeploymentGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ListDeploymentGroupsResponse;
+
+                    /**
+                     * Verifies a ListDeploymentGroupsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDeploymentGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDeploymentGroupsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ListDeploymentGroupsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDeploymentGroupsResponse message. Also converts values to other types if specified.
+                     * @param message ListDeploymentGroupsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ListDeploymentGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDeploymentGroupsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDeploymentGroupsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProvisionDeploymentGroupRequest. */
+                interface IProvisionDeploymentGroupRequest {
+
+                    /** ProvisionDeploymentGroupRequest name */
+                    name?: (string|null);
+
+                    /** ProvisionDeploymentGroupRequest deploymentSpecs */
+                    deploymentSpecs?: ({ [k: string]: google.cloud.config.v1.IDeploymentSpec }|null);
+                }
+
+                /** Represents a ProvisionDeploymentGroupRequest. */
+                class ProvisionDeploymentGroupRequest implements IProvisionDeploymentGroupRequest {
+
+                    /**
+                     * Constructs a new ProvisionDeploymentGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IProvisionDeploymentGroupRequest);
+
+                    /** ProvisionDeploymentGroupRequest name. */
+                    public name: string;
+
+                    /** ProvisionDeploymentGroupRequest deploymentSpecs. */
+                    public deploymentSpecs: { [k: string]: google.cloud.config.v1.IDeploymentSpec };
+
+                    /**
+                     * Creates a new ProvisionDeploymentGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProvisionDeploymentGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IProvisionDeploymentGroupRequest): google.cloud.config.v1.ProvisionDeploymentGroupRequest;
+
+                    /**
+                     * Encodes the specified ProvisionDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.ProvisionDeploymentGroupRequest.verify|verify} messages.
+                     * @param message ProvisionDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IProvisionDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProvisionDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ProvisionDeploymentGroupRequest.verify|verify} messages.
+                     * @param message ProvisionDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IProvisionDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProvisionDeploymentGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProvisionDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ProvisionDeploymentGroupRequest;
+
+                    /**
+                     * Decodes a ProvisionDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProvisionDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ProvisionDeploymentGroupRequest;
+
+                    /**
+                     * Verifies a ProvisionDeploymentGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProvisionDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProvisionDeploymentGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ProvisionDeploymentGroupRequest;
+
+                    /**
+                     * Creates a plain object from a ProvisionDeploymentGroupRequest message. Also converts values to other types if specified.
+                     * @param message ProvisionDeploymentGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ProvisionDeploymentGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProvisionDeploymentGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProvisionDeploymentGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeprovisionDeploymentGroupRequest. */
+                interface IDeprovisionDeploymentGroupRequest {
+
+                    /** DeprovisionDeploymentGroupRequest name */
+                    name?: (string|null);
+
+                    /** DeprovisionDeploymentGroupRequest force */
+                    force?: (boolean|null);
+
+                    /** DeprovisionDeploymentGroupRequest deletePolicy */
+                    deletePolicy?: (google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy|keyof typeof google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy|null);
+                }
+
+                /** Represents a DeprovisionDeploymentGroupRequest. */
+                class DeprovisionDeploymentGroupRequest implements IDeprovisionDeploymentGroupRequest {
+
+                    /**
+                     * Constructs a new DeprovisionDeploymentGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IDeprovisionDeploymentGroupRequest);
+
+                    /** DeprovisionDeploymentGroupRequest name. */
+                    public name: string;
+
+                    /** DeprovisionDeploymentGroupRequest force. */
+                    public force: boolean;
+
+                    /** DeprovisionDeploymentGroupRequest deletePolicy. */
+                    public deletePolicy: (google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy|keyof typeof google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy);
+
+                    /**
+                     * Creates a new DeprovisionDeploymentGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeprovisionDeploymentGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IDeprovisionDeploymentGroupRequest): google.cloud.config.v1.DeprovisionDeploymentGroupRequest;
+
+                    /**
+                     * Encodes the specified DeprovisionDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.DeprovisionDeploymentGroupRequest.verify|verify} messages.
+                     * @param message DeprovisionDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IDeprovisionDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeprovisionDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeprovisionDeploymentGroupRequest.verify|verify} messages.
+                     * @param message DeprovisionDeploymentGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IDeprovisionDeploymentGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeprovisionDeploymentGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeprovisionDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.DeprovisionDeploymentGroupRequest;
+
+                    /**
+                     * Decodes a DeprovisionDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeprovisionDeploymentGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.DeprovisionDeploymentGroupRequest;
+
+                    /**
+                     * Verifies a DeprovisionDeploymentGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeprovisionDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeprovisionDeploymentGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.DeprovisionDeploymentGroupRequest;
+
+                    /**
+                     * Creates a plain object from a DeprovisionDeploymentGroupRequest message. Also converts values to other types if specified.
+                     * @param message DeprovisionDeploymentGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.DeprovisionDeploymentGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeprovisionDeploymentGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeprovisionDeploymentGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeploymentOperationSummary. */
+                interface IDeploymentOperationSummary {
+
+                    /** DeploymentOperationSummary deploymentStep */
+                    deploymentStep?: (google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep|keyof typeof google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep|null);
+
+                    /** DeploymentOperationSummary build */
+                    build?: (string|null);
+
+                    /** DeploymentOperationSummary logs */
+                    logs?: (string|null);
+
+                    /** DeploymentOperationSummary content */
+                    content?: (string|null);
+
+                    /** DeploymentOperationSummary artifacts */
+                    artifacts?: (string|null);
+                }
+
+                /** Represents a DeploymentOperationSummary. */
+                class DeploymentOperationSummary implements IDeploymentOperationSummary {
+
+                    /**
+                     * Constructs a new DeploymentOperationSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IDeploymentOperationSummary);
+
+                    /** DeploymentOperationSummary deploymentStep. */
+                    public deploymentStep: (google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep|keyof typeof google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep);
+
+                    /** DeploymentOperationSummary build. */
+                    public build: string;
+
+                    /** DeploymentOperationSummary logs. */
+                    public logs: string;
+
+                    /** DeploymentOperationSummary content. */
+                    public content: string;
+
+                    /** DeploymentOperationSummary artifacts. */
+                    public artifacts: string;
+
+                    /**
+                     * Creates a new DeploymentOperationSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentOperationSummary instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IDeploymentOperationSummary): google.cloud.config.v1.DeploymentOperationSummary;
+
+                    /**
+                     * Encodes the specified DeploymentOperationSummary message. Does not implicitly {@link google.cloud.config.v1.DeploymentOperationSummary.verify|verify} messages.
+                     * @param message DeploymentOperationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IDeploymentOperationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentOperationSummary message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentOperationSummary.verify|verify} messages.
+                     * @param message DeploymentOperationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IDeploymentOperationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentOperationSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentOperationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.DeploymentOperationSummary;
+
+                    /**
+                     * Decodes a DeploymentOperationSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentOperationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.DeploymentOperationSummary;
+
+                    /**
+                     * Verifies a DeploymentOperationSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentOperationSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentOperationSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.DeploymentOperationSummary;
+
+                    /**
+                     * Creates a plain object from a DeploymentOperationSummary message. Also converts values to other types if specified.
+                     * @param message DeploymentOperationSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.DeploymentOperationSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentOperationSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentOperationSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeploymentUnitProgress. */
+                interface IDeploymentUnitProgress {
+
+                    /** DeploymentUnitProgress unitId */
+                    unitId?: (string|null);
+
+                    /** DeploymentUnitProgress deployment */
+                    deployment?: (string|null);
+
+                    /** DeploymentUnitProgress state */
+                    state?: (google.cloud.config.v1.DeploymentUnitProgress.State|keyof typeof google.cloud.config.v1.DeploymentUnitProgress.State|null);
+
+                    /** DeploymentUnitProgress stateDescription */
+                    stateDescription?: (string|null);
+
+                    /** DeploymentUnitProgress deploymentOperationSummary */
+                    deploymentOperationSummary?: (google.cloud.config.v1.IDeploymentOperationSummary|null);
+
+                    /** DeploymentUnitProgress error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** DeploymentUnitProgress intent */
+                    intent?: (google.cloud.config.v1.DeploymentUnitProgress.Intent|keyof typeof google.cloud.config.v1.DeploymentUnitProgress.Intent|null);
+                }
+
+                /** Represents a DeploymentUnitProgress. */
+                class DeploymentUnitProgress implements IDeploymentUnitProgress {
+
+                    /**
+                     * Constructs a new DeploymentUnitProgress.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IDeploymentUnitProgress);
+
+                    /** DeploymentUnitProgress unitId. */
+                    public unitId: string;
+
+                    /** DeploymentUnitProgress deployment. */
+                    public deployment: string;
+
+                    /** DeploymentUnitProgress state. */
+                    public state: (google.cloud.config.v1.DeploymentUnitProgress.State|keyof typeof google.cloud.config.v1.DeploymentUnitProgress.State);
+
+                    /** DeploymentUnitProgress stateDescription. */
+                    public stateDescription: string;
+
+                    /** DeploymentUnitProgress deploymentOperationSummary. */
+                    public deploymentOperationSummary?: (google.cloud.config.v1.IDeploymentOperationSummary|null);
+
+                    /** DeploymentUnitProgress error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** DeploymentUnitProgress intent. */
+                    public intent: (google.cloud.config.v1.DeploymentUnitProgress.Intent|keyof typeof google.cloud.config.v1.DeploymentUnitProgress.Intent);
+
+                    /**
+                     * Creates a new DeploymentUnitProgress instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentUnitProgress instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IDeploymentUnitProgress): google.cloud.config.v1.DeploymentUnitProgress;
+
+                    /**
+                     * Encodes the specified DeploymentUnitProgress message. Does not implicitly {@link google.cloud.config.v1.DeploymentUnitProgress.verify|verify} messages.
+                     * @param message DeploymentUnitProgress message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IDeploymentUnitProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentUnitProgress message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentUnitProgress.verify|verify} messages.
+                     * @param message DeploymentUnitProgress message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IDeploymentUnitProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentUnitProgress message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentUnitProgress
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.DeploymentUnitProgress;
+
+                    /**
+                     * Decodes a DeploymentUnitProgress message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentUnitProgress
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.DeploymentUnitProgress;
+
+                    /**
+                     * Verifies a DeploymentUnitProgress message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentUnitProgress message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentUnitProgress
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.DeploymentUnitProgress;
+
+                    /**
+                     * Creates a plain object from a DeploymentUnitProgress message. Also converts values to other types if specified.
+                     * @param message DeploymentUnitProgress
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.DeploymentUnitProgress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentUnitProgress to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentUnitProgress
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeploymentUnitProgress {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        QUEUED = 1,
+                        APPLYING_DEPLOYMENT = 2,
+                        SUCCEEDED = 4,
+                        FAILED = 5,
+                        ABORTED = 6,
+                        SKIPPED = 7,
+                        DELETING_DEPLOYMENT = 8,
+                        PREVIEWING_DEPLOYMENT = 9
+                    }
+
+                    /** Intent enum. */
+                    enum Intent {
+                        INTENT_UNSPECIFIED = 0,
+                        CREATE_DEPLOYMENT = 1,
+                        UPDATE_DEPLOYMENT = 2,
+                        DELETE_DEPLOYMENT = 3,
+                        RECREATE_DEPLOYMENT = 4,
+                        CLEAN_UP = 5,
+                        UNCHANGED = 6
+                    }
+                }
+
+                /** Properties of a ProvisionDeploymentGroupOperationMetadata. */
+                interface IProvisionDeploymentGroupOperationMetadata {
+
+                    /** ProvisionDeploymentGroupOperationMetadata step */
+                    step?: (google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep|keyof typeof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep|null);
+
+                    /** ProvisionDeploymentGroupOperationMetadata deploymentUnitProgresses */
+                    deploymentUnitProgresses?: (google.cloud.config.v1.IDeploymentUnitProgress[]|null);
+                }
+
+                /** Represents a ProvisionDeploymentGroupOperationMetadata. */
+                class ProvisionDeploymentGroupOperationMetadata implements IProvisionDeploymentGroupOperationMetadata {
+
+                    /**
+                     * Constructs a new ProvisionDeploymentGroupOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata);
+
+                    /** ProvisionDeploymentGroupOperationMetadata step. */
+                    public step: (google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep|keyof typeof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep);
+
+                    /** ProvisionDeploymentGroupOperationMetadata deploymentUnitProgresses. */
+                    public deploymentUnitProgresses: google.cloud.config.v1.IDeploymentUnitProgress[];
+
+                    /**
+                     * Creates a new ProvisionDeploymentGroupOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProvisionDeploymentGroupOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata): google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata;
+
+                    /**
+                     * Encodes the specified ProvisionDeploymentGroupOperationMetadata message. Does not implicitly {@link google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.verify|verify} messages.
+                     * @param message ProvisionDeploymentGroupOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProvisionDeploymentGroupOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.verify|verify} messages.
+                     * @param message ProvisionDeploymentGroupOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProvisionDeploymentGroupOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProvisionDeploymentGroupOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata;
+
+                    /**
+                     * Decodes a ProvisionDeploymentGroupOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProvisionDeploymentGroupOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata;
+
+                    /**
+                     * Verifies a ProvisionDeploymentGroupOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProvisionDeploymentGroupOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProvisionDeploymentGroupOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a ProvisionDeploymentGroupOperationMetadata message. Also converts values to other types if specified.
+                     * @param message ProvisionDeploymentGroupOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProvisionDeploymentGroupOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProvisionDeploymentGroupOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ProvisionDeploymentGroupOperationMetadata {
+
+                    /** ProvisionDeploymentGroupStep enum. */
+                    enum ProvisionDeploymentGroupStep {
+                        PROVISION_DEPLOYMENT_GROUP_STEP_UNSPECIFIED = 0,
+                        VALIDATING_DEPLOYMENT_GROUP = 1,
+                        ASSOCIATING_DEPLOYMENTS_TO_DEPLOYMENT_GROUP = 2,
+                        PROVISIONING_DEPLOYMENT_UNITS = 3,
+                        DISASSOCIATING_DEPLOYMENTS_FROM_DEPLOYMENT_GROUP = 4,
+                        SUCCEEDED = 5,
+                        FAILED = 6,
+                        DEPROVISIONING_DEPLOYMENT_UNITS = 7
+                    }
+                }
+
+                /** Properties of a DeploymentGroupRevision. */
+                interface IDeploymentGroupRevision {
+
+                    /** DeploymentGroupRevision name */
+                    name?: (string|null);
+
+                    /** DeploymentGroupRevision snapshot */
+                    snapshot?: (google.cloud.config.v1.IDeploymentGroup|null);
+
+                    /** DeploymentGroupRevision createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentGroupRevision alternativeIds */
+                    alternativeIds?: (string[]|null);
+                }
+
+                /** Represents a DeploymentGroupRevision. */
+                class DeploymentGroupRevision implements IDeploymentGroupRevision {
+
+                    /**
+                     * Constructs a new DeploymentGroupRevision.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IDeploymentGroupRevision);
+
+                    /** DeploymentGroupRevision name. */
+                    public name: string;
+
+                    /** DeploymentGroupRevision snapshot. */
+                    public snapshot?: (google.cloud.config.v1.IDeploymentGroup|null);
+
+                    /** DeploymentGroupRevision createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentGroupRevision alternativeIds. */
+                    public alternativeIds: string[];
+
+                    /**
+                     * Creates a new DeploymentGroupRevision instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentGroupRevision instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IDeploymentGroupRevision): google.cloud.config.v1.DeploymentGroupRevision;
+
+                    /**
+                     * Encodes the specified DeploymentGroupRevision message. Does not implicitly {@link google.cloud.config.v1.DeploymentGroupRevision.verify|verify} messages.
+                     * @param message DeploymentGroupRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IDeploymentGroupRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentGroupRevision message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentGroupRevision.verify|verify} messages.
+                     * @param message DeploymentGroupRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IDeploymentGroupRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentGroupRevision message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentGroupRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.DeploymentGroupRevision;
+
+                    /**
+                     * Decodes a DeploymentGroupRevision message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentGroupRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.DeploymentGroupRevision;
+
+                    /**
+                     * Verifies a DeploymentGroupRevision message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentGroupRevision message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentGroupRevision
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.DeploymentGroupRevision;
+
+                    /**
+                     * Creates a plain object from a DeploymentGroupRevision message. Also converts values to other types if specified.
+                     * @param message DeploymentGroupRevision
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.DeploymentGroupRevision, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentGroupRevision to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentGroupRevision
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDeploymentGroupRevisionRequest. */
+                interface IGetDeploymentGroupRevisionRequest {
+
+                    /** GetDeploymentGroupRevisionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDeploymentGroupRevisionRequest. */
+                class GetDeploymentGroupRevisionRequest implements IGetDeploymentGroupRevisionRequest {
+
+                    /**
+                     * Constructs a new GetDeploymentGroupRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IGetDeploymentGroupRevisionRequest);
+
+                    /** GetDeploymentGroupRevisionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDeploymentGroupRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDeploymentGroupRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IGetDeploymentGroupRevisionRequest): google.cloud.config.v1.GetDeploymentGroupRevisionRequest;
+
+                    /**
+                     * Encodes the specified GetDeploymentGroupRevisionRequest message. Does not implicitly {@link google.cloud.config.v1.GetDeploymentGroupRevisionRequest.verify|verify} messages.
+                     * @param message GetDeploymentGroupRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IGetDeploymentGroupRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDeploymentGroupRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetDeploymentGroupRevisionRequest.verify|verify} messages.
+                     * @param message GetDeploymentGroupRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IGetDeploymentGroupRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDeploymentGroupRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDeploymentGroupRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.GetDeploymentGroupRevisionRequest;
+
+                    /**
+                     * Decodes a GetDeploymentGroupRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDeploymentGroupRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.GetDeploymentGroupRevisionRequest;
+
+                    /**
+                     * Verifies a GetDeploymentGroupRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDeploymentGroupRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDeploymentGroupRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.GetDeploymentGroupRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a GetDeploymentGroupRevisionRequest message. Also converts values to other types if specified.
+                     * @param message GetDeploymentGroupRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.GetDeploymentGroupRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDeploymentGroupRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDeploymentGroupRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDeploymentGroupRevisionsRequest. */
+                interface IListDeploymentGroupRevisionsRequest {
+
+                    /** ListDeploymentGroupRevisionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDeploymentGroupRevisionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDeploymentGroupRevisionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDeploymentGroupRevisionsRequest. */
+                class ListDeploymentGroupRevisionsRequest implements IListDeploymentGroupRevisionsRequest {
+
+                    /**
+                     * Constructs a new ListDeploymentGroupRevisionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IListDeploymentGroupRevisionsRequest);
+
+                    /** ListDeploymentGroupRevisionsRequest parent. */
+                    public parent: string;
+
+                    /** ListDeploymentGroupRevisionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDeploymentGroupRevisionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDeploymentGroupRevisionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDeploymentGroupRevisionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IListDeploymentGroupRevisionsRequest): google.cloud.config.v1.ListDeploymentGroupRevisionsRequest;
+
+                    /**
+                     * Encodes the specified ListDeploymentGroupRevisionsRequest message. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupRevisionsRequest.verify|verify} messages.
+                     * @param message ListDeploymentGroupRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IListDeploymentGroupRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDeploymentGroupRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupRevisionsRequest.verify|verify} messages.
+                     * @param message ListDeploymentGroupRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IListDeploymentGroupRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDeploymentGroupRevisionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDeploymentGroupRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ListDeploymentGroupRevisionsRequest;
+
+                    /**
+                     * Decodes a ListDeploymentGroupRevisionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDeploymentGroupRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ListDeploymentGroupRevisionsRequest;
+
+                    /**
+                     * Verifies a ListDeploymentGroupRevisionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDeploymentGroupRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDeploymentGroupRevisionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ListDeploymentGroupRevisionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDeploymentGroupRevisionsRequest message. Also converts values to other types if specified.
+                     * @param message ListDeploymentGroupRevisionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ListDeploymentGroupRevisionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDeploymentGroupRevisionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDeploymentGroupRevisionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDeploymentGroupRevisionsResponse. */
+                interface IListDeploymentGroupRevisionsResponse {
+
+                    /** ListDeploymentGroupRevisionsResponse deploymentGroupRevisions */
+                    deploymentGroupRevisions?: (google.cloud.config.v1.IDeploymentGroupRevision[]|null);
+
+                    /** ListDeploymentGroupRevisionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDeploymentGroupRevisionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListDeploymentGroupRevisionsResponse. */
+                class ListDeploymentGroupRevisionsResponse implements IListDeploymentGroupRevisionsResponse {
+
+                    /**
+                     * Constructs a new ListDeploymentGroupRevisionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IListDeploymentGroupRevisionsResponse);
+
+                    /** ListDeploymentGroupRevisionsResponse deploymentGroupRevisions. */
+                    public deploymentGroupRevisions: google.cloud.config.v1.IDeploymentGroupRevision[];
+
+                    /** ListDeploymentGroupRevisionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDeploymentGroupRevisionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListDeploymentGroupRevisionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDeploymentGroupRevisionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IListDeploymentGroupRevisionsResponse): google.cloud.config.v1.ListDeploymentGroupRevisionsResponse;
+
+                    /**
+                     * Encodes the specified ListDeploymentGroupRevisionsResponse message. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupRevisionsResponse.verify|verify} messages.
+                     * @param message ListDeploymentGroupRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IListDeploymentGroupRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDeploymentGroupRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupRevisionsResponse.verify|verify} messages.
+                     * @param message ListDeploymentGroupRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IListDeploymentGroupRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDeploymentGroupRevisionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDeploymentGroupRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ListDeploymentGroupRevisionsResponse;
+
+                    /**
+                     * Decodes a ListDeploymentGroupRevisionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDeploymentGroupRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ListDeploymentGroupRevisionsResponse;
+
+                    /**
+                     * Verifies a ListDeploymentGroupRevisionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDeploymentGroupRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDeploymentGroupRevisionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ListDeploymentGroupRevisionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDeploymentGroupRevisionsResponse message. Also converts values to other types if specified.
+                     * @param message ListDeploymentGroupRevisionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ListDeploymentGroupRevisionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDeploymentGroupRevisionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDeploymentGroupRevisionsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
