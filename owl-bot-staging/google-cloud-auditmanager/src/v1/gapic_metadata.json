@@ -1,0 +1,115 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.auditmanager.v1",
+  "libraryPackage": "@google-cloud/auditmanager",
+  "services": {
+    "AuditManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AuditManagerClient",
+          "rpcs": {
+            "EnrollResource": {
+              "methods": [
+                "enrollResource"
+              ]
+            },
+            "GenerateAuditScopeReport": {
+              "methods": [
+                "generateAuditScopeReport"
+              ]
+            },
+            "GetAuditReport": {
+              "methods": [
+                "getAuditReport"
+              ]
+            },
+            "GetResourceEnrollmentStatus": {
+              "methods": [
+                "getResourceEnrollmentStatus"
+              ]
+            },
+            "GenerateAuditReport": {
+              "methods": [
+                "generateAuditReport"
+              ]
+            },
+            "ListAuditReports": {
+              "methods": [
+                "listAuditReports",
+                "listAuditReportsStream",
+                "listAuditReportsAsync"
+              ]
+            },
+            "ListResourceEnrollmentStatuses": {
+              "methods": [
+                "listResourceEnrollmentStatuses",
+                "listResourceEnrollmentStatusesStream",
+                "listResourceEnrollmentStatusesAsync"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AuditManagerClient",
+          "rpcs": {
+            "EnrollResource": {
+              "methods": [
+                "enrollResource"
+              ]
+            },
+            "GenerateAuditScopeReport": {
+              "methods": [
+                "generateAuditScopeReport"
+              ]
+            },
+            "GetAuditReport": {
+              "methods": [
+                "getAuditReport"
+              ]
+            },
+            "GetResourceEnrollmentStatus": {
+              "methods": [
+                "getResourceEnrollmentStatus"
+              ]
+            },
+            "GenerateAuditReport": {
+              "methods": [
+                "generateAuditReport"
+              ]
+            },
+            "ListAuditReports": {
+              "methods": [
+                "listAuditReports",
+                "listAuditReportsStream",
+                "listAuditReportsAsync"
+              ]
+            },
+            "ListResourceEnrollmentStatuses": {
+              "methods": [
+                "listResourceEnrollmentStatuses",
+                "listResourceEnrollmentStatusesStream",
+                "listResourceEnrollmentStatusesAsync"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
