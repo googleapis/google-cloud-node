@@ -12377,21 +12377,26 @@ declare namespace FirebaseFirestore {
       removeFields(options: RemoveFieldsStageOptions): Pipeline;
 
       /**
-       * Defines one or more variables in the pipeline's scope. `define` is used to bind a value to a
-       * variable for internal reuse within the pipeline body (accessed via the `variable()` function).
+       * Binds one or more expressions to variable names within the pipeline's scope.
        *
-       * This stage is useful for declaring reusable values or intermediate calculations that can be
-       * referenced multiple times in later parts of the pipeline.
+       * The `define` stage establishes a variable environment for the pipeline. It assigns
+       * the provided expressions to specific aliases. These variables remain in scope for all
+       * subsequent stages (and any nested subqueries), where they can be referenced using the
+       * `variable()` function.
+       *
+       * This is primarily used to improve query ergonomics by preventing the duplication of
+       * complex expression trees, or to explicitly pass state from an outer pipeline into an
+       * inner subquery.
        *
        * @example
        * ```typescript
+       * // Bind a mathematical expression to a variable to cleanly reference it multiple times.
        * db.pipeline().collection("products")
        *   .define(
-       *     field("price").multiply(0.9).as("discountedPrice"),
-       *     field("stock").add(10).as("newStock")
+       *     field("price").multiply(0.8).as("discountedPrice")
        *   )
-       *   .where(variable("discountedPrice").lessThan(100))
-       *   .select(field("name"), variable("newStock"));
+       *   .where(variable("discountedPrice").lessThan(50))
+       *   .select("name", variable("discountedPrice"));
        * ```
        *
        * @param aliasedExpression - The first expression to bind to a variable.
@@ -12403,21 +12408,26 @@ declare namespace FirebaseFirestore {
         ...additionalExpressions: AliasedExpression[]
       ): Pipeline;
       /**
-       * Defines one or more variables in the pipeline's scope. `define` is used to bind a value to a
-       * variable for internal reuse within the pipeline body (accessed via the `variable()` function).
+       * Binds one or more expressions to variable names within the pipeline's scope.
        *
-       * This stage is useful for declaring reusable values or intermediate calculations that can be
-       * referenced multiple times in later parts of the pipeline.
+       * The `define` stage establishes a variable environment for the pipeline. It assigns
+       * the provided expressions to specific aliases. These variables remain in scope for all
+       * subsequent stages (and any nested subqueries), where they can be referenced using the
+       * `variable()` function.
+       *
+       * This is primarily used to improve query ergonomics by preventing the duplication of
+       * complex expression trees, or to explicitly pass state from an outer pipeline into an
+       * inner subquery.
        *
        * @example
        * ```typescript
+       * // Bind a mathematical expression to a variable to cleanly reference it multiple times.
        * db.pipeline().collection("products")
-       *   .define(
-       *     field("price").multiply(0.9).as("discountedPrice"),
-       *     field("stock").add(10).as("newStock")
-       *   )
-       *   .where(variable("discountedPrice").lessThan(100))
-       *   .select(field("name"), variable("newStock"));
+       *   .define({
+       *     variables: [field("price").multiply(0.8).as("discountedPrice")]
+       *   })
+       *   .where(variable("discountedPrice").lessThan(50))
+       *   .select("name", variable("discountedPrice"));
        * ```
        *
        * @param options - An object that specifies required and optional parameters for the stage.
