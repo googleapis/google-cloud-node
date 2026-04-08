@@ -80,5 +80,13 @@
     "sinon": "^21.0.0",
     "typescript": "^5.8.2"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-translate"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-translate",
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
+  }
 }

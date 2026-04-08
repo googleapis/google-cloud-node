@@ -54,5 +54,13 @@
     "js-yaml": "^4.1.0",
     "nunjucks": "^3.2.4",
     "yargs": "^17.7.2"
+  },
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
   }
 }

@@ -68,5 +68,13 @@
   "license": "Apache-2.0",
   "engines": {
     "node": ">=18"
+  },
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
   }
 }
