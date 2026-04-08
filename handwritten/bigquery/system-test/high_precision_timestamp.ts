@@ -59,9 +59,14 @@ describe('BigQuery System Tests (High Precision)', () => {
     }
   });
 
-  // Programmatically require the tests. Mocha will discover and register them inside this 'describe' block.
-  require('./bigquery');
-  require('./timestamp_output_format');
+  describe('Run all tests', () => {
+    // Wrap all the other tests in a describe block to ensure the entire file is
+    // executed when the environment variable is set to true.
+
+    // Programmatically require the tests. Mocha will discover and register them inside this 'describe' block.
+    require('./bigquery');
+    require('./timestamp_output_format');
+  });
 });
 
 // 3. CLEANUP:
