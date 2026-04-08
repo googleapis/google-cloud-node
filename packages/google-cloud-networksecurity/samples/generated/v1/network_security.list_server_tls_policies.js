@@ -44,6 +44,14 @@ function main(parent) {
    *  should return the next page of data.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. Setting this field to `true` will opt the request into returning
+   *  the resources that are reachable, and into including the names of those
+   *  that were unreachable in the ListServerTlsPoliciesResponse.unreachable 
+   *  field. This can only be `true` when reading across collections e.g. when
+   *  `parent` is set to `"projects/example/locations/-"`.
+   */
+  // const returnPartialSuccess = true
 
   // Imports the Networksecurity library
   const {NetworkSecurityClient} = require('@google-cloud/network-security').v1;
