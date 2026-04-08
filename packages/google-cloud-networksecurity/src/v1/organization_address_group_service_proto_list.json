@@ -1,9 +1,25 @@
 [
   "../../protos/google/cloud/networksecurity/v1/address_group.proto",
   "../../protos/google/cloud/networksecurity/v1/authorization_policy.proto",
+  "../../protos/google/cloud/networksecurity/v1/authz_policy.proto",
+  "../../protos/google/cloud/networksecurity/v1/backend_authentication_config.proto",
   "../../protos/google/cloud/networksecurity/v1/client_tls_policy.proto",
   "../../protos/google/cloud/networksecurity/v1/common.proto",
+  "../../protos/google/cloud/networksecurity/v1/dns_threat_detector.proto",
+  "../../protos/google/cloud/networksecurity/v1/firewall_activation.proto",
+  "../../protos/google/cloud/networksecurity/v1/gateway_security_policy.proto",
+  "../../protos/google/cloud/networksecurity/v1/gateway_security_policy_rule.proto",
+  "../../protos/google/cloud/networksecurity/v1/intercept.proto",
+  "../../protos/google/cloud/networksecurity/v1/mirroring.proto",
   "../../protos/google/cloud/networksecurity/v1/network_security.proto",
+  "../../protos/google/cloud/networksecurity/v1/security_profile_group.proto",
+  "../../protos/google/cloud/networksecurity/v1/security_profile_group_intercept.proto",
+  "../../protos/google/cloud/networksecurity/v1/security_profile_group_mirroring.proto",
+  "../../protos/google/cloud/networksecurity/v1/security_profile_group_service.proto",
+  "../../protos/google/cloud/networksecurity/v1/security_profile_group_threatprevention.proto",
+  "../../protos/google/cloud/networksecurity/v1/security_profile_group_urlfiltering.proto",
   "../../protos/google/cloud/networksecurity/v1/server_tls_policy.proto",
-  "../../protos/google/cloud/networksecurity/v1/tls.proto"
+  "../../protos/google/cloud/networksecurity/v1/tls.proto",
+  "../../protos/google/cloud/networksecurity/v1/tls_inspection_policy.proto",
+  "../../protos/google/cloud/networksecurity/v1/url_list.proto"
 ]

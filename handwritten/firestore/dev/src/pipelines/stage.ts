@@ -725,6 +725,72 @@ export class Sort implements Stage {
 }
 
 /**
+ * Internal options for Define stage.
+ */
+export type InternalDefineStageOptions = Omit<
+  firestore.Pipelines.DefineStageOptions,
+  'variables'
+> & {
+  variables: Map<string, Expression>;
+};
+
+/**
+ * Define stage.
+ */
+export class Define implements Stage {
+  name = 'let';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor(private options: InternalDefineStageOptions) {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [serializer.encodeValue(this.options.variables)!],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.variables, ignoreUndefinedProperties);
+  }
+}
+
+/**
+ * Internal options for Subcollection stage.
+ */
+export type InternalSubcollectionStageOptions =
+  firestore.Pipelines.SubcollectionStageOptions;
+
+/**
+ * Subcollection stage.
+ */
+export class SubcollectionSource implements Stage {
+  name = 'subcollection';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor(private options: InternalSubcollectionStageOptions) {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [serializer.encodeValue(this.options.path)!],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
+}
+
+/**
  * Raw stage.
  */
 export class RawStage implements Stage {
