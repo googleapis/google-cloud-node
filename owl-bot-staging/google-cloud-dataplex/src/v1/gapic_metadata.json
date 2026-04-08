@@ -1,0 +1,1519 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.dataplex.v1",
+  "libraryPackage": "@google-cloud/dataplex",
+  "services": {
+    "BusinessGlossaryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BusinessGlossaryServiceClient",
+          "rpcs": {
+            "GetGlossary": {
+              "methods": [
+                "getGlossary"
+              ]
+            },
+            "CreateGlossaryCategory": {
+              "methods": [
+                "createGlossaryCategory"
+              ]
+            },
+            "UpdateGlossaryCategory": {
+              "methods": [
+                "updateGlossaryCategory"
+              ]
+            },
+            "DeleteGlossaryCategory": {
+              "methods": [
+                "deleteGlossaryCategory"
+              ]
+            },
+            "GetGlossaryCategory": {
+              "methods": [
+                "getGlossaryCategory"
+              ]
+            },
+            "CreateGlossaryTerm": {
+              "methods": [
+                "createGlossaryTerm"
+              ]
+            },
+            "UpdateGlossaryTerm": {
+              "methods": [
+                "updateGlossaryTerm"
+              ]
+            },
+            "DeleteGlossaryTerm": {
+              "methods": [
+                "deleteGlossaryTerm"
+              ]
+            },
+            "GetGlossaryTerm": {
+              "methods": [
+                "getGlossaryTerm"
+              ]
+            },
+            "CreateGlossary": {
+              "methods": [
+                "createGlossary"
+              ]
+            },
+            "UpdateGlossary": {
+              "methods": [
+                "updateGlossary"
+              ]
+            },
+            "DeleteGlossary": {
+              "methods": [
+                "deleteGlossary"
+              ]
+            },
+            "ListGlossaries": {
+              "methods": [
+                "listGlossaries",
+                "listGlossariesStream",
+                "listGlossariesAsync"
+              ]
+            },
+            "ListGlossaryCategories": {
+              "methods": [
+                "listGlossaryCategories",
+                "listGlossaryCategoriesStream",
+                "listGlossaryCategoriesAsync"
+              ]
+            },
+            "ListGlossaryTerms": {
+              "methods": [
+                "listGlossaryTerms",
+                "listGlossaryTermsStream",
+                "listGlossaryTermsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BusinessGlossaryServiceClient",
+          "rpcs": {
+            "GetGlossary": {
+              "methods": [
+                "getGlossary"
+              ]
+            },
+            "CreateGlossaryCategory": {
+              "methods": [
+                "createGlossaryCategory"
+              ]
+            },
+            "UpdateGlossaryCategory": {
+              "methods": [
+                "updateGlossaryCategory"
+              ]
+            },
+            "DeleteGlossaryCategory": {
+              "methods": [
+                "deleteGlossaryCategory"
+              ]
+            },
+            "GetGlossaryCategory": {
+              "methods": [
+                "getGlossaryCategory"
+              ]
+            },
+            "CreateGlossaryTerm": {
+              "methods": [
+                "createGlossaryTerm"
+              ]
+            },
+            "UpdateGlossaryTerm": {
+              "methods": [
+                "updateGlossaryTerm"
+              ]
+            },
+            "DeleteGlossaryTerm": {
+              "methods": [
+                "deleteGlossaryTerm"
+              ]
+            },
+            "GetGlossaryTerm": {
+              "methods": [
+                "getGlossaryTerm"
+              ]
+            },
+            "CreateGlossary": {
+              "methods": [
+                "createGlossary"
+              ]
+            },
+            "UpdateGlossary": {
+              "methods": [
+                "updateGlossary"
+              ]
+            },
+            "DeleteGlossary": {
+              "methods": [
+                "deleteGlossary"
+              ]
+            },
+            "ListGlossaries": {
+              "methods": [
+                "listGlossaries",
+                "listGlossariesStream",
+                "listGlossariesAsync"
+              ]
+            },
+            "ListGlossaryCategories": {
+              "methods": [
+                "listGlossaryCategories",
+                "listGlossaryCategoriesStream",
+                "listGlossaryCategoriesAsync"
+              ]
+            },
+            "ListGlossaryTerms": {
+              "methods": [
+                "listGlossaryTerms",
+                "listGlossaryTermsStream",
+                "listGlossaryTermsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CatalogService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CatalogServiceClient",
+          "rpcs": {
+            "GetEntryType": {
+              "methods": [
+                "getEntryType"
+              ]
+            },
+            "GetAspectType": {
+              "methods": [
+                "getAspectType"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "getEntryGroup"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "createEntry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "updateEntry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "deleteEntry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "getEntry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookupEntry"
+              ]
+            },
+            "GetMetadataJob": {
+              "methods": [
+                "getMetadataJob"
+              ]
+            },
+            "CancelMetadataJob": {
+              "methods": [
+                "cancelMetadataJob"
+              ]
+            },
+            "CreateEntryLink": {
+              "methods": [
+                "createEntryLink"
+              ]
+            },
+            "UpdateEntryLink": {
+              "methods": [
+                "updateEntryLink"
+              ]
+            },
+            "DeleteEntryLink": {
+              "methods": [
+                "deleteEntryLink"
+              ]
+            },
+            "LookupContext": {
+              "methods": [
+                "lookupContext"
+              ]
+            },
+            "GetEntryLink": {
+              "methods": [
+                "getEntryLink"
+              ]
+            },
+            "GetMetadataFeed": {
+              "methods": [
+                "getMetadataFeed"
+              ]
+            },
+            "CreateEntryType": {
+              "methods": [
+                "createEntryType"
+              ]
+            },
+            "UpdateEntryType": {
+              "methods": [
+                "updateEntryType"
+              ]
+            },
+            "DeleteEntryType": {
+              "methods": [
+                "deleteEntryType"
+              ]
+            },
+            "CreateAspectType": {
+              "methods": [
+                "createAspectType"
+              ]
+            },
+            "UpdateAspectType": {
+              "methods": [
+                "updateAspectType"
+              ]
+            },
+            "DeleteAspectType": {
+              "methods": [
+                "deleteAspectType"
+              ]
+            },
+            "CreateEntryGroup": {
+              "methods": [
+                "createEntryGroup"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "updateEntryGroup"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "deleteEntryGroup"
+              ]
+            },
+            "CreateMetadataJob": {
+              "methods": [
+                "createMetadataJob"
+              ]
+            },
+            "CreateMetadataFeed": {
+              "methods": [
+                "createMetadataFeed"
+              ]
+            },
+            "DeleteMetadataFeed": {
+              "methods": [
+                "deleteMetadataFeed"
+              ]
+            },
+            "UpdateMetadataFeed": {
+              "methods": [
+                "updateMetadataFeed"
+              ]
+            },
+            "ListEntryTypes": {
+              "methods": [
+                "listEntryTypes",
+                "listEntryTypesStream",
+                "listEntryTypesAsync"
+              ]
+            },
+            "ListAspectTypes": {
+              "methods": [
+                "listAspectTypes",
+                "listAspectTypesStream",
+                "listAspectTypesAsync"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "listEntryGroups",
+                "listEntryGroupsStream",
+                "listEntryGroupsAsync"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "listEntries",
+                "listEntriesStream",
+                "listEntriesAsync"
+              ]
+            },
+            "SearchEntries": {
+              "methods": [
+                "searchEntries",
+                "searchEntriesStream",
+                "searchEntriesAsync"
+              ]
+            },
+            "ListMetadataJobs": {
+              "methods": [
+                "listMetadataJobs",
+                "listMetadataJobsStream",
+                "listMetadataJobsAsync"
+              ]
+            },
+            "LookupEntryLinks": {
+              "methods": [
+                "lookupEntryLinks",
+                "lookupEntryLinksStream",
+                "lookupEntryLinksAsync"
+              ]
+            },
+            "ListMetadataFeeds": {
+              "methods": [
+                "listMetadataFeeds",
+                "listMetadataFeedsStream",
+                "listMetadataFeedsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CatalogServiceClient",
+          "rpcs": {
+            "GetEntryType": {
+              "methods": [
+                "getEntryType"
+              ]
+            },
+            "GetAspectType": {
+              "methods": [
+                "getAspectType"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "getEntryGroup"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "createEntry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "updateEntry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "deleteEntry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "getEntry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookupEntry"
+              ]
+            },
+            "GetMetadataJob": {
+              "methods": [
+                "getMetadataJob"
+              ]
+            },
+            "CancelMetadataJob": {
+              "methods": [
+                "cancelMetadataJob"
+              ]
+            },
+            "CreateEntryLink": {
+              "methods": [
+                "createEntryLink"
+              ]
+            },
+            "UpdateEntryLink": {
+              "methods": [
+                "updateEntryLink"
+              ]
+            },
+            "DeleteEntryLink": {
+              "methods": [
+                "deleteEntryLink"
+              ]
+            },
+            "LookupContext": {
+              "methods": [
+                "lookupContext"
+              ]
+            },
+            "GetEntryLink": {
+              "methods": [
+                "getEntryLink"
+              ]
+            },
+            "GetMetadataFeed": {
+              "methods": [
+                "getMetadataFeed"
+              ]
+            },
+            "CreateEntryType": {
+              "methods": [
+                "createEntryType"
+              ]
+            },
+            "UpdateEntryType": {
+              "methods": [
+                "updateEntryType"
+              ]
+            },
+            "DeleteEntryType": {
+              "methods": [
+                "deleteEntryType"
+              ]
+            },
+            "CreateAspectType": {
+              "methods": [
+                "createAspectType"
+              ]
+            },
+            "UpdateAspectType": {
+              "methods": [
+                "updateAspectType"
+              ]
+            },
+            "DeleteAspectType": {
+              "methods": [
+                "deleteAspectType"
+              ]
+            },
+            "CreateEntryGroup": {
+              "methods": [
+                "createEntryGroup"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "updateEntryGroup"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "deleteEntryGroup"
+              ]
+            },
+            "CreateMetadataJob": {
+              "methods": [
+                "createMetadataJob"
+              ]
+            },
+            "CreateMetadataFeed": {
+              "methods": [
+                "createMetadataFeed"
+              ]
+            },
+            "DeleteMetadataFeed": {
+              "methods": [
+                "deleteMetadataFeed"
+              ]
+            },
+            "UpdateMetadataFeed": {
+              "methods": [
+                "updateMetadataFeed"
+              ]
+            },
+            "ListEntryTypes": {
+              "methods": [
+                "listEntryTypes",
+                "listEntryTypesStream",
+                "listEntryTypesAsync"
+              ]
+            },
+            "ListAspectTypes": {
+              "methods": [
+                "listAspectTypes",
+                "listAspectTypesStream",
+                "listAspectTypesAsync"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "listEntryGroups",
+                "listEntryGroupsStream",
+                "listEntryGroupsAsync"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "listEntries",
+                "listEntriesStream",
+                "listEntriesAsync"
+              ]
+            },
+            "SearchEntries": {
+              "methods": [
+                "searchEntries",
+                "searchEntriesStream",
+                "searchEntriesAsync"
+              ]
+            },
+            "ListMetadataJobs": {
+              "methods": [
+                "listMetadataJobs",
+                "listMetadataJobsStream",
+                "listMetadataJobsAsync"
+              ]
+            },
+            "LookupEntryLinks": {
+              "methods": [
+                "lookupEntryLinks",
+                "lookupEntryLinksStream",
+                "lookupEntryLinksAsync"
+              ]
+            },
+            "ListMetadataFeeds": {
+              "methods": [
+                "listMetadataFeeds",
+                "listMetadataFeedsStream",
+                "listMetadataFeedsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CmekService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CmekServiceClient",
+          "rpcs": {
+            "GetEncryptionConfig": {
+              "methods": [
+                "getEncryptionConfig"
+              ]
+            },
+            "CreateEncryptionConfig": {
+              "methods": [
+                "createEncryptionConfig"
+              ]
+            },
+            "UpdateEncryptionConfig": {
+              "methods": [
+                "updateEncryptionConfig"
+              ]
+            },
+            "DeleteEncryptionConfig": {
+              "methods": [
+                "deleteEncryptionConfig"
+              ]
+            },
+            "ListEncryptionConfigs": {
+              "methods": [
+                "listEncryptionConfigs",
+                "listEncryptionConfigsStream",
+                "listEncryptionConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CmekServiceClient",
+          "rpcs": {
+            "GetEncryptionConfig": {
+              "methods": [
+                "getEncryptionConfig"
+              ]
+            },
+            "CreateEncryptionConfig": {
+              "methods": [
+                "createEncryptionConfig"
+              ]
+            },
+            "UpdateEncryptionConfig": {
+              "methods": [
+                "updateEncryptionConfig"
+              ]
+            },
+            "DeleteEncryptionConfig": {
+              "methods": [
+                "deleteEncryptionConfig"
+              ]
+            },
+            "ListEncryptionConfigs": {
+              "methods": [
+                "listEncryptionConfigs",
+                "listEncryptionConfigsStream",
+                "listEncryptionConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ContentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ContentServiceClient",
+          "rpcs": {}
+        },
+        "grpc-fallback": {
+          "libraryClient": "ContentServiceClient",
+          "rpcs": {}
+        }
+      }
+    },
+    "DataplexService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataplexServiceClient",
+          "rpcs": {
+            "GetLake": {
+              "methods": [
+                "getLake"
+              ]
+            },
+            "GetZone": {
+              "methods": [
+                "getZone"
+              ]
+            },
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "getTask"
+              ]
+            },
+            "RunTask": {
+              "methods": [
+                "runTask"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "CancelJob": {
+              "methods": [
+                "cancelJob"
+              ]
+            },
+            "CreateLake": {
+              "methods": [
+                "createLake"
+              ]
+            },
+            "UpdateLake": {
+              "methods": [
+                "updateLake"
+              ]
+            },
+            "DeleteLake": {
+              "methods": [
+                "deleteLake"
+              ]
+            },
+            "CreateZone": {
+              "methods": [
+                "createZone"
+              ]
+            },
+            "UpdateZone": {
+              "methods": [
+                "updateZone"
+              ]
+            },
+            "DeleteZone": {
+              "methods": [
+                "deleteZone"
+              ]
+            },
+            "CreateAsset": {
+              "methods": [
+                "createAsset"
+              ]
+            },
+            "UpdateAsset": {
+              "methods": [
+                "updateAsset"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "CreateTask": {
+              "methods": [
+                "createTask"
+              ]
+            },
+            "UpdateTask": {
+              "methods": [
+                "updateTask"
+              ]
+            },
+            "DeleteTask": {
+              "methods": [
+                "deleteTask"
+              ]
+            },
+            "ListLakes": {
+              "methods": [
+                "listLakes",
+                "listLakesStream",
+                "listLakesAsync"
+              ]
+            },
+            "ListLakeActions": {
+              "methods": [
+                "listLakeActions",
+                "listLakeActionsStream",
+                "listLakeActionsAsync"
+              ]
+            },
+            "ListZones": {
+              "methods": [
+                "listZones",
+                "listZonesStream",
+                "listZonesAsync"
+              ]
+            },
+            "ListZoneActions": {
+              "methods": [
+                "listZoneActions",
+                "listZoneActionsStream",
+                "listZoneActionsAsync"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "ListAssetActions": {
+              "methods": [
+                "listAssetActions",
+                "listAssetActionsStream",
+                "listAssetActionsAsync"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "listTasks",
+                "listTasksStream",
+                "listTasksAsync"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs",
+                "listJobsStream",
+                "listJobsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataplexServiceClient",
+          "rpcs": {
+            "GetLake": {
+              "methods": [
+                "getLake"
+              ]
+            },
+            "GetZone": {
+              "methods": [
+                "getZone"
+              ]
+            },
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "getTask"
+              ]
+            },
+            "RunTask": {
+              "methods": [
+                "runTask"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "CancelJob": {
+              "methods": [
+                "cancelJob"
+              ]
+            },
+            "CreateLake": {
+              "methods": [
+                "createLake"
+              ]
+            },
+            "UpdateLake": {
+              "methods": [
+                "updateLake"
+              ]
+            },
+            "DeleteLake": {
+              "methods": [
+                "deleteLake"
+              ]
+            },
+            "CreateZone": {
+              "methods": [
+                "createZone"
+              ]
+            },
+            "UpdateZone": {
+              "methods": [
+                "updateZone"
+              ]
+            },
+            "DeleteZone": {
+              "methods": [
+                "deleteZone"
+              ]
+            },
+            "CreateAsset": {
+              "methods": [
+                "createAsset"
+              ]
+            },
+            "UpdateAsset": {
+              "methods": [
+                "updateAsset"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "CreateTask": {
+              "methods": [
+                "createTask"
+              ]
+            },
+            "UpdateTask": {
+              "methods": [
+                "updateTask"
+              ]
+            },
+            "DeleteTask": {
+              "methods": [
+                "deleteTask"
+              ]
+            },
+            "ListLakes": {
+              "methods": [
+                "listLakes",
+                "listLakesStream",
+                "listLakesAsync"
+              ]
+            },
+            "ListLakeActions": {
+              "methods": [
+                "listLakeActions",
+                "listLakeActionsStream",
+                "listLakeActionsAsync"
+              ]
+            },
+            "ListZones": {
+              "methods": [
+                "listZones",
+                "listZonesStream",
+                "listZonesAsync"
+              ]
+            },
+            "ListZoneActions": {
+              "methods": [
+                "listZoneActions",
+                "listZoneActionsStream",
+                "listZoneActionsAsync"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "ListAssetActions": {
+              "methods": [
+                "listAssetActions",
+                "listAssetActionsStream",
+                "listAssetActionsAsync"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "listTasks",
+                "listTasksStream",
+                "listTasksAsync"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs",
+                "listJobsStream",
+                "listJobsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataProductService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataProductServiceClient",
+          "rpcs": {
+            "GetDataProduct": {
+              "methods": [
+                "getDataProduct"
+              ]
+            },
+            "GetDataAsset": {
+              "methods": [
+                "getDataAsset"
+              ]
+            },
+            "CreateDataProduct": {
+              "methods": [
+                "createDataProduct"
+              ]
+            },
+            "DeleteDataProduct": {
+              "methods": [
+                "deleteDataProduct"
+              ]
+            },
+            "UpdateDataProduct": {
+              "methods": [
+                "updateDataProduct"
+              ]
+            },
+            "CreateDataAsset": {
+              "methods": [
+                "createDataAsset"
+              ]
+            },
+            "UpdateDataAsset": {
+              "methods": [
+                "updateDataAsset"
+              ]
+            },
+            "DeleteDataAsset": {
+              "methods": [
+                "deleteDataAsset"
+              ]
+            },
+            "ListDataProducts": {
+              "methods": [
+                "listDataProducts",
+                "listDataProductsStream",
+                "listDataProductsAsync"
+              ]
+            },
+            "ListDataAssets": {
+              "methods": [
+                "listDataAssets",
+                "listDataAssetsStream",
+                "listDataAssetsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataProductServiceClient",
+          "rpcs": {
+            "GetDataProduct": {
+              "methods": [
+                "getDataProduct"
+              ]
+            },
+            "GetDataAsset": {
+              "methods": [
+                "getDataAsset"
+              ]
+            },
+            "CreateDataProduct": {
+              "methods": [
+                "createDataProduct"
+              ]
+            },
+            "DeleteDataProduct": {
+              "methods": [
+                "deleteDataProduct"
+              ]
+            },
+            "UpdateDataProduct": {
+              "methods": [
+                "updateDataProduct"
+              ]
+            },
+            "CreateDataAsset": {
+              "methods": [
+                "createDataAsset"
+              ]
+            },
+            "UpdateDataAsset": {
+              "methods": [
+                "updateDataAsset"
+              ]
+            },
+            "DeleteDataAsset": {
+              "methods": [
+                "deleteDataAsset"
+              ]
+            },
+            "ListDataProducts": {
+              "methods": [
+                "listDataProducts",
+                "listDataProductsStream",
+                "listDataProductsAsync"
+              ]
+            },
+            "ListDataAssets": {
+              "methods": [
+                "listDataAssets",
+                "listDataAssetsStream",
+                "listDataAssetsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataScanService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataScanServiceClient",
+          "rpcs": {
+            "GetDataScan": {
+              "methods": [
+                "getDataScan"
+              ]
+            },
+            "RunDataScan": {
+              "methods": [
+                "runDataScan"
+              ]
+            },
+            "GetDataScanJob": {
+              "methods": [
+                "getDataScanJob"
+              ]
+            },
+            "GenerateDataQualityRules": {
+              "methods": [
+                "generateDataQualityRules"
+              ]
+            },
+            "CreateDataScan": {
+              "methods": [
+                "createDataScan"
+              ]
+            },
+            "UpdateDataScan": {
+              "methods": [
+                "updateDataScan"
+              ]
+            },
+            "DeleteDataScan": {
+              "methods": [
+                "deleteDataScan"
+              ]
+            },
+            "ListDataScans": {
+              "methods": [
+                "listDataScans",
+                "listDataScansStream",
+                "listDataScansAsync"
+              ]
+            },
+            "ListDataScanJobs": {
+              "methods": [
+                "listDataScanJobs",
+                "listDataScanJobsStream",
+                "listDataScanJobsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataScanServiceClient",
+          "rpcs": {
+            "GetDataScan": {
+              "methods": [
+                "getDataScan"
+              ]
+            },
+            "RunDataScan": {
+              "methods": [
+                "runDataScan"
+              ]
+            },
+            "GetDataScanJob": {
+              "methods": [
+                "getDataScanJob"
+              ]
+            },
+            "GenerateDataQualityRules": {
+              "methods": [
+                "generateDataQualityRules"
+              ]
+            },
+            "CreateDataScan": {
+              "methods": [
+                "createDataScan"
+              ]
+            },
+            "UpdateDataScan": {
+              "methods": [
+                "updateDataScan"
+              ]
+            },
+            "DeleteDataScan": {
+              "methods": [
+                "deleteDataScan"
+              ]
+            },
+            "ListDataScans": {
+              "methods": [
+                "listDataScans",
+                "listDataScansStream",
+                "listDataScansAsync"
+              ]
+            },
+            "ListDataScanJobs": {
+              "methods": [
+                "listDataScanJobs",
+                "listDataScanJobsStream",
+                "listDataScanJobsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataTaxonomyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataTaxonomyServiceClient",
+          "rpcs": {
+            "GetDataTaxonomy": {
+              "methods": [
+                "getDataTaxonomy"
+              ]
+            },
+            "GetDataAttributeBinding": {
+              "methods": [
+                "getDataAttributeBinding"
+              ]
+            },
+            "GetDataAttribute": {
+              "methods": [
+                "getDataAttribute"
+              ]
+            },
+            "CreateDataTaxonomy": {
+              "methods": [
+                "createDataTaxonomy"
+              ]
+            },
+            "UpdateDataTaxonomy": {
+              "methods": [
+                "updateDataTaxonomy"
+              ]
+            },
+            "DeleteDataTaxonomy": {
+              "methods": [
+                "deleteDataTaxonomy"
+              ]
+            },
+            "CreateDataAttributeBinding": {
+              "methods": [
+                "createDataAttributeBinding"
+              ]
+            },
+            "UpdateDataAttributeBinding": {
+              "methods": [
+                "updateDataAttributeBinding"
+              ]
+            },
+            "DeleteDataAttributeBinding": {
+              "methods": [
+                "deleteDataAttributeBinding"
+              ]
+            },
+            "CreateDataAttribute": {
+              "methods": [
+                "createDataAttribute"
+              ]
+            },
+            "UpdateDataAttribute": {
+              "methods": [
+                "updateDataAttribute"
+              ]
+            },
+            "DeleteDataAttribute": {
+              "methods": [
+                "deleteDataAttribute"
+              ]
+            },
+            "ListDataTaxonomies": {
+              "methods": [
+                "listDataTaxonomies",
+                "listDataTaxonomiesStream",
+                "listDataTaxonomiesAsync"
+              ]
+            },
+            "ListDataAttributeBindings": {
+              "methods": [
+                "listDataAttributeBindings",
+                "listDataAttributeBindingsStream",
+                "listDataAttributeBindingsAsync"
+              ]
+            },
+            "ListDataAttributes": {
+              "methods": [
+                "listDataAttributes",
+                "listDataAttributesStream",
+                "listDataAttributesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataTaxonomyServiceClient",
+          "rpcs": {
+            "GetDataTaxonomy": {
+              "methods": [
+                "getDataTaxonomy"
+              ]
+            },
+            "GetDataAttributeBinding": {
+              "methods": [
+                "getDataAttributeBinding"
+              ]
+            },
+            "GetDataAttribute": {
+              "methods": [
+                "getDataAttribute"
+              ]
+            },
+            "CreateDataTaxonomy": {
+              "methods": [
+                "createDataTaxonomy"
+              ]
+            },
+            "UpdateDataTaxonomy": {
+              "methods": [
+                "updateDataTaxonomy"
+              ]
+            },
+            "DeleteDataTaxonomy": {
+              "methods": [
+                "deleteDataTaxonomy"
+              ]
+            },
+            "CreateDataAttributeBinding": {
+              "methods": [
+                "createDataAttributeBinding"
+              ]
+            },
+            "UpdateDataAttributeBinding": {
+              "methods": [
+                "updateDataAttributeBinding"
+              ]
+            },
+            "DeleteDataAttributeBinding": {
+              "methods": [
+                "deleteDataAttributeBinding"
+              ]
+            },
+            "CreateDataAttribute": {
+              "methods": [
+                "createDataAttribute"
+              ]
+            },
+            "UpdateDataAttribute": {
+              "methods": [
+                "updateDataAttribute"
+              ]
+            },
+            "DeleteDataAttribute": {
+              "methods": [
+                "deleteDataAttribute"
+              ]
+            },
+            "ListDataTaxonomies": {
+              "methods": [
+                "listDataTaxonomies",
+                "listDataTaxonomiesStream",
+                "listDataTaxonomiesAsync"
+              ]
+            },
+            "ListDataAttributeBindings": {
+              "methods": [
+                "listDataAttributeBindings",
+                "listDataAttributeBindingsStream",
+                "listDataAttributeBindingsAsync"
+              ]
+            },
+            "ListDataAttributes": {
+              "methods": [
+                "listDataAttributes",
+                "listDataAttributesStream",
+                "listDataAttributesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MetadataService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MetadataServiceClient",
+          "rpcs": {
+            "CreateEntity": {
+              "methods": [
+                "createEntity"
+              ]
+            },
+            "UpdateEntity": {
+              "methods": [
+                "updateEntity"
+              ]
+            },
+            "DeleteEntity": {
+              "methods": [
+                "deleteEntity"
+              ]
+            },
+            "GetEntity": {
+              "methods": [
+                "getEntity"
+              ]
+            },
+            "CreatePartition": {
+              "methods": [
+                "createPartition"
+              ]
+            },
+            "DeletePartition": {
+              "methods": [
+                "deletePartition"
+              ]
+            },
+            "GetPartition": {
+              "methods": [
+                "getPartition"
+              ]
+            },
+            "ListEntities": {
+              "methods": [
+                "listEntities",
+                "listEntitiesStream",
+                "listEntitiesAsync"
+              ]
+            },
+            "ListPartitions": {
+              "methods": [
+                "listPartitions",
+                "listPartitionsStream",
+                "listPartitionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MetadataServiceClient",
+          "rpcs": {
+            "CreateEntity": {
+              "methods": [
+                "createEntity"
+              ]
+            },
+            "UpdateEntity": {
+              "methods": [
+                "updateEntity"
+              ]
+            },
+            "DeleteEntity": {
+              "methods": [
+                "deleteEntity"
+              ]
+            },
+            "GetEntity": {
+              "methods": [
+                "getEntity"
+              ]
+            },
+            "CreatePartition": {
+              "methods": [
+                "createPartition"
+              ]
+            },
+            "DeletePartition": {
+              "methods": [
+                "deletePartition"
+              ]
+            },
+            "GetPartition": {
+              "methods": [
+                "getPartition"
+              ]
+            },
+            "ListEntities": {
+              "methods": [
+                "listEntities",
+                "listEntitiesStream",
+                "listEntitiesAsync"
+              ]
+            },
+            "ListPartitions": {
+              "methods": [
+                "listPartitions",
+                "listPartitionsStream",
+                "listPartitionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
