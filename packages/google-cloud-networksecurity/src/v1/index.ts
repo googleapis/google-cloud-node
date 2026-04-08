@@ -17,5 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 export {AddressGroupServiceClient} from './address_group_service_client';
+export {DnsThreatDetectorServiceClient} from './dns_threat_detector_service_client';
+export {FirewallActivationClient} from './firewall_activation_client';
+export {InterceptClient} from './intercept_client';
+export {MirroringClient} from './mirroring_client';
 export {NetworkSecurityClient} from './network_security_client';
 export {OrganizationAddressGroupServiceClient} from './organization_address_group_service_client';
+export {OrganizationSecurityProfileGroupServiceClient} from './organization_security_profile_group_service_client';

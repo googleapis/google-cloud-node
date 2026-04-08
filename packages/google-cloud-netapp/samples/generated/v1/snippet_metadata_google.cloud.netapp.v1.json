@@ -600,6 +600,62 @@
       }
     },
     {
+      "regionTag": "netapp_v1_generated_NetApp_EstablishVolumePeering_async",
+      "title": "NetApp establishVolumePeering Sample",
+      "origin": "API_DEFINITION",
+      "description": " Establish volume peering. This is used to establish cluster and svm peerings between the GCNV and OnPrem clusters.",
+      "canonical": true,
+      "file": "net_app.establish_volume_peering.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EstablishVolumePeering",
+        "fullName": "google.cloud.netapp.v1.NetApp.EstablishVolumePeering",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "peer_cluster_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "peer_svm_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "peer_ip_addresses",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "peer_volume_name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "EstablishVolumePeering",
+          "fullName": "google.cloud.netapp.v1.NetApp.EstablishVolumePeering",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "netapp_v1_generated_NetApp_ListSnapshots_async",
       "title": "NetApp listSnapshots Sample",
       "origin": "API_DEFINITION",
@@ -2996,6 +3052,174 @@
         "method": {
           "shortName": "DeleteHostGroup",
           "fullName": "google.cloud.netapp.v1.NetApp.DeleteHostGroup",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ExecuteOntapPost_async",
+      "title": "NetApp executeOntapPost Sample",
+      "origin": "API_DEFINITION",
+      "description": " `ExecuteOntapPost` dispatches the ONTAP `POST` request to the `StoragePool` cluster.",
+      "canonical": true,
+      "file": "net_app.execute_ontap_post.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExecuteOntapPost",
+        "fullName": "google.cloud.netapp.v1.NetApp.ExecuteOntapPost",
+        "async": true,
+        "parameters": [
+          {
+            "name": "body",
+            "type": ".google.protobuf.Struct"
+          },
+          {
+            "name": "ontap_path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ExecuteOntapPostResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ExecuteOntapPost",
+          "fullName": "google.cloud.netapp.v1.NetApp.ExecuteOntapPost",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ExecuteOntapGet_async",
+      "title": "NetApp executeOntapGet Sample",
+      "origin": "API_DEFINITION",
+      "description": " `ExecuteOntapGet` dispatches the ONTAP `GET` request to the `StoragePool` cluster.",
+      "canonical": true,
+      "file": "net_app.execute_ontap_get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExecuteOntapGet",
+        "fullName": "google.cloud.netapp.v1.NetApp.ExecuteOntapGet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "ontap_path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ExecuteOntapGetResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ExecuteOntapGet",
+          "fullName": "google.cloud.netapp.v1.NetApp.ExecuteOntapGet",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ExecuteOntapDelete_async",
+      "title": "NetApp executeOntapDelete Sample",
+      "origin": "API_DEFINITION",
+      "description": " `ExecuteOntapDelete` dispatches the ONTAP `DELETE` request to the `StoragePool` cluster.",
+      "canonical": true,
+      "file": "net_app.execute_ontap_delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExecuteOntapDelete",
+        "fullName": "google.cloud.netapp.v1.NetApp.ExecuteOntapDelete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "ontap_path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ExecuteOntapDeleteResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ExecuteOntapDelete",
+          "fullName": "google.cloud.netapp.v1.NetApp.ExecuteOntapDelete",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ExecuteOntapPatch_async",
+      "title": "NetApp executeOntapPatch Sample",
+      "origin": "API_DEFINITION",
+      "description": " `ExecuteOntapPatch` dispatches the ONTAP `PATCH` request to the `StoragePool` cluster.",
+      "canonical": true,
+      "file": "net_app.execute_ontap_patch.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExecuteOntapPatch",
+        "fullName": "google.cloud.netapp.v1.NetApp.ExecuteOntapPatch",
+        "async": true,
+        "parameters": [
+          {
+            "name": "body",
+            "type": ".google.protobuf.Struct"
+          },
+          {
+            "name": "ontap_path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ExecuteOntapPatchResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ExecuteOntapPatch",
+          "fullName": "google.cloud.netapp.v1.NetApp.ExecuteOntapPatch",
           "service": {
             "shortName": "NetApp",
             "fullName": "google.cloud.netapp.v1.NetApp"

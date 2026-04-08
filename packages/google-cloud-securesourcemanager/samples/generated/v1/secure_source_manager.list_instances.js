@@ -33,20 +33,20 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Requested page size. Server may return fewer items than requested.
-   *  If unspecified, server will pick an appropriate default.
+   *  Optional. Requested page size. Server may return fewer items than
+   *  requested. If unspecified, server will pick an appropriate default.
    */
   // const pageSize = 1234
   /**
-   *  A token identifying a page of results the server should return.
+   *  Optional. A token identifying a page of results the server should return.
    */
   // const pageToken = 'abc123'
   /**
-   *  Filter for filtering results.
+   *  Optional. Filter for filtering results.
    */
   // const filter = 'abc123'
   /**
-   *  Hint for how to order the results.
+   *  Optional. Hint for how to order the results.
    */
   // const orderBy = 'abc123'
 

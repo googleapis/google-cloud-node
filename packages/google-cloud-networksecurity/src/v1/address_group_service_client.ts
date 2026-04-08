@@ -192,14 +192,65 @@ export class AddressGroupServiceClient {
       authorizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}'
       ),
+      authzPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}'
+      ),
+      backendAuthenticationConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}'
+      ),
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
+      ),
+      dnsThreatDetectorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}'
+      ),
+      firewallEndpointAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}'
+      ),
+      gatewaySecurityPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}'
+      ),
+      gatewaySecurityPolicyRulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}'
+      ),
+      interceptDeploymentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}'
+      ),
+      interceptDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}'
+      ),
+      interceptEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}'
+      ),
+      interceptEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      mirroringDeploymentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}'
+      ),
+      mirroringDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}'
+      ),
+      mirroringEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}'
+      ),
+      mirroringEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}'
+      ),
       organizationLocationAddressGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/addressGroups/{address_group}'
+      ),
+      organizationLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
+      ),
+      organizationLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}'
+      ),
+      organizationLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -207,8 +258,23 @@ export class AddressGroupServiceClient {
       projectLocationAddressGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/addressGroups/{address_group}'
       ),
+      projectLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
+      ),
+      projectLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securityProfiles/{security_profile}'
+      ),
+      projectLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}'
+      ),
       serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
+      ),
+      tlsInspectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}'
+      ),
+      urlListPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/urlLists/{url_list}'
       ),
     };
 
@@ -234,9 +300,9 @@ export class AddressGroupServiceClient {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
       },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',body: '*',}],
       },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
       },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
       },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
@@ -2207,6 +2273,104 @@ export class AddressGroupServiceClient {
   }
 
   /**
+   * Return a fully-qualified authzPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authz_policy
+   * @returns {string} Resource name string.
+   */
+  authzPolicyPath(project:string,location:string,authzPolicy:string) {
+    return this.pathTemplates.authzPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      authz_policy: authzPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from AuthzPolicy resource.
+   *
+   * @param {string} authzPolicyName
+   *   A fully-qualified path representing AuthzPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAuthzPolicyName(authzPolicyName: string) {
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).project;
+  }
+
+  /**
+   * Parse the location from AuthzPolicy resource.
+   *
+   * @param {string} authzPolicyName
+   *   A fully-qualified path representing AuthzPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAuthzPolicyName(authzPolicyName: string) {
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).location;
+  }
+
+  /**
+   * Parse the authz_policy from AuthzPolicy resource.
+   *
+   * @param {string} authzPolicyName
+   *   A fully-qualified path representing AuthzPolicy resource.
+   * @returns {string} A string representing the authz_policy.
+   */
+  matchAuthzPolicyFromAuthzPolicyName(authzPolicyName: string) {
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).authz_policy;
+  }
+
+  /**
+   * Return a fully-qualified backendAuthenticationConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} backend_authentication_config
+   * @returns {string} Resource name string.
+   */
+  backendAuthenticationConfigPath(project:string,location:string,backendAuthenticationConfig:string) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.render({
+      project: project,
+      location: location,
+      backend_authentication_config: backendAuthenticationConfig,
+    });
+  }
+
+  /**
+   * Parse the project from BackendAuthenticationConfig resource.
+   *
+   * @param {string} backendAuthenticationConfigName
+   *   A fully-qualified path representing BackendAuthenticationConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).project;
+  }
+
+  /**
+   * Parse the location from BackendAuthenticationConfig resource.
+   *
+   * @param {string} backendAuthenticationConfigName
+   *   A fully-qualified path representing BackendAuthenticationConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).location;
+  }
+
+  /**
+   * Parse the backend_authentication_config from BackendAuthenticationConfig resource.
+   *
+   * @param {string} backendAuthenticationConfigName
+   *   A fully-qualified path representing BackendAuthenticationConfig resource.
+   * @returns {string} A string representing the backend_authentication_config.
+   */
+  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).backend_authentication_config;
+  }
+
+  /**
    * Return a fully-qualified clientTlsPolicy resource name string.
    *
    * @param {string} project
@@ -2256,6 +2420,411 @@ export class AddressGroupServiceClient {
   }
 
   /**
+   * Return a fully-qualified dnsThreatDetector resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dns_threat_detector
+   * @returns {string} Resource name string.
+   */
+  dnsThreatDetectorPath(project:string,location:string,dnsThreatDetector:string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.render({
+      project: project,
+      location: location,
+      dns_threat_detector: dnsThreatDetector,
+    });
+  }
+
+  /**
+   * Parse the project from DnsThreatDetector resource.
+   *
+   * @param {string} dnsThreatDetectorName
+   *   A fully-qualified path representing DnsThreatDetector resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).project;
+  }
+
+  /**
+   * Parse the location from DnsThreatDetector resource.
+   *
+   * @param {string} dnsThreatDetectorName
+   *   A fully-qualified path representing DnsThreatDetector resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).location;
+  }
+
+  /**
+   * Parse the dns_threat_detector from DnsThreatDetector resource.
+   *
+   * @param {string} dnsThreatDetectorName
+   *   A fully-qualified path representing DnsThreatDetector resource.
+   * @returns {string} A string representing the dns_threat_detector.
+   */
+  matchDnsThreatDetectorFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).dns_threat_detector;
+  }
+
+  /**
+   * Return a fully-qualified firewallEndpointAssociation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} firewall_endpoint_association
+   * @returns {string} Resource name string.
+   */
+  firewallEndpointAssociationPath(project:string,location:string,firewallEndpointAssociation:string) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.render({
+      project: project,
+      location: location,
+      firewall_endpoint_association: firewallEndpointAssociation,
+    });
+  }
+
+  /**
+   * Parse the project from FirewallEndpointAssociation resource.
+   *
+   * @param {string} firewallEndpointAssociationName
+   *   A fully-qualified path representing FirewallEndpointAssociation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).project;
+  }
+
+  /**
+   * Parse the location from FirewallEndpointAssociation resource.
+   *
+   * @param {string} firewallEndpointAssociationName
+   *   A fully-qualified path representing FirewallEndpointAssociation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).location;
+  }
+
+  /**
+   * Parse the firewall_endpoint_association from FirewallEndpointAssociation resource.
+   *
+   * @param {string} firewallEndpointAssociationName
+   *   A fully-qualified path representing FirewallEndpointAssociation resource.
+   * @returns {string} A string representing the firewall_endpoint_association.
+   */
+  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).firewall_endpoint_association;
+  }
+
+  /**
+   * Return a fully-qualified gatewaySecurityPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} gateway_security_policy
+   * @returns {string} Resource name string.
+   */
+  gatewaySecurityPolicyPath(project:string,location:string,gatewaySecurityPolicy:string) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      gateway_security_policy: gatewaySecurityPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from GatewaySecurityPolicy resource.
+   *
+   * @param {string} gatewaySecurityPolicyName
+   *   A fully-qualified path representing GatewaySecurityPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).project;
+  }
+
+  /**
+   * Parse the location from GatewaySecurityPolicy resource.
+   *
+   * @param {string} gatewaySecurityPolicyName
+   *   A fully-qualified path representing GatewaySecurityPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).location;
+  }
+
+  /**
+   * Parse the gateway_security_policy from GatewaySecurityPolicy resource.
+   *
+   * @param {string} gatewaySecurityPolicyName
+   *   A fully-qualified path representing GatewaySecurityPolicy resource.
+   * @returns {string} A string representing the gateway_security_policy.
+   */
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).gateway_security_policy;
+  }
+
+  /**
+   * Return a fully-qualified gatewaySecurityPolicyRule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} gateway_security_policy
+   * @param {string} rule
+   * @returns {string} Resource name string.
+   */
+  gatewaySecurityPolicyRulePath(project:string,location:string,gatewaySecurityPolicy:string,rule:string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render({
+      project: project,
+      location: location,
+      gateway_security_policy: gatewaySecurityPolicy,
+      rule: rule,
+    });
+  }
+
+  /**
+   * Parse the project from GatewaySecurityPolicyRule resource.
+   *
+   * @param {string} gatewaySecurityPolicyRuleName
+   *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).project;
+  }
+
+  /**
+   * Parse the location from GatewaySecurityPolicyRule resource.
+   *
+   * @param {string} gatewaySecurityPolicyRuleName
+   *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).location;
+  }
+
+  /**
+   * Parse the gateway_security_policy from GatewaySecurityPolicyRule resource.
+   *
+   * @param {string} gatewaySecurityPolicyRuleName
+   *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
+   * @returns {string} A string representing the gateway_security_policy.
+   */
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).gateway_security_policy;
+  }
+
+  /**
+   * Parse the rule from GatewaySecurityPolicyRule resource.
+   *
+   * @param {string} gatewaySecurityPolicyRuleName
+   *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
+   * @returns {string} A string representing the rule.
+   */
+  matchRuleFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).rule;
+  }
+
+  /**
+   * Return a fully-qualified interceptDeployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intercept_deployment
+   * @returns {string} Resource name string.
+   */
+  interceptDeploymentPath(project:string,location:string,interceptDeployment:string) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      intercept_deployment: interceptDeployment,
+    });
+  }
+
+  /**
+   * Parse the project from InterceptDeployment resource.
+   *
+   * @param {string} interceptDeploymentName
+   *   A fully-qualified path representing InterceptDeployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInterceptDeploymentName(interceptDeploymentName: string) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).project;
+  }
+
+  /**
+   * Parse the location from InterceptDeployment resource.
+   *
+   * @param {string} interceptDeploymentName
+   *   A fully-qualified path representing InterceptDeployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInterceptDeploymentName(interceptDeploymentName: string) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).location;
+  }
+
+  /**
+   * Parse the intercept_deployment from InterceptDeployment resource.
+   *
+   * @param {string} interceptDeploymentName
+   *   A fully-qualified path representing InterceptDeployment resource.
+   * @returns {string} A string representing the intercept_deployment.
+   */
+  matchInterceptDeploymentFromInterceptDeploymentName(interceptDeploymentName: string) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).intercept_deployment;
+  }
+
+  /**
+   * Return a fully-qualified interceptDeploymentGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intercept_deployment_group
+   * @returns {string} Resource name string.
+   */
+  interceptDeploymentGroupPath(project:string,location:string,interceptDeploymentGroup:string) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.render({
+      project: project,
+      location: location,
+      intercept_deployment_group: interceptDeploymentGroup,
+    });
+  }
+
+  /**
+   * Parse the project from InterceptDeploymentGroup resource.
+   *
+   * @param {string} interceptDeploymentGroupName
+   *   A fully-qualified path representing InterceptDeploymentGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).project;
+  }
+
+  /**
+   * Parse the location from InterceptDeploymentGroup resource.
+   *
+   * @param {string} interceptDeploymentGroupName
+   *   A fully-qualified path representing InterceptDeploymentGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).location;
+  }
+
+  /**
+   * Parse the intercept_deployment_group from InterceptDeploymentGroup resource.
+   *
+   * @param {string} interceptDeploymentGroupName
+   *   A fully-qualified path representing InterceptDeploymentGroup resource.
+   * @returns {string} A string representing the intercept_deployment_group.
+   */
+  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).intercept_deployment_group;
+  }
+
+  /**
+   * Return a fully-qualified interceptEndpointGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intercept_endpoint_group
+   * @returns {string} Resource name string.
+   */
+  interceptEndpointGroupPath(project:string,location:string,interceptEndpointGroup:string) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.render({
+      project: project,
+      location: location,
+      intercept_endpoint_group: interceptEndpointGroup,
+    });
+  }
+
+  /**
+   * Parse the project from InterceptEndpointGroup resource.
+   *
+   * @param {string} interceptEndpointGroupName
+   *   A fully-qualified path representing InterceptEndpointGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).project;
+  }
+
+  /**
+   * Parse the location from InterceptEndpointGroup resource.
+   *
+   * @param {string} interceptEndpointGroupName
+   *   A fully-qualified path representing InterceptEndpointGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).location;
+  }
+
+  /**
+   * Parse the intercept_endpoint_group from InterceptEndpointGroup resource.
+   *
+   * @param {string} interceptEndpointGroupName
+   *   A fully-qualified path representing InterceptEndpointGroup resource.
+   * @returns {string} A string representing the intercept_endpoint_group.
+   */
+  matchInterceptEndpointGroupFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).intercept_endpoint_group;
+  }
+
+  /**
+   * Return a fully-qualified interceptEndpointGroupAssociation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intercept_endpoint_group_association
+   * @returns {string} Resource name string.
+   */
+  interceptEndpointGroupAssociationPath(project:string,location:string,interceptEndpointGroupAssociation:string) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render({
+      project: project,
+      location: location,
+      intercept_endpoint_group_association: interceptEndpointGroupAssociation,
+    });
+  }
+
+  /**
+   * Parse the project from InterceptEndpointGroupAssociation resource.
+   *
+   * @param {string} interceptEndpointGroupAssociationName
+   *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).project;
+  }
+
+  /**
+   * Parse the location from InterceptEndpointGroupAssociation resource.
+   *
+   * @param {string} interceptEndpointGroupAssociationName
+   *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).location;
+  }
+
+  /**
+   * Parse the intercept_endpoint_group_association from InterceptEndpointGroupAssociation resource.
+   *
+   * @param {string} interceptEndpointGroupAssociationName
+   *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
+   * @returns {string} A string representing the intercept_endpoint_group_association.
+   */
+  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).intercept_endpoint_group_association;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -2289,6 +2858,202 @@ export class AddressGroupServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified mirroringDeployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mirroring_deployment
+   * @returns {string} Resource name string.
+   */
+  mirroringDeploymentPath(project:string,location:string,mirroringDeployment:string) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      mirroring_deployment: mirroringDeployment,
+    });
+  }
+
+  /**
+   * Parse the project from MirroringDeployment resource.
+   *
+   * @param {string} mirroringDeploymentName
+   *   A fully-qualified path representing MirroringDeployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMirroringDeploymentName(mirroringDeploymentName: string) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).project;
+  }
+
+  /**
+   * Parse the location from MirroringDeployment resource.
+   *
+   * @param {string} mirroringDeploymentName
+   *   A fully-qualified path representing MirroringDeployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMirroringDeploymentName(mirroringDeploymentName: string) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).location;
+  }
+
+  /**
+   * Parse the mirroring_deployment from MirroringDeployment resource.
+   *
+   * @param {string} mirroringDeploymentName
+   *   A fully-qualified path representing MirroringDeployment resource.
+   * @returns {string} A string representing the mirroring_deployment.
+   */
+  matchMirroringDeploymentFromMirroringDeploymentName(mirroringDeploymentName: string) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).mirroring_deployment;
+  }
+
+  /**
+   * Return a fully-qualified mirroringDeploymentGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mirroring_deployment_group
+   * @returns {string} Resource name string.
+   */
+  mirroringDeploymentGroupPath(project:string,location:string,mirroringDeploymentGroup:string) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.render({
+      project: project,
+      location: location,
+      mirroring_deployment_group: mirroringDeploymentGroup,
+    });
+  }
+
+  /**
+   * Parse the project from MirroringDeploymentGroup resource.
+   *
+   * @param {string} mirroringDeploymentGroupName
+   *   A fully-qualified path representing MirroringDeploymentGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).project;
+  }
+
+  /**
+   * Parse the location from MirroringDeploymentGroup resource.
+   *
+   * @param {string} mirroringDeploymentGroupName
+   *   A fully-qualified path representing MirroringDeploymentGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).location;
+  }
+
+  /**
+   * Parse the mirroring_deployment_group from MirroringDeploymentGroup resource.
+   *
+   * @param {string} mirroringDeploymentGroupName
+   *   A fully-qualified path representing MirroringDeploymentGroup resource.
+   * @returns {string} A string representing the mirroring_deployment_group.
+   */
+  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).mirroring_deployment_group;
+  }
+
+  /**
+   * Return a fully-qualified mirroringEndpointGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mirroring_endpoint_group
+   * @returns {string} Resource name string.
+   */
+  mirroringEndpointGroupPath(project:string,location:string,mirroringEndpointGroup:string) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.render({
+      project: project,
+      location: location,
+      mirroring_endpoint_group: mirroringEndpointGroup,
+    });
+  }
+
+  /**
+   * Parse the project from MirroringEndpointGroup resource.
+   *
+   * @param {string} mirroringEndpointGroupName
+   *   A fully-qualified path representing MirroringEndpointGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).project;
+  }
+
+  /**
+   * Parse the location from MirroringEndpointGroup resource.
+   *
+   * @param {string} mirroringEndpointGroupName
+   *   A fully-qualified path representing MirroringEndpointGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).location;
+  }
+
+  /**
+   * Parse the mirroring_endpoint_group from MirroringEndpointGroup resource.
+   *
+   * @param {string} mirroringEndpointGroupName
+   *   A fully-qualified path representing MirroringEndpointGroup resource.
+   * @returns {string} A string representing the mirroring_endpoint_group.
+   */
+  matchMirroringEndpointGroupFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).mirroring_endpoint_group;
+  }
+
+  /**
+   * Return a fully-qualified mirroringEndpointGroupAssociation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mirroring_endpoint_group_association
+   * @returns {string} Resource name string.
+   */
+  mirroringEndpointGroupAssociationPath(project:string,location:string,mirroringEndpointGroupAssociation:string) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render({
+      project: project,
+      location: location,
+      mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
+    });
+  }
+
+  /**
+   * Parse the project from MirroringEndpointGroupAssociation resource.
+   *
+   * @param {string} mirroringEndpointGroupAssociationName
+   *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).project;
+  }
+
+  /**
+   * Parse the location from MirroringEndpointGroupAssociation resource.
+   *
+   * @param {string} mirroringEndpointGroupAssociationName
+   *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).location;
+  }
+
+  /**
+   * Parse the mirroring_endpoint_group_association from MirroringEndpointGroupAssociation resource.
+   *
+   * @param {string} mirroringEndpointGroupAssociationName
+   *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
+   * @returns {string} A string representing the mirroring_endpoint_group_association.
+   */
+  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).mirroring_endpoint_group_association;
   }
 
   /**
@@ -2338,6 +3103,153 @@ export class AddressGroupServiceClient {
    */
   matchAddressGroupFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
     return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).address_group;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFirewallEndpoints resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} firewall_endpoint
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFirewallEndpointsPath(organization:string,location:string,firewallEndpoint:string) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render({
+      organization: organization,
+      location: location,
+      firewall_endpoint: firewallEndpoint,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFirewallEndpoints resource.
+   *
+   * @param {string} organizationLocationFirewallEndpointsName
+   *   A fully-qualified path representing organization_location_firewallEndpoints resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFirewallEndpoints resource.
+   *
+   * @param {string} organizationLocationFirewallEndpointsName
+   *   A fully-qualified path representing organization_location_firewallEndpoints resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).location;
+  }
+
+  /**
+   * Parse the firewall_endpoint from OrganizationLocationFirewallEndpoints resource.
+   *
+   * @param {string} organizationLocationFirewallEndpointsName
+   *   A fully-qualified path representing organization_location_firewallEndpoints resource.
+   * @returns {string} A string representing the firewall_endpoint.
+   */
+  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).firewall_endpoint;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationSecurityProfile resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} security_profile
+   * @returns {string} Resource name string.
+   */
+  organizationLocationSecurityProfilePath(organization:string,location:string,securityProfile:string) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render({
+      organization: organization,
+      location: location,
+      security_profile: securityProfile,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationSecurityProfile resource.
+   *
+   * @param {string} organizationLocationSecurityProfileName
+   *   A fully-qualified path representing organization_location_security_profile resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationSecurityProfile resource.
+   *
+   * @param {string} organizationLocationSecurityProfileName
+   *   A fully-qualified path representing organization_location_security_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).location;
+  }
+
+  /**
+   * Parse the security_profile from OrganizationLocationSecurityProfile resource.
+   *
+   * @param {string} organizationLocationSecurityProfileName
+   *   A fully-qualified path representing organization_location_security_profile resource.
+   * @returns {string} A string representing the security_profile.
+   */
+  matchSecurityProfileFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).security_profile;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationSecurityProfileGroup resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} security_profile_group
+   * @returns {string} Resource name string.
+   */
+  organizationLocationSecurityProfileGroupPath(organization:string,location:string,securityProfileGroup:string) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render({
+      organization: organization,
+      location: location,
+      security_profile_group: securityProfileGroup,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationSecurityProfileGroup resource.
+   *
+   * @param {string} organizationLocationSecurityProfileGroupName
+   *   A fully-qualified path representing organization_location_security_profile_group resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationSecurityProfileGroup resource.
+   *
+   * @param {string} organizationLocationSecurityProfileGroupName
+   *   A fully-qualified path representing organization_location_security_profile_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).location;
+  }
+
+  /**
+   * Parse the security_profile_group from OrganizationLocationSecurityProfileGroup resource.
+   *
+   * @param {string} organizationLocationSecurityProfileGroupName
+   *   A fully-qualified path representing organization_location_security_profile_group resource.
+   * @returns {string} A string representing the security_profile_group.
+   */
+  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).security_profile_group;
   }
 
   /**
@@ -2413,6 +3325,153 @@ export class AddressGroupServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationFirewallEndpoints resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} firewall_endpoint
+   * @returns {string} Resource name string.
+   */
+  projectLocationFirewallEndpointsPath(project:string,location:string,firewallEndpoint:string) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render({
+      project: project,
+      location: location,
+      firewall_endpoint: firewallEndpoint,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFirewallEndpoints resource.
+   *
+   * @param {string} projectLocationFirewallEndpointsName
+   *   A fully-qualified path representing project_location_firewallEndpoints resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFirewallEndpoints resource.
+   *
+   * @param {string} projectLocationFirewallEndpointsName
+   *   A fully-qualified path representing project_location_firewallEndpoints resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).location;
+  }
+
+  /**
+   * Parse the firewall_endpoint from ProjectLocationFirewallEndpoints resource.
+   *
+   * @param {string} projectLocationFirewallEndpointsName
+   *   A fully-qualified path representing project_location_firewallEndpoints resource.
+   * @returns {string} A string representing the firewall_endpoint.
+   */
+  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).firewall_endpoint;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSecurityProfile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} security_profile
+   * @returns {string} Resource name string.
+   */
+  projectLocationSecurityProfilePath(project:string,location:string,securityProfile:string) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render({
+      project: project,
+      location: location,
+      security_profile: securityProfile,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSecurityProfile resource.
+   *
+   * @param {string} projectLocationSecurityProfileName
+   *   A fully-qualified path representing project_location_security_profile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSecurityProfile resource.
+   *
+   * @param {string} projectLocationSecurityProfileName
+   *   A fully-qualified path representing project_location_security_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).location;
+  }
+
+  /**
+   * Parse the security_profile from ProjectLocationSecurityProfile resource.
+   *
+   * @param {string} projectLocationSecurityProfileName
+   *   A fully-qualified path representing project_location_security_profile resource.
+   * @returns {string} A string representing the security_profile.
+   */
+  matchSecurityProfileFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).security_profile;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSecurityProfileGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} security_profile_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationSecurityProfileGroupPath(project:string,location:string,securityProfileGroup:string) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render({
+      project: project,
+      location: location,
+      security_profile_group: securityProfileGroup,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSecurityProfileGroup resource.
+   *
+   * @param {string} projectLocationSecurityProfileGroupName
+   *   A fully-qualified path representing project_location_security_profile_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSecurityProfileGroup resource.
+   *
+   * @param {string} projectLocationSecurityProfileGroupName
+   *   A fully-qualified path representing project_location_security_profile_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).location;
+  }
+
+  /**
+   * Parse the security_profile_group from ProjectLocationSecurityProfileGroup resource.
+   *
+   * @param {string} projectLocationSecurityProfileGroupName
+   *   A fully-qualified path representing project_location_security_profile_group resource.
+   * @returns {string} A string representing the security_profile_group.
+   */
+  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).security_profile_group;
+  }
+
+  /**
    * Return a fully-qualified serverTlsPolicy resource name string.
    *
    * @param {string} project
@@ -2459,6 +3518,104 @@ export class AddressGroupServiceClient {
    */
   matchServerTlsPolicyFromServerTlsPolicyName(serverTlsPolicyName: string) {
     return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).server_tls_policy;
+  }
+
+  /**
+   * Return a fully-qualified tlsInspectionPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tls_inspection_policy
+   * @returns {string} Resource name string.
+   */
+  tlsInspectionPolicyPath(project:string,location:string,tlsInspectionPolicy:string) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      tls_inspection_policy: tlsInspectionPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from TlsInspectionPolicy resource.
+   *
+   * @param {string} tlsInspectionPolicyName
+   *   A fully-qualified path representing TlsInspectionPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).project;
+  }
+
+  /**
+   * Parse the location from TlsInspectionPolicy resource.
+   *
+   * @param {string} tlsInspectionPolicyName
+   *   A fully-qualified path representing TlsInspectionPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).location;
+  }
+
+  /**
+   * Parse the tls_inspection_policy from TlsInspectionPolicy resource.
+   *
+   * @param {string} tlsInspectionPolicyName
+   *   A fully-qualified path representing TlsInspectionPolicy resource.
+   * @returns {string} A string representing the tls_inspection_policy.
+   */
+  matchTlsInspectionPolicyFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).tls_inspection_policy;
+  }
+
+  /**
+   * Return a fully-qualified urlList resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} url_list
+   * @returns {string} Resource name string.
+   */
+  urlListPath(project:string,location:string,urlList:string) {
+    return this.pathTemplates.urlListPathTemplate.render({
+      project: project,
+      location: location,
+      url_list: urlList,
+    });
+  }
+
+  /**
+   * Parse the project from UrlList resource.
+   *
+   * @param {string} urlListName
+   *   A fully-qualified path representing UrlList resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUrlListName(urlListName: string) {
+    return this.pathTemplates.urlListPathTemplate.match(urlListName).project;
+  }
+
+  /**
+   * Parse the location from UrlList resource.
+   *
+   * @param {string} urlListName
+   *   A fully-qualified path representing UrlList resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUrlListName(urlListName: string) {
+    return this.pathTemplates.urlListPathTemplate.match(urlListName).location;
+  }
+
+  /**
+   * Parse the url_list from UrlList resource.
+   *
+   * @param {string} urlListName
+   *   A fully-qualified path representing UrlList resource.
+   * @returns {string} A string representing the url_list.
+   */
+  matchUrlListFromUrlListName(urlListName: string) {
+    return this.pathTemplates.urlListPathTemplate.match(urlListName).url_list;
   }
 
   /**

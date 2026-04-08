@@ -440,6 +440,2626 @@
       }
     },
     {
+      "regionTag": "networksecurity_v1_generated_DnsThreatDetectorService_ListDnsThreatDetectors_async",
+      "title": "AddressGroupService listDnsThreatDetectors Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists DnsThreatDetectors in a given project and location.",
+      "canonical": true,
+      "file": "dns_threat_detector_service.list_dns_threat_detectors.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDnsThreatDetectors",
+        "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.ListDnsThreatDetectors",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListDnsThreatDetectorsResponse",
+        "client": {
+          "shortName": "DnsThreatDetectorServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorServiceClient"
+        },
+        "method": {
+          "shortName": "ListDnsThreatDetectors",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.ListDnsThreatDetectors",
+          "service": {
+            "shortName": "DnsThreatDetectorService",
+            "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_DnsThreatDetectorService_GetDnsThreatDetector_async",
+      "title": "AddressGroupService getDnsThreatDetector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a single DnsThreatDetector.",
+      "canonical": true,
+      "file": "dns_threat_detector_service.get_dns_threat_detector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDnsThreatDetector",
+        "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.GetDnsThreatDetector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.DnsThreatDetector",
+        "client": {
+          "shortName": "DnsThreatDetectorServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorServiceClient"
+        },
+        "method": {
+          "shortName": "GetDnsThreatDetector",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.GetDnsThreatDetector",
+          "service": {
+            "shortName": "DnsThreatDetectorService",
+            "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_DnsThreatDetectorService_CreateDnsThreatDetector_async",
+      "title": "AddressGroupService createDnsThreatDetector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new DnsThreatDetector in a given project and location.",
+      "canonical": true,
+      "file": "dns_threat_detector_service.create_dns_threat_detector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDnsThreatDetector",
+        "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.CreateDnsThreatDetector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dns_threat_detector_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dns_threat_detector",
+            "type": ".google.cloud.networksecurity.v1.DnsThreatDetector"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.DnsThreatDetector",
+        "client": {
+          "shortName": "DnsThreatDetectorServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDnsThreatDetector",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.CreateDnsThreatDetector",
+          "service": {
+            "shortName": "DnsThreatDetectorService",
+            "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_DnsThreatDetectorService_UpdateDnsThreatDetector_async",
+      "title": "AddressGroupService updateDnsThreatDetector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single DnsThreatDetector.",
+      "canonical": true,
+      "file": "dns_threat_detector_service.update_dns_threat_detector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDnsThreatDetector",
+        "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.UpdateDnsThreatDetector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "dns_threat_detector",
+            "type": ".google.cloud.networksecurity.v1.DnsThreatDetector"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.DnsThreatDetector",
+        "client": {
+          "shortName": "DnsThreatDetectorServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDnsThreatDetector",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.UpdateDnsThreatDetector",
+          "service": {
+            "shortName": "DnsThreatDetectorService",
+            "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_DnsThreatDetectorService_DeleteDnsThreatDetector_async",
+      "title": "AddressGroupService deleteDnsThreatDetector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single DnsThreatDetector.",
+      "canonical": true,
+      "file": "dns_threat_detector_service.delete_dns_threat_detector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDnsThreatDetector",
+        "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.DeleteDnsThreatDetector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DnsThreatDetectorServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDnsThreatDetector",
+          "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService.DeleteDnsThreatDetector",
+          "service": {
+            "shortName": "DnsThreatDetectorService",
+            "fullName": "google.cloud.networksecurity.v1.DnsThreatDetectorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_ListFirewallEndpoints_async",
+      "title": "AddressGroupService listFirewallEndpoints Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists FirewallEndpoints in a given organization and location.",
+      "canonical": true,
+      "file": "firewall_activation.list_firewall_endpoints.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFirewallEndpoints",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.ListFirewallEndpoints",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListFirewallEndpointsResponse",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "ListFirewallEndpoints",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.ListFirewallEndpoints",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_GetFirewallEndpoint_async",
+      "title": "AddressGroupService getFirewallEndpoint Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single org Endpoint.",
+      "canonical": true,
+      "file": "firewall_activation.get_firewall_endpoint.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetFirewallEndpoint",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.GetFirewallEndpoint",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.FirewallEndpoint",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "GetFirewallEndpoint",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.GetFirewallEndpoint",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_CreateFirewallEndpoint_async",
+      "title": "AddressGroupService createFirewallEndpoint Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new FirewallEndpoint in a given organization and location.",
+      "canonical": true,
+      "file": "firewall_activation.create_firewall_endpoint.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateFirewallEndpoint",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.CreateFirewallEndpoint",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "firewall_endpoint_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "firewall_endpoint",
+            "type": ".google.cloud.networksecurity.v1.FirewallEndpoint"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "CreateFirewallEndpoint",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.CreateFirewallEndpoint",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_DeleteFirewallEndpoint_async",
+      "title": "AddressGroupService deleteFirewallEndpoint Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single org Endpoint.",
+      "canonical": true,
+      "file": "firewall_activation.delete_firewall_endpoint.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteFirewallEndpoint",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.DeleteFirewallEndpoint",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "DeleteFirewallEndpoint",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.DeleteFirewallEndpoint",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_UpdateFirewallEndpoint_async",
+      "title": "AddressGroupService updateFirewallEndpoint Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a single org Endpoint.",
+      "canonical": true,
+      "file": "firewall_activation.update_firewall_endpoint.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateFirewallEndpoint",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.UpdateFirewallEndpoint",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "firewall_endpoint",
+            "type": ".google.cloud.networksecurity.v1.FirewallEndpoint"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "UpdateFirewallEndpoint",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.UpdateFirewallEndpoint",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_ListFirewallEndpointAssociations_async",
+      "title": "AddressGroupService listFirewallEndpointAssociations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Associations in a given project and location.",
+      "canonical": true,
+      "file": "firewall_activation.list_firewall_endpoint_associations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFirewallEndpointAssociations",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.ListFirewallEndpointAssociations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListFirewallEndpointAssociationsResponse",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "ListFirewallEndpointAssociations",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.ListFirewallEndpointAssociations",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_GetFirewallEndpointAssociation_async",
+      "title": "AddressGroupService getFirewallEndpointAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single FirewallEndpointAssociation.",
+      "canonical": true,
+      "file": "firewall_activation.get_firewall_endpoint_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetFirewallEndpointAssociation",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.GetFirewallEndpointAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.FirewallEndpointAssociation",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "GetFirewallEndpointAssociation",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.GetFirewallEndpointAssociation",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_CreateFirewallEndpointAssociation_async",
+      "title": "AddressGroupService createFirewallEndpointAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new FirewallEndpointAssociation in a given project and location.",
+      "canonical": true,
+      "file": "firewall_activation.create_firewall_endpoint_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateFirewallEndpointAssociation",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.CreateFirewallEndpointAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "firewall_endpoint_association_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "firewall_endpoint_association",
+            "type": ".google.cloud.networksecurity.v1.FirewallEndpointAssociation"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "CreateFirewallEndpointAssociation",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.CreateFirewallEndpointAssociation",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_DeleteFirewallEndpointAssociation_async",
+      "title": "AddressGroupService deleteFirewallEndpointAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single FirewallEndpointAssociation.",
+      "canonical": true,
+      "file": "firewall_activation.delete_firewall_endpoint_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteFirewallEndpointAssociation",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.DeleteFirewallEndpointAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "DeleteFirewallEndpointAssociation",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.DeleteFirewallEndpointAssociation",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_FirewallActivation_UpdateFirewallEndpointAssociation_async",
+      "title": "AddressGroupService updateFirewallEndpointAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a single FirewallEndpointAssociation.",
+      "canonical": true,
+      "file": "firewall_activation.update_firewall_endpoint_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateFirewallEndpointAssociation",
+        "fullName": "google.cloud.networksecurity.v1.FirewallActivation.UpdateFirewallEndpointAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "firewall_endpoint_association",
+            "type": ".google.cloud.networksecurity.v1.FirewallEndpointAssociation"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirewallActivationClient",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivationClient"
+        },
+        "method": {
+          "shortName": "UpdateFirewallEndpointAssociation",
+          "fullName": "google.cloud.networksecurity.v1.FirewallActivation.UpdateFirewallEndpointAssociation",
+          "service": {
+            "shortName": "FirewallActivation",
+            "fullName": "google.cloud.networksecurity.v1.FirewallActivation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_ListInterceptEndpointGroups_async",
+      "title": "AddressGroupService listInterceptEndpointGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists endpoint groups in a given project and location. See https://google.aip.dev/132.",
+      "canonical": true,
+      "file": "intercept.list_intercept_endpoint_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInterceptEndpointGroups",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.ListInterceptEndpointGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListInterceptEndpointGroupsResponse",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "ListInterceptEndpointGroups",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.ListInterceptEndpointGroups",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_GetInterceptEndpointGroup_async",
+      "title": "AddressGroupService getInterceptEndpointGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a specific endpoint group. See https://google.aip.dev/131.",
+      "canonical": true,
+      "file": "intercept.get_intercept_endpoint_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInterceptEndpointGroup",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.GetInterceptEndpointGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.InterceptEndpointGroup",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "GetInterceptEndpointGroup",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.GetInterceptEndpointGroup",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_CreateInterceptEndpointGroup_async",
+      "title": "AddressGroupService createInterceptEndpointGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an endpoint group in a given project and location. See https://google.aip.dev/133.",
+      "canonical": true,
+      "file": "intercept.create_intercept_endpoint_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInterceptEndpointGroup",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.CreateInterceptEndpointGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intercept_endpoint_group_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intercept_endpoint_group",
+            "type": ".google.cloud.networksecurity.v1.InterceptEndpointGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "CreateInterceptEndpointGroup",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.CreateInterceptEndpointGroup",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_UpdateInterceptEndpointGroup_async",
+      "title": "AddressGroupService updateInterceptEndpointGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an endpoint group. See https://google.aip.dev/134.",
+      "canonical": true,
+      "file": "intercept.update_intercept_endpoint_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateInterceptEndpointGroup",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.UpdateInterceptEndpointGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "intercept_endpoint_group",
+            "type": ".google.cloud.networksecurity.v1.InterceptEndpointGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "UpdateInterceptEndpointGroup",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.UpdateInterceptEndpointGroup",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_DeleteInterceptEndpointGroup_async",
+      "title": "AddressGroupService deleteInterceptEndpointGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an endpoint group. See https://google.aip.dev/135.",
+      "canonical": true,
+      "file": "intercept.delete_intercept_endpoint_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInterceptEndpointGroup",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.DeleteInterceptEndpointGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "DeleteInterceptEndpointGroup",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.DeleteInterceptEndpointGroup",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_ListInterceptEndpointGroupAssociations_async",
+      "title": "AddressGroupService listInterceptEndpointGroupAssociations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists associations in a given project and location. See https://google.aip.dev/132.",
+      "canonical": true,
+      "file": "intercept.list_intercept_endpoint_group_associations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInterceptEndpointGroupAssociations",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.ListInterceptEndpointGroupAssociations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListInterceptEndpointGroupAssociationsResponse",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "ListInterceptEndpointGroupAssociations",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.ListInterceptEndpointGroupAssociations",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_GetInterceptEndpointGroupAssociation_async",
+      "title": "AddressGroupService getInterceptEndpointGroupAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a specific association. See https://google.aip.dev/131.",
+      "canonical": true,
+      "file": "intercept.get_intercept_endpoint_group_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInterceptEndpointGroupAssociation",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.GetInterceptEndpointGroupAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.InterceptEndpointGroupAssociation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "GetInterceptEndpointGroupAssociation",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.GetInterceptEndpointGroupAssociation",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_CreateInterceptEndpointGroupAssociation_async",
+      "title": "AddressGroupService createInterceptEndpointGroupAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an association in a given project and location. See https://google.aip.dev/133.",
+      "canonical": true,
+      "file": "intercept.create_intercept_endpoint_group_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInterceptEndpointGroupAssociation",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.CreateInterceptEndpointGroupAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intercept_endpoint_group_association_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intercept_endpoint_group_association",
+            "type": ".google.cloud.networksecurity.v1.InterceptEndpointGroupAssociation"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "CreateInterceptEndpointGroupAssociation",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.CreateInterceptEndpointGroupAssociation",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_UpdateInterceptEndpointGroupAssociation_async",
+      "title": "AddressGroupService updateInterceptEndpointGroupAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an association. See https://google.aip.dev/134.",
+      "canonical": true,
+      "file": "intercept.update_intercept_endpoint_group_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateInterceptEndpointGroupAssociation",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.UpdateInterceptEndpointGroupAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "intercept_endpoint_group_association",
+            "type": ".google.cloud.networksecurity.v1.InterceptEndpointGroupAssociation"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "UpdateInterceptEndpointGroupAssociation",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.UpdateInterceptEndpointGroupAssociation",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_DeleteInterceptEndpointGroupAssociation_async",
+      "title": "AddressGroupService deleteInterceptEndpointGroupAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an association. See https://google.aip.dev/135.",
+      "canonical": true,
+      "file": "intercept.delete_intercept_endpoint_group_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInterceptEndpointGroupAssociation",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.DeleteInterceptEndpointGroupAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "DeleteInterceptEndpointGroupAssociation",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.DeleteInterceptEndpointGroupAssociation",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_ListInterceptDeploymentGroups_async",
+      "title": "AddressGroupService listInterceptDeploymentGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists deployment groups in a given project and location. See https://google.aip.dev/132.",
+      "canonical": true,
+      "file": "intercept.list_intercept_deployment_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInterceptDeploymentGroups",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.ListInterceptDeploymentGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListInterceptDeploymentGroupsResponse",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "ListInterceptDeploymentGroups",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.ListInterceptDeploymentGroups",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_GetInterceptDeploymentGroup_async",
+      "title": "AddressGroupService getInterceptDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a specific deployment group. See https://google.aip.dev/131.",
+      "canonical": true,
+      "file": "intercept.get_intercept_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInterceptDeploymentGroup",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.GetInterceptDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.InterceptDeploymentGroup",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "GetInterceptDeploymentGroup",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.GetInterceptDeploymentGroup",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_CreateInterceptDeploymentGroup_async",
+      "title": "AddressGroupService createInterceptDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a deployment group in a given project and location. See https://google.aip.dev/133.",
+      "canonical": true,
+      "file": "intercept.create_intercept_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInterceptDeploymentGroup",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.CreateInterceptDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intercept_deployment_group_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intercept_deployment_group",
+            "type": ".google.cloud.networksecurity.v1.InterceptDeploymentGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "CreateInterceptDeploymentGroup",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.CreateInterceptDeploymentGroup",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_UpdateInterceptDeploymentGroup_async",
+      "title": "AddressGroupService updateInterceptDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a deployment group. See https://google.aip.dev/134.",
+      "canonical": true,
+      "file": "intercept.update_intercept_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateInterceptDeploymentGroup",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.UpdateInterceptDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "intercept_deployment_group",
+            "type": ".google.cloud.networksecurity.v1.InterceptDeploymentGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "UpdateInterceptDeploymentGroup",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.UpdateInterceptDeploymentGroup",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_DeleteInterceptDeploymentGroup_async",
+      "title": "AddressGroupService deleteInterceptDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a deployment group. See https://google.aip.dev/135.",
+      "canonical": true,
+      "file": "intercept.delete_intercept_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInterceptDeploymentGroup",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.DeleteInterceptDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "DeleteInterceptDeploymentGroup",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.DeleteInterceptDeploymentGroup",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_ListInterceptDeployments_async",
+      "title": "AddressGroupService listInterceptDeployments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists deployments in a given project and location. See https://google.aip.dev/132.",
+      "canonical": true,
+      "file": "intercept.list_intercept_deployments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInterceptDeployments",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.ListInterceptDeployments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListInterceptDeploymentsResponse",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "ListInterceptDeployments",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.ListInterceptDeployments",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_GetInterceptDeployment_async",
+      "title": "AddressGroupService getInterceptDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a specific deployment. See https://google.aip.dev/131.",
+      "canonical": true,
+      "file": "intercept.get_intercept_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInterceptDeployment",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.GetInterceptDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.InterceptDeployment",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "GetInterceptDeployment",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.GetInterceptDeployment",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_CreateInterceptDeployment_async",
+      "title": "AddressGroupService createInterceptDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a deployment in a given project and location. See https://google.aip.dev/133.",
+      "canonical": true,
+      "file": "intercept.create_intercept_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInterceptDeployment",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.CreateInterceptDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intercept_deployment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intercept_deployment",
+            "type": ".google.cloud.networksecurity.v1.InterceptDeployment"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "CreateInterceptDeployment",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.CreateInterceptDeployment",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_UpdateInterceptDeployment_async",
+      "title": "AddressGroupService updateInterceptDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a deployment. See https://google.aip.dev/134.",
+      "canonical": true,
+      "file": "intercept.update_intercept_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateInterceptDeployment",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.UpdateInterceptDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "intercept_deployment",
+            "type": ".google.cloud.networksecurity.v1.InterceptDeployment"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "UpdateInterceptDeployment",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.UpdateInterceptDeployment",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Intercept_DeleteInterceptDeployment_async",
+      "title": "AddressGroupService deleteInterceptDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a deployment. See https://google.aip.dev/135.",
+      "canonical": true,
+      "file": "intercept.delete_intercept_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInterceptDeployment",
+        "fullName": "google.cloud.networksecurity.v1.Intercept.DeleteInterceptDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InterceptClient",
+          "fullName": "google.cloud.networksecurity.v1.InterceptClient"
+        },
+        "method": {
+          "shortName": "DeleteInterceptDeployment",
+          "fullName": "google.cloud.networksecurity.v1.Intercept.DeleteInterceptDeployment",
+          "service": {
+            "shortName": "Intercept",
+            "fullName": "google.cloud.networksecurity.v1.Intercept"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_ListMirroringEndpointGroups_async",
+      "title": "AddressGroupService listMirroringEndpointGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists endpoint groups in a given project and location. See https://google.aip.dev/132.",
+      "canonical": true,
+      "file": "mirroring.list_mirroring_endpoint_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMirroringEndpointGroups",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.ListMirroringEndpointGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListMirroringEndpointGroupsResponse",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "ListMirroringEndpointGroups",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.ListMirroringEndpointGroups",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_GetMirroringEndpointGroup_async",
+      "title": "AddressGroupService getMirroringEndpointGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a specific endpoint group. See https://google.aip.dev/131.",
+      "canonical": true,
+      "file": "mirroring.get_mirroring_endpoint_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMirroringEndpointGroup",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.GetMirroringEndpointGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.MirroringEndpointGroup",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "GetMirroringEndpointGroup",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.GetMirroringEndpointGroup",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_CreateMirroringEndpointGroup_async",
+      "title": "AddressGroupService createMirroringEndpointGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an endpoint group in a given project and location. See https://google.aip.dev/133.",
+      "canonical": true,
+      "file": "mirroring.create_mirroring_endpoint_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMirroringEndpointGroup",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.CreateMirroringEndpointGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mirroring_endpoint_group_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mirroring_endpoint_group",
+            "type": ".google.cloud.networksecurity.v1.MirroringEndpointGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "CreateMirroringEndpointGroup",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.CreateMirroringEndpointGroup",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_UpdateMirroringEndpointGroup_async",
+      "title": "AddressGroupService updateMirroringEndpointGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an endpoint group. See https://google.aip.dev/134.",
+      "canonical": true,
+      "file": "mirroring.update_mirroring_endpoint_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMirroringEndpointGroup",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.UpdateMirroringEndpointGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "mirroring_endpoint_group",
+            "type": ".google.cloud.networksecurity.v1.MirroringEndpointGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "UpdateMirroringEndpointGroup",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.UpdateMirroringEndpointGroup",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_DeleteMirroringEndpointGroup_async",
+      "title": "AddressGroupService deleteMirroringEndpointGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an endpoint group. See https://google.aip.dev/135.",
+      "canonical": true,
+      "file": "mirroring.delete_mirroring_endpoint_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMirroringEndpointGroup",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.DeleteMirroringEndpointGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "DeleteMirroringEndpointGroup",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.DeleteMirroringEndpointGroup",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_ListMirroringEndpointGroupAssociations_async",
+      "title": "AddressGroupService listMirroringEndpointGroupAssociations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists associations in a given project and location. See https://google.aip.dev/132.",
+      "canonical": true,
+      "file": "mirroring.list_mirroring_endpoint_group_associations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMirroringEndpointGroupAssociations",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.ListMirroringEndpointGroupAssociations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListMirroringEndpointGroupAssociationsResponse",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "ListMirroringEndpointGroupAssociations",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.ListMirroringEndpointGroupAssociations",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_GetMirroringEndpointGroupAssociation_async",
+      "title": "AddressGroupService getMirroringEndpointGroupAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a specific association. See https://google.aip.dev/131.",
+      "canonical": true,
+      "file": "mirroring.get_mirroring_endpoint_group_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMirroringEndpointGroupAssociation",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.GetMirroringEndpointGroupAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.MirroringEndpointGroupAssociation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "GetMirroringEndpointGroupAssociation",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.GetMirroringEndpointGroupAssociation",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_CreateMirroringEndpointGroupAssociation_async",
+      "title": "AddressGroupService createMirroringEndpointGroupAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an association in a given project and location. See https://google.aip.dev/133.",
+      "canonical": true,
+      "file": "mirroring.create_mirroring_endpoint_group_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMirroringEndpointGroupAssociation",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.CreateMirroringEndpointGroupAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mirroring_endpoint_group_association_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mirroring_endpoint_group_association",
+            "type": ".google.cloud.networksecurity.v1.MirroringEndpointGroupAssociation"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "CreateMirroringEndpointGroupAssociation",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.CreateMirroringEndpointGroupAssociation",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_UpdateMirroringEndpointGroupAssociation_async",
+      "title": "AddressGroupService updateMirroringEndpointGroupAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an association. See https://google.aip.dev/134.",
+      "canonical": true,
+      "file": "mirroring.update_mirroring_endpoint_group_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMirroringEndpointGroupAssociation",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.UpdateMirroringEndpointGroupAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "mirroring_endpoint_group_association",
+            "type": ".google.cloud.networksecurity.v1.MirroringEndpointGroupAssociation"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "UpdateMirroringEndpointGroupAssociation",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.UpdateMirroringEndpointGroupAssociation",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_DeleteMirroringEndpointGroupAssociation_async",
+      "title": "AddressGroupService deleteMirroringEndpointGroupAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an association. See https://google.aip.dev/135.",
+      "canonical": true,
+      "file": "mirroring.delete_mirroring_endpoint_group_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMirroringEndpointGroupAssociation",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.DeleteMirroringEndpointGroupAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "DeleteMirroringEndpointGroupAssociation",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.DeleteMirroringEndpointGroupAssociation",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_ListMirroringDeploymentGroups_async",
+      "title": "AddressGroupService listMirroringDeploymentGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists deployment groups in a given project and location. See https://google.aip.dev/132.",
+      "canonical": true,
+      "file": "mirroring.list_mirroring_deployment_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMirroringDeploymentGroups",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.ListMirroringDeploymentGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListMirroringDeploymentGroupsResponse",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "ListMirroringDeploymentGroups",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.ListMirroringDeploymentGroups",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_GetMirroringDeploymentGroup_async",
+      "title": "AddressGroupService getMirroringDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a specific deployment group. See https://google.aip.dev/131.",
+      "canonical": true,
+      "file": "mirroring.get_mirroring_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMirroringDeploymentGroup",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.GetMirroringDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.MirroringDeploymentGroup",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "GetMirroringDeploymentGroup",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.GetMirroringDeploymentGroup",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_CreateMirroringDeploymentGroup_async",
+      "title": "AddressGroupService createMirroringDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a deployment group in a given project and location. See https://google.aip.dev/133.",
+      "canonical": true,
+      "file": "mirroring.create_mirroring_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMirroringDeploymentGroup",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.CreateMirroringDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mirroring_deployment_group_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mirroring_deployment_group",
+            "type": ".google.cloud.networksecurity.v1.MirroringDeploymentGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "CreateMirroringDeploymentGroup",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.CreateMirroringDeploymentGroup",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_UpdateMirroringDeploymentGroup_async",
+      "title": "AddressGroupService updateMirroringDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a deployment group. See https://google.aip.dev/134.",
+      "canonical": true,
+      "file": "mirroring.update_mirroring_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMirroringDeploymentGroup",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.UpdateMirroringDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "mirroring_deployment_group",
+            "type": ".google.cloud.networksecurity.v1.MirroringDeploymentGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "UpdateMirroringDeploymentGroup",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.UpdateMirroringDeploymentGroup",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_DeleteMirroringDeploymentGroup_async",
+      "title": "AddressGroupService deleteMirroringDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a deployment group. See https://google.aip.dev/135.",
+      "canonical": true,
+      "file": "mirroring.delete_mirroring_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMirroringDeploymentGroup",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.DeleteMirroringDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "DeleteMirroringDeploymentGroup",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.DeleteMirroringDeploymentGroup",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_ListMirroringDeployments_async",
+      "title": "AddressGroupService listMirroringDeployments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists deployments in a given project and location. See https://google.aip.dev/132.",
+      "canonical": true,
+      "file": "mirroring.list_mirroring_deployments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMirroringDeployments",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.ListMirroringDeployments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListMirroringDeploymentsResponse",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "ListMirroringDeployments",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.ListMirroringDeployments",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_GetMirroringDeployment_async",
+      "title": "AddressGroupService getMirroringDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a specific deployment. See https://google.aip.dev/131.",
+      "canonical": true,
+      "file": "mirroring.get_mirroring_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMirroringDeployment",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.GetMirroringDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.MirroringDeployment",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "GetMirroringDeployment",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.GetMirroringDeployment",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_CreateMirroringDeployment_async",
+      "title": "AddressGroupService createMirroringDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a deployment in a given project and location. See https://google.aip.dev/133.",
+      "canonical": true,
+      "file": "mirroring.create_mirroring_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMirroringDeployment",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.CreateMirroringDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mirroring_deployment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mirroring_deployment",
+            "type": ".google.cloud.networksecurity.v1.MirroringDeployment"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "CreateMirroringDeployment",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.CreateMirroringDeployment",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_UpdateMirroringDeployment_async",
+      "title": "AddressGroupService updateMirroringDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a deployment. See https://google.aip.dev/134.",
+      "canonical": true,
+      "file": "mirroring.update_mirroring_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMirroringDeployment",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.UpdateMirroringDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "mirroring_deployment",
+            "type": ".google.cloud.networksecurity.v1.MirroringDeployment"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "UpdateMirroringDeployment",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.UpdateMirroringDeployment",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_Mirroring_DeleteMirroringDeployment_async",
+      "title": "AddressGroupService deleteMirroringDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a deployment. See https://google.aip.dev/135.",
+      "canonical": true,
+      "file": "mirroring.delete_mirroring_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMirroringDeployment",
+        "fullName": "google.cloud.networksecurity.v1.Mirroring.DeleteMirroringDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MirroringClient",
+          "fullName": "google.cloud.networksecurity.v1.MirroringClient"
+        },
+        "method": {
+          "shortName": "DeleteMirroringDeployment",
+          "fullName": "google.cloud.networksecurity.v1.Mirroring.DeleteMirroringDeployment",
+          "service": {
+            "shortName": "Mirroring",
+            "fullName": "google.cloud.networksecurity.v1.Mirroring"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListAuthorizationPolicies_async",
       "title": "AddressGroupService listAuthorizationPolicies Sample",
       "origin": "API_DEFINITION",
@@ -660,6 +3280,230 @@
       }
     },
     {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListBackendAuthenticationConfigs_async",
+      "title": "AddressGroupService listBackendAuthenticationConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists BackendAuthenticationConfigs in a given project and location.",
+      "canonical": true,
+      "file": "network_security.list_backend_authentication_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBackendAuthenticationConfigs",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListBackendAuthenticationConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListBackendAuthenticationConfigsResponse",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "ListBackendAuthenticationConfigs",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListBackendAuthenticationConfigs",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_GetBackendAuthenticationConfig_async",
+      "title": "AddressGroupService getBackendAuthenticationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single BackendAuthenticationConfig to BackendAuthenticationConfig.",
+      "canonical": true,
+      "file": "network_security.get_backend_authentication_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBackendAuthenticationConfig",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetBackendAuthenticationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.BackendAuthenticationConfig",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "GetBackendAuthenticationConfig",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetBackendAuthenticationConfig",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_CreateBackendAuthenticationConfig_async",
+      "title": "AddressGroupService createBackendAuthenticationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new BackendAuthenticationConfig in a given project and location.",
+      "canonical": true,
+      "file": "network_security.create_backend_authentication_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBackendAuthenticationConfig",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateBackendAuthenticationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backend_authentication_config_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backend_authentication_config",
+            "type": ".google.cloud.networksecurity.v1.BackendAuthenticationConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "CreateBackendAuthenticationConfig",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateBackendAuthenticationConfig",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_UpdateBackendAuthenticationConfig_async",
+      "title": "AddressGroupService updateBackendAuthenticationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single BackendAuthenticationConfig to BackendAuthenticationConfig.",
+      "canonical": true,
+      "file": "network_security.update_backend_authentication_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBackendAuthenticationConfig",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateBackendAuthenticationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "backend_authentication_config",
+            "type": ".google.cloud.networksecurity.v1.BackendAuthenticationConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "UpdateBackendAuthenticationConfig",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateBackendAuthenticationConfig",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_DeleteBackendAuthenticationConfig_async",
+      "title": "AddressGroupService deleteBackendAuthenticationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single BackendAuthenticationConfig to BackendAuthenticationConfig.",
+      "canonical": true,
+      "file": "network_security.delete_backend_authentication_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBackendAuthenticationConfig",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteBackendAuthenticationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "DeleteBackendAuthenticationConfig",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteBackendAuthenticationConfig",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListServerTlsPolicies_async",
       "title": "AddressGroupService listServerTlsPolicies Sample",
       "origin": "API_DEFINITION",
@@ -670,7 +3514,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 67,
+          "end": 75,
           "type": "FULL"
         }
       ],
@@ -690,6 +3534,10 @@
           {
             "name": "page_token",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse",
@@ -758,7 +3606,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 67,
+          "end": 68,
           "type": "FULL"
         }
       ],
@@ -978,7 +3826,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 67,
+          "end": 68,
           "type": "FULL"
         }
       ],
@@ -1092,6 +3940,1130 @@
         "method": {
           "shortName": "DeleteClientTlsPolicy",
           "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteClientTlsPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListGatewaySecurityPolicies_async",
+      "title": "AddressGroupService listGatewaySecurityPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists GatewaySecurityPolicies in a given project and location.",
+      "canonical": true,
+      "file": "network_security.list_gateway_security_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGatewaySecurityPolicies",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListGatewaySecurityPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListGatewaySecurityPoliciesResponse",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "ListGatewaySecurityPolicies",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListGatewaySecurityPolicies",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_GetGatewaySecurityPolicy_async",
+      "title": "AddressGroupService getGatewaySecurityPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single GatewaySecurityPolicy.",
+      "canonical": true,
+      "file": "network_security.get_gateway_security_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGatewaySecurityPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetGatewaySecurityPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.GatewaySecurityPolicy",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "GetGatewaySecurityPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetGatewaySecurityPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_CreateGatewaySecurityPolicy_async",
+      "title": "AddressGroupService createGatewaySecurityPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new GatewaySecurityPolicy in a given project and location.",
+      "canonical": true,
+      "file": "network_security.create_gateway_security_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateGatewaySecurityPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateGatewaySecurityPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gateway_security_policy_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gateway_security_policy",
+            "type": ".google.cloud.networksecurity.v1.GatewaySecurityPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "CreateGatewaySecurityPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateGatewaySecurityPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_UpdateGatewaySecurityPolicy_async",
+      "title": "AddressGroupService updateGatewaySecurityPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single GatewaySecurityPolicy.",
+      "canonical": true,
+      "file": "network_security.update_gateway_security_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGatewaySecurityPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateGatewaySecurityPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "gateway_security_policy",
+            "type": ".google.cloud.networksecurity.v1.GatewaySecurityPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "UpdateGatewaySecurityPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateGatewaySecurityPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_DeleteGatewaySecurityPolicy_async",
+      "title": "AddressGroupService deleteGatewaySecurityPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single GatewaySecurityPolicy.",
+      "canonical": true,
+      "file": "network_security.delete_gateway_security_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteGatewaySecurityPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteGatewaySecurityPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "DeleteGatewaySecurityPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteGatewaySecurityPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListGatewaySecurityPolicyRules_async",
+      "title": "AddressGroupService listGatewaySecurityPolicyRules Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists GatewaySecurityPolicyRules in a given project and location.",
+      "canonical": true,
+      "file": "network_security.list_gateway_security_policy_rules.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGatewaySecurityPolicyRules",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListGatewaySecurityPolicyRules",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListGatewaySecurityPolicyRulesResponse",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "ListGatewaySecurityPolicyRules",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListGatewaySecurityPolicyRules",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_GetGatewaySecurityPolicyRule_async",
+      "title": "AddressGroupService getGatewaySecurityPolicyRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single GatewaySecurityPolicyRule.",
+      "canonical": true,
+      "file": "network_security.get_gateway_security_policy_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGatewaySecurityPolicyRule",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetGatewaySecurityPolicyRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.GatewaySecurityPolicyRule",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "GetGatewaySecurityPolicyRule",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetGatewaySecurityPolicyRule",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_CreateGatewaySecurityPolicyRule_async",
+      "title": "AddressGroupService createGatewaySecurityPolicyRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new GatewaySecurityPolicy in a given project and location.",
+      "canonical": true,
+      "file": "network_security.create_gateway_security_policy_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateGatewaySecurityPolicyRule",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateGatewaySecurityPolicyRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gateway_security_policy_rule",
+            "type": ".google.cloud.networksecurity.v1.GatewaySecurityPolicyRule"
+          },
+          {
+            "name": "gateway_security_policy_rule_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "CreateGatewaySecurityPolicyRule",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateGatewaySecurityPolicyRule",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_UpdateGatewaySecurityPolicyRule_async",
+      "title": "AddressGroupService updateGatewaySecurityPolicyRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single GatewaySecurityPolicyRule.",
+      "canonical": true,
+      "file": "network_security.update_gateway_security_policy_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGatewaySecurityPolicyRule",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateGatewaySecurityPolicyRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "gateway_security_policy_rule",
+            "type": ".google.cloud.networksecurity.v1.GatewaySecurityPolicyRule"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "UpdateGatewaySecurityPolicyRule",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateGatewaySecurityPolicyRule",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_DeleteGatewaySecurityPolicyRule_async",
+      "title": "AddressGroupService deleteGatewaySecurityPolicyRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single GatewaySecurityPolicyRule.",
+      "canonical": true,
+      "file": "network_security.delete_gateway_security_policy_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteGatewaySecurityPolicyRule",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteGatewaySecurityPolicyRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "DeleteGatewaySecurityPolicyRule",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteGatewaySecurityPolicyRule",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListUrlLists_async",
+      "title": "AddressGroupService listUrlLists Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists UrlLists in a given project and location.",
+      "canonical": true,
+      "file": "network_security.list_url_lists.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListUrlLists",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListUrlLists",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListUrlListsResponse",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "ListUrlLists",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListUrlLists",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_GetUrlList_async",
+      "title": "AddressGroupService getUrlList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single UrlList.",
+      "canonical": true,
+      "file": "network_security.get_url_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetUrlList",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetUrlList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.UrlList",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "GetUrlList",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetUrlList",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_CreateUrlList_async",
+      "title": "AddressGroupService createUrlList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new UrlList in a given project and location.",
+      "canonical": true,
+      "file": "network_security.create_url_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateUrlList",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateUrlList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "url_list_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "url_list",
+            "type": ".google.cloud.networksecurity.v1.UrlList"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "CreateUrlList",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateUrlList",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_UpdateUrlList_async",
+      "title": "AddressGroupService updateUrlList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single UrlList.",
+      "canonical": true,
+      "file": "network_security.update_url_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateUrlList",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateUrlList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "url_list",
+            "type": ".google.cloud.networksecurity.v1.UrlList"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "UpdateUrlList",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateUrlList",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_DeleteUrlList_async",
+      "title": "AddressGroupService deleteUrlList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single UrlList.",
+      "canonical": true,
+      "file": "network_security.delete_url_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteUrlList",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteUrlList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "DeleteUrlList",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteUrlList",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListTlsInspectionPolicies_async",
+      "title": "AddressGroupService listTlsInspectionPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists TlsInspectionPolicies in a given project and location.",
+      "canonical": true,
+      "file": "network_security.list_tls_inspection_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTlsInspectionPolicies",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListTlsInspectionPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListTlsInspectionPoliciesResponse",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "ListTlsInspectionPolicies",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListTlsInspectionPolicies",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_GetTlsInspectionPolicy_async",
+      "title": "AddressGroupService getTlsInspectionPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single TlsInspectionPolicy.",
+      "canonical": true,
+      "file": "network_security.get_tls_inspection_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTlsInspectionPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetTlsInspectionPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.TlsInspectionPolicy",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "GetTlsInspectionPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetTlsInspectionPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_CreateTlsInspectionPolicy_async",
+      "title": "AddressGroupService createTlsInspectionPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new TlsInspectionPolicy in a given project and location.",
+      "canonical": true,
+      "file": "network_security.create_tls_inspection_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTlsInspectionPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateTlsInspectionPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tls_inspection_policy_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tls_inspection_policy",
+            "type": ".google.cloud.networksecurity.v1.TlsInspectionPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "CreateTlsInspectionPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateTlsInspectionPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_UpdateTlsInspectionPolicy_async",
+      "title": "AddressGroupService updateTlsInspectionPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single TlsInspectionPolicy.",
+      "canonical": true,
+      "file": "network_security.update_tls_inspection_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTlsInspectionPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateTlsInspectionPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "tls_inspection_policy",
+            "type": ".google.cloud.networksecurity.v1.TlsInspectionPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "UpdateTlsInspectionPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateTlsInspectionPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_DeleteTlsInspectionPolicy_async",
+      "title": "AddressGroupService deleteTlsInspectionPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single TlsInspectionPolicy.",
+      "canonical": true,
+      "file": "network_security.delete_tls_inspection_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTlsInspectionPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteTlsInspectionPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "DeleteTlsInspectionPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteTlsInspectionPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListAuthzPolicies_async",
+      "title": "AddressGroupService listAuthzPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists AuthzPolicies in a given project and location.",
+      "canonical": true,
+      "file": "network_security.list_authz_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAuthzPolicies",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListAuthzPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListAuthzPoliciesResponse",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "ListAuthzPolicies",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListAuthzPolicies",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_GetAuthzPolicy_async",
+      "title": "AddressGroupService getAuthzPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single AuthzPolicy.",
+      "canonical": true,
+      "file": "network_security.get_authz_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAuthzPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetAuthzPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.AuthzPolicy",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "GetAuthzPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetAuthzPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_CreateAuthzPolicy_async",
+      "title": "AddressGroupService createAuthzPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new AuthzPolicy in a given project and location.",
+      "canonical": true,
+      "file": "network_security.create_authz_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAuthzPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateAuthzPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "authz_policy_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "authz_policy",
+            "type": ".google.cloud.networksecurity.v1.AuthzPolicy"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "CreateAuthzPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateAuthzPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_UpdateAuthzPolicy_async",
+      "title": "AddressGroupService updateAuthzPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single AuthzPolicy.",
+      "canonical": true,
+      "file": "network_security.update_authz_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAuthzPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateAuthzPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "authz_policy",
+            "type": ".google.cloud.networksecurity.v1.AuthzPolicy"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "UpdateAuthzPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateAuthzPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_NetworkSecurity_DeleteAuthzPolicy_async",
+      "title": "AddressGroupService deleteAuthzPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single AuthzPolicy.",
+      "canonical": true,
+      "file": "network_security.delete_authz_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAuthzPolicy",
+        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteAuthzPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "DeleteAuthzPolicy",
+          "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteAuthzPolicy",
           "service": {
             "shortName": "NetworkSecurity",
             "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
@@ -1523,6 +5495,454 @@
           "service": {
             "shortName": "OrganizationAddressGroupService",
             "fullName": "google.cloud.networksecurity.v1.OrganizationAddressGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_ListSecurityProfileGroups_async",
+      "title": "AddressGroupService listSecurityProfileGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists SecurityProfileGroups in a given organization and location.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.list_security_profile_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSecurityProfileGroups",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.ListSecurityProfileGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListSecurityProfileGroupsResponse",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "ListSecurityProfileGroups",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.ListSecurityProfileGroups",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_GetSecurityProfileGroup_async",
+      "title": "AddressGroupService getSecurityProfileGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single SecurityProfileGroup.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.get_security_profile_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSecurityProfileGroup",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.GetSecurityProfileGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.SecurityProfileGroup",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "GetSecurityProfileGroup",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.GetSecurityProfileGroup",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfileGroup_async",
+      "title": "AddressGroupService createSecurityProfileGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new SecurityProfileGroup in a given organization and location.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.create_security_profile_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSecurityProfileGroup",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.CreateSecurityProfileGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "security_profile_group_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "security_profile_group",
+            "type": ".google.cloud.networksecurity.v1.SecurityProfileGroup"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "CreateSecurityProfileGroup",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.CreateSecurityProfileGroup",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfileGroup_async",
+      "title": "AddressGroupService updateSecurityProfileGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single SecurityProfileGroup.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.update_security_profile_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSecurityProfileGroup",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.UpdateSecurityProfileGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "security_profile_group",
+            "type": ".google.cloud.networksecurity.v1.SecurityProfileGroup"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSecurityProfileGroup",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.UpdateSecurityProfileGroup",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfileGroup_async",
+      "title": "AddressGroupService deleteSecurityProfileGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single SecurityProfileGroup.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.delete_security_profile_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSecurityProfileGroup",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.DeleteSecurityProfileGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteSecurityProfileGroup",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.DeleteSecurityProfileGroup",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_ListSecurityProfiles_async",
+      "title": "AddressGroupService listSecurityProfiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists SecurityProfiles in a given organization and location.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.list_security_profiles.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSecurityProfiles",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.ListSecurityProfiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.ListSecurityProfilesResponse",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "ListSecurityProfiles",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.ListSecurityProfiles",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_GetSecurityProfile_async",
+      "title": "AddressGroupService getSecurityProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single SecurityProfile.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.get_security_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSecurityProfile",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.GetSecurityProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1.SecurityProfile",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "GetSecurityProfile",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.GetSecurityProfile",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_CreateSecurityProfile_async",
+      "title": "AddressGroupService createSecurityProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new SecurityProfile in a given organization and location.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.create_security_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSecurityProfile",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.CreateSecurityProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "security_profile_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "security_profile",
+            "type": ".google.cloud.networksecurity.v1.SecurityProfile"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "CreateSecurityProfile",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.CreateSecurityProfile",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_UpdateSecurityProfile_async",
+      "title": "AddressGroupService updateSecurityProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single SecurityProfile.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.update_security_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSecurityProfile",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.UpdateSecurityProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "security_profile",
+            "type": ".google.cloud.networksecurity.v1.SecurityProfile"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSecurityProfile",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.UpdateSecurityProfile",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1_generated_OrganizationSecurityProfileGroupService_DeleteSecurityProfile_async",
+      "title": "AddressGroupService deleteSecurityProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single SecurityProfile.",
+      "canonical": true,
+      "file": "organization_security_profile_group_service.delete_security_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSecurityProfile",
+        "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.DeleteSecurityProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OrganizationSecurityProfileGroupServiceClient",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteSecurityProfile",
+          "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService.DeleteSecurityProfile",
+          "service": {
+            "shortName": "OrganizationSecurityProfileGroupService",
+            "fullName": "google.cloud.networksecurity.v1.OrganizationSecurityProfileGroupService"
           }
         }
       }

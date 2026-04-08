@@ -296,6 +296,10 @@ export class NetAppClient {
       '.google.cloud.netapp.v1.Volume') as gax.protobuf.Type;
     const revertVolumeMetadata = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.OperationMetadata') as gax.protobuf.Type;
+    const establishVolumePeeringResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.Volume') as gax.protobuf.Type;
+    const establishVolumePeeringMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata') as gax.protobuf.Type;
     const createSnapshotResponse = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.Snapshot') as gax.protobuf.Type;
     const createSnapshotMetadata = protoFilesRoot.lookup(
@@ -470,6 +474,10 @@ export class NetAppClient {
         this.operationsClient,
         revertVolumeResponse.decode.bind(revertVolumeResponse),
         revertVolumeMetadata.decode.bind(revertVolumeMetadata)),
+      establishVolumePeering: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        establishVolumePeeringResponse.decode.bind(establishVolumePeeringResponse),
+        establishVolumePeeringMetadata.decode.bind(establishVolumePeeringMetadata)),
       createSnapshot: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSnapshotResponse.decode.bind(createSnapshotResponse),
@@ -651,7 +659,7 @@ export class NetAppClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const netAppStubMethods =
-        ['listStoragePools', 'createStoragePool', 'getStoragePool', 'updateStoragePool', 'deleteStoragePool', 'validateDirectoryService', 'switchActiveReplicaZone', 'listVolumes', 'getVolume', 'createVolume', 'updateVolume', 'deleteVolume', 'revertVolume', 'listSnapshots', 'getSnapshot', 'createSnapshot', 'deleteSnapshot', 'updateSnapshot', 'listActiveDirectories', 'getActiveDirectory', 'createActiveDirectory', 'updateActiveDirectory', 'deleteActiveDirectory', 'listKmsConfigs', 'createKmsConfig', 'getKmsConfig', 'updateKmsConfig', 'encryptVolumes', 'verifyKmsConfig', 'deleteKmsConfig', 'listReplications', 'getReplication', 'createReplication', 'deleteReplication', 'updateReplication', 'stopReplication', 'resumeReplication', 'reverseReplicationDirection', 'establishPeering', 'syncReplication', 'createBackupVault', 'getBackupVault', 'listBackupVaults', 'updateBackupVault', 'deleteBackupVault', 'createBackup', 'getBackup', 'listBackups', 'deleteBackup', 'updateBackup', 'createBackupPolicy', 'getBackupPolicy', 'listBackupPolicies', 'updateBackupPolicy', 'deleteBackupPolicy', 'listQuotaRules', 'getQuotaRule', 'createQuotaRule', 'updateQuotaRule', 'deleteQuotaRule', 'restoreBackupFiles', 'listHostGroups', 'getHostGroup', 'createHostGroup', 'updateHostGroup', 'deleteHostGroup'];
+        ['listStoragePools', 'createStoragePool', 'getStoragePool', 'updateStoragePool', 'deleteStoragePool', 'validateDirectoryService', 'switchActiveReplicaZone', 'listVolumes', 'getVolume', 'createVolume', 'updateVolume', 'deleteVolume', 'revertVolume', 'establishVolumePeering', 'listSnapshots', 'getSnapshot', 'createSnapshot', 'deleteSnapshot', 'updateSnapshot', 'listActiveDirectories', 'getActiveDirectory', 'createActiveDirectory', 'updateActiveDirectory', 'deleteActiveDirectory', 'listKmsConfigs', 'createKmsConfig', 'getKmsConfig', 'updateKmsConfig', 'encryptVolumes', 'verifyKmsConfig', 'deleteKmsConfig', 'listReplications', 'getReplication', 'createReplication', 'deleteReplication', 'updateReplication', 'stopReplication', 'resumeReplication', 'reverseReplicationDirection', 'establishPeering', 'syncReplication', 'createBackupVault', 'getBackupVault', 'listBackupVaults', 'updateBackupVault', 'deleteBackupVault', 'createBackup', 'getBackup', 'listBackups', 'deleteBackup', 'updateBackup', 'createBackupPolicy', 'getBackupPolicy', 'listBackupPolicies', 'updateBackupPolicy', 'deleteBackupPolicy', 'listQuotaRules', 'getQuotaRule', 'createQuotaRule', 'updateQuotaRule', 'deleteQuotaRule', 'restoreBackupFiles', 'listHostGroups', 'getHostGroup', 'createHostGroup', 'updateHostGroup', 'deleteHostGroup', 'executeOntapPost', 'executeOntapGet', 'executeOntapDelete', 'executeOntapPatch'];
     for (const methodName of netAppStubMethods) {
       const callPromise = this.netAppStub.then(
         stub => (...args: Array<{}>) => {
@@ -1890,6 +1898,426 @@ export class NetAppClient {
         throw error;
       });
   }
+/**
+ * `ExecuteOntapPost` dispatches the ONTAP `POST` request to the
+ * `StoragePool` cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.Struct} request.body
+ *   Required. The raw `JSON` body of the request.
+ *   The body should be in the format of the ONTAP resource.
+ *   For example:
+ *   ```
+ *   {
+ *     "body": {
+ *       "field1": "value1",
+ *       "field2": "value2",
+ *     }
+ *   }
+ *   ```
+ * @param {string} request.ontapPath
+ *   Required. The resource path of the ONTAP resource.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
+ *   For example:
+ *   `projects/123456789/locations/us-central1/storagePools/my-storage-pool/ontap/api/storage/volumes`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.netapp.v1.ExecuteOntapPostResponse|ExecuteOntapPostResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.execute_ontap_post.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_ExecuteOntapPost_async
+ */
+  executeOntapPost(
+      request?: protos.google.cloud.netapp.v1.IExecuteOntapPostRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.netapp.v1.IExecuteOntapPostResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapPostRequest|undefined, {}|undefined
+      ]>;
+  executeOntapPost(
+      request: protos.google.cloud.netapp.v1.IExecuteOntapPostRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapPostResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapPostRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeOntapPost(
+      request: protos.google.cloud.netapp.v1.IExecuteOntapPostRequest,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapPostResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapPostRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeOntapPost(
+      request?: protos.google.cloud.netapp.v1.IExecuteOntapPostRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapPostResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapPostRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapPostResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapPostRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.netapp.v1.IExecuteOntapPostResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapPostRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'ontap_path': request.ontapPath ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('executeOntapPost request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.netapp.v1.IExecuteOntapPostResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapPostRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('executeOntapPost response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.executeOntapPost(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.netapp.v1.IExecuteOntapPostResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapPostRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('executeOntapPost response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * `ExecuteOntapGet` dispatches the ONTAP `GET` request to the
+ * `StoragePool` cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.ontapPath
+ *   Required. The resource path of the ONTAP resource.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
+ *   For example:
+ *   `projects/123456789/locations/us-central1/storagePools/my-storage-pool/ontap/api/storage/volumes`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.netapp.v1.ExecuteOntapGetResponse|ExecuteOntapGetResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.execute_ontap_get.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_ExecuteOntapGet_async
+ */
+  executeOntapGet(
+      request?: protos.google.cloud.netapp.v1.IExecuteOntapGetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.netapp.v1.IExecuteOntapGetResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapGetRequest|undefined, {}|undefined
+      ]>;
+  executeOntapGet(
+      request: protos.google.cloud.netapp.v1.IExecuteOntapGetRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapGetResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapGetRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeOntapGet(
+      request: protos.google.cloud.netapp.v1.IExecuteOntapGetRequest,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapGetResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapGetRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeOntapGet(
+      request?: protos.google.cloud.netapp.v1.IExecuteOntapGetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapGetResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapGetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapGetResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapGetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.netapp.v1.IExecuteOntapGetResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapGetRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'ontap_path': request.ontapPath ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('executeOntapGet request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.netapp.v1.IExecuteOntapGetResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapGetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('executeOntapGet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.executeOntapGet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.netapp.v1.IExecuteOntapGetResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapGetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('executeOntapGet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * `ExecuteOntapDelete` dispatches the ONTAP `DELETE` request to the
+ * `StoragePool` cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.ontapPath
+ *   Required. The resource path of the ONTAP resource.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
+ *   For example:
+ *   `projects/123456789/locations/us-central1/storagePools/my-storage-pool/ontap/api/storage/volumes`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.netapp.v1.ExecuteOntapDeleteResponse|ExecuteOntapDeleteResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.execute_ontap_delete.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_ExecuteOntapDelete_async
+ */
+  executeOntapDelete(
+      request?: protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.netapp.v1.IExecuteOntapDeleteResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest|undefined, {}|undefined
+      ]>;
+  executeOntapDelete(
+      request: protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapDeleteResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeOntapDelete(
+      request: protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapDeleteResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeOntapDelete(
+      request?: protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapDeleteResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapDeleteResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.netapp.v1.IExecuteOntapDeleteResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'ontap_path': request.ontapPath ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('executeOntapDelete request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.netapp.v1.IExecuteOntapDeleteResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('executeOntapDelete response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.executeOntapDelete(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.netapp.v1.IExecuteOntapDeleteResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapDeleteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('executeOntapDelete response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * `ExecuteOntapPatch` dispatches the ONTAP `PATCH` request to the
+ * `StoragePool` cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.Struct} request.body
+ *   Required. The raw `JSON` body of the request.
+ *   The body should be in the format of the ONTAP resource.
+ *   For example:
+ *   ```
+ *   {
+ *     "body": {
+ *       "field1": "value1",
+ *       "field2": "value2",
+ *     }
+ *   }
+ *   ```
+ * @param {string} request.ontapPath
+ *   Required. The resource path of the ONTAP resource.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
+ *   For example:
+ *   `projects/123456789/locations/us-central1/storagePools/my-storage-pool/ontap/api/storage/volumes`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.netapp.v1.ExecuteOntapPatchResponse|ExecuteOntapPatchResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.execute_ontap_patch.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_ExecuteOntapPatch_async
+ */
+  executeOntapPatch(
+      request?: protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.netapp.v1.IExecuteOntapPatchResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest|undefined, {}|undefined
+      ]>;
+  executeOntapPatch(
+      request: protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapPatchResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeOntapPatch(
+      request: protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapPatchResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeOntapPatch(
+      request?: protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapPatchResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.netapp.v1.IExecuteOntapPatchResponse,
+          protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.netapp.v1.IExecuteOntapPatchResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'ontap_path': request.ontapPath ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('executeOntapPatch request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.netapp.v1.IExecuteOntapPatchResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('executeOntapPatch response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.executeOntapPatch(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.netapp.v1.IExecuteOntapPatchResponse,
+        protos.google.cloud.netapp.v1.IExecuteOntapPatchRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('executeOntapPatch response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
 /**
  * Creates a new storage pool.
@@ -2893,6 +3321,126 @@ export class NetAppClient {
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.revertVolume, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.netapp.v1.Volume, protos.google.cloud.netapp.v1.OperationMetadata>;
+  }
+/**
+ * Establish volume peering. This is used to establish cluster and svm
+ * peerings between the GCNV and OnPrem clusters.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The volume resource name, in the format
+ *   `projects/{project_id}/locations/{location}/volumes/{volume_id}`
+ * @param {string} request.peerClusterName
+ *   Required. Name of the user's local source cluster to be peered with the
+ *   destination cluster.
+ * @param {string} request.peerSvmName
+ *   Required. Name of the user's local source vserver svm to be peered with the
+ *   destination vserver svm.
+ * @param {string[]} [request.peerIpAddresses]
+ *   Optional. List of IPv4 ip addresses to be used for peering.
+ * @param {string} request.peerVolumeName
+ *   Required. Name of the user's local source volume to be peered with the
+ *   destination volume.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.establish_volume_peering.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_EstablishVolumePeering_async
+ */
+  establishVolumePeering(
+      request?: protos.google.cloud.netapp.v1.IEstablishVolumePeeringRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  establishVolumePeering(
+      request: protos.google.cloud.netapp.v1.IEstablishVolumePeeringRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  establishVolumePeering(
+      request: protos.google.cloud.netapp.v1.IEstablishVolumePeeringRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  establishVolumePeering(
+      request?: protos.google.cloud.netapp.v1.IEstablishVolumePeeringRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('establishVolumePeering response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('establishVolumePeering request %j', request);
+    return this.innerApiCalls.establishVolumePeering(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.netapp.v1.IVolume, protos.google.cloud.netapp.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('establishVolumePeering response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `establishVolumePeering()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.establish_volume_peering.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_EstablishVolumePeering_async
+ */
+  async checkEstablishVolumePeeringProgress(name: string): Promise<LROperation<protos.google.cloud.netapp.v1.Volume, protos.google.cloud.netapp.v1.OperationMetadata>>{
+    this._log.info('establishVolumePeering long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.establishVolumePeering, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.netapp.v1.Volume, protos.google.cloud.netapp.v1.OperationMetadata>;
   }
 /**

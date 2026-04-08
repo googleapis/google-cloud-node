@@ -3241,6 +3241,7 @@
                          * @memberof google.maps.geocode.v4
                          * @interface IPlaceView
                          * @property {string|null} [place] PlaceView place
+                         * @property {string|null} [placeId] PlaceView placeId
                          * @property {google.type.ILocalizedText|null} [displayName] PlaceView displayName
                          * @property {string|null} [primaryType] PlaceView primaryType
                          * @property {Array.<string>|null} [types] PlaceView types
@@ -3274,6 +3275,14 @@
                          * @instance
                          */
                         PlaceView.prototype.place = "";
+    
+                        /**
+                         * PlaceView placeId.
+                         * @member {string} placeId
+                         * @memberof google.maps.geocode.v4.PlaceView
+                         * @instance
+                         */
+                        PlaceView.prototype.placeId = "";
     
                         /**
                          * PlaceView displayName.
@@ -3365,6 +3374,8 @@
                                 writer = $Writer.create();
                             if (message.place != null && Object.hasOwnProperty.call(message, "place"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.place);
+                            if (message.placeId != null && Object.hasOwnProperty.call(message, "placeId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.placeId);
                             if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                 $root.google.type.LocalizedText.encode(message.displayName, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.primaryType != null && Object.hasOwnProperty.call(message, "primaryType"))
@@ -3420,6 +3431,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.place = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.placeId = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -3494,6 +3509,9 @@
                             if (message.place != null && message.hasOwnProperty("place"))
                                 if (!$util.isString(message.place))
                                     return "place: string expected";
+                            if (message.placeId != null && message.hasOwnProperty("placeId"))
+                                if (!$util.isString(message.placeId))
+                                    return "placeId: string expected";
                             if (message.displayName != null && message.hasOwnProperty("displayName")) {
                                 var error = $root.google.type.LocalizedText.verify(message.displayName);
                                 if (error)
@@ -3555,6 +3573,8 @@
                             var message = new $root.google.maps.geocode.v4.PlaceView();
                             if (object.place != null)
                                 message.place = String(object.place);
+                            if (object.placeId != null)
+                                message.placeId = String(object.placeId);
                             if (object.displayName != null) {
                                 if (typeof object.displayName !== "object")
                                     throw TypeError(".google.maps.geocode.v4.PlaceView.displayName: object expected");
@@ -3634,6 +3654,7 @@
                                 object.types = [];
                             if (options.defaults) {
                                 object.place = "";
+                                object.placeId = "";
                                 object.displayName = null;
                                 object.primaryType = "";
                                 object.formattedAddress = "";
@@ -3644,6 +3665,8 @@
                             }
                             if (message.place != null && message.hasOwnProperty("place"))
                                 object.place = message.place;
+                            if (message.placeId != null && message.hasOwnProperty("placeId"))
+                                object.placeId = message.placeId;
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = $root.google.type.LocalizedText.toObject(message.displayName, options);
                             if (message.primaryType != null && message.hasOwnProperty("primaryType"))
