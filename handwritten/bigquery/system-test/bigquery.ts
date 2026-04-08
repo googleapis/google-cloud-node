@@ -38,38 +38,16 @@ import {
 } from '../src';
 import bq from '../src/types';
 
-let bigquery = new BigQuery();
-let storage = new Storage();
+const bigquery = new BigQuery();
+const storage = new Storage();
 
-const runTests = (supportPicoseconds: boolean | undefined) => {
-  const label = supportPicoseconds ? 'with pico' : 'without pico';
-
-describe(`BigQuery (${label})`, () => {
-  const originalValue = process.env.BIGQUERY_PICOSECOND_SUPPORT;
-
-  let dataset = bigquery.dataset(generateName('dataset'));
-  let table = dataset.table(generateName('table'));
-  let bucket = storage.bucket(generateName('bucket'));
-
-  before(() => {
-    if (supportPicoseconds === undefined) {
-      delete process.env.BIGQUERY_PICOSECOND_SUPPORT;
-    } else {
-      process.env.BIGQUERY_PICOSECOND_SUPPORT = 'true';
-    }
-    bigquery = new BigQuery();
-    storage = new Storage();
-    dataset = bigquery.dataset(generateName('dataset'));
-    table = dataset.table(generateName('table'));
-    bucket = storage.bucket(generateName('bucket'));
-  });
-
-  after(() => {
-    process.env.BIGQUERY_PICOSECOND_SUPPORT = originalValue;
-  });
-
+describe('BigQuery', () => {
   const GCLOUD_TESTS_PREFIX = 'nodejs_bq_test';
   const minCreationTime = Date.now().toString();
+
+  const dataset = bigquery.dataset(generateName('dataset'));
+  const table = dataset.table(generateName('table'));
+  const bucket = storage.bucket(generateName('bucket'));
 
   const query = 'SELECT url FROM `publicdata.samples.github_nested` LIMIT 100';
 
@@ -2412,7 +2390,3 @@ describe(`BigQuery (${label})`, () => {
     }
   }
 });
-};
-
-runTests(true);
-runTests(undefined);
