@@ -3439,6 +3439,14 @@ describe('BigQuery', () => {
           delete req[key];
         }
       }
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              timestampOutputFormat: 'ISO8601_STRING',
+            }
+          : {
+              useInt64Timestamp: true,
+            };
       const expectedReq = {
         query: QUERY_STRING,
         useLegacySql: false,
@@ -3465,9 +3473,7 @@ describe('BigQuery', () => {
           key: 'value',
         },
         jobCreationMode: 'JOB_CREATION_REQUIRED',
-        formatOptions: {
-          timestampOutputFormat: 'ISO8601_STRING',
-        },
+        formatOptions,
       };
       assert.deepStrictEqual(req, expectedReq);
     });
@@ -3508,6 +3514,9 @@ describe('BigQuery', () => {
 
       testCases.forEach(testCase => {
         it(`should handle ${testCase.name}`, () => {
+          if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+            return;
+          }
           const req = bq.buildQueryRequest_(QUERY_STRING, testCase.opts);
 
           const expectedReq = {
@@ -3535,6 +3544,7 @@ describe('BigQuery', () => {
         });
       });
     });
+
     it('should create a QueryRequest from a SQL string', () => {
       const req = bq.buildQueryRequest_(QUERY_STRING, {});
       for (const key in req) {
@@ -3542,14 +3552,20 @@ describe('BigQuery', () => {
           delete req[key];
         }
       }
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              timestampOutputFormat: 'ISO8601_STRING',
+            }
+          : {
+              useInt64Timestamp: true,
+            };
       const expectedReq = {
         query: QUERY_STRING,
         useLegacySql: false,
         requestId: req.requestId,
         jobCreationMode: 'JOB_CREATION_OPTIONAL',
-        formatOptions: {
-          timestampOutputFormat: 'ISO8601_STRING',
-        },
+        formatOptions,
       };
       assert.deepStrictEqual(req, expectedReq);
     });
