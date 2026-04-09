@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as $protobuf from "protobufjs";
 import Long = require("long");
 /** Namespace grpc. */

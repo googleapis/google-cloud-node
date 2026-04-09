@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * @license
  * Copyright 2018 Google LLC. All Rights Reserved.
