@@ -165,5 +165,8 @@ export {
   currentDocument,
   ifNull,
   coalesce,
+  documentMatches,
+  score,
+  geoDistance,
   // TODO(new-expression): Add new expression exports above this line
 } from './expression';

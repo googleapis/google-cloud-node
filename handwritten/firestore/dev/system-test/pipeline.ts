@@ -181,54 +181,52 @@ import {getTestDb, getTestRoot} from './firestore';
 
 import {Firestore as InternalFirestore} from '../src';
 import {ServiceError} from 'google-gax';
+import {documentMatches, score} from '../src/pipelines/expression';
 
 use(chaiAsPromised);
 
 const timestampDeltaMS = 3000;
+let beginDocCreation = 0;
+let endDocCreation = 0;
+
+async function testCollectionWithDocs(
+  targetCol: CollectionReference,
+  docs: {
+    [id: string]: DocumentData;
+  },
+): Promise<CollectionReference<DocumentData>> {
+  beginDocCreation = new Date().valueOf();
+  for (const id in docs) {
+    const ref = targetCol.doc(id);
+    await ref.set(docs[id]);
+  }
+  endDocCreation = new Date().valueOf();
+  return targetCol;
+}
+
+function expectResults(result: PipelineSnapshot, ...docs: string[]): void;
+function expectResults(result: PipelineSnapshot, ...data: DocumentData[]): void;
+function expectResults(
+  result: PipelineSnapshot,
+  ...data: DocumentData[] | string[]
+): void {
+  if (data.length > 0) {
+    if (typeof data[0] === 'string') {
+      const actualIds = result.results.map(result => result.id);
+      expect(actualIds).to.deep.equal(data);
+    } else {
+      result.results.forEach(r => {
+        expect(r.data()).to.deep.equal(data.shift());
+      });
+    }
+  } else {
+    expect(result.results.length).to.equal(data.length);
+  }
+}
 
 describe.skipClassic('Pipeline class', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
-  let beginDocCreation = 0;
-  let endDocCreation = 0;
-
-  async function testCollectionWithDocs(
-    targetCol: CollectionReference,
-    docs: {
-      [id: string]: DocumentData;
-    },
-  ): Promise<CollectionReference<DocumentData>> {
-    beginDocCreation = new Date().valueOf();
-    for (const id in docs) {
-      const ref = targetCol.doc(id);
-      await ref.set(docs[id]);
-    }
-    endDocCreation = new Date().valueOf();
-    return targetCol;
-  }
-
-  function expectResults(result: PipelineSnapshot, ...docs: string[]): void;
-  function expectResults(
-    result: PipelineSnapshot,
-    ...data: DocumentData[]
-  ): void;
-  function expectResults(
-    result: PipelineSnapshot,
-    ...data: DocumentData[] | string[]
-  ): void {
-    if (data.length > 0) {
-      if (typeof data[0] === 'string') {
-        const actualIds = result.results.map(result => result.id);
-        expect(actualIds).to.deep.equal(data);
-      } else {
-        result.results.forEach(r => {
-          expect(r.data()).to.deep.equal(data.shift());
-        });
-      }
-    } else {
-      expect(result.results.length).to.equal(data.length);
-    }
-  }
 
   async function setupBookDocs(
     targetCol: CollectionReference,
@@ -6707,6 +6705,632 @@ describe.skipClassic('Pipeline class', () => {
       }
     });
   });
+});
+
+// Search tests require a collection with an index, so the test setup and tear
+// down is managed different from the rest of the Pipeline tests. To accomplish
+// this, we break these tests into a separate describe
+describe.skipClassic('Pipeline search', () => {
+  let firestore: Firestore;
+  let restaurantsCollection: CollectionReference;
+
+  async function setupRestaurantDocs(
+    collection: CollectionReference,
+  ): Promise<CollectionReference<DocumentData>> {
+    const restaurantDocs: {[id: string]: DocumentData} = {
+      sunnySideUp: {
+        name: 'The Sunny Side Up',
+        description:
+          'A cozy neighborhood diner serving classic breakfast favorites all day long, from fluffy pancakes to savory omelets.',
+        location: new GeoPoint(39.7541, -105.0002),
+        menu: '<h3>Breakfast Classics</h3><ul><li>Denver Omelet - $12</li><li>Buttermilk Pancakes - $10</li><li>Steak and Eggs - $16</li></ul><h3>Sides</h3><ul><li>Hash Browns - $4</li><li>Thick-cut Bacon - $5</li><li>Drip Coffee - $2</li></ul>',
+        average_price_per_person: 15,
+      },
+      goldenWaffle: {
+        name: 'The Golden Waffle',
+        description:
+          'Specializing exclusively in Belgian-style waffles. Open daily from 6:00 AM to 11:00 AM.',
+        location: new GeoPoint(39.7183, -104.9621),
+        menu: '<h3>Signature Waffles</h3><ul><li>Strawberry Delight - $11</li><li>Chicken and Waffles - $14</li><li>Chocolate Chip Crunch - $10</li></ul><h3>Drinks</h3><ul><li>Fresh OJ - $4</li><li>Artisan Coffee - $3</li></ul>',
+        average_price_per_person: 13,
+      },
+      lotusBlossomThai: {
+        name: 'Lotus Blossom Thai',
+        description:
+          'Authentic Thai cuisine featuring hand-crushed spices and traditional family recipes from the Chiang Mai region.',
+        location: new GeoPoint(39.7315, -104.9847),
+        menu: '<h3>Appetizers</h3><ul><li>Spring Rolls - $7</li><li>Chicken Satay - $9</li></ul><h3>Main Course</h3><ul><li>Pad Thai - $15</li><li>Green Curry - $16</li><li>Drunken Noodles - $15</li></ul>',
+        average_price_per_person: 22,
+      },
+      mileHighCatch: {
+        name: 'Mile High Catch',
+        description:
+          'Freshly sourced seafood offering a wide variety of Pacific fish and Atlantic shellfish in an upscale atmosphere.',
+        location: new GeoPoint(39.7401, -104.9903),
+        menu: '<h3>From the Raw Bar</h3><ul><li>Oysters (Half Dozen) - $18</li><li>Lobster Cocktail - $22</li></ul><h3>Entrees</h3><ul><li>Pan-Seared Salmon - $28</li><li>King Crab Legs - $45</li><li>Fish and Chips - $19</li></ul>',
+        average_price_per_person: 45,
+      },
+      peakBurgers: {
+        name: 'Peak Burgers',
+        description:
+          'Casual burger joint focused on locally sourced Colorado beef and hand-cut fries.',
+        location: new GeoPoint(39.7622, -105.0125),
+        menu: '<h3>Burgers</h3><ul><li>The Peak Double - $12</li><li>Bison Burger - $15</li><li>Veggie Stack - $11</li></ul><h3>Sides</h3><ul><li>Truffle Fries - $6</li><li>Onion Rings - $5</li></ul>',
+        average_price_per_person: 18,
+      },
+      solTacos: {
+        name: 'El Sol Tacos',
+        description:
+          'A vibrant street-side taco stand serving up quick, delicious, and traditional Mexican street food.',
+        location: new GeoPoint(39.6952, -105.0274),
+        menu: '<h3>Tacos ($3.50 each)</h3><ul><li>Al Pastor</li><li>Carne Asada</li><li>Pollo Asado</li><li>Nopales (Cactus)</li></ul><h3>Beverages</h3><ul><li>Horchata - $4</li><li>Mexican Coke - $3</li></ul>',
+        average_price_per_person: 12,
+      },
+      eastsideTacos: {
+        name: 'Eastside Cantina',
+        description:
+          'Authentic street tacos and hand-shaken margaritas on the vibrant east side of the city.',
+        location: new GeoPoint(39.735, -104.885),
+        menu: '<h3>Tacos</h3><ul><li>Carnitas Tacos - $4</li><li>Barbacoa Tacos - $4.50</li><li>Shrimp Tacos - $5</li></ul><h3>Drinks</h3><ul><li>House Margarita - $9</li><li>Jarritos - $3</li></ul>',
+        average_price_per_person: 18,
+      },
+      eastsideChicken: {
+        name: 'Eastside Chicken',
+        description: 'Fried chicken to go - next to Eastside Cantina.',
+        location: new GeoPoint(39.735, -104.885),
+        menu: '<h3>Fried Chicken</h3><ul><li>Drumstick - $4</li><li>Wings - $1</li><li>Sandwich - $9</li></ul><h3>Drinks</h3><ul><li>House Margarita - $9</li><li>Jarritos - $3</li></ul>',
+        average_price_per_person: 12,
+      },
+    };
+
+    // TODO(search) - Migrate this over to IndexTestHelper when search supports the equal filter.
+    // Remove any restaurant docs not in the expected set - perhaps these were
+    // set by another dev or test suite. This has potential to cause flakes in another concurrent
+    // run of these tests, if they have added new test docs.
+    const collectionSnapshot = await collection.get();
+    const expectedDocIds = Object.keys(restaurantDocs);
+    const deletes = collectionSnapshot.docs
+      .filter(ds => expectedDocIds.indexOf(ds.id) < 0)
+      .map(ds => ds.ref.delete());
+    await Promise.all(deletes);
+
+    // Add/overwrite all restaurant docs
+    return testCollectionWithDocs(collection, restaurantDocs);
+  }
+
+  const COLLECTION_NAME = 'TextSearchIntegrationTests';
+
+  // Search tests will use restaurant docs
+  before(async () => {
+    // TODO(search) - Migrate this over to IndexTestHelper when search supports the equal filter.
+    // Note: using a static collection of documents for every search test has an inherent risk
+    // of flakiness. Search requires an index on the collection, which is the reason we use a pre-defined
+    // collection. We cannot use the IndexTestHelper because that relies on an equality match to the testID
+    // field. Search currently does not support the equal expression.
+    firestore = getTestDb();
+    restaurantsCollection = firestore.collection(COLLECTION_NAME);
+    await setupRestaurantDocs(restaurantsCollection);
+    firestore = restaurantsCollection.firestore;
+  });
+
+  describe('search stage', () => {
+    describe('DISABLE query expansion', () => {
+      describe('query', () => {
+        // TODO(search) enable with backend support
+        // it('all search features', async () => {
+        //   const queryLocation = new GeoPoint(0, 0);
+        //   const ppl = firestore
+        //       .pipeline()
+        //       .collection(COLLECTION_NAME)
+        //       .search({
+        //         query: and(
+        //             documentMatches('waffles'),
+        //             field('description').matches('breakfast'),
+        //             field('location').geoDistance(queryLocation).lessThan(1000),
+        //             field('avgPrice').between(10, 20),
+        //         ),
+        //         select: [
+        //           field('title'),
+        //           field('menu'),
+        //           field('description'),
+        //           field('location').geoDistance(queryLocation).as('distance'),
+        //         ],
+        //         addFields: [score().as('searchScore')],
+        //         offset: 0,
+        //         retrievalDepth: 1000,
+        //         limit: 50,
+        //         sort: [field('location').geoDistance(queryLocation).ascending()],
+        //         queryEnhancement: 'disabled',
+        //       });
+        //
+        //   const snapshot = await ppl.execute();
+        //   expectResults(snapshot, 'goldenWaffle');
+        // });
+
+        it('search full document', async () => {
+          const ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({
+              query: documentMatches('waffles'),
+              // queryEnhancement: 'disabled',
+            });
+
+          const snapshot = await ppl.execute();
+          expectResults(snapshot, 'goldenWaffle');
+        });
+
+        // TODO(search) enable with per-field matching
+        // it('search a specific field', async () => {
+        //   const ppl = firestore
+        //       .pipeline()
+        //       .collection(COLLECTION_NAME)
+        //       .search({
+        //         query: field('menu').matches('waffles'),
+        //         queryEnhancement: 'disabled',
+        //       });
+        //
+        //   const snapshot = await ppl.execute();
+        //   expectResults(snapshot, 'goldenWaffle');
+        // });
+
+        // TODO(search) enable with per-field matching and support for AND expression
+        // it('conjunction of text search predicates', async () => {
+        //   const ppl = firestore
+        //       .pipeline()
+        //       .collection(COLLECTION_NAME)
+        //       .search({
+        //         query: and(
+        //             field('menu').matches('waffles'),
+        //             field('description').matches('diner'),
+        //         ),
+        //         queryEnhancement: 'disabled',
+        //       });
+        //
+        //   const snapshot = await ppl.execute();
+        //   expectResults(snapshot, 'goldenWaffle', 'sunnySideUp');
+        // });
+
+        it('geo near query', async () => {
+          const ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({
+              query: field('location')
+                .geoDistance(new GeoPoint(39.6985, -105.024))
+                .lessThanOrEqual(1000 /* m */),
+              // queryEnhancement: 'disabled',
+            });
+
+          const snapshot = await ppl.execute();
+          expectResults(snapshot, 'solTacos');
+        });
+
+        // TODO(search) enable with geo+text search indexes
+        // it('conjunction of text search and geo near', async () => {
+        //   const ppl = firestore
+        //       .pipeline()
+        //       .collection(COLLECTION_NAME)
+        //       .search({
+        //         query: and(
+        //             field('menu').matches('tacos'),
+        //             field('location')
+        //                 .geoDistance(new GeoPoint(39.6985, -105.024))
+        //                 .lessThan(10_000 /* meters */),
+        //         ),
+        //         queryEnhancement: 'disabled',
+        //       });
+        //
+        //   const snapshot = await ppl.execute();
+        //   expectResults(snapshot, 'solTacos');
+        // });
+
+        it('negate match', async () => {
+          const ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({
+              query: documentMatches('coffee -waffles'),
+              // queryEnhancement: 'disabled',
+            });
+
+          const snapshot = await ppl.execute();
+          expectResults(snapshot, 'sunnySideUp');
+        });
+
+        // TODO(search) this level of rquery is not yet supported
+        // it('rquery search the document with conjunction and disjunction', async () => {
+        //   const ppl = firestore
+        //     .pipeline()
+        //     .collection(COLLECTION_NAME)
+        //     .search({
+        //       query: documentMatches('(waffles OR pancakes) AND coffee'),
+        //       // queryEnhancement: 'disabled',
+        //     });
+        //
+        //   const snapshot = await ppl.execute();
+        //   expectResults(snapshot, 'goldenWaffle', 'sunnySideUp');
+        // });
+
+        it('rquery as query param', async () => {
+          const ppl = firestore.pipeline().collection(COLLECTION_NAME).search({
+            query: 'chicken wings',
+            // queryEnhancement: 'disabled',
+          });
+
+          const snapshot = await ppl.execute();
+          expectResults(snapshot, 'eastsideChicken');
+        });
+
+        // TODO(search) enable with advanced rquery support
+        // it('rquery supports field paths', async () => {
+        //   const ppl = firestore.pipeline().collection(COLLECTION_NAME).search({
+        //     query:
+        //         'menu:(waffles OR pancakes) AND description:"breakfast all day"',
+        //     queryEnhancement: 'disabled',
+        //   });
+        //
+        //   const snapshot = await ppl.execute();
+        //   expectResults(snapshot, 'sunnySideUp');
+        // });
+
+        // TODO(search) enable with support of other expressions in the search stage
+        // it('conjunction of rquery and expression', async () => {
+        //   const ppl = firestore
+        //       .pipeline()
+        //       .collection(COLLECTION_NAME)
+        //       .search({
+        //         query: and(
+        //             documentMatches('tacos'),
+        //             field('average_price_per_person').between(8, 15),
+        //         ),
+        //         queryEnhancement: 'disabled',
+        //       });
+        //
+        //   const snapshot = await ppl.execute();
+        //   expectResults(snapshot, 'solTacos');
+        // });
+      });
+
+      describe('addFields', () => {
+        it('score', async () => {
+          const ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({
+              query: documentMatches('waffles'),
+              addFields: [score().as('searchScore')],
+              // queryEnhancement: 'disabled',
+            })
+            .select('name', 'searchScore', 'snippet');
+
+          const snapshot = await ppl.execute();
+          expect(snapshot.results.length).to.equal(1);
+          expect(snapshot.results[0].get('name')).to.equal('The Golden Waffle');
+          expect(snapshot.results[0].get('searchScore')).to.be.greaterThan(0);
+        });
+
+        // TODO(search) enable with backend support
+        // it('topicality score and snippet', async () => {
+        //   const ppl = firestore
+        //       .pipeline()
+        //       .collection(COLLECTION_NAME)
+        //       .search({
+        //         query: field('menu').matches('waffles'),
+        //         addFields: [
+        //           score().as('searchScore'),
+        //           field('menu').snippet('waffles').as('snippet'),
+        //         ],
+        //         queryEnhancement: 'disabled',
+        //       })
+        //       .select('name', 'searchScore', 'snippet');
+        //
+        //   const snapshot = await ppl.execute();
+        //   expect(snapshot.results.length).to.equal(1);
+        //   expect(snapshot.results[0].get('name')).to.equal('The Golden Waffle');
+        //   expect(snapshot.results[0].get('searchScore')).to.be.greaterThan(0);
+        //   expect(snapshot.results[0].get('snippet')?.length).to.be.greaterThan(
+        //       0,
+        //   );
+        // });
+      });
+
+      // TODO(search) enable with backend support
+      // describe('select', () => {
+      // it('topicality score and snippet', async () => {
+      //   const ppl = firestore
+      //       .pipeline()
+      //       .collection(COLLECTION_NAME)
+      //       .search({
+      //         query: field('menu').matches('waffles'),
+      //         select: [
+      //           field('name'),
+      //           'location',
+      //           score().as('searchScore'),
+      //           field('menu').snippet('waffles').as('snippet'),
+      //         ],
+      //         queryEnhancement: 'disabled',
+      //       });
+      //
+      //   const snapshot = await ppl.execute();
+      //   expect(snapshot.results.length).to.equal(1);
+      //   expect(snapshot.results[0].get('name')).to.equal('The Golden Waffle');
+      //   expect(snapshot.results[0].get('location')).to.equal(
+      //       new GeoPoint(39.7183, -104.9621),
+      //   );
+      //   expect(snapshot.results[0].get('searchScore')).to.be.greaterThan(0);
+      //   expect(snapshot.results[0].get('snippet')?.length).to.be.greaterThan(
+      //       0,
+      //   );
+      //   expect(Object.keys(snapshot.results[0].data()).sort()).to.deep.equal([
+      //     'location',
+      //     'name',
+      //     'searchScore',
+      //     'snippet',
+      //   ]);
+      // });
+      // });
+
+      describe('sort', () => {
+        it('by score', async () => {
+          const ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({
+              query: documentMatches('tacos'),
+              sort: score().descending(),
+              // queryEnhancement: 'disabled',
+            });
+
+          const snapshot = await ppl.execute();
+          expectResults(snapshot, 'eastsideTacos', 'solTacos');
+        });
+
+        it('by distance', async () => {
+          const ppl = firestore
+            .pipeline()
+            .collection(COLLECTION_NAME)
+            .search({
+              query: field('location')
+                .geoDistance(new GeoPoint(39.6985, -105.024))
+                .lessThanOrEqual(5600),
+              sort: field('location')
+                .geoDistance(new GeoPoint(39.6985, -105.024))
+                .ascending(),
+            });
+
+          const snapshot = await ppl.execute();
+          expectResults(
+            snapshot,
+            'solTacos',
+            'lotusBlossomThai',
+            'mileHighCatch',
+          );
+        });
+
+        // TODO(search) enable with backend support
+        // it('by multiple orderings', async () => {
+        //   const ppl = firestore
+        //       .pipeline()
+        //       .collection(COLLECTION_NAME)
+        //       .search({
+        //         query: field('menu').matches('tacos OR chicken'),
+        //         sort: [
+        //           field('location')
+        //               .geoDistance(new GeoPoint(39.6985, -105.024))
+        //               .ascending(),
+        //           score().descending(),
+        //         ],
+        //         queryEnhancement: 'disabled',
+        //       });
+        //
+        //   const snapshot = await ppl.execute();
+        //   expectResults(
+        //       snapshot,
+        //       'solTacos',
+        //       'eastsideTacos',
+        //       'eastsideChicken',
+        //   );
+        // });
+      });
+
+      // TODO(search) enable with backend support
+      // describe('limit', () => {
+      // it('limits the number of documents returned', async () => {
+      //   const ppl = firestore
+      //       .pipeline()
+      //       .collection(COLLECTION_NAME)
+      //       .search({
+      //         query: constant(true),
+      //         sort: field('location')
+      //             .geoDistance(new GeoPoint(39.6985, -105.024))
+      //             .ascending(),
+      //         limit: 5,
+      //         queryEnhancement: 'disabled',
+      //       });
+      //
+      //   const snapshot = await ppl.execute();
+      //   expectResults(
+      //       snapshot,
+      //       'solTacos',
+      //       'lotusBlossomThai',
+      //       'goldenWaffle',
+      //   );
+      // });
+      // it('limits the number of documents scored', async () => {
+      //   const ppl = firestore
+      //       .pipeline()
+      //       .collection(COLLECTION_NAME)
+      //       .search({
+      //         query: field('menu').matches(
+      //             'chicken OR tacos OR fish OR waffles',
+      //         ),
+      //         retrievalDepth: 6,
+      //         queryEnhancement: 'disabled',
+      //       });
+      //
+      //   const snapshot = await ppl.execute();
+      //   expectResults(
+      //       snapshot,
+      //       'eastsideChicken',
+      //       'eastsideTacos',
+      //       'solTacos',
+      //       'mileHighCatch',
+      //   );
+      // });
+      // });
+
+      // TODO(search) enable with backend support
+      // describe('offset', () => {
+      // it('skips N documents', async () => {
+      //   const ppl = firestore
+      //       .pipeline()
+      //       .collection(COLLECTION_NAME)
+      //       .search({
+      //         query: constant(true),
+      //         limit: 2,
+      //         offset: 2,
+      //         queryEnhancement: 'disabled',
+      //       });
+      //
+      //   const snapshot = await ppl.execute();
+      //   expectResults(snapshot, 'eastsideChicken', 'eastsideTacos');
+      // });
+      // });
+    });
+
+    // TODO(search) add these tests when query enhancement is supported
+    // describe.skip('REQUIRE query expansion', () => {
+    // it('search full document', async () => {
+    //   const ppl = firestore
+    //       .pipeline()
+    //       .collection(COLLECTION_NAME)
+    //       .search({
+    //         query: documentMatches('waffles'),
+    //         queryEnhancement: 'required',
+    //       });
+    //
+    //   const snapshot = await ppl.execute();
+    //   expectResults(snapshot, 'goldenWaffle', 'sunnySideUp');
+    // });
+    //
+    // it('search a specific field', async () => {
+    //   const ppl = firestore
+    //       .pipeline()
+    //       .collection(COLLECTION_NAME)
+    //       .search({
+    //         query: field('menu').matches('waffles'),
+    //         queryEnhancement: 'required',
+    //       });
+    //
+    //   const snapshot = await ppl.execute();
+    //   expectResults(snapshot, 'goldenWaffle', 'sunnySideUp');
+    // });
+    // });
+  });
+
+  // TODO(search) add these tests when snippet expression is supported
+  // describe.skip('snippet', () => {
+  //   it('snippet options', async () => {
+  //     const ppl1 = firestore
+  //         .pipeline()
+  //         .collection(COLLECTION_NAME)
+  //         .search({
+  //           query: field('menu').matches('waffles'),
+  //           addFields: [
+  //             field('menu')
+  //                 .snippet({
+  //                   rquery: 'waffles',
+  //                   maxSnippetWidth: 10,
+  //                 })
+  //                 .as('snippet'),
+  //           ],
+  //           queryEnhancement: 'disabled',
+  //         });
+  //
+  //     const snapshot1 = await ppl1.execute();
+  //     expect(snapshot1.results.length).to.equal(1);
+  //     expect(snapshot1.results[0].get('name')).to.equal('The Golden Waffle');
+  //     expect(snapshot1.results[0].get('snippet')?.length).to.be.greaterThan(0);
+  //
+  //     const ppl2 = firestore
+  //         .pipeline()
+  //         .collection(COLLECTION_NAME)
+  //         .search({
+  //           query: field('menu').matches('waffles'),
+  //           addFields: [
+  //             field('menu')
+  //                 .snippet({
+  //                   rquery: 'waffles',
+  //                   maxSnippetWidth: 1000,
+  //                 })
+  //                 .as('snippet'),
+  //           ],
+  //           queryEnhancement: 'disabled',
+  //         });
+  //
+  //     const snapshot2 = await ppl2.execute();
+  //     expect(snapshot2.results.length).to.equal(1);
+  //     expect(snapshot2.results[0].get('name')).to.equal('The Golden Waffle');
+  //     expect(snapshot2.results[0].get('snippet')?.length).to.be.greaterThan(0);
+  //
+  //     expect(snapshot2.results[0].get('snippet')?.length).to.be.greaterThan(
+  //         snapshot2.results[0].get('snippet')?.length,
+  //     );
+  //   });
+  //
+  //   it('snippet on multiple fields', async () => {
+  //     // Get snippet from 1 field
+  //     const ppl1 = firestore
+  //         .pipeline()
+  //         .collection(COLLECTION_NAME)
+  //         .search({
+  //           query: documentMatches('waffle'),
+  //           addFields: [
+  //             field('menu')
+  //                 .snippet({
+  //                   rquery: 'waffles',
+  //                   maxSnippetWidth: 2000,
+  //                 })
+  //                 .as('snippet'),
+  //           ],
+  //           queryEnhancement: 'disabled',
+  //         });
+  //
+  //     const snapshot1 = await ppl1.execute();
+  //     expect(snapshot1.results.length).to.equal(1);
+  //     expect(snapshot1.results[0].get('name')).to.equal('The Golden Waffle');
+  //     expect(snapshot1.results[0].get('snippet')?.length).to.be.greaterThan(0);
+  //
+  //     // Get snippet from 2 fields
+  //     const ppl2 = firestore
+  //         .pipeline()
+  //         .collection(COLLECTION_NAME)
+  //         .search({
+  //           query: documentMatches('waffle'),
+  //           addFields: [
+  //             concat(field('menu'), field('description'))
+  //                 .snippet({
+  //                   rquery: 'waffles',
+  //                   maxSnippetWidth: 2000,
+  //                 })
+  //                 .as('snippet'),
+  //           ],
+  //           queryEnhancement: 'disabled',
+  //         });
+  //
+  //     const snapshot2 = await ppl2.execute();
+  //     expect(snapshot2.results.length).to.equal(1);
+  //     expect(snapshot2.results[0].get('name')).to.equal('The Golden Waffle');
+  //     expect(snapshot2.results[0].get('snippet')?.length).to.be.greaterThan(0);
+  //
+  //     // Expect snippet from 2 fields to be longer than snippet from one field
+  //     expect(snapshot2.results[0].get('snippet')?.length).to.be.greaterThan(
+  //         snapshot2.results[0].get('snippet')?.length,
+  //     );
+  //   });
+  // });
+  // });
 });
 
 // This is the Query integration tests from the lite API (no cache support)

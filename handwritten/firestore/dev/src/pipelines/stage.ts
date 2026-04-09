@@ -724,6 +724,86 @@ export class Sort implements Stage {
   }
 }
 
+export type InternalSearchStageOptions = Omit<
+  firestore.Pipelines.SearchStageOptions,
+  'query' | 'sort' | 'select' | 'addFields'
+> & {
+  query: BooleanExpression;
+  sort?: Array<Ordering>;
+  select?: Record<string, Expression>;
+  addFields?: Record<string, Expression>;
+};
+
+/**
+ * Search stage.
+ */
+export class Search implements Stage {
+  name = 'search';
+
+  constructor(private options: InternalSearchStageOptions) {}
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.query, ignoreUndefinedProperties);
+    if (this.options.sort) {
+      validateUserDataHelper(this.options.sort, ignoreUndefinedProperties);
+    }
+    if (this.options.select) {
+      validateUserDataHelper(
+        Object.values(this.options.select) as Expression[],
+        ignoreUndefinedProperties,
+      );
+    }
+    if (this.options.addFields) {
+      validateUserDataHelper(
+        Object.values(this.options.addFields) as Expression[],
+        ignoreUndefinedProperties,
+      );
+    }
+  }
+
+  readonly optionsUtil = new OptionsUtil({
+    query: {
+      serverName: 'query',
+    },
+    limit: {
+      serverName: 'limit',
+    },
+    retrievalDepth: {
+      serverName: 'retrieval_depth',
+    },
+    sort: {
+      serverName: 'sort',
+    },
+    addFields: {
+      serverName: 'add_fields',
+    },
+    select: {
+      serverName: 'select',
+    },
+    offset: {
+      serverName: 'offset',
+    },
+    queryEnhancement: {
+      serverName: 'query_enhancement',
+    },
+    languageCode: {
+      serverName: 'language_code',
+    },
+  });
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+}
+
 /**
  * Internal options for Define stage.
  */
@@ -846,7 +926,7 @@ export class DeleteStage implements Stage {
     };
   }
 
-  _validateUserData(ignoreUndefinedProperties: boolean): void {}
+  _validateUserData(_: boolean): void {}
 }
 
 /**
