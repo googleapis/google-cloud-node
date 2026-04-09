@@ -41,7 +41,7 @@ describe('Quickstart', () => {
     projectId = await client.getProjectId();
   });
 
-  it.skip('should run quickstart', async () => {
+  it('should run quickstart', async () => {
     assert.throws(() => {
       execSync(`node ./quickstart.js projects/${projectId}/locations/global`, {
         cwd,

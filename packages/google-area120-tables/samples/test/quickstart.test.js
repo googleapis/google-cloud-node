@@ -34,7 +34,7 @@ describe('Quickstart', () => {
     projectId = await client.getProjectId();
   });
 
-  it.skip('should run quickstart', async () => {
+  it('should run quickstart', async () => {
     const stdout = execSync(`node ./quickstart.js ${projectId}`);
     assert.match(stdout, /\[[^\]]*\]/);
   });
