@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script ensures that all the headers in any given folder under packages 
+# This script ensures that all the headers in any given folder under packages
 # all have the same Copyright year in their header.
 
 set -e
@@ -24,6 +24,7 @@ EXIT_CODE=0
 
 # Iterate through each package folder
 for pkg in "$PACKAGES_DIR"/*; do
+  echo "Scanning package $pkg"
   if [ ! -d "$pkg" ]; then
     continue
   fi
@@ -39,7 +40,7 @@ for pkg in "$PACKAGES_DIR"/*; do
 
     # Extract the year from the first copyright line found in the file
     year=$(grep -ohE "Copyright [0-9]{4}" "$file" | head -n 1 | awk '{print $2}')
-    
+
     if [ -n "$year" ]; then
       if [ -z "$first_year" ]; then
         first_year="$year"
