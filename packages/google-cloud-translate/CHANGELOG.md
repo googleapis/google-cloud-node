@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/translate-v9.3.0...translate-v9.4.0) (2026-04-08)
+
+
+### Features
+
+* [translate] A new field `mime_type` is added to message `.google.cloud.translation.v3.AdaptiveMtTranslateRequest` ([#7968](https://github.com/googleapis/google-cloud-node/issues/7968)) ([4e5752b](https://github.com/googleapis/google-cloud-node/commit/4e5752bbddbb630463602b7b8de924191f241f02))
+
 ## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/translate-v9.2.1...translate-v9.3.0) (2025-11-11)
 
 
