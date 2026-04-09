@@ -37,6 +37,12 @@ jobs:
       with:
         node-version: 18.x
 
+    - name: Install protoc
+      run: |
+        curl -LO "https://github.com/protocolbuffers/protobuf/releases/download/v25.3/protoc-25.3-linux-x86_64.zip"
+        unzip protoc-25.3-linux-x86_64.zip -d /usr/local
+        chmod +x /usr/local/bin/protoc
+
     - name: Install Node dependencies with npm
       run: npm install
       working-directory: core/generator/gapic-generator-typescript
