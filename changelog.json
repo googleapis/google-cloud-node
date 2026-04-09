@@ -4,6 +4,38 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "2280f7aeab96b9911efc3673dd084e3d9f831d9b",
+          "message": "Type conflict between @sinonjs/fake-timers and @types/sinonjs__fake-timers",
+          "issues": [],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "6d513f93d0126198b4eb3867c4f5809422e467fe",
+          "message": "Resolve type conflicts between @types/sinon and @sinonjs/fake-timers",
+          "issues": [],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "4d597690ad90f9cf7c3c2aa9611029beaa599703",
+          "message": "Enable afe_connectivity_error_count metric",
+          "issues": [
+            "7964"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "4758d8f1-1dab-4626-8071-c3ac30bb92b0",
+      "createTime": "2026-04-09T15:40:49.161Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "da6ef3b2599582c2132b83b5311caadc3e1e2a34",
           "message": "[geocode] make the Place ID format consistent",
@@ -69536,5 +69568,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-08T00:07:52.535Z"
+  "updateTime": "2026-04-09T15:40:49.161Z"
 }
