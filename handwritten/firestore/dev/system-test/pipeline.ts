@@ -147,6 +147,10 @@ import {
   arraySum,
   currentTimestamp,
   arrayConcat,
+  arrayFilter,
+  arrayTransform,
+  arrayTransformWithIndex,
+  arraySlice,
   type,
   isType,
   timestampTruncate,
@@ -3479,6 +3483,181 @@ describe.skipClassic('Pipeline class', () => {
         nullResult: null,
         absentResult: null,
       });
+    });
+
+    it('supports arrayFilter', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .where(equal('title', 'The Lord of the Rings'))
+        .select(
+          arrayFilter('tags', 'tag', notEqual(variable('tag'), 'magic')).as(
+            'notMagicTags',
+          ),
+          field('tags')
+            .arrayFilter('tag', notEqual(variable('tag'), 'epic'))
+            .as('notEpicTags'),
+          field('tags')
+            .arrayFilter('tag', equal(variable('tag'), 'fantasy'))
+            .as('noMatchingTags'),
+        )
+        .execute();
+
+      expectResults(snapshot, {
+        notMagicTags: ['adventure', 'epic'],
+        notEpicTags: ['adventure', 'magic'],
+        noMatchingTags: [],
+      });
+    });
+
+    it('supports arrayFilter with mixed types and nulls', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            arr: [1, 'foo', null, 20.0, 'bar', 30, '40', null],
+          }),
+        )
+        .select(
+          arrayFilter(
+            'arr',
+            'element',
+            greaterThan(variable('element'), 10),
+          ).as('filtered'),
+        )
+        .execute();
+
+      const res = snapshot.results[0].data();
+      expect(res.filtered).to.have.members([20.0, 30]);
+    });
+
+    it('supports arrayTransform and arrayTransformWithIndex', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(map({arr: [10, 20, 30]}))
+        .select(
+          arrayTransform(
+            'arr',
+            'element',
+            multiply(variable('element'), 10),
+          ).as('staticTransform'),
+          field('arr')
+            .arrayTransform('element', multiply(variable('element'), 10))
+            .as('instanceTransform'),
+          arrayTransformWithIndex(
+            'arr',
+            'element',
+            'i',
+            add(variable('element'), variable('i')),
+          ).as('staticTransformWithIndex'),
+          field('arr')
+            .arrayTransformWithIndex(
+              'element',
+              'i',
+              add(variable('element'), variable('i')),
+            )
+            .as('instanceTransformWithIndex'),
+        )
+        .execute();
+
+      expectResults(snapshot, {
+        staticTransform: [100, 200, 300],
+        instanceTransform: [100, 200, 300],
+        staticTransformWithIndex: [10, 21, 32],
+        instanceTransformWithIndex: [10, 21, 32],
+      });
+    });
+
+    it('supports arrayTransform with empty array and nulls', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .limit(1)
+        .replaceWith(
+          map({
+            arr: [1, null, 3],
+            empty: [],
+          }),
+        )
+        .select(
+          field('arr')
+            .arrayTransform('element', add(variable('element'), 1))
+            .as('transformedWithNulls'),
+          field('empty')
+            .arrayTransform('element', add(variable('element'), 1))
+            .as('transformedEmpty'),
+          field('arr')
+            .arrayTransformWithIndex(
+              'element',
+              'idx',
+              add(variable('element'), variable('idx')),
+            )
+            .as('transformedWithIndex'),
+          field('empty')
+            .arrayTransformWithIndex(
+              'element',
+              'idx',
+              add(variable('element'), variable('idx')),
+            )
+            .as('transformedEmptyWithIndex'),
+        )
+        .execute();
+
+      expectResults(snapshot, {
+        transformedWithNulls: [2, null, 4],
+        transformedEmpty: [],
+        transformedWithIndex: [1, null, 5],
+        transformedEmptyWithIndex: [],
+      });
+    });
+
+    it('supports arraySlice', async () => {
+      const snapshot = await firestore
+        .pipeline()
+        .collection(randomCol.path)
+        .where(equal('title', 'The Lord of the Rings'))
+        .select(
+          arraySlice('tags', 1, 1).as('staticMethodSlice'),
+          arraySlice('tags', 1).as('staticMethodSliceToEnd'),
+          field('tags').arraySlice(1, 1).as('instanceMethodSlice'),
+          field('tags').arraySlice(1).as('instanceMethodSliceToEnd'),
+          field('tags').arraySlice(1, 10).as('overflowLength'),
+          field('tags').arraySlice(-1, 1).as('negativeOffset'),
+          field('tags').arraySlice(-1).as('negativeOffsetSliceToEnd'),
+          field('tags').arraySlice(10).as('overflowOffset'),
+          field('tags').arraySlice(-10).as('negativeOverflowOffset'),
+        )
+        .execute();
+
+      const res = snapshot.results[0].data();
+      expect(res.staticMethodSlice).to.have.members(['magic']);
+      expect(res.staticMethodSliceToEnd).to.have.members(['magic', 'epic']);
+      expect(res.instanceMethodSlice).to.have.members(['magic']);
+      expect(res.instanceMethodSliceToEnd).to.have.members(['magic', 'epic']);
+      expect(res.overflowLength).to.have.members(['magic', 'epic']);
+      expect(res.overflowOffset).to.have.members([]);
+      expect(res.negativeOffset).to.have.members(['epic']);
+      expect(res.negativeOffsetSliceToEnd).to.have.members(['epic']);
+      expect(res.negativeOverflowOffset).to.have.members([
+        'adventure',
+        'magic',
+        'epic',
+      ]);
+    });
+
+    it('arraySlice throws error for negative length', async () => {
+      await expect(
+        firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .where(equal('title', 'The Lord of the Rings'))
+          .select(arraySlice('tags', 1, -1).as('negativeLengthSlice'))
+          .execute(),
+      ).to.be.rejectedWith(/length must be non-negative/);
     });
 
     it('supports arrayFirstN', async () => {
