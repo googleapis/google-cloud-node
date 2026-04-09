@@ -29,7 +29,7 @@
     "baseline": "node build/typescript/tools/update-baselines.js",
     "clean": "rm -rf build",
     "codecov": "c8 --reporter=lcov mocha build/typescript/test/unit && c8 report",
-    "compile": "tsc -p .",
+    "compile": "tsc -p . && cp -r templates build/",
     "compile-protos-json": "pbjs -t json -o protos/protos.json -p node_modules/google-gax/build/protos -p protos google/api/annotations.proto google/api/field_behavior.proto google/api/field_info.proto google/api/resource.proto google/api/routing.proto google/longrunning/operations.proto google/protobuf/compiler/plugin.proto service_config.proto snippet_index.proto",
     "compile-protos-js": "pbjs -t static-module -o protos/index.js -p node_modules/google-gax/build/protos -p protos google/api/annotations.proto google/api/field_behavior.proto google/api/field_info.proto google/api/resource.proto google/api/routing.proto google/longrunning/operations.proto google/protobuf/compiler/plugin.proto service_config.proto snippet_index.proto",
     "compile-protos-dts": "pbts protos/index.js -o protos/index.d.ts",
