@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "113d05c3bf068487bd81a7d4dbb4510f89142618",
+          "message": "Implement robust path validation and structured skip reporting",
+          "issues": [
+            "7546"
+          ],
+          "scope": "storage"
+        }
+      ],
+      "version": "7.20.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "fdb109a7-9baa-4c7c-b151-4dd8a1296162",
+      "createTime": "2026-04-09T15:40:49.239Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "da6ef3b2599582c2132b83b5311caadc3e1e2a34",
           "message": "[geocode] make the Place ID format consistent",
           "issues": [
@@ -69536,5 +69554,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-08T00:07:52.535Z"
+  "updateTime": "2026-04-09T15:40:49.239Z"
 }

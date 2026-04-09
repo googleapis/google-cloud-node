@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.20.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.19.0...storage-v7.20.0) (2026-04-09)
+
+
+### Features
+
+* **storage:** Implement robust path validation and structured skip reporting ([#7546](https://github.com/googleapis/google-cloud-node/issues/7546)) ([113d05c](https://github.com/googleapis/google-cloud-node/commit/113d05c3bf068487bd81a7d4dbb4510f89142618))
+
 ## [7.19.0](https://github.com/googleapis/nodejs-storage/compare/v7.18.0...v7.19.0) (2026-02-05)
 
 
