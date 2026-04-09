@@ -12,7 +12,7 @@
     "test": "echo nothing to test",
     "test-generate": "SMOKE_TEST=true node ./bin/generate-readme.mjs",
     "generate": "./bin/generate-readme.mjs",
-    "lint": "eslint \"packages/*/src/**/*.ts\"",
+    "lint": "node bin/lint-any.mjs",
     "clean": "echo nothing to clean",
     "precompile": "echo nothing to precompile",
     "system-test": "echo nothing to system test",
@@ -39,9 +39,7 @@
     "gaxios": "^7.0.0-rc",
     "parse-link-header": "^2.0.0"
   },
-  "devDependencies": {
-    "gts": "^6.0.2"
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=18"
   }
