@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ OWLBOT_PY="/tmp/${SPLIT_REPO}/owlbot.py"
 # Delete owlbot.yaml
 rm -rf "$OWLBOT_PY"
 
-IGNORE_README_TXT="# Copyright 2022 Google LLC
+IGNORE_README_TXT="# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
