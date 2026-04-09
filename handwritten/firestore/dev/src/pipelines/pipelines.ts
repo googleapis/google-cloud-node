@@ -40,6 +40,7 @@ import {
   selectablesToMap,
   toField,
   vectorToExpr,
+  selectablesToObject,
 } from './pipeline-util';
 import {DocumentReference} from '../reference/document-reference';
 import {PipelineResponse} from '../reference/types';
@@ -62,6 +63,7 @@ import {
   _mapValue,
   field,
   FunctionExpression,
+  documentMatches,
 } from './expression';
 import {
   AddFields,
@@ -104,6 +106,8 @@ import {
   InternalDefineStageOptions,
   InternalSubcollectionStageOptions,
   UpdateStage,
+  Search,
+  InternalSearchStageOptions,
 } from './stage';
 import {StructuredPipeline} from './structured-pipeline';
 import Selectable = FirebaseFirestore.Pipelines.Selectable;
@@ -1599,6 +1603,52 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
+   * @beta
+   *
+   * Add a search stage to the Pipeline.
+   *
+   * @remarks This must be the first stage of the pipeline.
+   * @remarks A limited set of expressions are supported in the search stage.
+   *
+   * @example
+   * ```typescript
+   * db.pipeline().collection('restaurants').search({
+   *   query: documentMatches('breakfast')
+   * })
+   * ```
+   *
+   * @param options - An object that specifies required and optional parameters
+   *                  for the stage.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
+   */
+  search(options: firestore.Pipelines.SearchStageOptions): Pipeline {
+    // Convert user land convenience types to internal types
+    const normalizedQuery: BooleanExpression = isExpr(options.query)
+      ? (options.query as BooleanExpression)
+      : documentMatches(options.query);
+    // TODO(search) - re-enable select normalization when select is supported in the API
+    // const normalizedSelect: Record<string, Expression> | undefined =
+    //   options.select ? selectablesToObject(options.select) : undefined;
+    const normalizedAddFields: Record<string, Expression> | undefined =
+      options.addFields ? selectablesToObject(options.addFields) : undefined;
+    const normalizedSort: Ordering[] | undefined = isOrdering(options.sort)
+      ? [options.sort as Ordering]
+      : (options.sort as Ordering[]);
+
+    const internalOptions: InternalSearchStageOptions = {
+      ...options,
+      query: normalizedQuery,
+      // TODO(search) - re-enable select normalization when select is supported in the API
+      // select: normalizedSelect,
+      addFields: normalizedAddFields,
+      sort: normalizedSort,
+    };
+
+    // Add stage to the pipeline
+    return this._addStage(new Search(internalOptions));
+  }
+
+  /**
    * Sorts the documents from previous stages based on one or more `Ordering` criteria.
    *
    * <p>This stage allows you to order the results of your pipeline. You can specify multiple
@@ -2158,7 +2208,7 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
    * @returns {T} An object containing all fields in the document.
    *
    * @example
-   * ```
+   * ```typescript
    * let p = firestore.pipeline().collection('col');
    *
    * p.execute().then(results => {
@@ -2186,7 +2236,7 @@ export class PipelineResult implements firestore.Pipelines.PipelineResult {
    * such field exists.
    *
    * @example
-   * ```
+   * ```typescript
    * let p = firestore.pipeline().collection('col');
    *
    * p.execute().then(results => {

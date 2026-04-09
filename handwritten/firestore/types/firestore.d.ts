@@ -758,7 +758,7 @@ declare namespace FirebaseFirestore {
      * starting with a source stage.
      *
      * @example
-     * ```
+     * ```typescript
      * let goodBooksPipeline: Pipeline =
      *     myFirestore.pipeline()
      *         .collection('books')
@@ -1938,7 +1938,7 @@ declare namespace FirebaseFirestore {
      * executing the query (if any).
      *
      * @example
-     * ```
+     * ```typescript
      * let query = firestore.collection('col').where('foo', '==', 'bar');
      * let count = 0;
      *
@@ -2042,7 +2042,7 @@ declare namespace FirebaseFirestore {
      * participate in the query, all other documents are ignored.
      *
      * @example
-     * ```
+     * ```typescript
      * // Returns the closest 10 documents whose Euclidean distance from their 'embedding' fields are closed to [41, 42].
      * const vectorQuery = col.findNearest('embedding', [41, 42], {limit: 10, distanceMeasure: 'EUCLIDEAN'});
      *
@@ -2078,7 +2078,7 @@ declare namespace FirebaseFirestore {
      * participate in the query, all other documents are ignored.
      *
      * @example
-     * ```
+     * ```typescript
      * // Returns the closest 10 documents whose Euclidean distance from their 'embedding' fields are closed to [41, 42].
      * const vectorQuery = col.findNearest({
      *     vectorField: 'embedding',
@@ -2109,7 +2109,7 @@ declare namespace FirebaseFirestore {
      * participate in the query, all other documents are ignored.
      *
      * @example
-     * ```
+     * ```typescript
      * // Returns the closest 10 documents whose Euclidean distance from their 'embedding' fields are closed to [41, 42].
      * const vectorQuery = col.findNearest({
      *     vectorField: 'embedding',
@@ -2988,7 +2988,7 @@ declare namespace FirebaseFirestore {
      * @returns {Filter} The created Filter.
      *
      * @example
-     * ```
+     * ```typescript
      * let collectionRef = firestore.collection('col');
      *
      * collectionRef.where(Filter.where('foo', '==', 'bar')).get().then(querySnapshot => {
@@ -3019,7 +3019,7 @@ declare namespace FirebaseFirestore {
      * @returns {Filter} The created {@link Filter}.
      *
      * @example
-     * ```
+     * ```typescript
      * let collectionRef = firestore.collection('col');
      *
      * // doc.foo == 'bar' || doc.baz > 0
@@ -3049,7 +3049,7 @@ declare namespace FirebaseFirestore {
      * @returns {Filter} The created {@link Filter}.
      *
      * @example
-     * ```
+     * ```typescript
      * let collectionRef = firestore.collection('col');
      *
      * // doc.foo == 'bar' && doc.baz > 0
@@ -3597,6 +3597,80 @@ declare namespace FirebaseFirestore {
        * @returns A new `Expression` representing the 'array_contains_any' comparison.
        */
       arrayContainsAny(arrayExpression: Expression): BooleanExpression;
+
+      /**
+       * Creates an expression that filters an array using a provided alias and predicate expression.
+       *
+       * @example
+       * ```typescript
+       * // Filter "scores" to include only values greater than 50
+       * field("scores").arrayFilter("score", greaterThan(variable("score"), 50));
+       * ```
+       *
+       * @param alias The variable name to use for each element.
+       * @param filter The predicate boolean expression to filter by.
+       * @returns A new `Expression` representing the filtered array.
+       */
+      arrayFilter(alias: string, filter: BooleanExpression): FunctionExpression;
+
+      /**
+       * Creates an expression that applies a provided transformation to each element in an array.
+       *
+       * @example
+       * ```typescript
+       * // Transform the 'scores' array by multiplying each score by 10
+       * field("scores").arrayTransform("score", multiply(variable("score"), 10));
+       * ```
+       *
+       * @param elementAlias The variable name to use for each element.
+       * @param transform The lambda expression used to transform the elements.
+       * @returns A new `Expression` representing the arrayTransform operation.
+       */
+      arrayTransform(
+        elementAlias: string,
+        transform: Expression,
+      ): FunctionExpression;
+
+      /**
+       * Creates an expression that applies a provided transformation to each element in an array, providing the element's index to the transformation expression.
+       *
+       * @example
+       * ```typescript
+       * // Transform the 'scores' array by adding the index to each score
+       * field("scores").arrayTransformWithIndex("score", "i", add(variable("score"), variable("i")));
+       * ```
+       *
+       * @param elementAlias The variable name to use for each element.
+       * @param indexAlias The variable name to use for the current index.
+       * @param transform The lambda expression used to transform the elements.
+       * @returns A new `Expression` representing the arrayTransformWithIndex operation.
+       */
+      arrayTransformWithIndex(
+        elementAlias: string,
+        indexAlias: string,
+        transform: Expression,
+      ): FunctionExpression;
+
+      /**
+       * Creates an expression that returns a slice of an array from `offset` with `length` elements.
+       *
+       * @example
+       * ```typescript
+       * // Get 5 elements from the 'items' array starting from index 2
+       * field("items").arraySlice(2, 5);
+       *
+       * // Get n number of elements from the 'items' array starting from index 2
+       * field("items").arraySlice(2, field("count"));
+       * ```
+       *
+       * @param offset The starting offset.
+       * @param length The optional length of the slice.
+       * @returns A new `Expression` representing the sliced array.
+       */
+      arraySlice(
+        offset: number | Expression,
+        length?: number | Expression,
+      ): FunctionExpression;
       /**
        * Creates an expression that calculates the length of an array.
        *
@@ -5599,6 +5673,71 @@ declare namespace FirebaseFirestore {
        */
       isType(type: string): BooleanExpression;
 
+      // TODO(search) enable with backend support
+      // /**
+      //  * Evaluates if the result of this `expression` is between
+      //  * the `lowerBound` (inclusive) and `upperBound` (inclusive).
+      //  *
+      //  * @example
+      //  * ```typescript
+      //  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+      //  * field('tireWidth').between(constant(2.2), constant(2.4))
+      //  *
+      //  * // This is functionally equivalent to
+      //  * and(field('tireWidth').greaterThanOrEqual(contant(2.2)), field('tireWidth').lessThanOrEqual(constant(2.4)))
+      //  * ```
+      //  *
+      //  * @param lowerBound - Lower bound (inclusive) of the range.
+      //  * @param upperBound - Upper bound (inclusive) of the range.
+      //  * @returns A `BooleanExpression` representing the specified between comparion.
+      //  */
+      // between(
+      //   lowerBound: Expression,
+      //   upperBound: Expression,
+      // ): BooleanExpression;
+      //
+      // /**
+      //  * Evaluates if the result of this `expression` is between
+      //  * the `lowerBound` (inclusive) and `upperBound` (inclusive).
+      //  *
+      //  * @example
+      //  * ```typescript
+      //  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+      //  * field('tireWidth').between(2.2, 2.4)
+      //  *
+      //  * // This is functionally equivalent to
+      //  * and(field('tireWidth').greaterThanOrEqual(2.2), field('tireWidth').lessThanOrEqual(2.4))
+      //  * ```
+      //  *
+      //  * @param lowerBound - Lower bound (inclusive) of the range.
+      //  * @param upperBound - Upper bound (inclusive) of the range.
+      //  * @returns A `BooleanExpression` representing the specified between comparion.
+      //  */
+      // between(lowerBound: unknown, upperBound: unknown): BooleanExpression;
+
+      // TODO(search) enable with backend support
+      // /**
+      //  * Evaluates to an HTML-formatted text snippet that renders terms matching
+      //  * the search query in `<b>bold</b>`.
+      //  *
+      //  * @remarks This Expression can only be used within a `Search` stage.
+      //  *
+      //  * @param rquery Define the search query using the search domain-specific language (DSL).
+      //  * @returns An `Expression` representing the snippet function.
+      //  */
+      // snippet(rquery: string): Expression;
+      //
+      // /**
+      //  * Evaluates to an HTML-formatted text snippet that renders terms matching
+      //  * the search query in `<b>bold</b>`.
+      //  *
+      //  * @remarks This Expression can only be used within a `Search` stage.
+      //  *
+      //  * @param options Define how snippeting behaves.
+      //  * @returns An `Expression` representing the snippet function.
+      //  */
+      // snippet(options: SnippetOptions): Expression;
+
       // TODO(new-expression): Add new expression method declarations above this line
       /**
        * Creates an `Ordering` that sorts documents in ascending order based on this expression.
@@ -5815,6 +5954,38 @@ declare namespace FirebaseFirestore {
        * @returns The name of the field.
        */
       get fieldName(): string;
+
+      // TODO(search) enable with backend support
+      // /**
+      //  * Perform a full-text search on this field.
+      //  *
+      //  * @remarks This Expression can only be used within a `Search` stage.
+      //  *
+      //  * @param rquery Define the search query using the search domain-specific language (DSL).
+      //  * @returns A `BooleanExpression` representing the matches function.
+      //  */
+      // matches(rquery: string | Expression): BooleanExpression;
+
+      /**
+       * Evaluates to the distance in meters between the location specified
+       * by this field and the query location.
+       *
+       * @remarks This Expression can only be used within a `Search` stage.
+       *
+       * @example
+       * ```typescript
+       * const geoDistanceToUser = field('location').geoDistance(new GeoPoint(39.7541, -105.0002));
+       *
+       * db.pipeline().collection('restaurants').search({
+       *   query: geoDistanceToUser.lessThanOrEqual(2000),
+       *   sort: geoDistanceToUser.ascending()
+       * })
+       * ```
+       *
+       * @param location - Compute distance to this GeoPoint.
+       */
+      geoDistance(location: GeoPoint | Expression): Expression;
+
       /**
        * @internal
        * Returns the alias of the field, which is the field-name itself.
@@ -8440,6 +8611,168 @@ declare namespace FirebaseFirestore {
      * @returns A new {@code Expression} representing the reversed string.
      */
     export function reverse(field: string): FunctionExpression;
+    /**
+     * Creates an expression that filters an array using a provided alias and predicate expression.
+     *
+     * ```typescript
+     * // Get a filtered array of the 'scores' field containing only elements greater than 50.
+     * arrayFilter("scores", "score", greaterThan(variable("score"), 50));
+     * ```
+     *
+     * @param fieldName The name of the field containing the array.
+     * @param alias The variable name to use for each element.
+     * @param filter The predicate boolean expression to evaluate for each element.
+     * @returns A new {@code Expression} representing the filtered array.
+     */
+    export function arrayFilter(
+      fieldName: string,
+      alias: string,
+      filter: BooleanExpression,
+    ): FunctionExpression;
+
+    /**
+     * Creates an expression that filters an array using a provided alias and predicate expression.
+     *
+     * ```typescript
+     * // Filter "scores" to include only values greater than 50
+     * arrayFilter(field("scores"), "score", greaterThan(variable("score"), 50));
+     * ```
+     *
+     * @param arrayExpression The expression representing the array.
+     * @param alias The variable name to use for each element.
+     * @param filter The predicate boolean expression to evaluate for each element.
+     * @returns A new {@code Expression} representing the filtered array.
+     */
+    export function arrayFilter(
+      arrayExpression: Expression,
+      alias: string,
+      filter: BooleanExpression,
+    ): FunctionExpression;
+
+    /**
+     * Creates an expression that transforms an array field using a provided alias and lambda expression.
+     *
+     * ```typescript
+     * // Transform "scores" array by adding 10 to each score
+     * arrayTransform("scores", "score", add(variable("score"), 10));
+     * ```
+     *
+     * @param fieldName The name of the field containing the array.
+     * @param elementAlias The variable name to use for each element.
+     * @param transform The lambda expression used to transform the elements.
+     * @returns A new `Expression` representing the transformed array.
+     */
+    export function arrayTransform(
+      fieldName: string,
+      elementAlias: string,
+      transform: Expression,
+    ): FunctionExpression;
+
+    /**
+     * Creates an expression that transforms an array using a provided alias and lambda expression.
+     *
+     * ```typescript
+     * // Transform "scores" array by adding 10 to each score
+     * arrayTransform(field("scores"), "score", add(variable("score"), 10));
+     * ```
+     *
+     * @param arrayExpression The expression representing the array.
+     * @param elementAlias The variable name to use for each element.
+     * @param transform The lambda expression used to transform the elements.
+     * @returns A new `Expression` representing the transformed array.
+     */
+    export function arrayTransform(
+      arrayExpression: Expression,
+      elementAlias: string,
+      transform: Expression,
+    ): FunctionExpression;
+
+    /**
+     * Creates an expression that transforms an array field using provided aliases and lambda expression with an index.
+     *
+     * ```typescript
+     * // Transform "scores" array by adding the index to each score
+     * arrayTransformWithIndex("scores", "score", "i", add(variable("score"), variable("i")));
+     * ```
+     *
+     * @param fieldName The name of the field containing the array.
+     * @param elementAlias The variable name to use for each element.
+     * @param indexAlias The variable name to use for the current index.
+     * @param transform The lambda expression used to transform the elements.
+     * @returns A new `Expression` representing the transformed array.
+     */
+    export function arrayTransformWithIndex(
+      fieldName: string,
+      elementAlias: string,
+      indexAlias: string,
+      transform: Expression,
+    ): FunctionExpression;
+
+    /**
+     * Creates an expression that transforms an array using provided aliases and lambda expression with an index.
+     *
+     * ```typescript
+     * // Transform "scores" array by adding the index to each score
+     * arrayTransformWithIndex(field("scores"), "score", "i", add(variable("score"), variable("i")));
+     * ```
+     *
+     * @param arrayExpression The expression representing the array.
+     * @param elementAlias The variable name to use for each element.
+     * @param indexAlias The variable name to use for the current index.
+     * @param transform The expression used to transform the elements.
+     * @returns A new `Expression` representing the transformed array.
+     */
+    export function arrayTransformWithIndex(
+      arrayExpression: Expression,
+      elementAlias: string,
+      indexAlias: string,
+      transform: Expression,
+    ): FunctionExpression;
+
+    /**
+     * Creates an expression that returns a slice of an array from `offset` with `length` elements.
+     *
+     * ```typescript
+     * // Get 5 elements from the 'items' array field starting from index 2
+     * arraySlice("items", 2, 5);
+     *
+     * // Get n elements from the 'items' array field starting from index 2
+     * arraySlice("items", 2, field("length"));
+     * ```
+     *
+     * @param arrayName The name of the field containing the array.
+     * @param offset The starting offset.
+     * @param length The optional length of the slice.
+     * @returns A new {@code Expression} representing the sliced array.
+     */
+    export function arraySlice(
+      arrayName: string,
+      offset: number | Expression,
+      length?: number | Expression,
+    ): FunctionExpression;
+
+    /**
+     * Creates an expression that returns a slice of an array from `offset` with `length` elements.
+     *
+     * ```typescript
+     * // Get 5 elements from an array expression starting from index 2
+     * arraySlice(field("items"), 2, 5);
+     *
+     * // Get n elements from an array expression starting from index 2
+     * arraySlice(field("items"), 2, field("length"));
+     * ```
+     *
+     * @param arrayExpression The expression representing the array.
+     * @param offset The starting offset.
+     * @param length The optional length of the slice.
+     * @returns A new {@code Expression} representing the sliced array.
+     */
+    export function arraySlice(
+      arrayExpression: Expression,
+      offset: number | Expression,
+      length?: number | Expression,
+    ): FunctionExpression;
+
     /**
      * Creates an expression that reverses an array.
      *
@@ -11516,6 +11849,224 @@ declare namespace FirebaseFirestore {
       type: string,
     ): BooleanExpression;
 
+    // TODO(search) enable with backend support
+    // /**
+    //  * @beta
+    //  * Perform a full-text search on the specified field.
+    //  *
+    //  * @remarks This Expression can only be used within a `Search` stage.
+    //  *
+    //  * @param searchField Search the specified field.
+    //  * @param rquery Define the search query using the search domain-specific language (DSL).
+    //  * @returns A `BooleanExpression` representing the matches function.
+    //  */
+    // export function matches(
+    //   searchField: string | Field,
+    //   rquery: string | Expression,
+    // ): BooleanExpression;
+
+    /**
+     * Perform a full-text search on all indexed search fields in the document.
+     *
+     * @remarks This Expression can only be used within a `Search` stage.
+     *
+     * @example
+     * ```typescript
+     * db.pipeline().collection('restaurants').search({
+     *   query: documentMatches('waffles OR pancakes')
+     * })
+     * ```
+     *
+     * @param rquery Define the search query using the search domain-specific language (DSL).
+     * @returns A `BooleanExpression` representing the documentMatches function.
+     */
+    export function documentMatches(
+      rquery: string | Expression,
+    ): BooleanExpression;
+
+    /**
+     * @beta
+     *
+     * Evaluates to the search score that reflects the topicality of the document
+     * to all of the text predicates (for example: `documentMatches`)
+     * in the search query. If `SearchOptions.query` is not set or does not contain
+     * any text predicates, then this score will always be `0`.
+     *
+     * @example
+     * ```typescript
+     * db.pipeline().collection('restaurants').search({
+     *   query: 'waffles',
+     *   sort: score().descending()
+     * })
+     * ```
+     *
+     * @remarks This Expression can only be used within a `Search` stage.
+     * @returns An `Expression` representing the score function.
+     */
+    export function score(): Expression;
+
+    // TODO(search) enable with backend support
+    // /**
+    //  * Evaluates to an HTML-formatted text snippet that highlights terms matching
+    //  * the search query in `<b>bold</b>`.
+    //  *
+    //  * @example
+    //  * ```typescript
+    //  * db.pipeline().collection('restaurants').search({
+    //  *   query: 'waffles',
+    //  *   addFields: { snippet: snippet('menu', 'waffles') }
+    //  * })
+    //  * ```
+    //  *
+    //  * @remarks This Expression can only be used within a `Search` stage.
+    //  *
+    //  * @param searchField Search the specified field for matching terms.
+    //  * @param rquery Define the search query using the search domain-specific language (DSL).
+    //  * @returns An `Expression` representing the snippet function.
+    //  */
+    // export function snippet(
+    //   searchField: string | Field,
+    //   rquery: string,
+    // ): Expression;
+    //
+    // /**
+    //  * Evaluates to an HTML-formatted text snippet that highlights terms matching
+    //  * the search query in `<b>bold</b>`.
+    //  *
+    //  * @remarks This Expression can only be used within a `Search` stage.
+    //  *
+    //  * @param searchField Search the specified field for matching terms.
+    //  * @param options Define the search query using the search domain-specific language (DSL).
+    //  * @returns An `Expression` representing the snippet function.
+    //  */
+    // export function snippet(
+    //   searchField: string | Field,
+    //   options: SnippetOptions,
+    // ): Expression;
+
+    /**
+     * @beta
+     *
+     * Evaluates to the distance in meters between the location in the specified
+     * field and the query location.
+     *
+     * @example
+     * ```typescript
+     * db.pipeline().collection('restaurants').search({
+     *   query: 'waffles',
+     *   sort: geoDistance('location', new GeoPoint(37.0, -122.0)).ascending()
+     * })
+     * ```
+     *
+     * @remarks This Expression can only be used within a `Search` stage.
+     *
+     * @param fieldName - Specifies the field in the document which contains
+     * the first GeoPoint for distance computation.
+     * @param location - Compute distance to this GeoPoint.
+     * @returns An `Expression` representing the geoDistance function.
+     */
+    export function geoDistance(
+      fieldName: string | Field,
+      location: GeoPoint | Expression,
+    ): Expression;
+
+    // TODO(search) enable when supported by the backend
+    // /**
+    //  * Evaluates if the value in the field specified by `fieldName` is between
+    //  * the evaluated values for `lowerBound` (inclusive) and `upperBound` (inclusive).
+    //  *
+    //  * @example
+    //  * ```typescript
+    //  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+    //  * between('tireWidth', constant(2.2), constant(2.4))
+    //  *
+    //  * // This is functionally equivalent to
+    //  * and(greaterThanOrEqual('tireWidth', constant(2.2)), lessThanOrEqual('tireWidth', constant(2.4)))
+    //  * ```
+    //  *
+    //  * @param fieldName - Evaluate if the value stored in this field is between the lower and upper bounds.
+    //  * @param lowerBound - An `Expression` that evaluates to the lower bound (inclusive) of the range.
+    //  * @param upperBound - An `Expression` that evaluates to the upper bound (inclusive) of the range.
+    //  * @returns A `BooleanExpression` representing the specified between comparion.
+    //  */
+    // export function between(
+    //   fieldName: string,
+    //   lowerBound: Expression,
+    //   upperBound: Expression,
+    // ): BooleanExpression;
+    //
+    // /**
+    //  * Evaluates if the value in the field specified by `fieldName` is between
+    //  * the values for `lowerBound` (inclusive) and `upperBound` (inclusive).
+    //  *
+    //  * @example
+    //  * ```typescript
+    //  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+    //  * between('tireWidth', 2.2, 2.4)
+    //  *
+    //  * // This is functionally equivalent to
+    //  * and(greaterThanOrEqual('tireWidth', 2.2), lessThanOrEqual('tireWidth', 2.4))
+    //  * ```
+    //  *
+    //  * @param fieldName - Evaluate if the value stored in this field is between the lower and upper bounds.
+    //  * @param lowerBound - Lower bound (inclusive) of the range.
+    //  * @param upperBound - Upper bound (inclusive) of the range.
+    //  * @returns A `BooleanExpression` representing the specified between comparion.
+    //  */
+    // export function between(
+    //   fieldName: string,
+    //   lowerBound: unknown,
+    //   upperBound: unknown,
+    // ): BooleanExpression;
+    //
+    // /**
+    //  * Evaluates if the result of the specified `expression` is between
+    //  * the results of `lowerBound` (inclusive) and `upperBound` (inclusive).
+    //  *
+    //  * @example
+    //  * ```typescript
+    //  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+    //  * between(field('tireWidth'), constant(2.2), constant(2.4))
+    //  *
+    //  * // This is functionally equivalent to
+    //  * and(greaterThanOrEqual(field('tireWidth'), constant(2.2)), lessThanOrEqual(field('tireWidth'), constant(2.4)))
+    //  * ```
+    //  *
+    //  * @param expression - Evaluate if the result of this expression is between the lower and upper bounds
+    //  * @param lowerBound - An `Expression` that evaluates to the lower bound (inclusive) of the range.
+    //  * @param upperBound - An `Expression` that evaluates to the upper bound (inclusive) of the range.
+    //  * @returns A `BooleanExpression` representing the specified between comparion.
+    //  */
+    // export function between(
+    //   expression: Expression,
+    //   lowerBound: Expression,
+    //   upperBound: Expression,
+    // ): BooleanExpression;
+    //
+    // /**
+    //  * Evaluates if the result of the specified `expression` is between
+    //  * the `lowerBound` (inclusive) and `upperBound` (inclusive).
+    //  *
+    //  * @example
+    //  * ```typescript
+    //  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+    //  * between(field('tireWidth'), 2.2, 2.4)
+    //  *
+    //  * // This is functionally equivalent to
+    //  * and(greaterThanOrEqual(field('tireWidth'), 2.2), lessThanOrEqual(field('tireWidth'), 2.4))
+    //  * ```
+    //  *
+    //  * @param expression - Evaluate if the result of this expression is between the lower and upper bounds.
+    //  * @param lowerBound - Lower bound (inclusive) of the range.
+    //  * @param upperBound - Upper bound (inclusive) of the range.
+    //  * @returns A `BooleanExpression` representing the specified between comparion.
+    //  */
+    // export function between(
+    //   expression: Expression,
+    //   lowerBound: unknown,
+    //   upperBound: unknown,
+    // ): BooleanExpression;
+
     // TODO(new-expression): Add new top-level expression function declarations above this line
     /**
      * Creates an `Ordering` that sorts documents in ascending order based on an expression.
@@ -12656,6 +13207,26 @@ declare namespace FirebaseFirestore {
        */
       unnest(options: UnnestStageOptions): Pipeline;
       /**
+       * @beta
+       *
+       * Add a search stage to the Pipeline.
+       *
+       * @remarks This must be the first stage of the pipeline.
+       * @remarks A limited set of expressions are supported in the search stage.
+       *
+       * @example
+       * ```typescript
+       * db.pipeline().collection('restaurants').search({
+       *   query: documentMatches('breakfast')
+       * })
+       * ```
+       *
+       * @param options - An object that specifies required and optional parameters
+       *                  for the stage.
+       * @return A new `Pipeline` object with this stage appended to the stage list.
+       */
+      search(options: SearchStageOptions): Pipeline;
+      /**
        * Sorts the documents from previous stages based on one or more `Ordering` criteria.
        *
        * <p>This stage allows you to order the results of your pipeline. You can specify multiple {@link
@@ -13139,6 +13710,135 @@ declare namespace FirebaseFirestore {
       orderings: Ordering[];
     };
 
+    ///**
+    // * @beta
+    // * Specifies if the `matches` and `snippet` expressions will enhance the user
+    // * provided query to perform matching of synonyms, misspellings, lemmatization,
+    // * stemming.
+    // *
+    // * required - search will fail if the query enhancement times out or if the query
+    // *                    enhancement is not supported by the project's DRZ compliance
+    // *                    requirements.
+    // * preferred - search will fall back to the un-enhanced, user provided query, if
+    // *                    the query enhancement fails.
+    // */
+    // TODO(search) enable with backend support
+    // export type QueryEnhancement = 'disabled' | 'required' | 'preferred';
+
+    /**
+     * @beta
+     *
+     * Options defining how a SearchStage is evaluated. See {@link @firebase/firestore/pipelines#Pipeline.(search)}.
+     */
+    export type SearchStageOptions = StageOptions & {
+      /**
+       * Specifies the search query that will be used to query and score documents
+       * by the search stage.
+       *
+       * The query can be expressed as an `Expression`, which will be used to score
+       * and filter the results. Not all expressions supported by Pipelines
+       * are supported in the Search query.
+       *
+       * @example
+       * ```typescript
+       * db.pipeline().collection('restaurants').search({
+       *   query: documentMatches('breakfast')
+       * })
+       * ```
+       *
+       * The query can also be expressed as a string in the search domain-specific language (DSL):
+       *
+       * @example
+       * ```typescript
+       * db.pipeline().collection('restaurants').search({
+       *   query: 'breakfast'
+       * })
+       * ```
+       */
+      query: BooleanExpression | string;
+
+      ///**
+      // * The BCP-47 language code of text in the search query, such as, “en-US” or “sr-Latn”
+      // */
+      // TODO(search) enable with backend support
+      //languageCode?: string;
+
+      // TODO(search) add indexPartition after languageCode
+
+      ///**
+      // * The maximum number of documents to retrieve. Documents will be retrieved in the
+      // * pre-sort order specified by the search index.
+      // */
+      // TODO(search) enable with backend support
+      //retrievalDepth?: number;
+
+      /**
+       * Orderings specify how the input documents are sorted.
+       * One or more ordering are required.
+       */
+      sort?: Ordering | Ordering[];
+
+      // /**
+      //  * The number of documents to skip.
+      //  */
+      // TODO(search) enable with backend support
+      // offset?: number;
+
+      // /**
+      //  * The maximum number of documents to return from the Search stage.
+      //  */
+      // TODO(search) enable with backend support
+      // limit?: number;
+
+      // /**
+      //  * The fields to keep or add to each document,
+      //  * specified as an array of {@link @firebase/firestore/pipelines#Selectable}.
+      //  */
+      // TODO(search) enable with backend support
+      // select?: Array<Selectable | string>;
+
+      /**
+       * The fields to add to each document, specified as a {@link @firebase/firestore/pipelines#Selectable}.
+       */
+      addFields?: Selectable[];
+
+      // /**
+      //  * Define the query expansion behavior used by full-text search expressions
+      //  * in this search stage.
+      //  */
+      // TODO(search) enable with backend support
+      // queryEnhancement?: QueryEnhancement;
+    };
+
+    // TODO(search) enable with backend support
+    // /**
+    //  * @beta
+    //  * Options defining how a snippet expression is evaluated.
+    //  */
+    // export type SnippetOptions = {
+    //   /**
+    //    * Define the search query using the search domain-specific language (DSL).
+    //    */
+    //   rquery: string;
+    //
+    //   /**
+    //    * The maximum width of the string estimated for a variable width font. The
+    //    * unit is tenths of ems. The default is `160`.
+    //    */
+    //   maxSnippetWidth?: number;
+    //
+    //   /**
+    //    * The maximum number of non-contiguous pieces of text in the returned snippet.
+    //    * The default is `1`.
+    //    */
+    //   maxSnippets?: number;
+    //
+    //   /**
+    //    * The string to join the pieces. The default value is '\n'
+    //    */
+    //   separator?: string;
+    // };
+
     /**
      * Represents a field value within the explain statistics, which can be a primitive type (null, string, number, boolean)
      * or a recursively defined object where keys are strings and values are also `ExplainStatsFieldValue`.
@@ -13249,7 +13949,7 @@ declare namespace FirebaseFirestore {
        * @returns {DocumentData} An object containing all fields in the document.
        *
        * @example
-       * ```
+       * ```typescript
        * let p = firestore.pipeline().collection('col');
        *
        * p.execute().then(results => {
@@ -13268,7 +13968,7 @@ declare namespace FirebaseFirestore {
        * such field exists.
        *
        * @example
-       * ```
+       * ```typescript
        * let p = firestore.pipeline().collection('col');
        *
        * p.execute().then(results => {
