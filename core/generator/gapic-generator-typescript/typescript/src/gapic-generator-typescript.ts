@@ -50,9 +50,21 @@ async function main(processArgv: string[]) {
   // Just in case if someone builds us without bazel, let's have a fallback to an actual
   // JS protoc plugin without a wrapper.
   const protocPluginBash = path.join(__dirname, '..', 'protoc_plugin.sh');
-  const protocPlugin = fs.existsSync(protocPluginBash)
+  let protocPlugin = fs.existsSync(protocPluginBash)
     ? protocPluginBash
     : path.join(__dirname, 'protoc-plugin.js');
+
+  if (protocPlugin.endsWith('.js') && process.platform === 'win32') {
+      protocPlugin = `node ${protocPlugin}`;
+  } else if (protocPlugin.endsWith('.js')) {
+      // In Unix, protoc expects an actual executable file. We cannot pass "node file.js".
+      // Instead, we ensure the file has execution permissions so the shebang takes over.
+      try {
+        fs.chmodSync(protocPlugin, 0o755);
+      } catch (e) {
+        // ignore
+      }
+  }
 
   const argv = await yargs(processArgv)
     .array('I')
@@ -164,7 +176,7 @@ async function main(processArgv: string[]) {
     protocParameter = protocParameter[protocParameter.length - 1];
   }
   const protoc = protocParameter ?? protocEnv ?? 'protoc';
-  if (!fs.existsSync(protoc)) {
+  if (protoc !== 'protoc' && !fs.existsSync(protoc)) {
     throw new Error(
       `ERROR: protoc binary is not found at ${protoc}, use --protoc option to point to your protoc binary`,
     );
@@ -189,6 +201,7 @@ async function main(processArgv: string[]) {
   const protocCommand = [
     `--plugin=protoc-gen-typescript_gapic=${protocPlugin}`,
     `--typescript_gapic_out=${outputDir}`,
+    `--experimental_editions`,
   ];
   if (gapicValidatorOut && validation === 'true') {
     protocCommand.push(`--gapic-validator_out=${gapicValidatorOut}`);
