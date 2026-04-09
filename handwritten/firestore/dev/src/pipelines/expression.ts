@@ -23,12 +23,15 @@ import {
   fieldOrExpression,
   isFirestoreValue,
   isString,
+  toField,
   valueToDefaultExpr,
   vectorToExpr,
 } from './pipeline-util';
 import {HasUserData, Serializer, validateUserInput} from '../serializer';
 import {cast} from '../util';
 import {Pipeline} from './pipelines';
+import {GeoPoint} from '../geo-point';
+import {OptionsUtil} from './options-util';
 
 /**
  * Represents an expression that can be evaluated to a value within the execution of a `Pipeline`.
@@ -3089,6 +3092,89 @@ export abstract class Expression
     return new FunctionExpression('get_field', [this, valueToDefaultExpr(key)]);
   }
 
+  // /**
+  //  * Evaluates if the result of this `expression` is between
+  //  * the `lowerBound` (inclusive) and `upperBound` (inclusive).
+  //  *
+  //  * @example
+  //  * ```typescript
+  //  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+  //  * field('tireWidth').between(constant(2.2), constant(2.4))
+  //  *
+  //  * // This is functionally equivalent to
+  //  * and(field('tireWidth').greaterThanOrEqual(contant(2.2)), field('tireWidth').lessThanOrEqual(constant(2.4)))
+  //  * ```
+  //  *
+  //  * @param lowerBound - Lower bound (inclusive) of the range.
+  //  * @param upperBound - Upper bound (inclusive) of the range.
+  //  * @returns A `BooleanExpression` representing the specified between comparison.
+  //  */
+  // between(lowerBound: Expression, upperBound: Expression): BooleanExpression;
+  //
+  // /**
+  //  * Evaluates if the result of this `expression` is between
+  //  * the `lowerBound` (inclusive) and `upperBound` (inclusive).
+  //  *
+  //  * @example
+  //  * ```typescript
+  //  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+  //  * field('tireWidth').between(2.2, 2.4)
+  //  *
+  //  * // This is functionally equivalent to
+  //  * and(field('tireWidth').greaterThanOrEqual(2.2), field('tireWidth').lessThanOrEqual(2.4))
+  //  * ```
+  //  *
+  //  * @param lowerBound - Lower bound (inclusive) of the range.
+  //  * @param upperBound - Upper bound (inclusive) of the range.
+  //  * @returns An `BooleanExpression` representing the specified between comparison.
+  //  */
+  // between(lowerBound: unknown, upperBound: unknown): BooleanExpression;
+  //
+  // between(lowerBound: unknown, upperBound: unknown): BooleanExpression {
+  //   return new FunctionExpression('between', [
+  //     this,
+  //     valueToDefaultExpr(lowerBound),
+  //     valueToDefaultExpr(upperBound),
+  //   ]).asBoolean();
+  // }
+  //
+  // /**
+  //  * Evaluates to an HTML-formatted text snippet that renders terms matching
+  //  * the search query in `<b>bold</b>`.
+  //  *
+  //  * @remarks This Expression can only be used within a `Search` stage.
+  //  *
+  //  * @param rquery Define the search query using the search domain-specific language (DSL).
+  //  * @returns An `Expression` representing the snippet function.
+  //  */
+  // snippet(rquery: string): Expression;
+  //
+  // /**
+  //  * Evaluates to an HTML-formatted text snippet that renders terms matching
+  //  * the search query in `<b>bold</b>`.
+  //  *
+  //  * @remarks This Expression can only be used within a `Search` stage.
+  //  *
+  //  * @param options Define how snippeting behaves.
+  //  * @returns An `Expression` representing the snippet function.
+  //  */
+  // snippet(options: firestore.Pipelines.SnippetOptions): Expression;
+  //
+  // snippet(
+  //   queryOrOptions: string | firestore.Pipelines.SnippetOptions,
+  // ): Expression {
+  //   const options: firestore.Pipelines.SnippetOptions = isString(queryOrOptions)
+  //     ? {rquery: queryOrOptions}
+  //     : queryOrOptions;
+  //   const rquery = options.rquery;
+  //   const internalOptions = {
+  //     maxSnippetWidth: options.maxSnippetWidth,
+  //     maxSnippets: options.maxSnippets,
+  //     separator: options.separator,
+  //   };
+  //   return new SnippetExpression([this, constant(rquery)], internalOptions);
+  // }
+
   // TODO(new-expression): Add new expression method definitions above this line
 
   /**
@@ -3321,6 +3407,49 @@ export class Field
 {
   readonly expressionType: firestore.Pipelines.ExpressionType = 'Field';
   selectable = true as const;
+
+  // /**
+  //  * Perform a full-text search on this field.
+  //  *
+  //  * @remarks This Expression can only be used within a `Search` stage.
+  //  *
+  //  * @param rquery Define the search query using the search domain-specific language (DSL).
+  //  * @returns A `BooleanExpression` representing the matches function.
+  //  */
+  // matches(rquery: string | Expression): BooleanExpression {
+  //   return new FunctionExpression('matches', [
+  //     this,
+  //     valueToDefaultExpr(rquery),
+  //   ]).asBoolean();
+  // }
+
+  /**
+   * @beta
+   *
+   * Evaluates to the distance in meters between the location specified
+   * by this field and the query location.
+   *
+   * @remarks This Expression can only be used within a `Search` stage.
+   *
+   * @example
+   * ```typescript
+   * const geoDistanceToUser = field('location').geoDistance(new GeoPoint(39.7541, -105.0002));
+   *
+   * db.pipeline().collection('restaurants').search({
+   *   query: geoDistanceToUser.lessThanOrEqual(2000),
+   *   sort: geoDistanceToUser.ascending()
+   * })
+   * ```
+   *
+   * @param location - Compute distance to this GeoPoint.
+   * @returns An `Expression` representing the geoDistance function.
+   */
+  geoDistance(location: GeoPoint | Expression): Expression {
+    return new FunctionExpression('geo_distance', [
+      this,
+      valueToDefaultExpr(location),
+    ]);
+  }
 
   /**
    * @internal
@@ -3628,6 +3757,51 @@ export class FunctionExpression extends Expression {
     this.params.forEach(expr => {
       return expr._validateUserData(ignoreUndefinedProperties);
     });
+  }
+}
+
+/**
+ * SnippetExpression extends from FunctionExpression because it
+ * supports options and requires the options util.
+ */
+export class SnippetExpression extends FunctionExpression {
+  /**
+   * @private
+   * @internal
+   */
+  get _optionsUtil(): OptionsUtil {
+    return new OptionsUtil({
+      maxSnippetWidth: {
+        serverName: 'max_snippet_width',
+      },
+      maxSnippets: {
+        serverName: 'max_snippets',
+      },
+      separator: {
+        serverName: 'separator',
+      },
+    });
+  }
+
+  /**
+   * @hideconstructor
+   */
+  constructor(
+    params: Expression[],
+    private _options?: {},
+  ) {
+    super('snippet', params);
+  }
+
+  _toProto(serializer: Serializer): api.IValue {
+    const proto = super._toProto(serializer);
+    proto.functionValue!.options = this._optionsUtil.getOptionsProto(
+      serializer,
+      this._options ?? {},
+      {},
+    );
+
+    return proto;
   }
 }
 
@@ -10432,6 +10606,219 @@ export function pipelineValue(
 ): Expression {
   return new PipelineValueExpression(pipeline);
 }
+
+// /**
+//  * @beta
+//  * Perform a full-text search on the specified field.
+//  *
+//  * @remarks This Expression can only be used within a `Search` stage.
+//  *
+//  * @param searchField Search the specified field.
+//  * @param rquery Define the search query using the search domain-specific language (DSL).
+//  * @returns A `BooleanExpression` representing the matches function.
+//  */
+// export function matches(
+//   searchField: string | Field,
+//   rquery: string | Expression,
+// ): BooleanExpression {
+//   return toField(searchField).matches(rquery);
+// }
+
+/**
+ * @beta
+ *
+ * Perform a full-text search on the document.
+ *
+ * @remarks This Expression can only be used within a `Search` stage.
+ *
+ * @param rquery Define the search query using the search domain-specific language (DSL).
+ * @returns A `BooleanExpression` representing the documentMatches function.
+ */
+export function documentMatches(
+  rquery: string | Expression,
+): BooleanExpression {
+  return new FunctionExpression('document_matches', [
+    valueToDefaultExpr(rquery),
+  ]).asBoolean();
+}
+
+/**
+ * @beta
+ *
+ * Evaluates to the search score that reflects the topicality of the document
+ * to all the text predicates (for example: `documentMatches`)
+ * in the search `query` provided to the `search` stage. If the `query` provided to the search stage
+ * is not set or does not contain any text predicates, then this score will always be `0`.
+ *
+ * @remarks This Expression can only be used within a `Search` stage.
+ *
+ * @returns An `Expression` representing the score function.
+ */
+export function score(): Expression {
+  return new FunctionExpression('score', []);
+}
+
+// /**
+//  * Evaluates to an HTML-formatted text snippet that highlights terms matching
+//  * the search query in `<b>bold</b>`.
+//  *
+//  * @remarks This Expression can only be used within a `Search` stage.
+//  *
+//  * @param searchField Search the specified field for matching terms.
+//  * @param rquery Define the search query using the search domain-specific language (DSL).
+//  * @returns An `Expression` representing the snippet function.
+//  */
+// export function snippet(
+//   searchField: string | Field,
+//   rquery: string,
+// ): Expression;
+//
+// /**
+//  * Evaluates to an HTML-formatted text snippet that highlights terms matching
+//  * the search query in `<b>bold</b>`.
+//  *
+//  * @remarks This Expression can only be used within a `Search` stage.
+//  *
+//  * @param searchField Search the specified field for matching terms.
+//  * @param options Define the search query using the search domain-specific language (DSL).
+//  * @returns An `Expression` representing the snippet function.
+//  */
+// export function snippet(
+//   searchField: string | Field,
+//   options: firestore.Pipelines.SnippetOptions,
+// ): Expression;
+// export function snippet(
+//   field: string | Field,
+//   queryOrOptions: string | firestore.Pipelines.SnippetOptions,
+// ): Expression {
+//   return toField(field).snippet(
+//     isString(queryOrOptions) ? {rquery: queryOrOptions} : queryOrOptions,
+//   );
+// }
+
+/**
+ * @beta
+ *
+ * Evaluates to the distance in meters between the location in the specified
+ * field and the query location.
+ *
+ * @remarks This Expression can only be used within a `Search` stage.
+ *
+ * @param fieldName - Specifies the field in the document which contains
+ * the first GeoPoint for distance computation.
+ * @param location - Compute distance to this GeoPoint.
+ * @returns An `Expression` representing the geoDistance function.
+ */
+export function geoDistance(
+  fieldName: string | Field,
+  location: GeoPoint | Expression,
+): Expression {
+  return toField(fieldName).geoDistance(location);
+}
+//
+// /**
+//  * Evaluates if the value in the field specified by `fieldName` is between
+//  * the evaluated values for `lowerBound` (inclusive) and `upperBound` (inclusive).
+//  *
+//  * @example
+//  * ```typescript
+//  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+//  * between('tireWidth', constant(2.2), constant(2.4))
+//  *
+//  * // This is functionally equivalent to
+//  * and(greaterThanOrEqual('tireWidth', constant(2.2)), lessThanOrEqual('tireWidth', constant(2.4)))
+//  * ```
+//  *
+//  * @param fieldName - Evaluate if the value stored in this field is between the lower and upper bounds.
+//  * @param lowerBound - An `Expression` that evaluates to the lower bound (inclusive) of the range.
+//  * @param upperBound - An `Expression` that evaluates to the upper bound (inclusive) of the range.
+//  * @returns A `BooleanExpression` representing the specified between comparion.
+//  */
+// export function between(
+//   fieldName: string,
+//   lowerBound: Expression,
+//   upperBound: Expression,
+// ): BooleanExpression;
+//
+// /**
+//  * Evaluates if the value in the field specified by `fieldName` is between
+//  * the values for `lowerBound` (inclusive) and `upperBound` (inclusive).
+//  *
+//  * @example
+//  * ```typescript
+//  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+//  * between('tireWidth', 2.2, 2.4)
+//  *
+//  * // This is functionally equivalent to
+//  * and(greaterThanOrEqual('tireWidth', 2.2), lessThanOrEqual('tireWidth', 2.4))
+//  * ```
+//  *
+//  * @param fieldName - Evaluate if the value stored in this field is between the lower and upper bounds.
+//  * @param lowerBound - Lower bound (inclusive) of the range.
+//  * @param upperBound - Upper bound (inclusive) of the range.
+//  * @returns A `BooleanExpression` representing the specified between comparion.
+//  */
+// export function between(
+//   fieldName: string,
+//   lowerBound: unknown,
+//   upperBound: unknown,
+// ): BooleanExpression;
+//
+// /**
+//  * Evaluates if the result of the specified `expression` is between
+//  * the results of `lowerBound` (inclusive) and `upperBound` (inclusive).
+//  *
+//  * @example
+//  * ```typescript
+//  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+//  * between(field('tireWidth'), constant(2.2), constant(2.4))
+//  *
+//  * // This is functionally equivalent to
+//  * and(greaterThanOrEqual(field('tireWidth'), constant(2.2)), lessThanOrEqual(field('tireWidth'), constant(2.4)))
+//  * ```
+//  *
+//  * @param expression - Evaluate if the result of this expression is between the lower and upper bounds.
+//  * @param lowerBound - An `Expression` that evaluates to the lower bound (inclusive) of the range.
+//  * @param upperBound - An `Expression` that evaluates to the upper bound (inclusive) of the range.
+//  * @returns A `BooleanExpression` representing the specified between comparion.
+//  */
+// export function between(
+//   expression: Expression,
+//   lowerBound: Expression,
+//   upperBound: Expression,
+// ): BooleanExpression;
+//
+// /**
+//  * Evaluates if the result of the specified `expression` is between
+//  * the `lowerBound` (inclusive) and `upperBound` (inclusive).
+//  *
+//  * @example
+//  * ```typescript
+//  * // Evaluate if the 'tireWidth' is between 2.2 and 2.4
+//  * between(field('tireWidth'), 2.2, 2.4)
+//  *
+//  * // This is functionally equivalent to
+//  * and(greaterThanOrEqual(field('tireWidth'), 2.2), lessThanOrEqual(field('tireWidth'), 2.4))
+//  * ```
+//  *
+//  * @param expression - Evaluate if the result of this expression is between the lower and upper bounds.
+//  * @param lowerBound - Lower bound (inclusive) of the range.
+//  * @param upperBound - Upper bound (inclusive) of the range.
+//  * @returns A `BooleanExpression` representing the specified between comparion.
+//  */
+// export function between(
+//   expression: Expression,
+//   lowerBound: unknown,
+//   upperBound: unknown,
+// ): BooleanExpression;
+//
+// export function between(
+//   expression: Expression | string,
+//   lowerBound: unknown,
+//   upperBound: unknown,
+// ): BooleanExpression {
+//   return fieldOrExpression(expression).between(lowerBound, upperBound);
+// }
 
 // TODO(new-expression): Add new top-level expression function definitions above this line
 
