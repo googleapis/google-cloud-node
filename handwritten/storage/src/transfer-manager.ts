@@ -607,7 +607,7 @@ export class TransferManager {
     let files: File[] = [];
 
     const baseDestination = path.resolve(
-      options.passthroughOptions?.destination || '.'
+      options.passthroughOptions?.destination || '.',
     );
 
     if (!Array.isArray(filesOrFolder)) {
@@ -701,7 +701,7 @@ export class TransferManager {
             await fsp.mkdir(path.dirname(destination), {recursive: true});
 
             const resp = (await file.download(
-              passThroughOptionsCopy
+              passThroughOptionsCopy,
             )) as DownloadResponseWithStatus;
 
             finalResults[i] = {
@@ -719,7 +719,7 @@ export class TransferManager {
             errorResp.error = err as Error;
             finalResults[i] = errorResp;
           }
-        })
+        }),
       );
     }
 

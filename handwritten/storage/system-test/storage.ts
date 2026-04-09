@@ -3005,7 +3005,7 @@ describe('storage', function () {
             });
 
             await new Promise(res =>
-              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
             );
 
             const encryptionKey = crypto.randomBytes(32);
@@ -3019,7 +3019,7 @@ describe('storage', function () {
                 assert.strictEqual(err.code, 412);
                 assert.ok(err.message.includes(failureMessage));
                 return true;
-              }
+              },
             );
           });
 
@@ -3047,7 +3047,7 @@ describe('storage', function () {
             });
 
             await new Promise(res =>
-              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
             );
 
             await bucket.setMetadata({
@@ -3059,19 +3059,19 @@ describe('storage', function () {
             });
 
             await new Promise(res =>
-              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
             );
 
             const [metadata] = await bucket.getMetadata();
             assert.strictEqual(
               metadata.encryption?.defaultKmsKeyName,
-              kmsKeyName
+              kmsKeyName,
             );
 
             assert.strictEqual(
               metadata.encryption?.googleManagedEncryptionEnforcementConfig
                 ?.restrictionMode,
-              'FullyRestricted'
+              'FullyRestricted',
             );
           });
         });
