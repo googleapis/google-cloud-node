@@ -4,6 +4,150 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "da6ef3b2599582c2132b83b5311caadc3e1e2a34",
+          "message": "[geocode] make the Place ID format consistent",
+          "issues": [
+            "7903"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "48591e57572ca14f9b4e7dd63d5b9df7405efcb6",
+          "message": "Add initial files for google.maps.geocode.v4",
+          "issues": [
+            "7841"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geocode",
+      "id": "f5610bce-ae82-460d-b83c-cbf3d5eb7473",
+      "createTime": "2026-04-08T00:07:52.535Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "14bb52806fb3783933b1acdfcb3e5007328cf6f7",
+          "message": "Add initial files for google.cloud.auditmanager.v1",
+          "issues": [
+            "7843"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/auditmanager",
+      "id": "c456aeaf-fd40-4052-8d71-68570717a02c",
+      "createTime": "2026-04-08T00:07:52.489Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4e5752bbddbb630463602b7b8de924191f241f02",
+          "message": "[translate] A new field `mime_type` is added to message `.google.cloud.translation.v3.AdaptiveMtTranslateRequest`",
+          "issues": [
+            "7968"
+          ]
+        }
+      ],
+      "version": "9.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "2a4b675f-5527-4c69-ac7c-f746782926a2",
+      "createTime": "2026-04-08T00:07:52.462Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a8fac0a6374071436ff37cfffe9dbceb896d496c",
+          "message": "[securesourcemanager] Add CustomHostConfig to configure custom hostnames for private instances",
+          "issues": [
+            "7901"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "69973b61-4b15-45a9-82ab-222274815173",
+      "createTime": "2026-04-08T00:07:52.413Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "efa3e04e34f4eb4d2f4ee757d2ef8c6b2e380a40",
+          "message": "[networksecurity] Publish proto definitions for AuthzPolicy, TlsInspectionPolicy, GatewaySecurityPolicy, GatewaySecurityPolicyRule, and UrlList",
+          "issues": [
+            "7862"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "b5425758-5059-4b95-9999-e54e8aeda224",
+      "createTime": "2026-04-08T00:07:52.367Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5d3b1387d42b741e2d0cda09c6993e2e37da959c",
+          "message": "[netapp] Add ONTAP passthrough APIs",
+          "issues": [
+            "7861"
+          ]
+        }
+      ],
+      "version": "0.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "8d778c43-daf8-4bc0-877d-156b936338a7",
+      "createTime": "2026-04-08T00:07:52.333Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "24d9b56ef1840f2738920f4577d4f77fb0a5b8fd",
+          "message": "[cx] updated v3 dialogflow client libraries with `dtmf_pattern` and `trace_blocks`",
+          "issues": [
+            "7846"
+          ]
+        }
+      ],
+      "version": "5.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "43968700-60ca-47e4-a83b-3ad4075e929c",
+      "createTime": "2026-04-08T00:07:52.287Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "75c76e1253982abc8e228c793dee684004e621f2",
+          "message": "[dialogflow] updated v2beta1 dialogflow client libraries",
+          "issues": [
+            "7853"
+          ]
+        }
+      ],
+      "version": "7.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "d759283e-d57d-4b46-b819-bfdf7843c8c0",
+      "createTime": "2026-04-08T00:07:52.254Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "31fa06fe888b173c86c166af1c062c3cc3211342",
           "message": "Upgrade the generator to protobuf 31 and bazel 7.7.1, and update templates to fix system test",
@@ -69392,5 +69536,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-06T17:24:30.125Z"
+  "updateTime": "2026-04-08T00:07:52.535Z"
 }

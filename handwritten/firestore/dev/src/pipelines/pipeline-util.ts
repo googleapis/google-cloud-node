@@ -65,6 +65,8 @@ import {
   lessThan,
   Field,
   AggregateFunction,
+  pipelineValue,
+  AliasedExpression,
 } from './expression';
 import {Pipeline, PipelineResult, ExplainStats} from './pipelines';
 import {StructuredPipeline} from './structured-pipeline';
@@ -605,6 +607,12 @@ export function isBooleanExpr(
   return val instanceof BooleanExpression;
 }
 
+export function isAliasedExpr(
+  val: unknown,
+): val is firestore.Pipelines.AliasedExpression {
+  return val instanceof AliasedExpression;
+}
+
 export function isField(val: unknown): val is firestore.Pipelines.Field {
   return val instanceof Field;
 }
@@ -632,6 +640,9 @@ export function valueToDefaultExpr(value: unknown): Expression {
   if (isFirestoreValue(value)) {
     return constant(value);
   }
+  if (isPipeline(value)) {
+    return pipelineValue(value);
+  }
   if (value instanceof Expression) {
     return value;
   } else if (isPlainObject(value)) {
@@ -642,7 +653,6 @@ export function valueToDefaultExpr(value: unknown): Expression {
     result = constant(value);
   }
 
-  // TODO(pipeline) is this still used?
   result._createdFromLiteral = true;
   return result;
 }
