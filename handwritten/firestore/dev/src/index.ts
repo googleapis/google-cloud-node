@@ -964,7 +964,6 @@ export class Firestore implements firestore.Firestore {
   }
 
   /**
-   * @beta
    * Creates and returns a new PipelineSource, which allows specifying the source stage of a `Pipeline`.
    *
    * @example
