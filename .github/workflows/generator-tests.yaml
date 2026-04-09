@@ -41,6 +41,10 @@ jobs:
       run: npm install
       working-directory: core/generator/gapic-generator-typescript
       
+    - name: Strip local GCC 15 flags for CI
+      working-directory: core/generator/gapic-generator-typescript
+      run: sed -i '/--gsframe/d' .bazelrc
+
     - name: Run bazel build
       working-directory: core/generator/gapic-generator-typescript
       run: bazelisk build --noremote_accept_cached '//...'
@@ -106,136 +110,6 @@ jobs:
           cd ../..
         done
     - name: Test combined library (Speech)
-      if: steps.generator-changes.outputs.changes == 'true'
-      env:
-        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
-      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs v1 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
-
-    - name: Run tests for combined library (Speech)
-      if: steps.generator-changes.outputs.changes == 'true'
-      run: |
-        set -ex
-        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
-        npm install
-        npm test
-        npm run system-test
-
-    - name: Test combined library (Tasks)
-      if: steps.generator-changes.outputs.changes == 'true'
-      env:
-        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
-      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs v2 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
-
-    - name: Run tests for combined library (Tasks)
-      if: steps.generator-changes.outputs.changes == 'true'
-      run: |
-        set -ex
-        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
-        npm install
-        npm test
-        npm run system-test
-
-  continuous:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    container: gcr.io/gapic-images/googleapis:20250404
-    steps:
-    - uses: actions/checkout@v5
-      with:
-        fetch-depth: 2 # Need at least two commits for HEAD~..
-
-    - name: Mark repo as safe for git
-      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
-    - name: Compute GIT_DIFF_ARG
-      id: diff-logic
-      run: |
-        # For continuous build, we want to know the difference in the last
-        # commit. This assumes we use squash commit when merging PRs.
-        git fetch origin main --deepen=1
-        echo "GIT_DIFF_ARG=HEAD~.." >> $GITHUB_ENV
-
-    - name: Cache Bazel files
-      id: cache-bazel
-      uses: actions/cache@v5
-      with:
-        path: ~/.cache/bazel
-        key: ${{ runner.os }}-googleapis-20250422-${{ secrets.CACHE_VERSION }}
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version: 18.x
-
-    - name: Install Node dependencies with npm
-      run: npm install
-      working-directory: core/generator/gapic-generator-typescript
-      
-    - name: Run bazel build
-      working-directory: core/generator/gapic-generator-typescript
-      run: bazelisk build --noremote_accept_cached '//...'
-
-    - name: Run bazel test
-      working-directory: core/generator/gapic-generator-typescript
-      run: bazelisk test --test_output=errors --noremote_accept_cached //...
-
-    - name: Verify error conformance
-      working-directory: core/generator/gapic-generator-typescript
-      run: |
-        curl -sSL https://github.com/googleapis/gapic-config-validator/releases/download/v0.6.0/gapic-config-validator-0.6.0-linux-amd64.tar.gz > config-validator.tar.gz
-        tar xzf config-validator.tar.gz --no-same-owner
-        chmod +x gapic-error-conformance
-        chmod +x bazel-bin/protoc_plugin_/protoc_plugin
-        ./gapic-error-conformance -plugin="bazel-bin/protoc_plugin_/protoc_plugin"
-
-    - name: Prepare baseline artifacts
-      working-directory: core/generator/gapic-generator-typescript
-      run: |
-        mkdir -p ~/artifacts
-        cp bazel-testlogs/unit_tests/test.outputs/outputs.zip ~/artifacts/
-        bazelisk run -- @pnpm//:pnpm --dir $PWD install
-        tar cfz ~/artifacts/node_modules.tar.gz node_modules
-
-    - name: Save artifacts
-      uses: actions/upload-artifact@v5
-      with:
-        name: artifacts
-        path: ~/artifacts
-
-    - name: Test generated libraries
-      working-directory: core/generator/gapic-generator-typescript
-      run: |
-        set -ex
-        unzip ~/artifacts/outputs.zip -d library
-        for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
-          echo "--- Testing library $lib ---"
-          cd library/.test-out-$lib
-          npm install
-          npm test
-          npm run fix
-          rm -rf build
-          npm run compile
-          npm run system-test
-          npm run docs
-          cd ../..
-        done
-
-    - name: Test generated ESM libraries
-      working-directory: core/generator/gapic-generator-typescript
-      run: |
-        set -ex
-        for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
-          echo "--- Testing ESM library $lib ---"
-          cd library/.test-out-$lib-esm
-          npm install
-          npm test
-          npm run fix
-          rm -rf build
-          npm run compile
-          npm run system-test
-          cd ../..
-        done
-            - name: Test combined library (Speech)
       if: steps.generator-changes.outputs.changes == 'true'
       env:
         TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
