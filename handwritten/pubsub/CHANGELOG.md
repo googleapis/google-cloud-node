@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v5.3.0...pubsub-v5.3.1) (2026-04-09)
+
+
+### Bug Fixes
+
+* **pubsub:** Remove messages from leasing on nackWithResponse ([#7817](https://github.com/googleapis/google-cloud-node/issues/7817)) ([841f0ca](https://github.com/googleapis/google-cloud-node/commit/841f0ca06d3d70278bb1d0c99535ad3c73c3d5d4))
+
 ## [5.3.0](https://github.com/googleapis/nodejs-pubsub/compare/v5.2.4...v5.3.0) (2026-02-19)
 
 

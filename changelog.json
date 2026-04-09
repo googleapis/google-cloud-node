@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "841f0ca06d3d70278bb1d0c99535ad3c73c3d5d4",
+          "message": "Remove messages from leasing on nackWithResponse",
+          "issues": [
+            "7817"
+          ],
+          "scope": "pubsub"
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "363c5690-e863-41f4-a677-e31e2dd0041e",
+      "createTime": "2026-04-09T15:40:49.321Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "da6ef3b2599582c2132b83b5311caadc3e1e2a34",
           "message": "[geocode] make the Place ID format consistent",
@@ -69536,5 +69554,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-08T00:07:52.535Z"
+  "updateTime": "2026-04-09T15:40:49.321Z"
 }
