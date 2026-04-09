@@ -4,6 +4,32 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "7fad2f6e2ef0b16ab87a92ae471136fe6f2655ef",
+          "message": "Unblock the releases on Node Bigquery",
+          "issues": [
+            "7946"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "e500d4077065529fbdee4be565434a34b6643c09",
+          "message": "Allow the user to ask for skipping parsing rows when querying",
+          "issues": [
+            "7848"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "8.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "95c0b159-cdba-4b27-9c19-e99b2535868f",
+      "createTime": "2026-04-09T15:40:48.837Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "da6ef3b2599582c2132b83b5311caadc3e1e2a34",
           "message": "[geocode] make the Place ID format consistent",
@@ -69536,5 +69562,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-08T00:07:52.535Z"
+  "updateTime": "2026-04-09T15:40:48.837Z"
 }
