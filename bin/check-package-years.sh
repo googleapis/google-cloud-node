@@ -17,58 +17,88 @@
 # This script ensures that all the headers in any given folder under packages
 # all have the same Copyright year in their header.
 
-set -e
+# Get the directory where the script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Assume packages is a sibling of the bin directory where this script lives
+# or in the current directory if run from root.
+if [ -d "$SCRIPT_DIR/../packages" ]; then
+  PACKAGES_DIR="$SCRIPT_DIR/../packages"
+elif [ -d "$SCRIPT_DIR/packages" ]; then
+  PACKAGES_DIR="$SCRIPT_DIR/packages"
+else
+  echo "Error: Could not find 'packages' directory."
+  exit 1
+fi
 
-PACKAGES_DIR="packages"
 EXIT_CODE=0
 
 # Iterate through each package folder
-for pkg in "$PACKAGES_DIR"/*; do
-  echo "Scanning package $pkg"
-  if [ ! -d "$pkg" ]; then
-    continue
-  fi
+# Using find -print0 and read -d '' is the most robust way to handle any filename
+while IFS= read -r -d '' pkg_path; do
+  pkg=$(basename "$pkg_path")
+  echo "Scanning package $pkg..."
 
   first_year=""
   first_file=""
 
-  # Find all files with a Copyright year, excluding common non-source files
-  # We use -l to get the list of files to avoid issues with multiple matches in one file
-  # Use process substitution to avoid subshell issues with EXIT_CODE
+  # Find all files that are likely to have copyright headers
+  # This addresses the request to ensure all files in the folder have a copyright year.
+  # We focus on source files to avoid checking every single file (like images, etc.)
+  # and exclude common non-source files.
+  
+  # Use a temporary file to store the list of files to avoid subshell issues
+  tmp_file=$(mktemp)
+  find "$pkg_path" -type f \
+    \( -name "*.ts" -o -name "*.js" -o -name "*.proto" \) \
+    -not -path "*/node_modules/*" \
+    -not -path "*/.git/*" \
+    -not -path "*/dist/*" \
+    -not -path "*/build/*" \
+    -not -name "LICENSE" \
+    -not -name "CHANGELOG.md" \
+    -not -name "package.json" \
+    -not -name "package-lock.json" \
+    -not -name "pnpm-lock.yaml" \
+    -not -name "prettier.config.js" \
+    -not -name ".prettierrc.js" \
+    -not -name ".eslintrc.js" \
+    -not -name "webpack.config.js" \
+    -not -name "rollup.config.js" \
+    > "$tmp_file"
+
   while IFS= read -r file; do
     if [ -z "$file" ]; then continue; fi
 
     # Extract the year from the first copyright line found in the file
-    year=$(grep -ohE "Copyright [0-9]{4}" "$file" | head -n 1 | awk '{print $2}')
+    # We use grep -i to be case-insensitive and || true to be robust
+    year=$(grep -iohE "Copyright [0-9]{4}" "$file" | head -n 1 | awk '{print $2}' || true)
 
-    if [ -n "$year" ]; then
-      if [ -z "$first_year" ]; then
-        first_year="$year"
-        first_file="$file"
-      elif [ "$year" != "$first_year" ]; then
-        echo "Error: Copyright year mismatch in package: $(basename "$pkg")"
-        echo "  $first_file: $first_year"
-        echo "  $file: $year"
-        EXIT_CODE=1
-        # Stop checking this package and move to the next
-        break
-      fi
+    if [ -z "$year" ]; then
+      # If the file is missing a copyright year, report it
+      # Note: We only report this if it's a file type we expect to have it
+      echo "Error: Missing copyright year in file: $file"
+      EXIT_CODE=1
+      continue
     fi
-  done < <(grep -rlE "Copyright [0-9]{4}" "$pkg" \
-    --exclude-dir=node_modules \
-    --exclude-dir=.git \
-    --exclude=LICENSE \
-    --exclude=CHANGELOG.md \
-    --exclude=package.json \
-    --exclude=package-lock.json \
-    --exclude=pnpm-lock.yaml \
-    2>/dev/null || true)
-done
+
+    if [ -z "$first_year" ]; then
+      first_year="$year"
+      first_file="$file"
+    elif [ "$year" != "$first_year" ]; then
+      echo "Error: Copyright year mismatch in package: $pkg"
+      echo "  $first_file: $first_year"
+      echo "  $file: $year"
+      EXIT_CODE=1
+      # We don't break here to allow finding all issues in this package
+    fi
+  done < "$tmp_file"
+  rm "$tmp_file"
+done < <(find "$PACKAGES_DIR" -maxdepth 1 -mindepth 1 -type d -print0 | sort -z)
 
 if [ $EXIT_CODE -eq 0 ]; then
   echo "Success: All package copyright years match."
 else
-  echo "Failure: Some packages have mismatched copyright years."
+  echo "Failure: Some packages have mismatched or missing copyright years."
 fi
 
 exit $EXIT_CODE
