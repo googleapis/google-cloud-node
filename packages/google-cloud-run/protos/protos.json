@@ -5200,7 +5200,10 @@
                         "customAudiences": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 37
+                          "id": 37,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "satisfiesPzs": {
                           "type": "bool",

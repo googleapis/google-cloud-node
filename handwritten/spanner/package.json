@@ -140,5 +140,15 @@
     "typescript": "^5.8.2",
     "yargs": "^17.7.2"
   },
+  "overrides": {
+    "gcp-metadata": "^7.0.1",
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "gcp-metadata": "^7.0.1",
+      "@sinonjs/fake-timers": "15.2.1"
+    }
+  },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/spanner"
 }

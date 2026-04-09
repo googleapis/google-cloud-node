@@ -42,10 +42,10 @@ function main(resource, permissions) {
   // const permissions = ['abc','def']
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callTestIamPermissions() {
     // Construct request
@@ -55,7 +55,7 @@ function main(resource, permissions) {
     };
 
     // Run request
-    const response = await controlClient.testIamPermissions(request);
+    const response = await storageControlClient.testIamPermissions(request);
     console.log(response);
   }
 

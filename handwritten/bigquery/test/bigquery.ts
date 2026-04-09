@@ -3243,6 +3243,74 @@ describe('BigQuery', () => {
       });
     });
 
+    it('should delete res.rows if skipParsing is false', done => {
+      const rawRows = [{f: [{v: 'hi'}]}];
+      const resp = {
+        jobComplete: true,
+        schema: {
+          fields: [{name: 'name', type: 'STRING'}],
+        },
+        rows: rawRows,
+      };
+
+      const job = {
+        getQueryResults: (options: {}, callback: Function) => {
+          callback(null, [], null, resp);
+        },
+      };
+
+      bq.runJobsQuery = (reqOpts: {}, callback: Function) => {
+        callback(null, job, resp);
+      };
+
+      bq.query(
+        {
+          query: 'SELECT * FROM table',
+          skipParsing: false,
+        },
+        (err: Error, rows: {}[], nextQuery: {}, response: any) => {
+          assert.ifError(err);
+          // the job Complete callback returned the resp
+          assert.deepStrictEqual(response.rows, undefined);
+          done();
+        },
+      );
+    });
+
+    it('should skip parsing if skipParsing is true', done => {
+      const rawRows = [{f: [{v: 'hi'}]}];
+      const resp = {
+        jobComplete: true,
+        schema: {
+          fields: [{name: 'name', type: 'STRING'}],
+        },
+        rows: rawRows,
+      };
+
+      const job = {
+        getQueryResults: (options: QueryResultsOptions, callback: Function) => {
+          callback(null, options._cachedRows, null, options._cachedResponse);
+        },
+      };
+
+      bq.runJobsQuery = (reqOpts: {}, callback: Function) => {
+        callback(null, job, resp);
+      };
+
+      bq.query(
+        {
+          query: 'SELECT * FROM table',
+          skipParsing: true,
+        },
+        (err: Error, rows: {}[], nextQuery: {}, response: any) => {
+          assert.ifError(err);
+          assert.strictEqual(rows, rawRows);
+          assert.deepStrictEqual(response.rows, rawRows);
+          done();
+        },
+      );
+    });
+
     it('should call job#getQueryResults with query options', done => {
       let queryResultsOpts = {};
       const fakeJob = {
@@ -3371,6 +3439,14 @@ describe('BigQuery', () => {
           delete req[key];
         }
       }
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              timestampOutputFormat: 'ISO8601_STRING',
+            }
+          : {
+              useInt64Timestamp: true,
+            };
       const expectedReq = {
         query: QUERY_STRING,
         useLegacySql: false,
@@ -3397,9 +3473,7 @@ describe('BigQuery', () => {
           key: 'value',
         },
         jobCreationMode: 'JOB_CREATION_REQUIRED',
-        formatOptions: {
-          timestampOutputFormat: 'ISO8601_STRING',
-        },
+        formatOptions,
       };
       assert.deepStrictEqual(req, expectedReq);
     });
@@ -3440,6 +3514,9 @@ describe('BigQuery', () => {
 
       testCases.forEach(testCase => {
         it(`should handle ${testCase.name}`, () => {
+          if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+            return;
+          }
           const req = bq.buildQueryRequest_(QUERY_STRING, testCase.opts);
 
           const expectedReq = {
@@ -3467,6 +3544,7 @@ describe('BigQuery', () => {
         });
       });
     });
+
     it('should create a QueryRequest from a SQL string', () => {
       const req = bq.buildQueryRequest_(QUERY_STRING, {});
       for (const key in req) {
@@ -3474,14 +3552,20 @@ describe('BigQuery', () => {
           delete req[key];
         }
       }
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              timestampOutputFormat: 'ISO8601_STRING',
+            }
+          : {
+              useInt64Timestamp: true,
+            };
       const expectedReq = {
         query: QUERY_STRING,
         useLegacySql: false,
         requestId: req.requestId,
         jobCreationMode: 'JOB_CREATION_OPTIONAL',
-        formatOptions: {
-          timestampOutputFormat: 'ISO8601_STRING',
-        },
+        formatOptions,
       };
       assert.deepStrictEqual(req, expectedReq);
     });

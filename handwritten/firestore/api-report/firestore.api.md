@@ -14,16 +14,16 @@ import * as protos from '../../protos/firestore_v1_proto_api';
 import { Readable } from 'stream';
 import { Span as Span_2 } from '@opentelemetry/api';
 
-// @beta
+// @public
 function abs(expr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function abs(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function add(first: Expression, second: Expression | unknown): FunctionExpression;
 
-// @beta
+// @public
 function add(fieldName: string, second: Expression | unknown): FunctionExpression;
 
 // @public
@@ -57,11 +57,13 @@ export type AggregateFieldType = ReturnType<typeof AggregateField.count> | Retur
 
 // Warning: (ae-forgotten-export) The symbol "HasUserData" needs to be exported by the entry point index.d.ts
 //
-// @beta
+// @public
 class AggregateFunction implements AggregateFunction, HasUserData {
     constructor(name: string, params: Expression[]);
     as(name: string): AliasedAggregate;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal
     _createdFromLiteral: boolean;
     // (undocumented)
     expressionType: firestore.Pipelines.ExpressionType;
@@ -70,11 +72,11 @@ class AggregateFunction implements AggregateFunction, HasUserData {
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     // Warning: (ae-forgotten-export) The symbol "Serializer" needs to be exported by the entry point index.d.ts
     //
-    // (undocumented)
+    // @internal (undocumented)
     _toProto(serializer: Serializer): api.IValue;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
@@ -129,7 +131,7 @@ export interface AggregateSpec {
 // @public
 export type AggregateType = 'count' | 'avg' | 'sum';
 
-// @beta
+// @public
 class AliasedAggregate implements AliasedAggregate, HasUserData {
     constructor(_aggregate: AggregateFunction, _alias: string);
     // (undocumented)
@@ -137,19 +139,23 @@ class AliasedAggregate implements AliasedAggregate, HasUserData {
     // (undocumented)
     readonly _alias: string;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal
     _createdFromLiteral: boolean;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
-// @beta
+// @public
 class AliasedExpression implements firestore.Pipelines.Selectable, HasUserData {
     constructor(_expr: Expression, _alias: string);
     // (undocumented)
     readonly _alias: string;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal
     _createdFromLiteral: boolean;
     // (undocumented)
     readonly _expr: Expression;
@@ -159,203 +165,227 @@ class AliasedExpression implements firestore.Pipelines.Selectable, HasUserData {
     selectable: true;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
-// @beta
+// @public
 function and(first: BooleanExpression, second: BooleanExpression, ...more: BooleanExpression[]): BooleanExpression;
 
-// @beta
+// @public
 function array(elements: unknown[]): FunctionExpression;
 
-// @beta
+// @public
 function arrayAgg(expression: Expression): AggregateFunction;
 
-// @beta
+// @public
 function arrayAgg(fieldName: string): AggregateFunction;
 
-// @beta
+// @public
 function arrayAggDistinct(expression: Expression): AggregateFunction;
 
-// @beta
+// @public
 function arrayAggDistinct(fieldName: string): AggregateFunction;
 
-// @beta
+// @public
 function arrayConcat(firstArray: Expression, secondArray: Expression | unknown[], ...otherArrays: Array<Expression | unknown[]>): FunctionExpression;
 
-// @beta
+// @public
 function arrayConcat(firstArrayField: string, secondArray: Expression | unknown[], ...otherArrays: Array<Expression | unknown[]>): FunctionExpression;
 
-// @beta
+// @public
 function arrayContains(array: Expression, element: Expression): BooleanExpression;
 
-// @beta
+// @public
 function arrayContains(array: Expression, element: unknown): BooleanExpression;
 
-// @beta
+// @public
 function arrayContains(fieldName: string, element: Expression): BooleanExpression;
 
-// @beta
+// @public
 function arrayContains(fieldName: string, element: unknown): BooleanExpression;
 
-// @beta
+// @public
 function arrayContainsAll(array: Expression, values: Array<Expression | unknown>): BooleanExpression;
 
-// @beta
+// @public
 function arrayContainsAll(fieldName: string, values: Array<Expression | unknown>): BooleanExpression;
 
-// @beta
+// @public
 function arrayContainsAll(array: Expression, arrayExpression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function arrayContainsAll(fieldName: string, arrayExpression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function arrayContainsAny(array: Expression, values: Array<Expression | unknown>): BooleanExpression;
 
-// @beta
+// @public
 function arrayContainsAny(fieldName: string, values: Array<Expression | unknown>): BooleanExpression;
 
-// @beta
+// @public
 function arrayContainsAny(array: Expression, values: Expression): BooleanExpression;
 
-// @beta
+// @public
 function arrayContainsAny(fieldName: string, values: Expression): BooleanExpression;
 
-// @beta
+// @public
+function arrayFilter(fieldName: string, alias: string, filter: BooleanExpression): FunctionExpression;
+
+// @public
+function arrayFilter(arrayExpression: Expression, alias: string, filter: BooleanExpression): FunctionExpression;
+
+// @public
 function arrayFirst(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function arrayFirst(arrayExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayFirstN(fieldName: string, n: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayFirstN(fieldName: string, n: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayFirstN(arrayExpression: Expression, n: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayFirstN(arrayExpression: Expression, n: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayGet(arrayField: string, index: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayGet(arrayField: string, indexExpr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayGet(arrayExpression: Expression, index: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayGet(arrayExpression: Expression, indexExpr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayIndexOf(fieldName: string, search: unknown | Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayIndexOf(arrayExpression: Expression, search: unknown | Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayIndexOfAll(fieldName: string, search: unknown | Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayIndexOfAll(arrayExpression: Expression, search: unknown | Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayLast(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function arrayLast(arrayExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayLastIndexOf(fieldName: string, search: unknown | Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayLastIndexOf(arrayExpression: Expression, search: unknown | Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayLastN(fieldName: string, n: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayLastN(fieldName: string, n: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayLastN(arrayExpression: Expression, n: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayLastN(arrayExpression: Expression, n: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayLength(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function arrayLength(array: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayMaximum(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function arrayMaximum(arrayExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayMaximumN(fieldName: string, n: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayMaximumN(fieldName: string, n: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayMaximumN(arrayExpression: Expression, n: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayMaximumN(arrayExpression: Expression, n: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayMinimum(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function arrayMinimum(arrayExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayMinimumN(fieldName: string, n: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayMinimumN(fieldName: string, n: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayMinimumN(arrayExpression: Expression, n: number): FunctionExpression;
 
-// @beta
+// @public
 function arrayMinimumN(arrayExpression: Expression, n: Expression): FunctionExpression;
 
-// @beta
+// @public
 function arrayReverse(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function arrayReverse(arrayExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
+function arraySlice(arrayName: string, offset: number | Expression, length?: number | Expression): FunctionExpression;
+
+// @public
+function arraySlice(arrayExpression: Expression, offset: number | Expression, length?: number | Expression): FunctionExpression;
+
+// @public
 function arraySum(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function arraySum(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
+function arrayTransform(fieldName: string, elementAlias: string, transform: Expression): FunctionExpression;
+
+// @public
+function arrayTransform(arrayExpression: Expression, elementAlias: string, transform: Expression): FunctionExpression;
+
+// @public
+function arrayTransformWithIndex(fieldName: string, elementAlias: string, indexAlias: string, transform: Expression): FunctionExpression;
+
+// @public
+function arrayTransformWithIndex(arrayExpression: Expression, elementAlias: string, indexAlias: string, transform: Expression): FunctionExpression;
+
+// @public
 function ascending(expr: Expression): Ordering;
 
-// @beta
+// @public
 function ascending(fieldName: string): Ordering;
 
-// @beta
+// @public
 function average(expression: Expression): AggregateFunction;
 
-// @beta
+// @public
 function average(fieldName: string): AggregateFunction;
 
-// @beta
+// @public
 abstract class BooleanExpression extends Expression implements firestore.Pipelines.BooleanExpression {
     conditional(thenExpr: Expression, elseExpr: Expression): FunctionExpression;
     countIf(): AggregateFunction;
@@ -480,23 +510,29 @@ export class BundleBuilder {
     readonly bundleId: string;
 }
 
-// @beta
+// @public
 function byteLength(expr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function byteLength(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function ceil(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function ceil(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function charLength(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function charLength(stringExpression: Expression): FunctionExpression;
+
+// @public
+function coalesce(expression: Expression, replacement: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
+
+// @public
+function coalesce(fieldName: string, replacement: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
 //
@@ -514,10 +550,10 @@ export class CollectionGroup<AppModelType = firestore.DocumentData, DbModelType 
     withConverter<NewAppModelType, NewDbModelType extends firestore.DocumentData = firestore.DocumentData>(converter: firestore.FirestoreDataConverter<NewAppModelType, NewDbModelType> | null): CollectionGroup<NewAppModelType, NewDbModelType>;
 }
 
-// @beta
+// @public
 function collectionId(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function collectionId(expression: Expression): FunctionExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
@@ -570,16 +606,16 @@ export class CollectionReference<AppModelType = firestore.DocumentData, DbModelT
     withConverter(converter: null): CollectionReference<firestore.DocumentData, firestore.DocumentData>;
 }
 
-// @beta
+// @public
 function concat(first: Expression, second: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
 
-// @beta
+// @public
 function concat(fieldName: string, second: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
 
-// @beta
+// @public
 function conditional(condition: BooleanExpression, thenExpr: Expression, elseExpr: Expression): FunctionExpression;
 
-// @beta
+// @internal
 class Constant extends Expression {
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@hideconstructor" is not defined in this configuration
@@ -600,74 +636,80 @@ class Constant extends Expression {
     _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
-// @beta
+// Warning: (ae-internal-mixed-release-tag) Mixed release tags are not allowed for "constant" because one of its declarations is marked as @internal
+// Warning: (ae-internal-mixed-release-tag) Mixed release tags are not allowed for "constant" because one of its declarations is marked as @internal
+//
+// @public
 function constant(value: number): Expression;
 
-// @beta
+// @public
 function constant(value: string): Expression;
 
-// @beta
+// @public
 function constant(value: boolean): BooleanExpression;
 
-// @beta
+// @public
 function constant(value: null): Expression;
 
-// @beta
+// @public
 function constant(value: firestore.GeoPoint): Expression;
 
-// @beta
+// @public
 function constant(value: firestore.Timestamp): Expression;
 
-// @beta
+// @public
 function constant(value: Date): Expression;
 
-// @beta
+// @public
 function constant(value: Buffer | Uint8Array): Expression;
 
-// @beta
+// @public
 function constant(value: firestore.DocumentReference): Expression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
 //
-// @beta
+// @internal
 function constant(value: api.IValue): Expression;
 
-// @beta
+// @public
 function constant(value: firestore.VectorValue): Expression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
 //
-// @beta (undocumented)
+// @internal (undocumented)
 function constant(value: unknown): Expression;
 
-// @beta
+// @public
 function cosineDistance(fieldName: string, vector: number[] | VectorValue): FunctionExpression;
 
-// @beta
+// @public
 function cosineDistance(fieldName: string, vectorExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function cosineDistance(vectorExpression: Expression, vector: number[] | VectorValue): FunctionExpression;
 
-// @beta
+// @public
 function cosineDistance(vectorExpression: Expression, otherVectorExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function count(expression: Expression): AggregateFunction;
 
-// @beta
+// @public
 function count(fieldName: string): AggregateFunction;
 
-// @beta
+// @public
 function countAll(): AggregateFunction;
 
-// @beta
+// @public
 function countDistinct(expr: Expression | string): AggregateFunction;
 
-// @beta
+// @public
 function countIf(booleanExpr: BooleanExpression): AggregateFunction;
 
-// @beta
+// @public
+function currentDocument(): Expression;
+
+// @public
 function currentTimestamp(): FunctionExpression;
 
 // @public (undocumented)
@@ -678,22 +720,22 @@ export const DEFAULT_MAX_IDLE_CHANNELS = 1;
 // @public
 export const DEFAULT_MAX_TRANSACTION_ATTEMPTS = 5;
 
-// @beta
+// @public
 function descending(expr: Expression): Ordering;
 
-// @beta
+// @public
 function descending(fieldName: string): Ordering;
 
-// @beta
+// @public
 function divide(dividend: Expression, divisort: Expression): FunctionExpression;
 
-// @beta
+// @public
 function divide(dividend: Expression, divisor: unknown): FunctionExpression;
 
-// @beta
+// @public
 function divide(dividend: string, divisor: Expression): FunctionExpression;
 
-// @beta
+// @public
 function divide(dividend: string, divisor: unknown): FunctionExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
@@ -733,11 +775,14 @@ export class DocumentChange<AppModelType = firestore.DocumentData, DbModelType e
 // @public (undocumented)
 export type DocumentChangeType = 'added' | 'removed' | 'modified';
 
-// @beta
+// @public
 function documentId(documentPath: string | firestore.DocumentReference): FunctionExpression;
 
-// @beta
+// @public
 function documentId(documentPathExpr: Expression): FunctionExpression;
+
+// @beta
+function documentMatches(rquery: string | Expression): BooleanExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
 // Warning: (ae-forgotten-export) The symbol "Serializable" needs to be exported by the entry point index.d.ts
@@ -930,64 +975,64 @@ export class DocumentSnapshot<AppModelType = firestore.DocumentData, DbModelType
     get updateTime(): Timestamp | undefined;
 }
 
-// @beta
+// @public
 function dotProduct(fieldName: string, vector: number[] | VectorValue): FunctionExpression;
 
-// @beta
+// @public
 function dotProduct(fieldName: string, vectorExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function dotProduct(vectorExpression: Expression, vector: number[] | VectorValue): FunctionExpression;
 
-// @beta
+// @public
 function dotProduct(vectorExpression: Expression, otherVectorExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function endsWith(fieldName: string, suffix: string): BooleanExpression;
 
-// @beta
+// @public
 function endsWith(fieldName: string, suffix: Expression): BooleanExpression;
 
-// @beta
+// @public
 function endsWith(stringExpression: Expression, suffix: string): BooleanExpression;
 
-// @beta
+// @public
 function endsWith(stringExpression: Expression, suffix: Expression): BooleanExpression;
 
-// @beta
+// @public
 function equal(left: Expression, right: Expression): BooleanExpression;
 
-// @beta
+// @public
 function equal(expression: Expression, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function equal(fieldName: string, expression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function equal(fieldName: string, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function equalAny(expression: Expression, values: Array<Expression | unknown>): BooleanExpression;
 
-// @beta
+// @public
 function equalAny(expression: Expression, arrayExpression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function equalAny(fieldName: string, values: Array<Expression | unknown>): BooleanExpression;
 
-// @beta
+// @public
 function equalAny(fieldName: string, arrayExpression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function euclideanDistance(fieldName: string, vector: number[] | VectorValue): FunctionExpression;
 
-// @beta
+// @public
 function euclideanDistance(fieldName: string, vectorExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function euclideanDistance(vectorExpression: Expression, vector: number[] | VectorValue): FunctionExpression;
 
-// @beta
+// @public
 function euclideanDistance(vectorExpression: Expression, otherVectorExpression: Expression): FunctionExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
@@ -1012,16 +1057,16 @@ export class ExecutionStats implements firestore.ExecutionStats {
     readonly resultsReturned: number;
 }
 
-// @beta
+// @public
 function exists(value: Expression): BooleanExpression;
 
-// @beta
+// @public
 function exists(fieldName: string): BooleanExpression;
 
-// @beta
+// @public
 function exp(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function exp(fieldName: string): FunctionExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
@@ -1056,7 +1101,7 @@ export class ExplainResults<T> implements firestore.ExplainResults<T> {
     readonly snapshot: T | null;
 }
 
-// @beta
+// @public
 abstract class Expression implements firestore.Pipelines.Expression, HasUserData {
     abs(): FunctionExpression;
     add(second: firestore.Pipelines.Expression | unknown, ...others: Array<firestore.Pipelines.Expression | unknown>): FunctionExpression;
@@ -1069,6 +1114,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     arrayContainsAll(arrayExpression: Expression): BooleanExpression;
     arrayContainsAny(values: Array<Expression | unknown>): BooleanExpression;
     arrayContainsAny(arrayExpression: Expression): BooleanExpression;
+    arrayFilter(alias: string, filter: BooleanExpression): FunctionExpression;
     arrayFirst(): FunctionExpression;
     arrayFirstN(n: number): FunctionExpression;
     arrayFirstN(n: Expression): FunctionExpression;
@@ -1091,7 +1137,10 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     arrayMinimumN(n: number): FunctionExpression;
     arrayMinimumN(n: Expression): FunctionExpression;
     arrayReverse(): FunctionExpression;
+    arraySlice(offset: number | Expression, length?: number | Expression): FunctionExpression;
     arraySum(): FunctionExpression;
+    arrayTransform(elementAlias: string, transform: Expression): FunctionExpression;
+    arrayTransformWithIndex(elementAlias: string, indexAlias: string, transform: Expression): FunctionExpression;
     as(name: string): AliasedExpression;
     asBoolean(): BooleanExpression;
     ascending(): Ordering;
@@ -1099,6 +1148,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     byteLength(): FunctionExpression;
     ceil(): FunctionExpression;
     charLength(): FunctionExpression;
+    coalesce(replacement: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
     collectionId(): FunctionExpression;
     concat(second: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
     cosineDistance(vectorExpression: Expression): FunctionExpression;
@@ -1106,6 +1156,8 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     count(): AggregateFunction;
     countDistinct(): AggregateFunction;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal
     _createdFromLiteral: boolean;
     descending(): Ordering;
     divide(divisor: Expression): FunctionExpression;
@@ -1127,6 +1179,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     abstract expressionType: firestore.Pipelines.ExpressionType;
     first(): AggregateFunction;
     floor(): FunctionExpression;
+    getField(key: string | Expression): Expression;
     greaterThan(expression: Expression): BooleanExpression;
     greaterThan(value: unknown): BooleanExpression;
     greaterThanOrEqual(expression: Expression): BooleanExpression;
@@ -1135,9 +1188,11 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     ifAbsent(elseExpression: unknown): Expression;
     ifError(catchExpr: Expression): FunctionExpression;
     ifError(catchValue: unknown): FunctionExpression;
+    ifNull(elseExpression: Expression): FunctionExpression;
+    ifNull(elseValue: unknown): FunctionExpression;
     isAbsent(): BooleanExpression;
     isError(): BooleanExpression;
-    isType(type: Type): BooleanExpression;
+    isType(type: string): BooleanExpression;
     join(delimiterExpression: Expression): Expression;
     join(delimiter: string): Expression;
     last(): AggregateFunction;
@@ -1170,6 +1225,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     notEqual(value: unknown): BooleanExpression;
     notEqualAny(values: Array<Expression | unknown>): BooleanExpression;
     notEqualAny(arrayExpression: Expression): BooleanExpression;
+    parent(): FunctionExpression;
     pow(exponent: Expression): FunctionExpression;
     pow(exponent: number): FunctionExpression;
     // (undocumented)
@@ -1206,9 +1262,13 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     subtract(subtrahend: number): FunctionExpression;
     sum(): AggregateFunction;
     timestampAdd(unit: Expression, amount: Expression): FunctionExpression;
-    timestampAdd(unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day', amount: number): FunctionExpression;
+    timestampAdd(unit: firestore.Pipelines.TimeUnit, amount: number): FunctionExpression;
+    timestampDiff(start: Expression, unit: Expression): FunctionExpression;
+    timestampDiff(start: string | Expression, unit: firestore.Pipelines.TimeUnit): FunctionExpression;
+    timestampExtract(part: firestore.Pipelines.TimePart, timezone?: string | Expression): FunctionExpression;
+    timestampExtract(part: Expression, timezone?: string | Expression): FunctionExpression;
     timestampSubtract(unit: Expression, amount: Expression): FunctionExpression;
-    timestampSubtract(unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day', amount: number): FunctionExpression;
+    timestampSubtract(unit: firestore.Pipelines.TimeUnit, amount: number): FunctionExpression;
     timestampToUnixMicros(): FunctionExpression;
     timestampToUnixMillis(): FunctionExpression;
     timestampToUnixSeconds(): FunctionExpression;
@@ -1221,7 +1281,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     toLower(): FunctionExpression;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     abstract _toProto(serializer: Serializer): api.IValue;
     toUpper(): FunctionExpression;
     trim(valueToTrim?: string | Expression | Uint8Array | Buffer): FunctionExpression;
@@ -1236,15 +1296,17 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     unixSecondsToTimestamp(): FunctionExpression;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     abstract _validateUserData(ignoreUndefinedProperties: boolean): void;
     vectorLength(): FunctionExpression;
 }
 
-// @beta
+// @public
 class Field extends Expression implements firestore.Pipelines.Selectable {
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@hideconstructor" is not defined in this configuration
+    //
+    // @internal
     constructor(fieldPath: FieldPath);
     // (undocumented)
     get _alias(): string;
@@ -1254,19 +1316,21 @@ class Field extends Expression implements firestore.Pipelines.Selectable {
     readonly expressionType: firestore.Pipelines.ExpressionType;
     // (undocumented)
     get fieldName(): string;
+    // @beta
+    geoDistance(location: GeoPoint | Expression): Expression;
     // (undocumented)
     selectable: true;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     _toProto(_: Serializer): api.IValue;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     _validateUserData(_: boolean): void;
 }
 
-// @beta
+// @public
 function field(field: string | firestore.FieldPath): Field;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
@@ -1414,6 +1478,8 @@ class Firestore implements firestore.Firestore {
     // Warning: (tsdoc-param-tag-with-invalid-name) The @param block should be followed by a valid parameter name: The identifier cannot non-word characters
     // Warning: (tsdoc-param-tag-with-invalid-type) The @param block should not include a JSDoc-style '{type}'
     constructor(settings?: firestore.Settings);
+    // @internal
+    get alwaysUseImplicitOrderBy(): boolean;
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
     batch(): WriteBatch;
@@ -1459,7 +1525,6 @@ class Firestore implements firestore.Firestore {
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
     listCollections(): Promise<CollectionReference[]>;
-    // @beta
     pipeline(): PipelineSource;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
@@ -1531,19 +1596,19 @@ class Firestore implements firestore.Firestore {
 export { Firestore }
 export default Firestore;
 
-// @beta
+// @public
 function first(expression: Expression): AggregateFunction;
 
-// @beta
+// @public
 function first(fieldName: string): AggregateFunction;
 
-// @beta
+// @public
 function floor(expr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function floor(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 class FunctionExpression extends Expression {
     constructor(_methodName: string, params: Expression[]);
     // (undocumented)
@@ -1552,13 +1617,16 @@ class FunctionExpression extends Expression {
     _methodName: string;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     _toProto(serializer: Serializer): api.IValue;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
+
+// @beta
+function geoDistance(fieldName: string | Field, location: GeoPoint | Expression): Expression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
 //
@@ -1591,205 +1659,229 @@ export class GeoPoint implements Serializable, firestore.GeoPoint {
     toProto(): api.IValue;
 }
 
-// @beta
+// @public
+function getField(expression: Expression, key: string): Expression;
+
+// @public
+function getField(expression: Expression, keyExpr: Expression): Expression;
+
+// @public
+function getField(fieldName: string, key: string): Expression;
+
+// @public
+function getField(fieldName: string, keyExpr: Expression): Expression;
+
+// @public
 function greaterThan(left: Expression, right: Expression): BooleanExpression;
 
-// @beta
+// @public
 function greaterThan(expression: Expression, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function greaterThan(fieldName: string, expression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function greaterThan(fieldName: string, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function greaterThanOrEqual(left: Expression, right: Expression): BooleanExpression;
 
-// @beta
+// @public
 function greaterThanOrEqual(expression: Expression, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function greaterThanOrEqual(fieldName: string, value: Expression): BooleanExpression;
 
-// @beta
+// @public
 function greaterThanOrEqual(fieldName: string, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function ifAbsent(ifExpr: Expression, elseExpr: Expression): Expression;
 
-// @beta
+// @public
 function ifAbsent(ifExpr: Expression, elseValue: unknown): Expression;
 
-// @beta
+// @public
 function ifAbsent(ifFieldName: string, elseExpr: Expression): Expression;
 
-// @beta
+// @public
 function ifAbsent(ifFieldName: string | Expression, elseValue: Expression | unknown): Expression;
 
-// @beta
+// @public
 function ifError(tryExpr: BooleanExpression, catchExpr: BooleanExpression): BooleanExpression;
 
-// @beta
+// @public
 function ifError(tryExpr: Expression, catchExpr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function ifError(tryExpr: Expression, catchValue: unknown): FunctionExpression;
 
-// @beta
+// @public
+function ifNull(ifExpr: Expression, elseExpr: Expression): FunctionExpression;
+
+// @public
+function ifNull(ifExpr: Expression, elseValue: unknown): FunctionExpression;
+
+// @public
+function ifNull(ifFieldName: string, elseExpr: Expression): FunctionExpression;
+
+// @public
+function ifNull(ifFieldName: string, elseValue: unknown): FunctionExpression;
+
+// @public
 function isAbsent(value: Expression): BooleanExpression;
 
-// @beta
+// @public
 function isAbsent(field: string): BooleanExpression;
 
-// @beta
+// @public
 function isError(value: Expression): BooleanExpression;
 
-// @beta
-function isType(fieldName: string, type: Type): BooleanExpression;
+// @public
+function isType(fieldName: string, type: string): BooleanExpression;
 
-// @beta
-function isType(expression: Expression, type: Type): BooleanExpression;
+// @public
+function isType(expression: Expression, type: string): BooleanExpression;
 
-// @beta
+// @public
 function join(arrayFieldName: string, delimiter: string): Expression;
 
-// @beta
+// @public
 function join(arrayExpression: Expression, delimiterExpression: Expression): Expression;
 
-// @beta
+// @public
 function join(arrayExpression: Expression, delimiter: string): Expression;
 
-// @beta
+// @public
 function join(arrayFieldName: string, delimiterExpression: Expression): Expression;
 
-// @beta
+// @public
 function last(expression: Expression): AggregateFunction;
 
-// @beta
+// @public
 function last(fieldName: string): AggregateFunction;
 
-// @beta
+// @public
 function length_2(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function length_2(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function lessThan(left: Expression, right: Expression): BooleanExpression;
 
-// @beta
+// @public
 function lessThan(expression: Expression, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function lessThan(fieldName: string, expression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function lessThan(fieldName: string, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function lessThanOrEqual(left: Expression, right: Expression): BooleanExpression;
 
-// @beta
+// @public
 function lessThanOrEqual(expression: Expression, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function lessThanOrEqual(fieldName: string, expression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function lessThanOrEqual(fieldName: string, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function like(fieldName: string, pattern: string): BooleanExpression;
 
-// @beta
+// @public
 function like(fieldName: string, pattern: Expression): BooleanExpression;
 
-// @beta
+// @public
 function like(stringExpression: Expression, pattern: string): BooleanExpression;
 
-// @beta
+// @public
 function like(stringExpression: Expression, pattern: Expression): BooleanExpression;
 
-// @beta
+// @public
 function ln(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function ln(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function log10(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function log10(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function logicalMaximum(first: Expression, second: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
 
-// @beta
+// @public
 function logicalMaximum(fieldName: string, second: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
 
-// @beta
+// @public
 function logicalMinimum(first: Expression, second: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
 
-// @beta
+// @public
 function logicalMinimum(fieldName: string, second: Expression | unknown, ...others: Array<Expression | unknown>): FunctionExpression;
 
-// @beta
+// @public
 function ltrim(fieldName: string, valueToTrim?: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function ltrim(expression: Expression, valueToTrim?: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function map(elements: Record<string, unknown>): FunctionExpression;
 
-// @beta
+// @public
 function mapEntries(mapField: string): FunctionExpression;
 
-// @beta
+// @public
 function mapEntries(mapExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function mapGet(fieldName: string, subField: string): FunctionExpression;
 
-// @beta
+// @public
 function mapGet(mapExpression: Expression, subField: string): FunctionExpression;
 
-// @beta
+// @public
 function mapKeys(mapField: string): FunctionExpression;
 
-// @beta
+// @public
 function mapKeys(mapExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function mapMerge(mapField: string, secondMap: Record<string, unknown> | Expression, ...otherMaps: Array<Record<string, unknown> | Expression>): FunctionExpression;
 
-// @beta
+// @public
 function mapMerge(firstMap: Record<string, unknown> | Expression, secondMap: Record<string, unknown> | Expression, ...otherMaps: Array<Record<string, unknown> | Expression>): FunctionExpression;
 
-// @beta
+// @public
 function mapRemove(mapField: string, key: string): FunctionExpression;
 
-// @beta
+// @public
 function mapRemove(mapExpr: Expression, key: string): FunctionExpression;
 
-// @beta
+// @public
 function mapRemove(mapField: string, keyExpr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function mapRemove(mapExpr: Expression, keyExpr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function mapSet(mapField: string, key: string | Expression, value: unknown, ...moreKeyValues: unknown[]): FunctionExpression;
 
-// @beta
+// @public
 function mapSet(mapExpression: Expression, key: string | Expression, value: unknown, ...moreKeyValues: unknown[]): FunctionExpression;
 
-// @beta
+// @public
 function mapValues(mapField: string): FunctionExpression;
 
-// @beta
+// @public
 function mapValues(mapExpression: Expression): FunctionExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
@@ -1797,70 +1889,75 @@ function mapValues(mapExpression: Expression): FunctionExpression;
 // @public
 export const MAX_REQUEST_RETRIES = 5;
 
-// @beta
+// @public
 function maximum(expression: Expression): AggregateFunction;
 
-// @beta
+// @public
 function maximum(fieldName: string): AggregateFunction;
 
-// @beta
+// @public
 function minimum(expression: Expression): AggregateFunction;
 
-// @beta
+// @public
 function minimum(fieldName: string): AggregateFunction;
 
-// @beta
+// @public
 function mod(left: Expression, right: Expression): FunctionExpression;
 
-// @beta
+// @public
 function mod(expression: Expression, value: unknown): FunctionExpression;
 
-// @beta
+// @public
 function mod(fieldName: string, expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function mod(fieldName: string, value: unknown): FunctionExpression;
 
-// @beta
+// @public
 function multiply(first: Expression, second: Expression | unknown): FunctionExpression;
 
-// @beta
+// @public
 function multiply(fieldName: string, second: Expression | unknown): FunctionExpression;
 
-// @beta
+// @public
+function nor(first: BooleanExpression, second: BooleanExpression, ...more: BooleanExpression[]): BooleanExpression;
+
+// @public
 function not(booleanExpr: BooleanExpression): BooleanExpression;
 
-// @beta
+// @public
 function notEqual(left: Expression, right: Expression): BooleanExpression;
 
-// @beta
+// @public
 function notEqual(expression: Expression, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function notEqual(fieldName: string, expression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function notEqual(fieldName: string, value: unknown): BooleanExpression;
 
-// @beta
+// @public
 function notEqualAny(element: Expression, values: Array<Expression | unknown>): BooleanExpression;
 
-// @beta
+// @public
 function notEqualAny(fieldName: string, values: Array<Expression | unknown>): BooleanExpression;
 
-// @beta
+// @public
 function notEqualAny(element: Expression, arrayExpression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function notEqualAny(fieldName: string, arrayExpression: Expression): BooleanExpression;
 
-// @beta
+// @public
 function or(first: BooleanExpression, second: BooleanExpression, ...more: BooleanExpression[]): BooleanExpression;
 
-// @beta
+// @public
 class Ordering implements HasUserData {
     constructor(expr: Expression, direction: 'ascending' | 'descending');
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal
     _createdFromLiteral: boolean;
     // (undocumented)
     readonly direction: 'ascending' | 'descending';
@@ -1870,23 +1967,36 @@ class Ordering implements HasUserData {
     _protoValueType: 'ProtoValue';
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     _toProto(serializer: Serializer): api.IValue;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
-// @beta
+// @public
+function parent_2(documentPath: string | firestore.DocumentReference): FunctionExpression;
+
+// @public
+function parent_2(documentPathExpr: Expression): FunctionExpression;
+
+// @public
 class Pipeline implements firestore.Pipelines.Pipeline {
     // Warning: (ae-forgotten-export) The symbol "Stage" needs to be exported by the entry point index.d.ts
-    constructor(db: Firestore, stages: Stage[]);
+    constructor(db: Firestore | undefined, stages: Stage[]);
     addFields(field: firestore.Pipelines.Selectable, ...additionalFields: firestore.Pipelines.Selectable[]): Pipeline;
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     addFields(options: firestore.Pipelines.AddFieldsStageOptions): Pipeline;
     aggregate(accumulator: firestore.Pipelines.AliasedAggregate, ...additionalAccumulators: firestore.Pipelines.AliasedAggregate[]): Pipeline;
     aggregate(options: firestore.Pipelines.AggregateStageOptions): Pipeline;
+    define(aliasedExpression: firestore.Pipelines.AliasedExpression, ...additionalExpressions: firestore.Pipelines.AliasedExpression[]): Pipeline;
+    define(options: firestore.Pipelines.DefineStageOptions): Pipeline;
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@return" is not defined in this configuration
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@code" is not defined in this configuration
+    //
+    // @beta
+    delete(): Pipeline;
     distinct(group: string | firestore.Pipelines.Selectable, ...additionalGroups: Array<string | firestore.Pipelines.Selectable>): Pipeline;
     distinct(options: firestore.Pipelines.DistinctStageOptions): Pipeline;
     execute(pipelineExecuteOptions?: firestore.Pipelines.PipelineExecuteOptions): Promise<PipelineSnapshot>;
@@ -1913,6 +2023,10 @@ class Pipeline implements firestore.Pipelines.Pipeline {
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
     sample(options: firestore.Pipelines.SampleStageOptions): Pipeline;
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@return" is not defined in this configuration
+    //
+    // @beta
+    search(options: firestore.Pipelines.SearchStageOptions): Pipeline;
     select(selection: firestore.Pipelines.Selectable | string, ...additionalSelections: Array<firestore.Pipelines.Selectable | string>): Pipeline;
     select(options: firestore.Pipelines.SelectStageOptions): Pipeline;
     sort(ordering: firestore.Pipelines.Ordering, ...additionalOrderings: firestore.Pipelines.Ordering[]): Pipeline;
@@ -1920,8 +2034,10 @@ class Pipeline implements firestore.Pipelines.Pipeline {
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
     stream(): NodeJS.ReadableStream;
+    toArrayExpression(): firestore.Pipelines.Expression;
     // (undocumented)
-    _toProto(): api.IPipeline;
+    _toProto(serializer?: Serializer): api.IPipeline;
+    toScalarExpression(): firestore.Pipelines.Expression;
     // Warning: (ae-forgotten-export) The symbol "StructuredPipeline" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -1930,15 +2046,27 @@ class Pipeline implements firestore.Pipelines.Pipeline {
     union(options: firestore.Pipelines.UnionStageOptions): Pipeline;
     unnest(selectable: firestore.Pipelines.Selectable, indexField?: string): Pipeline;
     unnest(options: firestore.Pipelines.UnnestStageOptions): Pipeline;
-    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
-    _validateUserData<T extends Map<string, HasUserData> | HasUserData[] | HasUserData>(_: string, val: T): T;
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@return" is not defined in this configuration
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@code" is not defined in this configuration
+    //
+    // @beta
+    update(): Pipeline;
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@return" is not defined in this configuration
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@code" is not defined in this configuration
+    //
+    // @beta
+    update(transformedFields: AliasedExpression[]): Pipeline;
+    // (undocumented)
+    _validateUserData(ignoreUndefinedProperties: boolean): void;
     where(condition: firestore.Pipelines.BooleanExpression): Pipeline;
     where(options: firestore.Pipelines.WhereStageOptions): Pipeline;
 }
 
-// @beta
+// @public
 class PipelineResult implements firestore.Pipelines.PipelineResult {
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal
     constructor(serializer: Serializer,
     _fieldsProto: ApiMapValue, ref?: DocumentReference, readTime?: Timestamp, createTime?: Timestamp, updateTime?: Timestamp);
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
@@ -1954,7 +2082,7 @@ class PipelineResult implements firestore.Pipelines.PipelineResult {
     readonly _executionTime: Timestamp | undefined;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
-    // (undocumented)
+    // @internal (undocumented)
     readonly _fieldsProto: ApiMapValue;
     // Warning: (tsdoc-param-tag-with-invalid-type) The @param block should not include a JSDoc-style '{type}'
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
@@ -1969,6 +2097,8 @@ class PipelineResult implements firestore.Pipelines.PipelineResult {
     // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
     isEqual(other: PipelineResult): boolean;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal
     protoField(field: string | FieldPath): api.IValue | undefined;
     get ref(): DocumentReference | undefined;
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
@@ -1985,6 +2115,7 @@ declare namespace Pipelines {
         PipelineResult,
         PipelineSnapshot,
         PipelineSource,
+        subcollection,
         and,
         arrayContains,
         arrayContainsAny,
@@ -2032,6 +2163,10 @@ declare namespace Pipelines {
         arrayMinimum,
         arrayMaximumN,
         arrayMinimumN,
+        arrayFilter,
+        arrayTransform,
+        arrayTransformWithIndex,
+        arraySlice,
         field,
         xor,
         AggregateFunction,
@@ -2059,6 +2194,7 @@ declare namespace Pipelines {
         isError,
         substring,
         documentId,
+        parent_2 as parent,
         arrayContainsAll,
         constant,
         Field,
@@ -2111,20 +2247,31 @@ declare namespace Pipelines {
         arrayConcat,
         type,
         isType,
-        Type,
         timestampTruncate,
+        timestampExtract,
+        timestampDiff,
         split,
         ltrim,
         rtrim,
         stringIndexOf,
         stringRepeat,
         stringReplaceAll,
-        stringReplaceOne
+        stringReplaceOne,
+        nor,
+        switchOn,
+        getField,
+        variable,
+        currentDocument,
+        ifNull,
+        coalesce,
+        documentMatches,
+        score,
+        geoDistance
     }
 }
 export { Pipelines }
 
-// @beta
+// @public
 class PipelineSnapshot implements firestore.Pipelines.PipelineSnapshot {
     // Warning: (ae-forgotten-export) The symbol "ExplainStats" needs to be exported by the entry point index.d.ts
     constructor(pipeline: Pipeline, results: PipelineResult[], executionTime?: Timestamp, explainStats?: ExplainStats);
@@ -2137,7 +2284,7 @@ class PipelineSnapshot implements firestore.Pipelines.PipelineSnapshot {
     get results(): PipelineResult[];
 }
 
-// @beta
+// @public
 class PipelineSource implements firestore.Pipelines.PipelineSource {
     constructor(db: Firestore);
     collection(collection: string | firestore.CollectionReference): Pipeline;
@@ -2174,16 +2321,16 @@ export class PlanSummary implements firestore.PlanSummary {
     readonly indexesUsed: Record<string, unknown>[];
 }
 
-// @beta
+// @public
 function pow(base: Expression, exponent: Expression): FunctionExpression;
 
-// @beta
+// @public
 function pow(base: Expression, exponent: number): FunctionExpression;
 
-// @beta
+// @public
 function pow(base: string, exponent: Expression): FunctionExpression;
 
-// @beta
+// @public
 function pow(base: string, exponent: number): FunctionExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
@@ -2349,7 +2496,7 @@ export class Query<AppModelType = firestore.DocumentData, DbModelType extends fi
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
     // @internal
-    toProto(transactionOrReadTime?: Uint8Array | Timestamp | api.ITransactionOptions, explainOptions?: firestore.ExplainOptions): api.IRunQueryRequest;
+    toProto(transactionOrReadTime?: Uint8Array | Timestamp | api.ITransactionOptions, explainOptions?: firestore.ExplainOptions, forceImplicitOrderBy?: boolean): api.IRunQueryRequest;
     // Warning: (tsdoc-param-tag-with-invalid-type) The @param block should not include a JSDoc-style '{type}'
     // Warning: (tsdoc-param-tag-with-invalid-type) The @param block should not include a JSDoc-style '{type}'
     // Warning: (tsdoc-param-tag-with-invalid-type) The @param block should not include a JSDoc-style '{type}'
@@ -2456,191 +2603,203 @@ export class QuerySnapshot<AppModelType = firestore.DocumentData, DbModelType ex
     get size(): number;
 }
 
-// @beta
+// @public
 function rand(): FunctionExpression;
 
-// @beta
+// @public
 function regexContains(fieldName: string, pattern: string): BooleanExpression;
 
-// @beta
+// @public
 function regexContains(fieldName: string, pattern: Expression): BooleanExpression;
 
-// @beta
+// @public
 function regexContains(stringExpression: Expression, pattern: string): BooleanExpression;
 
-// @beta
+// @public
 function regexContains(stringExpression: Expression, pattern: Expression): BooleanExpression;
 
-// @beta
+// @public
 function regexFind(fieldName: string, pattern: string): FunctionExpression;
 
-// @beta
+// @public
 function regexFind(fieldName: string, pattern: Expression): FunctionExpression;
 
-// @beta
+// @public
 function regexFind(stringExpression: Expression, pattern: string): FunctionExpression;
 
-// @beta
+// @public
 function regexFind(stringExpression: Expression, pattern: Expression): FunctionExpression;
 
-// @beta
+// @public
 function regexFindAll(fieldName: string, pattern: string): FunctionExpression;
 
-// @beta
+// @public
 function regexFindAll(fieldName: string, pattern: Expression): FunctionExpression;
 
-// @beta
+// @public
 function regexFindAll(stringExpression: Expression, pattern: string): FunctionExpression;
 
-// @beta
+// @public
 function regexFindAll(stringExpression: Expression, pattern: Expression): FunctionExpression;
 
-// @beta
+// @public
 function regexMatch(fieldName: string, pattern: string): BooleanExpression;
 
-// @beta
+// @public
 function regexMatch(fieldName: string, pattern: Expression): BooleanExpression;
 
-// @beta
+// @public
 function regexMatch(stringExpression: Expression, pattern: string): BooleanExpression;
 
-// @beta
+// @public
 function regexMatch(stringExpression: Expression, pattern: Expression): BooleanExpression;
 
-// @beta
+// @public
 function reverse(stringExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function reverse(field: string): FunctionExpression;
 
-// @beta
+// @public
 function round(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function round(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function round(fieldName: string, decimalPlaces: number | Expression): FunctionExpression;
 
-// @beta
+// @public
 function round(expression: Expression, decimalPlaces: number | Expression): FunctionExpression;
 
-// @beta
+// @public
 function rtrim(fieldName: string, valueToTrim?: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function rtrim(expression: Expression, valueToTrim?: string | Expression | Uint8Array | Buffer): FunctionExpression;
+
+// @beta
+function score(): Expression;
 
 // @public
 export function setLogFunction(logger: ((msg: string) => void) | null): void;
 
-// @beta
+// @public
 function split(fieldName: string, delimiter: string): FunctionExpression;
 
-// @beta
+// @public
 function split(fieldName: string, delimiter: Expression): FunctionExpression;
 
-// @beta
+// @public
 function split(expression: Expression, delimiter: string): FunctionExpression;
 
-// @beta
+// @public
 function split(expression: Expression, delimiter: Expression): FunctionExpression;
 
-// @beta
+// @public
 function sqrt(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function sqrt(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function startsWith(fieldName: string, prefix: string): BooleanExpression;
 
-// @beta
+// @public
 function startsWith(fieldName: string, prefix: Expression): BooleanExpression;
 
-// @beta
+// @public
 function startsWith(stringExpression: Expression, prefix: string): BooleanExpression;
 
-// @beta
+// @public
 function startsWith(stringExpression: Expression, prefix: Expression): BooleanExpression;
 
-// @beta
+// @public
 function stringConcat(fieldName: string, secondString: Expression | string, ...otherStrings: Array<Expression | string>): FunctionExpression;
 
-// @beta
+// @public
 function stringConcat(firstString: Expression, secondString: Expression | string, ...otherStrings: Array<Expression | string>): FunctionExpression;
 
-// @beta
+// @public
 function stringContains(fieldName: string, substring: string): BooleanExpression;
 
-// @beta
+// @public
 function stringContains(fieldName: string, substring: Expression): BooleanExpression;
 
-// @beta
+// @public
 function stringContains(stringExpression: Expression, substring: string): BooleanExpression;
 
-// @beta
+// @public
 function stringContains(stringExpression: Expression, substring: Expression): BooleanExpression;
 
-// @beta
+// @public
 function stringIndexOf(fieldName: string, search: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function stringIndexOf(expression: Expression, search: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function stringRepeat(fieldName: string, repetitions: number | Expression): FunctionExpression;
 
-// @beta
+// @public
 function stringRepeat(expression: Expression, repetitions: number | Expression): FunctionExpression;
 
-// @beta
+// @public
 function stringReplaceAll(fieldName: string, find: string | Expression | Uint8Array | Buffer, replacement: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function stringReplaceAll(expression: Expression, find: string | Expression | Uint8Array | Buffer, replacement: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function stringReplaceOne(fieldName: string, find: string | Expression | Uint8Array | Buffer, replacement: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function stringReplaceOne(expression: Expression, find: string | Expression | Uint8Array | Buffer, replacement: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function stringReverse(stringExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function stringReverse(field: string): FunctionExpression;
 
-// @beta
+// @public
+function subcollection(path: string): Pipeline;
+
+// @public
+function subcollection(options: firestore.Pipelines.SubcollectionStageOptions): Pipeline;
+
+// @public
 function substring(field: string, position: number, length?: number): FunctionExpression;
 
-// @beta
+// @public
 function substring(input: Expression, position: number, length?: number): FunctionExpression;
 
-// @beta
+// @public
 function substring(field: string, position: Expression, length?: Expression): FunctionExpression;
 
-// @beta
+// @public
 function substring(input: Expression, position: Expression, length?: Expression): FunctionExpression;
 
-// @beta
+// @public
 function subtract(minuend: Expression, subtrahend: Expression): FunctionExpression;
 
-// @beta
+// @public
 function subtract(minuend: Expression, subtrahend: unknown): FunctionExpression;
 
-// @beta
+// @public
 function subtract(minuendFieldName: string, subtrahend: Expression): FunctionExpression;
 
-// @beta
+// @public
 function subtract(minuendFieldName: string, subtrahend: unknown): FunctionExpression;
 
-// @beta
+// @public
 function sum(expression: Expression): AggregateFunction;
 
-// @beta
+// @public
 function sum(fieldName: string): AggregateFunction;
+
+// @public
+function switchOn(condition: BooleanExpression, result: Expression, ...others: Array<BooleanExpression | Expression>): FunctionExpression;
 
 // @public
 export class Timestamp implements firestore.Timestamp {
@@ -2692,92 +2851,100 @@ export class Timestamp implements firestore.Timestamp {
     valueOf(): string;
 }
 
-// @beta
+// @public
 function timestampAdd(timestamp: Expression, unit: Expression, amount: Expression): FunctionExpression;
 
-// @beta
-function timestampAdd(timestamp: Expression, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day', amount: number): FunctionExpression;
+// @public
+function timestampAdd(timestamp: Expression, unit: firestore.Pipelines.TimeUnit, amount: number): FunctionExpression;
 
-// @beta
-function timestampAdd(fieldName: string, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day', amount: number): FunctionExpression;
+// @public
+function timestampAdd(fieldName: string, unit: firestore.Pipelines.TimeUnit, amount: number): FunctionExpression;
 
-// @beta
+// @public
+function timestampDiff(endFieldName: string, startFieldName: string, unit: firestore.Pipelines.TimeUnit | Expression): FunctionExpression;
+
+// @public
+function timestampDiff(endFieldName: string, startExpression: Expression, unit: firestore.Pipelines.TimeUnit | Expression): FunctionExpression;
+
+// @public
+function timestampDiff(endExpression: Expression, startFieldName: string, unit: firestore.Pipelines.TimeUnit | Expression): FunctionExpression;
+
+// @public
+function timestampDiff(endExpression: Expression, startExpression: Expression, unit: firestore.Pipelines.TimeUnit | Expression): FunctionExpression;
+
+// @public
+function timestampExtract(fieldName: string, part: firestore.Pipelines.TimePart, timezone?: string | Expression): FunctionExpression;
+
+// @public
+function timestampExtract(fieldName: string, part: Expression, timezone?: string | Expression): FunctionExpression;
+
+// @public
+function timestampExtract(timestampExpression: Expression, part: firestore.Pipelines.TimePart, timezone?: string | Expression): FunctionExpression;
+
+// @public
+function timestampExtract(timestampExpression: Expression, part: Expression, timezone?: string | Expression): FunctionExpression;
+
+// @public
 function timestampSubtract(timestamp: Expression, unit: Expression, amount: Expression): FunctionExpression;
 
-// @beta
-function timestampSubtract(timestamp: Expression, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day', amount: number): FunctionExpression;
+// @public
+function timestampSubtract(timestamp: Expression, unit: firestore.Pipelines.TimeUnit, amount: number): FunctionExpression;
 
-// @beta
-function timestampSubtract(fieldName: string, unit: 'microsecond' | 'millisecond' | 'second' | 'minute' | 'hour' | 'day', amount: number): FunctionExpression;
+// @public
+function timestampSubtract(fieldName: string, unit: firestore.Pipelines.TimeUnit, amount: number): FunctionExpression;
 
-// @beta
+// @public
 function timestampToUnixMicros(expr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function timestampToUnixMicros(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function timestampToUnixMillis(expr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function timestampToUnixMillis(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function timestampToUnixSeconds(expr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function timestampToUnixSeconds(fieldName: string): FunctionExpression;
 
 // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
 // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "Expression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "FunctionExpression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "Expression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "FunctionExpression" which is marked as @beta
 //
 // @public
 function timestampTruncate(fieldName: string, granularity: firestore.Pipelines.TimeGranularity, timezone?: string | Expression): FunctionExpression;
 
 // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
 // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "Expression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "FunctionExpression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "Expression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "FunctionExpression" which is marked as @beta
 //
 // @public
 function timestampTruncate(fieldName: string, granularity: Expression, timezone?: string | Expression): FunctionExpression;
 
 // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
 // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "Expression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "FunctionExpression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "Expression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "FunctionExpression" which is marked as @beta
 //
 // @public
 function timestampTruncate(timestampExpression: Expression, granularity: firestore.Pipelines.TimeGranularity, timezone?: string | Expression): FunctionExpression;
 
 // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
 // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "Expression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "FunctionExpression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "Expression" which is marked as @beta
-// Warning: (ae-incompatible-release-tags) The symbol "timestampTruncate" is marked as @public, but its signature references "FunctionExpression" which is marked as @beta
 //
 // @public
 function timestampTruncate(timestampExpression: Expression, granularity: Expression, timezone?: string | Expression): FunctionExpression;
 
-// @beta
+// @public
 function toLower(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function toLower(stringExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function toUpper(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function toUpper(stringExpression: Expression): FunctionExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
@@ -2808,8 +2975,6 @@ export class Transaction implements firestore.Transaction {
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
     delete(documentRef: DocumentReference<any, any>, precondition?: firestore.Precondition): this;
-    // Warning: (ae-incompatible-release-tags) The symbol "execute" is marked as @public, but its signature references "Pipeline" which is marked as @beta
-    // Warning: (ae-incompatible-release-tags) The symbol "execute" is marked as @public, but its signature references "PipelineSnapshot" which is marked as @beta
     execute(pipeline: Pipeline): Promise<PipelineSnapshot>;
     // Warning: (tsdoc-param-tag-with-invalid-type) The @param block should not include a JSDoc-style '{type}'
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
@@ -2850,61 +3015,61 @@ export class Transaction implements firestore.Transaction {
     update<AppModelType, DbModelType extends firestore.DocumentData>(documentRef: firestore.DocumentReference<AppModelType, DbModelType>, dataOrField: firestore.UpdateData<DbModelType> | string | firestore.FieldPath, ...preconditionOrValues: Array<firestore.Precondition | unknown | string | firestore.FieldPath>): Transaction;
 }
 
-// @beta
+// @public
 function trim(fieldName: string, valueToTrim?: string | Expression): FunctionExpression;
 
-// @beta
+// @public
 function trim(stringExpression: Expression, valueToTrim?: string | Expression): FunctionExpression;
 
-// @beta
+// @public
 function trunc(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function trunc(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function trunc(fieldName: string, decimalPlaces: number | Expression): FunctionExpression;
 
-// @beta
+// @public
 function trunc(expression: Expression, decimalPlaces: number | Expression): FunctionExpression;
-
-// @beta
-type Type = 'null' | 'array' | 'boolean' | 'bytes' | 'timestamp' | 'geo_point' | 'number' | 'int32' | 'int64' | 'float64' | 'decimal128' | 'map' | 'reference' | 'string' | 'vector' | 'max_key' | 'min_key' | 'object_id' | 'regex' | 'request_timestamp';
 
 // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
 // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
 //
-// @beta
+// @public
 function type(fieldName: string): FunctionExpression;
 
 // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
 // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
 //
-// @beta
+// @public
 function type(expression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function unixMicrosToTimestamp(expr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function unixMicrosToTimestamp(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function unixMillisToTimestamp(expr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function unixMillisToTimestamp(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
 function unixSecondsToTimestamp(expr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function unixSecondsToTimestamp(fieldName: string): FunctionExpression;
 
-// @beta
+// @public
+function variable(name: string): Expression;
+
+// @public
 function vectorLength(vectorExpression: Expression): FunctionExpression;
 
-// @beta
+// @public
 function vectorLength(fieldName: string): FunctionExpression;
 
 // @public
@@ -3076,7 +3241,7 @@ export class WriteResult implements firestore.WriteResult {
     get writeTime(): Timestamp;
 }
 
-// @beta
+// @public
 function xor(first: BooleanExpression, second: BooleanExpression, ...additionalConditions: BooleanExpression[]): BooleanExpression;
 
 // Warnings were encountered during analysis:
@@ -3110,9 +3275,9 @@ function xor(first: BooleanExpression, second: BooleanExpression, ...additionalC
 // build/types/src/index.d.ts:371:8 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
 // build/types/src/index.d.ts:378:8 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
 // build/types/src/index.d.ts:387:8 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
-// build/types/src/index.d.ts:881:8 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
-// build/types/src/index.d.ts:900:8 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
-// build/types/src/index.d.ts:915:8 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+// build/types/src/index.d.ts:885:8 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+// build/types/src/index.d.ts:904:8 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+// build/types/src/index.d.ts:919:8 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
 // build/types/src/path.d.ts:29:4 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
 // build/types/src/path.d.ts:31:4 - (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
 // build/types/src/path.d.ts:146:4 - (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration

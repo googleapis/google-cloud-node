@@ -9666,6 +9666,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|establishVolumePeering}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef EstablishVolumePeeringCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls EstablishVolumePeering.
+                         * @function establishVolumePeering
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IEstablishVolumePeeringRequest} request EstablishVolumePeeringRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.EstablishVolumePeeringCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.establishVolumePeering = function establishVolumePeering(request, callback) {
+                            return this.rpcCall(establishVolumePeering, $root.google.cloud.netapp.v1.EstablishVolumePeeringRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "EstablishVolumePeering" });
+    
+                        /**
+                         * Calls EstablishVolumePeering.
+                         * @function establishVolumePeering
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IEstablishVolumePeeringRequest} request EstablishVolumePeeringRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.netapp.v1.NetApp|listSnapshots}.
                          * @memberof google.cloud.netapp.v1.NetApp
                          * @typedef ListSnapshotsCallback
@@ -11411,6 +11444,138 @@
                          * @instance
                          * @param {google.cloud.netapp.v1.IDeleteHostGroupRequest} request DeleteHostGroupRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|executeOntapPost}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef ExecuteOntapPostCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.ExecuteOntapPostResponse} [response] ExecuteOntapPostResponse
+                         */
+    
+                        /**
+                         * Calls ExecuteOntapPost.
+                         * @function executeOntapPost
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostRequest} request ExecuteOntapPostRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.ExecuteOntapPostCallback} callback Node-style callback called with the error, if any, and ExecuteOntapPostResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.executeOntapPost = function executeOntapPost(request, callback) {
+                            return this.rpcCall(executeOntapPost, $root.google.cloud.netapp.v1.ExecuteOntapPostRequest, $root.google.cloud.netapp.v1.ExecuteOntapPostResponse, request, callback);
+                        }, "name", { value: "ExecuteOntapPost" });
+    
+                        /**
+                         * Calls ExecuteOntapPost.
+                         * @function executeOntapPost
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostRequest} request ExecuteOntapPostRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.ExecuteOntapPostResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|executeOntapGet}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef ExecuteOntapGetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.ExecuteOntapGetResponse} [response] ExecuteOntapGetResponse
+                         */
+    
+                        /**
+                         * Calls ExecuteOntapGet.
+                         * @function executeOntapGet
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetRequest} request ExecuteOntapGetRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.ExecuteOntapGetCallback} callback Node-style callback called with the error, if any, and ExecuteOntapGetResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.executeOntapGet = function executeOntapGet(request, callback) {
+                            return this.rpcCall(executeOntapGet, $root.google.cloud.netapp.v1.ExecuteOntapGetRequest, $root.google.cloud.netapp.v1.ExecuteOntapGetResponse, request, callback);
+                        }, "name", { value: "ExecuteOntapGet" });
+    
+                        /**
+                         * Calls ExecuteOntapGet.
+                         * @function executeOntapGet
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetRequest} request ExecuteOntapGetRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.ExecuteOntapGetResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|executeOntapDelete}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef ExecuteOntapDeleteCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.ExecuteOntapDeleteResponse} [response] ExecuteOntapDeleteResponse
+                         */
+    
+                        /**
+                         * Calls ExecuteOntapDelete.
+                         * @function executeOntapDelete
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteRequest} request ExecuteOntapDeleteRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.ExecuteOntapDeleteCallback} callback Node-style callback called with the error, if any, and ExecuteOntapDeleteResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.executeOntapDelete = function executeOntapDelete(request, callback) {
+                            return this.rpcCall(executeOntapDelete, $root.google.cloud.netapp.v1.ExecuteOntapDeleteRequest, $root.google.cloud.netapp.v1.ExecuteOntapDeleteResponse, request, callback);
+                        }, "name", { value: "ExecuteOntapDelete" });
+    
+                        /**
+                         * Calls ExecuteOntapDelete.
+                         * @function executeOntapDelete
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteRequest} request ExecuteOntapDeleteRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.ExecuteOntapDeleteResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|executeOntapPatch}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef ExecuteOntapPatchCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.ExecuteOntapPatchResponse} [response] ExecuteOntapPatchResponse
+                         */
+    
+                        /**
+                         * Calls ExecuteOntapPatch.
+                         * @function executeOntapPatch
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchRequest} request ExecuteOntapPatchRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.ExecuteOntapPatchCallback} callback Node-style callback called with the error, if any, and ExecuteOntapPatchResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.executeOntapPatch = function executeOntapPatch(request, callback) {
+                            return this.rpcCall(executeOntapPatch, $root.google.cloud.netapp.v1.ExecuteOntapPatchRequest, $root.google.cloud.netapp.v1.ExecuteOntapPatchResponse, request, callback);
+                        }, "name", { value: "ExecuteOntapPatch" });
+    
+                        /**
+                         * Calls ExecuteOntapPatch.
+                         * @function executeOntapPatch
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchRequest} request ExecuteOntapPatchRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.ExecuteOntapPatchResponse>} Promise
                          * @variation 2
                          */
     
@@ -13886,14 +14051,12 @@
                      * @property {number} STORAGE_POOL_TYPE_UNSPECIFIED=0 STORAGE_POOL_TYPE_UNSPECIFIED value
                      * @property {number} FILE=1 FILE value
                      * @property {number} UNIFIED=2 UNIFIED value
-                     * @property {number} UNIFIED_LARGE_CAPACITY=3 UNIFIED_LARGE_CAPACITY value
                      */
                     v1.StoragePoolType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "STORAGE_POOL_TYPE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "FILE"] = 1;
                         values[valuesById[2] = "UNIFIED"] = 2;
-                        values[valuesById[3] = "UNIFIED_LARGE_CAPACITY"] = 3;
                         return values;
                     })();
     
@@ -17241,6 +17404,1724 @@
                         })();
     
                         return KmsConfig;
+                    })();
+    
+                    v1.ExecuteOntapPostRequest = (function() {
+    
+                        /**
+                         * Properties of an ExecuteOntapPostRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IExecuteOntapPostRequest
+                         * @property {google.protobuf.IStruct|null} [body] ExecuteOntapPostRequest body
+                         * @property {string|null} [ontapPath] ExecuteOntapPostRequest ontapPath
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteOntapPostRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an ExecuteOntapPostRequest.
+                         * @implements IExecuteOntapPostRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostRequest=} [properties] Properties to set
+                         */
+                        function ExecuteOntapPostRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecuteOntapPostRequest body.
+                         * @member {google.protobuf.IStruct|null|undefined} body
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @instance
+                         */
+                        ExecuteOntapPostRequest.prototype.body = null;
+    
+                        /**
+                         * ExecuteOntapPostRequest ontapPath.
+                         * @member {string} ontapPath
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @instance
+                         */
+                        ExecuteOntapPostRequest.prototype.ontapPath = "";
+    
+                        /**
+                         * Creates a new ExecuteOntapPostRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPostRequest} ExecuteOntapPostRequest instance
+                         */
+                        ExecuteOntapPostRequest.create = function create(properties) {
+                            return new ExecuteOntapPostRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapPostRequest message. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapPostRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostRequest} message ExecuteOntapPostRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapPostRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.protobuf.Struct.encode(message.body, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.ontapPath != null && Object.hasOwnProperty.call(message, "ontapPath"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.ontapPath);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapPostRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapPostRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostRequest} message ExecuteOntapPostRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapPostRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapPostRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPostRequest} ExecuteOntapPostRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapPostRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ExecuteOntapPostRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.body = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ontapPath = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapPostRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPostRequest} ExecuteOntapPostRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapPostRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteOntapPostRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteOntapPostRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.protobuf.Struct.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            if (message.ontapPath != null && message.hasOwnProperty("ontapPath"))
+                                if (!$util.isString(message.ontapPath))
+                                    return "ontapPath: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteOntapPostRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPostRequest} ExecuteOntapPostRequest
+                         */
+                        ExecuteOntapPostRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ExecuteOntapPostRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ExecuteOntapPostRequest();
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.ExecuteOntapPostRequest.body: object expected");
+                                message.body = $root.google.protobuf.Struct.fromObject(object.body);
+                            }
+                            if (object.ontapPath != null)
+                                message.ontapPath = String(object.ontapPath);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteOntapPostRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ExecuteOntapPostRequest} message ExecuteOntapPostRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteOntapPostRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.body = null;
+                                object.ontapPath = "";
+                            }
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.protobuf.Struct.toObject(message.body, options);
+                            if (message.ontapPath != null && message.hasOwnProperty("ontapPath"))
+                                object.ontapPath = message.ontapPath;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecuteOntapPostRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteOntapPostRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteOntapPostRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteOntapPostRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ExecuteOntapPostRequest";
+                        };
+    
+                        return ExecuteOntapPostRequest;
+                    })();
+    
+                    v1.ExecuteOntapPostResponse = (function() {
+    
+                        /**
+                         * Properties of an ExecuteOntapPostResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IExecuteOntapPostResponse
+                         * @property {google.protobuf.IStruct|null} [body] ExecuteOntapPostResponse body
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteOntapPostResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an ExecuteOntapPostResponse.
+                         * @implements IExecuteOntapPostResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostResponse=} [properties] Properties to set
+                         */
+                        function ExecuteOntapPostResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecuteOntapPostResponse body.
+                         * @member {google.protobuf.IStruct|null|undefined} body
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @instance
+                         */
+                        ExecuteOntapPostResponse.prototype.body = null;
+    
+                        /**
+                         * Creates a new ExecuteOntapPostResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPostResponse} ExecuteOntapPostResponse instance
+                         */
+                        ExecuteOntapPostResponse.create = function create(properties) {
+                            return new ExecuteOntapPostResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapPostResponse message. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapPostResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostResponse} message ExecuteOntapPostResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapPostResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.protobuf.Struct.encode(message.body, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapPostResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapPostResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPostResponse} message ExecuteOntapPostResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapPostResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapPostResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPostResponse} ExecuteOntapPostResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapPostResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ExecuteOntapPostResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.body = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapPostResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPostResponse} ExecuteOntapPostResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapPostResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteOntapPostResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteOntapPostResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.protobuf.Struct.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteOntapPostResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPostResponse} ExecuteOntapPostResponse
+                         */
+                        ExecuteOntapPostResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ExecuteOntapPostResponse)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ExecuteOntapPostResponse();
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.ExecuteOntapPostResponse.body: object expected");
+                                message.body = $root.google.protobuf.Struct.fromObject(object.body);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteOntapPostResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.ExecuteOntapPostResponse} message ExecuteOntapPostResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteOntapPostResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.body = null;
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.protobuf.Struct.toObject(message.body, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecuteOntapPostResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteOntapPostResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteOntapPostResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPostResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteOntapPostResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ExecuteOntapPostResponse";
+                        };
+    
+                        return ExecuteOntapPostResponse;
+                    })();
+    
+                    v1.ExecuteOntapGetRequest = (function() {
+    
+                        /**
+                         * Properties of an ExecuteOntapGetRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IExecuteOntapGetRequest
+                         * @property {string|null} [ontapPath] ExecuteOntapGetRequest ontapPath
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteOntapGetRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an ExecuteOntapGetRequest.
+                         * @implements IExecuteOntapGetRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetRequest=} [properties] Properties to set
+                         */
+                        function ExecuteOntapGetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecuteOntapGetRequest ontapPath.
+                         * @member {string} ontapPath
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @instance
+                         */
+                        ExecuteOntapGetRequest.prototype.ontapPath = "";
+    
+                        /**
+                         * Creates a new ExecuteOntapGetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapGetRequest} ExecuteOntapGetRequest instance
+                         */
+                        ExecuteOntapGetRequest.create = function create(properties) {
+                            return new ExecuteOntapGetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapGetRequest message. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapGetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetRequest} message ExecuteOntapGetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapGetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ontapPath != null && Object.hasOwnProperty.call(message, "ontapPath"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.ontapPath);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapGetRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapGetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetRequest} message ExecuteOntapGetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapGetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapGetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapGetRequest} ExecuteOntapGetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapGetRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ExecuteOntapGetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ontapPath = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapGetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapGetRequest} ExecuteOntapGetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapGetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteOntapGetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteOntapGetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ontapPath != null && message.hasOwnProperty("ontapPath"))
+                                if (!$util.isString(message.ontapPath))
+                                    return "ontapPath: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteOntapGetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapGetRequest} ExecuteOntapGetRequest
+                         */
+                        ExecuteOntapGetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ExecuteOntapGetRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ExecuteOntapGetRequest();
+                            if (object.ontapPath != null)
+                                message.ontapPath = String(object.ontapPath);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteOntapGetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ExecuteOntapGetRequest} message ExecuteOntapGetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteOntapGetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.ontapPath = "";
+                            if (message.ontapPath != null && message.hasOwnProperty("ontapPath"))
+                                object.ontapPath = message.ontapPath;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecuteOntapGetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteOntapGetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteOntapGetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteOntapGetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ExecuteOntapGetRequest";
+                        };
+    
+                        return ExecuteOntapGetRequest;
+                    })();
+    
+                    v1.ExecuteOntapGetResponse = (function() {
+    
+                        /**
+                         * Properties of an ExecuteOntapGetResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IExecuteOntapGetResponse
+                         * @property {google.protobuf.IStruct|null} [body] ExecuteOntapGetResponse body
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteOntapGetResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an ExecuteOntapGetResponse.
+                         * @implements IExecuteOntapGetResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetResponse=} [properties] Properties to set
+                         */
+                        function ExecuteOntapGetResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecuteOntapGetResponse body.
+                         * @member {google.protobuf.IStruct|null|undefined} body
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @instance
+                         */
+                        ExecuteOntapGetResponse.prototype.body = null;
+    
+                        /**
+                         * Creates a new ExecuteOntapGetResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapGetResponse} ExecuteOntapGetResponse instance
+                         */
+                        ExecuteOntapGetResponse.create = function create(properties) {
+                            return new ExecuteOntapGetResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapGetResponse message. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapGetResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetResponse} message ExecuteOntapGetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapGetResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.protobuf.Struct.encode(message.body, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapGetResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapGetResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapGetResponse} message ExecuteOntapGetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapGetResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapGetResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapGetResponse} ExecuteOntapGetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapGetResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ExecuteOntapGetResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.body = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapGetResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapGetResponse} ExecuteOntapGetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapGetResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteOntapGetResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteOntapGetResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.protobuf.Struct.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteOntapGetResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapGetResponse} ExecuteOntapGetResponse
+                         */
+                        ExecuteOntapGetResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ExecuteOntapGetResponse)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ExecuteOntapGetResponse();
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.ExecuteOntapGetResponse.body: object expected");
+                                message.body = $root.google.protobuf.Struct.fromObject(object.body);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteOntapGetResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.ExecuteOntapGetResponse} message ExecuteOntapGetResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteOntapGetResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.body = null;
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.protobuf.Struct.toObject(message.body, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecuteOntapGetResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteOntapGetResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteOntapGetResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapGetResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteOntapGetResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ExecuteOntapGetResponse";
+                        };
+    
+                        return ExecuteOntapGetResponse;
+                    })();
+    
+                    v1.ExecuteOntapDeleteRequest = (function() {
+    
+                        /**
+                         * Properties of an ExecuteOntapDeleteRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IExecuteOntapDeleteRequest
+                         * @property {string|null} [ontapPath] ExecuteOntapDeleteRequest ontapPath
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteOntapDeleteRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an ExecuteOntapDeleteRequest.
+                         * @implements IExecuteOntapDeleteRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteRequest=} [properties] Properties to set
+                         */
+                        function ExecuteOntapDeleteRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecuteOntapDeleteRequest ontapPath.
+                         * @member {string} ontapPath
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @instance
+                         */
+                        ExecuteOntapDeleteRequest.prototype.ontapPath = "";
+    
+                        /**
+                         * Creates a new ExecuteOntapDeleteRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapDeleteRequest} ExecuteOntapDeleteRequest instance
+                         */
+                        ExecuteOntapDeleteRequest.create = function create(properties) {
+                            return new ExecuteOntapDeleteRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapDeleteRequest message. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapDeleteRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteRequest} message ExecuteOntapDeleteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapDeleteRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ontapPath != null && Object.hasOwnProperty.call(message, "ontapPath"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ontapPath);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapDeleteRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapDeleteRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteRequest} message ExecuteOntapDeleteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapDeleteRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapDeleteRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapDeleteRequest} ExecuteOntapDeleteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapDeleteRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ExecuteOntapDeleteRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.ontapPath = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapDeleteRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapDeleteRequest} ExecuteOntapDeleteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapDeleteRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteOntapDeleteRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteOntapDeleteRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ontapPath != null && message.hasOwnProperty("ontapPath"))
+                                if (!$util.isString(message.ontapPath))
+                                    return "ontapPath: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteOntapDeleteRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapDeleteRequest} ExecuteOntapDeleteRequest
+                         */
+                        ExecuteOntapDeleteRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ExecuteOntapDeleteRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ExecuteOntapDeleteRequest();
+                            if (object.ontapPath != null)
+                                message.ontapPath = String(object.ontapPath);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteOntapDeleteRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ExecuteOntapDeleteRequest} message ExecuteOntapDeleteRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteOntapDeleteRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.ontapPath = "";
+                            if (message.ontapPath != null && message.hasOwnProperty("ontapPath"))
+                                object.ontapPath = message.ontapPath;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecuteOntapDeleteRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteOntapDeleteRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteOntapDeleteRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteOntapDeleteRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ExecuteOntapDeleteRequest";
+                        };
+    
+                        return ExecuteOntapDeleteRequest;
+                    })();
+    
+                    v1.ExecuteOntapDeleteResponse = (function() {
+    
+                        /**
+                         * Properties of an ExecuteOntapDeleteResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IExecuteOntapDeleteResponse
+                         * @property {google.protobuf.IStruct|null} [body] ExecuteOntapDeleteResponse body
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteOntapDeleteResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an ExecuteOntapDeleteResponse.
+                         * @implements IExecuteOntapDeleteResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteResponse=} [properties] Properties to set
+                         */
+                        function ExecuteOntapDeleteResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecuteOntapDeleteResponse body.
+                         * @member {google.protobuf.IStruct|null|undefined} body
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @instance
+                         */
+                        ExecuteOntapDeleteResponse.prototype.body = null;
+    
+                        /**
+                         * Creates a new ExecuteOntapDeleteResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapDeleteResponse} ExecuteOntapDeleteResponse instance
+                         */
+                        ExecuteOntapDeleteResponse.create = function create(properties) {
+                            return new ExecuteOntapDeleteResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapDeleteResponse message. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapDeleteResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteResponse} message ExecuteOntapDeleteResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapDeleteResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.protobuf.Struct.encode(message.body, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapDeleteResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapDeleteResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapDeleteResponse} message ExecuteOntapDeleteResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapDeleteResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapDeleteResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapDeleteResponse} ExecuteOntapDeleteResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapDeleteResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ExecuteOntapDeleteResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.body = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapDeleteResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapDeleteResponse} ExecuteOntapDeleteResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapDeleteResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteOntapDeleteResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteOntapDeleteResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.protobuf.Struct.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteOntapDeleteResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapDeleteResponse} ExecuteOntapDeleteResponse
+                         */
+                        ExecuteOntapDeleteResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ExecuteOntapDeleteResponse)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ExecuteOntapDeleteResponse();
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.ExecuteOntapDeleteResponse.body: object expected");
+                                message.body = $root.google.protobuf.Struct.fromObject(object.body);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteOntapDeleteResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.ExecuteOntapDeleteResponse} message ExecuteOntapDeleteResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteOntapDeleteResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.body = null;
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.protobuf.Struct.toObject(message.body, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecuteOntapDeleteResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteOntapDeleteResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteOntapDeleteResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapDeleteResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteOntapDeleteResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ExecuteOntapDeleteResponse";
+                        };
+    
+                        return ExecuteOntapDeleteResponse;
+                    })();
+    
+                    v1.ExecuteOntapPatchRequest = (function() {
+    
+                        /**
+                         * Properties of an ExecuteOntapPatchRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IExecuteOntapPatchRequest
+                         * @property {google.protobuf.IStruct|null} [body] ExecuteOntapPatchRequest body
+                         * @property {string|null} [ontapPath] ExecuteOntapPatchRequest ontapPath
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteOntapPatchRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an ExecuteOntapPatchRequest.
+                         * @implements IExecuteOntapPatchRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchRequest=} [properties] Properties to set
+                         */
+                        function ExecuteOntapPatchRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecuteOntapPatchRequest body.
+                         * @member {google.protobuf.IStruct|null|undefined} body
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @instance
+                         */
+                        ExecuteOntapPatchRequest.prototype.body = null;
+    
+                        /**
+                         * ExecuteOntapPatchRequest ontapPath.
+                         * @member {string} ontapPath
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @instance
+                         */
+                        ExecuteOntapPatchRequest.prototype.ontapPath = "";
+    
+                        /**
+                         * Creates a new ExecuteOntapPatchRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPatchRequest} ExecuteOntapPatchRequest instance
+                         */
+                        ExecuteOntapPatchRequest.create = function create(properties) {
+                            return new ExecuteOntapPatchRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapPatchRequest message. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapPatchRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchRequest} message ExecuteOntapPatchRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapPatchRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.protobuf.Struct.encode(message.body, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.ontapPath != null && Object.hasOwnProperty.call(message, "ontapPath"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.ontapPath);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapPatchRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapPatchRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchRequest} message ExecuteOntapPatchRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapPatchRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapPatchRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPatchRequest} ExecuteOntapPatchRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapPatchRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ExecuteOntapPatchRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.body = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ontapPath = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapPatchRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPatchRequest} ExecuteOntapPatchRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapPatchRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteOntapPatchRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteOntapPatchRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.protobuf.Struct.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            if (message.ontapPath != null && message.hasOwnProperty("ontapPath"))
+                                if (!$util.isString(message.ontapPath))
+                                    return "ontapPath: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteOntapPatchRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPatchRequest} ExecuteOntapPatchRequest
+                         */
+                        ExecuteOntapPatchRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ExecuteOntapPatchRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ExecuteOntapPatchRequest();
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.ExecuteOntapPatchRequest.body: object expected");
+                                message.body = $root.google.protobuf.Struct.fromObject(object.body);
+                            }
+                            if (object.ontapPath != null)
+                                message.ontapPath = String(object.ontapPath);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteOntapPatchRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ExecuteOntapPatchRequest} message ExecuteOntapPatchRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteOntapPatchRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.body = null;
+                                object.ontapPath = "";
+                            }
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.protobuf.Struct.toObject(message.body, options);
+                            if (message.ontapPath != null && message.hasOwnProperty("ontapPath"))
+                                object.ontapPath = message.ontapPath;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecuteOntapPatchRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteOntapPatchRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteOntapPatchRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteOntapPatchRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ExecuteOntapPatchRequest";
+                        };
+    
+                        return ExecuteOntapPatchRequest;
+                    })();
+    
+                    v1.ExecuteOntapPatchResponse = (function() {
+    
+                        /**
+                         * Properties of an ExecuteOntapPatchResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IExecuteOntapPatchResponse
+                         * @property {google.protobuf.IStruct|null} [body] ExecuteOntapPatchResponse body
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteOntapPatchResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an ExecuteOntapPatchResponse.
+                         * @implements IExecuteOntapPatchResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchResponse=} [properties] Properties to set
+                         */
+                        function ExecuteOntapPatchResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecuteOntapPatchResponse body.
+                         * @member {google.protobuf.IStruct|null|undefined} body
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @instance
+                         */
+                        ExecuteOntapPatchResponse.prototype.body = null;
+    
+                        /**
+                         * Creates a new ExecuteOntapPatchResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPatchResponse} ExecuteOntapPatchResponse instance
+                         */
+                        ExecuteOntapPatchResponse.create = function create(properties) {
+                            return new ExecuteOntapPatchResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapPatchResponse message. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapPatchResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchResponse} message ExecuteOntapPatchResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapPatchResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.protobuf.Struct.encode(message.body, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteOntapPatchResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ExecuteOntapPatchResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IExecuteOntapPatchResponse} message ExecuteOntapPatchResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteOntapPatchResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapPatchResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPatchResponse} ExecuteOntapPatchResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapPatchResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ExecuteOntapPatchResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.body = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteOntapPatchResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPatchResponse} ExecuteOntapPatchResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteOntapPatchResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteOntapPatchResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteOntapPatchResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.protobuf.Struct.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteOntapPatchResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ExecuteOntapPatchResponse} ExecuteOntapPatchResponse
+                         */
+                        ExecuteOntapPatchResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ExecuteOntapPatchResponse)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ExecuteOntapPatchResponse();
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.ExecuteOntapPatchResponse.body: object expected");
+                                message.body = $root.google.protobuf.Struct.fromObject(object.body);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteOntapPatchResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.ExecuteOntapPatchResponse} message ExecuteOntapPatchResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteOntapPatchResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.body = null;
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.protobuf.Struct.toObject(message.body, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecuteOntapPatchResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteOntapPatchResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteOntapPatchResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ExecuteOntapPatchResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteOntapPatchResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ExecuteOntapPatchResponse";
+                        };
+    
+                        return ExecuteOntapPatchResponse;
                     })();
     
                     v1.ListQuotaRulesRequest = (function() {
@@ -25999,6 +27880,7 @@
                          * @property {google.cloud.netapp.v1.ICacheParameters|null} [cacheParameters] Volume cacheParameters
                          * @property {number|Long|null} [hotTierSizeUsedGib] Volume hotTierSizeUsedGib
                          * @property {Array.<google.cloud.netapp.v1.IBlockDevice>|null} [blockDevices] Volume blockDevices
+                         * @property {google.cloud.netapp.v1.Volume.ICloneDetails|null} [cloneDetails] Volume cloneDetails
                          */
     
                         /**
@@ -26358,6 +28240,14 @@
                          */
                         Volume.prototype.blockDevices = $util.emptyArray;
     
+                        /**
+                         * Volume cloneDetails.
+                         * @member {google.cloud.netapp.v1.Volume.ICloneDetails|null|undefined} cloneDetails
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.cloneDetails = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -26496,6 +28386,8 @@
                             if (message.blockDevices != null && message.blockDevices.length)
                                 for (var i = 0; i < message.blockDevices.length; ++i)
                                     $root.google.cloud.netapp.v1.BlockDevice.encode(message.blockDevices[i], writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
+                            if (message.cloneDetails != null && Object.hasOwnProperty.call(message, "cloneDetails"))
+                                $root.google.cloud.netapp.v1.Volume.CloneDetails.encode(message.cloneDetails, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             return writer;
                         };
     
@@ -26742,6 +28634,10 @@
                                         if (!(message.blockDevices && message.blockDevices.length))
                                             message.blockDevices = [];
                                         message.blockDevices.push($root.google.cloud.netapp.v1.BlockDevice.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 47: {
+                                        message.cloneDetails = $root.google.cloud.netapp.v1.Volume.CloneDetails.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -27015,6 +28911,11 @@
                                     if (error)
                                         return "blockDevices." + error;
                                 }
+                            }
+                            if (message.cloneDetails != null && message.hasOwnProperty("cloneDetails")) {
+                                var error = $root.google.cloud.netapp.v1.Volume.CloneDetails.verify(message.cloneDetails);
+                                if (error)
+                                    return "cloneDetails." + error;
                             }
                             return null;
                         };
@@ -27397,6 +29298,11 @@
                                     message.blockDevices[i] = $root.google.cloud.netapp.v1.BlockDevice.fromObject(object.blockDevices[i]);
                                 }
                             }
+                            if (object.cloneDetails != null) {
+                                if (typeof object.cloneDetails !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.Volume.cloneDetails: object expected");
+                                message.cloneDetails = $root.google.cloud.netapp.v1.Volume.CloneDetails.fromObject(object.cloneDetails);
+                            }
                             return message;
                         };
     
@@ -27473,6 +29379,7 @@
                                     object.hotTierSizeUsedGib = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.hotTierSizeUsedGib = options.longs === String ? "0" : 0;
+                                object.cloneDetails = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -27595,6 +29502,8 @@
                                 for (var j = 0; j < message.blockDevices.length; ++j)
                                     object.blockDevices[j] = $root.google.cloud.netapp.v1.BlockDevice.toObject(message.blockDevices[j], options);
                             }
+                            if (message.cloneDetails != null && message.hasOwnProperty("cloneDetails"))
+                                object.cloneDetails = $root.google.cloud.netapp.v1.Volume.CloneDetails.toObject(message.cloneDetails, options);
                             return object;
                         };
     
@@ -27623,6 +29532,272 @@
                             }
                             return typeUrlPrefix + "/google.cloud.netapp.v1.Volume";
                         };
+    
+                        Volume.CloneDetails = (function() {
+    
+                            /**
+                             * Properties of a CloneDetails.
+                             * @memberof google.cloud.netapp.v1.Volume
+                             * @interface ICloneDetails
+                             * @property {string|null} [sourceSnapshot] CloneDetails sourceSnapshot
+                             * @property {string|null} [sourceVolume] CloneDetails sourceVolume
+                             * @property {number|Long|null} [sharedSpaceGib] CloneDetails sharedSpaceGib
+                             */
+    
+                            /**
+                             * Constructs a new CloneDetails.
+                             * @memberof google.cloud.netapp.v1.Volume
+                             * @classdesc Represents a CloneDetails.
+                             * @implements ICloneDetails
+                             * @constructor
+                             * @param {google.cloud.netapp.v1.Volume.ICloneDetails=} [properties] Properties to set
+                             */
+                            function CloneDetails(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloneDetails sourceSnapshot.
+                             * @member {string} sourceSnapshot
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @instance
+                             */
+                            CloneDetails.prototype.sourceSnapshot = "";
+    
+                            /**
+                             * CloneDetails sourceVolume.
+                             * @member {string} sourceVolume
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @instance
+                             */
+                            CloneDetails.prototype.sourceVolume = "";
+    
+                            /**
+                             * CloneDetails sharedSpaceGib.
+                             * @member {number|Long} sharedSpaceGib
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @instance
+                             */
+                            CloneDetails.prototype.sharedSpaceGib = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new CloneDetails instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @static
+                             * @param {google.cloud.netapp.v1.Volume.ICloneDetails=} [properties] Properties to set
+                             * @returns {google.cloud.netapp.v1.Volume.CloneDetails} CloneDetails instance
+                             */
+                            CloneDetails.create = function create(properties) {
+                                return new CloneDetails(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloneDetails message. Does not implicitly {@link google.cloud.netapp.v1.Volume.CloneDetails.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @static
+                             * @param {google.cloud.netapp.v1.Volume.ICloneDetails} message CloneDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloneDetails.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.sourceSnapshot != null && Object.hasOwnProperty.call(message, "sourceSnapshot"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceSnapshot);
+                                if (message.sourceVolume != null && Object.hasOwnProperty.call(message, "sourceVolume"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceVolume);
+                                if (message.sharedSpaceGib != null && Object.hasOwnProperty.call(message, "sharedSpaceGib"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.sharedSpaceGib);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloneDetails message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.Volume.CloneDetails.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @static
+                             * @param {google.cloud.netapp.v1.Volume.ICloneDetails} message CloneDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloneDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloneDetails message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.netapp.v1.Volume.CloneDetails} CloneDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloneDetails.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.Volume.CloneDetails();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.sourceSnapshot = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.sourceVolume = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.sharedSpaceGib = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloneDetails message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.netapp.v1.Volume.CloneDetails} CloneDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloneDetails.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloneDetails message.
+                             * @function verify
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloneDetails.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.sourceSnapshot != null && message.hasOwnProperty("sourceSnapshot"))
+                                    if (!$util.isString(message.sourceSnapshot))
+                                        return "sourceSnapshot: string expected";
+                                if (message.sourceVolume != null && message.hasOwnProperty("sourceVolume"))
+                                    if (!$util.isString(message.sourceVolume))
+                                        return "sourceVolume: string expected";
+                                if (message.sharedSpaceGib != null && message.hasOwnProperty("sharedSpaceGib"))
+                                    if (!$util.isInteger(message.sharedSpaceGib) && !(message.sharedSpaceGib && $util.isInteger(message.sharedSpaceGib.low) && $util.isInteger(message.sharedSpaceGib.high)))
+                                        return "sharedSpaceGib: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloneDetails message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.netapp.v1.Volume.CloneDetails} CloneDetails
+                             */
+                            CloneDetails.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.netapp.v1.Volume.CloneDetails)
+                                    return object;
+                                var message = new $root.google.cloud.netapp.v1.Volume.CloneDetails();
+                                if (object.sourceSnapshot != null)
+                                    message.sourceSnapshot = String(object.sourceSnapshot);
+                                if (object.sourceVolume != null)
+                                    message.sourceVolume = String(object.sourceVolume);
+                                if (object.sharedSpaceGib != null)
+                                    if ($util.Long)
+                                        (message.sharedSpaceGib = $util.Long.fromValue(object.sharedSpaceGib)).unsigned = false;
+                                    else if (typeof object.sharedSpaceGib === "string")
+                                        message.sharedSpaceGib = parseInt(object.sharedSpaceGib, 10);
+                                    else if (typeof object.sharedSpaceGib === "number")
+                                        message.sharedSpaceGib = object.sharedSpaceGib;
+                                    else if (typeof object.sharedSpaceGib === "object")
+                                        message.sharedSpaceGib = new $util.LongBits(object.sharedSpaceGib.low >>> 0, object.sharedSpaceGib.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloneDetails message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @static
+                             * @param {google.cloud.netapp.v1.Volume.CloneDetails} message CloneDetails
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloneDetails.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.sourceSnapshot = "";
+                                    object.sourceVolume = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.sharedSpaceGib = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.sharedSpaceGib = options.longs === String ? "0" : 0;
+                                }
+                                if (message.sourceSnapshot != null && message.hasOwnProperty("sourceSnapshot"))
+                                    object.sourceSnapshot = message.sourceSnapshot;
+                                if (message.sourceVolume != null && message.hasOwnProperty("sourceVolume"))
+                                    object.sourceVolume = message.sourceVolume;
+                                if (message.sharedSpaceGib != null && message.hasOwnProperty("sharedSpaceGib"))
+                                    if (typeof message.sharedSpaceGib === "number")
+                                        object.sharedSpaceGib = options.longs === String ? String(message.sharedSpaceGib) : message.sharedSpaceGib;
+                                    else
+                                        object.sharedSpaceGib = options.longs === String ? $util.Long.prototype.toString.call(message.sharedSpaceGib) : options.longs === Number ? new $util.LongBits(message.sharedSpaceGib.low >>> 0, message.sharedSpaceGib.high >>> 0).toNumber() : message.sharedSpaceGib;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloneDetails to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloneDetails.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloneDetails
+                             * @function getTypeUrl
+                             * @memberof google.cloud.netapp.v1.Volume.CloneDetails
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloneDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.netapp.v1.Volume.CloneDetails";
+                            };
+    
+                            return CloneDetails;
+                        })();
     
                         /**
                          * State enum.
@@ -33965,6 +36140,321 @@
                         return RestoreBackupFilesResponse;
                     })();
     
+                    v1.EstablishVolumePeeringRequest = (function() {
+    
+                        /**
+                         * Properties of an EstablishVolumePeeringRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IEstablishVolumePeeringRequest
+                         * @property {string|null} [name] EstablishVolumePeeringRequest name
+                         * @property {string|null} [peerClusterName] EstablishVolumePeeringRequest peerClusterName
+                         * @property {string|null} [peerSvmName] EstablishVolumePeeringRequest peerSvmName
+                         * @property {Array.<string>|null} [peerIpAddresses] EstablishVolumePeeringRequest peerIpAddresses
+                         * @property {string|null} [peerVolumeName] EstablishVolumePeeringRequest peerVolumeName
+                         */
+    
+                        /**
+                         * Constructs a new EstablishVolumePeeringRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an EstablishVolumePeeringRequest.
+                         * @implements IEstablishVolumePeeringRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IEstablishVolumePeeringRequest=} [properties] Properties to set
+                         */
+                        function EstablishVolumePeeringRequest(properties) {
+                            this.peerIpAddresses = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EstablishVolumePeeringRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @instance
+                         */
+                        EstablishVolumePeeringRequest.prototype.name = "";
+    
+                        /**
+                         * EstablishVolumePeeringRequest peerClusterName.
+                         * @member {string} peerClusterName
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @instance
+                         */
+                        EstablishVolumePeeringRequest.prototype.peerClusterName = "";
+    
+                        /**
+                         * EstablishVolumePeeringRequest peerSvmName.
+                         * @member {string} peerSvmName
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @instance
+                         */
+                        EstablishVolumePeeringRequest.prototype.peerSvmName = "";
+    
+                        /**
+                         * EstablishVolumePeeringRequest peerIpAddresses.
+                         * @member {Array.<string>} peerIpAddresses
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @instance
+                         */
+                        EstablishVolumePeeringRequest.prototype.peerIpAddresses = $util.emptyArray;
+    
+                        /**
+                         * EstablishVolumePeeringRequest peerVolumeName.
+                         * @member {string} peerVolumeName
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @instance
+                         */
+                        EstablishVolumePeeringRequest.prototype.peerVolumeName = "";
+    
+                        /**
+                         * Creates a new EstablishVolumePeeringRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IEstablishVolumePeeringRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.EstablishVolumePeeringRequest} EstablishVolumePeeringRequest instance
+                         */
+                        EstablishVolumePeeringRequest.create = function create(properties) {
+                            return new EstablishVolumePeeringRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EstablishVolumePeeringRequest message. Does not implicitly {@link google.cloud.netapp.v1.EstablishVolumePeeringRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IEstablishVolumePeeringRequest} message EstablishVolumePeeringRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EstablishVolumePeeringRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.peerClusterName != null && Object.hasOwnProperty.call(message, "peerClusterName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.peerClusterName);
+                            if (message.peerSvmName != null && Object.hasOwnProperty.call(message, "peerSvmName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.peerSvmName);
+                            if (message.peerIpAddresses != null && message.peerIpAddresses.length)
+                                for (var i = 0; i < message.peerIpAddresses.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.peerIpAddresses[i]);
+                            if (message.peerVolumeName != null && Object.hasOwnProperty.call(message, "peerVolumeName"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.peerVolumeName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EstablishVolumePeeringRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.EstablishVolumePeeringRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IEstablishVolumePeeringRequest} message EstablishVolumePeeringRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EstablishVolumePeeringRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EstablishVolumePeeringRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.EstablishVolumePeeringRequest} EstablishVolumePeeringRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EstablishVolumePeeringRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.EstablishVolumePeeringRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.peerClusterName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.peerSvmName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.peerIpAddresses && message.peerIpAddresses.length))
+                                            message.peerIpAddresses = [];
+                                        message.peerIpAddresses.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.peerVolumeName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EstablishVolumePeeringRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.EstablishVolumePeeringRequest} EstablishVolumePeeringRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EstablishVolumePeeringRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EstablishVolumePeeringRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EstablishVolumePeeringRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.peerClusterName != null && message.hasOwnProperty("peerClusterName"))
+                                if (!$util.isString(message.peerClusterName))
+                                    return "peerClusterName: string expected";
+                            if (message.peerSvmName != null && message.hasOwnProperty("peerSvmName"))
+                                if (!$util.isString(message.peerSvmName))
+                                    return "peerSvmName: string expected";
+                            if (message.peerIpAddresses != null && message.hasOwnProperty("peerIpAddresses")) {
+                                if (!Array.isArray(message.peerIpAddresses))
+                                    return "peerIpAddresses: array expected";
+                                for (var i = 0; i < message.peerIpAddresses.length; ++i)
+                                    if (!$util.isString(message.peerIpAddresses[i]))
+                                        return "peerIpAddresses: string[] expected";
+                            }
+                            if (message.peerVolumeName != null && message.hasOwnProperty("peerVolumeName"))
+                                if (!$util.isString(message.peerVolumeName))
+                                    return "peerVolumeName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EstablishVolumePeeringRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.EstablishVolumePeeringRequest} EstablishVolumePeeringRequest
+                         */
+                        EstablishVolumePeeringRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.EstablishVolumePeeringRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.EstablishVolumePeeringRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.peerClusterName != null)
+                                message.peerClusterName = String(object.peerClusterName);
+                            if (object.peerSvmName != null)
+                                message.peerSvmName = String(object.peerSvmName);
+                            if (object.peerIpAddresses) {
+                                if (!Array.isArray(object.peerIpAddresses))
+                                    throw TypeError(".google.cloud.netapp.v1.EstablishVolumePeeringRequest.peerIpAddresses: array expected");
+                                message.peerIpAddresses = [];
+                                for (var i = 0; i < object.peerIpAddresses.length; ++i)
+                                    message.peerIpAddresses[i] = String(object.peerIpAddresses[i]);
+                            }
+                            if (object.peerVolumeName != null)
+                                message.peerVolumeName = String(object.peerVolumeName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EstablishVolumePeeringRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.EstablishVolumePeeringRequest} message EstablishVolumePeeringRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EstablishVolumePeeringRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.peerIpAddresses = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.peerClusterName = "";
+                                object.peerSvmName = "";
+                                object.peerVolumeName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.peerClusterName != null && message.hasOwnProperty("peerClusterName"))
+                                object.peerClusterName = message.peerClusterName;
+                            if (message.peerSvmName != null && message.hasOwnProperty("peerSvmName"))
+                                object.peerSvmName = message.peerSvmName;
+                            if (message.peerIpAddresses && message.peerIpAddresses.length) {
+                                object.peerIpAddresses = [];
+                                for (var j = 0; j < message.peerIpAddresses.length; ++j)
+                                    object.peerIpAddresses[j] = message.peerIpAddresses[j];
+                            }
+                            if (message.peerVolumeName != null && message.hasOwnProperty("peerVolumeName"))
+                                object.peerVolumeName = message.peerVolumeName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EstablishVolumePeeringRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EstablishVolumePeeringRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EstablishVolumePeeringRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.EstablishVolumePeeringRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EstablishVolumePeeringRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.EstablishVolumePeeringRequest";
+                        };
+    
+                        return EstablishVolumePeeringRequest;
+                    })();
+    
                     v1.ListSnapshotsRequest = (function() {
     
                         /**
@@ -35912,6 +38402,22 @@
                         return Snapshot;
                     })();
     
+                    /**
+                     * Mode enum.
+                     * @name google.cloud.netapp.v1.Mode
+                     * @enum {number}
+                     * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                     * @property {number} DEFAULT=1 DEFAULT value
+                     * @property {number} ONTAP=2 ONTAP value
+                     */
+                    v1.Mode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DEFAULT"] = 1;
+                        values[valuesById[2] = "ONTAP"] = 2;
+                        return values;
+                    })();
+    
                     v1.GetStoragePoolRequest = (function() {
     
                         /**
@@ -37649,6 +40155,7 @@
                          * @property {number|Long|null} [coldTierSizeUsedGib] StoragePool coldTierSizeUsedGib
                          * @property {number|Long|null} [hotTierSizeUsedGib] StoragePool hotTierSizeUsedGib
                          * @property {google.cloud.netapp.v1.StoragePoolType|null} [type] StoragePool type
+                         * @property {google.cloud.netapp.v1.Mode|null} [mode] StoragePool mode
                          */
     
                         /**
@@ -37923,6 +40430,14 @@
                          */
                         StoragePool.prototype.type = null;
     
+                        /**
+                         * StoragePool mode.
+                         * @member {google.cloud.netapp.v1.Mode|null|undefined} mode
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.mode = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -37941,6 +40456,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(StoragePool.prototype, "_type", {
                             get: $util.oneOfGetter($oneOfFields = ["type"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(StoragePool.prototype, "_mode", {
+                            get: $util.oneOfGetter($oneOfFields = ["mode"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -38033,6 +40554,8 @@
                                 writer.uint32(/* id 34, wireType 0 =*/272).int64(message.hotTierSizeUsedGib);
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 35, wireType 0 =*/280).int32(message.type);
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                writer.uint32(/* id 36, wireType 0 =*/288).int32(message.mode);
                             return writer;
                         };
     
@@ -38216,6 +40739,10 @@
                                         message.type = reader.int32();
                                         break;
                                     }
+                                case 36: {
+                                        message.mode = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -38395,7 +40922,17 @@
                                 case 0:
                                 case 1:
                                 case 2:
-                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.mode != null && message.hasOwnProperty("mode")) {
+                                properties._mode = 1;
+                                switch (message.mode) {
+                                default:
+                                    return "mode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             }
@@ -38652,9 +41189,25 @@
                             case 2:
                                 message.type = 2;
                                 break;
-                            case "UNIFIED_LARGE_CAPACITY":
-                            case 3:
-                                message.type = 3;
+                            }
+                            switch (object.mode) {
+                            default:
+                                if (typeof object.mode === "number") {
+                                    message.mode = object.mode;
+                                    break;
+                                }
+                                break;
+                            case "MODE_UNSPECIFIED":
+                            case 0:
+                                message.mode = 0;
+                                break;
+                            case "DEFAULT":
+                            case 1:
+                                message.mode = 1;
+                                break;
+                            case "ONTAP":
+                            case 2:
+                                message.mode = 2;
                                 break;
                             }
                             return message;
@@ -38830,6 +41383,11 @@
                                 object.type = options.enums === String ? $root.google.cloud.netapp.v1.StoragePoolType[message.type] === undefined ? message.type : $root.google.cloud.netapp.v1.StoragePoolType[message.type] : message.type;
                                 if (options.oneofs)
                                     object._type = "type";
+                            }
+                            if (message.mode != null && message.hasOwnProperty("mode")) {
+                                object.mode = options.enums === String ? $root.google.cloud.netapp.v1.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.netapp.v1.Mode[message.mode] : message.mode;
+                                if (options.oneofs)
+                                    object._mode = "mode";
                             }
                             return object;
                         };
@@ -57922,6 +60480,885 @@
                 };
     
                 return Duration;
+            })();
+    
+            protobuf.Struct = (function() {
+    
+                /**
+                 * Properties of a Struct.
+                 * @memberof google.protobuf
+                 * @interface IStruct
+                 * @property {Object.<string,google.protobuf.IValue>|null} [fields] Struct fields
+                 */
+    
+                /**
+                 * Constructs a new Struct.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Struct.
+                 * @implements IStruct
+                 * @constructor
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 */
+                function Struct(properties) {
+                    this.fields = {};
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Struct fields.
+                 * @member {Object.<string,google.protobuf.IValue>} fields
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 */
+                Struct.prototype.fields = $util.emptyObject;
+    
+                /**
+                 * Creates a new Struct instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 * @returns {google.protobuf.Struct} Struct instance
+                 */
+                Struct.create = function create(properties) {
+                    return new Struct(properties);
+                };
+    
+                /**
+                 * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fields != null && Object.hasOwnProperty.call(message, "fields"))
+                        for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                            $root.google.protobuf.Value.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                        }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (message.fields === $util.emptyObject)
+                                    message.fields = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = null;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.fields[key] = value;
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Struct message.
+                 * @function verify
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Struct.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fields != null && message.hasOwnProperty("fields")) {
+                        if (!$util.isObject(message.fields))
+                            return "fields: object expected";
+                        var key = Object.keys(message.fields);
+                        for (var i = 0; i < key.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.fields[key[i]]);
+                            if (error)
+                                return "fields." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Struct} Struct
+                 */
+                Struct.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Struct)
+                        return object;
+                    var message = new $root.google.protobuf.Struct();
+                    if (object.fields) {
+                        if (typeof object.fields !== "object")
+                            throw TypeError(".google.protobuf.Struct.fields: object expected");
+                        message.fields = {};
+                        for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
+                            if (typeof object.fields[keys[i]] !== "object")
+                                throw TypeError(".google.protobuf.Struct.fields: object expected");
+                            message.fields[keys[i]] = $root.google.protobuf.Value.fromObject(object.fields[keys[i]]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Struct message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.Struct} message Struct
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Struct.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.objects || options.defaults)
+                        object.fields = {};
+                    var keys2;
+                    if (message.fields && (keys2 = Object.keys(message.fields)).length) {
+                        object.fields = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.fields[keys2[j]] = $root.google.protobuf.Value.toObject(message.fields[keys2[j]], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Struct to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Struct.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Struct
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Struct.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Struct";
+                };
+    
+                return Struct;
+            })();
+    
+            protobuf.Value = (function() {
+    
+                /**
+                 * Properties of a Value.
+                 * @memberof google.protobuf
+                 * @interface IValue
+                 * @property {google.protobuf.NullValue|null} [nullValue] Value nullValue
+                 * @property {number|null} [numberValue] Value numberValue
+                 * @property {string|null} [stringValue] Value stringValue
+                 * @property {boolean|null} [boolValue] Value boolValue
+                 * @property {google.protobuf.IStruct|null} [structValue] Value structValue
+                 * @property {google.protobuf.IListValue|null} [listValue] Value listValue
+                 */
+    
+                /**
+                 * Constructs a new Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Value.
+                 * @implements IValue
+                 * @constructor
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 */
+                function Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Value nullValue.
+                 * @member {google.protobuf.NullValue|null|undefined} nullValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.nullValue = null;
+    
+                /**
+                 * Value numberValue.
+                 * @member {number|null|undefined} numberValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.numberValue = null;
+    
+                /**
+                 * Value stringValue.
+                 * @member {string|null|undefined} stringValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.stringValue = null;
+    
+                /**
+                 * Value boolValue.
+                 * @member {boolean|null|undefined} boolValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.boolValue = null;
+    
+                /**
+                 * Value structValue.
+                 * @member {google.protobuf.IStruct|null|undefined} structValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.structValue = null;
+    
+                /**
+                 * Value listValue.
+                 * @member {google.protobuf.IListValue|null|undefined} listValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.listValue = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Value kind.
+                 * @member {"nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue"|undefined} kind
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Object.defineProperty(Value.prototype, "kind", {
+                    get: $util.oneOfGetter($oneOfFields = ["nullValue", "numberValue", "stringValue", "boolValue", "structValue", "listValue"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 * @returns {google.protobuf.Value} Value instance
+                 */
+                Value.create = function create(properties) {
+                    return new Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.nullValue != null && Object.hasOwnProperty.call(message, "nullValue"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nullValue);
+                    if (message.numberValue != null && Object.hasOwnProperty.call(message, "numberValue"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.numberValue);
+                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.stringValue);
+                    if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.boolValue);
+                    if (message.structValue != null && Object.hasOwnProperty.call(message, "structValue"))
+                        $root.google.protobuf.Struct.encode(message.structValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.listValue != null && Object.hasOwnProperty.call(message, "listValue"))
+                        $root.google.protobuf.ListValue.encode(message.listValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.nullValue = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.numberValue = reader.double();
+                                break;
+                            }
+                        case 3: {
+                                message.stringValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.boolValue = reader.bool();
+                                break;
+                            }
+                        case 5: {
+                                message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        properties.kind = 1;
+                        switch (message.nullValue) {
+                        default:
+                            return "nullValue: enum value expected";
+                        case 0:
+                            break;
+                        }
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.numberValue !== "number")
+                            return "numberValue: number expected";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (!$util.isString(message.stringValue))
+                            return "stringValue: string expected";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.boolValue !== "boolean")
+                            return "boolValue: boolean expected";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.Struct.verify(message.structValue);
+                            if (error)
+                                return "structValue." + error;
+                        }
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.ListValue.verify(message.listValue);
+                            if (error)
+                                return "listValue." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Value} Value
+                 */
+                Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Value)
+                        return object;
+                    var message = new $root.google.protobuf.Value();
+                    switch (object.nullValue) {
+                    default:
+                        if (typeof object.nullValue === "number") {
+                            message.nullValue = object.nullValue;
+                            break;
+                        }
+                        break;
+                    case "NULL_VALUE":
+                    case 0:
+                        message.nullValue = 0;
+                        break;
+                    }
+                    if (object.numberValue != null)
+                        message.numberValue = Number(object.numberValue);
+                    if (object.stringValue != null)
+                        message.stringValue = String(object.stringValue);
+                    if (object.boolValue != null)
+                        message.boolValue = Boolean(object.boolValue);
+                    if (object.structValue != null) {
+                        if (typeof object.structValue !== "object")
+                            throw TypeError(".google.protobuf.Value.structValue: object expected");
+                        message.structValue = $root.google.protobuf.Struct.fromObject(object.structValue);
+                    }
+                    if (object.listValue != null) {
+                        if (typeof object.listValue !== "object")
+                            throw TypeError(".google.protobuf.Value.listValue: object expected");
+                        message.listValue = $root.google.protobuf.ListValue.fromObject(object.listValue);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.Value} message Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        if (options.oneofs)
+                            object.kind = "nullValue";
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        object.numberValue = options.json && !isFinite(message.numberValue) ? String(message.numberValue) : message.numberValue;
+                        if (options.oneofs)
+                            object.kind = "numberValue";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        object.stringValue = message.stringValue;
+                        if (options.oneofs)
+                            object.kind = "stringValue";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        object.boolValue = message.boolValue;
+                        if (options.oneofs)
+                            object.kind = "boolValue";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        object.structValue = $root.google.protobuf.Struct.toObject(message.structValue, options);
+                        if (options.oneofs)
+                            object.kind = "structValue";
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        object.listValue = $root.google.protobuf.ListValue.toObject(message.listValue, options);
+                        if (options.oneofs)
+                            object.kind = "listValue";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Value";
+                };
+    
+                return Value;
+            })();
+    
+            /**
+             * NullValue enum.
+             * @name google.protobuf.NullValue
+             * @enum {number}
+             * @property {number} NULL_VALUE=0 NULL_VALUE value
+             */
+            protobuf.NullValue = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "NULL_VALUE"] = 0;
+                return values;
+            })();
+    
+            protobuf.ListValue = (function() {
+    
+                /**
+                 * Properties of a ListValue.
+                 * @memberof google.protobuf
+                 * @interface IListValue
+                 * @property {Array.<google.protobuf.IValue>|null} [values] ListValue values
+                 */
+    
+                /**
+                 * Constructs a new ListValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a ListValue.
+                 * @implements IListValue
+                 * @constructor
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 */
+                function ListValue(properties) {
+                    this.values = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListValue values.
+                 * @member {Array.<google.protobuf.IValue>} values
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 */
+                ListValue.prototype.values = $util.emptyArray;
+    
+                /**
+                 * Creates a new ListValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 * @returns {google.protobuf.ListValue} ListValue instance
+                 */
+                ListValue.create = function create(properties) {
+                    return new ListValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.values != null && message.values.length)
+                        for (var i = 0; i < message.values.length; ++i)
+                            $root.google.protobuf.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.values && message.values.length))
+                                    message.values = [];
+                                message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListValue message.
+                 * @function verify
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.values != null && message.hasOwnProperty("values")) {
+                        if (!Array.isArray(message.values))
+                            return "values: array expected";
+                        for (var i = 0; i < message.values.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.values[i]);
+                            if (error)
+                                return "values." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.ListValue} ListValue
+                 */
+                ListValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.ListValue)
+                        return object;
+                    var message = new $root.google.protobuf.ListValue();
+                    if (object.values) {
+                        if (!Array.isArray(object.values))
+                            throw TypeError(".google.protobuf.ListValue.values: array expected");
+                        message.values = [];
+                        for (var i = 0; i < object.values.length; ++i) {
+                            if (typeof object.values[i] !== "object")
+                                throw TypeError(".google.protobuf.ListValue.values: object expected");
+                            message.values[i] = $root.google.protobuf.Value.fromObject(object.values[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.ListValue} message ListValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.values = [];
+                    if (message.values && message.values.length) {
+                        object.values = [];
+                        for (var j = 0; j < message.values.length; ++j)
+                            object.values[j] = $root.google.protobuf.Value.toObject(message.values[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ListValue";
+                };
+    
+                return ListValue;
             })();
     
             protobuf.Any = (function() {

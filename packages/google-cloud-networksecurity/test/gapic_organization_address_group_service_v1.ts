@@ -2546,6 +2546,98 @@ describe('v1.OrganizationAddressGroupServiceClient', () => {
             });
         });
 
+        describe('authzPolicy', async () => {
+            const fakePath = "/rendered/path/authzPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                authz_policy: "authzPolicyValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.authzPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.authzPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('authzPolicyPath', () => {
+                const result = client.authzPolicyPath("projectValue", "locationValue", "authzPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.authzPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAuthzPolicyName', () => {
+                const result = client.matchProjectFromAuthzPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAuthzPolicyName', () => {
+                const result = client.matchLocationFromAuthzPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAuthzPolicyFromAuthzPolicyName', () => {
+                const result = client.matchAuthzPolicyFromAuthzPolicyName(fakePath);
+                assert.strictEqual(result, "authzPolicyValue");
+                assert((client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('backendAuthenticationConfig', async () => {
+            const fakePath = "/rendered/path/backendAuthenticationConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                backend_authentication_config: "backendAuthenticationConfigValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backendAuthenticationConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backendAuthenticationConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('backendAuthenticationConfigPath', () => {
+                const result = client.backendAuthenticationConfigPath("projectValue", "locationValue", "backendAuthenticationConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBackendAuthenticationConfigName', () => {
+                const result = client.matchProjectFromBackendAuthenticationConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBackendAuthenticationConfigName', () => {
+                const result = client.matchLocationFromBackendAuthenticationConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackendAuthenticationConfigFromBackendAuthenticationConfigName', () => {
+                const result = client.matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(fakePath);
+                assert.strictEqual(result, "backendAuthenticationConfigValue");
+                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('clientTlsPolicy', async () => {
             const fakePath = "/rendered/path/clientTlsPolicy";
             const expectedParameters = {
@@ -2592,6 +2684,382 @@ describe('v1.OrganizationAddressGroupServiceClient', () => {
             });
         });
 
+        describe('dnsThreatDetector', async () => {
+            const fakePath = "/rendered/path/dnsThreatDetector";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dns_threat_detector: "dnsThreatDetectorValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dnsThreatDetectorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dnsThreatDetectorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dnsThreatDetectorPath', () => {
+                const result = client.dnsThreatDetectorPath("projectValue", "locationValue", "dnsThreatDetectorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDnsThreatDetectorName', () => {
+                const result = client.matchProjectFromDnsThreatDetectorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDnsThreatDetectorName', () => {
+                const result = client.matchLocationFromDnsThreatDetectorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDnsThreatDetectorFromDnsThreatDetectorName', () => {
+                const result = client.matchDnsThreatDetectorFromDnsThreatDetectorName(fakePath);
+                assert.strictEqual(result, "dnsThreatDetectorValue");
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('firewallEndpointAssociation', async () => {
+            const fakePath = "/rendered/path/firewallEndpointAssociation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                firewall_endpoint_association: "firewallEndpointAssociationValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.firewallEndpointAssociationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.firewallEndpointAssociationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('firewallEndpointAssociationPath', () => {
+                const result = client.firewallEndpointAssociationPath("projectValue", "locationValue", "firewallEndpointAssociationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromFirewallEndpointAssociationName', () => {
+                const result = client.matchProjectFromFirewallEndpointAssociationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFirewallEndpointAssociationName', () => {
+                const result = client.matchLocationFromFirewallEndpointAssociationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFirewallEndpointAssociationFromFirewallEndpointAssociationName', () => {
+                const result = client.matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(fakePath);
+                assert.strictEqual(result, "firewallEndpointAssociationValue");
+                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('gatewaySecurityPolicy', async () => {
+            const fakePath = "/rendered/path/gatewaySecurityPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                gateway_security_policy: "gatewaySecurityPolicyValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.gatewaySecurityPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.gatewaySecurityPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('gatewaySecurityPolicyPath', () => {
+                const result = client.gatewaySecurityPolicyPath("projectValue", "locationValue", "gatewaySecurityPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGatewaySecurityPolicyName', () => {
+                const result = client.matchProjectFromGatewaySecurityPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGatewaySecurityPolicyName', () => {
+                const result = client.matchLocationFromGatewaySecurityPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGatewaySecurityPolicyFromGatewaySecurityPolicyName', () => {
+                const result = client.matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(fakePath);
+                assert.strictEqual(result, "gatewaySecurityPolicyValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('gatewaySecurityPolicyRule', async () => {
+            const fakePath = "/rendered/path/gatewaySecurityPolicyRule";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                gateway_security_policy: "gatewaySecurityPolicyValue",
+                rule: "ruleValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('gatewaySecurityPolicyRulePath', () => {
+                const result = client.gatewaySecurityPolicyRulePath("projectValue", "locationValue", "gatewaySecurityPolicyValue", "ruleValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGatewaySecurityPolicyRuleName', () => {
+                const result = client.matchProjectFromGatewaySecurityPolicyRuleName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGatewaySecurityPolicyRuleName', () => {
+                const result = client.matchLocationFromGatewaySecurityPolicyRuleName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName', () => {
+                const result = client.matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(fakePath);
+                assert.strictEqual(result, "gatewaySecurityPolicyValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRuleFromGatewaySecurityPolicyRuleName', () => {
+                const result = client.matchRuleFromGatewaySecurityPolicyRuleName(fakePath);
+                assert.strictEqual(result, "ruleValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('interceptDeployment', async () => {
+            const fakePath = "/rendered/path/interceptDeployment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                intercept_deployment: "interceptDeploymentValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.interceptDeploymentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.interceptDeploymentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('interceptDeploymentPath', () => {
+                const result = client.interceptDeploymentPath("projectValue", "locationValue", "interceptDeploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.interceptDeploymentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInterceptDeploymentName', () => {
+                const result = client.matchProjectFromInterceptDeploymentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.interceptDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInterceptDeploymentName', () => {
+                const result = client.matchLocationFromInterceptDeploymentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.interceptDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInterceptDeploymentFromInterceptDeploymentName', () => {
+                const result = client.matchInterceptDeploymentFromInterceptDeploymentName(fakePath);
+                assert.strictEqual(result, "interceptDeploymentValue");
+                assert((client.pathTemplates.interceptDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('interceptDeploymentGroup', async () => {
+            const fakePath = "/rendered/path/interceptDeploymentGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                intercept_deployment_group: "interceptDeploymentGroupValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.interceptDeploymentGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.interceptDeploymentGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('interceptDeploymentGroupPath', () => {
+                const result = client.interceptDeploymentGroupPath("projectValue", "locationValue", "interceptDeploymentGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInterceptDeploymentGroupName', () => {
+                const result = client.matchProjectFromInterceptDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInterceptDeploymentGroupName', () => {
+                const result = client.matchLocationFromInterceptDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInterceptDeploymentGroupFromInterceptDeploymentGroupName', () => {
+                const result = client.matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "interceptDeploymentGroupValue");
+                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('interceptEndpointGroup', async () => {
+            const fakePath = "/rendered/path/interceptEndpointGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                intercept_endpoint_group: "interceptEndpointGroupValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.interceptEndpointGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.interceptEndpointGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('interceptEndpointGroupPath', () => {
+                const result = client.interceptEndpointGroupPath("projectValue", "locationValue", "interceptEndpointGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInterceptEndpointGroupName', () => {
+                const result = client.matchProjectFromInterceptEndpointGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInterceptEndpointGroupName', () => {
+                const result = client.matchLocationFromInterceptEndpointGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInterceptEndpointGroupFromInterceptEndpointGroupName', () => {
+                const result = client.matchInterceptEndpointGroupFromInterceptEndpointGroupName(fakePath);
+                assert.strictEqual(result, "interceptEndpointGroupValue");
+                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('interceptEndpointGroupAssociation', async () => {
+            const fakePath = "/rendered/path/interceptEndpointGroupAssociation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                intercept_endpoint_group_association: "interceptEndpointGroupAssociationValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('interceptEndpointGroupAssociationPath', () => {
+                const result = client.interceptEndpointGroupAssociationPath("projectValue", "locationValue", "interceptEndpointGroupAssociationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInterceptEndpointGroupAssociationName', () => {
+                const result = client.matchProjectFromInterceptEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInterceptEndpointGroupAssociationName', () => {
+                const result = client.matchLocationFromInterceptEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName', () => {
+                const result = client.matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "interceptEndpointGroupAssociationValue");
+                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('location', async () => {
             const fakePath = "/rendered/path/location";
             const expectedParameters = {
@@ -2626,6 +3094,190 @@ describe('v1.OrganizationAddressGroupServiceClient', () => {
                 const result = client.matchLocationFromLocationName(fakePath);
                 assert.strictEqual(result, "locationValue");
                 assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mirroringDeployment', async () => {
+            const fakePath = "/rendered/path/mirroringDeployment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mirroring_deployment: "mirroringDeploymentValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mirroringDeploymentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mirroringDeploymentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mirroringDeploymentPath', () => {
+                const result = client.mirroringDeploymentPath("projectValue", "locationValue", "mirroringDeploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mirroringDeploymentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMirroringDeploymentName', () => {
+                const result = client.matchProjectFromMirroringDeploymentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.mirroringDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMirroringDeploymentName', () => {
+                const result = client.matchLocationFromMirroringDeploymentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.mirroringDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMirroringDeploymentFromMirroringDeploymentName', () => {
+                const result = client.matchMirroringDeploymentFromMirroringDeploymentName(fakePath);
+                assert.strictEqual(result, "mirroringDeploymentValue");
+                assert((client.pathTemplates.mirroringDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mirroringDeploymentGroup', async () => {
+            const fakePath = "/rendered/path/mirroringDeploymentGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mirroring_deployment_group: "mirroringDeploymentGroupValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mirroringDeploymentGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mirroringDeploymentGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mirroringDeploymentGroupPath', () => {
+                const result = client.mirroringDeploymentGroupPath("projectValue", "locationValue", "mirroringDeploymentGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMirroringDeploymentGroupName', () => {
+                const result = client.matchProjectFromMirroringDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMirroringDeploymentGroupName', () => {
+                const result = client.matchLocationFromMirroringDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMirroringDeploymentGroupFromMirroringDeploymentGroupName', () => {
+                const result = client.matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "mirroringDeploymentGroupValue");
+                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mirroringEndpointGroup', async () => {
+            const fakePath = "/rendered/path/mirroringEndpointGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mirroring_endpoint_group: "mirroringEndpointGroupValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mirroringEndpointGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mirroringEndpointGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mirroringEndpointGroupPath', () => {
+                const result = client.mirroringEndpointGroupPath("projectValue", "locationValue", "mirroringEndpointGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMirroringEndpointGroupName', () => {
+                const result = client.matchProjectFromMirroringEndpointGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMirroringEndpointGroupName', () => {
+                const result = client.matchLocationFromMirroringEndpointGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMirroringEndpointGroupFromMirroringEndpointGroupName', () => {
+                const result = client.matchMirroringEndpointGroupFromMirroringEndpointGroupName(fakePath);
+                assert.strictEqual(result, "mirroringEndpointGroupValue");
+                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mirroringEndpointGroupAssociation', async () => {
+            const fakePath = "/rendered/path/mirroringEndpointGroupAssociation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mirroring_endpoint_group_association: "mirroringEndpointGroupAssociationValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mirroringEndpointGroupAssociationPath', () => {
+                const result = client.mirroringEndpointGroupAssociationPath("projectValue", "locationValue", "mirroringEndpointGroupAssociationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMirroringEndpointGroupAssociationName', () => {
+                const result = client.matchProjectFromMirroringEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMirroringEndpointGroupAssociationName', () => {
+                const result = client.matchLocationFromMirroringEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName', () => {
+                const result = client.matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "mirroringEndpointGroupAssociationValue");
+                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -2672,6 +3324,144 @@ describe('v1.OrganizationAddressGroupServiceClient', () => {
                 const result = client.matchAddressGroupFromOrganizationLocationAddressGroupName(fakePath);
                 assert.strictEqual(result, "addressGroupValue");
                 assert((client.pathTemplates.organizationLocationAddressGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationFirewallEndpoints', async () => {
+            const fakePath = "/rendered/path/organizationLocationFirewallEndpoints";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                firewall_endpoint: "firewallEndpointValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationFirewallEndpointsPath', () => {
+                const result = client.organizationLocationFirewallEndpointsPath("organizationValue", "locationValue", "firewallEndpointValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationFirewallEndpointsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationFirewallEndpointsName', () => {
+                const result = client.matchLocationFromOrganizationLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName', () => {
+                const result = client.matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "firewallEndpointValue");
+                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationSecurityProfile', async () => {
+            const fakePath = "/rendered/path/organizationLocationSecurityProfile";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                security_profile: "securityProfileValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationSecurityProfilePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationSecurityProfilePath', () => {
+                const result = client.organizationLocationSecurityProfilePath("organizationValue", "locationValue", "securityProfileValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationSecurityProfileName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationSecurityProfileName', () => {
+                const result = client.matchLocationFromOrganizationLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecurityProfileFromOrganizationLocationSecurityProfileName', () => {
+                const result = client.matchSecurityProfileFromOrganizationLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "securityProfileValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationSecurityProfileGroup', async () => {
+            const fakePath = "/rendered/path/organizationLocationSecurityProfileGroup";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                security_profile_group: "securityProfileGroupValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationSecurityProfileGroupPath', () => {
+                const result = client.organizationLocationSecurityProfileGroupPath("organizationValue", "locationValue", "securityProfileGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationSecurityProfileGroupName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationSecurityProfileGroupName', () => {
+                const result = client.matchLocationFromOrganizationLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName', () => {
+                const result = client.matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "securityProfileGroupValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -2752,6 +3542,144 @@ describe('v1.OrganizationAddressGroupServiceClient', () => {
             });
         });
 
+        describe('projectLocationFirewallEndpoints', async () => {
+            const fakePath = "/rendered/path/projectLocationFirewallEndpoints";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                firewall_endpoint: "firewallEndpointValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationFirewallEndpointsPath', () => {
+                const result = client.projectLocationFirewallEndpointsPath("projectValue", "locationValue", "firewallEndpointValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationFirewallEndpointsName', () => {
+                const result = client.matchProjectFromProjectLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationFirewallEndpointsName', () => {
+                const result = client.matchLocationFromProjectLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFirewallEndpointFromProjectLocationFirewallEndpointsName', () => {
+                const result = client.matchFirewallEndpointFromProjectLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "firewallEndpointValue");
+                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationSecurityProfile', async () => {
+            const fakePath = "/rendered/path/projectLocationSecurityProfile";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                security_profile: "securityProfileValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationSecurityProfilePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationSecurityProfilePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationSecurityProfilePath', () => {
+                const result = client.projectLocationSecurityProfilePath("projectValue", "locationValue", "securityProfileValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationSecurityProfileName', () => {
+                const result = client.matchProjectFromProjectLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationSecurityProfileName', () => {
+                const result = client.matchLocationFromProjectLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecurityProfileFromProjectLocationSecurityProfileName', () => {
+                const result = client.matchSecurityProfileFromProjectLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "securityProfileValue");
+                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationSecurityProfileGroup', async () => {
+            const fakePath = "/rendered/path/projectLocationSecurityProfileGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                security_profile_group: "securityProfileGroupValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationSecurityProfileGroupPath', () => {
+                const result = client.projectLocationSecurityProfileGroupPath("projectValue", "locationValue", "securityProfileGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationSecurityProfileGroupName', () => {
+                const result = client.matchProjectFromProjectLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationSecurityProfileGroupName', () => {
+                const result = client.matchLocationFromProjectLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName', () => {
+                const result = client.matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "securityProfileGroupValue");
+                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('serverTlsPolicy', async () => {
             const fakePath = "/rendered/path/serverTlsPolicy";
             const expectedParameters = {
@@ -2794,6 +3722,98 @@ describe('v1.OrganizationAddressGroupServiceClient', () => {
                 const result = client.matchServerTlsPolicyFromServerTlsPolicyName(fakePath);
                 assert.strictEqual(result, "serverTlsPolicyValue");
                 assert((client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tlsInspectionPolicy', async () => {
+            const fakePath = "/rendered/path/tlsInspectionPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                tls_inspection_policy: "tlsInspectionPolicyValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tlsInspectionPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tlsInspectionPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tlsInspectionPolicyPath', () => {
+                const result = client.tlsInspectionPolicyPath("projectValue", "locationValue", "tlsInspectionPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTlsInspectionPolicyName', () => {
+                const result = client.matchProjectFromTlsInspectionPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTlsInspectionPolicyName', () => {
+                const result = client.matchLocationFromTlsInspectionPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTlsInspectionPolicyFromTlsInspectionPolicyName', () => {
+                const result = client.matchTlsInspectionPolicyFromTlsInspectionPolicyName(fakePath);
+                assert.strictEqual(result, "tlsInspectionPolicyValue");
+                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('urlList', async () => {
+            const fakePath = "/rendered/path/urlList";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                url_list: "urlListValue",
+            };
+            const client = new organizationaddressgroupserviceModule.v1.OrganizationAddressGroupServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.urlListPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.urlListPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('urlListPath', () => {
+                const result = client.urlListPath("projectValue", "locationValue", "urlListValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.urlListPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromUrlListName', () => {
+                const result = client.matchProjectFromUrlListName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.urlListPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromUrlListName', () => {
+                const result = client.matchLocationFromUrlListName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.urlListPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUrlListFromUrlListName', () => {
+                const result = client.matchUrlListFromUrlListName(fakePath);
+                assert.strictEqual(result, "urlListValue");
+                assert((client.pathTemplates.urlListPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

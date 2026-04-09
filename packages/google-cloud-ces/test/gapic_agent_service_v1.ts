@@ -8094,6 +8094,44 @@ describe('v1.AgentServiceClient', () => {
             });
         });
 
+        describe('securitySettings', async () => {
+            const fakePath = "/rendered/path/securitySettings";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new agentserviceModule.v1.AgentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.securitySettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.securitySettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('securitySettingsPath', () => {
+                const result = client.securitySettingsPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.securitySettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSecuritySettingsName', () => {
+                const result = client.matchProjectFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSecuritySettingsName', () => {
+                const result = client.matchLocationFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('tool', async () => {
             const fakePath = "/rendered/path/tool";
             const expectedParameters = {

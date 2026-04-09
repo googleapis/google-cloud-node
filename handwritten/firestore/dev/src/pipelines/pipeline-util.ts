@@ -37,7 +37,7 @@ import {
   PipelineStreamElement,
   QueryCursor,
 } from '../reference/types';
-import {Serializer} from '../serializer';
+import {hasUserData, HasUserData, Serializer} from '../serializer';
 import {
   Deferred,
   getTotalTimeout,
@@ -65,6 +65,8 @@ import {
   lessThan,
   Field,
   AggregateFunction,
+  pipelineValue,
+  AliasedExpression,
 } from './expression';
 import {Pipeline, PipelineResult, ExplainStats} from './pipelines';
 import {StructuredPipeline} from './structured-pipeline';
@@ -222,7 +224,9 @@ export class ExecutionUtil {
               this._serializer,
               result.fields || {},
               ref,
-              Timestamp.fromProto(proto.executionTime!),
+              proto.executionTime
+                ? Timestamp.fromProto(proto.executionTime)
+                : undefined,
               result.createTime
                 ? Timestamp.fromProto(result.createTime!)
                 : undefined,
@@ -577,6 +581,7 @@ export function isSelectable(
 export function isOrdering(val: unknown): val is firestore.Pipelines.Ordering {
   const candidate = val as firestore.Pipelines.Ordering;
   return (
+    val !== undefined &&
     isExpr(candidate.expr) &&
     (candidate.direction === 'ascending' ||
       candidate.direction === 'descending')
@@ -601,6 +606,12 @@ export function isBooleanExpr(
   val: unknown,
 ): val is firestore.Pipelines.BooleanExpression {
   return val instanceof BooleanExpression;
+}
+
+export function isAliasedExpr(
+  val: unknown,
+): val is firestore.Pipelines.AliasedExpression {
+  return val instanceof AliasedExpression;
 }
 
 export function isField(val: unknown): val is firestore.Pipelines.Field {
@@ -630,6 +641,9 @@ export function valueToDefaultExpr(value: unknown): Expression {
   if (isFirestoreValue(value)) {
     return constant(value);
   }
+  if (isPipeline(value)) {
+    return pipelineValue(value);
+  }
   if (value instanceof Expression) {
     return value;
   } else if (isPlainObject(value)) {
@@ -640,7 +654,6 @@ export function valueToDefaultExpr(value: unknown): Expression {
     result = constant(value);
   }
 
-  // TODO(pipeline) is this still used?
   result._createdFromLiteral = true;
   return result;
 }
@@ -721,10 +734,19 @@ export function fieldOrSelectable(value: string | Selectable): Selectable {
   }
 }
 
+/**
+ * @deprecated use selectablesToObject instead
+ */
 export function selectablesToMap(
   selectables: (firestore.Pipelines.Selectable | string)[],
 ): Map<string, Expression> {
-  const result = new Map<string, Expression>();
+  return new Map(Object.entries(selectablesToObject(selectables)));
+}
+
+export function selectablesToObject(
+  selectables: (firestore.Pipelines.Selectable | string)[],
+): Record<string, Expression> {
+  const result: Record<string, Expression> = {};
   for (const selectable of selectables) {
     let alias: string;
     let expression: Expression;
@@ -736,11 +758,11 @@ export function selectablesToMap(
       expression = selectable._expr as unknown as Expression;
     }
 
-    if (result.get(alias) !== undefined) {
+    if (result[alias] !== undefined) {
       throw new Error(`Duplicate alias or field '${alias}'`);
     }
 
-    result.set(alias, expression);
+    result[alias] = expression;
   }
   return result;
 }
@@ -762,4 +784,26 @@ export function aliasedAggregateToMap(
     },
     new Map() as Map<string, AggregateFunction>,
   );
+}
+
+/**
+ * @internal
+ *
+ * Helper to read user data across a number of different formats.
+ */
+export function validateUserDataHelper<
+  T extends Map<string, HasUserData> | HasUserData[] | HasUserData,
+>(expressionMap: T, ignoreUndefinedProperties: boolean): T {
+  if (hasUserData(expressionMap)) {
+    expressionMap._validateUserData(ignoreUndefinedProperties);
+  } else if (Array.isArray(expressionMap)) {
+    expressionMap.forEach(readableData => {
+      readableData._validateUserData(ignoreUndefinedProperties);
+    });
+  } else {
+    expressionMap.forEach(expr =>
+      expr._validateUserData(ignoreUndefinedProperties),
+    );
+  }
+  return expressionMap;
 }

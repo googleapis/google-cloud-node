@@ -5991,6 +5991,13 @@
                             "description": {
                               "type": "string",
                               "id": 8
+                            },
+                            "dtmfPattern": {
+                              "type": "string",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -7242,6 +7249,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "traceBlocks": {
+                              "rule": "repeated",
+                              "type": "TraceBlock",
+                              "id": 37,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -7725,6 +7740,384 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/SessionEntityType"
                               }
                             }
+                          }
+                        },
+                        "TraceBlock": {
+                          "oneofs": {
+                            "traceMetadata": {
+                              "oneof": [
+                                "playbookTraceMetadata",
+                                "flowTraceMetadata",
+                                "speechProcessingMetadata"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "playbookTraceMetadata": {
+                              "type": "PlaybookTraceMetadata",
+                              "id": 1
+                            },
+                            "flowTraceMetadata": {
+                              "type": "FlowTraceMetadata",
+                              "id": 2
+                            },
+                            "speechProcessingMetadata": {
+                              "type": "SpeechProcessingMetadata",
+                              "id": 8
+                            },
+                            "actions": {
+                              "rule": "repeated",
+                              "type": "Action",
+                              "id": 3
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "completeTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "inputParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "outputParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "endState": {
+                              "type": "OutputState",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SpeechProcessingMetadata": {
+                          "fields": {
+                            "displayName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "PlaybookTraceMetadata": {
+                          "fields": {
+                            "playbook": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "FlowTraceMetadata": {
+                          "fields": {
+                            "flow": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "PlaybookInput": {
+                          "fields": {
+                            "precedingConversationSummary": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "PlaybookOutput": {
+                          "fields": {
+                            "executionSummary": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Action": {
+                          "oneofs": {
+                            "action": {
+                              "oneof": [
+                                "userUtterance",
+                                "agentUtterance",
+                                "toolUse",
+                                "playbookInvocation",
+                                "flowInvocation",
+                                "playbookTransition",
+                                "flowTransition"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "userUtterance": {
+                              "type": "UserUtterance",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "agentUtterance": {
+                              "type": "AgentUtterance",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "toolUse": {
+                              "type": "ToolUse",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "playbookInvocation": {
+                              "type": "PlaybookInvocation",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "flowInvocation": {
+                              "type": "FlowInvocation",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "playbookTransition": {
+                              "type": "PlaybookTransition",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "flowTransition": {
+                              "type": "FlowTransition",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "UserUtterance": {
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "AgentUtterance": {
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ToolUse": {
+                          "fields": {
+                            "tool": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Tool"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "action": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "inputActionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "outputActionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "PlaybookInvocation": {
+                          "fields": {
+                            "playbook": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "playbookInput": {
+                              "type": "PlaybookInput",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "playbookOutput": {
+                              "type": "PlaybookOutput",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "playbookState": {
+                              "type": "OutputState",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "FlowInvocation": {
+                          "fields": {
+                            "flow": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "flowState": {
+                              "type": "OutputState",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "PlaybookTransition": {
+                          "fields": {
+                            "playbook": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "FlowTransition": {
+                          "fields": {
+                            "flow": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "OutputState": {
+                          "values": {
+                            "OUTPUT_STATE_UNSPECIFIED": 0,
+                            "OUTPUT_STATE_OK": 1,
+                            "OUTPUT_STATE_CANCELLED": 2,
+                            "OUTPUT_STATE_FAILED": 3,
+                            "OUTPUT_STATE_ESCALATED": 4,
+                            "OUTPUT_STATE_PENDING": 5
                           }
                         },
                         "TransitionRouteGroups": {
@@ -9040,270 +9433,6 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
-                          }
-                        },
-                        "PlaybookInput": {
-                          "fields": {
-                            "precedingConversationSummary": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "PlaybookOutput": {
-                          "fields": {
-                            "executionSummary": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "Action": {
-                          "oneofs": {
-                            "action": {
-                              "oneof": [
-                                "userUtterance",
-                                "agentUtterance",
-                                "toolUse",
-                                "playbookInvocation",
-                                "flowInvocation",
-                                "playbookTransition",
-                                "flowTransition"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "userUtterance": {
-                              "type": "UserUtterance",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "agentUtterance": {
-                              "type": "AgentUtterance",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "toolUse": {
-                              "type": "ToolUse",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "playbookInvocation": {
-                              "type": "PlaybookInvocation",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "flowInvocation": {
-                              "type": "FlowInvocation",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "playbookTransition": {
-                              "type": "PlaybookTransition",
-                              "id": 12,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "flowTransition": {
-                              "type": "FlowTransition",
-                              "id": 13,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "UserUtterance": {
-                          "fields": {
-                            "text": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "AgentUtterance": {
-                          "fields": {
-                            "text": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "ToolUse": {
-                          "fields": {
-                            "tool": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Tool"
-                              }
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 8,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "action": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "inputActionParameters": {
-                              "type": "google.protobuf.Struct",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "outputActionParameters": {
-                              "type": "google.protobuf.Struct",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "PlaybookInvocation": {
-                          "fields": {
-                            "playbook": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
-                              }
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "playbookInput": {
-                              "type": "PlaybookInput",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "playbookOutput": {
-                              "type": "PlaybookOutput",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "playbookState": {
-                              "type": "OutputState",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "FlowInvocation": {
-                          "fields": {
-                            "flow": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
-                              }
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "flowState": {
-                              "type": "OutputState",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "PlaybookTransition": {
-                          "fields": {
-                            "playbook": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
-                              }
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        },
-                        "FlowTransition": {
-                          "fields": {
-                            "flow": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
-                              }
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        },
-                        "OutputState": {
-                          "values": {
-                            "OUTPUT_STATE_UNSPECIFIED": 0,
-                            "OUTPUT_STATE_OK": 1,
-                            "OUTPUT_STATE_CANCELLED": 2,
-                            "OUTPUT_STATE_FAILED": 3,
-                            "OUTPUT_STATE_ESCALATED": 4,
-                            "OUTPUT_STATE_PENDING": 5
                           }
                         },
                         "Experiments": {
@@ -18382,6 +18511,13 @@
                             "description": {
                               "type": "string",
                               "id": 8
+                            },
+                            "dtmfPattern": {
+                              "type": "string",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -19689,6 +19825,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "traceBlocks": {
+                              "rule": "repeated",
+                              "type": "TraceBlock",
+                              "id": 37,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -20208,6 +20352,120 @@
                               "id": 13,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "TraceBlock": {
+                          "oneofs": {
+                            "traceMetadata": {
+                              "oneof": [
+                                "playbookTraceMetadata",
+                                "flowTraceMetadata",
+                                "speechProcessingMetadata"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "playbookTraceMetadata": {
+                              "type": "PlaybookTraceMetadata",
+                              "id": 1
+                            },
+                            "flowTraceMetadata": {
+                              "type": "FlowTraceMetadata",
+                              "id": 2
+                            },
+                            "speechProcessingMetadata": {
+                              "type": "SpeechProcessingMetadata",
+                              "id": 8
+                            },
+                            "actions": {
+                              "rule": "repeated",
+                              "type": "Action",
+                              "id": 3
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "completeTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "inputParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "outputParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "endState": {
+                              "type": "OutputState",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SpeechProcessingMetadata": {
+                          "fields": {
+                            "displayName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "PlaybookTraceMetadata": {
+                          "fields": {
+                            "playbook": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "FlowTraceMetadata": {
+                          "fields": {
+                            "flow": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }

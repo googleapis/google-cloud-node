@@ -1,6 +1,7 @@
 [
   "../../protos/google/cloud/ces/v1/agent.proto",
   "../../protos/google/cloud/ces/v1/agent_service.proto",
+  "../../protos/google/cloud/ces/v1/agent_tool.proto",
   "../../protos/google/cloud/ces/v1/agent_transfers.proto",
   "../../protos/google/cloud/ces/v1/app.proto",
   "../../protos/google/cloud/ces/v1/app_version.proto",
@@ -29,6 +30,7 @@
   "../../protos/google/cloud/ces/v1/python_function.proto",
   "../../protos/google/cloud/ces/v1/schema.proto",
   "../../protos/google/cloud/ces/v1/search_suggestions.proto",
+  "../../protos/google/cloud/ces/v1/security_settings.proto",
   "../../protos/google/cloud/ces/v1/session_service.proto",
   "../../protos/google/cloud/ces/v1/system_tool.proto",
   "../../protos/google/cloud/ces/v1/tool.proto",

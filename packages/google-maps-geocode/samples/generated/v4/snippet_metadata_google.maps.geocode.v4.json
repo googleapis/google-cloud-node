@@ -1,0 +1,239 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-geocode",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.maps.geocode.v4",
+        "version": "v4"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "geocoding-backend_v4_generated_DestinationService_SearchDestinations_async",
+      "title": "DestinationService searchDestinations Sample",
+      "origin": "API_DEFINITION",
+      "description": " This method performs a destination lookup and returns a list of destinations.",
+      "canonical": true,
+      "file": "destination_service.search_destinations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchDestinations",
+        "fullName": "google.maps.geocode.v4.DestinationService.SearchDestinations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "place",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "address_query",
+            "type": ".google.maps.geocode.v4.SearchDestinationsRequest.AddressQuery"
+          },
+          {
+            "name": "location_query",
+            "type": ".google.maps.geocode.v4.SearchDestinationsRequest.LocationQuery"
+          },
+          {
+            "name": "travel_modes",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.maps.geocode.v4.SearchDestinationsResponse",
+        "client": {
+          "shortName": "DestinationServiceClient",
+          "fullName": "google.maps.geocode.v4.DestinationServiceClient"
+        },
+        "method": {
+          "shortName": "SearchDestinations",
+          "fullName": "google.maps.geocode.v4.DestinationService.SearchDestinations",
+          "service": {
+            "shortName": "DestinationService",
+            "fullName": "google.maps.geocode.v4.DestinationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "geocoding-backend_v4_generated_GeocodeService_GeocodeAddress_async",
+      "title": "DestinationService geocodeAddress Sample",
+      "origin": "API_DEFINITION",
+      "description": " This method performs an address geocode, which maps an address to a LatLng. It also provides structured information about the address.",
+      "canonical": true,
+      "file": "geocode_service.geocode_address.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GeocodeAddress",
+        "fullName": "google.maps.geocode.v4.GeocodeService.GeocodeAddress",
+        "async": true,
+        "parameters": [
+          {
+            "name": "address_query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "address",
+            "type": ".google.type.PostalAddress"
+          },
+          {
+            "name": "location_bias",
+            "type": ".google.maps.geocode.v4.GeocodeAddressRequest.LocationBias"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.maps.geocode.v4.GeocodeAddressResponse",
+        "client": {
+          "shortName": "GeocodeServiceClient",
+          "fullName": "google.maps.geocode.v4.GeocodeServiceClient"
+        },
+        "method": {
+          "shortName": "GeocodeAddress",
+          "fullName": "google.maps.geocode.v4.GeocodeService.GeocodeAddress",
+          "service": {
+            "shortName": "GeocodeService",
+            "fullName": "google.maps.geocode.v4.GeocodeService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "geocoding-backend_v4_generated_GeocodeService_GeocodeLocation_async",
+      "title": "DestinationService geocodeLocation Sample",
+      "origin": "API_DEFINITION",
+      "description": " This method performs a location geocode, which maps a LatLng to an address. It also provides structured information about the address.",
+      "canonical": true,
+      "file": "geocode_service.geocode_location.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GeocodeLocation",
+        "fullName": "google.maps.geocode.v4.GeocodeService.GeocodeLocation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "location_query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": ".google.type.LatLng"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "types",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "granularity",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.maps.geocode.v4.GeocodeLocationResponse",
+        "client": {
+          "shortName": "GeocodeServiceClient",
+          "fullName": "google.maps.geocode.v4.GeocodeServiceClient"
+        },
+        "method": {
+          "shortName": "GeocodeLocation",
+          "fullName": "google.maps.geocode.v4.GeocodeService.GeocodeLocation",
+          "service": {
+            "shortName": "GeocodeService",
+            "fullName": "google.maps.geocode.v4.GeocodeService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "geocoding-backend_v4_generated_GeocodeService_GeocodePlace_async",
+      "title": "DestinationService geocodePlace Sample",
+      "origin": "API_DEFINITION",
+      "description": " This method performs a geocode lookup using a place ID.",
+      "canonical": true,
+      "file": "geocode_service.geocode_place.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GeocodePlace",
+        "fullName": "google.maps.geocode.v4.GeocodeService.GeocodePlace",
+        "async": true,
+        "parameters": [
+          {
+            "name": "place",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.maps.geocode.v4.GeocodeResult",
+        "client": {
+          "shortName": "GeocodeServiceClient",
+          "fullName": "google.maps.geocode.v4.GeocodeServiceClient"
+        },
+        "method": {
+          "shortName": "GeocodePlace",
+          "fullName": "google.maps.geocode.v4.GeocodeService.GeocodePlace",
+          "service": {
+            "shortName": "GeocodeService",
+            "fullName": "google.maps.geocode.v4.GeocodeService"
+          }
+        }
+      }
+    }
+  ]
+}

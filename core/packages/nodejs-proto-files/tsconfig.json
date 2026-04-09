@@ -1,0 +1,16 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "lib": ["es2018", "dom"],
+    "rootDir": ".",
+    "outDir": "build",
+    "noImplicitAny": false,
+    "moduleResolution": "nodenext",
+    "module": "nodenext"
+  },
+  "include": [
+    "src/*.ts",
+    "tools/*.ts",
+    "test/*.ts"
+  ]
+}

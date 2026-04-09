@@ -21,6 +21,7 @@ import {ProtoSerializable, Serializer} from '../serializer';
 
 import {
   AggregateFunction,
+  AliasedExpression,
   BooleanExpression,
   Expression,
   Field,
@@ -29,6 +30,8 @@ import {
 } from './expression';
 import {OptionsUtil} from './options-util';
 import {CollectionReference} from '../reference/collection-reference';
+import {validateUserDataHelper, selectablesToMap} from './pipeline-util';
+import {Pipeline} from './pipelines';
 
 /**
  * Interface for Stage classes.
@@ -37,6 +40,7 @@ export interface Stage extends ProtoSerializable<api.Pipeline.IStage> {
   name: string;
 
   _toProto(serializer: Serializer): api.Pipeline.IStage;
+  _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
 /**
@@ -68,6 +72,10 @@ export class RemoveFields implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.fields, ignoreUndefinedProperties);
   }
 }
 
@@ -105,6 +113,14 @@ export class Aggregate implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.groups, ignoreUndefinedProperties);
+    validateUserDataHelper(
+      this.options.accumulators,
+      ignoreUndefinedProperties,
+    );
+  }
 }
 
 /**
@@ -136,6 +152,10 @@ export class Distinct implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.groups, ignoreUndefinedProperties);
   }
 }
 
@@ -180,6 +200,8 @@ export class CollectionSource implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -215,6 +237,8 @@ export class CollectionGroupSource implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -242,6 +266,8 @@ export class DatabaseSource implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -277,6 +303,8 @@ export class DocumentsSource implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -308,6 +336,10 @@ export class Where implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.condition, ignoreUndefinedProperties);
   }
 }
 
@@ -354,6 +386,20 @@ export class FindNearest implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this._options.field, ignoreUndefinedProperties);
+    validateUserDataHelper(
+      this._options.vectorValue,
+      ignoreUndefinedProperties,
+    );
+    if (this._options.distanceField) {
+      validateUserDataHelper(
+        this._options.distanceField,
+        ignoreUndefinedProperties,
+      );
+    }
+  }
 }
 
 /**
@@ -390,6 +436,8 @@ export class Sample implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -416,6 +464,13 @@ export class Union implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    // A Union stage embeds a full pipeline, we trigger its validation here.
+    (this.options.other as Pipeline)._validateUserData(
+      ignoreUndefinedProperties,
+    );
   }
 }
 
@@ -458,6 +513,10 @@ export class Unnest implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.expr, ignoreUndefinedProperties);
+  }
 }
 
 /**
@@ -485,6 +544,8 @@ export class Limit implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -512,6 +573,8 @@ export class Offset implements Stage {
       ),
     };
   }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -547,6 +610,10 @@ export class ReplaceWith implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.map, ignoreUndefinedProperties);
+  }
 }
 
 /**
@@ -578,6 +645,10 @@ export class Select implements Stage {
         this.options.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.selections, ignoreUndefinedProperties);
   }
 }
 
@@ -611,6 +682,10 @@ export class AddFields implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.fields, ignoreUndefinedProperties);
+  }
 }
 
 /**
@@ -643,6 +718,156 @@ export class Sort implements Stage {
       ),
     };
   }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.orderings, ignoreUndefinedProperties);
+  }
+}
+
+export type InternalSearchStageOptions = Omit<
+  firestore.Pipelines.SearchStageOptions,
+  'query' | 'sort' | 'select' | 'addFields'
+> & {
+  query: BooleanExpression;
+  sort?: Array<Ordering>;
+  select?: Record<string, Expression>;
+  addFields?: Record<string, Expression>;
+};
+
+/**
+ * Search stage.
+ */
+export class Search implements Stage {
+  name = 'search';
+
+  constructor(private options: InternalSearchStageOptions) {}
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.query, ignoreUndefinedProperties);
+    if (this.options.sort) {
+      validateUserDataHelper(this.options.sort, ignoreUndefinedProperties);
+    }
+    if (this.options.select) {
+      validateUserDataHelper(
+        Object.values(this.options.select) as Expression[],
+        ignoreUndefinedProperties,
+      );
+    }
+    if (this.options.addFields) {
+      validateUserDataHelper(
+        Object.values(this.options.addFields) as Expression[],
+        ignoreUndefinedProperties,
+      );
+    }
+  }
+
+  readonly optionsUtil = new OptionsUtil({
+    query: {
+      serverName: 'query',
+    },
+    limit: {
+      serverName: 'limit',
+    },
+    retrievalDepth: {
+      serverName: 'retrieval_depth',
+    },
+    sort: {
+      serverName: 'sort',
+    },
+    addFields: {
+      serverName: 'add_fields',
+    },
+    select: {
+      serverName: 'select',
+    },
+    offset: {
+      serverName: 'offset',
+    },
+    queryEnhancement: {
+      serverName: 'query_enhancement',
+    },
+    languageCode: {
+      serverName: 'language_code',
+    },
+  });
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+}
+
+/**
+ * Internal options for Define stage.
+ */
+export type InternalDefineStageOptions = Omit<
+  firestore.Pipelines.DefineStageOptions,
+  'variables'
+> & {
+  variables: Map<string, Expression>;
+};
+
+/**
+ * Define stage.
+ */
+export class Define implements Stage {
+  name = 'let';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor(private options: InternalDefineStageOptions) {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [serializer.encodeValue(this.options.variables)!],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.variables, ignoreUndefinedProperties);
+  }
+}
+
+/**
+ * Internal options for Subcollection stage.
+ */
+export type InternalSubcollectionStageOptions =
+  firestore.Pipelines.SubcollectionStageOptions;
+
+/**
+ * Subcollection stage.
+ */
+export class SubcollectionSource implements Stage {
+  name = 'subcollection';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor(private options: InternalSubcollectionStageOptions) {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [serializer.encodeValue(this.options.path)!],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
 }
 
 /**
@@ -675,5 +900,64 @@ export class RawStage implements Stage {
         this.rawOptions,
       ),
     };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.params, ignoreUndefinedProperties);
+  }
+}
+
+/**
+ * Delete stage.
+ */
+export class DeleteStage implements Stage {
+  name = 'delete';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor() {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    const args: api.IValue[] = [];
+
+    return {
+      name: this.name,
+      args,
+      options: this.optionsUtil.getOptionsProto(serializer, {}, {}),
+    };
+  }
+
+  _validateUserData(_: boolean): void {}
+}
+
+/**
+ * Update stage.
+ */
+export class UpdateStage implements Stage {
+  name = 'update';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor(private transformedFields?: AliasedExpression[]) {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    const args: api.IValue[] = [];
+
+    if (this.transformedFields && this.transformedFields.length > 0) {
+      const mapped = selectablesToMap(this.transformedFields);
+      args.push(serializer.encodeValue(mapped)!);
+    } else {
+      args.push(serializer.encodeValue(new Map())!);
+    }
+
+    return {
+      name: this.name,
+      args,
+      options: this.optionsUtil.getOptionsProto(serializer, {}, {}),
+    };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    if (this.transformedFields) {
+      validateUserDataHelper(this.transformedFields, ignoreUndefinedProperties);
+    }
   }
 }

@@ -17,6 +17,7 @@ export {
   PipelineResult,
   PipelineSnapshot,
   PipelineSource,
+  subcollection,
 } from './pipelines';
 
 export {
@@ -67,6 +68,10 @@ export {
   arrayMinimum,
   arrayMaximumN,
   arrayMinimumN,
+  arrayFilter,
+  arrayTransform,
+  arrayTransformWithIndex,
+  arraySlice,
   field,
   xor,
   AggregateFunction,
@@ -94,6 +99,7 @@ export {
   isError,
   substring,
   documentId,
+  parent,
   arrayContainsAll,
   constant,
   Field,
@@ -146,8 +152,9 @@ export {
   arrayConcat,
   type,
   isType,
-  Type,
   timestampTruncate,
+  timestampExtract,
+  timestampDiff,
   split,
   ltrim,
   rtrim,
@@ -155,5 +162,15 @@ export {
   stringRepeat,
   stringReplaceAll,
   stringReplaceOne,
+  nor,
+  switchOn,
+  getField,
+  variable,
+  currentDocument,
+  ifNull,
+  coalesce,
+  documentMatches,
+  score,
+  geoDistance,
   // TODO(new-expression): Add new expression exports above this line
 } from './expression';

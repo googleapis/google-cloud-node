@@ -43,7 +43,7 @@ function main(account, service) {
    *  `account_aggregation` and `accounts.createAndConfigure` method can be
    *  used to create a sub-account under an existing advanced account through
    *  this method. Additional `account_management` or
-   *  `product_management` services may be provided.
+   *  `products_management` services may be provided.
    */
   // const service = [1,2,3,4]
   /**

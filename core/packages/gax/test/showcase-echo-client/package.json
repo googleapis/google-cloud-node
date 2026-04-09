@@ -1,0 +1,45 @@
+{
+  "name": "showcase-echo-client",
+  "version": "0.1.0",
+  "description": "Showcase client for Node.js",
+  "repository": "googleapis/nodejs-showcase",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "main": "build/src/index.js",
+  "files": [
+    "build/src",
+    "build/protos"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google showcase",
+    "showcase",
+    "echo",
+    "sequence service"
+  ],
+  "scripts": {
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile-protos": "compileProtos src",
+    "prefetch": "rm -rf node_modules package-lock.json google-gax*.tgz gapic-tools*.tgz && cd ../.. && npm pack && mv google-gax*.tgz test/showcase-echo-client/google-gax.tgz && cd ../tools && npm install && npm pack && mv gapic-tools*.tgz ../gax/test/showcase-echo-client/gapic-tools.tgz",
+    "prepare": "npm run compile-protos && npm run compile"
+  },
+  "dependencies": {
+    "google-gax": "./google-gax.tgz"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.2",
+    "gapic-tools": "./gapic-tools.tgz",
+    "typescript": "5.8.3"
+  },
+  "engines": {
+    "node": ">=v18"
+  }
+}
