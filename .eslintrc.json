@@ -1,6 +1,0 @@
-{
-  "extends": "gts",
-  "rules": {
-    "@typescript-eslint/no-explicit-any": "error"
-  }
-}

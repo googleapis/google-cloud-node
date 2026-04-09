@@ -1,7 +1,10 @@
 **/node_modules
 **/coverage
+**/.coverage
+**/test/fixtures/**
 test/fixtures
+system-test/
+samples/generated/
 build/
 docs/
 protos/
-packages/
