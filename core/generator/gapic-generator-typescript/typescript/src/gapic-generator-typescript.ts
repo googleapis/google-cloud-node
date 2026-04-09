@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 #!/usr/bin/env node
 
 // Copyright 2020 Google LLC

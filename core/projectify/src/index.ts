@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Stream} from 'stream';
 
 // Copyright 2014 Google LLC

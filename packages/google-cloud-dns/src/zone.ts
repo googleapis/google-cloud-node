@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*!
  * Copyright 2014 Google Inc. All Rights Reserved.
  *
