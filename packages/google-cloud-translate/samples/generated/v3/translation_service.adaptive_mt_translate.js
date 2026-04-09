@@ -43,6 +43,10 @@ function main(parent, dataset, content) {
    */
   // const content = ['abc','def']
   /**
+   *  The format of the source text.
+   */
+  // const mimeType = 'abc123'
+  /**
    *  Configuration for caller provided reference sentences.
    */
   // const referenceSentenceConfig = {}
