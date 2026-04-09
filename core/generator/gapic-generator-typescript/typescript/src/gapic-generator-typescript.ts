@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // Copyright 2020 Google LLC
 //
