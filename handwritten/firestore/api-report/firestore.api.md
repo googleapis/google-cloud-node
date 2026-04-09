@@ -230,6 +230,12 @@ function arrayContainsAny(array: Expression, values: Expression): BooleanExpress
 function arrayContainsAny(fieldName: string, values: Expression): BooleanExpression;
 
 // @public
+function arrayFilter(fieldName: string, alias: string, filter: BooleanExpression): FunctionExpression;
+
+// @public
+function arrayFilter(arrayExpression: Expression, alias: string, filter: BooleanExpression): FunctionExpression;
+
+// @public
 function arrayFirst(fieldName: string): FunctionExpression;
 
 // @public
@@ -344,10 +350,28 @@ function arrayReverse(fieldName: string): FunctionExpression;
 function arrayReverse(arrayExpression: Expression): FunctionExpression;
 
 // @public
+function arraySlice(arrayName: string, offset: number | Expression, length?: number | Expression): FunctionExpression;
+
+// @public
+function arraySlice(arrayExpression: Expression, offset: number | Expression, length?: number | Expression): FunctionExpression;
+
+// @public
 function arraySum(fieldName: string): FunctionExpression;
 
 // @public
 function arraySum(expression: Expression): FunctionExpression;
+
+// @public
+function arrayTransform(fieldName: string, elementAlias: string, transform: Expression): FunctionExpression;
+
+// @public
+function arrayTransform(arrayExpression: Expression, elementAlias: string, transform: Expression): FunctionExpression;
+
+// @public
+function arrayTransformWithIndex(fieldName: string, elementAlias: string, indexAlias: string, transform: Expression): FunctionExpression;
+
+// @public
+function arrayTransformWithIndex(arrayExpression: Expression, elementAlias: string, indexAlias: string, transform: Expression): FunctionExpression;
 
 // @public
 function ascending(expr: Expression): Ordering;
@@ -1090,6 +1114,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     arrayContainsAll(arrayExpression: Expression): BooleanExpression;
     arrayContainsAny(values: Array<Expression | unknown>): BooleanExpression;
     arrayContainsAny(arrayExpression: Expression): BooleanExpression;
+    arrayFilter(alias: string, filter: BooleanExpression): FunctionExpression;
     arrayFirst(): FunctionExpression;
     arrayFirstN(n: number): FunctionExpression;
     arrayFirstN(n: Expression): FunctionExpression;
@@ -1112,7 +1137,10 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     arrayMinimumN(n: number): FunctionExpression;
     arrayMinimumN(n: Expression): FunctionExpression;
     arrayReverse(): FunctionExpression;
+    arraySlice(offset: number | Expression, length?: number | Expression): FunctionExpression;
     arraySum(): FunctionExpression;
+    arrayTransform(elementAlias: string, transform: Expression): FunctionExpression;
+    arrayTransformWithIndex(elementAlias: string, indexAlias: string, transform: Expression): FunctionExpression;
     as(name: string): AliasedExpression;
     asBoolean(): BooleanExpression;
     ascending(): Ordering;
@@ -2135,6 +2163,10 @@ declare namespace Pipelines {
         arrayMinimum,
         arrayMaximumN,
         arrayMinimumN,
+        arrayFilter,
+        arrayTransform,
+        arrayTransformWithIndex,
+        arraySlice,
         field,
         xor,
         AggregateFunction,
