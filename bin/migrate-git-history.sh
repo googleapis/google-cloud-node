@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2026 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -92,9 +92,9 @@ then
       if [[ $file == "${KEEP_FILES_SPACES[$LAST_ELEMENT]}" ]]
       then
         KEEP_FILE_COMMANDS+="git checkout -- ${file} 2>/dev/null || true"
-      else 
+      else
         KEEP_FILE_COMMANDS+="git checkout -- ${file} 2>/dev/null || true; "
-      fi   
+      fi
     done
     # restore files to keep, silence errors if the file doesn't exist
     FILTER="${FILTER}; ${KEEP_FILE_COMMANDS}"

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2026 Google LLC
+# Copyright 202 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ git checkout "/tmp/${SPLIT_REPO}/.kokoro/trampoline.sh"
 git checkout "/tmp/${SPLIT_REPO}/.kokoro/trampoline_v2.sh"
 git checkout "/tmp/${SPLIT_REPO}/.kokoro/.gitattributes"
 
-IGNORE_README_TXT="# Copyright 2026 Google LLC
+IGNORE_README_TXT="# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -73,7 +73,7 @@ OWLBOT_PY="/tmp/${SPLIT_REPO}/owlbot.py"
 echo "$IGNORE_README_TXT" >> "$OWLBOT_PY"
 
 SAMPLES_CFG_TXT="#!/bin/bash
-# Copyright 2026 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -128,7 +128,7 @@ else
 fi"
 
 SYSTEM_TEST_CFG_TXT="#!/bin/bash
-# Copyright 2026 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the \"License\");
 # you may not use this file except in compliance with the License.
