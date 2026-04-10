@@ -197,7 +197,7 @@ describe('MetricInterceptor', () => {
       );
     });
 
-    it.skip('AFE Metrics - Connectivity Error Count', () => {
+    it('AFE Metrics - Connectivity Error Count', () => {
       const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
       interceptingCall.start(testMetadata, mockListener);
 

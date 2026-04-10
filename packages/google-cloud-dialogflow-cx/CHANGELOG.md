@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.7.0...dialogflow-cx-v5.8.0) (2026-04-08)
+
+
+### Features
+
+* [cx] updated v3 dialogflow client libraries with `dtmf_pattern` and `trace_blocks` ([#7846](https://github.com/googleapis/google-cloud-node/issues/7846)) ([24d9b56](https://github.com/googleapis/google-cloud-node/commit/24d9b56ef1840f2738920f4577d4f77fb0a5b8fd))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.6.0...dialogflow-cx-v5.7.0) (2026-02-19)
 
 
