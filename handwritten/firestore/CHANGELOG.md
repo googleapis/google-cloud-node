@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [8.4.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.3.0...firestore-v8.4.0) (2026-04-09)
+
+
+### Features
+
+* [firestore] Add support for DML ([09cd24f](https://github.com/googleapis/google-cloud-node/commit/09cd24fcb742fa2f084c4c358a0156aac7951c26))
+* [firestore] Add support for DML ([77ce319](https://github.com/googleapis/google-cloud-node/commit/77ce3195b2b5f569b7fba33ea5bcc05391428318))
+* Added public preview support for full-text search and geo search in Pipelines. ([228fe85](https://github.com/googleapis/google-cloud-node/commit/228fe85ad548968823bc9c99e21afceacf2638b0))
+* **firestore:** Add support for subqueries ([#7839](https://github.com/googleapis/google-cloud-node/issues/7839)) ([fb317f8](https://github.com/googleapis/google-cloud-node/commit/fb317f859be6d1c9f60cf388431f6419a3dc5055))
+* **firestore:** Add the parent expression ([f17a791](https://github.com/googleapis/google-cloud-node/commit/f17a79153046f578bda9bbd0d2cdb9ed9371d500))
+* **firestore:** Add timestamp expressions ([deeb265](https://github.com/googleapis/google-cloud-node/commit/deeb265d21751393a71224a3793adb38582f39b8))
+
+
+### Bug Fixes
+
+* **firestore:** Update pipeline tests for backend changes ([e8755b5](https://github.com/googleapis/google-cloud-node/commit/e8755b5f490e6eca885804792a18119a7a822a0a))
+* **firestore:** Update pipeline tests for backend changes ([e5dd91e](https://github.com/googleapis/google-cloud-node/commit/e5dd91e03595452fc1dece58ca6b0c553f72398f))
+* Refactor the parameters for timestamp expressions and fix bug for timeGranularity lowercase ([7d044d1](https://github.com/googleapis/google-cloud-node/commit/7d044d1f9d30ab0edef38d1fc07311799a3e9f91))
+
 ## [8.3.0](https://github.com/googleapis/nodejs-firestore/compare/v8.2.0...v8.3.0) (2026-02-02)
 
 
