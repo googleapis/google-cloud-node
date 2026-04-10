@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Dirent} from 'fs';
 import * as fs from 'fs/promises';
 import * as path from 'path';

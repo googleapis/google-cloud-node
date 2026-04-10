@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,14 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -100,17 +108,37 @@ export class EntitySignalsMappingServiceClient {
    *     const client = new EntitySignalsMappingServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof EntitySignalsMappingServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof EntitySignalsMappingServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'admanager.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -119,7 +147,9 @@ export class EntitySignalsMappingServiceClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -145,7 +175,7 @@ export class EntitySignalsMappingServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -159,10 +189,7 @@ export class EntitySignalsMappingServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,139 +211,139 @@ export class EntitySignalsMappingServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       adBreakPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}'
+        'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}',
       ),
       adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}'
+        'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}',
       ),
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/adUnits/{ad_unit}'
+        'networks/{network_code}/adUnits/{ad_unit}',
       ),
       applicationPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/applications/{application}'
+        'networks/{network_code}/applications/{application}',
       ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/audienceSegments/{audience_segment}'
+        'networks/{network_code}/audienceSegments/{audience_segment}',
       ),
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/bandwidthGroups/{bandwidth_group}'
+        'networks/{network_code}/bandwidthGroups/{bandwidth_group}',
       ),
       browserPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/browsers/{browser}'
+        'networks/{network_code}/browsers/{browser}',
       ),
       browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/browserLanguages/{browser_language}'
+        'networks/{network_code}/browserLanguages/{browser_language}',
       ),
       cmsMetadataKeyPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/cmsMetadataKeys/{cms_metadata_key}'
+        'networks/{network_code}/cmsMetadataKeys/{cms_metadata_key}',
       ),
       cmsMetadataValuePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/cmsMetadataValues/{cms_metadata_value}'
+        'networks/{network_code}/cmsMetadataValues/{cms_metadata_value}',
       ),
       companyPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/companies/{company}'
+        'networks/{network_code}/companies/{company}',
       ),
       contactPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/contacts/{contact}'
+        'networks/{network_code}/contacts/{contact}',
       ),
       contentPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/content/{content}'
+        'networks/{network_code}/content/{content}',
       ),
       contentBundlePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/contentBundles/{content_bundle}'
+        'networks/{network_code}/contentBundles/{content_bundle}',
       ),
       contentLabelPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/contentLabels/{content_label}'
+        'networks/{network_code}/contentLabels/{content_label}',
       ),
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/creativeTemplates/{creative_template}'
+        'networks/{network_code}/creativeTemplates/{creative_template}',
       ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/customFields/{custom_field}'
+        'networks/{network_code}/customFields/{custom_field}',
       ),
       customTargetingKeyPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/customTargetingKeys/{custom_targeting_key}'
+        'networks/{network_code}/customTargetingKeys/{custom_targeting_key}',
       ),
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/customTargetingValues/{custom_targeting_value}'
+        'networks/{network_code}/customTargetingValues/{custom_targeting_value}',
       ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/deviceCapabilities/{device_capability}'
+        'networks/{network_code}/deviceCapabilities/{device_capability}',
       ),
       deviceCategoryPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/deviceCategories/{device_category}'
+        'networks/{network_code}/deviceCategories/{device_category}',
       ),
       deviceManufacturerPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/deviceManufacturers/{device_manufacturer}'
+        'networks/{network_code}/deviceManufacturers/{device_manufacturer}',
       ),
       entitySignalsMappingPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}'
+        'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}',
       ),
       geoTargetPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/geoTargets/{geo_target}'
+        'networks/{network_code}/geoTargets/{geo_target}',
       ),
       labelPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/labels/{label}'
+        'networks/{network_code}/labels/{label}',
       ),
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/lineItems/{line_item}'
+        'networks/{network_code}/lineItems/{line_item}',
       ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/liveStreamEvents/{live_stream_event}'
+        'networks/{network_code}/liveStreamEvents/{live_stream_event}',
       ),
       mobileCarrierPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/mobileCarriers/{mobile_carrier}'
+        'networks/{network_code}/mobileCarriers/{mobile_carrier}',
       ),
       mobileDevicePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/mobileDevices/{mobile_device}'
+        'networks/{network_code}/mobileDevices/{mobile_device}',
       ),
       mobileDeviceSubmodelPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}'
+        'networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}',
       ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}'
+        'networks/{network_code}',
       ),
       operatingSystemPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/operatingSystems/{operating_system}'
+        'networks/{network_code}/operatingSystems/{operating_system}',
       ),
       operatingSystemVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/operatingSystemVersions/{operating_system_version}'
+        'networks/{network_code}/operatingSystemVersions/{operating_system_version}',
       ),
       orderPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/orders/{order}'
+        'networks/{network_code}/orders/{order}',
       ),
       placementPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/placements/{placement}'
+        'networks/{network_code}/placements/{placement}',
       ),
       privateAuctionPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/privateAuctions/{private_auction}'
+        'networks/{network_code}/privateAuctions/{private_auction}',
       ),
       privateAuctionDealPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/privateAuctionDeals/{private_auction_deal}'
+        'networks/{network_code}/privateAuctionDeals/{private_auction_deal}',
       ),
       programmaticBuyerPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/programmaticBuyers/{programmatic_buyer}'
+        'networks/{network_code}/programmaticBuyers/{programmatic_buyer}',
       ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/reports/{report}'
+        'networks/{network_code}/reports/{report}',
       ),
       rolePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/roles/{role}'
+        'networks/{network_code}/roles/{role}',
       ),
       sitePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/sites/{site}'
+        'networks/{network_code}/sites/{site}',
       ),
       taxonomyCategoryPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/taxonomyCategories/{taxonomy_category}'
+        'networks/{network_code}/taxonomyCategories/{taxonomy_category}',
       ),
       teamPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/teams/{team}'
+        'networks/{network_code}/teams/{team}',
       ),
       userPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/users/{user}'
+        'networks/{network_code}/users/{user}',
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/webProperties/{web_property}'
+        'networks/{network_code}/webProperties/{web_property}',
       ),
     };
 
@@ -324,14 +351,20 @@ export class EntitySignalsMappingServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEntitySignalsMappings:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entitySignalsMappings')
+      listEntitySignalsMappings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'entitySignalsMappings',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.ads.admanager.v1.EntitySignalsMappingService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.ads.admanager.v1.EntitySignalsMappingService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')},
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -362,37 +395,48 @@ export class EntitySignalsMappingServiceClient {
     // Put together the "service stub" for
     // google.ads.admanager.v1.EntitySignalsMappingService.
     this.entitySignalsMappingServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.ads.admanager.v1.EntitySignalsMappingService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ads.admanager.v1.EntitySignalsMappingService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.ads.admanager.v1.EntitySignalsMappingService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ads.admanager.v1
+            .EntitySignalsMappingService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const entitySignalsMappingServiceStubMethods =
-        ['getEntitySignalsMapping', 'listEntitySignalsMappings', 'createEntitySignalsMapping', 'updateEntitySignalsMapping', 'batchCreateEntitySignalsMappings', 'batchUpdateEntitySignalsMappings'];
+    const entitySignalsMappingServiceStubMethods = [
+      'getEntitySignalsMapping',
+      'listEntitySignalsMappings',
+      'createEntitySignalsMapping',
+      'updateEntitySignalsMapping',
+      'batchCreateEntitySignalsMappings',
+      'batchUpdateEntitySignalsMappings',
+    ];
     for (const methodName of entitySignalsMappingServiceStubMethods) {
       const callPromise = this.entitySignalsMappingServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -407,8 +451,14 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'admanager.googleapis.com';
   }
@@ -419,8 +469,14 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'admanager.googleapis.com';
   }
@@ -451,9 +507,7 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/admanager'
-    ];
+    return ['https://www.googleapis.com/auth/admanager'];
   }
 
   getProjectId(): Promise<string>;
@@ -462,8 +516,9 @@ export class EntitySignalsMappingServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -474,600 +529,882 @@ export class EntitySignalsMappingServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * API to retrieve a `EntitySignalsMapping` object.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the EntitySignalsMapping.
- *   Format:
- *   `networks/{network_code}/entitySignalsMappings/{entity_signals_mapping_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.get_entity_signals_mapping.js</caption>
- * region_tag:admanager_v1_generated_EntitySignalsMappingService_GetEntitySignalsMapping_async
- */
+  /**
+   * API to retrieve a `EntitySignalsMapping` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the EntitySignalsMapping.
+   *   Format:
+   *   `networks/{network_code}/entitySignalsMappings/{entity_signals_mapping_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.get_entity_signals_mapping.js</caption>
+   * region_tag:admanager_v1_generated_EntitySignalsMappingService_GetEntitySignalsMapping_async
+   */
   getEntitySignalsMapping(
-      request?: protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      (
+        | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getEntitySignalsMapping(
-      request: protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEntitySignalsMapping(
-      request: protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEntitySignalsMapping(
-      request?: protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      (
+        | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getEntitySignalsMapping request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEntitySignalsMapping response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEntitySignalsMapping(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEntitySignalsMapping response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEntitySignalsMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          (
+            | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntitySignalsMapping response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to create an `EntitySignalsMapping` object.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this EntitySignalsMapping will be
- *   created. Format: `networks/{network_code}`
- * @param {google.ads.admanager.v1.EntitySignalsMapping} request.entitySignalsMapping
- *   Required. The EntitySignalsMapping object to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.create_entity_signals_mapping.js</caption>
- * region_tag:admanager_v1_generated_EntitySignalsMappingService_CreateEntitySignalsMapping_async
- */
+  /**
+   * API to create an `EntitySignalsMapping` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this EntitySignalsMapping will be
+   *   created. Format: `networks/{network_code}`
+   * @param {google.ads.admanager.v1.EntitySignalsMapping} request.entitySignalsMapping
+   *   Required. The EntitySignalsMapping object to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.create_entity_signals_mapping.js</caption>
+   * region_tag:admanager_v1_generated_EntitySignalsMappingService_CreateEntitySignalsMapping_async
+   */
   createEntitySignalsMapping(
-      request?: protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      (
+        | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createEntitySignalsMapping(
-      request: protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEntitySignalsMapping(
-      request: protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEntitySignalsMapping(
-      request?: protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      (
+        | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createEntitySignalsMapping request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createEntitySignalsMapping response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createEntitySignalsMapping(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createEntitySignalsMapping response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createEntitySignalsMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          (
+            | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntitySignalsMapping response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to update an `EntitySignalsMapping` object.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.ads.admanager.v1.EntitySignalsMapping} request.entitySignalsMapping
- *   Required. The `EntitySignalsMapping` to update.
- *
- *   The EntitySignalsMapping's name is used to identify the
- *   EntitySignalsMapping to update.
- *   Format:
- *   `networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}`
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The list of fields to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.update_entity_signals_mapping.js</caption>
- * region_tag:admanager_v1_generated_EntitySignalsMappingService_UpdateEntitySignalsMapping_async
- */
+  /**
+   * API to update an `EntitySignalsMapping` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ads.admanager.v1.EntitySignalsMapping} request.entitySignalsMapping
+   *   Required. The `EntitySignalsMapping` to update.
+   *
+   *   The EntitySignalsMapping's name is used to identify the
+   *   EntitySignalsMapping to update.
+   *   Format:
+   *   `networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}`
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.update_entity_signals_mapping.js</caption>
+   * region_tag:admanager_v1_generated_EntitySignalsMappingService_UpdateEntitySignalsMapping_async
+   */
   updateEntitySignalsMapping(
-      request?: protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      (
+        | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateEntitySignalsMapping(
-      request: protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEntitySignalsMapping(
-      request: protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEntitySignalsMapping(
-      request?: protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IEntitySignalsMapping,
-          protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IEntitySignalsMapping,
+      (
+        | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'entity_signals_mapping.name': request.entitySignalsMapping!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'entity_signals_mapping.name': request.entitySignalsMapping!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateEntitySignalsMapping request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateEntitySignalsMapping response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateEntitySignalsMapping(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IEntitySignalsMapping,
-        protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateEntitySignalsMapping response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateEntitySignalsMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          (
+            | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntitySignalsMapping response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to batch create `EntitySignalsMapping` objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where `EntitySignalsMappings` will be
- *   created. Format: `networks/{network_code}` The parent field in the
- *   CreateEntitySignalsMappingRequest must match this field.
- * @param {number[]} request.requests
- *   Required. The `EntitySignalsMapping` objects to create.
- *   A maximum of 100 objects can be created in a batch.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateEntitySignalsMappingsResponse|BatchCreateEntitySignalsMappingsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.batch_create_entity_signals_mappings.js</caption>
- * region_tag:admanager_v1_generated_EntitySignalsMappingService_BatchCreateEntitySignalsMappings_async
- */
+  /**
+   * API to batch create `EntitySignalsMapping` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `EntitySignalsMappings` will be
+   *   created. Format: `networks/{network_code}` The parent field in the
+   *   CreateEntitySignalsMappingRequest must match this field.
+   * @param {number[]} request.requests
+   *   Required. The `EntitySignalsMapping` objects to create.
+   *   A maximum of 100 objects can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateEntitySignalsMappingsResponse|BatchCreateEntitySignalsMappingsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.batch_create_entity_signals_mappings.js</caption>
+   * region_tag:admanager_v1_generated_EntitySignalsMappingService_BatchCreateEntitySignalsMappings_async
+   */
   batchCreateEntitySignalsMappings(
-      request?: protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
-        protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   batchCreateEntitySignalsMappings(
-      request: protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
-          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchCreateEntitySignalsMappings(
-      request: protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
-          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchCreateEntitySignalsMappings(
-      request?: protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
-          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
-          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
-        protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchCreateEntitySignalsMappings request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
-        protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateEntitySignalsMappings response %j', response);
+          this._log.info(
+            'batchCreateEntitySignalsMappings response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchCreateEntitySignalsMappings(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
-        protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchCreateEntitySignalsMappings response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchCreateEntitySignalsMappings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchCreateEntitySignalsMappings response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to batch update `EntitySignalsMapping` objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where `EntitySignalsMappings` will be
- *   updated. Format: `networks/{network_code}` The parent field in the
- *   UpdateEntitySignalsMappingRequest must match this field.
- * @param {number[]} request.requests
- *   Required. The `EntitySignalsMapping` objects to update.
- *   A maximum of 100 objects can be updated in a batch.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateEntitySignalsMappingsResponse|BatchUpdateEntitySignalsMappingsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.batch_update_entity_signals_mappings.js</caption>
- * region_tag:admanager_v1_generated_EntitySignalsMappingService_BatchUpdateEntitySignalsMappings_async
- */
+  /**
+   * API to batch update `EntitySignalsMapping` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `EntitySignalsMappings` will be
+   *   updated. Format: `networks/{network_code}` The parent field in the
+   *   UpdateEntitySignalsMappingRequest must match this field.
+   * @param {number[]} request.requests
+   *   Required. The `EntitySignalsMapping` objects to update.
+   *   A maximum of 100 objects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateEntitySignalsMappingsResponse|BatchUpdateEntitySignalsMappingsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.batch_update_entity_signals_mappings.js</caption>
+   * region_tag:admanager_v1_generated_EntitySignalsMappingService_BatchUpdateEntitySignalsMappings_async
+   */
   batchUpdateEntitySignalsMappings(
-      request?: protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
-        protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   batchUpdateEntitySignalsMappings(
-      request: protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
-          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchUpdateEntitySignalsMappings(
-      request: protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
-          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchUpdateEntitySignalsMappings(
-      request?: protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
-          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
-          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
-        protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchUpdateEntitySignalsMappings request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
-        protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateEntitySignalsMappings response %j', response);
+          this._log.info(
+            'batchUpdateEntitySignalsMappings response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchUpdateEntitySignalsMappings(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
-        protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchUpdateEntitySignalsMappings response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchUpdateEntitySignalsMappings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchUpdateEntitySignalsMappings response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * API to retrieve a list of `EntitySignalsMapping` objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of EntitySignalsMappings.
- *   Format: `networks/{network_code}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of `EntitySignalsMappings` to return. The
- *   service may return fewer than this value. If unspecified, at most 50
- *   `EntitySignalsMappings` will be returned. The maximum value is 1000; values
- *   above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListEntitySignalsMappings` call. Provide this to retrieve the subsequent
- *   page.
- *
- *   When paginating, all other parameters provided to
- *   `ListEntitySignalsMappings` must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. Expression to filter the response.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters
- * @param {string} [request.orderBy]
- *   Optional. Expression to specify sorting order.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters#order
- * @param {number} [request.skip]
- *   Optional. Number of individual resources to skip while paginating.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEntitySignalsMappingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * API to retrieve a list of `EntitySignalsMapping` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of EntitySignalsMappings.
+   *   Format: `networks/{network_code}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `EntitySignalsMappings` to return. The
+   *   service may return fewer than this value. If unspecified, at most 50
+   *   `EntitySignalsMappings` will be returned. The maximum value is 1000; values
+   *   above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListEntitySignalsMappings` call. Provide this to retrieve the subsequent
+   *   page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListEntitySignalsMappings` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Expression to filter the response.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters
+   * @param {string} [request.orderBy]
+   *   Optional. Expression to specify sorting order.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters#order
+   * @param {number} [request.skip]
+   *   Optional. Number of individual resources to skip while paginating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEntitySignalsMappingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEntitySignalsMappings(
-      request?: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IEntitySignalsMapping[],
-        protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest|null,
-        protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse
-      ]>;
+    request?: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IEntitySignalsMapping[],
+      protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest | null,
+      protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse,
+    ]
+  >;
   listEntitySignalsMappings(
-      request: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-          protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse|null|undefined,
-          protos.google.ads.admanager.v1.IEntitySignalsMapping>): void;
+    request: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+      | protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse
+      | null
+      | undefined,
+      protos.google.ads.admanager.v1.IEntitySignalsMapping
+    >,
+  ): void;
   listEntitySignalsMappings(
-      request: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-      callback: PaginationCallback<
-          protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-          protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse|null|undefined,
-          protos.google.ads.admanager.v1.IEntitySignalsMapping>): void;
+    request: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+    callback: PaginationCallback<
+      protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+      | protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse
+      | null
+      | undefined,
+      protos.google.ads.admanager.v1.IEntitySignalsMapping
+    >,
+  ): void;
   listEntitySignalsMappings(
-      request?: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-          protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse|null|undefined,
-          protos.google.ads.admanager.v1.IEntitySignalsMapping>,
-      callback?: PaginationCallback<
-          protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-          protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse|null|undefined,
-          protos.google.ads.admanager.v1.IEntitySignalsMapping>):
-      Promise<[
-        protos.google.ads.admanager.v1.IEntitySignalsMapping[],
-        protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest|null,
-        protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse
-      ]>|void {
+          | protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse
+          | null
+          | undefined,
+          protos.google.ads.admanager.v1.IEntitySignalsMapping
+        >,
+    callback?: PaginationCallback<
+      protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+      | protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse
+      | null
+      | undefined,
+      protos.google.ads.admanager.v1.IEntitySignalsMapping
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IEntitySignalsMapping[],
+      protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest | null,
+      protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-      protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse|null|undefined,
-      protos.google.ads.admanager.v1.IEntitySignalsMapping>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+          | protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse
+          | null
+          | undefined,
+          protos.google.ads.admanager.v1.IEntitySignalsMapping
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEntitySignalsMappings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1076,146 +1413,150 @@ export class EntitySignalsMappingServiceClient {
     this._log.info('listEntitySignalsMappings request %j', request);
     return this.innerApiCalls
       .listEntitySignalsMappings(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.ads.admanager.v1.IEntitySignalsMapping[],
-        protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest|null,
-        protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse
-      ]) => {
-        this._log.info('listEntitySignalsMappings values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.IEntitySignalsMapping[],
+          protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest | null,
+          protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse,
+        ]) => {
+          this._log.info('listEntitySignalsMappings values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEntitySignalsMappings`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of EntitySignalsMappings.
- *   Format: `networks/{network_code}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of `EntitySignalsMappings` to return. The
- *   service may return fewer than this value. If unspecified, at most 50
- *   `EntitySignalsMappings` will be returned. The maximum value is 1000; values
- *   above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListEntitySignalsMappings` call. Provide this to retrieve the subsequent
- *   page.
- *
- *   When paginating, all other parameters provided to
- *   `ListEntitySignalsMappings` must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. Expression to filter the response.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters
- * @param {string} [request.orderBy]
- *   Optional. Expression to specify sorting order.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters#order
- * @param {number} [request.skip]
- *   Optional. Number of individual resources to skip while paginating.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEntitySignalsMappingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEntitySignalsMappings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of EntitySignalsMappings.
+   *   Format: `networks/{network_code}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `EntitySignalsMappings` to return. The
+   *   service may return fewer than this value. If unspecified, at most 50
+   *   `EntitySignalsMappings` will be returned. The maximum value is 1000; values
+   *   above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListEntitySignalsMappings` call. Provide this to retrieve the subsequent
+   *   page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListEntitySignalsMappings` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Expression to filter the response.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters
+   * @param {string} [request.orderBy]
+   *   Optional. Expression to specify sorting order.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters#order
+   * @param {number} [request.skip]
+   *   Optional. Number of individual resources to skip while paginating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEntitySignalsMappingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEntitySignalsMappingsStream(
-      request?: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEntitySignalsMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntitySignalsMappings stream %j', request);
     return this.descriptors.page.listEntitySignalsMappings.createStream(
       this.innerApiCalls.listEntitySignalsMappings as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEntitySignalsMappings`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of EntitySignalsMappings.
- *   Format: `networks/{network_code}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of `EntitySignalsMappings` to return. The
- *   service may return fewer than this value. If unspecified, at most 50
- *   `EntitySignalsMappings` will be returned. The maximum value is 1000; values
- *   above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListEntitySignalsMappings` call. Provide this to retrieve the subsequent
- *   page.
- *
- *   When paginating, all other parameters provided to
- *   `ListEntitySignalsMappings` must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. Expression to filter the response.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters
- * @param {string} [request.orderBy]
- *   Optional. Expression to specify sorting order.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters#order
- * @param {number} [request.skip]
- *   Optional. Number of individual resources to skip while paginating.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.list_entity_signals_mappings.js</caption>
- * region_tag:admanager_v1_generated_EntitySignalsMappingService_ListEntitySignalsMappings_async
- */
+  /**
+   * Equivalent to `listEntitySignalsMappings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of EntitySignalsMappings.
+   *   Format: `networks/{network_code}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `EntitySignalsMappings` to return. The
+   *   service may return fewer than this value. If unspecified, at most 50
+   *   `EntitySignalsMappings` will be returned. The maximum value is 1000; values
+   *   above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListEntitySignalsMappings` call. Provide this to retrieve the subsequent
+   *   page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListEntitySignalsMappings` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Expression to filter the response.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters
+   * @param {string} [request.orderBy]
+   *   Optional. Expression to specify sorting order.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters#order
+   * @param {number} [request.skip]
+   *   Optional. Number of individual resources to skip while paginating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.ads.admanager.v1.EntitySignalsMapping|EntitySignalsMapping}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/entity_signals_mapping_service.list_entity_signals_mappings.js</caption>
+   * region_tag:admanager_v1_generated_EntitySignalsMappingService_ListEntitySignalsMappings_async
+   */
   listEntitySignalsMappingsAsync(
-      request?: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.ads.admanager.v1.IEntitySignalsMapping>{
+    request?: protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.ads.admanager.v1.IEntitySignalsMapping> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEntitySignalsMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntitySignalsMappings iterate %j', request);
     return this.descriptors.page.listEntitySignalsMappings.asyncIterate(
       this.innerApiCalls['listEntitySignalsMappings'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.ads.admanager.v1.IEntitySignalsMapping>;
   }
   // --------------------
@@ -1230,7 +1571,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} ad_break
    * @returns {string} Resource name string.
    */
-  adBreakPath(networkCode:string,assetKey:string,adBreak:string) {
+  adBreakPath(networkCode: string, assetKey: string, adBreak: string) {
     return this.pathTemplates.adBreakPathTemplate.render({
       network_code: networkCode,
       asset_key: assetKey,
@@ -1246,7 +1587,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromAdBreakName(adBreakName: string) {
-    return this.pathTemplates.adBreakPathTemplate.match(adBreakName).network_code;
+    return this.pathTemplates.adBreakPathTemplate.match(adBreakName)
+      .network_code;
   }
 
   /**
@@ -1279,7 +1621,11 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} ad_review_center_ad
    * @returns {string} Resource name string.
    */
-  adReviewCenterAdPath(networkCode:string,webPropertyCode:string,adReviewCenterAd:string) {
+  adReviewCenterAdPath(
+    networkCode: string,
+    webPropertyCode: string,
+    adReviewCenterAd: string,
+  ) {
     return this.pathTemplates.adReviewCenterAdPathTemplate.render({
       network_code: networkCode,
       web_property_code: webPropertyCode,
@@ -1295,7 +1641,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromAdReviewCenterAdName(adReviewCenterAdName: string) {
-    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).network_code;
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(
+      adReviewCenterAdName,
+    ).network_code;
   }
 
   /**
@@ -1306,7 +1654,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the web_property_code.
    */
   matchWebPropertyCodeFromAdReviewCenterAdName(adReviewCenterAdName: string) {
-    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).web_property_code;
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(
+      adReviewCenterAdName,
+    ).web_property_code;
   }
 
   /**
@@ -1317,7 +1667,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the ad_review_center_ad.
    */
   matchAdReviewCenterAdFromAdReviewCenterAdName(adReviewCenterAdName: string) {
-    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).ad_review_center_ad;
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(
+      adReviewCenterAdName,
+    ).ad_review_center_ad;
   }
 
   /**
@@ -1327,7 +1679,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} ad_unit
    * @returns {string} Resource name string.
    */
-  adUnitPath(networkCode:string,adUnit:string) {
+  adUnitPath(networkCode: string, adUnit: string) {
     return this.pathTemplates.adUnitPathTemplate.render({
       network_code: networkCode,
       ad_unit: adUnit,
@@ -1363,7 +1715,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} application
    * @returns {string} Resource name string.
    */
-  applicationPath(networkCode:string,application:string) {
+  applicationPath(networkCode: string, application: string) {
     return this.pathTemplates.applicationPathTemplate.render({
       network_code: networkCode,
       application: application,
@@ -1378,7 +1730,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).network_code;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .network_code;
   }
 
   /**
@@ -1389,7 +1742,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).application;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .application;
   }
 
   /**
@@ -1399,7 +1753,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} audience_segment
    * @returns {string} Resource name string.
    */
-  audienceSegmentPath(networkCode:string,audienceSegment:string) {
+  audienceSegmentPath(networkCode: string, audienceSegment: string) {
     return this.pathTemplates.audienceSegmentPathTemplate.render({
       network_code: networkCode,
       audience_segment: audienceSegment,
@@ -1414,7 +1768,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromAudienceSegmentName(audienceSegmentName: string) {
-    return this.pathTemplates.audienceSegmentPathTemplate.match(audienceSegmentName).network_code;
+    return this.pathTemplates.audienceSegmentPathTemplate.match(
+      audienceSegmentName,
+    ).network_code;
   }
 
   /**
@@ -1425,7 +1781,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the audience_segment.
    */
   matchAudienceSegmentFromAudienceSegmentName(audienceSegmentName: string) {
-    return this.pathTemplates.audienceSegmentPathTemplate.match(audienceSegmentName).audience_segment;
+    return this.pathTemplates.audienceSegmentPathTemplate.match(
+      audienceSegmentName,
+    ).audience_segment;
   }
 
   /**
@@ -1435,7 +1793,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} bandwidth_group
    * @returns {string} Resource name string.
    */
-  bandwidthGroupPath(networkCode:string,bandwidthGroup:string) {
+  bandwidthGroupPath(networkCode: string, bandwidthGroup: string) {
     return this.pathTemplates.bandwidthGroupPathTemplate.render({
       network_code: networkCode,
       bandwidth_group: bandwidthGroup,
@@ -1450,7 +1808,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromBandwidthGroupName(bandwidthGroupName: string) {
-    return this.pathTemplates.bandwidthGroupPathTemplate.match(bandwidthGroupName).network_code;
+    return this.pathTemplates.bandwidthGroupPathTemplate.match(
+      bandwidthGroupName,
+    ).network_code;
   }
 
   /**
@@ -1461,7 +1821,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the bandwidth_group.
    */
   matchBandwidthGroupFromBandwidthGroupName(bandwidthGroupName: string) {
-    return this.pathTemplates.bandwidthGroupPathTemplate.match(bandwidthGroupName).bandwidth_group;
+    return this.pathTemplates.bandwidthGroupPathTemplate.match(
+      bandwidthGroupName,
+    ).bandwidth_group;
   }
 
   /**
@@ -1471,7 +1833,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} browser
    * @returns {string} Resource name string.
    */
-  browserPath(networkCode:string,browser:string) {
+  browserPath(networkCode: string, browser: string) {
     return this.pathTemplates.browserPathTemplate.render({
       network_code: networkCode,
       browser: browser,
@@ -1486,7 +1848,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromBrowserName(browserName: string) {
-    return this.pathTemplates.browserPathTemplate.match(browserName).network_code;
+    return this.pathTemplates.browserPathTemplate.match(browserName)
+      .network_code;
   }
 
   /**
@@ -1507,7 +1870,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} browser_language
    * @returns {string} Resource name string.
    */
-  browserLanguagePath(networkCode:string,browserLanguage:string) {
+  browserLanguagePath(networkCode: string, browserLanguage: string) {
     return this.pathTemplates.browserLanguagePathTemplate.render({
       network_code: networkCode,
       browser_language: browserLanguage,
@@ -1522,7 +1885,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromBrowserLanguageName(browserLanguageName: string) {
-    return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).network_code;
+    return this.pathTemplates.browserLanguagePathTemplate.match(
+      browserLanguageName,
+    ).network_code;
   }
 
   /**
@@ -1533,7 +1898,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the browser_language.
    */
   matchBrowserLanguageFromBrowserLanguageName(browserLanguageName: string) {
-    return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).browser_language;
+    return this.pathTemplates.browserLanguagePathTemplate.match(
+      browserLanguageName,
+    ).browser_language;
   }
 
   /**
@@ -1543,7 +1910,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} cms_metadata_key
    * @returns {string} Resource name string.
    */
-  cmsMetadataKeyPath(networkCode:string,cmsMetadataKey:string) {
+  cmsMetadataKeyPath(networkCode: string, cmsMetadataKey: string) {
     return this.pathTemplates.cmsMetadataKeyPathTemplate.render({
       network_code: networkCode,
       cms_metadata_key: cmsMetadataKey,
@@ -1558,7 +1925,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCmsMetadataKeyName(cmsMetadataKeyName: string) {
-    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(cmsMetadataKeyName).network_code;
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(
+      cmsMetadataKeyName,
+    ).network_code;
   }
 
   /**
@@ -1569,7 +1938,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the cms_metadata_key.
    */
   matchCmsMetadataKeyFromCmsMetadataKeyName(cmsMetadataKeyName: string) {
-    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(cmsMetadataKeyName).cms_metadata_key;
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(
+      cmsMetadataKeyName,
+    ).cms_metadata_key;
   }
 
   /**
@@ -1579,7 +1950,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} cms_metadata_value
    * @returns {string} Resource name string.
    */
-  cmsMetadataValuePath(networkCode:string,cmsMetadataValue:string) {
+  cmsMetadataValuePath(networkCode: string, cmsMetadataValue: string) {
     return this.pathTemplates.cmsMetadataValuePathTemplate.render({
       network_code: networkCode,
       cms_metadata_value: cmsMetadataValue,
@@ -1594,7 +1965,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCmsMetadataValueName(cmsMetadataValueName: string) {
-    return this.pathTemplates.cmsMetadataValuePathTemplate.match(cmsMetadataValueName).network_code;
+    return this.pathTemplates.cmsMetadataValuePathTemplate.match(
+      cmsMetadataValueName,
+    ).network_code;
   }
 
   /**
@@ -1605,7 +1978,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the cms_metadata_value.
    */
   matchCmsMetadataValueFromCmsMetadataValueName(cmsMetadataValueName: string) {
-    return this.pathTemplates.cmsMetadataValuePathTemplate.match(cmsMetadataValueName).cms_metadata_value;
+    return this.pathTemplates.cmsMetadataValuePathTemplate.match(
+      cmsMetadataValueName,
+    ).cms_metadata_value;
   }
 
   /**
@@ -1615,7 +1990,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} company
    * @returns {string} Resource name string.
    */
-  companyPath(networkCode:string,company:string) {
+  companyPath(networkCode: string, company: string) {
     return this.pathTemplates.companyPathTemplate.render({
       network_code: networkCode,
       company: company,
@@ -1630,7 +2005,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCompanyName(companyName: string) {
-    return this.pathTemplates.companyPathTemplate.match(companyName).network_code;
+    return this.pathTemplates.companyPathTemplate.match(companyName)
+      .network_code;
   }
 
   /**
@@ -1651,7 +2027,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} contact
    * @returns {string} Resource name string.
    */
-  contactPath(networkCode:string,contact:string) {
+  contactPath(networkCode: string, contact: string) {
     return this.pathTemplates.contactPathTemplate.render({
       network_code: networkCode,
       contact: contact,
@@ -1666,7 +2042,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContactName(contactName: string) {
-    return this.pathTemplates.contactPathTemplate.match(contactName).network_code;
+    return this.pathTemplates.contactPathTemplate.match(contactName)
+      .network_code;
   }
 
   /**
@@ -1687,7 +2064,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} content
    * @returns {string} Resource name string.
    */
-  contentPath(networkCode:string,content:string) {
+  contentPath(networkCode: string, content: string) {
     return this.pathTemplates.contentPathTemplate.render({
       network_code: networkCode,
       content: content,
@@ -1702,7 +2079,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContentName(contentName: string) {
-    return this.pathTemplates.contentPathTemplate.match(contentName).network_code;
+    return this.pathTemplates.contentPathTemplate.match(contentName)
+      .network_code;
   }
 
   /**
@@ -1723,7 +2101,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} content_bundle
    * @returns {string} Resource name string.
    */
-  contentBundlePath(networkCode:string,contentBundle:string) {
+  contentBundlePath(networkCode: string, contentBundle: string) {
     return this.pathTemplates.contentBundlePathTemplate.render({
       network_code: networkCode,
       content_bundle: contentBundle,
@@ -1738,7 +2116,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContentBundleName(contentBundleName: string) {
-    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName).network_code;
+    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName)
+      .network_code;
   }
 
   /**
@@ -1749,7 +2128,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the content_bundle.
    */
   matchContentBundleFromContentBundleName(contentBundleName: string) {
-    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName).content_bundle;
+    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName)
+      .content_bundle;
   }
 
   /**
@@ -1759,7 +2139,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} content_label
    * @returns {string} Resource name string.
    */
-  contentLabelPath(networkCode:string,contentLabel:string) {
+  contentLabelPath(networkCode: string, contentLabel: string) {
     return this.pathTemplates.contentLabelPathTemplate.render({
       network_code: networkCode,
       content_label: contentLabel,
@@ -1774,7 +2154,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContentLabelName(contentLabelName: string) {
-    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName).network_code;
+    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName)
+      .network_code;
   }
 
   /**
@@ -1785,7 +2166,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the content_label.
    */
   matchContentLabelFromContentLabelName(contentLabelName: string) {
-    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName).content_label;
+    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName)
+      .content_label;
   }
 
   /**
@@ -1795,7 +2177,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} creative_template
    * @returns {string} Resource name string.
    */
-  creativeTemplatePath(networkCode:string,creativeTemplate:string) {
+  creativeTemplatePath(networkCode: string, creativeTemplate: string) {
     return this.pathTemplates.creativeTemplatePathTemplate.render({
       network_code: networkCode,
       creative_template: creativeTemplate,
@@ -1810,7 +2192,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCreativeTemplateName(creativeTemplateName: string) {
-    return this.pathTemplates.creativeTemplatePathTemplate.match(creativeTemplateName).network_code;
+    return this.pathTemplates.creativeTemplatePathTemplate.match(
+      creativeTemplateName,
+    ).network_code;
   }
 
   /**
@@ -1821,7 +2205,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the creative_template.
    */
   matchCreativeTemplateFromCreativeTemplateName(creativeTemplateName: string) {
-    return this.pathTemplates.creativeTemplatePathTemplate.match(creativeTemplateName).creative_template;
+    return this.pathTemplates.creativeTemplatePathTemplate.match(
+      creativeTemplateName,
+    ).creative_template;
   }
 
   /**
@@ -1831,7 +2217,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} custom_field
    * @returns {string} Resource name string.
    */
-  customFieldPath(networkCode:string,customField:string) {
+  customFieldPath(networkCode: string, customField: string) {
     return this.pathTemplates.customFieldPathTemplate.render({
       network_code: networkCode,
       custom_field: customField,
@@ -1846,7 +2232,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).network_code;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
+      .network_code;
   }
 
   /**
@@ -1857,7 +2244,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the custom_field.
    */
   matchCustomFieldFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).custom_field;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
+      .custom_field;
   }
 
   /**
@@ -1867,7 +2255,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} custom_targeting_key
    * @returns {string} Resource name string.
    */
-  customTargetingKeyPath(networkCode:string,customTargetingKey:string) {
+  customTargetingKeyPath(networkCode: string, customTargetingKey: string) {
     return this.pathTemplates.customTargetingKeyPathTemplate.render({
       network_code: networkCode,
       custom_targeting_key: customTargetingKey,
@@ -1882,7 +2270,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomTargetingKeyName(customTargetingKeyName: string) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).network_code;
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(
+      customTargetingKeyName,
+    ).network_code;
   }
 
   /**
@@ -1892,8 +2282,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing CustomTargetingKey resource.
    * @returns {string} A string representing the custom_targeting_key.
    */
-  matchCustomTargetingKeyFromCustomTargetingKeyName(customTargetingKeyName: string) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).custom_targeting_key;
+  matchCustomTargetingKeyFromCustomTargetingKeyName(
+    customTargetingKeyName: string,
+  ) {
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(
+      customTargetingKeyName,
+    ).custom_targeting_key;
   }
 
   /**
@@ -1903,7 +2297,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} custom_targeting_value
    * @returns {string} Resource name string.
    */
-  customTargetingValuePath(networkCode:string,customTargetingValue:string) {
+  customTargetingValuePath(networkCode: string, customTargetingValue: string) {
     return this.pathTemplates.customTargetingValuePathTemplate.render({
       network_code: networkCode,
       custom_targeting_value: customTargetingValue,
@@ -1917,8 +2311,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromCustomTargetingValueName(customTargetingValueName: string) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).network_code;
+  matchNetworkCodeFromCustomTargetingValueName(
+    customTargetingValueName: string,
+  ) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(
+      customTargetingValueName,
+    ).network_code;
   }
 
   /**
@@ -1928,8 +2326,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the custom_targeting_value.
    */
-  matchCustomTargetingValueFromCustomTargetingValueName(customTargetingValueName: string) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).custom_targeting_value;
+  matchCustomTargetingValueFromCustomTargetingValueName(
+    customTargetingValueName: string,
+  ) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(
+      customTargetingValueName,
+    ).custom_targeting_value;
   }
 
   /**
@@ -1939,7 +2341,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} device_capability
    * @returns {string} Resource name string.
    */
-  deviceCapabilityPath(networkCode:string,deviceCapability:string) {
+  deviceCapabilityPath(networkCode: string, deviceCapability: string) {
     return this.pathTemplates.deviceCapabilityPathTemplate.render({
       network_code: networkCode,
       device_capability: deviceCapability,
@@ -1954,7 +2356,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromDeviceCapabilityName(deviceCapabilityName: string) {
-    return this.pathTemplates.deviceCapabilityPathTemplate.match(deviceCapabilityName).network_code;
+    return this.pathTemplates.deviceCapabilityPathTemplate.match(
+      deviceCapabilityName,
+    ).network_code;
   }
 
   /**
@@ -1965,7 +2369,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the device_capability.
    */
   matchDeviceCapabilityFromDeviceCapabilityName(deviceCapabilityName: string) {
-    return this.pathTemplates.deviceCapabilityPathTemplate.match(deviceCapabilityName).device_capability;
+    return this.pathTemplates.deviceCapabilityPathTemplate.match(
+      deviceCapabilityName,
+    ).device_capability;
   }
 
   /**
@@ -1975,7 +2381,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} device_category
    * @returns {string} Resource name string.
    */
-  deviceCategoryPath(networkCode:string,deviceCategory:string) {
+  deviceCategoryPath(networkCode: string, deviceCategory: string) {
     return this.pathTemplates.deviceCategoryPathTemplate.render({
       network_code: networkCode,
       device_category: deviceCategory,
@@ -1990,7 +2396,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromDeviceCategoryName(deviceCategoryName: string) {
-    return this.pathTemplates.deviceCategoryPathTemplate.match(deviceCategoryName).network_code;
+    return this.pathTemplates.deviceCategoryPathTemplate.match(
+      deviceCategoryName,
+    ).network_code;
   }
 
   /**
@@ -2001,7 +2409,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the device_category.
    */
   matchDeviceCategoryFromDeviceCategoryName(deviceCategoryName: string) {
-    return this.pathTemplates.deviceCategoryPathTemplate.match(deviceCategoryName).device_category;
+    return this.pathTemplates.deviceCategoryPathTemplate.match(
+      deviceCategoryName,
+    ).device_category;
   }
 
   /**
@@ -2011,7 +2421,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} device_manufacturer
    * @returns {string} Resource name string.
    */
-  deviceManufacturerPath(networkCode:string,deviceManufacturer:string) {
+  deviceManufacturerPath(networkCode: string, deviceManufacturer: string) {
     return this.pathTemplates.deviceManufacturerPathTemplate.render({
       network_code: networkCode,
       device_manufacturer: deviceManufacturer,
@@ -2026,7 +2436,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromDeviceManufacturerName(deviceManufacturerName: string) {
-    return this.pathTemplates.deviceManufacturerPathTemplate.match(deviceManufacturerName).network_code;
+    return this.pathTemplates.deviceManufacturerPathTemplate.match(
+      deviceManufacturerName,
+    ).network_code;
   }
 
   /**
@@ -2036,8 +2448,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing DeviceManufacturer resource.
    * @returns {string} A string representing the device_manufacturer.
    */
-  matchDeviceManufacturerFromDeviceManufacturerName(deviceManufacturerName: string) {
-    return this.pathTemplates.deviceManufacturerPathTemplate.match(deviceManufacturerName).device_manufacturer;
+  matchDeviceManufacturerFromDeviceManufacturerName(
+    deviceManufacturerName: string,
+  ) {
+    return this.pathTemplates.deviceManufacturerPathTemplate.match(
+      deviceManufacturerName,
+    ).device_manufacturer;
   }
 
   /**
@@ -2047,7 +2463,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} entity_signals_mapping
    * @returns {string} Resource name string.
    */
-  entitySignalsMappingPath(networkCode:string,entitySignalsMapping:string) {
+  entitySignalsMappingPath(networkCode: string, entitySignalsMapping: string) {
     return this.pathTemplates.entitySignalsMappingPathTemplate.render({
       network_code: networkCode,
       entity_signals_mapping: entitySignalsMapping,
@@ -2061,8 +2477,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromEntitySignalsMappingName(entitySignalsMappingName: string) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).network_code;
+  matchNetworkCodeFromEntitySignalsMappingName(
+    entitySignalsMappingName: string,
+  ) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
+      entitySignalsMappingName,
+    ).network_code;
   }
 
   /**
@@ -2072,8 +2492,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the entity_signals_mapping.
    */
-  matchEntitySignalsMappingFromEntitySignalsMappingName(entitySignalsMappingName: string) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).entity_signals_mapping;
+  matchEntitySignalsMappingFromEntitySignalsMappingName(
+    entitySignalsMappingName: string,
+  ) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
+      entitySignalsMappingName,
+    ).entity_signals_mapping;
   }
 
   /**
@@ -2083,7 +2507,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} geo_target
    * @returns {string} Resource name string.
    */
-  geoTargetPath(networkCode:string,geoTarget:string) {
+  geoTargetPath(networkCode: string, geoTarget: string) {
     return this.pathTemplates.geoTargetPathTemplate.render({
       network_code: networkCode,
       geo_target: geoTarget,
@@ -2098,7 +2522,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromGeoTargetName(geoTargetName: string) {
-    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName).network_code;
+    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName)
+      .network_code;
   }
 
   /**
@@ -2109,7 +2534,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the geo_target.
    */
   matchGeoTargetFromGeoTargetName(geoTargetName: string) {
-    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName).geo_target;
+    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName)
+      .geo_target;
   }
 
   /**
@@ -2119,7 +2545,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} label
    * @returns {string} Resource name string.
    */
-  labelPath(networkCode:string,label:string) {
+  labelPath(networkCode: string, label: string) {
     return this.pathTemplates.labelPathTemplate.render({
       network_code: networkCode,
       label: label,
@@ -2155,7 +2581,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} line_item
    * @returns {string} Resource name string.
    */
-  lineItemPath(networkCode:string,lineItem:string) {
+  lineItemPath(networkCode: string, lineItem: string) {
     return this.pathTemplates.lineItemPathTemplate.render({
       network_code: networkCode,
       line_item: lineItem,
@@ -2170,7 +2596,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromLineItemName(lineItemName: string) {
-    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).network_code;
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
+      .network_code;
   }
 
   /**
@@ -2181,7 +2608,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the line_item.
    */
   matchLineItemFromLineItemName(lineItemName: string) {
-    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).line_item;
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
+      .line_item;
   }
 
   /**
@@ -2191,7 +2619,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} live_stream_event
    * @returns {string} Resource name string.
    */
-  liveStreamEventPath(networkCode:string,liveStreamEvent:string) {
+  liveStreamEventPath(networkCode: string, liveStreamEvent: string) {
     return this.pathTemplates.liveStreamEventPathTemplate.render({
       network_code: networkCode,
       live_stream_event: liveStreamEvent,
@@ -2206,7 +2634,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromLiveStreamEventName(liveStreamEventName: string) {
-    return this.pathTemplates.liveStreamEventPathTemplate.match(liveStreamEventName).network_code;
+    return this.pathTemplates.liveStreamEventPathTemplate.match(
+      liveStreamEventName,
+    ).network_code;
   }
 
   /**
@@ -2217,7 +2647,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the live_stream_event.
    */
   matchLiveStreamEventFromLiveStreamEventName(liveStreamEventName: string) {
-    return this.pathTemplates.liveStreamEventPathTemplate.match(liveStreamEventName).live_stream_event;
+    return this.pathTemplates.liveStreamEventPathTemplate.match(
+      liveStreamEventName,
+    ).live_stream_event;
   }
 
   /**
@@ -2227,7 +2659,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} mobile_carrier
    * @returns {string} Resource name string.
    */
-  mobileCarrierPath(networkCode:string,mobileCarrier:string) {
+  mobileCarrierPath(networkCode: string, mobileCarrier: string) {
     return this.pathTemplates.mobileCarrierPathTemplate.render({
       network_code: networkCode,
       mobile_carrier: mobileCarrier,
@@ -2242,7 +2674,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromMobileCarrierName(mobileCarrierName: string) {
-    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName).network_code;
+    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName)
+      .network_code;
   }
 
   /**
@@ -2253,7 +2686,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the mobile_carrier.
    */
   matchMobileCarrierFromMobileCarrierName(mobileCarrierName: string) {
-    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName).mobile_carrier;
+    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName)
+      .mobile_carrier;
   }
 
   /**
@@ -2263,7 +2697,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} mobile_device
    * @returns {string} Resource name string.
    */
-  mobileDevicePath(networkCode:string,mobileDevice:string) {
+  mobileDevicePath(networkCode: string, mobileDevice: string) {
     return this.pathTemplates.mobileDevicePathTemplate.render({
       network_code: networkCode,
       mobile_device: mobileDevice,
@@ -2278,7 +2712,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromMobileDeviceName(mobileDeviceName: string) {
-    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName).network_code;
+    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName)
+      .network_code;
   }
 
   /**
@@ -2289,7 +2724,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the mobile_device.
    */
   matchMobileDeviceFromMobileDeviceName(mobileDeviceName: string) {
-    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName).mobile_device;
+    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName)
+      .mobile_device;
   }
 
   /**
@@ -2299,7 +2735,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} mobile_device_submodel
    * @returns {string} Resource name string.
    */
-  mobileDeviceSubmodelPath(networkCode:string,mobileDeviceSubmodel:string) {
+  mobileDeviceSubmodelPath(networkCode: string, mobileDeviceSubmodel: string) {
     return this.pathTemplates.mobileDeviceSubmodelPathTemplate.render({
       network_code: networkCode,
       mobile_device_submodel: mobileDeviceSubmodel,
@@ -2313,8 +2749,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing MobileDeviceSubmodel resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromMobileDeviceSubmodelName(mobileDeviceSubmodelName: string) {
-    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(mobileDeviceSubmodelName).network_code;
+  matchNetworkCodeFromMobileDeviceSubmodelName(
+    mobileDeviceSubmodelName: string,
+  ) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(
+      mobileDeviceSubmodelName,
+    ).network_code;
   }
 
   /**
@@ -2324,8 +2764,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing MobileDeviceSubmodel resource.
    * @returns {string} A string representing the mobile_device_submodel.
    */
-  matchMobileDeviceSubmodelFromMobileDeviceSubmodelName(mobileDeviceSubmodelName: string) {
-    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(mobileDeviceSubmodelName).mobile_device_submodel;
+  matchMobileDeviceSubmodelFromMobileDeviceSubmodelName(
+    mobileDeviceSubmodelName: string,
+  ) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(
+      mobileDeviceSubmodelName,
+    ).mobile_device_submodel;
   }
 
   /**
@@ -2334,7 +2778,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} network_code
    * @returns {string} Resource name string.
    */
-  networkPath(networkCode:string) {
+  networkPath(networkCode: string) {
     return this.pathTemplates.networkPathTemplate.render({
       network_code: networkCode,
     });
@@ -2348,7 +2792,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromNetworkName(networkName: string) {
-    return this.pathTemplates.networkPathTemplate.match(networkName).network_code;
+    return this.pathTemplates.networkPathTemplate.match(networkName)
+      .network_code;
   }
 
   /**
@@ -2358,7 +2803,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} operating_system
    * @returns {string} Resource name string.
    */
-  operatingSystemPath(networkCode:string,operatingSystem:string) {
+  operatingSystemPath(networkCode: string, operatingSystem: string) {
     return this.pathTemplates.operatingSystemPathTemplate.render({
       network_code: networkCode,
       operating_system: operatingSystem,
@@ -2373,7 +2818,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromOperatingSystemName(operatingSystemName: string) {
-    return this.pathTemplates.operatingSystemPathTemplate.match(operatingSystemName).network_code;
+    return this.pathTemplates.operatingSystemPathTemplate.match(
+      operatingSystemName,
+    ).network_code;
   }
 
   /**
@@ -2384,7 +2831,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the operating_system.
    */
   matchOperatingSystemFromOperatingSystemName(operatingSystemName: string) {
-    return this.pathTemplates.operatingSystemPathTemplate.match(operatingSystemName).operating_system;
+    return this.pathTemplates.operatingSystemPathTemplate.match(
+      operatingSystemName,
+    ).operating_system;
   }
 
   /**
@@ -2394,7 +2843,10 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} operating_system_version
    * @returns {string} Resource name string.
    */
-  operatingSystemVersionPath(networkCode:string,operatingSystemVersion:string) {
+  operatingSystemVersionPath(
+    networkCode: string,
+    operatingSystemVersion: string,
+  ) {
     return this.pathTemplates.operatingSystemVersionPathTemplate.render({
       network_code: networkCode,
       operating_system_version: operatingSystemVersion,
@@ -2408,8 +2860,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing OperatingSystemVersion resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromOperatingSystemVersionName(operatingSystemVersionName: string) {
-    return this.pathTemplates.operatingSystemVersionPathTemplate.match(operatingSystemVersionName).network_code;
+  matchNetworkCodeFromOperatingSystemVersionName(
+    operatingSystemVersionName: string,
+  ) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.match(
+      operatingSystemVersionName,
+    ).network_code;
   }
 
   /**
@@ -2419,8 +2875,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing OperatingSystemVersion resource.
    * @returns {string} A string representing the operating_system_version.
    */
-  matchOperatingSystemVersionFromOperatingSystemVersionName(operatingSystemVersionName: string) {
-    return this.pathTemplates.operatingSystemVersionPathTemplate.match(operatingSystemVersionName).operating_system_version;
+  matchOperatingSystemVersionFromOperatingSystemVersionName(
+    operatingSystemVersionName: string,
+  ) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.match(
+      operatingSystemVersionName,
+    ).operating_system_version;
   }
 
   /**
@@ -2430,7 +2890,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} order
    * @returns {string} Resource name string.
    */
-  orderPath(networkCode:string,order:string) {
+  orderPath(networkCode: string, order: string) {
     return this.pathTemplates.orderPathTemplate.render({
       network_code: networkCode,
       order: order,
@@ -2466,7 +2926,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} placement
    * @returns {string} Resource name string.
    */
-  placementPath(networkCode:string,placement:string) {
+  placementPath(networkCode: string, placement: string) {
     return this.pathTemplates.placementPathTemplate.render({
       network_code: networkCode,
       placement: placement,
@@ -2481,7 +2941,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName).network_code;
+    return this.pathTemplates.placementPathTemplate.match(placementName)
+      .network_code;
   }
 
   /**
@@ -2492,7 +2953,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the placement.
    */
   matchPlacementFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName).placement;
+    return this.pathTemplates.placementPathTemplate.match(placementName)
+      .placement;
   }
 
   /**
@@ -2502,7 +2964,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} private_auction
    * @returns {string} Resource name string.
    */
-  privateAuctionPath(networkCode:string,privateAuction:string) {
+  privateAuctionPath(networkCode: string, privateAuction: string) {
     return this.pathTemplates.privateAuctionPathTemplate.render({
       network_code: networkCode,
       private_auction: privateAuction,
@@ -2517,7 +2979,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromPrivateAuctionName(privateAuctionName: string) {
-    return this.pathTemplates.privateAuctionPathTemplate.match(privateAuctionName).network_code;
+    return this.pathTemplates.privateAuctionPathTemplate.match(
+      privateAuctionName,
+    ).network_code;
   }
 
   /**
@@ -2528,7 +2992,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the private_auction.
    */
   matchPrivateAuctionFromPrivateAuctionName(privateAuctionName: string) {
-    return this.pathTemplates.privateAuctionPathTemplate.match(privateAuctionName).private_auction;
+    return this.pathTemplates.privateAuctionPathTemplate.match(
+      privateAuctionName,
+    ).private_auction;
   }
 
   /**
@@ -2538,7 +3004,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} private_auction_deal
    * @returns {string} Resource name string.
    */
-  privateAuctionDealPath(networkCode:string,privateAuctionDeal:string) {
+  privateAuctionDealPath(networkCode: string, privateAuctionDeal: string) {
     return this.pathTemplates.privateAuctionDealPathTemplate.render({
       network_code: networkCode,
       private_auction_deal: privateAuctionDeal,
@@ -2553,7 +3019,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromPrivateAuctionDealName(privateAuctionDealName: string) {
-    return this.pathTemplates.privateAuctionDealPathTemplate.match(privateAuctionDealName).network_code;
+    return this.pathTemplates.privateAuctionDealPathTemplate.match(
+      privateAuctionDealName,
+    ).network_code;
   }
 
   /**
@@ -2563,8 +3031,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing PrivateAuctionDeal resource.
    * @returns {string} A string representing the private_auction_deal.
    */
-  matchPrivateAuctionDealFromPrivateAuctionDealName(privateAuctionDealName: string) {
-    return this.pathTemplates.privateAuctionDealPathTemplate.match(privateAuctionDealName).private_auction_deal;
+  matchPrivateAuctionDealFromPrivateAuctionDealName(
+    privateAuctionDealName: string,
+  ) {
+    return this.pathTemplates.privateAuctionDealPathTemplate.match(
+      privateAuctionDealName,
+    ).private_auction_deal;
   }
 
   /**
@@ -2574,7 +3046,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} programmatic_buyer
    * @returns {string} Resource name string.
    */
-  programmaticBuyerPath(networkCode:string,programmaticBuyer:string) {
+  programmaticBuyerPath(networkCode: string, programmaticBuyer: string) {
     return this.pathTemplates.programmaticBuyerPathTemplate.render({
       network_code: networkCode,
       programmatic_buyer: programmaticBuyer,
@@ -2589,7 +3061,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromProgrammaticBuyerName(programmaticBuyerName: string) {
-    return this.pathTemplates.programmaticBuyerPathTemplate.match(programmaticBuyerName).network_code;
+    return this.pathTemplates.programmaticBuyerPathTemplate.match(
+      programmaticBuyerName,
+    ).network_code;
   }
 
   /**
@@ -2599,8 +3073,12 @@ export class EntitySignalsMappingServiceClient {
    *   A fully-qualified path representing ProgrammaticBuyer resource.
    * @returns {string} A string representing the programmatic_buyer.
    */
-  matchProgrammaticBuyerFromProgrammaticBuyerName(programmaticBuyerName: string) {
-    return this.pathTemplates.programmaticBuyerPathTemplate.match(programmaticBuyerName).programmatic_buyer;
+  matchProgrammaticBuyerFromProgrammaticBuyerName(
+    programmaticBuyerName: string,
+  ) {
+    return this.pathTemplates.programmaticBuyerPathTemplate.match(
+      programmaticBuyerName,
+    ).programmatic_buyer;
   }
 
   /**
@@ -2610,7 +3088,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} report
    * @returns {string} Resource name string.
    */
-  reportPath(networkCode:string,report:string) {
+  reportPath(networkCode: string, report: string) {
     return this.pathTemplates.reportPathTemplate.render({
       network_code: networkCode,
       report: report,
@@ -2646,7 +3124,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} role
    * @returns {string} Resource name string.
    */
-  rolePath(networkCode:string,role:string) {
+  rolePath(networkCode: string, role: string) {
     return this.pathTemplates.rolePathTemplate.render({
       network_code: networkCode,
       role: role,
@@ -2682,7 +3160,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} site
    * @returns {string} Resource name string.
    */
-  sitePath(networkCode:string,site:string) {
+  sitePath(networkCode: string, site: string) {
     return this.pathTemplates.sitePathTemplate.render({
       network_code: networkCode,
       site: site,
@@ -2718,7 +3196,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} taxonomy_category
    * @returns {string} Resource name string.
    */
-  taxonomyCategoryPath(networkCode:string,taxonomyCategory:string) {
+  taxonomyCategoryPath(networkCode: string, taxonomyCategory: string) {
     return this.pathTemplates.taxonomyCategoryPathTemplate.render({
       network_code: networkCode,
       taxonomy_category: taxonomyCategory,
@@ -2733,7 +3211,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).network_code;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
+      taxonomyCategoryName,
+    ).network_code;
   }
 
   /**
@@ -2744,7 +3224,9 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the taxonomy_category.
    */
   matchTaxonomyCategoryFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).taxonomy_category;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
+      taxonomyCategoryName,
+    ).taxonomy_category;
   }
 
   /**
@@ -2754,7 +3236,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} team
    * @returns {string} Resource name string.
    */
-  teamPath(networkCode:string,team:string) {
+  teamPath(networkCode: string, team: string) {
     return this.pathTemplates.teamPathTemplate.render({
       network_code: networkCode,
       team: team,
@@ -2790,7 +3272,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  userPath(networkCode:string,user:string) {
+  userPath(networkCode: string, user: string) {
     return this.pathTemplates.userPathTemplate.render({
       network_code: networkCode,
       user: user,
@@ -2826,7 +3308,7 @@ export class EntitySignalsMappingServiceClient {
    * @param {string} web_property
    * @returns {string} Resource name string.
    */
-  webPropertyPath(networkCode:string,webProperty:string) {
+  webPropertyPath(networkCode: string, webProperty: string) {
     return this.pathTemplates.webPropertyPathTemplate.render({
       network_code: networkCode,
       web_property: webProperty,
@@ -2841,7 +3323,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromWebPropertyName(webPropertyName: string) {
-    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName).network_code;
+    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName)
+      .network_code;
   }
 
   /**
@@ -2852,7 +3335,8 @@ export class EntitySignalsMappingServiceClient {
    * @returns {string} A string representing the web_property.
    */
   matchWebPropertyFromWebPropertyName(webPropertyName: string) {
-    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName).web_property;
+    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName)
+      .web_property;
   }
 
   /**

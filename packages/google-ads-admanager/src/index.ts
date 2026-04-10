@@ -78,8 +78,10 @@ const NetworkServiceClient = v1.NetworkServiceClient;
 type NetworkServiceClient = v1.NetworkServiceClient;
 const OperatingSystemServiceClient = v1.OperatingSystemServiceClient;
 type OperatingSystemServiceClient = v1.OperatingSystemServiceClient;
-const OperatingSystemVersionServiceClient = v1.OperatingSystemVersionServiceClient;
-type OperatingSystemVersionServiceClient = v1.OperatingSystemVersionServiceClient;
+const OperatingSystemVersionServiceClient =
+  v1.OperatingSystemVersionServiceClient;
+type OperatingSystemVersionServiceClient =
+  v1.OperatingSystemVersionServiceClient;
 const OrderServiceClient = v1.OrderServiceClient;
 type OrderServiceClient = v1.OrderServiceClient;
 const PlacementServiceClient = v1.PlacementServiceClient;
@@ -103,7 +105,95 @@ type TeamServiceClient = v1.TeamServiceClient;
 const UserServiceClient = v1.UserServiceClient;
 type UserServiceClient = v1.UserServiceClient;
 
-export {v1, AdBreakServiceClient, AdReviewCenterAdServiceClient, AdUnitServiceClient, ApplicationServiceClient, AudienceSegmentServiceClient, BandwidthGroupServiceClient, BrowserLanguageServiceClient, BrowserServiceClient, CmsMetadataKeyServiceClient, CmsMetadataValueServiceClient, CompanyServiceClient, ContactServiceClient, ContentBundleServiceClient, ContentLabelServiceClient, ContentServiceClient, CreativeTemplateServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCapabilityServiceClient, DeviceCategoryServiceClient, DeviceManufacturerServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, LineItemServiceClient, MobileCarrierServiceClient, MobileDeviceServiceClient, MobileDeviceSubmodelServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RoleServiceClient, SiteServiceClient, TaxonomyCategoryServiceClient, TeamServiceClient, UserServiceClient};
-export default {v1, AdBreakServiceClient, AdReviewCenterAdServiceClient, AdUnitServiceClient, ApplicationServiceClient, AudienceSegmentServiceClient, BandwidthGroupServiceClient, BrowserLanguageServiceClient, BrowserServiceClient, CmsMetadataKeyServiceClient, CmsMetadataValueServiceClient, CompanyServiceClient, ContactServiceClient, ContentBundleServiceClient, ContentLabelServiceClient, ContentServiceClient, CreativeTemplateServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCapabilityServiceClient, DeviceCategoryServiceClient, DeviceManufacturerServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, LineItemServiceClient, MobileCarrierServiceClient, MobileDeviceServiceClient, MobileDeviceSubmodelServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RoleServiceClient, SiteServiceClient, TaxonomyCategoryServiceClient, TeamServiceClient, UserServiceClient};
+export {
+  v1,
+  AdBreakServiceClient,
+  AdReviewCenterAdServiceClient,
+  AdUnitServiceClient,
+  ApplicationServiceClient,
+  AudienceSegmentServiceClient,
+  BandwidthGroupServiceClient,
+  BrowserLanguageServiceClient,
+  BrowserServiceClient,
+  CmsMetadataKeyServiceClient,
+  CmsMetadataValueServiceClient,
+  CompanyServiceClient,
+  ContactServiceClient,
+  ContentBundleServiceClient,
+  ContentLabelServiceClient,
+  ContentServiceClient,
+  CreativeTemplateServiceClient,
+  CustomFieldServiceClient,
+  CustomTargetingKeyServiceClient,
+  CustomTargetingValueServiceClient,
+  DeviceCapabilityServiceClient,
+  DeviceCategoryServiceClient,
+  DeviceManufacturerServiceClient,
+  EntitySignalsMappingServiceClient,
+  GeoTargetServiceClient,
+  LineItemServiceClient,
+  MobileCarrierServiceClient,
+  MobileDeviceServiceClient,
+  MobileDeviceSubmodelServiceClient,
+  NetworkServiceClient,
+  OperatingSystemServiceClient,
+  OperatingSystemVersionServiceClient,
+  OrderServiceClient,
+  PlacementServiceClient,
+  PrivateAuctionDealServiceClient,
+  PrivateAuctionServiceClient,
+  ProgrammaticBuyerServiceClient,
+  ReportServiceClient,
+  RoleServiceClient,
+  SiteServiceClient,
+  TaxonomyCategoryServiceClient,
+  TeamServiceClient,
+  UserServiceClient,
+};
+export default {
+  v1,
+  AdBreakServiceClient,
+  AdReviewCenterAdServiceClient,
+  AdUnitServiceClient,
+  ApplicationServiceClient,
+  AudienceSegmentServiceClient,
+  BandwidthGroupServiceClient,
+  BrowserLanguageServiceClient,
+  BrowserServiceClient,
+  CmsMetadataKeyServiceClient,
+  CmsMetadataValueServiceClient,
+  CompanyServiceClient,
+  ContactServiceClient,
+  ContentBundleServiceClient,
+  ContentLabelServiceClient,
+  ContentServiceClient,
+  CreativeTemplateServiceClient,
+  CustomFieldServiceClient,
+  CustomTargetingKeyServiceClient,
+  CustomTargetingValueServiceClient,
+  DeviceCapabilityServiceClient,
+  DeviceCategoryServiceClient,
+  DeviceManufacturerServiceClient,
+  EntitySignalsMappingServiceClient,
+  GeoTargetServiceClient,
+  LineItemServiceClient,
+  MobileCarrierServiceClient,
+  MobileDeviceServiceClient,
+  MobileDeviceSubmodelServiceClient,
+  NetworkServiceClient,
+  OperatingSystemServiceClient,
+  OperatingSystemVersionServiceClient,
+  OrderServiceClient,
+  PlacementServiceClient,
+  PrivateAuctionDealServiceClient,
+  PrivateAuctionServiceClient,
+  ProgrammaticBuyerServiceClient,
+  ReportServiceClient,
+  RoleServiceClient,
+  SiteServiceClient,
+  TaxonomyCategoryServiceClient,
+  TeamServiceClient,
+  UserServiceClient,
+};
 import * as protos from '../protos/protos';
 export {protos};

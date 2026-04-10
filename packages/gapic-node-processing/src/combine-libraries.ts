@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Dirent} from 'fs';
 import {LibraryConfig} from './library';
 
@@ -197,9 +198,7 @@ export function setOnlyDefaultSystemTests(
   defaultVersion: string,
   filePaths: FilePaths[],
 ) {
-  const systemTestRegex = new RegExp(
-    'system-test/fixtures/sample/src',
-  );
+  const systemTestRegex = new RegExp('system-test/fixtures/sample/src');
 
   for (let i = filePaths.length - 1; i >= 0; i--) {
     const filePathObj = filePaths[i];
