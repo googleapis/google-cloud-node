@@ -2152,7 +2152,9 @@ export namespace google {
                     UNSUPPORTED_INGESTED_USER_LIST_INFO_CONFIG = 96,
                     UNSUPPORTED_ACCOUNT_TYPES_FOR_USER_LIST_TYPE = 97,
                     UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK = 98,
-                    MEMBERSHIP_DURATION_TOO_LONG = 99
+                    MEMBERSHIP_DURATION_TOO_LONG = 99,
+                    INVALID_MERCHANT_ID = 100,
+                    EU_POLITICAL_ADVERTISING_DECLARATION_REQUIRED = 101
                 }
 
                 /** Properties of an Event. */

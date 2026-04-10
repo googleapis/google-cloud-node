@@ -197,6 +197,10 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 4
+                        },
                         "referenceSentenceConfig": {
                           "type": "ReferenceSentenceConfig",
                           "id": 6,

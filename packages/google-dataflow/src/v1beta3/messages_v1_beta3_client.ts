@@ -33,8 +33,7 @@ import * as gapicConfig from './messages_v1_beta3_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The Dataflow Messages API is used for monitoring the progress of
- *  Dataflow jobs.
+ *  The Dataflow Messages API is used to monitor the progress of Dataflow jobs.
  * @class
  * @memberof v1beta3
  */

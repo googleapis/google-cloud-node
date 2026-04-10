@@ -1258,7 +1258,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 75,
+          "end": 79,
           "type": "FULL"
         }
       ],
@@ -1278,6 +1278,10 @@
           {
             "name": "content",
             "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "mime_type",
+            "type": "TYPE_STRING"
           },
           {
             "name": "reference_sentence_config",

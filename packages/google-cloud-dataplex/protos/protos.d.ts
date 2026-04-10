@@ -24942,6 +24942,9 @@ export namespace google {
                 /** Properties of a DataDocumentationResult. */
                 interface IDataDocumentationResult {
 
+                    /** DataDocumentationResult datasetResult */
+                    datasetResult?: (google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult|null);
+
                     /** DataDocumentationResult tableResult */
                     tableResult?: (google.cloud.dataplex.v1.DataDocumentationResult.ITableResult|null);
                 }
@@ -24955,11 +24958,14 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.dataplex.v1.IDataDocumentationResult);
 
+                    /** DataDocumentationResult datasetResult. */
+                    public datasetResult?: (google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult|null);
+
                     /** DataDocumentationResult tableResult. */
                     public tableResult?: (google.cloud.dataplex.v1.DataDocumentationResult.ITableResult|null);
 
                     /** DataDocumentationResult result. */
-                    public result?: "tableResult";
+                    public result?: ("datasetResult"|"tableResult");
 
                     /**
                      * Creates a new DataDocumentationResult instance using the specified properties.
@@ -25040,6 +25046,115 @@ export namespace google {
                 }
 
                 namespace DataDocumentationResult {
+
+                    /** Properties of a DatasetResult. */
+                    interface IDatasetResult {
+
+                        /** DatasetResult overview */
+                        overview?: (string|null);
+
+                        /** DatasetResult schemaRelationships */
+                        schemaRelationships?: (google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship[]|null);
+
+                        /** DatasetResult queries */
+                        queries?: (google.cloud.dataplex.v1.DataDocumentationResult.IQuery[]|null);
+                    }
+
+                    /** Represents a DatasetResult. */
+                    class DatasetResult implements IDatasetResult {
+
+                        /**
+                         * Constructs a new DatasetResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult);
+
+                        /** DatasetResult overview. */
+                        public overview: string;
+
+                        /** DatasetResult schemaRelationships. */
+                        public schemaRelationships: google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship[];
+
+                        /** DatasetResult queries. */
+                        public queries: google.cloud.dataplex.v1.DataDocumentationResult.IQuery[];
+
+                        /**
+                         * Creates a new DatasetResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DatasetResult instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult): google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult;
+
+                        /**
+                         * Encodes the specified DatasetResult message. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.verify|verify} messages.
+                         * @param message DatasetResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DatasetResult message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.verify|verify} messages.
+                         * @param message DatasetResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DatasetResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DatasetResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult;
+
+                        /**
+                         * Decodes a DatasetResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DatasetResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult;
+
+                        /**
+                         * Verifies a DatasetResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DatasetResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DatasetResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult;
+
+                        /**
+                         * Creates a plain object from a DatasetResult message. Also converts values to other types if specified.
+                         * @param message DatasetResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DatasetResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DatasetResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** Properties of a TableResult. */
                     interface ITableResult {
@@ -25154,6 +25269,241 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SchemaRelationship. */
+                    interface ISchemaRelationship {
+
+                        /** SchemaRelationship leftSchemaPaths */
+                        leftSchemaPaths?: (google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths|null);
+
+                        /** SchemaRelationship rightSchemaPaths */
+                        rightSchemaPaths?: (google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths|null);
+
+                        /** SchemaRelationship sources */
+                        sources?: (google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Source[]|null);
+
+                        /** SchemaRelationship type */
+                        type?: (google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Type|keyof typeof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Type|null);
+                    }
+
+                    /** Represents a SchemaRelationship. */
+                    class SchemaRelationship implements ISchemaRelationship {
+
+                        /**
+                         * Constructs a new SchemaRelationship.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship);
+
+                        /** SchemaRelationship leftSchemaPaths. */
+                        public leftSchemaPaths?: (google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths|null);
+
+                        /** SchemaRelationship rightSchemaPaths. */
+                        public rightSchemaPaths?: (google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths|null);
+
+                        /** SchemaRelationship sources. */
+                        public sources: google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Source[];
+
+                        /** SchemaRelationship type. */
+                        public type: (google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Type|keyof typeof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Type);
+
+                        /**
+                         * Creates a new SchemaRelationship instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SchemaRelationship instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship): google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship;
+
+                        /**
+                         * Encodes the specified SchemaRelationship message. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.verify|verify} messages.
+                         * @param message SchemaRelationship message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SchemaRelationship message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.verify|verify} messages.
+                         * @param message SchemaRelationship message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SchemaRelationship message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SchemaRelationship
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship;
+
+                        /**
+                         * Decodes a SchemaRelationship message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SchemaRelationship
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship;
+
+                        /**
+                         * Verifies a SchemaRelationship message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SchemaRelationship message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SchemaRelationship
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship;
+
+                        /**
+                         * Creates a plain object from a SchemaRelationship message. Also converts values to other types if specified.
+                         * @param message SchemaRelationship
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SchemaRelationship to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SchemaRelationship
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SchemaRelationship {
+
+                        /** Source enum. */
+                        enum Source {
+                            SOURCE_UNSPECIFIED = 0,
+                            AGENT = 4,
+                            QUERY_HISTORY = 5,
+                            TABLE_CONSTRAINTS = 6
+                        }
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            SCHEMA_JOIN = 1
+                        }
+
+                        /** Properties of a SchemaPaths. */
+                        interface ISchemaPaths {
+
+                            /** SchemaPaths tableFqn */
+                            tableFqn?: (string|null);
+
+                            /** SchemaPaths paths */
+                            paths?: (string[]|null);
+                        }
+
+                        /** Represents a SchemaPaths. */
+                        class SchemaPaths implements ISchemaPaths {
+
+                            /**
+                             * Constructs a new SchemaPaths.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths);
+
+                            /** SchemaPaths tableFqn. */
+                            public tableFqn: string;
+
+                            /** SchemaPaths paths. */
+                            public paths: string[];
+
+                            /**
+                             * Creates a new SchemaPaths instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SchemaPaths instance
+                             */
+                            public static create(properties?: google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths): google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths;
+
+                            /**
+                             * Encodes the specified SchemaPaths message. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.verify|verify} messages.
+                             * @param message SchemaPaths message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SchemaPaths message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.verify|verify} messages.
+                             * @param message SchemaPaths message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SchemaPaths message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SchemaPaths
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths;
+
+                            /**
+                             * Decodes a SchemaPaths message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SchemaPaths
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths;
+
+                            /**
+                             * Verifies a SchemaPaths message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SchemaPaths message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SchemaPaths
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths;
+
+                            /**
+                             * Creates a plain object from a SchemaPaths message. Also converts values to other types if specified.
+                             * @param message SchemaPaths
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SchemaPaths to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SchemaPaths
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a Query. */

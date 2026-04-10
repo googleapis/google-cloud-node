@@ -334,11 +334,17 @@ export class VertexRagDataServiceClient {
       ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
       ),
+      ragDataSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragDataSchemas/{rag_data_schema}'
+      ),
       ragEngineConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragEngineConfig'
       ),
       ragFilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
+      ),
+      ragMetadataPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}/ragMetadata/{rag_metadata}'
       ),
       reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
@@ -391,7 +397,11 @@ export class VertexRagDataServiceClient {
       listRagCorpora:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ragCorpora'),
       listRagFiles:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ragFiles')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ragFiles'),
+      listRagDataSchemas:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ragDataSchemas'),
+      listRagMetadata:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ragMetadata')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -441,6 +451,22 @@ export class VertexRagDataServiceClient {
       '.google.cloud.aiplatform.v1beta1.RagEngineConfig') as gax.protobuf.Type;
     const updateRagEngineConfigMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.UpdateRagEngineConfigOperationMetadata') as gax.protobuf.Type;
+    const batchCreateRagDataSchemasResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.BatchCreateRagDataSchemasResponse') as gax.protobuf.Type;
+    const batchCreateRagDataSchemasMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.BatchCreateRagDataSchemasOperationMetadata') as gax.protobuf.Type;
+    const batchDeleteRagDataSchemasResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const batchDeleteRagDataSchemasMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata') as gax.protobuf.Type;
+    const batchCreateRagMetadataResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.BatchCreateRagMetadataResponse') as gax.protobuf.Type;
+    const batchCreateRagMetadataMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.BatchCreateRagMetadataOperationMetadata') as gax.protobuf.Type;
+    const batchDeleteRagMetadataResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const batchDeleteRagMetadataMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createRagCorpus: new this._gaxModule.LongrunningDescriptor(
@@ -466,7 +492,23 @@ export class VertexRagDataServiceClient {
       updateRagEngineConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateRagEngineConfigResponse.decode.bind(updateRagEngineConfigResponse),
-        updateRagEngineConfigMetadata.decode.bind(updateRagEngineConfigMetadata))
+        updateRagEngineConfigMetadata.decode.bind(updateRagEngineConfigMetadata)),
+      batchCreateRagDataSchemas: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchCreateRagDataSchemasResponse.decode.bind(batchCreateRagDataSchemasResponse),
+        batchCreateRagDataSchemasMetadata.decode.bind(batchCreateRagDataSchemasMetadata)),
+      batchDeleteRagDataSchemas: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchDeleteRagDataSchemasResponse.decode.bind(batchDeleteRagDataSchemasResponse),
+        batchDeleteRagDataSchemasMetadata.decode.bind(batchDeleteRagDataSchemasMetadata)),
+      batchCreateRagMetadata: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchCreateRagMetadataResponse.decode.bind(batchCreateRagMetadataResponse),
+        batchCreateRagMetadataMetadata.decode.bind(batchCreateRagMetadataMetadata)),
+      batchDeleteRagMetadata: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchDeleteRagMetadataResponse.decode.bind(batchDeleteRagMetadataResponse),
+        batchDeleteRagMetadataMetadata.decode.bind(batchDeleteRagMetadataMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -512,7 +554,7 @@ export class VertexRagDataServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const vertexRagDataServiceStubMethods =
-        ['createRagCorpus', 'updateRagCorpus', 'getRagCorpus', 'listRagCorpora', 'deleteRagCorpus', 'uploadRagFile', 'importRagFiles', 'getRagFile', 'listRagFiles', 'deleteRagFile', 'updateRagEngineConfig', 'getRagEngineConfig'];
+        ['createRagCorpus', 'updateRagCorpus', 'getRagCorpus', 'listRagCorpora', 'deleteRagCorpus', 'uploadRagFile', 'importRagFiles', 'getRagFile', 'listRagFiles', 'deleteRagFile', 'updateRagEngineConfig', 'getRagEngineConfig', 'createRagDataSchema', 'batchCreateRagDataSchemas', 'getRagDataSchema', 'listRagDataSchemas', 'deleteRagDataSchema', 'batchDeleteRagDataSchemas', 'createRagMetadata', 'batchCreateRagMetadata', 'updateRagMetadata', 'getRagMetadata', 'listRagMetadata', 'deleteRagMetadata', 'batchDeleteRagMetadata'];
     for (const methodName of vertexRagDataServiceStubMethods) {
       const callPromise = this.vertexRagDataServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -996,6 +1038,696 @@ export class VertexRagDataServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getRagEngineConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Creates a RagDataSchema.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagCorpus to create the RagDataSchema
+ *   in. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+ * @param {google.cloud.aiplatform.v1beta1.RagDataSchema} request.ragDataSchema
+ *   Required. The RagDataSchema to create.
+ * @param {string} [request.ragDataSchemaId]
+ *   Optional. The ID to use for the RagDataSchema, which will become the final
+ *   component of the RagDataSchema's resource name if the user chooses to
+ *   specify. Otherwise, RagDataSchema id will be generated by system.
+ *
+ *   This value should be up to 63 characters, and valid characters
+ *   are /{@link protos.0-9|a-z}-/. The first character must be a letter, the last could be
+ *   a letter or a number.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagDataSchema|RagDataSchema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.create_rag_data_schema.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_CreateRagDataSchema_async
+ */
+  createRagDataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest|undefined, {}|undefined
+      ]>;
+  createRagDataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+          protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRagDataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+          protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRagDataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+          protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+          protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createRagDataSchema request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRagDataSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createRagDataSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagDataSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createRagDataSchema response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets a RagDataSchema.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the RagDataSchema resource.
+ *   Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragDataSchemas/{rag_data_schema}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagDataSchema|RagDataSchema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.get_rag_data_schema.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_GetRagDataSchema_async
+ */
+  getRagDataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+        protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest|undefined, {}|undefined
+      ]>;
+  getRagDataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+          protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRagDataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+          protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRagDataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+          protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+          protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+        protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getRagDataSchema request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+        protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRagDataSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getRagDataSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema,
+        protos.google.cloud.aiplatform.v1beta1.IGetRagDataSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRagDataSchema response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes a RagDataSchema.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the RagDataSchema resource to be deleted.
+ *   Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragDataSchemas/{rag_data_schema}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_data_schema.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagDataSchema_async
+ */
+  deleteRagDataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest|undefined, {}|undefined
+      ]>;
+  deleteRagDataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRagDataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRagDataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteRagDataSchema request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteRagDataSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteRagDataSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteRagDataSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteRagDataSchema response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Creates a RagMetadata.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this metadata will be created.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
+ * @param {google.cloud.aiplatform.v1beta1.RagMetadata} request.ragMetadata
+ *   Required. The metadata to create.
+ * @param {string} [request.ragMetadataId]
+ *   Optional. The ID to use for the metadata, which will become the final
+ *   component of the metadata's resource name if the user chooses to specify.
+ *   Otherwise, metadata id will be generated by system.
+ *
+ *   This value should be up to 63 characters, and valid characters
+ *   are /{@link protos.0-9|a-z}-/. The first character must be a letter, the last could be
+ *   a letter or a number.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagMetadata|RagMetadata}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.create_rag_metadata.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_CreateRagMetadata_async
+ */
+  createRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest|undefined, {}|undefined
+      ]>;
+  createRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createRagMetadata request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRagMetadata response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createRagMetadata(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagMetadataRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createRagMetadata response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Updates a RagMetadata.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.aiplatform.v1beta1.RagMetadata} request.ragMetadata
+ *   Required. The RagMetadata which replaces the resource on the server.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagMetadata|RagMetadata}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.update_rag_metadata.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_UpdateRagMetadata_async
+ */
+  updateRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest|undefined, {}|undefined
+      ]>;
+  updateRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'rag_metadata.name': request.ragMetadata!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateRagMetadata request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateRagMetadata response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateRagMetadata(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagMetadataRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateRagMetadata response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets a RagMetadata.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the RagMetadata resource.
+ *   Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}/ragMetadata/{rag_metadata}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagMetadata|RagMetadata}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.get_rag_metadata.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_GetRagMetadata_async
+ */
+  getRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest|undefined, {}|undefined
+      ]>;
+  getRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+          protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getRagMetadata request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRagMetadata response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getRagMetadata(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata,
+        protos.google.cloud.aiplatform.v1beta1.IGetRagMetadataRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRagMetadata response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes a RagMetadata.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the RagMetadata resource to be deleted.
+ *   Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}/ragMetadata/{rag_metadata}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_metadata.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagMetadata_async
+ */
+  deleteRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest|undefined, {}|undefined
+      ]>;
+  deleteRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteRagMetadata request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteRagMetadata response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteRagMetadata(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteRagMetadataRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteRagMetadata response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -1674,6 +2406,458 @@ export class VertexRagDataServiceClient {
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateRagEngineConfig, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.RagEngineConfig, protos.google.cloud.aiplatform.v1beta1.UpdateRagEngineConfigOperationMetadata>;
   }
+/**
+ * Batch Create one or more RagDataSchemas
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagCorpus to create the RagDataSchemas
+ *   in. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+ * @param {number[]} request.requests
+ *   Required. The request messages for
+ *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagDataSchema|VertexRagDataService.CreateRagDataSchema}.
+ *   A maximum of 500 schemas can be created in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.batch_create_rag_data_schemas.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_BatchCreateRagDataSchemas_async
+ */
+  batchCreateRagDataSchemas(
+      request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  batchCreateRagDataSchemas(
+      request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateRagDataSchemas(
+      request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateRagDataSchemas(
+      request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchCreateRagDataSchemas response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchCreateRagDataSchemas request %j', request);
+    return this.innerApiCalls.batchCreateRagDataSchemas(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagDataSchemasOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchCreateRagDataSchemas response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `batchCreateRagDataSchemas()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.batch_create_rag_data_schemas.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_BatchCreateRagDataSchemas_async
+ */
+  async checkBatchCreateRagDataSchemasProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.BatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.BatchCreateRagDataSchemasOperationMetadata>>{
+    this._log.info('batchCreateRagDataSchemas long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchCreateRagDataSchemas, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.BatchCreateRagDataSchemasResponse, protos.google.cloud.aiplatform.v1beta1.BatchCreateRagDataSchemasOperationMetadata>;
+  }
+/**
+ * Batch Deletes one or more RagDataSchemas
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagCorpus from which to delete the
+ *   RagDataSchemas. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+ * @param {string[]} request.names
+ *   Required. The RagDataSchemas to delete.
+ *   A maximum of 500 schemas can be deleted in a batch.
+ *   Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragDataSchemas/{rag_data_schema}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.batch_delete_rag_data_schemas.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_BatchDeleteRagDataSchemas_async
+ */
+  batchDeleteRagDataSchemas(
+      request?: protos.google.cloud.aiplatform.v1beta1.IBatchDeleteRagDataSchemasRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  batchDeleteRagDataSchemas(
+      request: protos.google.cloud.aiplatform.v1beta1.IBatchDeleteRagDataSchemasRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteRagDataSchemas(
+      request: protos.google.cloud.aiplatform.v1beta1.IBatchDeleteRagDataSchemasRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteRagDataSchemas(
+      request?: protos.google.cloud.aiplatform.v1beta1.IBatchDeleteRagDataSchemasRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchDeleteRagDataSchemas response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchDeleteRagDataSchemas request %j', request);
+    return this.innerApiCalls.batchDeleteRagDataSchemas(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchDeleteRagDataSchemas response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `batchDeleteRagDataSchemas()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.batch_delete_rag_data_schemas.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_BatchDeleteRagDataSchemas_async
+ */
+  async checkBatchDeleteRagDataSchemasProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>>{
+    this._log.info('batchDeleteRagDataSchemas long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchDeleteRagDataSchemas, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>;
+  }
+/**
+ * Batch Create one or more RagMetadatas
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where the RagMetadata will be created.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
+ * @param {number[]} request.requests
+ *   Required. The request messages for
+ *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagMetadata|VertexRagDataService.CreateRagMetadata}.
+ *   A maximum of 500 rag file metadata can be created in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.batch_create_rag_metadata.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_BatchCreateRagMetadata_async
+ */
+  batchCreateRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  batchCreateRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchCreateRagMetadata response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchCreateRagMetadata request %j', request);
+    return this.innerApiCalls.batchCreateRagMetadata(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.IBatchCreateRagMetadataOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchCreateRagMetadata response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `batchCreateRagMetadata()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.batch_create_rag_metadata.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_BatchCreateRagMetadata_async
+ */
+  async checkBatchCreateRagMetadataProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.BatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.BatchCreateRagMetadataOperationMetadata>>{
+    this._log.info('batchCreateRagMetadata long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchCreateRagMetadata, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.BatchCreateRagMetadataResponse, protos.google.cloud.aiplatform.v1beta1.BatchCreateRagMetadataOperationMetadata>;
+  }
+/**
+ * Batch Deletes one or more RagMetadata.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagFile from which to delete the
+ *   RagMetadata. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
+ * @param {string[]} request.names
+ *   Required. The RagMetadata to delete.
+ *   A maximum of 500 rag metadata can be deleted in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.batch_delete_rag_metadata.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_BatchDeleteRagMetadata_async
+ */
+  batchDeleteRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IBatchDeleteRagMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  batchDeleteRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IBatchDeleteRagMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IBatchDeleteRagMetadataRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IBatchDeleteRagMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchDeleteRagMetadata response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchDeleteRagMetadata request %j', request);
+    return this.innerApiCalls.batchDeleteRagMetadata(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchDeleteRagMetadata response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `batchDeleteRagMetadata()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.batch_delete_rag_metadata.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_BatchDeleteRagMetadata_async
+ */
+  async checkBatchDeleteRagMetadataProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>>{
+    this._log.info('batchDeleteRagMetadata long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchDeleteRagMetadata, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>;
+  }
  /**
  * Lists RagCorpora in a Location.
  *
@@ -2094,6 +3278,436 @@ export class VertexRagDataServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagFile>;
+  }
+ /**
+ * Lists RagDataSchemas in a Location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagCorpus from which to list the
+ *   RagDataSchemas. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size. The maximum value is 100. If not
+ *   specified, a default value of 100 will be used.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagDataSchemasResponse.next_page_token|ListRagDataSchemasResponse.next_page_token}
+ *   of the previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagDataSchemas|VertexRagDataService.ListRagDataSchemas}
+ *   call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.RagDataSchema|RagDataSchema}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRagDataSchemasAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listRagDataSchemas(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema[],
+        protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasResponse
+      ]>;
+  listRagDataSchemas(
+      request: protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema>): void;
+  listRagDataSchemas(
+      request: protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema>): void;
+  listRagDataSchemas(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagDataSchema>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema[],
+        protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+      protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasResponse|null|undefined,
+      protos.google.cloud.aiplatform.v1beta1.IRagDataSchema>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRagDataSchemas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRagDataSchemas request %j', request);
+    return this.innerApiCalls
+      .listRagDataSchemas(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.aiplatform.v1beta1.IRagDataSchema[],
+        protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasResponse
+      ]) => {
+        this._log.info('listRagDataSchemas values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listRagDataSchemas`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagCorpus from which to list the
+ *   RagDataSchemas. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size. The maximum value is 100. If not
+ *   specified, a default value of 100 will be used.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagDataSchemasResponse.next_page_token|ListRagDataSchemasResponse.next_page_token}
+ *   of the previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagDataSchemas|VertexRagDataService.ListRagDataSchemas}
+ *   call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagDataSchema|RagDataSchema} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRagDataSchemasAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listRagDataSchemasStream(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listRagDataSchemas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listRagDataSchemas stream %j', request);
+    return this.descriptors.page.listRagDataSchemas.createStream(
+      this.innerApiCalls.listRagDataSchemas as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listRagDataSchemas`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagCorpus from which to list the
+ *   RagDataSchemas. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size. The maximum value is 100. If not
+ *   specified, a default value of 100 will be used.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagDataSchemasResponse.next_page_token|ListRagDataSchemasResponse.next_page_token}
+ *   of the previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagDataSchemas|VertexRagDataService.ListRagDataSchemas}
+ *   call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.aiplatform.v1beta1.RagDataSchema|RagDataSchema}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.list_rag_data_schemas.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ListRagDataSchemas_async
+ */
+  listRagDataSchemasAsync(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListRagDataSchemasRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagDataSchema>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listRagDataSchemas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listRagDataSchemas iterate %j', request);
+    return this.descriptors.page.listRagDataSchemas.asyncIterate(
+      this.innerApiCalls['listRagDataSchemas'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagDataSchema>;
+  }
+ /**
+ * Lists RagMetadata in a RagFile.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagFile from which to list the
+ *   RagMetadata. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size. The maximum value is 100. If not
+ *   specified, a default value of 100 will be used.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagMetadataResponse.next_page_token|ListRagMetadataResponse.next_page_token}
+ *   of the previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagMetadata|VertexRagDataService.ListRagMetadata}
+ *   call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.RagMetadata|RagMetadata}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRagMetadataAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata[],
+        protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListRagMetadataResponse
+      ]>;
+  listRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListRagMetadataResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata>): void;
+  listRagMetadata(
+      request: protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListRagMetadataResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata>): void;
+  listRagMetadata(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListRagMetadataResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListRagMetadataResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagMetadata>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata[],
+        protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListRagMetadataResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+      protos.google.cloud.aiplatform.v1beta1.IListRagMetadataResponse|null|undefined,
+      protos.google.cloud.aiplatform.v1beta1.IRagMetadata>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRagMetadata values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRagMetadata request %j', request);
+    return this.innerApiCalls
+      .listRagMetadata(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.aiplatform.v1beta1.IRagMetadata[],
+        protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListRagMetadataResponse
+      ]) => {
+        this._log.info('listRagMetadata values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listRagMetadata`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagFile from which to list the
+ *   RagMetadata. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size. The maximum value is 100. If not
+ *   specified, a default value of 100 will be used.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagMetadataResponse.next_page_token|ListRagMetadataResponse.next_page_token}
+ *   of the previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagMetadata|VertexRagDataService.ListRagMetadata}
+ *   call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagMetadata|RagMetadata} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRagMetadataAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listRagMetadataStream(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listRagMetadata'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listRagMetadata stream %j', request);
+    return this.descriptors.page.listRagMetadata.createStream(
+      this.innerApiCalls.listRagMetadata as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listRagMetadata`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the RagFile from which to list the
+ *   RagMetadata. Format:
+ *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size. The maximum value is 100. If not
+ *   specified, a default value of 100 will be used.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagMetadataResponse.next_page_token|ListRagMetadataResponse.next_page_token}
+ *   of the previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagMetadata|VertexRagDataService.ListRagMetadata}
+ *   call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.aiplatform.v1beta1.RagMetadata|RagMetadata}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.list_rag_metadata.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ListRagMetadata_async
+ */
+  listRagMetadataAsync(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListRagMetadataRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagMetadata>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listRagMetadata'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listRagMetadata iterate %j', request);
+    return this.descriptors.page.listRagMetadata.asyncIterate(
+      this.innerApiCalls['listRagMetadata'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagMetadata>;
   }
 /**
  * Gets the access control policy for a resource. Returns an empty policy
@@ -5240,6 +6854,68 @@ export class VertexRagDataServiceClient {
   }
 
   /**
+   * Return a fully-qualified ragDataSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_data_schema
+   * @returns {string} Resource name string.
+   */
+  ragDataSchemaPath(project:string,location:string,ragCorpus:string,ragDataSchema:string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_data_schema: ragDataSchema,
+    });
+  }
+
+  /**
+   * Parse the project from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).project;
+  }
+
+  /**
+   * Parse the location from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_data_schema from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_data_schema.
+   */
+  matchRagDataSchemaFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_data_schema;
+  }
+
+  /**
    * Return a fully-qualified ragEngineConfig resource name string.
    *
    * @param {string} project
@@ -5335,6 +7011,81 @@ export class VertexRagDataServiceClient {
    */
   matchRagFileFromRagFileName(ragFileName: string) {
     return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_file;
+  }
+
+  /**
+   * Return a fully-qualified ragMetadata resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_file
+   * @param {string} rag_metadata
+   * @returns {string} Resource name string.
+   */
+  ragMetadataPath(project:string,location:string,ragCorpus:string,ragFile:string,ragMetadata:string) {
+    return this.pathTemplates.ragMetadataPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_file: ragFile,
+      rag_metadata: ragMetadata,
+    });
+  }
+
+  /**
+   * Parse the project from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).project;
+  }
+
+  /**
+   * Parse the location from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_file from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_file.
+   */
+  matchRagFileFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_file;
+  }
+
+  /**
+   * Parse the rag_metadata from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_metadata.
+   */
+  matchRagMetadataFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_metadata;
   }
 
   /**
