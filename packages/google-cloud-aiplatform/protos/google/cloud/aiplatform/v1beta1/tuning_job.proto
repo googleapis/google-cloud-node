@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -644,6 +644,11 @@ message EvaluationConfig {
 
   // Optional. Autorater config for evaluation.
   AutoraterConfig autorater_config = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Configuration options for inference generation and outputs.
+  // If not set, default generation parameters are used.
+  GenerationConfig inference_generation_config = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Evaluate Dataset Run Result for Tuning Job.
@@ -652,11 +657,15 @@ message EvaluateDatasetRun {
   // `projects/{project}/locations/{location}/operations/{operation_id}`.
   string operation_name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
+  // Output only. The resource name of the evaluation run. Format:
+  // `projects/{project}/locations/{location}/evaluationRuns/{evaluation_run_id}`.
+  string evaluation_run = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+
   // Output only. The checkpoint id used in the evaluation run. Only populated
   // when evaluating checkpoints.
   string checkpoint_id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. Results for EvaluationService.EvaluateDataset.
+  // Output only. Results for EvaluationService.
   EvaluateDatasetResponse evaluate_dataset_response = 3
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
