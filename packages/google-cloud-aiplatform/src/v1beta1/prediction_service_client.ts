@@ -330,11 +330,17 @@ export class PredictionServiceClient {
       ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
       ),
+      ragDataSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragDataSchemas/{rag_data_schema}'
+      ),
       ragEngineConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragEngineConfig'
       ),
       ragFilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
+      ),
+      ragMetadataPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}/ragMetadata/{rag_metadata}'
       ),
       reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
@@ -1409,17 +1415,23 @@ export class PredictionServiceClient {
  *   prediction. Format:
  *   `projects/{project}/locations/{location}/publishers/* /models/*`
  * @param {google.cloud.aiplatform.v1beta1.Content} request.content
- *   Required. Input content to be embedded. Required.
+ *   Required. Input content to be embedded.
  * @param {string} [request.title]
- *   Optional. An optional title for the text.
+ *   Optional. Deprecated: Please use EmbedContentConfig.title instead.
+ *   The title for the text.
  * @param {google.cloud.aiplatform.v1beta1.EmbedContentRequest.EmbeddingTaskType} [request.taskType]
- *   Optional. The task type of the embedding.
+ *   Optional. Deprecated: Please use EmbedContentConfig.task_type instead.
+ *   The task type of the embedding.
  * @param {number} [request.outputDimensionality]
- *   Optional. Optional reduced dimension for the output embedding. If set,
- *   excessive values in the output embedding are truncated from the end.
+ *   Optional. Deprecated: Please use EmbedContentConfig.output_dimensionality
+ *   instead. Reduced dimension for the output embedding. If set, excessive
+ *   values in the output embedding are truncated from the end.
  * @param {boolean} [request.autoTruncate]
- *   Optional. Whether to silently truncate the input content if it's longer
+ *   Optional. Deprecated: Please use EmbedContentConfig.auto_truncate instead.
+ *   Whether to silently truncate the input content if it's longer
  *   than the maximum sequence length.
+ * @param {google.cloud.aiplatform.v1beta1.EmbedContentRequest.EmbedContentConfig} [request.embedContentConfig]
+ *   Optional. Configuration for the EmbedContent request.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -4685,6 +4697,68 @@ export class PredictionServiceClient {
   }
 
   /**
+   * Return a fully-qualified ragDataSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_data_schema
+   * @returns {string} Resource name string.
+   */
+  ragDataSchemaPath(project:string,location:string,ragCorpus:string,ragDataSchema:string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_data_schema: ragDataSchema,
+    });
+  }
+
+  /**
+   * Parse the project from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).project;
+  }
+
+  /**
+   * Parse the location from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_data_schema from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_data_schema.
+   */
+  matchRagDataSchemaFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_data_schema;
+  }
+
+  /**
    * Return a fully-qualified ragEngineConfig resource name string.
    *
    * @param {string} project
@@ -4780,6 +4854,81 @@ export class PredictionServiceClient {
    */
   matchRagFileFromRagFileName(ragFileName: string) {
     return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_file;
+  }
+
+  /**
+   * Return a fully-qualified ragMetadata resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_file
+   * @param {string} rag_metadata
+   * @returns {string} Resource name string.
+   */
+  ragMetadataPath(project:string,location:string,ragCorpus:string,ragFile:string,ragMetadata:string) {
+    return this.pathTemplates.ragMetadataPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_file: ragFile,
+      rag_metadata: ragMetadata,
+    });
+  }
+
+  /**
+   * Parse the project from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).project;
+  }
+
+  /**
+   * Parse the location from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_file from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_file.
+   */
+  matchRagFileFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_file;
+  }
+
+  /**
+   * Parse the rag_metadata from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_metadata.
+   */
+  matchRagMetadataFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_metadata;
   }
 
   /**
