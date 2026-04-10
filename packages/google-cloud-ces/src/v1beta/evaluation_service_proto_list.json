@@ -20,6 +20,7 @@
   "../../protos/google/cloud/ces/v1beta/evaluation_service.proto",
   "../../protos/google/cloud/ces/v1beta/example.proto",
   "../../protos/google/cloud/ces/v1beta/fakes.proto",
+  "../../protos/google/cloud/ces/v1beta/file_context.proto",
   "../../protos/google/cloud/ces/v1beta/file_search_tool.proto",
   "../../protos/google/cloud/ces/v1beta/golden_run.proto",
   "../../protos/google/cloud/ces/v1beta/google_search_tool.proto",
