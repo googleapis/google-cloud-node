@@ -379,24 +379,6 @@
     "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
-    "name": "bigtable",
-    "name_pretty": "Bigtable",
-    "product_documentation": "https://cloud.google.com/bigtable",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigtable/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559777",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-bigtable",
-    "distribution_name": "@google-cloud/bigtable",
-    "api_id": "bigtable.googleapis.com",
-    "requires_billing": true,
-    "codeowner_team": "@googleapis/bigtable-team @googleapis/cloud-sdk-nodejs-team",
-    "api_shortname": "bigtable",
-    "library_type": "GAPIC_COMBO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-bigtable",
-    "support_documentation": "https://cloud.google.com/bigtable/docs/getting-support"
-  },
-  {
     "language": "nodejs",
     "requires_billing": true,
     "product_documentation": "https://cloud.google.com/billing/docs",
@@ -3030,6 +3012,24 @@
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datalabeling",
     "support_documentation": "https://cloud.google.com/data-labeling/docs/getting-support"
+  },
+  {
+    "name": "datalineage",
+    "name_pretty": "Data Lineage API",
+    "product_documentation": "https://cloud.google.com/dataplex/docs/about-data-lineage",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datalineage/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/configmanagement",
+    "api_id": "datalineage.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "datalineage",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datacatalog-lineage-configmanagement",
+    "support_documentation": "https://cloud.google.com/dataplex/docs/getting-support"
   },
   {
     "name": "datamanager",
