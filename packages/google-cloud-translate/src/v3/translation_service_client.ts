@@ -2053,6 +2053,8 @@ export class TranslationServiceClient {
  *   `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
  * @param {string[]} request.content
  *   Required. The content of the input in string format.
+ * @param {string} request.mimeType
+ *   The format of the source text.
  * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig} request.referenceSentenceConfig
  *   Configuration for caller provided reference sentences.
  * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig} [request.glossaryConfig]
