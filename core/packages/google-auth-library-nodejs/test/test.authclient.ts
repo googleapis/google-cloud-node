@@ -418,11 +418,9 @@ describe('AuthClient', () => {
       }
 
       beforeEach(() => {
-        process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'] = 'true';
       });
 
       afterEach(() => {
-        delete process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'];
       });
 
       it('should trigger asynchronous background refresh and not block', async () => {

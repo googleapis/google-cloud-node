@@ -909,11 +909,9 @@ describe('ExternalAccountAuthorizedUserClient', () => {
 
     beforeEach(() => {
       clock.restore();
-      process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'] = 'true';
     });
 
     afterEach(() => {
-      delete process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'];
       nock.cleanAll();
     });
 

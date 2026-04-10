@@ -1278,11 +1278,9 @@ describe('jwt', () => {
 
     beforeEach(() => {
       sandbox = sinon.createSandbox();
-      process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'] = 'true';
     });
 
     afterEach(() => {
-      delete process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'];
       sandbox.restore();
       nock.cleanAll();
     });
