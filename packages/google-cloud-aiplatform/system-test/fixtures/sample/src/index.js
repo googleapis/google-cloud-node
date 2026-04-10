@@ -49,6 +49,7 @@ function main() {
   const reasoningEngineExecutionServiceClient = new aiplatform.ReasoningEngineExecutionServiceClient();
   const reasoningEngineServiceClient = new aiplatform.ReasoningEngineServiceClient();
   const scheduleServiceClient = new aiplatform.ScheduleServiceClient();
+  const sessionServiceClient = new aiplatform.SessionServiceClient();
   const specialistPoolServiceClient = new aiplatform.SpecialistPoolServiceClient();
   const tensorboardServiceClient = new aiplatform.TensorboardServiceClient();
   const vertexRagDataServiceClient = new aiplatform.VertexRagDataServiceClient();
