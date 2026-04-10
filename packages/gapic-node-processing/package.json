@@ -36,7 +36,7 @@
     "gapic-tools": "^1.0.0",
     "gts": "^6.0.2",
     "mocha": "^11.1.0",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "snap-shot-it": "^7.9.10",
     "typescript": "^5.8.2"
   },
@@ -54,5 +54,13 @@
     "js-yaml": "^4.1.0",
     "nunjucks": "^3.2.4",
     "yargs": "^17.7.2"
+  },
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
   }
 }

@@ -46,7 +46,7 @@
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "pack-n-play": "^3.0.0",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
   "scripts": {
@@ -68,5 +68,13 @@
   "license": "Apache-2.0",
   "engines": {
     "node": ">=18"
+  },
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
   }
 }

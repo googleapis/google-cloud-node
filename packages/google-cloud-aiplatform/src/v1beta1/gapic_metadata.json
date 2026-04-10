@@ -4387,6 +4387,41 @@
                 "getRagEngineConfig"
               ]
             },
+            "CreateRagDataSchema": {
+              "methods": [
+                "createRagDataSchema"
+              ]
+            },
+            "GetRagDataSchema": {
+              "methods": [
+                "getRagDataSchema"
+              ]
+            },
+            "DeleteRagDataSchema": {
+              "methods": [
+                "deleteRagDataSchema"
+              ]
+            },
+            "CreateRagMetadata": {
+              "methods": [
+                "createRagMetadata"
+              ]
+            },
+            "UpdateRagMetadata": {
+              "methods": [
+                "updateRagMetadata"
+              ]
+            },
+            "GetRagMetadata": {
+              "methods": [
+                "getRagMetadata"
+              ]
+            },
+            "DeleteRagMetadata": {
+              "methods": [
+                "deleteRagMetadata"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -4417,6 +4452,26 @@
                 "updateRagEngineConfig"
               ]
             },
+            "BatchCreateRagDataSchemas": {
+              "methods": [
+                "batchCreateRagDataSchemas"
+              ]
+            },
+            "BatchDeleteRagDataSchemas": {
+              "methods": [
+                "batchDeleteRagDataSchemas"
+              ]
+            },
+            "BatchCreateRagMetadata": {
+              "methods": [
+                "batchCreateRagMetadata"
+              ]
+            },
+            "BatchDeleteRagMetadata": {
+              "methods": [
+                "batchDeleteRagMetadata"
+              ]
+            },
             "ListRagCorpora": {
               "methods": [
                 "listRagCorpora",
@@ -4429,6 +4484,20 @@
                 "listRagFiles",
                 "listRagFilesStream",
                 "listRagFilesAsync"
+              ]
+            },
+            "ListRagDataSchemas": {
+              "methods": [
+                "listRagDataSchemas",
+                "listRagDataSchemasStream",
+                "listRagDataSchemasAsync"
+              ]
+            },
+            "ListRagMetadata": {
+              "methods": [
+                "listRagMetadata",
+                "listRagMetadataStream",
+                "listRagMetadataAsync"
               ]
             }
           }
@@ -4456,6 +4525,41 @@
                 "getRagEngineConfig"
               ]
             },
+            "CreateRagDataSchema": {
+              "methods": [
+                "createRagDataSchema"
+              ]
+            },
+            "GetRagDataSchema": {
+              "methods": [
+                "getRagDataSchema"
+              ]
+            },
+            "DeleteRagDataSchema": {
+              "methods": [
+                "deleteRagDataSchema"
+              ]
+            },
+            "CreateRagMetadata": {
+              "methods": [
+                "createRagMetadata"
+              ]
+            },
+            "UpdateRagMetadata": {
+              "methods": [
+                "updateRagMetadata"
+              ]
+            },
+            "GetRagMetadata": {
+              "methods": [
+                "getRagMetadata"
+              ]
+            },
+            "DeleteRagMetadata": {
+              "methods": [
+                "deleteRagMetadata"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -4486,6 +4590,26 @@
                 "updateRagEngineConfig"
               ]
             },
+            "BatchCreateRagDataSchemas": {
+              "methods": [
+                "batchCreateRagDataSchemas"
+              ]
+            },
+            "BatchDeleteRagDataSchemas": {
+              "methods": [
+                "batchDeleteRagDataSchemas"
+              ]
+            },
+            "BatchCreateRagMetadata": {
+              "methods": [
+                "batchCreateRagMetadata"
+              ]
+            },
+            "BatchDeleteRagMetadata": {
+              "methods": [
+                "batchDeleteRagMetadata"
+              ]
+            },
             "ListRagCorpora": {
               "methods": [
                 "listRagCorpora",
@@ -4498,6 +4622,20 @@
                 "listRagFiles",
                 "listRagFilesStream",
                 "listRagFilesAsync"
+              ]
+            },
+            "ListRagDataSchemas": {
+              "methods": [
+                "listRagDataSchemas",
+                "listRagDataSchemasStream",
+                "listRagDataSchemasAsync"
+              ]
+            },
+            "ListRagMetadata": {
+              "methods": [
+                "listRagMetadata",
+                "listRagMetadataStream",
+                "listRagMetadataAsync"
               ]
             }
           }
@@ -4523,6 +4661,16 @@
               "methods": [
                 "corroborateContent"
               ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
+              ]
             }
           }
         },
@@ -4542,6 +4690,16 @@
             "CorroborateContent": {
               "methods": [
                 "corroborateContent"
+              ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
               ]
             }
           }
